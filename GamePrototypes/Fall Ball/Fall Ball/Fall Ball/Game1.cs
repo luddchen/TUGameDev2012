@@ -18,6 +18,8 @@ namespace Fall_Ball
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Field gamefield;
+        Vector3 offset;
 
         public Game1()
         {
@@ -48,6 +50,12 @@ namespace Fall_Ball
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Content hier zu laden
+            offset = new Vector3( 0, 0, 0); // move of the full gamefield
+            gamefield = new Field();
+            gamefield.add(new Square(new Vector3(50, 100, 0), new Vector3(100, 20, 0), spriteBatch, Content));
+            gamefield.add(new Square(new Vector3(125, 120, 0), new Vector3(50, 20, 0), spriteBatch, Content));
+            gamefield.add(new Square(new Vector3(225, 135, 0), new Vector3(150, 10, 0), spriteBatch, Content));
+            gamefield.add(new Square(new Vector3(350, 155, 0), new Vector3(100, 30, 0), spriteBatch, Content));
         }
 
         /// <summary>
@@ -84,6 +92,7 @@ namespace Fall_Ball
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             // TODO: Fügen Sie Ihren Zeichnungscode hier hinzu
+            gamefield.draw( offset );
 
             base.Draw(gameTime);
         }
