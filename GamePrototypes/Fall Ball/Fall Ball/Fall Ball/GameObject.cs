@@ -5,6 +5,10 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using FarseerPhysics;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics;
 
 namespace Fall_Ball
 {
@@ -15,40 +19,22 @@ namespace Fall_Ball
     class GameObject
     {
 
-        // square bounds - simple as possible
-        public BoundingBox box;
-
-        // world coords of centerpoint
-        public Vector3 position;
-
         // internal for loading and drawing sprites
         public SpriteBatch spriteBatch;
         public Texture2D texture;
+        public Body body;
 
         // constructor
-        public GameObject(Vector3 pos, SpriteBatch batch, Texture2D texture)
+        public GameObject(Vector2 pos, SpriteBatch batch, Texture2D texture, World world)
         {
-            this.position = pos;
-            this.box = new BoundingBox( new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X, pos.Y, 0) );
+            body = BodyFactory.CreateBody(world, pos);
+            body.BodyType = BodyType.Static;
             this.spriteBatch = batch;
             this.texture = texture;
         }
 
         // draw the object on position + offset
-        public virtual void draw( Vector3 offset ) {}
-
-
-        // here we need something for exact collision detection and computation of object normal
-        // public virtual ??? testCollisionAndReturnNormal( ?? ?? ??) { }
-
-
-        // moves the object -> for the balls ..
-        public virtual void move(Vector3 offset)
-        {
-            this.position += offset;
-            this.box.Min += offset;
-            this.box.Max += offset;
-        }
+        public virtual void draw(Vector3 offset) { }
 
     }
 }

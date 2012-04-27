@@ -15,9 +15,7 @@ using FarseerPhysics.Dynamics;
 
 namespace Fall_Ball
 {
-    /// <summary>
-    /// Dies ist der Haupttyp für Ihr Spiel
-    /// </summary>
+
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
@@ -25,6 +23,8 @@ namespace Fall_Ball
         Field gamefield;
         Vector3 offset;
         Texture2D squareSprite;
+        Texture2D circleSprite;
+        World world;
 
         public Game1()
         {
@@ -32,75 +32,58 @@ namespace Fall_Ball
             Content.RootDirectory = "Content";
         }
 
-        /// <summary>
-        /// Ermöglicht dem Spiel die Durchführung einer Initialisierung, die es benötigt, bevor es ausgeführt werden kann.
-        /// Dort kann es erforderliche Dienste abfragen und nicht mit der Grafik
-        /// verbundenen Content laden.  Bei Aufruf von base.Initialize werden alle Komponenten aufgezählt
-        /// sowie initialisiert.
-        /// </summary>
+
         protected override void Initialize()
         {
-            // TODO: Fügen Sie Ihre Initialisierungslogik hier hinzu
-
             base.Initialize();
         }
 
-        /// <summary>
-        /// LoadContent wird einmal pro Spiel aufgerufen und ist der Platz, wo
-        /// Ihr gesamter Content geladen wird.
-        /// </summary>
+
         protected override void LoadContent()
         {
             // Erstellen Sie einen neuen SpriteBatch, der zum Zeichnen von Texturen verwendet werden kann.
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            world = new World(new Vector2(0.0f, 10.0f));
 
             squareSprite = Content.Load<Texture2D>("Sprites\\Square");
+            circleSprite = Content.Load<Texture2D>("Sprites\\Circle");
 
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Content hier zu laden
-            offset = new Vector3( 0, 0, 0); // move of the full gamefield
+            offset = new Vector3(0, 0, 0); // move of the full gamefield
             gamefield = new Field();
-            gamefield.add(new Square(new Vector3(50, 100, 0), new Vector3(100, 20, 0), spriteBatch, squareSprite));
-            gamefield.add(new Square(new Vector3(125, 120, 0), new Vector3(50, 20, 0), spriteBatch, squareSprite));
-            gamefield.add(new Square(new Vector3(225, 135, 0), new Vector3(150, 10, 0), spriteBatch, squareSprite));
-            gamefield.add(new Square(new Vector3(350, 155, 0), new Vector3(100, 30, 0), spriteBatch, squareSprite));
+
+            gamefield.add(new Ball(new Vector2(30, 0), 10.0f, spriteBatch, circleSprite, world));
+            gamefield.add(new Square(new Vector2(50, 100), new Vector2(100, 10), 0.6f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(125, 140), new Vector2(70, 5), 0.05f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(225, 175), new Vector2(150, 10), 0.2f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(320, 250), new Vector2(350, 5), -0.4f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(50, 350), new Vector2(10, 50), 0.0f, spriteBatch, squareSprite, world));
+            gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 7), 0.3f, spriteBatch, squareSprite, world));
         }
 
-        /// <summary>
-        /// UnloadContent wird einmal pro Spiel aufgerufen und ist der Ort, wo
-        /// Ihr gesamter Content entladen wird.
-        /// </summary>
+
         protected override void UnloadContent()
         {
-            // TODO: Entladen Sie jeglichen Nicht-ContentManager-Content hier
         }
 
-        /// <summary>
-        /// Ermöglicht dem Spiel die Ausführung der Logik, wie zum Beispiel Aktualisierung der Welt,
-        /// Überprüfung auf Kollisionen, Erfassung von Eingaben und Abspielen von Ton.
-        /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+
         protected override void Update(GameTime gameTime)
         {
-            // Ermöglicht ein Beenden des Spiels
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
-
-            // TODO: Fügen Sie Ihre Aktualisierungslogik hier hinzu
 
             base.Update(gameTime);
         }
 
-        /// <summary>
-        /// Dies wird aufgerufen, wenn das Spiel selbst zeichnen soll.
-        /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Fügen Sie Ihren Zeichnungscode hier hinzu
-            gamefield.draw( offset );
+            gamefield.draw(offset);
 
+            world.Step(0.05f);
             base.Draw(gameTime);
         }
     }

@@ -35,18 +35,5 @@ namespace Fall_Ball
             this.objects.Remove(gameObject);
         }
 
-        public List<GameObject> getPossibleCollisionObjects(GameObject testObject)
-        {
-            List<GameObject> list = new List<GameObject>();
-            foreach (GameObject obj in objects)
-            {
-                if (obj.box.Intersects(testObject.box))
-                {
-                    list.Add( obj );
-                }
-            }
-            return list;
-        }
-
     }
 }

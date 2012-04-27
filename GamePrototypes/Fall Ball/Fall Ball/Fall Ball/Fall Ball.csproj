@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Ball.cs" />
     <Compile Include="Field.cs" />
     <Compile Include="GameObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
