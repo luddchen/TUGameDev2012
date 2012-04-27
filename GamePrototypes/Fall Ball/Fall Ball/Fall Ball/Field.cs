@@ -19,9 +19,9 @@ namespace Fall_Ball
 
         public void draw(Vector3 offset)
         {
-            for (int i = 0; i < this.objects.Count; i++) 
+            foreach (GameObject obj in objects) 
             { 
-                this.objects[i].draw( offset ); 
+                obj.draw( offset ); 
             }
         }
 
@@ -38,11 +38,11 @@ namespace Fall_Ball
         public List<GameObject> getPossibleCollisionObjects(GameObject testObject)
         {
             List<GameObject> list = new List<GameObject>();
-            for (int i = 0; i < this.objects.Count; i++)
+            foreach (GameObject obj in objects)
             {
-                if (this.objects[i].box.Intersects(testObject.box))
+                if (obj.box.Intersects(testObject.box))
                 {
-                    list.Add( this.objects[i] );
+                    list.Add( obj );
                 }
             }
             return list;

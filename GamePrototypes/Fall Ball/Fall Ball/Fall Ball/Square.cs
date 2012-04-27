@@ -11,17 +11,16 @@ namespace Fall_Ball
     class Square : GameObject
     {
         private Vector3 size;           // = (width, height, 0)
-        private Texture2D texture;
         private Vector2 spriteOrigin;   // sprite center
-        Rectangle dest;                 
+        private Rectangle dest;                 
 
 
-        public Square(Vector3 pos, Vector3 size, SpriteBatch batch, ContentManager content) : base( pos, batch , content)
+        public Square(Vector3 pos, Vector3 size, SpriteBatch batch, Texture2D texture) : base( pos, batch , texture)
         {
             this.size = size;
             this.box.Min -= size / 2;
             this.box.Max += size / 2;
-            this.texture = content.Load<Texture2D>("Sprites\\Square");
+            this.texture = texture;
             spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
         }
 

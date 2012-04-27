@@ -23,15 +23,15 @@ namespace Fall_Ball
 
         // internal for loading and drawing sprites
         public SpriteBatch spriteBatch;
-        public ContentManager content;
+        public Texture2D texture;
 
         // constructor
-        public GameObject(Vector3 pos, SpriteBatch batch, ContentManager content)
+        public GameObject(Vector3 pos, SpriteBatch batch, Texture2D texture)
         {
             this.position = pos;
             this.box = new BoundingBox( new Vector3(pos.X, pos.Y, 0), new Vector3(pos.X, pos.Y, 0) );
             this.spriteBatch = batch;
-            this.content = content;
+            this.texture = texture;
         }
 
         // draw the object on position + offset

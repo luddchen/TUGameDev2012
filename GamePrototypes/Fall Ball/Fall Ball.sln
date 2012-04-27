@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fall Ball", "Fall Ball\Fall Ball\Fall Ball.csproj", "{0E1C5649-A55B-45A7-8660-08B0BBA807F2}"
 EndProject
-Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Fall BallContent", "Fall Ball\Fall BallContent\Fall BallContent.contentproj", "{08CA1698-3F38-4437-B509-CFF0AC12CA5A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fall BallContent", "Fall Ball\Fall BallContent\Fall BallContent.contentproj", "{08CA1698-3F38-4437-B509-CFF0AC12CA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Farseer Physics XNA", "..\Farseer Physics Engine 3.3.1 Samples XNA\Farseer Physics Engine 3.3 XNA\Farseer Physics XNA.csproj", "{0A850700-1ABB-4288-A391-6726B90EBEB9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,6 +19,10 @@ Global
 		{0E1C5649-A55B-45A7-8660-08B0BBA807F2}.Release|x86.Build.0 = Release|x86
 		{08CA1698-3F38-4437-B509-CFF0AC12CA5A}.Debug|x86.ActiveCfg = Debug|x86
 		{08CA1698-3F38-4437-B509-CFF0AC12CA5A}.Release|x86.ActiveCfg = Release|x86
+		{0A850700-1ABB-4288-A391-6726B90EBEB9}.Debug|x86.ActiveCfg = Debug|x86
+		{0A850700-1ABB-4288-A391-6726B90EBEB9}.Debug|x86.Build.0 = Debug|x86
+		{0A850700-1ABB-4288-A391-6726B90EBEB9}.Release|x86.ActiveCfg = Release|x86
+		{0A850700-1ABB-4288-A391-6726B90EBEB9}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

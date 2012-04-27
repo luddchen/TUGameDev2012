@@ -8,6 +8,10 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using FarseerPhysics;
+using FarseerPhysics.Collision;
+using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics;
 
 namespace Fall_Ball
 {
@@ -20,6 +24,7 @@ namespace Fall_Ball
         SpriteBatch spriteBatch;
         Field gamefield;
         Vector3 offset;
+        Texture2D squareSprite;
 
         public Game1()
         {
@@ -49,13 +54,15 @@ namespace Fall_Ball
             // Erstellen Sie einen neuen SpriteBatch, der zum Zeichnen von Texturen verwendet werden kann.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            squareSprite = Content.Load<Texture2D>("Sprites\\Square");
+
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Content hier zu laden
             offset = new Vector3( 0, 0, 0); // move of the full gamefield
             gamefield = new Field();
-            gamefield.add(new Square(new Vector3(50, 100, 0), new Vector3(100, 20, 0), spriteBatch, Content));
-            gamefield.add(new Square(new Vector3(125, 120, 0), new Vector3(50, 20, 0), spriteBatch, Content));
-            gamefield.add(new Square(new Vector3(225, 135, 0), new Vector3(150, 10, 0), spriteBatch, Content));
-            gamefield.add(new Square(new Vector3(350, 155, 0), new Vector3(100, 30, 0), spriteBatch, Content));
+            gamefield.add(new Square(new Vector3(50, 100, 0), new Vector3(100, 20, 0), spriteBatch, squareSprite));
+            gamefield.add(new Square(new Vector3(125, 120, 0), new Vector3(50, 20, 0), spriteBatch, squareSprite));
+            gamefield.add(new Square(new Vector3(225, 135, 0), new Vector3(150, 10, 0), spriteBatch, squareSprite));
+            gamefield.add(new Square(new Vector3(350, 155, 0), new Vector3(100, 30, 0), spriteBatch, squareSprite));
         }
 
         /// <summary>
