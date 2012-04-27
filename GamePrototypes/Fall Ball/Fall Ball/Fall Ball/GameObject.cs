@@ -34,7 +34,10 @@ namespace Fall_Ball
         }
 
         // draw the object on position + offset
-        public virtual void draw(Vector3 offset) { }
+        public virtual void draw(Vector2 offset) { }
+
+        // draw the object on position + offset , using some scaling
+        public virtual void draw(Vector2 offset, float size) { }
 
     }
 }

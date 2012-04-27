@@ -17,11 +17,19 @@ namespace Fall_Ball
             this.objects = new List<GameObject>();
         }
 
-        public void draw(Vector3 offset)
+        public void draw(Vector2 offset, float scale)
         {
             foreach (GameObject obj in objects) 
             { 
-                obj.draw( offset ); 
+                obj.draw( offset , scale); 
+            }
+        }
+
+        public void draw(Vector2 offset)
+        {
+            foreach (GameObject obj in objects)
+            {
+                obj.draw(offset);
             }
         }
 
