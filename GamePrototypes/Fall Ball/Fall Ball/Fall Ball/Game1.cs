@@ -47,8 +47,8 @@ namespace Fall_Ball
             spriteBatch = new SpriteBatch(GraphicsDevice);
             world = new World(new Vector2(0.0f, 3.0f));
 
-            squareSprite = Content.Load<Texture2D>("Sprites\\Square");
-            circleSprite = Content.Load<Texture2D>("Sprites\\Circle");
+            squareSprite = Content.Load<Texture2D>("Sprites\\Square2");
+            circleSprite = Content.Load<Texture2D>("Sprites\\Circle2");
 
             // TODO: Verwenden Sie this.Content, um Ihren Spiel-Content hier zu laden
             offset = new Vector2(0, 0); // move of the full gamefield

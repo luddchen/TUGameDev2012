@@ -34,7 +34,7 @@ namespace Fall_Ball
         {
             dest = new Rectangle((int)(this.body.Position.X + offset.X), (int)(this.body.Position.Y + offset.Y), (int)(radius * 2), (int)(radius * 2));
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, Color.Green, 0f, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, Color.Green, this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
