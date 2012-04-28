@@ -54,8 +54,8 @@ namespace Fall_Ball
             gamefield.add(new Ball(new Vector2(50, 885), 12.0f, Color.LightSalmon, batch, textures[2], world));
             gamefield.add(new Ball(new Vector2(450, 885), 12.0f, Color.MistyRose, batch, textures[6], world));
 
-            this.width = 500;
-            this.height = 950;
+            this.size.X = 550;
+            this.size.Y = 950;
         }
 
     }

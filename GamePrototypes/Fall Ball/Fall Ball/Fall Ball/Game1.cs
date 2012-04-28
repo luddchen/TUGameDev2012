@@ -20,12 +20,23 @@ namespace Fall_Ball
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Overlay overlay;
+        KeyboardState keyboardState;
+        GamePadState gamepadState;
+        int maxScrollBackDelay = 100;
+        int scrollBackDelay;
+
+        Color background = Color.SeaShell;
+        Color foreground;
 
         int screenWidth;
         int screenHeight;
 
         Vector2 offset;
         Vector2 minimapOffset;
+
+        Vector2 playerOffset;
+
         float gameScale;
         float minimapScale;
         float screenScale;
@@ -39,17 +50,21 @@ namespace Fall_Ball
             Content.RootDirectory = "Content";
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
-            screenWidth = graphics.PreferredBackBufferWidth;
-            screenHeight = graphics.PreferredBackBufferHeight;
+
+            foreground = new Color(255 - background.R, 255 - background.G, 255 - background.B);
+            overlay = new Overlay(this, foreground);
+            Components.Add(overlay);
         }
 
         void Window_ClientSizeChanged(object sender, EventArgs e)
         {
-            screenWidth = graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
-            screenHeight = graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
-            screenScale = (float)(screenWidth) / (float)(level.width);
-            minimapOffset.X = (float)((float)(screenWidth) - (level.width * minimapScale * screenScale));
-            minimapOffset.Y = (float)((float)(screenHeight) - (level.height * minimapScale * screenScale));
+            screenWidth = graphics.GraphicsDevice.Viewport.Width;
+            screenHeight = graphics.GraphicsDevice.Viewport.Height;
+            screenScale = (float)(screenWidth) / (float)(level.size.X);
+            minimapOffset.X = (float)((float)(screenWidth) - (level.size.X * minimapScale * screenScale));
+            minimapOffset.Y = (float)((float)(screenHeight) - (level.size.Y * minimapScale * screenScale));
+
+            overlay.TitleSafe = new Rectangle(graphics.GraphicsDevice.Viewport.X, graphics.GraphicsDevice.Viewport.Y, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
         }
 
         protected override void Initialize()
@@ -74,18 +89,19 @@ namespace Fall_Ball
             level = new Level_1(textures, spriteBatch);
 
             offset = new Vector2(0, 0); // move of the full gamefield
+            playerOffset = new Vector2(0, 0);
 
-            if ((float)(level.height) / (float)(level.width) > 1.0f)
+            if ((float)(level.size.Y) / (float)(level.size.X) > 1.0f)
             {
-                minimapScale = 0.2f / ((float)(level.height) / (float)(level.width)); 
+                minimapScale = 0.2f / ((float)(level.size.Y) / (float)(level.size.X)); 
             }
             else
             {
                 minimapScale = 0.2f;
             }
-            gameScale = 1.0f - minimapScale;
+            gameScale = 0.8f;
             Window_ClientSizeChanged( null, null);  // sets the minimapoffset vector
-
+            scrollBackDelay = maxScrollBackDelay;
         }
 
 
@@ -96,8 +112,43 @@ namespace Fall_Ball
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+            GamePadState gamepad = GamePad.GetState(PlayerIndex.One);
+            KeyboardState keyboard = Keyboard.GetState();
+
+            if (gamepad.Buttons.Back == ButtonState.Pressed ||
+                keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
+
+            if (keyboard.IsKeyDown(Keys.Up) || keyboard.IsKeyDown(Keys.Down))
+            {
+                if (keyboard.IsKeyDown(Keys.Up))
+                {
+                    playerOffset.Y += 1;
+                    scrollBackDelay = maxScrollBackDelay;
+                }
+
+                if (keyboard.IsKeyDown(Keys.Down))
+                {
+                    playerOffset.Y -= 1;
+                    scrollBackDelay = maxScrollBackDelay;
+                }
+            }
+            else
+            {
+                if (scrollBackDelay > 0)
+                {
+                    scrollBackDelay--;
+                }
+                else
+                {
+                    if (playerOffset.Y > 0) playerOffset.Y -= 0.5f;
+                    if (playerOffset.Y < 0) playerOffset.Y += 0.5f;
+                }
+
+            }
+
+            keyboardState = keyboard;
+            gamepadState = gamepad;
 
             base.Update(gameTime);
         }
@@ -105,11 +156,31 @@ namespace Fall_Ball
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear( background);
 
-            offset.Y =  (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * gameScale * screenScale / 2);
+            float drawScale = gameScale * screenScale;
 
-            level.gamefield.draw( offset , gameScale * screenScale );
+            offset.Y =  (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * drawScale / 2);
+
+            // draw level
+            level.gamefield.draw( offset + playerOffset, drawScale );
+
+            // draw minimap
+            Rectangle dest = new Rectangle((int)(minimapOffset.X - 2), 
+                                            (int)(minimapOffset.Y - 2), 
+                                            (int)(2 + screenWidth - minimapOffset.X), 
+                                            (int)(2 + screenHeight - minimapOffset.Y));
+            spriteBatch.Begin();
+            spriteBatch.Draw(textures[0], dest, null, foreground, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.End();
+
+            dest.X += 1;
+            dest.Y += 1;
+            dest.Width -= 2;
+            dest.Height -= 2;
+            spriteBatch.Begin();
+            spriteBatch.Draw(textures[0], dest, null, background, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.End();
             level.gamefield.draw( minimapOffset, minimapScale * screenScale );
 
             level.world.Step(0.1f);

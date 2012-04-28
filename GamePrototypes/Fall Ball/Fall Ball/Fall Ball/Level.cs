@@ -16,8 +16,7 @@ namespace Fall_Ball
     class Level
     {
 
-        public int width;   // width of full level
-        public int height;  // height of full level
+        public Vector2 size;
         public World world;
         public Field gamefield;
         public GameObject ball1;
@@ -25,8 +24,7 @@ namespace Fall_Ball
 
         public Level(List<Texture2D> textures, SpriteBatch batch)
         {
-            this.width = 1;
-            this.height = 1;
+            this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
         }
