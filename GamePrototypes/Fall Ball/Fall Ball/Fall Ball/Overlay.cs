@@ -27,12 +27,22 @@ namespace Fall_Ball
         private SpriteFont smallFont;
 
         // Some strings and positioning data
-        string xnaString = "sample text";
-        Vector2 xnaStringPos;
+        string buttomString = "buttom text 1";
+        string buttomString2 = "buttom text 2";
+        string centerString = "center text";
+
+        Vector2 buttomPos = new Vector2(0,0);
+        Vector2 buttomPos2 = new Vector2(0, 0);
+        Vector2 centerPos = new Vector2(0,0);
+
+        float buttomSize = 0.66f;
+        float buttomSize2 = 0.66f;
+        float centerSize = 1.32f;
 
         TimeSpan elapsedTime = TimeSpan.Zero;
 
         Color foreground;
+        Color foregroundAlpha;
 
         // for detecting the visible region on the xbox 360 (this is set from Sandbox.cs)
         Rectangle titleSafe;
@@ -42,7 +52,52 @@ namespace Fall_Ball
         public Rectangle TitleSafe
         {
             get { return titleSafe; }
-            set { titleSafe = value; }
+            set 
+            { 
+                titleSafe = value;
+                centerPos.X = titleSafe.X + titleSafe.Width / 2;
+                centerPos.Y = titleSafe.Y + titleSafe.Height / 2;
+                buttomPos.X = titleSafe.X + titleSafe.Width / 3;
+                buttomPos.Y = titleSafe.Y + titleSafe.Height;
+                buttomPos2.X = titleSafe.X + titleSafe.Width * 2 / 3;
+                buttomPos2.Y = titleSafe.Y + titleSafe.Height;
+            }
+        }
+
+        public String CenterString
+        {
+            get { return centerString; }
+            set { centerString = value; }
+        }
+
+        public String ButtomString
+        {
+            get { return buttomString; }
+            set { buttomString = value; }
+        }
+
+        public String ButtomString2
+        {
+            get { return buttomString2; }
+            set { buttomString2 = value; }
+        }
+
+        public float CenterSize
+        {
+            get { return centerSize; }
+            set { centerSize = value; }
+        }
+
+        public float ButtomSize
+        {
+            get { return buttomSize; }
+            set { buttomSize = value; }
+        }
+
+        public float BUttomSize2
+        {
+            get { return buttomSize2; }
+            set { buttomSize2 = value; }
         }
 
         #endregion
@@ -55,6 +110,7 @@ namespace Fall_Ball
             content = new ContentManager(game.Services);
             content.RootDirectory = "Content";
             this.foreground = foreground;
+            this.foregroundAlpha = new Color( foreground.R, foreground.G, foreground.B, 128 );
         }
 
         public override void Initialize()
@@ -65,7 +121,7 @@ namespace Fall_Ball
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            // Load font and set spacing
+
             font = content.Load<SpriteFont>("Fonts\\Font");
             font.Spacing = fontSpacing;
             smallFont = content.Load<SpriteFont>("Fonts\\FontSmall");
@@ -91,14 +147,16 @@ namespace Fall_Ball
 
         public override void Draw(GameTime gameTime)
         {
-            // The center of the string
-            xnaStringPos = new Vector2(titleSafe.X + titleSafe.Width/2, titleSafe.Y + titleSafe.Height * 0.9f);
-
-            // Draw text
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(font, xnaString, xnaStringPos, foreground,
-                0, font.MeasureString(xnaString), 1.0f, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, buttomString, buttomPos, foreground,
+                0, font.MeasureString(buttomString), buttomSize, SpriteEffects.None, 0.5f);
+
+            spriteBatch.DrawString(font, buttomString2, buttomPos2, foreground,
+                0, font.MeasureString(buttomString2), buttomSize2, SpriteEffects.None, 0.5f);
+
+            spriteBatch.DrawString(font, centerString, centerPos + font.MeasureString(centerString) / 2, foregroundAlpha,
+                0, font.MeasureString(centerString), centerSize, SpriteEffects.None, 0.5f);
 
             spriteBatch.End();
         }
