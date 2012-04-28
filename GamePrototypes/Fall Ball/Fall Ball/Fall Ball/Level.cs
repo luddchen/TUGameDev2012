@@ -19,6 +19,7 @@ namespace Fall_Ball
         public Vector2 size;
         public World world;
         public Field gamefield;
+        public Field addObjects;
         public GameObject ball1;
         public GameObject ball2;
 
@@ -27,6 +28,7 @@ namespace Fall_Ball
             this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
+            this.addObjects = new Field();
         }
 
     }

@@ -56,6 +56,10 @@ namespace Fall_Ball
 
             this.size.X = 550;
             this.size.Y = 950;
+
+            addObjects.add(new Square(new Vector2(0, 0), new Vector2(80, 7), 0.0f, Color.Blue, batch, textures[0], world));
+            addObjects.add(new Ball(new Vector2(0, 0), 12.0f, Color.Blue, batch, textures[6], world));
+            addObjects.add(new Ball(new Vector2(0, 0), 12.0f, Color.Blue, batch, textures[5], world));
         }
 
     }

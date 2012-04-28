@@ -23,6 +23,7 @@ namespace Fall_Ball
         public SpriteBatch spriteBatch;
         public Texture2D texture;
         public Body body;
+        public Color color;
 
         // constructor
         public GameObject(Vector2 pos, SpriteBatch batch, Texture2D texture, World world)
@@ -31,6 +32,7 @@ namespace Fall_Ball
             body.BodyType = BodyType.Static;
             this.spriteBatch = batch;
             this.texture = texture;
+            this.color = Color.Gray;
         }
 
         // draw the object on position + offset , using some scaling

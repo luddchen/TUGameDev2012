@@ -36,6 +36,7 @@ namespace Fall_Ball
         Vector2 minimapOffset;
 
         Vector2 playerOffset;
+        Vector2 cursorOffset;
 
         float gameScale;
         float minimapScale;
@@ -43,6 +44,7 @@ namespace Fall_Ball
         List<Texture2D> textures;
 
         Level level;
+        GameObject cursor;
 
         public Game1()
         {
@@ -90,6 +92,7 @@ namespace Fall_Ball
 
             offset = new Vector2(0, 0); // move of the full gamefield
             playerOffset = new Vector2(0, 0);
+            cursorOffset = new Vector2(0, 0);
 
             if ((float)(level.size.Y) / (float)(level.size.X) > 1.0f)
             {
@@ -102,6 +105,13 @@ namespace Fall_Ball
             gameScale = 0.8f;
             Window_ClientSizeChanged( null, null);  // sets the minimapoffset vector
             scrollBackDelay = maxScrollBackDelay;
+
+            if (level.addObjects.objects.Count > 0)
+            {
+                cursor = level.addObjects.objects[0];
+                cursor.color = new Color( cursor.color.R, cursor.color.G, cursor.color.B, cursor.color.A / 2);
+                level.addObjects.remove(cursor);
+            }
         }
 
 
@@ -147,6 +157,16 @@ namespace Fall_Ball
 
             }
 
+            if (keyboard.IsKeyDown(Keys.Left))
+            {
+                cursorOffset.X -= 1;
+            }
+
+            if (keyboard.IsKeyDown(Keys.Right))
+            {
+                cursorOffset.X += 1;
+            }
+
             keyboardState = keyboard;
             gamepadState = gamepad;
 
@@ -164,6 +184,19 @@ namespace Fall_Ball
 
             // draw level
             level.gamefield.draw( offset + playerOffset, drawScale );
+
+            // draw addObjects
+            Vector2 addPos = new Vector2( minimapOffset.X, 0);
+            for (int i = 0; i < level.addObjects.objects.Count; i++)
+            {
+                addPos.Y += 30;
+                level.addObjects.objects[i].draw( addPos, drawScale);
+            }
+
+            // draw cursor
+            addPos.X = screenWidth * gameScale / 2;
+            addPos.Y = screenHeight * gameScale / 2;
+            cursor.draw(addPos + cursorOffset, drawScale);
 
             // draw minimap
             Rectangle dest = new Rectangle((int)(minimapOffset.X - 2), 

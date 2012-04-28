@@ -18,7 +18,6 @@ namespace Fall_Ball
         private Vector2 spriteOrigin;   // sprite center
         private Rectangle dest;
         private float rot;
-        private Color color;
 
         public Square(Vector2 pos, Vector2 size, float rot, SpriteBatch batch, Texture2D texture, World world)
             : base(pos, batch, texture, world)
