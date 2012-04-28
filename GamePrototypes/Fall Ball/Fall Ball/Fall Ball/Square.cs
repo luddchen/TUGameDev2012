@@ -18,6 +18,7 @@ namespace Fall_Ball
         private Vector2 spriteOrigin;   // sprite center
         private Rectangle dest;
         private float rot;
+        private Color color;
 
         public Square(Vector2 pos, Vector2 size, float rot, SpriteBatch batch, Texture2D texture, World world)
             : base(pos, batch, texture, world)
@@ -25,6 +26,7 @@ namespace Fall_Ball
             this.size = size;
             this.rot = rot;
             this.texture = texture;
+            this.color = Color.Green;
             this.spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             Matrix rMat = Matrix.CreateRotationZ(rot);
@@ -39,12 +41,17 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
         }
 
+        public Square(Vector2 pos, Vector2 size, float rot, Color color, SpriteBatch batch, Texture2D texture, World world) : this(pos, size, rot, batch, texture, world)
+        {
+            this.color = color;
+        }
+
 
         public override void draw(Vector2 offset)
         {
             dest = new Rectangle((int)(this.body.Position.X + offset.X), (int)(this.body.Position.Y + offset.Y), (int)size.X, (int)size.Y);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, Color.LightGray, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
@@ -53,7 +60,7 @@ namespace Fall_Ball
         {
             dest = new Rectangle((int)(this.body.Position.X*scale + offset.X), (int)(this.body.Position.Y*scale + offset.Y), (int)(size.X*scale), (int)(size.Y*scale));
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, Color.LightGray, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
