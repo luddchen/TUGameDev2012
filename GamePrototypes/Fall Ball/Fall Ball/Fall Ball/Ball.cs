@@ -36,22 +36,16 @@ namespace Fall_Ball
             this.color = color;
         }
 
-        public override void draw(Vector2 offset)
+        public override void draw(Vector2 offset, float scale)
         {
-            dest = new Rectangle((int)(this.body.Position.X + offset.X), (int)(this.body.Position.Y + offset.Y), (int)(radius * 2), (int)(radius * 2));
+            int drawSize = (int)(radius * 2 * scale);
+            if (drawSize < 1) drawSize = 1;
+
+            dest = new Rectangle((int)(this.body.Position.X*scale + offset.X), (int)(this.body.Position.Y*scale + offset.Y), drawSize, drawSize);
             spriteBatch.Begin();
             spriteBatch.Draw(texture, dest, null, this.color, this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
-
-        public override void draw(Vector2 offset, float scale)
-        {
-            dest = new Rectangle((int)(this.body.Position.X*scale + offset.X), (int)(this.body.Position.Y*scale + offset.Y), (int)(radius * 2 * scale), (int)(radius * 2 * scale));
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, 0f, spriteOrigin, SpriteEffects.None, 0f);
-            spriteBatch.End();
-        }
-
 
     }
 }

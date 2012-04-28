@@ -39,13 +39,23 @@ namespace Fall_Ball
             gamefield.add(new Ball(new Vector2(445, 160), 12.0f, Color.LemonChiffon, batch, textures[5], world));
             gamefield.add(new Ball(new Vector2(445, 140), 12.0f, Color.Yellow, batch, textures[6], world));
 
-            gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, batch,  textures[0], world));
             gamefield.add(new Square(new Vector2(50, 335), new Vector2(7, 50), -0.5f, batch, textures[0], world));
             gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 7), 0.3f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(370, 425), new Vector2(7, 70), 0.9f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(390, 500), new Vector2(7, 100), 0.9f, batch, textures[0], world));
+
+            gamefield.add(new Square(new Vector2(250, 600), new Vector2(160, 7), 0.0f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(150, 700), new Vector2(80, 7), 0.5f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(350, 700), new Vector2(80, 7), -0.5f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(195, 800), new Vector2(80, 7), 0.2f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(305, 800), new Vector2(80, 7), -0.2f, batch, textures[0], world));
+
+            gamefield.add(new Square(new Vector2(250, 900), new Vector2(400, 7), 0.0f, batch, textures[0], world));
+            gamefield.add(new Ball(new Vector2(50, 885), 12.0f, Color.LightSalmon, batch, textures[2], world));
+            gamefield.add(new Ball(new Vector2(450, 885), 12.0f, Color.MistyRose, batch, textures[6], world));
 
             this.width = 500;
-            this.height = 500;
+            this.height = 950;
         }
 
     }

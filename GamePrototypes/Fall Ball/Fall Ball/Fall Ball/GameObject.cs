@@ -33,9 +33,6 @@ namespace Fall_Ball
             this.texture = texture;
         }
 
-        // draw the object on position + offset
-        public virtual void draw(Vector2 offset) { }
-
         // draw the object on position + offset , using some scaling
         public virtual void draw(Vector2 offset, float size) { }
 

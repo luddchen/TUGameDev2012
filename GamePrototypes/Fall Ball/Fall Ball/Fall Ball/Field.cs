@@ -25,14 +25,6 @@ namespace Fall_Ball
             }
         }
 
-        public void draw(Vector2 offset)
-        {
-            foreach (GameObject obj in objects)
-            {
-                obj.draw(offset);
-            }
-        }
-
         public void add(GameObject gameObject)
         {
             this.objects.Add( gameObject );

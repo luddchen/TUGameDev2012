@@ -41,24 +41,21 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
         }
 
-        public Square(Vector2 pos, Vector2 size, float rot, Color color, SpriteBatch batch, Texture2D texture, World world) : this(pos, size, rot, batch, texture, world)
+        public Square(Vector2 pos, Vector2 size, float rot, Color color, SpriteBatch batch, Texture2D texture, World world)
+            : this(pos, size, rot, batch, texture, world)
         {
             this.color = color;
         }
 
-
-        public override void draw(Vector2 offset)
-        {
-            dest = new Rectangle((int)(this.body.Position.X + offset.X), (int)(this.body.Position.Y + offset.Y), (int)size.X, (int)size.Y);
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
-            spriteBatch.End();
-        }
-
-
         public override void draw(Vector2 offset, float scale)
         {
-            dest = new Rectangle((int)(this.body.Position.X*scale + offset.X), (int)(this.body.Position.Y*scale + offset.Y), (int)(size.X*scale), (int)(size.Y*scale));
+            int drawSizeX = (int)(size.X * scale);
+            if (drawSizeX < 1) drawSizeX = 1;
+
+            int drawSizeY = (int)(size.Y * scale);
+            if (drawSizeY < 1) drawSizeY = 1;
+
+            dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
             spriteBatch.Begin();
             spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();

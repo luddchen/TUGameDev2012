@@ -20,9 +20,15 @@ namespace Fall_Ball
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        int screenWidth;
+        int screenHeight;
+
         Vector2 offset;
         Vector2 minimapOffset;
+        float gameScale;
         float minimapScale;
+        float screenScale;
         List<Texture2D> textures;
 
         Level level;
@@ -31,8 +37,20 @@ namespace Fall_Ball
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
+            screenWidth = graphics.PreferredBackBufferWidth;
+            screenHeight = graphics.PreferredBackBufferHeight;
         }
 
+        void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            screenWidth = graphics.PreferredBackBufferWidth = Window.ClientBounds.Width;
+            screenHeight = graphics.PreferredBackBufferHeight = Window.ClientBounds.Height;
+            screenScale = (float)(screenWidth) / (float)(level.width);
+            minimapOffset.X = (float)((float)(screenWidth) - (level.width * minimapScale * screenScale));
+            minimapOffset.Y = (float)((float)(screenHeight) - (level.height * minimapScale * screenScale));
+        }
 
         protected override void Initialize()
         {
@@ -53,11 +71,21 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Smiley"));   // textures[5]
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
 
-            offset = new Vector2(0, 0); // move of the full gamefield
-            minimapOffset = new Vector2(650, 350);
-            minimapScale = 0.25f;
-
             level = new Level_1(textures, spriteBatch);
+
+            offset = new Vector2(0, 0); // move of the full gamefield
+
+            if ((float)(level.height) / (float)(level.width) > 1.0f)
+            {
+                minimapScale = 0.2f / ((float)(level.height) / (float)(level.width)); 
+            }
+            else
+            {
+                minimapScale = 0.2f;
+            }
+            gameScale = 1.0f - minimapScale;
+            Window_ClientSizeChanged( null, null);  // sets the minimapoffset vector
+
         }
 
 
@@ -79,8 +107,10 @@ namespace Fall_Ball
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            level.gamefield.draw( offset );
-            level.gamefield.draw( minimapOffset, minimapScale );
+            offset.Y =  (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * gameScale * screenScale / 2);
+
+            level.gamefield.draw( offset , gameScale * screenScale );
+            level.gamefield.draw( minimapOffset, minimapScale * screenScale );
 
             level.world.Step(0.1f);
             base.Draw(gameTime);
