@@ -45,16 +45,14 @@ namespace Fall_Ball
             return true;
         }
 
-        public virtual void update(GameTime gameTime)
+        public virtual void update(GameTime gameTime, Vector2 pos)
         {
             //Vector2 position = Camera.ConvertScreenToWorld(mouse.Cursor);
-            Vector2 position = mouse.Cursor;
+            Vector2 position = pos;
 
             if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) &&
                 fixedMouseJoint == null)
             {
-                Console.WriteLine("Ball1 position: " + ball1.body.Position.X + " " + ball1.body.Position.Y);
-                Console.WriteLine("Mouse X: " + position.X + " Mouse Y: " + position.Y);
                 Fixture savedFixture = this.world.TestPoint(position);
                 if (savedFixture != null)
                 {

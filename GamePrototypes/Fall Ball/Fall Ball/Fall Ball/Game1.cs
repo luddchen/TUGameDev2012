@@ -175,7 +175,8 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             base.Update(gameTime);
-            level.update(gameTime);
+            Vector2 posWorld = (mouseController.Cursor - offset) / (gameScale * screenScale);
+            level.update(gameTime, posWorld);
             mouseController.Update(gameTime);
         }
 

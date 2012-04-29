@@ -103,10 +103,10 @@ namespace Fall_Ball
             return true;
         }
 
-        public override void update(GameTime gameTime)
+        public override void update(GameTime gameTime, Vector2 pos)
         {
             
-            base.update(gameTime);
+            base.update(gameTime, pos);
         }
     }
 }
