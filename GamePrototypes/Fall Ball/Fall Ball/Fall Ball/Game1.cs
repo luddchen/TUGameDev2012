@@ -92,7 +92,7 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Smiley"));   // textures[5]
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
 
-            level = new Level_1(textures, spriteBatch);
+            level = new Level_1(this, textures, spriteBatch, mouseController);
 
             offset = new Vector2(0, 0); // move of the full gamefield
             playerOffset = new Vector2(0, 0);
@@ -175,6 +175,7 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             base.Update(gameTime);
+            level.update(gameTime);
             mouseController.Update(gameTime);
         }
 

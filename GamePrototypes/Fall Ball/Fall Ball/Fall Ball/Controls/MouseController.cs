@@ -88,8 +88,8 @@ namespace Fall_Ball.Controls
             lastMouseState = currentMouseState;
             currentMouseState = Mouse.GetState();
 
-            cursor.X = currentMouseState.X;
-            cursor.Y = currentMouseState.Y;
+
+            cursor = new Vector2(currentMouseState.X, currentMouseState.Y);
 
             cursor.X = MathHelper.Clamp(cursor.X, 0f, ScreenWidth);
             cursor.Y = MathHelper.Clamp(cursor.Y, 0f, ScreenHeight);

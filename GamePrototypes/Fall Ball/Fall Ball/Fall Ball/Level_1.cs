@@ -10,6 +10,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using FarseerPhysics.Dynamics.Contacts;
+using Fall_Ball.Controls;
 
 namespace Fall_Ball
 {
@@ -20,8 +21,8 @@ namespace Fall_Ball
         private GameObject specialObject1;
         private GameObject specialObject2;
 
-        public Level_1(List<Texture2D> textures, SpriteBatch batch)
-            : base(textures, batch)
+        public Level_1(Game game, List<Texture2D> textures, SpriteBatch batch, MouseController mouse)
+            : base(game, textures, batch, mouse)
         {
 
             ball1 = new Ball(new Vector2(30, 0), 10.0f, Color.IndianRed, batch, textures[1], world);
@@ -102,5 +103,10 @@ namespace Fall_Ball
             return true;
         }
 
+        public override void update(GameTime gameTime)
+        {
+            
+            base.update(gameTime);
+        }
     }
 }

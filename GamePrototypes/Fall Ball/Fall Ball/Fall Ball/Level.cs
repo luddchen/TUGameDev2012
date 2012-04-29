@@ -9,6 +9,8 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics.Contacts;
+using FarseerPhysics.Dynamics.Joints;
+using Fall_Ball.Controls;
 
 namespace Fall_Ball
 {
@@ -24,13 +26,18 @@ namespace Fall_Ball
         public GameObject ball1;
         public GameObject ball2;
         public Overlay overlay;
+        public MouseController mouse;
+        private FixedMouseJoint fixedMouseJoint;
+        private Game game;
 
-        public Level(List<Texture2D> textures, SpriteBatch batch)
+        public Level(Game game, List<Texture2D> textures, SpriteBatch batch, MouseController mouse)
         {
             this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
             this.addObjects = new Field();
+            this.mouse = mouse;
+            this.game = game;
         }
 
         public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
@@ -40,6 +47,36 @@ namespace Fall_Ball
 
         public virtual void update(GameTime gameTime)
         {
+            //Vector2 position = Camera.ConvertScreenToWorld(mouse.Cursor);
+            Vector2 position = mouse.Cursor;
+
+            if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) &&
+                fixedMouseJoint == null)
+            {
+                Console.WriteLine("Ball1 position: " + ball1.body.Position.X + " " + ball1.body.Position.Y);
+                Console.WriteLine("Mouse X: " + position.X + " Mouse Y: " + position.Y);
+                Fixture savedFixture = this.world.TestPoint(position);
+                if (savedFixture != null)
+                {
+                    Body body = savedFixture.Body;
+                    fixedMouseJoint = new FixedMouseJoint(body, position);
+                    fixedMouseJoint.MaxForce = 1000.0f * body.Mass;
+                    this.world.AddJoint(fixedMouseJoint);
+                    body.Awake = true;
+                }
+            }
+
+            if ((mouse.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
+                fixedMouseJoint != null)
+            {
+                this.world.RemoveJoint(fixedMouseJoint);
+                fixedMouseJoint = null;
+            }
+
+            if (fixedMouseJoint != null)
+            {
+                fixedMouseJoint.WorldAnchorB = position;
+            }
         }
 
         public void addToMyOnCollision(GameObject gameObject)
