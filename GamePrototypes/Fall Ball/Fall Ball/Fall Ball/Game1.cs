@@ -45,7 +45,6 @@ namespace Fall_Ball
         List<Texture2D> textures;
 
         Level level;
-        //GameObject cursor;
         MouseController mouseController;
 
         public Game1()
