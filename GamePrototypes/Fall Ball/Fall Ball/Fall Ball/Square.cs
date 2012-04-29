@@ -38,6 +38,8 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(rightTop, rightBottom, body);
             FixtureFactory.AttachEdge(rightBottom, leftBottom, body);
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
+            this.width = max(max(leftTop.X, rightTop.X), max(leftBottom.X, rightBottom.X)) - min(min(leftTop.X, rightTop.X), min(leftBottom.X, rightBottom.X));
+            this.height = max(max(leftTop.Y, rightTop.Y), max(leftBottom.Y, rightBottom.Y)) - min(min(leftTop.Y, rightTop.Y), min(leftBottom.Y, rightBottom.Y));
         }
 
         public Square(Vector2 pos, Vector2 size, float rot, Color color, SpriteBatch batch, Texture2D texture, World world)

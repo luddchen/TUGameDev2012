@@ -24,6 +24,8 @@ namespace Fall_Ball
         public Texture2D texture;
         public Body body;
         public Color color;
+        public float width;
+        public float height;
 
         // constructor
         public GameObject(Vector2 pos, SpriteBatch batch, Texture2D texture, World world)
@@ -33,6 +35,8 @@ namespace Fall_Ball
             this.spriteBatch = batch;
             this.texture = texture;
             this.color = Color.Gray;
+            this.width = 0;
+            this.height = 0;
         }
 
         // draw the object on position + offset , using some scaling
@@ -41,5 +45,23 @@ namespace Fall_Ball
 
         // draw the object simple for map
         public virtual void drawMap(Vector2 offset, float size) { }
+
+        public float min(float a, float b)
+        {
+            if (a < b)
+            {
+                return a;
+            }
+            return b;
+        }
+
+        public float max(float a, float b)
+        {
+            if (a < b)
+            {
+                return b;
+            }
+            return a;
+        }
     }
 }
