@@ -25,10 +25,10 @@ namespace Fall_Ball
             : base(game, textures, batch, mouse)
         {
 
-            ball1 = new Ball(new Vector2(30, 0), 10.0f, Color.IndianRed, batch, textures[1], world);
+            ball1 = new Ball(new Vector2(30, 30), 10.0f, Color.IndianRed, batch, textures[1], world);
             ball1.body.BodyType = BodyType.Dynamic;
 
-            ball2 = new Ball(new Vector2(200, 0), 15.0f, Color.HotPink, batch, textures[3], world);
+            ball2 = new Ball(new Vector2(200, 30), 15.0f, Color.HotPink, batch, textures[3], world);
             ball2.body.BodyType = BodyType.Dynamic;
 
             gamefield.add(ball1);
@@ -64,6 +64,12 @@ namespace Fall_Ball
 
             this.size.X = 550;
             this.size.Y = 950;
+            gamefield.add(new Square(new Vector2(size.X/2, -5), new Vector2(size.X, 10), 0.0f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(size.X / 2, size.Y+5), new Vector2(size.X, 10), 0.0f, batch, textures[0], world));
+
+            gamefield.add(new Square(new Vector2(5, size.Y/2), new Vector2(10, size.Y), 0.0f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(size.X - 5, size.Y / 2), new Vector2(10, size.Y), 0.0f, batch, textures[0], world));
+
 
             addObjects.add(new Square(new Vector2(0, 0), new Vector2(80, 7), 0.0f, Color.Blue, batch, textures[0], world));
             addObjects.add(new Ball(new Vector2(0, 0), 12.0f, Color.Blue, batch, textures[6], world));
