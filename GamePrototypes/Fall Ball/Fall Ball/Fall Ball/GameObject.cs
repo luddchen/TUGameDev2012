@@ -38,5 +38,8 @@ namespace Fall_Ball
         // draw the object on position + offset , using some scaling
         public virtual void draw(Vector2 offset, float size) { }
 
+
+        // draw the object simple for map
+        public virtual void drawMap(Vector2 offset, float size) { }
     }
 }

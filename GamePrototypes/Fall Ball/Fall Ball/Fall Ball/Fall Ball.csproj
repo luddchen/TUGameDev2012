@@ -118,6 +118,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Square.cs" />
+    <Compile Include="SquareStack.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
