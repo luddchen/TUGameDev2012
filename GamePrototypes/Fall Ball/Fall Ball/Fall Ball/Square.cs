@@ -60,5 +60,10 @@ namespace Fall_Ball
             spriteBatch.End();
         }
 
+        public override void drawMap(Vector2 offset, float scale)
+        {
+            draw(offset, scale);
+        }
+
     }
 }

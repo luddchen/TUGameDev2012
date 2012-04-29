@@ -23,6 +23,7 @@ namespace Fall_Ball
         public Field addObjects;
         public GameObject ball1;
         public GameObject ball2;
+        public Overlay overlay;
 
         public Level(List<Texture2D> textures, SpriteBatch batch)
         {
@@ -35,6 +36,10 @@ namespace Fall_Ball
         public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
             return true;
+        }
+
+        public virtual void update(GameTime gameTime)
+        {
         }
 
         public void addToMyOnCollision(GameObject gameObject)

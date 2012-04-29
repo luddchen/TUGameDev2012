@@ -36,10 +36,10 @@ namespace Fall_Ball
             addToMyOnCollision(ball1);
             addToMyOnCollision(ball2);
 
-            gamefield.add(new Square(new Vector2(50, 100), new Vector2(100, 10), 0.6f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(125, 140), new Vector2(70, 5), 0.05f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(225, 175), new Vector2(150, 10), 0.2f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(320, 250), new Vector2(350, 5), -0.4f, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(50, 100), new Vector2(100, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(125, 140), new Vector2(70, 6), new Vector2(10, 6), 0.05f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(225, 175), new Vector2(150, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(320, 250), new Vector2(350, 5), new Vector2(10, 5), -0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
             gamefield.add(new Ball(new Vector2(470, 170), 12.0f, Color.Indigo, batch, textures[2], world));
             gamefield.add(new Ball(new Vector2(440, 185), 12.0f, Color.LightSteelBlue, batch, textures[4], world));
@@ -47,17 +47,17 @@ namespace Fall_Ball
             gamefield.add(new Ball(new Vector2(445, 140), 12.0f, Color.Yellow, batch, textures[6], world));
 
             gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, batch,  textures[0], world));
-            gamefield.add(new Square(new Vector2(50, 335), new Vector2(7, 50), -0.5f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 7), 0.3f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(50, 335), new Vector2(8, 50), -0.5f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 8), 0.3f, batch, textures[0], world));
             gamefield.add(new Square(new Vector2(390, 500), new Vector2(7, 100), 0.9f, batch, textures[0], world));
 
-            gamefield.add(new Square(new Vector2(250, 600), new Vector2(160, 7), 0.0f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(150, 700), new Vector2(80, 7), 0.5f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(350, 700), new Vector2(80, 7), -0.5f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(195, 800), new Vector2(80, 7), 0.2f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(305, 800), new Vector2(80, 7), -0.2f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(250, 600), new Vector2(160, 8), 0.0f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(150, 700), new Vector2(120, 8), 0.5f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(350, 700), new Vector2(80, 8), -0.5f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(195, 800), new Vector2(80, 8), 0.2f, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(305, 800), new Vector2(80, 8), -0.2f, batch, textures[0], world));
 
-            gamefield.add(new Square(new Vector2(250, 900), new Vector2(400, 7), 0.0f, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(250, 905), new Vector2(400, 15), new Vector2(20, 5), 0.0f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new Ball(new Vector2(50, 885), 12.0f, Color.LightSalmon, batch, textures[2], world));
             gamefield.add(new Ball(new Vector2(450, 885), 12.0f, Color.MistyRose, batch, textures[6], world));
 
@@ -88,15 +88,15 @@ namespace Fall_Ball
                     gamefield.remove(specialObject1);
                     removeFromMyOnCollision(specialObject1);
                     world.RemoveBody(specialObject1.body);
+                    world.Gravity.Y /= 3;
                     return false;
                 }
                 if (f1.Body == specialObject2.body || f2.Body == specialObject2.body)
                 {
-                    gamefield.remove(specialObject2);
-                    removeFromMyOnCollision(specialObject2);
-                    world.RemoveBody(specialObject2.body);
-                    world.Gravity.Y *= 2;
-                    return false;
+                    specialObject2.body.BodyType = BodyType.Dynamic;
+                    if(overlay!=null) overlay.CenterString = "Bonus";
+                    //specialObject2.body.BodyType = BodyType.Kinematic;
+                    //specialObject2.body.LinearVelocity += new Vector2(0.3f, 0.3f);
                 }
             }
             return true;
