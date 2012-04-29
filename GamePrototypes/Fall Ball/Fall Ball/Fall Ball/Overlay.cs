@@ -30,14 +30,17 @@ namespace Fall_Ball
         string buttomString = "buttom text 1";
         string buttomString2 = "buttom text 2";
         string centerString = "center text";
+        string locatedString = "";
 
         Vector2 buttomPos = new Vector2(0,0);
         Vector2 buttomPos2 = new Vector2(0, 0);
         Vector2 centerPos = new Vector2(0,0);
+        Vector2 locatedPos = new Vector2(0, 0);
 
         float buttomSize = 0.66f;
         float buttomSize2 = 0.66f;
         float centerSize = 1.32f;
+        float locatedSize = 1.0f;
 
         TimeSpan elapsedTime = TimeSpan.Zero;
 
@@ -82,6 +85,12 @@ namespace Fall_Ball
             set { buttomString2 = value; }
         }
 
+        public string LocatedString
+        {
+            get { return locatedString; }
+            set { locatedString = value; }
+        }
+
         public float CenterSize
         {
             get { return centerSize; }
@@ -94,10 +103,22 @@ namespace Fall_Ball
             set { buttomSize = value; }
         }
 
-        public float BUttomSize2
+        public float ButtomSize2
         {
             get { return buttomSize2; }
             set { buttomSize2 = value; }
+        }
+
+        public float LocatedSize
+        {
+            get { return locatedSize; }
+            set { locatedSize = value; }
+        }
+
+        public Vector2 LocatedPos
+        {
+            get { return locatedPos; }
+            set { locatedPos = value; }
         }
 
         #endregion
@@ -157,6 +178,9 @@ namespace Fall_Ball
 
             spriteBatch.DrawString(font, centerString, centerPos + font.MeasureString(centerString) / 2, foregroundAlpha,
                 0, font.MeasureString(centerString), centerSize, SpriteEffects.None, 0.5f);
+
+            spriteBatch.DrawString(font, locatedString, locatedPos + font.MeasureString(locatedString) / 2, foregroundAlpha,
+                0, font.MeasureString(locatedString), locatedSize, SpriteEffects.None, 0.5f);
 
             spriteBatch.End();
         }
