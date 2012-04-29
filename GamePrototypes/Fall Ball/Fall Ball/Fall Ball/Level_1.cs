@@ -23,7 +23,6 @@ namespace Fall_Ball
         public Level_1(List<Texture2D> textures, SpriteBatch batch)
             : base(textures, batch)
         {
-            gamefield.add(new Pipeline(new Vector2(270, 230), new Vector2(120, 40), 5.0f, -0.1f, Color.Green, batch, textures[0], world));
 
             ball1 = new Ball(new Vector2(30, 0), 10.0f, Color.IndianRed, batch, textures[1], world);
             ball1.body.BodyType = BodyType.Dynamic;
@@ -76,6 +75,8 @@ namespace Fall_Ball
             specialObject2 = new Ball(new Vector2(150, 350), 15.0f, Color.Green, batch, textures[6], world);
             gamefield.add(specialObject2);
             addToMyOnCollision(specialObject2);
+
+            gamefield.add(new Pipeline(new Vector2(270, 230), new Vector2(120, 40), 5.0f, -0.1f, Color.Green, batch, textures[0], world));
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

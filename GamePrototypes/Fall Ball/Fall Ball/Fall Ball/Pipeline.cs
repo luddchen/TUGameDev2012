@@ -20,6 +20,7 @@ namespace Fall_Ball
         private float rot;
         private Color innerColor;
         private float thickness;
+        private Matrix rMat;
 
         public Pipeline(Vector2 pos, Vector2 size, float thickness, float rot, SpriteBatch batch, Texture2D texture, World world)
             : base(pos, batch, texture, world)
@@ -31,7 +32,7 @@ namespace Fall_Ball
             this.color = Color.Green;
             this.spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
 
-            Matrix rMat = Matrix.CreateRotationZ(rot);
+            this.rMat = Matrix.CreateRotationZ(rot);
 
             Vector2 leftTop = Vector2.Transform(new Vector2(-size.X / 2, -size.Y / 2), rMat);
             Vector2 rightTop = Vector2.Transform(new Vector2(size.X / 2, -size.Y / 2), rMat);
@@ -51,7 +52,7 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(rightBottom, leftBottom, body);
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
 
-            this.innerColor = new Color(color.R, color.G, color.B, color.A/2);
+            this.innerColor = new Color(color.R, color.G, color.B, color.A / 3);
         }
 
         public Pipeline(Vector2 pos, Vector2 size, float thickness, float rot, Color color, SpriteBatch batch, Texture2D texture, World world)
@@ -63,26 +64,34 @@ namespace Fall_Ball
 
         public override void draw(Vector2 offset, float scale)
         {
-            //outer
             int drawSizeX = (int)(size.X * scale);
             if (drawSizeX < 1) drawSizeX = 1;
 
-            int drawSizeY = (int)(size.Y * scale);
-            if (drawSizeY < 1) drawSizeY = 1;
-
-            dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
-            spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
-            spriteBatch.End();
-
             //inner
 
-            drawSizeY = (int)((size.Y - 2 * thickness) * scale);
+            int drawSizeY = (int)((size.Y - 2 * thickness) * scale);
             if (drawSizeY < 1) drawSizeY = 1;
 
             dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
             spriteBatch.Begin();
             spriteBatch.Draw(texture, dest, null, this.innerColor, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.End();
+
+            //outer
+
+            int drawThickness = (int)(thickness * scale);
+            if (drawThickness < 1) drawThickness = 1;
+
+            Vector2 newPos = Vector2.Transform(new Vector2(0, -size.Y / 2 + thickness), rMat);
+            dest = new Rectangle((int)((this.body.Position.X+newPos.X) * scale + offset.X), (int)((this.body.Position.Y+newPos.Y) * scale + offset.Y), drawSizeX, drawThickness);
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.End();
+
+            newPos = Vector2.Transform(new Vector2(0, size.Y / 2 - thickness), rMat);
+            dest = new Rectangle((int)((this.body.Position.X + newPos.X) * scale + offset.X), (int)((this.body.Position.Y + newPos.Y) * scale + offset.Y), drawSizeX, drawThickness);
+            spriteBatch.Begin();
+            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
