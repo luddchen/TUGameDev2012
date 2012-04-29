@@ -8,6 +8,7 @@ using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using FarseerPhysics.Dynamics.Contacts;
 
 namespace Fall_Ball
 {
@@ -29,6 +30,27 @@ namespace Fall_Ball
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
             this.addObjects = new Field();
+        }
+
+        public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            return true;
+        }
+
+        public void addToMyOnCollision(GameObject gameObject)
+        {
+            foreach (Fixture fix in gameObject.body.FixtureList)
+            {
+                fix.OnCollision += MyOnCollision;
+            }
+        }
+
+        public void removeFromMyOnCollision(GameObject gameObject)
+        {
+            foreach (Fixture fix in gameObject.body.FixtureList)
+            {
+                fix.OnCollision -= MyOnCollision;
+            }
         }
 
     }
