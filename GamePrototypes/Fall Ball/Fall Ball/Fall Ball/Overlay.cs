@@ -42,6 +42,11 @@ namespace Fall_Ball
         float centerSize = 1.32f;
         float locatedSize = 1.0f;
 
+        int centerTimeout = 0;
+        int locatedTimeout = 0;
+
+        int maxTimer = 100;
+
         TimeSpan elapsedTime = TimeSpan.Zero;
 
         Color foreground;
@@ -70,7 +75,7 @@ namespace Fall_Ball
         public String CenterString
         {
             get { return centerString; }
-            set { centerString = value; }
+            set { centerString = value; centerTimeout = maxTimer; }
         }
 
         public String ButtomString
@@ -88,7 +93,7 @@ namespace Fall_Ball
         public string LocatedString
         {
             get { return locatedString; }
-            set { locatedString = value; }
+            set { locatedString = value; locatedTimeout = maxTimer;  }
         }
 
         public float CenterSize
@@ -160,6 +165,23 @@ namespace Fall_Ball
 
         public override void Update(GameTime gameTime)
         {
+            if (centerTimeout > 0)
+            {
+                centerTimeout--;
+            }
+            else
+            {
+                centerString = "";
+            }
+
+            if (locatedTimeout > 0)
+            {
+                locatedTimeout--;
+            }
+            else
+            {
+                locatedString = "";
+            }
         }
 
         #endregion

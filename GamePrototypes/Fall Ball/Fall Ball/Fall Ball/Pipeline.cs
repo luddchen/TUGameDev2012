@@ -43,6 +43,11 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(rightBottom, leftBottom, body);
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
 
+            float maxWidth1 = max(max(leftTop.X, rightTop.X), max(leftBottom.X, rightBottom.X)); 
+            float minWidth1 = min(min(leftTop.X, rightTop.X), min(leftBottom.X, rightBottom.X));
+            float maxHeight1 = max(max(leftTop.Y, rightTop.Y), max(leftBottom.Y, rightBottom.Y));
+            float minHeight1 = min(min(leftTop.Y, rightTop.Y), min(leftBottom.Y, rightBottom.Y));
+
             leftTop = Vector2.Transform(new Vector2(-size.X / 2, size.Y / 2), rMat);
             rightTop = Vector2.Transform(new Vector2(size.X / 2, size.Y / 2), rMat);
             leftBottom = Vector2.Transform(new Vector2(-size.X / 2, size.Y / 2 - thickness), rMat);
@@ -51,6 +56,14 @@ namespace Fall_Ball
             FixtureFactory.AttachEdge(rightTop, rightBottom, body);
             FixtureFactory.AttachEdge(rightBottom, leftBottom, body);
             FixtureFactory.AttachEdge(leftBottom, leftTop, body);
+
+            float maxWidth2 = max(max(leftTop.X, rightTop.X), max(leftBottom.X, rightBottom.X));
+            float minWidth2 = min(min(leftTop.X, rightTop.X), min(leftBottom.X, rightBottom.X));
+            float maxHeight2 = max(max(leftTop.Y, rightTop.Y), max(leftBottom.Y, rightBottom.Y));
+            float minHeight2 = min(min(leftTop.Y, rightTop.Y), min(leftBottom.Y, rightBottom.Y));
+
+            this.width = max(maxWidth1, maxWidth2) - min(minWidth1, minWidth2);
+            this.height = max(maxHeight1, maxHeight2) - min(minHeight1, minHeight2);
 
             this.innerColor = new Color(color.R, color.G, color.B, color.A / 3);
         }

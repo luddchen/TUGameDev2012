@@ -27,6 +27,7 @@ namespace Fall_Ball
             this.spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             FixtureFactory.AttachCircle(radius, 1.0f, body);
+            this.width = this.height = radius * 2;
         }
 
         public Ball(Vector2 pos, float radius, Color color, SpriteBatch batch, Texture2D texture, World world)
