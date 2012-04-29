@@ -12,6 +12,7 @@ using FarseerPhysics;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
+using Fall_Ball.Controls;
 
 namespace Fall_Ball
 {
@@ -44,7 +45,8 @@ namespace Fall_Ball
         List<Texture2D> textures;
 
         Level level;
-        GameObject cursor;
+        //GameObject cursor;
+        MouseController mouseController;
 
         public Game1()
         {
@@ -65,6 +67,7 @@ namespace Fall_Ball
             screenScale = (float)(screenWidth) / (float)(level.size.X);
             minimapOffset.X = (float)((float)(screenWidth) - (level.size.X * minimapScale * screenScale));
             minimapOffset.Y = (float)((float)(screenHeight) - (level.size.Y * minimapScale * screenScale));
+            mouseController.OnScreenResize();
 
             overlay.TitleSafe = new Rectangle(graphics.GraphicsDevice.Viewport.X, graphics.GraphicsDevice.Viewport.Y, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
         }
@@ -78,6 +81,8 @@ namespace Fall_Ball
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            mouseController = new MouseController(this, spriteBatch);
+            mouseController.LoadContent();
 
             textures = new List<Texture2D>();
             textures.Add(Content.Load<Texture2D>("Sprites\\Square"));   // textures[0]
@@ -106,12 +111,12 @@ namespace Fall_Ball
             Window_ClientSizeChanged( null, null);  // sets the minimapoffset vector
             scrollBackDelay = maxScrollBackDelay;
 
-            if (level.addObjects.objects.Count > 0)
-            {
-                cursor = level.addObjects.objects[0];
-                cursor.color = new Color( cursor.color.R, cursor.color.G, cursor.color.B, cursor.color.A / 2);
-                level.addObjects.remove(cursor);
-            }
+            //if (level.addObjects.objects.Count > 0)
+            //{
+            //    cursor = level.addObjects.objects[0];
+            //    cursor.color = new Color( cursor.color.R, cursor.color.G, cursor.color.B, cursor.color.A / 2);
+            //    level.addObjects.remove(cursor);
+            //}
         }
 
 
@@ -171,6 +176,7 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             base.Update(gameTime);
+            mouseController.Update(gameTime);
         }
 
 
@@ -196,7 +202,7 @@ namespace Fall_Ball
             // draw cursor
             addPos.X = screenWidth * gameScale / 2;
             addPos.Y = screenHeight * gameScale / 2;
-            cursor.draw(addPos + cursorOffset, drawScale);
+            //cursor.draw(addPos + cursorOffset, drawScale);
 
             // draw minimap
             Rectangle dest = new Rectangle((int)(minimapOffset.X - 2), 
@@ -218,6 +224,7 @@ namespace Fall_Ball
 
             level.world.Step(0.1f);
             base.Draw(gameTime);
+            mouseController.Draw();
         }
     }
 }
