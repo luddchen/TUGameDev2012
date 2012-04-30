@@ -9,6 +9,7 @@ using FarseerPhysics;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Common;
 
 namespace Fall_Ball.Objects
 {
@@ -33,9 +34,11 @@ namespace Fall_Ball.Objects
             Vector2 top = Vector2.Transform(new Vector2( 0, -size.Y / 2), rMat);
             Vector2 right = Vector2.Transform(new Vector2(size.X / 2, size.Y / 2), rMat);
             Vector2 left = Vector2.Transform(new Vector2(-size.X / 2, size.Y / 2), rMat);
-            FixtureFactory.AttachEdge(top, right, body);
-            FixtureFactory.AttachEdge(right, left, body);
-            FixtureFactory.AttachEdge(left, top, body);
+
+            Vertices verts = new Vertices();
+            verts.Add(top); verts.Add(right); verts.Add(left);
+            FixtureFactory.AttachPolygon(verts, 1.0f, body);
+
             this.width = size.X;
             this.height = size.Y;
         }

@@ -28,8 +28,8 @@ namespace Fall_Ball
         public GameObject ball2;
         public Overlay overlay;
         public MouseController mouse;
-        private FixedMouseJoint fixedMouseJoint;
-        private Game1 game;
+        public FixedMouseJoint fixedMouseJoint;
+        public Game1 game;
 
         public Level(Game1 game, List<Texture2D> textures, SpriteBatch batch)
         {
@@ -47,8 +47,7 @@ namespace Fall_Ball
 
         public virtual void update(GameTime gameTime, Vector2 pos)
         {
-            if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) &&
-                fixedMouseJoint == null)
+            if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) )// && fixedMouseJoint == null)
             {
                 Fixture savedFixture = this.world.TestPoint(pos);
                 if (savedFixture != null)
@@ -61,17 +60,17 @@ namespace Fall_Ball
 
                     Console.WriteLine("Body Clicked " + body.Position);
 
-                    foreach (GameObject obj in addObjects.objects)
-                    {
+                    //foreach (GameObject obj in addObjects.objects)
+                    //{
 
-                        //if (obj.body == body)
-                        //{
+                    //    //if (obj.body == body)
+                    //    //{
                             
-                            Console.WriteLine("Body Clicked " + obj.body.Position);
-                            obj.body.BodyType = BodyType.Dynamic;
-                            obj.body.Awake = true;
-                        //}
-                    }
+                    //        Console.WriteLine("Body Clicked " + obj.body.Position);
+                    //        obj.body.BodyType = BodyType.Dynamic;
+                    //        obj.body.Awake = true;
+                    //    //}
+                    //}
                 }
             }
 

@@ -200,9 +200,9 @@ namespace Fall_Ball
             {
                 addPos.Y += level.addObjects.objects[i].height/2;
                 level.addObjects.objects[i].body.Position = addPos;
-                level.addObjects.objects[i].draw(offset + playerOffset, drawScale);
                 addPos.Y += level.addObjects.objects[i].height / 2;
             }
+            level.addObjects.draw(offset + playerOffset, drawScale);
 
             // draw cursor
             addPos.X = screenWidth * gameScale / 2;

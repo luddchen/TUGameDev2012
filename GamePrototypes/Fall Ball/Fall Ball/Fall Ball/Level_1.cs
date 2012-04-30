@@ -87,12 +87,10 @@ namespace Fall_Ball
 
             gamefield.add(new Triangle(new Vector2(350,975), new Vector2(50,50), 0.0f, batch, textures[7], world));
 
-
             // bonus objects
             bonus = new List<GameObject>();
             bonusLifetime = new List<int>();
             bonus.Add(new Egg(new Vector2(150, 360), 15.0f, 13.0f, Color.Green, batch, textures[1], world));
-            Console.WriteLine("max Vertices: " + Settings.MaxPolygonVertices);
             bonus.Add(new Ball(new Vector2(150, 660), 12.0f, Color.Red, batch, textures[4], world));
             bonus.Add(new Ball(new Vector2(150, 945), 10.0f, Color.Yellow, batch, textures[4], world));
 
@@ -103,7 +101,6 @@ namespace Fall_Ball
                 bonusLifetime.Add( maxLifetime );
             }
 
-
             // border
             gamefield.add(new Square(new Vector2(size.X / 2, 0), new Vector2(size.X, 7), 0.0f, Color.DarkGreen, batch, textures[0], world));
             gamefield.add(new Square(new Vector2(size.X / 2, size.Y ), new Vector2(size.X, 7), 0.0f, Color.DarkGreen, batch, textures[0], world));
@@ -113,17 +110,17 @@ namespace Fall_Ball
 
 
             // add objects
-            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(80, 10), new Vector2(10, 5), -0.6f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+
+            addObjects.add( new Egg(new Vector2(0, 0), 15.0f, 13.0f, Color.Blue, batch, textures[1], world) );
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), -0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
-            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(60, 20), new Vector2(10, 5), -0.2f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new Ball(new Vector2(0, 0), 13.0f, Color.Blue, batch, textures[1], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(80, 10), new Vector2(10, 5), 0.0f, Color.Blue, Color.LightBlue, batch, textures[0], world));
-            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(40, 45), new Vector2(10, 5), 0.2f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new Square(new Vector2(0, 0), new Vector2(40, 45), 0.2f, Color.Blue, batch, textures[0], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), 0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
-            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new Triangle(new Vector2(0, 0), new Vector2(50, 50), 0.0f, Color.Blue, batch, textures[7], world));
         
             foreach (GameObject obj in addObjects.objects)
             {
-                //gamefield.add(obj);
                 obj.body.BodyType = BodyType.Dynamic;
             }
         }

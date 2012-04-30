@@ -9,6 +9,7 @@ using FarseerPhysics;
 using FarseerPhysics.Collision;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Common;
 
 namespace Fall_Ball.Objects
 {
@@ -35,14 +36,16 @@ namespace Fall_Ball.Objects
 
             rMat = Matrix.CreateRotationZ(rot);
 
+            if (Settings.MaxPolygonVertices < 24) Settings.MaxPolygonVertices = 24;
+
             Vector2 leftTop = Vector2.Transform(new Vector2(-size.X / 2, -size.Y / 2), rMat);
             Vector2 rightTop = Vector2.Transform(new Vector2(size.X / 2, -size.Y / 2), rMat);
             Vector2 leftBottom = Vector2.Transform(new Vector2(-size.X / 2, size.Y / 2), rMat);
             Vector2 rightBottom = Vector2.Transform(new Vector2(size.X / 2, size.Y / 2), rMat);
-            FixtureFactory.AttachEdge(leftTop, rightTop, body);
-            FixtureFactory.AttachEdge(rightTop, rightBottom, body);
-            FixtureFactory.AttachEdge(rightBottom, leftBottom, body);
-            FixtureFactory.AttachEdge(leftBottom, leftTop, body);
+
+            Vertices verts = new Vertices();
+            verts.Add(leftTop); verts.Add(rightTop); verts.Add(rightBottom); verts.Add(leftBottom);
+            FixtureFactory.AttachPolygon(verts, 1.0f, body);
             this.width = max(max(leftTop.X, rightTop.X), max(leftBottom.X, rightBottom.X)) - min(min(leftTop.X, rightTop.X), min(leftBottom.X, rightBottom.X));
             this.height = max(max(leftTop.Y, rightTop.Y), max(leftBottom.Y, rightBottom.Y)) - min(min(leftTop.Y, rightTop.Y), min(leftBottom.Y, rightBottom.Y));
         }
