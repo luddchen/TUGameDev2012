@@ -110,6 +110,7 @@
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Controls\MouseController.cs" />
     <Compile Include="Field.cs" />
+    <Compile Include="Objects\Egg.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Level_1.cs" />
