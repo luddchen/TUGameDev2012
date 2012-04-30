@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using FarseerPhysics.Dynamics.Contacts;
 using Fall_Ball.Controls;
+using Fall_Ball.Objects;
 
 namespace Fall_Ball
 {
@@ -21,8 +22,8 @@ namespace Fall_Ball
         private GameObject specialObject1;
         private GameObject specialObject2;
 
-        public Level_1(Game game, List<Texture2D> textures, SpriteBatch batch, MouseController mouse)
-            : base(game, textures, batch, mouse)
+        public Level_1(Game game, List<Texture2D> textures, SpriteBatch batch)
+            : base(game, textures, batch)
         {
 
             ball1 = new Ball(new Vector2(30, 30), 10.0f, Color.IndianRed, batch, textures[1], world);
@@ -48,7 +49,7 @@ namespace Fall_Ball
             gamefield.add(new Ball(new Vector2(445, 140), 12.0f, Color.Yellow, batch, textures[6], world));
 
             gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, batch,  textures[0], world));
-            gamefield.add(new Square(new Vector2(50, 335), new Vector2(8, 50), -0.5f, batch, textures[0], world));
+            gamefield.add(new Triangle(new Vector2(100, 315), new Vector2(90, 70), 0.4f, batch, textures[7], world));
             gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 8), 0.3f, batch, textures[0], world));
             gamefield.add(new Square(new Vector2(390, 500), new Vector2(7, 100), 0.9f, batch, textures[0], world));
 
@@ -83,7 +84,7 @@ namespace Fall_Ball
             gamefield.add(specialObject2);
             addToMyOnCollision(specialObject2);
 
-            gamefield.add(new Pipeline(new Vector2(270, 230), new Vector2(120, 40), 5.0f, -0.1f, Color.Green, batch, textures[0], world));
+            gamefield.add(new Pipeline(new Vector2(270, 230), new Vector2(120, 43), 5.0f, -0.1f, Color.Green, batch, textures[0], world));
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
@@ -96,6 +97,7 @@ namespace Fall_Ball
                     removeFromMyOnCollision(specialObject1);
                     world.RemoveBody(specialObject1.body);
                     world.Gravity.Y /= 3;
+                    if (overlay != null) overlay.CenterString = "changed gravity";
                     return false;
                 }
                 if (f1.Body == specialObject2.body || f2.Body == specialObject2.body)

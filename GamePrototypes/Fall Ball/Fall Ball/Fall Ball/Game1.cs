@@ -91,8 +91,11 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Pepper"));   // textures[4]
             textures.Add(Content.Load<Texture2D>("Sprites\\Smiley"));   // textures[5]
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
+            textures.Add(Content.Load<Texture2D>("Sprites\\Triangle")); // textures[7]
 
-            level = new Level_1(this, textures, spriteBatch, mouseController);
+            level = new Level_1(this, textures, spriteBatch);
+            level.overlay = overlay;
+            level.mouse = mouseController;
 
             offset = new Vector2(0, 0); // move of the full gamefield
             playerOffset = new Vector2(0, 0);
@@ -221,7 +224,7 @@ namespace Fall_Ball
             spriteBatch.Begin();
             spriteBatch.Draw(textures[0], dest, null, background, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
-            level.gamefield.draw( minimapOffset, minimapScale * screenScale );
+            level.gamefield.drawMap( minimapOffset, minimapScale * screenScale );
 
             level.world.Step(0.1f);
             base.Draw(gameTime);

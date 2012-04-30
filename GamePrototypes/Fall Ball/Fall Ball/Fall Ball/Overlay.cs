@@ -45,7 +45,7 @@ namespace Fall_Ball
         int centerTimeout = 0;
         int locatedTimeout = 0;
 
-        int maxTimer = 100;
+        int maxTimer = 150;
 
         TimeSpan elapsedTime = TimeSpan.Zero;
 

@@ -10,7 +10,7 @@ using FarseerPhysics.Collision;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
 
-namespace Fall_Ball
+namespace Fall_Ball.Objects
 {
     class Square : GameObject
     {

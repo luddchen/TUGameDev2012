@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Fall_Ball.Objects;
 
 namespace Fall_Ball
 {
@@ -22,6 +23,14 @@ namespace Fall_Ball
             foreach (GameObject obj in objects) 
             { 
                 obj.draw( offset , scale); 
+            }
+        }
+
+        public void drawMap(Vector2 offset, float scale)
+        {
+            foreach (GameObject obj in objects)
+            {
+                obj.drawMap(offset, scale);
             }
         }
 

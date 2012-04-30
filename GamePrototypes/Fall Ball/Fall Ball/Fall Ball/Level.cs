@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics.Contacts;
 using FarseerPhysics.Dynamics.Joints;
 using Fall_Ball.Controls;
+using Fall_Ball.Objects;
 
 namespace Fall_Ball
 {
@@ -30,13 +31,12 @@ namespace Fall_Ball
         private FixedMouseJoint fixedMouseJoint;
         private Game game;
 
-        public Level(Game game, List<Texture2D> textures, SpriteBatch batch, MouseController mouse)
+        public Level(Game game, List<Texture2D> textures, SpriteBatch batch)
         {
             this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
             this.addObjects = new Field();
-            this.mouse = mouse;
             this.game = game;
         }
 

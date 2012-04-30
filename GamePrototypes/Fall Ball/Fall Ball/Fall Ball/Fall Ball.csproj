@@ -107,19 +107,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ball.cs" />
+    <Compile Include="Objects\Ball.cs" />
     <Compile Include="Controls\MouseController.cs" />
     <Compile Include="Field.cs" />
-    <Compile Include="GameObject.cs" />
+    <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="Level_1.cs" />
     <Compile Include="Overlay.cs" />
-    <Compile Include="Pipeline.cs" />
+    <Compile Include="Objects\Pipeline.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="Square.cs" />
-    <Compile Include="SquareStack.cs" />
+    <Compile Include="Objects\Square.cs" />
+    <Compile Include="Objects\SquareStack.cs" />
+    <Compile Include="Objects\Triangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
