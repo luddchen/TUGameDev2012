@@ -37,7 +37,7 @@ namespace Fall_Ball.Objects
 
             Vertices verts = new Vertices();
             verts.Add(top); verts.Add(right); verts.Add(left);
-            FixtureFactory.AttachPolygon(verts, 1.0f, body);
+            FixtureFactory.AttachPolygon(verts, density, body);
 
             this.width = size.X;
             this.height = size.Y;
@@ -47,6 +47,12 @@ namespace Fall_Ball.Objects
             : this(pos, size, rot, batch, texture, world)
         {
             this.color = color;
+        }
+
+        public Triangle(Vector2 pos, Vector2 size, float rot, float density, Color color, SpriteBatch batch, Texture2D texture, World world)
+            : this(pos, size, rot, color, batch, texture, world)
+        {
+            this.density = density;
         }
 
         public override void draw(Vector2 offset, float scale)

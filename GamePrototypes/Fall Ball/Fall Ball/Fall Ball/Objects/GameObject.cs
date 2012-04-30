@@ -26,6 +26,7 @@ namespace Fall_Ball.Objects
         public Color color;
         public float width;
         public float height;
+        public float density;
 
         // constructor
         public GameObject(Vector2 pos, SpriteBatch batch, Texture2D texture, World world)
@@ -35,6 +36,7 @@ namespace Fall_Ball.Objects
             this.spriteBatch = batch;
             this.texture = texture;
             this.color = Color.Gray;
+            this.density = 1.0f;
             this.width = 0;
             this.height = 0;
         }

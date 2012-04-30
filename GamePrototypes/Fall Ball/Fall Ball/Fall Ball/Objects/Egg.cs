@@ -29,7 +29,7 @@ namespace Fall_Ball.Objects
             this.spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
 
             if (Settings.MaxPolygonVertices < 24) Settings.MaxPolygonVertices = 24;
-            FixtureFactory.AttachEllipse(radiusX, radiusY, 24, 1.0f, body);
+            FixtureFactory.AttachEllipse(radiusX, radiusY, 24, density, body);
             this.width = this.height = max( radiusX , radiusY) *2;
         }
 
@@ -37,6 +37,12 @@ namespace Fall_Ball.Objects
             : this(pos, radiusX, radiusY, batch, texture, world)
         {
             this.color = color;
+        }
+
+        public Egg(Vector2 pos, float radiusX, float radiusY, float density, Color color, SpriteBatch batch, Texture2D texture, World world)
+            : this(pos, radiusX, radiusY, color, batch, texture, world)
+        {
+            this.density = density;
         }
 
         public override void draw(Vector2 offset, float scale)

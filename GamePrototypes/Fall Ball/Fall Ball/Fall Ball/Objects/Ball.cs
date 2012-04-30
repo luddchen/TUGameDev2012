@@ -26,7 +26,7 @@ namespace Fall_Ball.Objects
             this.color = Color.Green;
             this.spriteOrigin = new Vector2(texture.Width / 2, texture.Height / 2);
 
-            FixtureFactory.AttachCircle(radius, 1.0f, body);
+            FixtureFactory.AttachCircle(radius, density, body);
             this.width = this.height = radius * 2;
         }
 
@@ -34,6 +34,12 @@ namespace Fall_Ball.Objects
             : this(pos, radius, batch, texture, world)
         {
             this.color = color;
+        }
+
+        public Ball(Vector2 pos, float radius, float density, Color color, SpriteBatch batch, Texture2D texture, World world)
+            : this(pos, radius, color, batch, texture, world)
+        {
+            this.density = density;
         }
 
         public override void draw(Vector2 offset, float scale)

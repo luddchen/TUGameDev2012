@@ -45,7 +45,8 @@ namespace Fall_Ball.Objects
 
             Vertices verts = new Vertices();
             verts.Add(leftTop); verts.Add(rightTop); verts.Add(rightBottom); verts.Add(leftBottom);
-            FixtureFactory.AttachPolygon(verts, 1.0f, body);
+            FixtureFactory.AttachPolygon(verts, density, body);
+
             this.width = max(max(leftTop.X, rightTop.X), max(leftBottom.X, rightBottom.X)) - min(min(leftTop.X, rightTop.X), min(leftBottom.X, rightBottom.X));
             this.height = max(max(leftTop.Y, rightTop.Y), max(leftBottom.Y, rightBottom.Y)) - min(min(leftTop.Y, rightTop.Y), min(leftBottom.Y, rightBottom.Y));
         }
@@ -55,6 +56,12 @@ namespace Fall_Ball.Objects
         {
             this.color = color;
             this.backCol = backColor;
+        }
+
+        public SquareStack(Vector2 pos, Vector2 size, Vector2 subSize, float rot, float density, Color color, Color backColor, SpriteBatch batch, Texture2D texture, World world)
+            : this(pos, size, subSize, rot, color, backColor, batch, texture, world)
+        {
+            this.density = density;
         }
 
         public override void draw(Vector2 offset, float scale)
