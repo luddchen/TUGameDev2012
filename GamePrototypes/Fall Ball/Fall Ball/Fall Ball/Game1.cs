@@ -195,12 +195,13 @@ namespace Fall_Ball
             level.gamefield.draw( offset + playerOffset, drawScale );
 
             // draw addObjects
-            Vector2 addPos = new Vector2( minimapOffset.X, 0);
+            Vector2 addPos = new Vector2(level.size.X * 1.1f, 0) - (offset + playerOffset)/drawScale;
             for (int i = 0; i < level.addObjects.objects.Count; i++)
             {
-                addPos.Y += 30 * screenScale;
-                level.addObjects.objects[i].body.Position = ScreenToWorld(offset + playerOffset);
-                level.addObjects.objects[i].draw(level.addObjects.objects[i].body.Position, drawScale);
+                addPos.Y += level.addObjects.objects[i].height/2;
+                level.addObjects.objects[i].body.Position = addPos;
+                level.addObjects.objects[i].draw(offset + playerOffset, drawScale);
+                addPos.Y += level.addObjects.objects[i].height / 2;
             }
 
             // draw cursor
