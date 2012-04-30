@@ -19,93 +19,125 @@ namespace Fall_Ball
     // base class for levels
     class Level_1 : Level
     {
-        private GameObject specialObject1;
-        private GameObject specialObject2;
+        private List<GameObject> bonus;
+        private List<int> bonusLifetime;
+        private int maxLifetime = 500;
 
         public Level_1(Game game, List<Texture2D> textures, SpriteBatch batch)
             : base(game, textures, batch)
         {
+            this.size.X = 500;
+            this.size.Y = 1000;
 
-            ball1 = new Ball(new Vector2(30, 30), 10.0f, Color.IndianRed, batch, textures[1], world);
+            ball1 = new Ball(new Vector2(50, 10), 10.0f, Color.IndianRed, batch, textures[1], world);
             ball1.body.BodyType = BodyType.Dynamic;
-
-            ball2 = new Ball(new Vector2(200, 30), 15.0f, Color.HotPink, batch, textures[3], world);
-            ball2.body.BodyType = BodyType.Dynamic;
-
             gamefield.add(ball1);
-            gamefield.add(ball2);
-
             addToMyOnCollision(ball1);
+
+            ball2 = new Ball(new Vector2(485, 15), 15.0f, Color.HotPink, batch, textures[3], world);
+            ball2.body.BodyType = BodyType.Dynamic;
+            gamefield.add(ball2);
             addToMyOnCollision(ball2);
 
-            gamefield.add(new SquareStack(new Vector2(50, 100), new Vector2(100, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(125, 140), new Vector2(70, 6), new Vector2(10, 6), 0.05f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(225, 175), new Vector2(150, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(320, 250), new Vector2(350, 5), new Vector2(10, 5), -0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(18, 40), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(61, 64), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(181, 93), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(303, 115), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new Pipeline(new Vector2(303, 100), new Vector2(50, 30), 3.0f, 0.1f, Color.Green, batch, textures[0], world));
 
-            gamefield.add(new Ball(new Vector2(470, 170), 12.0f, Color.Indigo, batch, textures[2], world));
-            gamefield.add(new Ball(new Vector2(440, 185), 12.0f, Color.LightSteelBlue, batch, textures[4], world));
-            gamefield.add(new Ball(new Vector2(445, 160), 12.0f, Color.LemonChiffon, batch, textures[5], world));
-            gamefield.add(new Ball(new Vector2(445, 140), 12.0f, Color.Yellow, batch, textures[6], world));
+            gamefield.add(new SquareStack(new Vector2(447, 116), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
-            gamefield.add(new Square(new Vector2(320, 250), new Vector2(10, 10), -0.4f, batch,  textures[0], world));
-            gamefield.add(new Triangle(new Vector2(100, 315), new Vector2(90, 70), 0.4f, batch, textures[7], world));
-            gamefield.add(new Square(new Vector2(200, 400), new Vector2(300, 8), 0.3f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(390, 500), new Vector2(7, 100), 0.9f, batch, textures[0], world));
-
-            gamefield.add(new Square(new Vector2(250, 600), new Vector2(160, 8), 0.0f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(150, 700), new Vector2(120, 8), 0.5f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(350, 700), new Vector2(80, 8), -0.5f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(195, 800), new Vector2(80, 8), 0.2f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(305, 800), new Vector2(80, 8), -0.2f, batch, textures[0], world));
-
-            gamefield.add(new SquareStack(new Vector2(250, 905), new Vector2(400, 15), new Vector2(20, 5), 0.0f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new Ball(new Vector2(50, 885), 12.0f, Color.LightSalmon, batch, textures[2], world));
-            gamefield.add(new Ball(new Vector2(450, 885), 12.0f, Color.MistyRose, batch, textures[6], world));
-
-            this.size.X = 550;
-            this.size.Y = 950;
-            gamefield.add(new Square(new Vector2(size.X/2, -5), new Vector2(size.X, 10), 0.0f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(size.X / 2, size.Y+5), new Vector2(size.X, 10), 0.0f, batch, textures[0], world));
-
-            gamefield.add(new Square(new Vector2(5, size.Y/2), new Vector2(10, size.Y), 0.0f, batch, textures[0], world));
-            gamefield.add(new Square(new Vector2(size.X - 5, size.Y / 2), new Vector2(10, size.Y), 0.0f, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(320, 200), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(220, 230), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(400, 230), new Vector2(90, 10), new Vector2(10, 5), 0.3f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(120, 260), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
 
-            addObjects.add(new Square(new Vector2(0, 0), new Vector2(80, 7), 0.0f, Color.Blue, batch, textures[0], world));
-            addObjects.add(new Ball(new Vector2(0, 0), 12.0f, Color.Blue, batch, textures[6], world));
-            addObjects.add(new Ball(new Vector2(0, 0), 12.0f, Color.Blue, batch, textures[5], world));
+            gamefield.add(new SquareStack(new Vector2(18, 340), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(61, 364), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(181, 393), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(303, 415), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
-            specialObject1 = new Ball(new Vector2(250, 800), 15.0f, Color.LightGreen, batch, textures[6], world);
-            gamefield.add(specialObject1);
-            addToMyOnCollision(specialObject1);
+            gamefield.add(new SquareStack(new Vector2(447, 416), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
-            specialObject2 = new Ball(new Vector2(150, 350), 15.0f, Color.Green, batch, textures[6], world);
-            gamefield.add(specialObject2);
-            addToMyOnCollision(specialObject2);
+            gamefield.add(new SquareStack(new Vector2(320, 500), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(220, 530), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(400, 530), new Vector2(90, 10), new Vector2(10, 5), 0.3f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(120, 560), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
-            gamefield.add(new Pipeline(new Vector2(270, 230), new Vector2(120, 43), 5.0f, -0.1f, Color.Green, batch, textures[0], world));
+
+            gamefield.add(new SquareStack(new Vector2(18, 640), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(61, 664), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(181, 693), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(303, 715), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+
+            gamefield.add(new SquareStack(new Vector2(447, 716), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
+
+            gamefield.add(new SquareStack(new Vector2(320, 800), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(220, 830), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(400, 830), new Vector2(90, 10), new Vector2(10, 5), 0.3f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(120, 860), new Vector2(80, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+
+
+            gamefield.add(new SquareStack(new Vector2(18, 925), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(61, 949), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(181, 978), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
+
+            gamefield.add(new SquareStack(new Vector2(447, 971), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
+
+            gamefield.add(new Triangle(new Vector2(350,975), new Vector2(50,50), 0.0f, batch, textures[7], world));
+
+
+            // bonus objects
+            bonus = new List<GameObject>();
+            bonusLifetime = new List<int>();
+
+            bonus.Add(new Ball(new Vector2(150, 360), 15.0f, Color.Green, batch, textures[4], world));
+            bonus.Add(new Ball(new Vector2(150, 660), 12.0f, Color.Red, batch, textures[4], world));
+            bonus.Add(new Ball(new Vector2(150, 945), 10.0f, Color.Yellow, batch, textures[4], world));
+
+            foreach (GameObject obj in bonus)
+            {
+                gamefield.add( obj );
+                addToMyOnCollision( obj );
+                bonusLifetime.Add( maxLifetime );
+            }
+
+
+            // border
+            gamefield.add(new Square(new Vector2(size.X / 2, 0), new Vector2(size.X, 7), 0.0f, Color.DarkGreen, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(size.X / 2, size.Y ), new Vector2(size.X, 7), 0.0f, Color.DarkGreen, batch, textures[0], world));
+
+            gamefield.add(new Square(new Vector2(0, size.Y / 2), new Vector2(7, size.Y), 0.0f, Color.DarkGreen, batch, textures[0], world));
+            gamefield.add(new Square(new Vector2(size.X, size.Y / 2), new Vector2(7, size.Y), 0.0f, Color.DarkGreen, batch, textures[0], world));
+
+
+            // add objects
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(80, 10), new Vector2(10, 5), -0.6f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), -0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(60, 20), new Vector2(10, 5), -0.2f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(80, 10), new Vector2(10, 5), 0.0f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(40, 45), new Vector2(10, 5), 0.2f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), 0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Blue, Color.LightBlue, batch, textures[0], world));
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            if (f1.Body == ball1.body || f2.Body == ball1.body || f1.Body == ball2.body || f2.Body == ball2.body)
+            // test collision both balls
+            if ( (f1.Body == ball1.body && f2.Body == ball2.body) || (f1.Body == ball2.body && f2.Body == ball1.body) )
             {
-                if (f1.Body == specialObject1.body || f2.Body == specialObject1.body)
+                if (overlay != null) overlay.CenterString = "ball collision";
+                return true;
+            }
+
+            // test bonus objects
+            foreach (GameObject obj in bonus)
+            {
+                if (f1.Body == obj.body || f2.Body == obj.body)
                 {
-                    gamefield.remove(specialObject1);
-                    removeFromMyOnCollision(specialObject1);
-                    world.RemoveBody(specialObject1.body);
-                    world.Gravity.Y /= 3;
-                    if (overlay != null) overlay.CenterString = "changed gravity";
-                    return false;
-                }
-                if (f1.Body == specialObject2.body || f2.Body == specialObject2.body)
-                {
-                    specialObject2.body.BodyType = BodyType.Dynamic;
-                    if(overlay!=null) overlay.CenterString = "Bonus";
-                    //specialObject2.body.BodyType = BodyType.Kinematic;
-                    //specialObject2.body.LinearVelocity += new Vector2(0.3f, 0.3f);
+                    if (overlay != null && obj.body.BodyType == BodyType.Static) overlay.CenterString = "Bonus";
+                    obj.body.BodyType = BodyType.Dynamic;
                 }
             }
             return true;
@@ -113,7 +145,22 @@ namespace Fall_Ball
 
         public override void update(GameTime gameTime, Vector2 pos)
         {
-            
+            for (int i = 0; i < bonus.Count; i++ )
+            {
+                if (bonus[i].body.BodyType == BodyType.Dynamic)
+                {
+                    bonusLifetime[i]--;
+                    if (bonusLifetime[i] < 1)
+                    {
+                        gamefield.remove(bonus[i]);
+                        world.RemoveBody(bonus[i].body);
+                        bonusLifetime.RemoveAt(i);
+                        bonus.RemoveAt(i);
+                        break;
+                    }
+                }
+            }
+
             base.update(gameTime, pos);
         }
     }
