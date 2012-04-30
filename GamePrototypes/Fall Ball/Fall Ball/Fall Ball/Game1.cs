@@ -198,8 +198,9 @@ namespace Fall_Ball
             Vector2 addPos = new Vector2( minimapOffset.X, 0);
             for (int i = 0; i < level.addObjects.objects.Count; i++)
             {
-                addPos.Y += 30;
-                level.addObjects.objects[i].draw( addPos, drawScale);
+                addPos.Y += 30 * screenScale;
+                level.addObjects.objects[i].body.Position = ScreenToWorld(offset + playerOffset);
+                level.addObjects.objects[i].draw(level.addObjects.objects[i].body.Position, drawScale);
             }
 
             // draw cursor
@@ -230,13 +231,13 @@ namespace Fall_Ball
             mouseController.Draw();
         }
 
-        private Vector2 ScreenToWorld(Vector2 pos)
+        public Vector2 ScreenToWorld(Vector2 pos)
         {
             Vector2 posWorld = (pos - offset) / (gameScale * screenScale);
             return posWorld;
         }
 
-        private Vector2 WorldToScreen(Vector2 pos)
+        public Vector2 WorldToScreen(Vector2 pos)
         {
             Vector2 posScreen = (pos * (gameScale * screenScale)) + offset;
             return posScreen;

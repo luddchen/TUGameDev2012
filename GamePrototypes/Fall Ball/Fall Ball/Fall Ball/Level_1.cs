@@ -23,7 +23,7 @@ namespace Fall_Ball
         private List<int> bonusLifetime;
         private int maxLifetime = 500;
 
-        public Level_1(Game game, List<Texture2D> textures, SpriteBatch batch)
+        public Level_1(Game1 game, List<Texture2D> textures, SpriteBatch batch)
             : base(game, textures, batch)
         {
             this.size.X = 500;

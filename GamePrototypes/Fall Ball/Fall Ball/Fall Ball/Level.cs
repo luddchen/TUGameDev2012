@@ -29,9 +29,9 @@ namespace Fall_Ball
         public Overlay overlay;
         public MouseController mouse;
         private FixedMouseJoint fixedMouseJoint;
-        private Game game;
+        private Game1 game;
 
-        public Level(Game game, List<Texture2D> textures, SpriteBatch batch)
+        public Level(Game1 game, List<Texture2D> textures, SpriteBatch batch)
         {
             this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
@@ -47,21 +47,28 @@ namespace Fall_Ball
 
         public virtual void update(GameTime gameTime, Vector2 pos)
         {
-            //Vector2 position = Camera.ConvertScreenToWorld(mouse.Cursor);
-            Vector2 position = pos;
-
             if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) &&
                 fixedMouseJoint == null)
             {
-                Fixture savedFixture = this.world.TestPoint(position);
+                Fixture savedFixture = this.world.TestPoint(pos);
                 if (savedFixture != null)
                 {
                     Body body = savedFixture.Body;
-                    fixedMouseJoint = new FixedMouseJoint(body, position);
+                    fixedMouseJoint = new FixedMouseJoint(body, pos);
                     fixedMouseJoint.MaxForce = 1000.0f * body.Mass;
                     this.world.AddJoint(fixedMouseJoint);
                     body.Awake = true;
+                    body.BodyType = BodyType.Dynamic;
+
+                    foreach (GameObject obj in addObjects.objects)
+                    {
+                        Console.WriteLine("Body Pos: " + game.WorldToScreen(obj.body.Position));
+                        //obj.body.BodyType = BodyType.Dynamic;
+                        
+                    }
                 }
+
+                
             }
 
             if ((mouse.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
@@ -73,7 +80,7 @@ namespace Fall_Ball
 
             if (fixedMouseJoint != null)
             {
-                fixedMouseJoint.WorldAnchorB = position;
+                fixedMouseJoint.WorldAnchorB = pos;
             }
         }
 
