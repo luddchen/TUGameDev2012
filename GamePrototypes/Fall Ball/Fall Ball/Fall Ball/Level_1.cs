@@ -91,8 +91,8 @@ namespace Fall_Ball
             // bonus objects
             bonus = new List<GameObject>();
             bonusLifetime = new List<int>();
-
-            bonus.Add(new Ball(new Vector2(150, 360), 15.0f, Color.Green, batch, textures[4], world));
+            bonus.Add(new Egg(new Vector2(150, 360), 15.0f, 13.0f, Color.Green, batch, textures[1], world));
+            Console.WriteLine("max Vertices: " + Settings.MaxPolygonVertices);
             bonus.Add(new Ball(new Vector2(150, 660), 12.0f, Color.Red, batch, textures[4], world));
             bonus.Add(new Ball(new Vector2(150, 945), 10.0f, Color.Yellow, batch, textures[4], world));
 
