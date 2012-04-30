@@ -77,6 +77,7 @@ namespace Fall_Ball.Objects
 
         public override void draw(Vector2 offset, float scale)
         {
+            this.rMat = Matrix.CreateRotationZ(rot + this.body.Rotation);
             int drawSizeX = (int)(size.X * scale);
             if (drawSizeX < 1) drawSizeX = 1;
 
@@ -87,7 +88,7 @@ namespace Fall_Ball.Objects
 
             dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.innerColor, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.innerColor, rot + this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             //outer
@@ -98,13 +99,13 @@ namespace Fall_Ball.Objects
             Vector2 newPos = Vector2.Transform(new Vector2(0, -size.Y / 2 + thickness), rMat);
             dest = new Rectangle((int)((this.body.Position.X+newPos.X) * scale + offset.X), (int)((this.body.Position.Y+newPos.Y) * scale + offset.Y), drawSizeX, drawThickness);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.color, rot + this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             newPos = Vector2.Transform(new Vector2(0, size.Y / 2 - thickness), rMat);
             dest = new Rectangle((int)((this.body.Position.X + newPos.X) * scale + offset.X), (int)((this.body.Position.Y + newPos.Y) * scale + offset.Y), drawSizeX, drawThickness);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.color, rot + this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
@@ -118,7 +119,7 @@ namespace Fall_Ball.Objects
 
             dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.innerColor, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.innerColor, rot + this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
 
         }

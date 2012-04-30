@@ -182,39 +182,40 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             Vector2 pos = ScreenToWorld(mouseController.Cursor);
-            if ((mouseController.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) && fixedMouseJoint == null)
+            if (mouseController.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
             {
-                Fixture savedFixture = this.level.world.TestPoint( pos );
-                if (savedFixture != null)
+                if (fixedMouseJoint == null)
                 {
-                    foreach (GameObject obj in level.addObjects.objects)
+                    Fixture savedFixture = this.level.world.TestPoint(pos);
+                    if (savedFixture != null)
                     {
-                        if (obj.body == savedFixture.Body)
+                        foreach (GameObject obj in level.addObjects.objects)
                         {
-                            movingObject = obj;
-                            level.addObjects.objects.Remove(obj);
-                            movingObject.body.CollidesWith = Category.None;
-                            fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
-                            fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
-                            this.level.world.AddJoint(fixedMouseJoint);
+                            if (obj.body == savedFixture.Body)
+                            {
+                                movingObject = obj;
+                                level.addObjects.objects.Remove(obj);
+                                movingObject.body.CollidesWith = Category.None;
+                                fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
+                                fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
+                                this.level.world.AddJoint(fixedMouseJoint);
 
-                            Console.WriteLine("Body Clicked " + movingObject.body.Position);
-                            break;
+                                Console.WriteLine("Body Clicked " + movingObject.body.Position);
+                                break;
+                            }
                         }
                     }
+                } 
+                else 
+                {
+                    this.level.world.RemoveJoint(fixedMouseJoint);
+                    fixedMouseJoint = null;
+                    movingObject.body.BodyType = BodyType.Static;
+                    movingObject.body.CollidesWith = Category.All;
+                    movingObject.body.Awake = true;
+                    level.gamefield.add(movingObject);
+                    movingObject = null;
                 }
-            }
-
-            if ((mouseController.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
-                fixedMouseJoint != null)
-            {
-                this.level.world.RemoveJoint(fixedMouseJoint);
-                fixedMouseJoint = null;
-                movingObject.body.BodyType = BodyType.Static;
-                movingObject.body.CollidesWith = Category.All;
-                movingObject.body.Awake = true;
-                level.gamefield.add(movingObject);
-                movingObject = null;
             }
 
             if (fixedMouseJoint != null)

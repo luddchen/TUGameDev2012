@@ -65,7 +65,7 @@ namespace Fall_Ball.Objects
 
             dest = new Rectangle((int)(this.body.Position.X * scale + offset.X), (int)(this.body.Position.Y * scale + offset.Y), drawSizeX, drawSizeY);
             spriteBatch.Begin();
-            spriteBatch.Draw(texture, dest, null, this.color, rot, spriteOrigin, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture, dest, null, this.color, rot + this.body.Rotation, spriteOrigin, SpriteEffects.None, 0f);
             spriteBatch.End();
         }
 
