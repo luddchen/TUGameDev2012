@@ -120,6 +120,12 @@ namespace Fall_Ball
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(40, 45), new Vector2(10, 5), 0.2f, Color.Blue, Color.LightBlue, batch, textures[0], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), 0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+        
+            foreach (GameObject obj in addObjects.objects)
+            {
+                //gamefield.add(obj);
+                obj.body.BodyType = BodyType.Dynamic;
+            }
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

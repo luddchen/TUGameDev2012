@@ -58,17 +58,21 @@ namespace Fall_Ball
                     fixedMouseJoint.MaxForce = 1000.0f * body.Mass;
                     this.world.AddJoint(fixedMouseJoint);
                     body.Awake = true;
-                    body.BodyType = BodyType.Dynamic;
+
+                    Console.WriteLine("Body Clicked " + body.Position);
 
                     foreach (GameObject obj in addObjects.objects)
                     {
-                        Console.WriteLine("Body Pos: " + game.WorldToScreen(obj.body.Position));
-                        //obj.body.BodyType = BodyType.Dynamic;
-                        
+
+                        //if (obj.body == body)
+                        //{
+                            
+                            Console.WriteLine("Body Clicked " + obj.body.Position);
+                            obj.body.BodyType = BodyType.Dynamic;
+                            obj.body.Awake = true;
+                        //}
                     }
                 }
-
-                
             }
 
             if ((mouse.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
