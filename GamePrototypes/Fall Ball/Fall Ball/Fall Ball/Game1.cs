@@ -178,8 +178,7 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             base.Update(gameTime);
-            Vector2 posWorld = (mouseController.Cursor - offset) / (gameScale * screenScale);
-            level.update(gameTime, posWorld);
+            level.update(gameTime, ScreenToWorld(mouseController.Cursor));
             mouseController.Update(gameTime);
         }
 
@@ -229,6 +228,18 @@ namespace Fall_Ball
             level.world.Step(0.1f);
             base.Draw(gameTime);
             mouseController.Draw();
+        }
+
+        private Vector2 ScreenToWorld(Vector2 pos)
+        {
+            Vector2 posWorld = (pos - offset) / (gameScale * screenScale);
+            return posWorld;
+        }
+
+        private Vector2 WorldToScreen(Vector2 pos)
+        {
+            Vector2 posScreen = (pos * (gameScale * screenScale)) + offset;
+            return posScreen;
         }
     }
 }
