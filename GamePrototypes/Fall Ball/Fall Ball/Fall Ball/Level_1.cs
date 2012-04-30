@@ -23,18 +23,19 @@ namespace Fall_Ball
         private List<int> bonusLifetime;
         private int maxLifetime = 500;
 
-        public Level_1(Game1 game, List<Texture2D> textures, SpriteBatch batch)
-            : base(game, textures, batch)
+        public Level_1(List<Texture2D> textures, SpriteBatch batch)
+            : base(textures, batch)
         {
             this.size.X = 500;
             this.size.Y = 1000;
+            this.timeFactor = 2.0f;
 
-            ball1 = new Ball(new Vector2(50, 10), 10.0f, Color.IndianRed, batch, textures[1], world);
+            ball1 = new Ball(new Vector2(50, 10), 10.0f, 10000f, Color.IndianRed, batch, textures[1], world);
             ball1.body.BodyType = BodyType.Dynamic;
             gamefield.add(ball1);
             addToMyOnCollision(ball1);
 
-            ball2 = new Ball(new Vector2(485, 15), 15.0f, Color.HotPink, batch, textures[3], world);
+            ball2 = new Ball(new Vector2(485, 15), 15.0f, 10000f, Color.HotPink, batch, textures[3], world);
             ball2.body.BodyType = BodyType.Dynamic;
             gamefield.add(ball2);
             addToMyOnCollision(ball2);
@@ -42,8 +43,8 @@ namespace Fall_Ball
             gamefield.add(new SquareStack(new Vector2(18, 40), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(61, 64), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(181, 93), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(303, 115), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new Pipeline(new Vector2(303, 100), new Vector2(50, 30), 3.0f, 0.1f, Color.Green, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(293, 115), new Vector2(30, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new Pipeline(new Vector2(293, 100), new Vector2(30, 30), 3.0f, 0.1f, Color.Green, batch, textures[0], world));
 
             gamefield.add(new SquareStack(new Vector2(447, 116), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
@@ -56,7 +57,7 @@ namespace Fall_Ball
             gamefield.add(new SquareStack(new Vector2(18, 340), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(61, 364), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(181, 393), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(303, 415), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(293, 415), new Vector2(30, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
             gamefield.add(new SquareStack(new Vector2(447, 416), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
@@ -69,7 +70,7 @@ namespace Fall_Ball
             gamefield.add(new SquareStack(new Vector2(18, 640), new Vector2(50, 10), new Vector2(10, 5), 0.6f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(61, 664), new Vector2(50, 10), new Vector2(10, 5), 0.4f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(181, 693), new Vector2(200, 10), new Vector2(10, 5), 0.2f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            gamefield.add(new SquareStack(new Vector2(303, 715), new Vector2(50, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
+            gamefield.add(new SquareStack(new Vector2(293, 715), new Vector2(30, 10), new Vector2(10, 5), 0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
             gamefield.add(new SquareStack(new Vector2(447, 716), new Vector2(120, 10), new Vector2(10, 5), -0.5f, Color.Green, Color.LightGreen, batch, textures[0], world));
 
@@ -146,7 +147,7 @@ namespace Fall_Ball
             return true;
         }
 
-        public override void update(GameTime gameTime, Vector2 pos)
+        public override void update(GameTime gameTime)
         {
             for (int i = 0; i < bonus.Count; i++ )
             {
@@ -164,7 +165,7 @@ namespace Fall_Ball
                 }
             }
 
-            base.update(gameTime, pos);
+            base.update(gameTime);
         }
     }
 }

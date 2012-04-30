@@ -27,17 +27,15 @@ namespace Fall_Ball
         public GameObject ball1;
         public GameObject ball2;
         public Overlay overlay;
-        public MouseController mouse;
-        public FixedMouseJoint fixedMouseJoint;
-        public Game1 game;
+        public float timeFactor;
 
-        public Level(Game1 game, List<Texture2D> textures, SpriteBatch batch)
+        public Level(List<Texture2D> textures, SpriteBatch batch)
         {
             this.size = new Vector2(1, 1);
             this.world = new World(new Vector2(0.0f, 10.0f));
             this.gamefield = new Field();
             this.addObjects = new Field();
-            this.game = game;
+            this.timeFactor = 1;
         }
 
         public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
@@ -45,45 +43,12 @@ namespace Fall_Ball
             return true;
         }
 
-        public virtual void update(GameTime gameTime, Vector2 pos)
-        {
-            if ((mouse.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) )// && fixedMouseJoint == null)
+        public virtual void update(GameTime gameTime)
+        {        
+            int millis = gameTime.ElapsedGameTime.Milliseconds;
+            for (int i = 0; i < millis; i += 4)
             {
-                Fixture savedFixture = this.world.TestPoint(pos);
-                if (savedFixture != null)
-                {
-                    Body body = savedFixture.Body;
-                    fixedMouseJoint = new FixedMouseJoint(body, pos);
-                    fixedMouseJoint.MaxForce = 1000.0f * body.Mass;
-                    this.world.AddJoint(fixedMouseJoint);
-                    body.Awake = true;
-
-                    Console.WriteLine("Body Clicked " + body.Position);
-
-                    //foreach (GameObject obj in addObjects.objects)
-                    //{
-
-                    //    //if (obj.body == body)
-                    //    //{
-                            
-                    //        Console.WriteLine("Body Clicked " + obj.body.Position);
-                    //        obj.body.BodyType = BodyType.Dynamic;
-                    //        obj.body.Awake = true;
-                    //    //}
-                    //}
-                }
-            }
-
-            if ((mouse.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
-                fixedMouseJoint != null)
-            {
-                this.world.RemoveJoint(fixedMouseJoint);
-                fixedMouseJoint = null;
-            }
-
-            if (fixedMouseJoint != null)
-            {
-                fixedMouseJoint.WorldAnchorB = pos;
+                world.Step(0.01f * this.timeFactor);
             }
         }
 

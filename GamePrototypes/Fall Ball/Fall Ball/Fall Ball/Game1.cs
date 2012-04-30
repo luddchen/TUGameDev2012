@@ -13,6 +13,8 @@ using FarseerPhysics.Collision;
 using FarseerPhysics.Factories;
 using FarseerPhysics.Dynamics;
 using Fall_Ball.Controls;
+using FarseerPhysics.Dynamics.Joints;
+using Fall_Ball.Objects;
 
 namespace Fall_Ball
 {
@@ -46,6 +48,9 @@ namespace Fall_Ball
 
         Level level;
         MouseController mouseController;
+        GameObject movingObject;
+
+        public FixedMouseJoint fixedMouseJoint;
 
         public Game1()
         {
@@ -93,9 +98,8 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
             textures.Add(Content.Load<Texture2D>("Sprites\\Triangle")); // textures[7]
 
-            level = new Level_1(this, textures, spriteBatch);
+            level = new Level_1(textures, spriteBatch);
             level.overlay = overlay;
-            level.mouse = mouseController;
 
             offset = new Vector2(0, 0); // move of the full gamefield
             playerOffset = new Vector2(0, 0);
@@ -177,8 +181,49 @@ namespace Fall_Ball
             keyboardState = keyboard;
             gamepadState = gamepad;
 
+            Vector2 pos = ScreenToWorld(mouseController.Cursor);
+            if ((mouseController.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) && fixedMouseJoint == null)
+            {
+                Fixture savedFixture = this.level.world.TestPoint( pos );
+                if (savedFixture != null)
+                {
+                    foreach (GameObject obj in level.addObjects.objects)
+                    {
+                        if (obj.body == savedFixture.Body)
+                        {
+                            movingObject = obj;
+                            level.addObjects.objects.Remove(obj);
+                            movingObject.body.CollidesWith = Category.None;
+                            fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
+                            fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
+                            this.level.world.AddJoint(fixedMouseJoint);
+
+                            Console.WriteLine("Body Clicked " + movingObject.body.Position);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if ((mouseController.IsNewMouseButtonReleased(MouseButtons.LEFT_BUTTON)) &&
+                fixedMouseJoint != null)
+            {
+                this.level.world.RemoveJoint(fixedMouseJoint);
+                fixedMouseJoint = null;
+                movingObject.body.BodyType = BodyType.Static;
+                movingObject.body.CollidesWith = Category.All;
+                movingObject.body.Awake = true;
+                level.gamefield.add(movingObject);
+                movingObject = null;
+            }
+
+            if (fixedMouseJoint != null)
+            {
+                fixedMouseJoint.WorldAnchorB = pos;
+            }
+
             base.Update(gameTime);
-            level.update(gameTime, ScreenToWorld(mouseController.Cursor));
+            level.update(gameTime);
             mouseController.Update(gameTime);
         }
 
@@ -227,9 +272,12 @@ namespace Fall_Ball
             spriteBatch.End();
             level.gamefield.drawMap( minimapOffset, minimapScale * screenScale );
 
-            level.world.Step(0.1f);
-            base.Draw(gameTime);
+            if (movingObject != null)
+            {
+                movingObject.draw(offset + playerOffset, drawScale);
+            }
             mouseController.Draw();
+            base.Draw(gameTime);
         }
 
         public Vector2 ScreenToWorld(Vector2 pos)
