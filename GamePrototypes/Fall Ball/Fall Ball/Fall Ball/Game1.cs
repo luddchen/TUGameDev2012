@@ -259,7 +259,7 @@ namespace Fall_Ball
                 }
             }
 
-            if (mouseController.IsNewMouseButtonPressed(MouseButtons.RIGHT_BUTTON))
+            if (mouseController.IsNewMouseButtonPressed(MouseButtons.RIGHT_BUTTON) && movingObject != null)
             {
                 movingObject.body.FixedRotation = false;
                 movingObject.body.Rotation += 0.7f;
