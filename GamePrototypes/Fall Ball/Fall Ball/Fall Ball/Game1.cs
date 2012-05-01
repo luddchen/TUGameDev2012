@@ -246,6 +246,13 @@ namespace Fall_Ball
                 }
             }
 
+            if (mouseController.IsNewMouseButtonPressed(MouseButtons.RIGHT_BUTTON))
+            {
+                movingObject.body.FixedRotation = false;
+                movingObject.body.Rotation += 0.7f;
+                movingObject.body.FixedRotation = true;
+            }
+
             if (fixedMouseJoint != null)
             {
                 fixedMouseJoint.WorldAnchorB = pos;

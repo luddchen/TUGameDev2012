@@ -66,9 +66,6 @@ namespace Fall_Ball
             gamefield.add(new SquareStack(new Vector2(280, 400), new Vector2(10, 160), new Vector2(10, 5), 0.0f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(370, 570), new Vector2(230, 10), new Vector2(10, 5), 0.7f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(450, 730), new Vector2(100, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
-
-            // just for testing, delete this objects for the real level
-            gamefield.add(new Triangle(new Vector2(40, 50), new Vector2(25, 25), 0.0f, batch, textures[7], world));
             
 
             // bonus objects
