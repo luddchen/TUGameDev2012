@@ -27,6 +27,7 @@ namespace Fall_Ball.Objects
         public float width;
         public float height;
         public float density;
+        public bool isMoveable = false;
 
         // constructor
         public GameObject(Vector2 pos, SpriteBatch batch, Texture2D texture, World world)

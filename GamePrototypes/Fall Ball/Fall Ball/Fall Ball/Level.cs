@@ -68,5 +68,16 @@ namespace Fall_Ball
             }
         }
 
+        public void enableFallingBalls()
+        {
+            ball1.body.BodyType = BodyType.Dynamic;
+            ball2.body.BodyType = BodyType.Dynamic;
+        }
+
+        public void disableFallingBalls()
+        {
+            ball1.body.BodyType = BodyType.Static;
+            ball2.body.BodyType = BodyType.Static;
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace Fall_Ball
         Overlay overlay;
         KeyboardState keyboardState;
         GamePadState gamepadState;
-        int maxScrollBackDelay = 100;
+        int maxScrollBackDelay = 1000;
         int scrollBackDelay;
 
         Color background = Color.SeaShell;
@@ -51,6 +51,8 @@ namespace Fall_Ball
         GameObject movingObject;
 
         public FixedMouseJoint fixedMouseJoint;
+
+        public bool startFallingBalls = false;
 
         public Game1()
         {
@@ -140,18 +142,24 @@ namespace Fall_Ball
                 keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (keyboard.IsKeyDown(Keys.Space))
+            {
+                startFallingBalls = true;
+                level.enableFallingBalls();
+            }
+
             if (keyboard.IsKeyDown(Keys.Up) || keyboard.IsKeyDown(Keys.Down))
             {
                 if (keyboard.IsKeyDown(Keys.Up))
                 {
-                    playerOffset.Y += 1;
-                    scrollBackDelay = maxScrollBackDelay;
+                    //playerOffset.Y += 10;
+                    offset.Y += 10;
                 }
 
                 if (keyboard.IsKeyDown(Keys.Down))
                 {
-                    playerOffset.Y -= 1;
-                    scrollBackDelay = maxScrollBackDelay;
+                    //playerOffset.Y -= 10;
+                    offset.Y -= 10;
                 }
             }
             else
@@ -165,7 +173,6 @@ namespace Fall_Ball
                     if (playerOffset.Y > 0) playerOffset.Y -= 0.5f;
                     if (playerOffset.Y < 0) playerOffset.Y += 0.5f;
                 }
-
             }
 
             if (keyboard.IsKeyDown(Keys.Left))
@@ -182,7 +189,7 @@ namespace Fall_Ball
             gamepadState = gamepad;
 
             Vector2 pos = ScreenToWorld(mouseController.Cursor);
-            if (mouseController.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+            if (mouseController.IsNewMouseButtonPressed(MouseButtons.LEFT_BUTTON) && !startFallingBalls)
             {
                 if (fixedMouseJoint == null)
                 {
@@ -196,6 +203,7 @@ namespace Fall_Ball
                                 movingObject = obj;
                                 level.addObjects.objects.Remove(obj);
                                 movingObject.body.CollidesWith = Category.None;
+                                movingObject.body.FixedRotation = true;
                                 fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
                                 fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
                                 this.level.world.AddJoint(fixedMouseJoint);
@@ -204,6 +212,26 @@ namespace Fall_Ball
                                 break;
                             }
                         }
+
+
+                        foreach (GameObject obj in level.gamefield.objects)
+                        {
+                            if (obj.isMoveable && obj.body == savedFixture.Body)
+                            {
+                                movingObject = obj;
+                                level.gamefield.objects.Remove(obj);
+                                movingObject.body.CollidesWith = Category.None;
+                                movingObject.body.FixedRotation = true;
+                                movingObject.body.BodyType = BodyType.Dynamic;
+                                fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
+                                fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
+                                this.level.world.AddJoint(fixedMouseJoint);
+
+                                Console.WriteLine("Body Clicked " + movingObject.body.Position);
+                                break;
+                            }
+                        }
+
                     }
                 } 
                 else 
@@ -235,7 +263,10 @@ namespace Fall_Ball
 
             float drawScale = gameScale * screenScale;
 
-            offset.Y =  (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * drawScale / 2);
+            if (startFallingBalls)
+            {
+                offset.Y = (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * drawScale / 2);
+            }
 
             // draw level
             level.gamefield.draw( offset + playerOffset, drawScale );

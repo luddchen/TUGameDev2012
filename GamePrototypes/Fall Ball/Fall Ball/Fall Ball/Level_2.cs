@@ -29,13 +29,13 @@ namespace Fall_Ball
             this.size.Y = 800;
             this.timeFactor = 1.5f;
 
-            ball1 = new Ball(new Vector2(50, 10), 11.0f, 10000f, Color.HotPink, batch, textures[5], world);
-            ball1.body.BodyType = BodyType.Dynamic;
+            ball1 = new Ball(new Vector2(50, 30), 11.0f, 10000f, Color.HotPink, batch, textures[5], world);
+            ball1.body.BodyType = BodyType.Static;
             gamefield.add(ball1);
             addToMyOnCollision(ball1);
 
-            ball2 = new Ball(new Vector2(485, 200), 15.0f, 10000f, Color.HotPink, batch, textures[2], world);
-            ball2.body.BodyType = BodyType.Dynamic;
+            ball2 = new Ball(new Vector2(480, 195), 15.0f, 10000f, Color.HotPink, batch, textures[2], world);
+            ball2.body.BodyType = BodyType.Static;
             gamefield.add(ball2);
             addToMyOnCollision(ball2);
 
@@ -102,12 +102,14 @@ namespace Fall_Ball
         
             foreach (GameObject obj in addObjects.objects)
             {
+                obj.isMoveable = true;
                 obj.body.BodyType = BodyType.Dynamic;
             }
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            // test collision bottom border with ball1
             if ((f1.Body == bottomBorder.body && f2.Body == ball1.body) || (f1.Body == ball1.body && f2.Body == bottomBorder.body)
                 && ballOneReachedBottom == false)
             {
@@ -156,7 +158,6 @@ namespace Fall_Ball
             }
             base.update(gameTime);
         }
-
         
     }
 }
