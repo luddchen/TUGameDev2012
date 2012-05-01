@@ -145,6 +145,11 @@ namespace Fall_Ball
                 keyboard.IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            if (keyboard.IsKeyDown(Keys.R))
+            {
+                restartGame();
+            }
+
             if (keyboard.IsKeyDown(Keys.Space))
             {
                 startFallingBalls = true;
@@ -337,6 +342,12 @@ namespace Fall_Ball
         {
             Vector2 posScreen = (pos * (gameScale * screenScale)) + offset;
             return posScreen;
+        }
+
+        private void restartGame()
+        {
+            startFallingBalls = false;
+            LoadContent();
         }
     }
 }
