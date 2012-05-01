@@ -107,6 +107,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LevelBallCollision.cs" />
+    <Compile Include="LevelBottomReach.cs" />
     <Compile Include="Level_2.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Controls\MouseController.cs" />
