@@ -66,19 +66,6 @@ namespace Fall_Ball
             gamefield.add(new SquareStack(new Vector2(280, 400), new Vector2(10, 160), new Vector2(10, 5), 0.0f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(370, 570), new Vector2(230, 10), new Vector2(10, 5), 0.7f, Color.Green, Color.LightGreen, batch, textures[0], world));
             gamefield.add(new SquareStack(new Vector2(450, 730), new Vector2(100, 10), new Vector2(10, 5), -0.1f, Color.Green, Color.LightGreen, batch, textures[0], world));
-            
-
-            // bonus objects
-            bonus = new List<GameObject>();
-            bonusScore = new List<int>();
-            bonus.Add(new Ball(new Vector2(400, 430), 12.0f, Color.LightGreen, batch, textures[4], world));
-
-            foreach (GameObject obj in bonus)
-            {
-                gamefield.add( obj );
-                addToMyOnCollision( obj );
-                bonusScore.Add( score );
-            }
 
             // border
             bottomBorder = new Square(new Vector2(size.X / 2, size.Y), new Vector2(size.X, 7), 0.0f, Color.DarkGreen, batch, textures[0], world);
@@ -87,21 +74,35 @@ namespace Fall_Ball
             gamefield.add(new Square(new Vector2(0, size.Y / 2), new Vector2(7, size.Y), 0.0f, Color.DarkGreen, batch, textures[0], world));
             gamefield.add(new Square(new Vector2(size.X, size.Y / 2), new Vector2(7, size.Y), 0.0f, Color.DarkGreen, batch, textures[0], world));
 
+            // bonus objects
+            bonus = new List<GameObject>();
+            bonusScore = new List<int>();
+            bonus.Add(new Ball(new Vector2(400, 430), 12.0f, Color.LightGreen, batch, textures[4], world));
+
+            foreach (GameObject obj in bonus)
+            {
+                gamefield.add(obj);
+                addToMyOnCollision(obj);
+                bonusScore.Add(score);
+            }
 
             // add objects
-            addObjects.add( new Egg(new Vector2(0, 0), 15.0f, 13.0f, Color.Blue, batch, textures[1], world) );
+            addObjects.add(new Egg(new Vector2(0, 0), 15.0f, 13.0f, Color.Blue, batch, textures[1], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), -0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
+            addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(60, 10), new Vector2(10, 5), -0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
             addObjects.add(new Ball(new Vector2(0, 0), 13.0f, Color.Blue, batch, textures[1], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(80, 10), new Vector2(10, 5), 0.0f, Color.Blue, Color.LightBlue, batch, textures[0], world));
-            addObjects.add(new Square(new Vector2(0, 0), new Vector2(40, 45), 0.2f, Color.Blue, batch, textures[0], world));
+            addObjects.add(new Square(new Vector2(0, 0), new Vector2(20, 20), 0.2f, Color.Blue, batch, textures[0], world));
             addObjects.add(new SquareStack(new Vector2(0, 0), new Vector2(50, 15), new Vector2(10, 5), 0.4f, Color.Blue, Color.LightBlue, batch, textures[0], world));
             addObjects.add(new Triangle(new Vector2(0, 0), new Vector2(50, 50), 0.0f, Color.Blue, batch, textures[7], world));
-        
+
             foreach (GameObject obj in addObjects.objects)
             {
                 obj.isMoveable = true;
+                obj.body.FixedRotation = true;
                 obj.body.BodyType = BodyType.Dynamic;
             }
+
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
@@ -125,13 +126,24 @@ namespace Fall_Ball
             }
 
             // test bonus objects
+            List<GameObject> removeBonusItems = new List<GameObject>();
             foreach (GameObject obj in bonus)
             {
                 if (f1.Body == obj.body || f2.Body == obj.body)
                 {
                     if (overlay != null && obj.body.BodyType == BodyType.Static) overlay.CenterString = "Bonus";
-                    obj.body.BodyType = BodyType.Dynamic;
+                    score += bonusItemScore;
+                    removeBonusItems.Add(obj);
                 }
+            }
+            // remove collected bonus items
+            foreach (GameObject obj in removeBonusItems)
+            {
+                world.RemoveBody(obj.body);
+                gamefield.remove(obj);
+                removeFromMyOnCollision(obj);
+                bonusScore.Remove(score);
+                bonus.Remove(obj);
             }
             return true;
         }

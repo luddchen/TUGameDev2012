@@ -347,7 +347,10 @@ namespace Fall_Ball
         private void restartGame()
         {
             startFallingBalls = false;
-            LoadContent();
+
+
+            level = new Level_2(textures, spriteBatch);
+            level.overlay = overlay;
         }
     }
 }

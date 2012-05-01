@@ -17,7 +17,7 @@ namespace Fall_Ball
 {
 
     // base class for levels
-    class Level
+    abstract class Level
     {
 
         public Vector2 size;

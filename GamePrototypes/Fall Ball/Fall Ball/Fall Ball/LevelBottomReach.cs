@@ -10,9 +10,11 @@ using Microsoft.Xna.Framework;
 
 namespace Fall_Ball
 {
-    class LevelBottomReach : Level
+    abstract class LevelBottomReach : Level
     {
-        protected int score = 1000;
+        static protected int initialScore = 500;
+        protected int score = initialScore;
+        protected int bonusItemScore = 200;
         protected bool ballOneReachedBottom = false;
         protected bool ballTwoReachedBottom = false;
         protected bool timerStarted = false;

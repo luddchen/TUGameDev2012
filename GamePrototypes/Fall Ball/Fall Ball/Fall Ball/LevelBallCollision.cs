@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Fall_Ball
 {
-    class LevelBallCollision : Level
+    abstract class LevelBallCollision : Level
     {
         public LevelBallCollision(List<Texture2D> textures, SpriteBatch batch)
             : base(textures, batch)
