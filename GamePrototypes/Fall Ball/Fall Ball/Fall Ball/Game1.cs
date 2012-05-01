@@ -52,6 +52,8 @@ namespace Fall_Ball
 
         public FixedMouseJoint fixedMouseJoint;
 
+        private int oldMouseWheelValue;
+
         public bool startFallingBalls = false;
 
         public Game1()
@@ -137,6 +139,7 @@ namespace Fall_Ball
         {
             GamePadState gamepad = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboard = Keyboard.GetState();
+            MouseState mouse = Mouse.GetState();
 
             if (gamepad.Buttons.Back == ButtonState.Pressed ||
                 keyboard.IsKeyDown(Keys.Escape))
@@ -148,6 +151,11 @@ namespace Fall_Ball
                 level.enableFallingBalls();
             }
 
+            if (oldMouseWheelValue != mouse.ScrollWheelValue)
+            {
+                offset.Y -= (oldMouseWheelValue - mouse.ScrollWheelValue) / 3;
+                oldMouseWheelValue = mouse.ScrollWheelValue;
+            }
             if (keyboard.IsKeyDown(Keys.Up) || keyboard.IsKeyDown(Keys.Down))
             {
                 if (keyboard.IsKeyDown(Keys.Up))
