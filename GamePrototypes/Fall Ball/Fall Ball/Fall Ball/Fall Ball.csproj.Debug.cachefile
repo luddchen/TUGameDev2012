@@ -1,7 +1,5 @@
 Content\Sprites\Circle.xnb
 Content\Sprites\Square.xnb
-Content\Fonts\Font.xnb
-Content\Fonts\FontSmall.xnb
 Content\Sprites\Circle2.xnb
 Content\Sprites\Square2.xnb
 Content\Sprites\Pepper.xnb
@@ -12,3 +10,5 @@ Content\Sprites\Smiley.xnb
 Content\Sprites\Sun.xnb
 Content\Sprites\Cursor.xnb
 Content\Sprites\Triangle.xnb
+Content\Fonts\Font.xnb
+Content\Fonts\FontSmall.xnb

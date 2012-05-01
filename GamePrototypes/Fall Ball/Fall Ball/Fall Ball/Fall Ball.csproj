@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Level_2.cs" />
     <Compile Include="Objects\Ball.cs" />
     <Compile Include="Controls\MouseController.cs" />
     <Compile Include="Field.cs" />

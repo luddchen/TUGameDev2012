@@ -98,7 +98,7 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
             textures.Add(Content.Load<Texture2D>("Sprites\\Triangle")); // textures[7]
 
-            level = new Level_1(textures, spriteBatch);
+            level = new Level_2(textures, spriteBatch);
             level.overlay = overlay;
 
             offset = new Vector2(0, 0); // move of the full gamefield
