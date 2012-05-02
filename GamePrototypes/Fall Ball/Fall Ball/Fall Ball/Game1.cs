@@ -56,6 +56,15 @@ namespace Fall_Ball
 
         public bool startFallingBalls = false;
 
+        //sound effects
+        SoundEffect backgroundEngine; //background Music
+        SoundEffectInstance backgroundEngineInstance;
+
+        public SoundEffect bodyclickedEffect; //body click
+        public SoundEffect collicionEffect; //collicion Effect
+        public SoundEffect bonusEffect; //get bonus point
+        public SoundEffect normalHitEffect; //hit the wall
+
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -81,7 +90,7 @@ namespace Fall_Ball
         }
 
         protected override void Initialize()
-        {
+        {  
             base.Initialize();
         }
 
@@ -127,6 +136,15 @@ namespace Fall_Ball
             //    cursor.color = new Color( cursor.color.R, cursor.color.G, cursor.color.B, cursor.color.A / 2);
             //    level.addObjects.remove(cursor);
             //}
+
+            //sound effect
+            backgroundEngine = Content.Load<SoundEffect>("engine_2");
+            backgroundEngineInstance = backgroundEngine.CreateInstance();
+
+            normalHitEffect = Content.Load<SoundEffect>("hyperspace_activate");
+            collicionEffect = Content.Load<SoundEffect>("hyperspace_activate");
+            bonusEffect = Content.Load<SoundEffect>("hyperspace_activate");
+            bodyclickedEffect = Content.Load<SoundEffect>("hyperspace_activate");
         }
 
 
@@ -140,6 +158,14 @@ namespace Fall_Ball
             GamePadState gamepad = GamePad.GetState(PlayerIndex.One);
             KeyboardState keyboard = Keyboard.GetState();
             MouseState mouse = Mouse.GetState();
+            
+            //soundEngineInstance.Volume = 0.25f;
+            //soundEngineInstance.IsLooped = true;
+            //soundEngineInstance.Play();
+
+            backgroundEngineInstance.Volume = 1.0f;
+            //backgroundEngineInstance.IsLooped = true;
+            backgroundEngineInstance.Play();
 
             if (gamepad.Buttons.Back == ButtonState.Pressed ||
                 keyboard.IsKeyDown(Keys.Escape))
@@ -147,6 +173,7 @@ namespace Fall_Ball
 
             if (keyboard.IsKeyDown(Keys.R))
             {
+                //audioEngine.Update();
                 restartGame();
             }
 
@@ -222,6 +249,7 @@ namespace Fall_Ball
                                 this.level.world.AddJoint(fixedMouseJoint);
 
                                 Console.WriteLine("Body Clicked " + movingObject.body.Position);
+                                bodyclickedEffect.Play();
                                 break;
                             }
                         }
@@ -241,6 +269,7 @@ namespace Fall_Ball
                                 this.level.world.AddJoint(fixedMouseJoint);
 
                                 Console.WriteLine("Body Clicked " + movingObject.body.Position);
+                                bodyclickedEffect.Play();
                                 break;
                             }
                         }
@@ -351,6 +380,10 @@ namespace Fall_Ball
 
             level = new Level_2(textures, spriteBatch);
             level.overlay = overlay;
+        }
+
+        public void playMusic() {
+            bonusEffect.Play();
         }
     }
 }
