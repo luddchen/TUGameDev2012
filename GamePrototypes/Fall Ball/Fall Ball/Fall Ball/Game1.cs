@@ -44,6 +44,7 @@ namespace Fall_Ball
         float gameScale;
         float minimapScale;
         float screenScale;
+        float zoomScale = 1.0f;
         List<Texture2D> textures;
 
         Level level;
@@ -325,7 +326,23 @@ namespace Fall_Ball
         {
             GraphicsDevice.Clear( background);
 
-            float drawScale = gameScale * screenScale;
+            float drawScale = gameScale * screenScale * zoomScale;
+
+            float ballDist = Math.Abs(level.ball1.body.Position.Y - level.ball2.body.Position.Y) * drawScale;
+            if (ballDist < screenHeight * 0.6)
+            {
+                zoomScale /= 0.995f;
+                if (zoomScale > 1.0f) { zoomScale = 1.0f; }
+                drawScale = gameScale * screenScale * zoomScale;
+            }
+            if (ballDist > screenHeight * 0.8f)
+            {
+                zoomScale *= 0.995f;
+                float minScale = screenHeight / (level.size.Y * gameScale * screenScale);
+                if (zoomScale < minScale) { zoomScale = minScale; }
+                drawScale = gameScale * screenScale * zoomScale;
+            }
+
 
             if (startFallingBalls)
             {
