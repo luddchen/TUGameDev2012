@@ -29,7 +29,7 @@ namespace Fall_Ball
         int maxScrollBackDelay = 1000;
         int scrollBackDelay;
 
-        Color background = Color.SeaShell;
+        Color background = Color.DimGray;
         Color foreground;
 
         int screenWidth;
@@ -111,6 +111,7 @@ namespace Fall_Ball
             textures.Add(Content.Load<Texture2D>("Sprites\\Smiley"));   // textures[5]
             textures.Add(Content.Load<Texture2D>("Sprites\\Sun"));      // textures[6]
             textures.Add(Content.Load<Texture2D>("Sprites\\Triangle")); // textures[7]
+            textures.Add(Content.Load<Texture2D>("Sprites\\background_stones")); // textures[8]
 
             level = new Level_2(textures, spriteBatch);
             level.overlay = overlay;
@@ -329,6 +330,12 @@ namespace Fall_Ball
                 offset.Y = (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * drawScale / 2);
             }
 
+            Rectangle backgroundDest = new Rectangle(0, 0, screenWidth, screenHeight);
+            Rectangle backgroundSource = new Rectangle((int)offset.X, (int)offset.Y, (int)(textures[8].Width - offset.X), (int)(textures[8].Height - offset.Y));
+            spriteBatch.Begin();
+            spriteBatch.Draw(textures[8], backgroundDest, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.End();
+
             // draw level
             level.gamefield.draw( offset + playerOffset, drawScale );
 
@@ -348,21 +355,23 @@ namespace Fall_Ball
             //cursor.draw(addPos + cursorOffset, drawScale);
 
             // draw minimap
-            Rectangle dest = new Rectangle((int)(minimapOffset.X - 2), 
+            Rectangle minimapDest = new Rectangle((int)(minimapOffset.X - 2), 
                                             (int)(minimapOffset.Y - 2), 
                                             (int)(2 + screenWidth - minimapOffset.X), 
                                             (int)(2 + screenHeight - minimapOffset.Y));
             spriteBatch.Begin();
-            spriteBatch.Draw(textures[0], dest, null, foreground, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(textures[0], minimapDest, null, foreground, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
 
-            dest.X += 1;
-            dest.Y += 1;
-            dest.Width -= 2;
-            dest.Height -= 2;
+            minimapDest.X += 1;
+            minimapDest.Y += 1;
+            minimapDest.Width -= 2;
+            minimapDest.Height -= 2;
+            Rectangle minimapSource = new Rectangle(0, 0, minimapDest.Width, minimapDest.Height);
             spriteBatch.Begin();
-            spriteBatch.Draw(textures[0], dest, null, background, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(textures[8], minimapDest, minimapSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
+
             level.gamefield.drawMap( minimapOffset, minimapScale * screenScale );
 
             if (movingObject != null)
