@@ -64,7 +64,7 @@ namespace Fall_Ball
         public static SoundEffect bodyPlacedEffect; // body placed
         public static SoundEffect collicionEffect; //collicion Effect
         public static SoundEffect bonusEffect; //get bonus point
-        public static SoundEffect normalHitEffect; //hit the wall
+        public static SoundEffect bottomReachedEffect; //hit the bottom
         public static SoundEffect endGameEffect; //end game
         public static SoundEffect lostGameEffect; //score reached 0
 
@@ -141,7 +141,7 @@ namespace Fall_Ball
             //    level.addObjects.remove(cursor);
             //}
 
-            normalHitEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            bottomReachedEffect = Content.Load<SoundEffect>("Sounds/bottomReached");
             collicionEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
             bonusEffect = Content.Load<SoundEffect>("Sounds/bonus");
             bodyclickedEffect = Content.Load<SoundEffect>("Sounds/tong");

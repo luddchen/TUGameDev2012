@@ -52,6 +52,7 @@ namespace Fall_Ball
             if ((ballOneReachedBottom || ballTwoReachedBottom)
                 && !timerStarted)
             {
+                Game1.bottomReachedEffect.Play();
                 timerStarted = true;
                 timerStartedAt = gameTime.TotalGameTime;
             }
@@ -60,7 +61,10 @@ namespace Fall_Ball
             if (ballOneReachedBottom && ballTwoReachedBottom && !timerStopped)
             {
                 MediaPlayer.Stop();
-                Game1.endGameEffect.Play();
+                if (!levelLost)
+                {
+                    Game1.endGameEffect.Play();
+                }
                 timerStoppedAt = gameTime.TotalGameTime;
                 timerStopped = true;
             }
