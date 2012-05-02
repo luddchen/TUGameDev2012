@@ -29,8 +29,8 @@ namespace Fall_Ball
         int maxScrollBackDelay = 1000;
         int scrollBackDelay;
 
-        Color background = Color.DimGray;
-        Color foreground;
+        Color background = Color.LightGray;
+        Color foreground = Color.White;
 
         int screenWidth;
         int screenHeight;
@@ -73,7 +73,7 @@ namespace Fall_Ball
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
 
-            foreground = new Color(255 - background.R, 255 - background.G, 255 - background.B);
+            //foreground = new Color(255 - background.R, 255 - background.G, 255 - background.B);
             overlay = new Overlay(this, foreground);
             Components.Add(overlay);
         }
@@ -184,6 +184,7 @@ namespace Fall_Ball
             if (keyboard.IsKeyDown(Keys.R))
             {
                 //audioEngine.Update();
+                offset.Y = 0;
                 stopBackgroundmusic();
                 restartGame();
             }
@@ -330,10 +331,20 @@ namespace Fall_Ball
                 offset.Y = (float)(screenHeight / 2 - (level.ball1.body.Position.Y + level.ball2.body.Position.Y) * drawScale / 2);
             }
 
-            Rectangle backgroundDest = new Rectangle(0, 0, screenWidth, screenHeight);
-            Rectangle backgroundSource = new Rectangle((int)offset.X, (int)offset.Y, (int)(textures[8].Width - offset.X), (int)(textures[8].Height - offset.Y));
+            // limit offset to level
+            if (-offset.Y < 0)
+            {
+                offset.Y = 0;
+            }
+            if (-(offset.Y - screenHeight) > level.size.Y *drawScale)
+            {
+                offset.Y = -((level.size.Y * drawScale) - screenHeight);
+            }
+            // draw backgound pic
+            Rectangle backgroundPicDest = new Rectangle(0, 0, (int) (level.size.X * drawScale), screenHeight);
+            Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 30, textures[8].Width, 400);
             spriteBatch.Begin();
-            spriteBatch.Draw(textures[8], backgroundDest, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
+            spriteBatch.Draw(textures[8], backgroundPicDest, backgroundPicSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
 
             // draw level
@@ -359,6 +370,7 @@ namespace Fall_Ball
                                             (int)(minimapOffset.Y - 2), 
                                             (int)(2 + screenWidth - minimapOffset.X), 
                                             (int)(2 + screenHeight - minimapOffset.Y));
+            Rectangle minimapSource = new Rectangle(0, 0, minimapDest.Width, minimapDest.Height);
             spriteBatch.Begin();
             spriteBatch.Draw(textures[0], minimapDest, null, foreground, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
@@ -367,7 +379,7 @@ namespace Fall_Ball
             minimapDest.Y += 1;
             minimapDest.Width -= 2;
             minimapDest.Height -= 2;
-            Rectangle minimapSource = new Rectangle(0, 0, minimapDest.Width, minimapDest.Height);
+
             spriteBatch.Begin();
             spriteBatch.Draw(textures[8], minimapDest, minimapSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
