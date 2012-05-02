@@ -65,7 +65,8 @@ namespace Fall_Ball
         public static SoundEffect collicionEffect; //collicion Effect
         public static SoundEffect bonusEffect; //get bonus point
         public static SoundEffect normalHitEffect; //hit the wall
-        public static SoundEffect endGameEffect; //hit the wall
+        public static SoundEffect endGameEffect; //end game
+        public static SoundEffect lostGameEffect; //score reached 0
 
         public Game1()
         {
@@ -146,6 +147,7 @@ namespace Fall_Ball
             bodyclickedEffect = Content.Load<SoundEffect>("Sounds/tong");
             bodyPlacedEffect = Content.Load<SoundEffect>("Sounds/click");
             endGameEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            lostGameEffect = Content.Load<SoundEffect>("Sounds/gameLost");
         }
 
         public void startBackgroundmusic()
@@ -185,6 +187,7 @@ namespace Fall_Ball
             if (keyboard.IsKeyDown(Keys.R))
             {
                 //audioEngine.Update();
+                overlay.CenterString = "";
                 offset.Y = 0;
                 stopBackgroundmusic();
                 restartGame();
@@ -360,7 +363,7 @@ namespace Fall_Ball
             }
             // draw backgound pic
             Rectangle backgroundPicDest = new Rectangle(0, 0, (int) (level.size.X * drawScale), screenHeight);
-            Console.WriteLine(zoomScale);
+            
             Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 10, textures[8].Width, (int) (300 * (1 / zoomScale)));
             spriteBatch.Begin();
             spriteBatch.Draw(textures[8], backgroundPicDest, backgroundPicSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);

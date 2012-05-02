@@ -21,6 +21,7 @@ namespace Fall_Ball
         protected bool ballTwoReachedBottom = false;
         protected bool timerStarted = false;
         protected bool timerStopped = false;
+        protected bool levelLost = false;
         protected Square bottomBorder;
         protected TimeSpan timerStartedAt;
         protected TimeSpan timerStoppedAt;
@@ -36,8 +37,9 @@ namespace Fall_Ball
         {
             int newScore = calculateScore(gameTime);
 
-            overlay.ButtomString = "Score: " + newScore;
-            overlay.ButtomString2 = "";
+            overlay.BottomCenterString = "Score: " + newScore;
+            overlay.BottomString = "";
+            overlay.BottomString2 = "";
 
             base.update(gameTime);
         }
@@ -75,10 +77,18 @@ namespace Fall_Ball
             {
                 TimeSpan timeDif = timerStoppedAt.Subtract(timerStartedAt);
                 newScore = score - timeDif.Seconds * 100 - timeDif.Milliseconds / 10;
+                overlay.CenterString = "Level Cleared!";
             }
 
-            if (newScore < 0)
+            if (newScore < 0 && !levelLost)
             {
+                levelLost = true;
+                MediaPlayer.Stop();
+                Game1.lostGameEffect.Play();
+                newScore = 0;
+            }
+            if(newScore < 0) {
+                overlay.CenterString = "Fail!";
                 newScore = 0;
             }
             return newScore;

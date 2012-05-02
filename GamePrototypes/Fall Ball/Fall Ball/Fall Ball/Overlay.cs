@@ -22,23 +22,26 @@ namespace Fall_Ball
         private SpriteBatch spriteBatch;
 
         // For font rendering
-        private int fontSpacing = 3;
+        private int fontSpacing = 4;
         private SpriteFont font;
         private SpriteFont smallFont;
 
         // Some strings and positioning data
-        string buttomString = "buttom text 1";
-        string buttomString2 = "buttom text 2";
+        string bottomCenterString = "center text";
+        string bottomString = "bottom text 1";
+        string bottomString2 = "bottom text 2";
         string centerString = "center text";
         string locatedString = "";
 
-        Vector2 buttomPos = new Vector2(0,0);
-        Vector2 buttomPos2 = new Vector2(0, 0);
+        Vector2 bottomCenterPos = new Vector2(0, 0);
+        Vector2 bottomPos = new Vector2(0,0);
+        Vector2 bottomPos2 = new Vector2(0, 0);
         Vector2 centerPos = new Vector2(0,0);
         Vector2 locatedPos = new Vector2(0, 0);
 
-        float buttomSize = 0.66f;
-        float buttomSize2 = 0.66f;
+        float bouttomCenterSize = 1f;
+        float bottomSize = 0.66f;
+        float bottomSize2 = 0.66f;
         float centerSize = 1.32f;
         float locatedSize = 1.0f;
 
@@ -65,10 +68,12 @@ namespace Fall_Ball
                 titleSafe = value;
                 centerPos.X = titleSafe.X + titleSafe.Width / 2;
                 centerPos.Y = titleSafe.Y + titleSafe.Height / 2;
-                buttomPos.X = titleSafe.X + titleSafe.Width / 3;
-                buttomPos.Y = titleSafe.Y + titleSafe.Height;
-                buttomPos2.X = titleSafe.X + titleSafe.Width * 2 / 3;
-                buttomPos2.Y = titleSafe.Y + titleSafe.Height;
+                bottomCenterPos.X = titleSafe.X + titleSafe.Width / 2;
+                bottomCenterPos.Y = titleSafe.Y + titleSafe.Height;
+                bottomPos.X = titleSafe.X + titleSafe.Width / 3;
+                bottomPos.Y = titleSafe.Y + titleSafe.Height;
+                bottomPos2.X = titleSafe.X + titleSafe.Width * 2 / 3;
+                bottomPos2.Y = titleSafe.Y + titleSafe.Height;
             }
         }
 
@@ -78,16 +83,22 @@ namespace Fall_Ball
             set { centerString = value; centerTimeout = maxTimer; }
         }
 
-        public String ButtomString
+        public String BottomCenterString
         {
-            get { return buttomString; }
-            set { buttomString = value; }
+            get { return bottomCenterString; }
+            set { bottomCenterString = value; }
         }
 
-        public String ButtomString2
+        public String BottomString
         {
-            get { return buttomString2; }
-            set { buttomString2 = value; }
+            get { return bottomString; }
+            set { bottomString = value; }
+        }
+
+        public String BottomString2
+        {
+            get { return bottomString2; }
+            set { bottomString2 = value; }
         }
 
         public string LocatedString
@@ -104,14 +115,14 @@ namespace Fall_Ball
 
         public float ButtomSize
         {
-            get { return buttomSize; }
-            set { buttomSize = value; }
+            get { return bottomSize; }
+            set { bottomSize = value; }
         }
 
         public float ButtomSize2
         {
-            get { return buttomSize2; }
-            set { buttomSize2 = value; }
+            get { return bottomSize2; }
+            set { bottomSize2 = value; }
         }
 
         public float LocatedSize
@@ -192,11 +203,14 @@ namespace Fall_Ball
         {
             spriteBatch.Begin();
 
-            spriteBatch.DrawString(font, buttomString, buttomPos, foreground,
-                0, font.MeasureString(buttomString), buttomSize, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, bottomCenterString, bottomCenterPos, foreground,
+                0, font.MeasureString(bottomCenterString), bouttomCenterSize, SpriteEffects.None, 0.5f);
 
-            spriteBatch.DrawString(font, buttomString2, buttomPos2, foreground,
-                0, font.MeasureString(buttomString2), buttomSize2, SpriteEffects.None, 0.5f);
+            spriteBatch.DrawString(font, bottomString, bottomPos, foreground,
+                0, font.MeasureString(bottomString), bottomSize, SpriteEffects.None, 0.5f);
+
+            spriteBatch.DrawString(font, bottomString2, bottomPos2, foreground,
+                0, font.MeasureString(bottomString2), bottomSize2, SpriteEffects.None, 0.5f);
 
             spriteBatch.DrawString(font, centerString, centerPos + font.MeasureString(centerString) / 2, foregroundAlpha,
                 0, font.MeasureString(centerString), centerSize, SpriteEffects.None, 0.5f);

@@ -35,7 +35,7 @@ sind.
     Style steuert den Stil der Schriftart. Gültige Einträge sind "Normal", "Fett", "Kursiv"
     und "Fett, Kursiv", dabei muss die Groß- und Kleinschreibung beachtet werden.
     -->
-    <Style>Regular</Style>
+    <Style>Bold</Style>
 
     <!--
     Wenn Sie den Kommentar von dieser Zeile entfernen, wird das Standardzeichen ersetzt, wenn Sie zeichnen
