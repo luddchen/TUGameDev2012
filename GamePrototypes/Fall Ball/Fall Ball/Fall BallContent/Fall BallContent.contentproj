@@ -130,6 +130,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Sounds\savanna-stomp-groove.mp3">
+      <Name>savanna-stomp-groove</Name>
+      <Importer>Mp3Importer</Importer>
+      <Processor>SongProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Sounds\engine_2.wav">
       <Name>engine_2</Name>
       <Importer>WavImporter</Importer>

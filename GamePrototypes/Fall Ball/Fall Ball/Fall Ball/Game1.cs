@@ -57,8 +57,7 @@ namespace Fall_Ball
         public bool startFallingBalls = false;
 
         //sound effects
-        SoundEffect backgroundEngine; //background Music
-        SoundEffectInstance backgroundEngineInstance;
+        Song backgroundMusic; //background Music
 
         public SoundEffect bodyclickedEffect; //body click
         public SoundEffect collicionEffect; //collicion Effect
@@ -138,8 +137,9 @@ namespace Fall_Ball
             //}
 
             //sound effect
-            backgroundEngine = Content.Load<SoundEffect>("Sounds/engine_2");
-            backgroundEngineInstance = backgroundEngine.CreateInstance();
+            backgroundMusic = Content.Load<Song>("Sounds/savanna-stomp-groove");
+            MediaPlayer.Play(backgroundMusic);
+            MediaPlayer.IsRepeating = true;
 
             normalHitEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
             collicionEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
@@ -162,10 +162,6 @@ namespace Fall_Ball
             //soundEngineInstance.Volume = 0.25f;
             //soundEngineInstance.IsLooped = true;
             //soundEngineInstance.Play();
-
-            backgroundEngineInstance.Volume = 1.0f;
-            //backgroundEngineInstance.IsLooped = true;
-            backgroundEngineInstance.Play();
 
             if (gamepad.Buttons.Back == ButtonState.Pressed ||
                 keyboard.IsKeyDown(Keys.Escape))
