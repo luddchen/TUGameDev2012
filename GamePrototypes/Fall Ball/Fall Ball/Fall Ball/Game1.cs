@@ -59,10 +59,12 @@ namespace Fall_Ball
         //sound effects
         Song backgroundMusic; //background Music
 
-        public SoundEffect bodyclickedEffect; //body click
-        public SoundEffect collicionEffect; //collicion Effect
-        public SoundEffect bonusEffect; //get bonus point
-        public SoundEffect normalHitEffect; //hit the wall
+        public static SoundEffect bodyclickedEffect; //body click
+        public static SoundEffect bodyPlacedEffect; // body placed
+        public static SoundEffect collicionEffect; //collicion Effect
+        public static SoundEffect bonusEffect; //get bonus point
+        public static SoundEffect normalHitEffect; //hit the wall
+        public static SoundEffect endGameEffect; //hit the wall
 
         public Game1()
         {
@@ -136,15 +138,26 @@ namespace Fall_Ball
             //    level.addObjects.remove(cursor);
             //}
 
+            normalHitEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            collicionEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            bonusEffect = Content.Load<SoundEffect>("Sounds/bonus");
+            bodyclickedEffect = Content.Load<SoundEffect>("Sounds/tong");
+            bodyPlacedEffect = Content.Load<SoundEffect>("Sounds/click");
+            endGameEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+        }
+
+        public void startBackgroundmusic()
+        {
             //sound effect
             backgroundMusic = Content.Load<Song>("Sounds/savanna-stomp-groove");
             MediaPlayer.Play(backgroundMusic);
             MediaPlayer.IsRepeating = true;
+        }
 
-            normalHitEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
-            collicionEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
-            bonusEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
-            bodyclickedEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+        private void stopBackgroundmusic()
+        {
+            //sound effect
+            MediaPlayer.Stop();
         }
 
 
@@ -170,12 +183,14 @@ namespace Fall_Ball
             if (keyboard.IsKeyDown(Keys.R))
             {
                 //audioEngine.Update();
+                stopBackgroundmusic();
                 restartGame();
             }
 
             if (keyboard.IsKeyDown(Keys.Space))
             {
                 startFallingBalls = true;
+                startBackgroundmusic();
                 level.enableFallingBalls();
             }
 
@@ -281,6 +296,7 @@ namespace Fall_Ball
                     movingObject.body.Awake = true;
                     level.gamefield.add(movingObject);
                     movingObject = null;
+                    bodyPlacedEffect.Play();
                 }
             }
 

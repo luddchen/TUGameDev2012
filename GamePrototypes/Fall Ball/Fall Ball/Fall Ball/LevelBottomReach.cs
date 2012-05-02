@@ -5,6 +5,9 @@ using System.Text;
 using Microsoft.Xna.Framework.Graphics;
 using Fall_Ball.Objects;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 
 // author: Thomas
 
@@ -12,8 +15,7 @@ namespace Fall_Ball
 {
     abstract class LevelBottomReach : Level
     {
-        static protected int initialScore = 500;
-        protected int score = initialScore;
+        protected int score = 500;
         protected int bonusItemScore = 200;
         protected bool ballOneReachedBottom = false;
         protected bool ballTwoReachedBottom = false;
@@ -22,6 +24,7 @@ namespace Fall_Ball
         protected Square bottomBorder;
         protected TimeSpan timerStartedAt;
         protected TimeSpan timerStoppedAt;
+
 
         public LevelBottomReach(List<Texture2D> textures, SpriteBatch batch)
             : base(textures, batch)
@@ -54,6 +57,8 @@ namespace Fall_Ball
             // hold timer after both balls reached the bottom
             if (ballOneReachedBottom && ballTwoReachedBottom && !timerStopped)
             {
+                MediaPlayer.Stop();
+                Game1.endGameEffect.Play();
                 timerStoppedAt = gameTime.TotalGameTime;
                 timerStopped = true;
             }

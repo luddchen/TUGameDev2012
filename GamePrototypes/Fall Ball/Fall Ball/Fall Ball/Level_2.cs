@@ -107,6 +107,7 @@ namespace Fall_Ball
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            bool bonusHit = false;
             // test collision bottom border with ball1
             if ((f1.Body == bottomBorder.body && f2.Body == ball1.body) || (f1.Body == ball1.body && f2.Body == bottomBorder.body)
                 && ballOneReachedBottom == false)
@@ -134,18 +135,20 @@ namespace Fall_Ball
                     if (overlay != null && obj.body.BodyType == BodyType.Static) overlay.CenterString = "Bonus";
                     score += bonusItemScore;
                     removeBonusItems.Add(obj);
+                    bonusHit = true;
                 }
             }
             // remove collected bonus items
             foreach (GameObject obj in removeBonusItems)
             {
+                Game1.bonusEffect.Play();
                 world.RemoveBody(obj.body);
                 gamefield.remove(obj);
                 removeFromMyOnCollision(obj);
                 bonusScore.Remove(score);
                 bonus.Remove(obj);
             }
-            return true;
+            return !bonusHit;
         }
 
         public override void update(GameTime gameTime)
