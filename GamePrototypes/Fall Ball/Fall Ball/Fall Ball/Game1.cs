@@ -360,7 +360,8 @@ namespace Fall_Ball
             }
             // draw backgound pic
             Rectangle backgroundPicDest = new Rectangle(0, 0, (int) (level.size.X * drawScale), screenHeight);
-            Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 10, textures[8].Width, 400);
+            Console.WriteLine(zoomScale);
+            Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 10, textures[8].Width, (int) (300 * (1 / zoomScale)));
             spriteBatch.Begin();
             spriteBatch.Draw(textures[8], backgroundPicDest, backgroundPicSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
