@@ -260,7 +260,7 @@ namespace Fall_Ball
                                 fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
                                 fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
                                 this.level.world.AddJoint(fixedMouseJoint);
-
+                                movingObject.color = Color.DarkCyan;
                                 Console.WriteLine("Body Clicked " + movingObject.body.Position);
                                 bodyclickedEffect.Play();
                                 break;
@@ -280,7 +280,7 @@ namespace Fall_Ball
                                 fixedMouseJoint = new FixedMouseJoint(movingObject.body, pos);
                                 fixedMouseJoint.MaxForce = 1000.0f * movingObject.body.Mass;
                                 this.level.world.AddJoint(fixedMouseJoint);
-
+                                movingObject.color = Color.DarkCyan;
                                 Console.WriteLine("Body Clicked " + movingObject.body.Position);
                                 bodyclickedEffect.Play();
                                 break;
@@ -293,6 +293,7 @@ namespace Fall_Ball
                 {
                     this.level.world.RemoveJoint(fixedMouseJoint);
                     fixedMouseJoint = null;
+                    movingObject.color = Color.Blue;
                     movingObject.body.BodyType = BodyType.Static;
                     movingObject.body.CollidesWith = Category.All;
                     movingObject.body.Awake = true;
@@ -342,7 +343,7 @@ namespace Fall_Ball
             }
             // draw backgound pic
             Rectangle backgroundPicDest = new Rectangle(0, 0, (int) (level.size.X * drawScale), screenHeight);
-            Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 30, textures[8].Width, 400);
+            Rectangle backgroundPicSource = new Rectangle((int)offset.X, (int) -offset.Y / 10, textures[8].Width, 400);
             spriteBatch.Begin();
             spriteBatch.Draw(textures[8], backgroundPicDest, backgroundPicSource, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 0f);
             spriteBatch.End();
