@@ -138,13 +138,13 @@ namespace Fall_Ball
             //}
 
             //sound effect
-            backgroundEngine = Content.Load<SoundEffect>("engine_2");
+            backgroundEngine = Content.Load<SoundEffect>("Sounds/engine_2");
             backgroundEngineInstance = backgroundEngine.CreateInstance();
 
-            normalHitEffect = Content.Load<SoundEffect>("hyperspace_activate");
-            collicionEffect = Content.Load<SoundEffect>("hyperspace_activate");
-            bonusEffect = Content.Load<SoundEffect>("hyperspace_activate");
-            bodyclickedEffect = Content.Load<SoundEffect>("hyperspace_activate");
+            normalHitEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            collicionEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            bonusEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
+            bodyclickedEffect = Content.Load<SoundEffect>("Sounds/hyperspace_activate");
         }
 
 
