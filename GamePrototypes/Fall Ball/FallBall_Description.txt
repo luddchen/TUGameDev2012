@@ -1,0 +1,34 @@
+--------------------------------------------------------------------------------
+*                                                                              *
+*                               * Fall Ball *                                  *
+*                                                                              *
+*                                                                              *
+*                            Group 3: o Christopher Sierigk                    *
+*                                     o Eeva Erkko                             *
+*                                     o Ludwig Ringler                         *
+*                                     o Thomas Weber                           *
+*                                     o Xi Wang                                *
+*                                                                              *
+*                            Date: 03. May 2012                                *
+--------------------------------------------------------------------------------
+
+
+
+1. GAMEPLAY:
+
+In Fall Ball are two balls falling from the top of the level to the bottom. 
+Your goal is to manage, that both balls reach the bottom at the same time. To 
+archieve this, you can place given stones in the level and then activate the 
+falling balls with 'space'. If both balls hit the ground before the score 
+runs to 0, you've won the level.
+
+There is also a bonus item in the level. When you collect this item with one 
+ball, you gain a bonus score.
+
+2. CONTROLS:
+
+o Left-Mouse-Button:  select and place stone
+o Right-Mouse-Button: rotate stones
+o Mousewheel:         scroll upwards/downwards
+o 'space'-key:        activate balls
+o 'r'-key:            start new game
