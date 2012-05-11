@@ -11,9 +11,7 @@ using Microsoft.Xna.Framework.Storage;
 
 namespace Robuddies
 {
-    /// <summary>
-    /// game component for a simple text overlay 
-    /// </summary>
+
     public class Overlay : DrawableGameComponent
     {
         #region Fields and Properties
@@ -21,12 +19,10 @@ namespace Robuddies
         private ContentManager content;
         private SpriteBatch spriteBatch;
 
-        // For font rendering
         private int fontSpacing = 4;
         private SpriteFont font;
         private SpriteFont smallFont;
 
-        // Some strings and positioning data
         string bottomCenterString = "RoBuddies prototyp";
 
         Vector2 bottomCenterPos = new Vector2(0, 0);
@@ -37,11 +33,7 @@ namespace Robuddies
 
         Color foreground;
 
-        // for detecting the visible region on the xbox 360 (this is set from Sandbox.cs)
         Rectangle titleSafe;
-        /// <summary>
-        /// The title safe rectangle used for both the game and the text overlay
-        /// </summary>
         public Rectangle TitleSafe
         {
             get { return titleSafe; }

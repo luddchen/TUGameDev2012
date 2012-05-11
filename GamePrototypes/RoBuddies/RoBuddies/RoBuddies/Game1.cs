@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using Robuddies.Objects;
 
 namespace Robuddies
 {
@@ -17,6 +18,14 @@ namespace Robuddies
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Overlay overlay;
+        Level level;
+
+        Rectangle titleSafe;
+        public Rectangle TitleSafe
+        {
+            get { return titleSafe; }
+            set { titleSafe = value; }
+        }
 
         public Game1()
         {
@@ -27,11 +36,19 @@ namespace Robuddies
 
             overlay = new Overlay(this);
             Components.Add(overlay);
+
+            level = new Level_1(this);
+
         }
 
 
         void Window_ClientSizeChanged(object sender, EventArgs e) {
-            overlay.TitleSafe = new Rectangle(graphics.GraphicsDevice.Viewport.X, graphics.GraphicsDevice.Viewport.Y, graphics.GraphicsDevice.Viewport.Width, graphics.GraphicsDevice.Viewport.Height);
+            titleSafe.X = graphics.GraphicsDevice.Viewport.X;
+            titleSafe.Y = graphics.GraphicsDevice.Viewport.Y;
+            titleSafe.Width = graphics.GraphicsDevice.Viewport.Width;
+            titleSafe.Height = graphics.GraphicsDevice.Viewport.Height;
+            overlay.TitleSafe = titleSafe;
+            level.TitleSafe = titleSafe;
         }
 
 
@@ -44,7 +61,7 @@ namespace Robuddies
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
+            level.LoadContent();
             Window_ClientSizeChanged(null, null);
         }
 
@@ -59,6 +76,14 @@ namespace Robuddies
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) )
                 this.Exit();
 
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            {
+                level.Offset -= 2;
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            {
+                level.Offset += 2;
+            }
             base.Update(gameTime);
         }
 
@@ -66,7 +91,7 @@ namespace Robuddies
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
+            level.Draw(gameTime);
             base.Draw(gameTime);
         }
     }
