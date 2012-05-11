@@ -16,18 +16,30 @@ namespace Robuddies.Objects
 
         Game game;
 
+        float scrollSpeed;
         float layerDepth;
-        public float LayerDepth
+
+        /// <summary>
+        /// Depth or Z-Coord of this Layer 
+        /// float  in [0.0 .. 1.0]
+        /// 1.0 == far away
+        /// 0.5 == mainLayer where bud, budi and bro live
+        /// 0.0 == in front of mainLayer
+        /// </summary>
+        public float Depth
         {
             get { return layerDepth; }
-            set { layerDepth = value; }
+            set { 
+                layerDepth = value;
+                scrollSpeed = (float)( 256.0d / Math.Pow(value*32.0d, 2.0d) );
+            }
         }
 
         float offset;
         public float Offset
         {
             get { return offset; }
-            set { offset = value/layerDepth; }
+            set { offset = value * scrollSpeed; }
         }
 
         private SpriteBatch spriteBatch;
@@ -67,19 +79,18 @@ namespace Robuddies.Objects
 
         #region Rendering
 
-        public void Draw(GameTime gameTime)
+        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin();
 
             Rectangle dest = new Rectangle();
             foreach (GameObject obj in objects)
             {
-                dest.X = (int)(titleSafe.Width/2 + obj.Position.X - offset); dest.Y = (int)(titleSafe.Height - (obj.Position.Y + 20));
+                float xPos = (float)titleSafe.Width / 2.0f + obj.Position.X - offset;
+                dest.X = (int)(xPos); dest.Y = (int)((float)titleSafe.Height - (obj.Position.Y + 20));
                 dest.Width = (int)obj.Width; dest.Height = (int)obj.Height;
                 spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.Origin, SpriteEffects.None, layerDepth);
-                //Console.Out.WriteLine("X="+dest.X+" Y="+dest.Y+" width="+dest.Width+" height="+dest.Height);
             }
-            spriteBatch.End();
+
         }
 
         #endregion
