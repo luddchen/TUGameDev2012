@@ -11,8 +11,18 @@ namespace Robuddies.Objects
         #region Fields and Properties
 
         public List<GameObject> objects;
-        public void add(GameObject obj) { objects.Add(obj); }
-        public void remove(GameObject obj) { objects.Remove(obj); }
+        public List<AnimatedObject> animatedObjects;
+
+        public void add(GameObject obj) 
+        { 
+            objects.Add(obj);
+            if (obj is AnimatedObject) animatedObjects.Add((AnimatedObject)obj);
+        }
+        public void remove(GameObject obj) 
+        { 
+            objects.Remove(obj);
+            if (obj is AnimatedObject) animatedObjects.Remove((AnimatedObject)obj);
+        }
 
         float scrollSpeed;
         float layerDepth;
@@ -54,6 +64,7 @@ namespace Robuddies.Objects
         public Layer()
         {
             objects = new List<GameObject>();
+            animatedObjects = new List<AnimatedObject>();
         }
 
         public void LoadContent(){}
@@ -64,7 +75,10 @@ namespace Robuddies.Objects
 
         #region Update
 
-        public void Update(GameTime gameTime) { }
+        public void Update(GameTime gameTime) 
+        {
+            foreach (AnimatedObject obj in animatedObjects) { obj.Update(gameTime); }
+        }
 
         #endregion
 
@@ -79,7 +93,7 @@ namespace Robuddies.Objects
                 float xPos = (float)titleSafe.Width / 2.0f + obj.Position.X - offset;
                 dest.X = (int)(xPos); dest.Y = (int)((float)titleSafe.Height - (obj.Position.Y + 20));
                 dest.Width = (int)obj.Width; dest.Height = (int)obj.Height;
-                spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.Origin, SpriteEffects.None, layerDepth);
+                spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.Origin, obj.effects, layerDepth);
             }
 
         }

@@ -6,7 +6,7 @@ namespace Robuddies.Objects
 {
     class GameObject
     {
-        Texture2D texture;
+        public Texture2D texture;
         public Texture2D Texture
         {
             get { return texture; }
@@ -65,6 +65,8 @@ namespace Robuddies.Objects
             set { rotation = value; }
         }
 
+        public SpriteEffects effects;
+
         public GameObject() 
         {
             position = new Vector2();
@@ -72,6 +74,7 @@ namespace Robuddies.Objects
             rotation = 0;
             origin = new Vector2();
             color = Color.White;
+            effects = SpriteEffects.None;
         }
 
         public GameObject(Texture2D tex, Vector2 pos)
@@ -81,6 +84,7 @@ namespace Robuddies.Objects
             rotation = 0;
             origin = new Vector2();
             color = Color.White;
+            effects = SpriteEffects.None;
             Texture = tex;
         }
 

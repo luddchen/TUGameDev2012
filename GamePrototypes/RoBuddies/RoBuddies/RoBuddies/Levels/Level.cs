@@ -74,14 +74,13 @@ namespace Robuddies.Levels
 
             Texture2D budTex = game.Content.Load<Texture2D>("Sprites\\Bud");
             Texture2D budiTex = game.Content.Load<Texture2D>("Sprites\\Budi");
-            Texture2D budBudiTex = game.Content.Load<Texture2D>("Sprites\\BudAndBudi");
 
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
             Bud = new GameObject(budTex, new Vector2(TitleSafe.Width / 2, (budTex.Height / 2) * 0.15f)); Bud.Size *= 0.15f;
             Budi = new GameObject(budiTex, new Vector2(TitleSafe.Width / 2, (budTex.Height + budiTex.Height) * 0.15f)); Budi.Size *= 0.15f;
-            BudBudi = new GameObject(budBudiTex, new Vector2(TitleSafe.Width / 2, (budBudiTex.Height / 2) * 0.15f)); BudBudi.Size *= 0.15f;
+            BudBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); BudBudi.Size *= 0.3f;
             mainLayer.add(BudBudi);
 
             layers.Add(mainLayer);
@@ -102,6 +101,8 @@ namespace Robuddies.Levels
         {
             // only for testing seperation
             seperationDelay--;
+            Offset = BudBudi.Position.X;
+            mainLayer.Update(gameTime);
         }
 
         public void Draw(GameTime gameTime)

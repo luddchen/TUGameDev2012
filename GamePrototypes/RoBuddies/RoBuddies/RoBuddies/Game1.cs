@@ -79,12 +79,38 @@ namespace Robuddies
 
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                level.Offset -= 2;
+                if (((BudBudi)level.BudBudi).state == BudBudi.State.Waiting)
+                {
+                    ((BudBudi)level.BudBudi).setState(BudBudi.State.StartWalking);
+                    ((BudBudi)level.BudBudi).WalkDirection = -1; ;
+                }
             }
+
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                level.Offset += 2;
+            { 
+                if (((BudBudi)level.BudBudi).state == BudBudi.State.Waiting)
+                {
+                    ((BudBudi)level.BudBudi).setState(BudBudi.State.StartWalking);
+                    ((BudBudi)level.BudBudi).WalkDirection = 1; ;
+                }
             }
+
+            if (!Keyboard.GetState().IsKeyDown(Keys.Right) && ((BudBudi)level.BudBudi).WalkDirection == 1)
+            {
+                if (((BudBudi)level.BudBudi).state == BudBudi.State.Walking)
+                {
+                    ((BudBudi)level.BudBudi).setState(BudBudi.State.StopWalking);
+                }
+            }
+
+            if (!Keyboard.GetState().IsKeyDown(Keys.Left) && ((BudBudi)level.BudBudi).WalkDirection == -1)
+            {
+                if (((BudBudi)level.BudBudi).state == BudBudi.State.Walking)
+                {
+                    ((BudBudi)level.BudBudi).setState(BudBudi.State.StopWalking);
+                }
+            }
+
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 level.seperate();
