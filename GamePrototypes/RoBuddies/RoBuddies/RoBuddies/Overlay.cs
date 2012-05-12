@@ -23,7 +23,7 @@ namespace Robuddies
         private SpriteFont font;
         private SpriteFont smallFont;
 
-        string bottomCenterString = "RoBuddies prototyp";
+        string bottomCenterString = "(s) to seperate Bud and Budi";
 
         Vector2 bottomCenterPos = new Vector2(0, 0);
 

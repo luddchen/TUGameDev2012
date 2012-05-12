@@ -102,11 +102,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Bro.png">
-      <Name>Bro</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
     <Compile Include="Sprites\Bud.png">
       <Name>Bud</Name>
       <Importer>TextureImporter</Importer>
@@ -119,18 +114,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Bro2.png">
-      <Name>Bro2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Bud2.png">
-      <Name>Bud2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Budi2.png">
-      <Name>Budi2</Name>
+    <Compile Include="Sprites\BudAndBudi.png">
+      <Name>BudAndBudi</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

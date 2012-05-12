@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Robuddies.Objects;
+using Robuddies.Levels;
 
 namespace Robuddies
 {
@@ -84,6 +85,11 @@ namespace Robuddies
             {
                 level.Offset += 2;
             }
+            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            {
+                level.seperate();
+            }
+            level.Update(gameTime);
             base.Update(gameTime);
         }
 

@@ -14,8 +14,6 @@ namespace Robuddies.Objects
         public void add(GameObject obj) { objects.Add(obj); }
         public void remove(GameObject obj) { objects.Remove(obj); }
 
-        Game game;
-
         float scrollSpeed;
         float layerDepth;
 
@@ -42,8 +40,6 @@ namespace Robuddies.Objects
             set { offset = value * scrollSpeed; }
         }
 
-        private SpriteBatch spriteBatch;
-
         Rectangle titleSafe;
         public Rectangle TitleSafe
         {
@@ -55,17 +51,12 @@ namespace Robuddies.Objects
 
         #region Construction and Initialization
 
-        public Layer(Game game)
+        public Layer()
         {
             objects = new List<GameObject>();
-            this.game = game;
         }
 
-        public void LoadContent()
-        {
-            spriteBatch = new SpriteBatch(game.GraphicsDevice);
-        }
-
+        public void LoadContent(){}
 
         public void UnloadContent() { objects.Clear();  }
 
