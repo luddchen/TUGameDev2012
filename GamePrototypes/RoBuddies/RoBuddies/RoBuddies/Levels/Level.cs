@@ -78,7 +78,7 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            Bud = new GameObject(budTex, new Vector2(TitleSafe.Width / 2, (budTex.Height / 2) * 0.15f)); Bud.Size *= 0.15f;
+            Bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); Bud.Size *= 0.3f;
             Budi = new GameObject(budiTex, new Vector2(TitleSafe.Width / 2, (budTex.Height + budiTex.Height) * 0.15f)); Budi.Size *= 0.15f;
             BudBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); BudBudi.Size *= 0.3f;
             mainLayer.add(BudBudi);
@@ -101,7 +101,8 @@ namespace Robuddies.Levels
         {
             // only for testing seperation
             seperationDelay--;
-            Offset = BudBudi.Position.X;
+            if (!seperated) { Offset = BudBudi.Position.X; }
+            if (seperated) { Offset = Bud.Position.X; }
             mainLayer.Update(gameTime);
         }
 
