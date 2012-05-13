@@ -12,8 +12,8 @@ namespace Robuddies.Objects
             get { return texture; }
             set { 
                 texture = value;
-                origin.X = Width / 2;
-                origin.Y = Height / 2;
+                origin.X = texture.Width / 2;
+                origin.Y = texture.Height / 2;
             }
         }
 

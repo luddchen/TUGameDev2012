@@ -89,16 +89,16 @@ namespace Robuddies
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (obj.state == BudBudi.State.Waiting)
+                if (obj.state == AnimatedObject.State.Waiting)
                 {
                     obj.state = AnimatedObject.State.StartWalking;
-                    obj.DirectionX = 1; ;
+                    obj.DirectionX = 1;
                 }
             }
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Right) && obj.DirectionX == 1)
             {
-                if (obj.state == BudBudi.State.Walking)
+                if (obj.state == AnimatedObject.State.Walking)
                 {
                     obj.state = AnimatedObject.State.StopWalking;
                 }
@@ -106,9 +106,19 @@ namespace Robuddies
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Left) && obj.DirectionX == -1)
             {
-                if (obj.state == BudBudi.State.Walking)
+                if (obj.state == AnimatedObject.State.Walking)
                 {
                     obj.state = AnimatedObject.State.StopWalking;
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            {
+                if ((obj.state != AnimatedObject.State.Jumping) && (obj.state != AnimatedObject.State.StartJumping) && (obj.state != AnimatedObject.State.StopJumping))
+                {
+                    obj.state = AnimatedObject.State.StartJumping;
+                    if (level.seperated) { obj.DirectionY = 3.5f; }
+                    if (!level.seperated) { obj.DirectionY = 2.5f; }
                 }
             }
 
