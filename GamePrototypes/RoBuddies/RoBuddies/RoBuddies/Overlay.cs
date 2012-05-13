@@ -23,9 +23,28 @@ namespace Robuddies
         private SpriteFont font;
         private SpriteFont smallFont;
 
-        string bottomCenterString = "(s) to seperate  (space) to jump";
+        Color menuBackColor = new Color(0, 0, 128, 128);
+        Color menuBackColor2 = new Color(128, 128, 128, 128);
+        Texture2D menuTex;
+        Vector2 menuOrigin;
+        bool menuVisible = false;
+        int menuDelay = 0;
+        public void SwitchMenu()
+        {
+            if (menuDelay == 0)
+            {
+                menuVisible = !menuVisible;
+                menuDelay = 10;
+            }
+        }
 
-        Vector2 bottomCenterPos = new Vector2(0, 0);
+        string menuString = " (space) : jump \n (s) : seperate \n (q) : quit \n (1) - (6) : choose level \n (escape) : this menu";
+        Vector2 menuStringPos = new Vector2();
+        float menuStringSize = 1.0f;
+
+        string bottomCenterString = "(escape) : menu ";
+
+        Vector2 bottomCenterPos = new Vector2();
 
         float bouttomCenterSize = 0.5f;
 
@@ -34,6 +53,8 @@ namespace Robuddies
         Color foreground;
 
         Rectangle titleSafe;
+        Rectangle menuSafe = new Rectangle();
+        Rectangle menuSafe2 = new Rectangle();
         public Rectangle TitleSafe
         {
             get { return titleSafe; }
@@ -42,6 +63,16 @@ namespace Robuddies
                 titleSafe = value;
                 bottomCenterPos.X = titleSafe.X + titleSafe.Width / 2;
                 bottomCenterPos.Y = titleSafe.Y + titleSafe.Height;
+                menuSafe.X = titleSafe.Width / 2;
+                menuSafe.Y = titleSafe.Height / 2;
+                menuSafe.Width = (int)(titleSafe.Width * 0.8f);
+                menuSafe.Height = (int)(titleSafe.Height * 0.8f);
+                menuSafe2.X = titleSafe.Width / 2;
+                menuSafe2.Y = titleSafe.Height / 2;
+                menuSafe2.Width = (int)(titleSafe.Width * 0.8f + 8);
+                menuSafe2.Height = (int)(titleSafe.Height * 0.8f + 8);
+                menuStringPos.X = titleSafe.Width / 2;
+                menuStringPos.Y = titleSafe.Height / 2;
             }
         }
 
@@ -71,6 +102,8 @@ namespace Robuddies
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            menuTex = content.Load<Texture2D>("Sprites\\Square");
+            menuOrigin = new Vector2(menuTex.Width/2, menuTex.Height/2);
 
             font = content.Load<SpriteFont>("Fonts\\Font");
             font.Spacing = fontSpacing;
@@ -87,7 +120,10 @@ namespace Robuddies
 
         #region Update
 
-        public override void Update(GameTime gameTime) { }
+        public override void Update(GameTime gameTime) 
+        {
+            if (menuDelay > 0) { menuDelay--; }
+        }
 
         #endregion
 
@@ -96,9 +132,17 @@ namespace Robuddies
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
+            if (menuVisible)
+            {
+                spriteBatch.Draw(menuTex, menuSafe2, null, menuBackColor2, 0, menuOrigin, SpriteEffects.None, 0.0f);
+                spriteBatch.Draw(menuTex, menuSafe, null, menuBackColor, 0, menuOrigin, SpriteEffects.None, 0.0f); 
+                spriteBatch.DrawString(font, menuString, menuStringPos, foreground,
+                                        0, font.MeasureString(menuString)/2, menuStringSize, SpriteEffects.None, 0.0f);
+            }
+
 
             spriteBatch.DrawString(font, bottomCenterString, bottomCenterPos, foreground,
-                0, font.MeasureString(bottomCenterString), bouttomCenterSize, SpriteEffects.None, 0.5f);
+                0, font.MeasureString(bottomCenterString), bouttomCenterSize, SpriteEffects.None, 0.0f);
 
             spriteBatch.End();
         }
