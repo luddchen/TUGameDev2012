@@ -27,13 +27,13 @@ namespace Robuddies
         Color menuBackColor2 = new Color(128, 128, 128, 128);
         Texture2D menuTex;
         Vector2 menuOrigin;
-        bool menuVisible = false;
+        bool IsMenuVisible = false;
         int menuDelay = 0;
-        public void SwitchMenu()
+        public void SwitchMenuVisible()
         {
             if (menuDelay == 0)
             {
-                menuVisible = !menuVisible;
+                IsMenuVisible = !IsMenuVisible;
                 menuDelay = 10;
             }
         }
@@ -132,7 +132,7 @@ namespace Robuddies
         public override void Draw(GameTime gameTime)
         {
             spriteBatch.Begin();
-            if (menuVisible)
+            if (IsMenuVisible)
             {
                 spriteBatch.Draw(menuTex, menuSafe2, null, menuBackColor2, 0, menuOrigin, SpriteEffects.None, 0.0f);
                 spriteBatch.Draw(menuTex, menuSafe, null, menuBackColor, 0, menuOrigin, SpriteEffects.None, 0.0f); 

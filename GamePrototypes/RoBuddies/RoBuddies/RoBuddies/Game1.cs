@@ -74,7 +74,7 @@ namespace Robuddies
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) )
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Q) )
                 this.Exit();
 
             AnimatedObject obj = (AnimatedObject)level.ControledObject;
@@ -125,6 +125,11 @@ namespace Robuddies
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
                 level.seperate();
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                overlay.SwitchMenuVisible();
             }
 
             levelChooser();
