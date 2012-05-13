@@ -11,6 +11,7 @@ namespace Robuddies.Levels
 
         public List<Layer> layers;
 
+        public Layer backgroundLayer;
         public Layer mainLayer;
         public GameObject Bud;
         public GameObject Budi;
@@ -18,6 +19,8 @@ namespace Robuddies.Levels
         public GameObject BudBudi;
 
         public GameObject ControledObject;
+
+        public Color backgroundColor;
 
         public bool seperated;
         int seperationDelay = 0;
@@ -70,19 +73,22 @@ namespace Robuddies.Levels
             this.game = game;
             layers = new List<Layer>();
             seperated = false;
+            offset = 0;
+            backgroundColor = Color.Black;
         }
 
         public virtual void LoadContent()
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-            Texture2D budiTex = game.Content.Load<Texture2D>("Sprites\\Budi");
+            backgroundLayer = new BackgroundLayer();
+            layers.Add( backgroundLayer );
 
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
             Bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); Bud.Size *= 0.3f;
-            Budi = new GameObject(budiTex, new Vector2(TitleSafe.Width / 2, 200)); Budi.Size *= 0.15f;
+            Budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); Budi.Size *= 0.3f;
             BudBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); BudBudi.Size *= 0.3f;
             mainLayer.add(BudBudi);
             ControledObject = BudBudi;
@@ -103,7 +109,7 @@ namespace Robuddies.Levels
 
         public void Update(GameTime gameTime)
         {
-            // only for testing seperation
+            // todo
             seperationDelay--;
             if (!seperated) { Offset = BudBudi.Position.X; }
             if (seperated) { Offset = Bud.Position.X; }

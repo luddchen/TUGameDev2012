@@ -12,5 +12,11 @@ namespace Robuddies.Levels
             : base(game)
         {
         }
+
+        public override void LoadContent()
+        {
+            base.LoadContent();
+            backgroundColor = Color.LightGreen;
+        }
     }
 }

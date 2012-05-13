@@ -40,6 +40,7 @@ namespace Robuddies.Objects
             set { 
                 layerDepth = value;
                 scrollSpeed = (float)( 256.0d / Math.Pow(value*32.0d, 2.0d) );
+                if (value >= 0.9f) { scrollSpeed = (float)(Math.Pow(scrollSpeed,4d) * 16d); }
             }
         }
 
@@ -84,7 +85,7 @@ namespace Robuddies.Objects
 
         #region Rendering
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+        public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
 
             Rectangle dest = new Rectangle();

@@ -116,6 +116,9 @@ namespace Robuddies
             {
                 level.seperate();
             }
+
+            levelChooser();
+
             level.Update(gameTime);
             base.Update(gameTime);
         }
@@ -123,9 +126,78 @@ namespace Robuddies
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Black);
-            level.Draw(gameTime);
-            base.Draw(gameTime);
+            GraphicsDevice.Clear( level.backgroundColor );
+            level.Draw( gameTime );
+            base.Draw( gameTime );
+        }
+
+        public void levelChooser()
+        {
+            if (Keyboard.GetState().IsKeyDown(Keys.D1))
+            {
+                if (!(level is Level_1))
+                {
+                    level = new Level_1(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_1 loaded");
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D2))
+            {
+                if (!(level is Level_City))
+                {
+                    level = new Level_City(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_City loaded");
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                if (!(level is Level_Forest))
+                {
+                    level = new Level_Forest(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_Forest loaded");
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D4))
+            {
+                if (!(level is Level_Hospital))
+                {
+                    level = new Level_Hospital(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_Hospital loaded");
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D5))
+            {
+                if (!(level is Level_See))
+                {
+                    level = new Level_See(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_See loaded");
+                }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D6))
+            {
+                if (!(level is Level_Underwater))
+                {
+                    level = new Level_Underwater(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_Underwater loaded");
+                }
+            }
         }
     }
 }

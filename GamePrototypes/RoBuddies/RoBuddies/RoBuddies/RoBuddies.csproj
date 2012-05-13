@@ -108,8 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Objects\AnimatedObject.cs" />
+    <Compile Include="Objects\BackgroundLayer.cs" />
     <Compile Include="Objects\Bud.cs" />
     <Compile Include="Objects\BudBudi.cs" />
+    <Compile Include="Objects\Budi.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Objects\Layer.cs" />
     <Compile Include="Levels\Level.cs" />
