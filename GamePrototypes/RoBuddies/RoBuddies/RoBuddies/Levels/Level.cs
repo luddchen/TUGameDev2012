@@ -17,6 +17,8 @@ namespace Robuddies.Levels
         //public GameObject Bro;
         public GameObject BudBudi;
 
+        public GameObject ControledObject;
+
         public bool seperated;
         int seperationDelay = 0;
         public void seperate()
@@ -27,12 +29,14 @@ namespace Robuddies.Levels
                 mainLayer.remove(BudBudi);
                 mainLayer.add(Bud);
                 mainLayer.add(Budi);
+                ControledObject = Bud;
                 seperated = true;
                 seperationDelay = 10;
             }
             else
             {
                 mainLayer.add(BudBudi);
+                ControledObject = BudBudi;
                 mainLayer.remove(Bud);
                 mainLayer.remove(Budi);
                 seperated = false;
@@ -72,16 +76,16 @@ namespace Robuddies.Levels
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-            Texture2D budTex = game.Content.Load<Texture2D>("Sprites\\Bud");
             Texture2D budiTex = game.Content.Load<Texture2D>("Sprites\\Budi");
 
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
             Bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); Bud.Size *= 0.3f;
-            Budi = new GameObject(budiTex, new Vector2(TitleSafe.Width / 2, (budTex.Height + budiTex.Height) * 0.15f)); Budi.Size *= 0.15f;
+            Budi = new GameObject(budiTex, new Vector2(TitleSafe.Width / 2, 200)); Budi.Size *= 0.15f;
             BudBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); BudBudi.Size *= 0.3f;
             mainLayer.add(BudBudi);
+            ControledObject = BudBudi;
 
             layers.Add(mainLayer);
         }

@@ -9,29 +9,25 @@ namespace Robuddies.Objects
     class BudBudi : AnimatedObject
     {
         float texNr = 0;
-        public enum State { Waiting, Walking, StartWalking, StopWalking };
-        public State state;
-        int walkDirection;
-        public int WalkDirection
+
+        public override float DirectionX
         {
-            set 
+            set
             {
-                if (value > 0) { walkDirection = 1; effects = SpriteEffects.None; }
-                if (value < 0) { walkDirection = -1; effects = SpriteEffects.FlipHorizontally; }
+                if (value > 0) { directionX = 1; effects = SpriteEffects.None; }
+                if (value < 0) { directionX = -1; effects = SpriteEffects.FlipHorizontally; }
             }
-            get { return walkDirection; }
+            get { return directionX; }
         }
 
-        public void setState(State state)
+        public override Texture2D Texture
         {
-            if (state == State.StartWalking)
+            get { return texture; }
+            set
             {
-                texNr = 1;
-                this.state = state;
-            }
-            if (state == State.StopWalking)
-            {
-                this.state = state;
+                texture = value;
+                origin.X = Width / 2;
+                origin.Y = Height;
             }
         }
 
@@ -42,20 +38,20 @@ namespace Robuddies.Objects
             {
                 textureList.Add( content.Load<Texture2D>("Sprites\\Buddies\\BudBudi_00" + i) );
             }
-            for (int i = 10; i < 31; i++)
+            for (int i = 10; i < 41; i++)
             {
                 textureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\BudBudi_0" + i));
             }
 
             Position = pos;
-            Size = new Vector2(textureList[0].Width, textureList[0].Height);
+            Size = 1;
             Rotation = 0;
             effects = SpriteEffects.None;
-            Origin = new Vector2(Size.X/2, Size.Y);
+            origin = new Vector2();
             Color = Color.White;
-            texture = textureList[0];
+            Texture = textureList[0];
             state = State.Waiting;
-            walkDirection = 1;
+            directionX = 1;
         }
 
         public override void Update(GameTime gameTime)
@@ -64,7 +60,8 @@ namespace Robuddies.Objects
 
             if (state != State.Waiting) { 
                 texNr += 0.5f;
-                setPosition(Position.X + walkDirection * 2, Position.Y);
+                if (texNr > textureList.Count) { texNr = 0; }
+                setPosition(Position.X + directionX * 2, Position.Y);
             }
 
             if (state == State.Walking)

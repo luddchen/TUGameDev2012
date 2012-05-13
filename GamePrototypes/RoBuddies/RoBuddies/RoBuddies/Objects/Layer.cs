@@ -93,7 +93,7 @@ namespace Robuddies.Objects
                 float xPos = (float)titleSafe.Width / 2.0f + obj.Position.X - offset;
                 dest.X = (int)(xPos); dest.Y = (int)((float)titleSafe.Height - (obj.Position.Y + 20));
                 dest.Width = (int)obj.Width; dest.Height = (int)obj.Height;
-                spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.Origin, obj.effects, layerDepth);
+                spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.origin, obj.effects, layerDepth);
             }
 
         }

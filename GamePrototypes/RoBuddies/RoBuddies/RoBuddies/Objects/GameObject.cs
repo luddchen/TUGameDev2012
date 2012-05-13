@@ -7,14 +7,13 @@ namespace Robuddies.Objects
     class GameObject
     {
         public Texture2D texture;
-        public Texture2D Texture
+        public virtual Texture2D Texture
         {
             get { return texture; }
             set { 
                 texture = value;
-                size.X = texture.Width;
-                size.Y = texture.Height;
-                origin = size / 2;
+                origin.X = Width / 2;
+                origin.Y = Height / 2;
             }
         }
 
@@ -25,12 +24,7 @@ namespace Robuddies.Objects
             set { color = value; }
         }
 
-        Vector2 origin;
-        public Vector2 Origin
-        {
-            get { return origin; }
-            set { origin = value; }
-        }
+        public Vector2 origin;
 
         Vector2 position;
         public Vector2 Position
@@ -39,20 +33,18 @@ namespace Robuddies.Objects
             set { position = value; }
         }
 
-        Vector2 size;
+        float size;
         public float Width
         {
-            get { return size.X; }
-            set { size.X = value; }
+            get { return texture.Width * size; }
         }
 
         public float Height
         {
-            get { return size.Y; }
-            set { size.Y = value; }
+            get { return texture.Height * size; }
         }
 
-        public Vector2 Size
+        public float Size
         {
             get { return size; }
             set { size = value; }
@@ -70,7 +62,7 @@ namespace Robuddies.Objects
         public GameObject() 
         {
             position = new Vector2();
-            size = new Vector2();
+            size = 1;
             rotation = 0;
             origin = new Vector2();
             color = Color.White;
@@ -80,7 +72,7 @@ namespace Robuddies.Objects
         public GameObject(Texture2D tex, Vector2 pos)
         {
             position = pos;
-            size = new Vector2();
+            size = 1;
             rotation = 0;
             origin = new Vector2();
             color = Color.White;

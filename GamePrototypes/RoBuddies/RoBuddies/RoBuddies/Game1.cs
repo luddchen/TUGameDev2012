@@ -77,77 +77,38 @@ namespace Robuddies
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape) )
                 this.Exit();
 
-            if (!level.seperated)
+            AnimatedObject obj = (AnimatedObject)level.ControledObject;
+            if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                if (obj.state == AnimatedObject.State.Waiting)
                 {
-                    if (((BudBudi)level.BudBudi).state == BudBudi.State.Waiting)
-                    {
-                        ((BudBudi)level.BudBudi).setState(BudBudi.State.StartWalking);
-                        ((BudBudi)level.BudBudi).WalkDirection = -1; ;
-                    }
-                }
-
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
-                {
-                    if (((BudBudi)level.BudBudi).state == BudBudi.State.Waiting)
-                    {
-                        ((BudBudi)level.BudBudi).setState(BudBudi.State.StartWalking);
-                        ((BudBudi)level.BudBudi).WalkDirection = 1; ;
-                    }
-                }
-
-                if (!Keyboard.GetState().IsKeyDown(Keys.Right) && ((BudBudi)level.BudBudi).WalkDirection == 1)
-                {
-                    if (((BudBudi)level.BudBudi).state == BudBudi.State.Walking)
-                    {
-                        ((BudBudi)level.BudBudi).setState(BudBudi.State.StopWalking);
-                    }
-                }
-
-                if (!Keyboard.GetState().IsKeyDown(Keys.Left) && ((BudBudi)level.BudBudi).WalkDirection == -1)
-                {
-                    if (((BudBudi)level.BudBudi).state == BudBudi.State.Walking)
-                    {
-                        ((BudBudi)level.BudBudi).setState(BudBudi.State.StopWalking);
-                    }
+                    obj.state = AnimatedObject.State.StartWalking;
+                    obj.DirectionX = -1; ;
                 }
             }
 
-            if (level.seperated)
+            if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.Left))
+                if (obj.state == BudBudi.State.Waiting)
                 {
-                    if (((Bud)level.Bud).state == Bud.State.Waiting)
-                    {
-                        ((Bud)level.Bud).setState(Bud.State.StartWalking);
-                        ((Bud)level.Bud).WalkDirection = -1; ;
-                    }
+                    obj.state = AnimatedObject.State.StartWalking;
+                    obj.DirectionX = 1; ;
                 }
+            }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (!Keyboard.GetState().IsKeyDown(Keys.Right) && obj.DirectionX == 1)
+            {
+                if (obj.state == BudBudi.State.Walking)
                 {
-                    if (((Bud)level.Bud).state == Bud.State.Waiting)
-                    {
-                        ((Bud)level.Bud).setState(Bud.State.StartWalking);
-                        ((Bud)level.Bud).WalkDirection = 1; ;
-                    }
+                    obj.state = AnimatedObject.State.StopWalking;
                 }
+            }
 
-                if (!Keyboard.GetState().IsKeyDown(Keys.Right) && ((Bud)level.Bud).WalkDirection == 1)
+            if (!Keyboard.GetState().IsKeyDown(Keys.Left) && obj.DirectionX == -1)
+            {
+                if (obj.state == BudBudi.State.Walking)
                 {
-                    if (((Bud)level.Bud).state == Bud.State.Walking)
-                    {
-                        ((Bud)level.Bud).setState(Bud.State.StopWalking);
-                    }
-                }
-
-                if (!Keyboard.GetState().IsKeyDown(Keys.Left) && ((Bud)level.Bud).WalkDirection == -1)
-                {
-                    if (((Bud)level.Bud).state == Bud.State.Walking)
-                    {
-                        ((Bud)level.Bud).setState(Bud.State.StopWalking);
-                    }
+                    obj.state = AnimatedObject.State.StopWalking;
                 }
             }
 
