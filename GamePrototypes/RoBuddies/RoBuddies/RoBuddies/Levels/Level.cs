@@ -29,6 +29,12 @@ namespace Robuddies.Levels
         protected Color backgroundColor;
         protected bool seperated;
 
+        public bool IsSeperated
+        {
+            get { return seperated; }
+            set { seperated = value; }
+        }
+
         public Color BackgroundColor
         {
             get { return backgroundColor; }

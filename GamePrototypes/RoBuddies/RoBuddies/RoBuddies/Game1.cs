@@ -117,8 +117,8 @@ namespace Robuddies
                 if ((obj.state != AnimatedObject.State.Jumping) && (obj.state != AnimatedObject.State.StartJumping) && (obj.state != AnimatedObject.State.StopJumping))
                 {
                     obj.state = AnimatedObject.State.StartJumping;
-                    if (level.seperated) { obj.DirectionY = 3.5f; }
-                    if (!level.seperated) { obj.DirectionY = 2.5f; }
+                    if (level.IsSeperated) { obj.DirectionY = 3.5f; }
+                    if (!level.IsSeperated) { obj.DirectionY = 2.5f; }
                 }
             }
 
