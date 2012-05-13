@@ -126,7 +126,7 @@ namespace Robuddies
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear( level.backgroundColor );
+            GraphicsDevice.Clear( level.BackgroundColor );
             level.Draw( gameTime );
             base.Draw( gameTime );
         }

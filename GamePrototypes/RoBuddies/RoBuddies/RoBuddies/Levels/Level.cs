@@ -2,55 +2,75 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using FarseerPhysics.Dynamics;
 using Robuddies.Objects;
 
 namespace Robuddies.Levels
 {
     class Level
     {
+        private int seperationDelay = 0;
+        private float offset;
+        private Rectangle titleSafe;
 
-        public List<Layer> layers;
+        protected List<Layer> layers;
+        protected Layer backgroundLayer;
+        protected Layer mainLayer;
 
-        public Layer backgroundLayer;
-        public Layer mainLayer;
-        public GameObject Bud;
-        public GameObject Budi;
-        //public GameObject Bro;
-        public GameObject BudBudi;
+        protected GameObject bud;
+        protected GameObject budi;
+        //protected GameObject Bro;
+        protected GameObject budBudi;
+        protected GameObject controledObject;
 
-        public GameObject ControledObject;
+        protected World gameWorld;
+        protected Game game;
+        protected SpriteBatch spriteBatch;
+        protected Color backgroundColor;
+        protected bool seperated;
 
-        public Color backgroundColor;
+        public Color BackgroundColor
+        {
+            get { return backgroundColor; }
+            set { backgroundColor = value; }
+        }
 
-        public bool seperated;
-        int seperationDelay = 0;
+        public GameObject ControledObject
+        {
+            get { return controledObject; }
+            set { controledObject = value; }
+        }
+
+        public World GameWorld
+        {
+            get { return gameWorld; }
+        }
+
         public void seperate()
         {
             if (seperationDelay > 0) return;
+
             if (!seperated)
             {
-                mainLayer.remove(BudBudi);
-                mainLayer.add(Bud);
-                mainLayer.add(Budi);
-                ControledObject = Bud;
+                mainLayer.remove(budBudi);
+                mainLayer.add(bud);
+                mainLayer.add(budi);
+                controledObject = bud;
                 seperated = true;
                 seperationDelay = 10;
             }
             else
             {
-                mainLayer.add(BudBudi);
-                ControledObject = BudBudi;
-                mainLayer.remove(Bud);
-                mainLayer.remove(Budi);
+                mainLayer.add(budBudi);
+                controledObject = budBudi;
+                mainLayer.remove(bud);
+                mainLayer.remove(budi);
                 seperated = false;
                 seperationDelay = 10;
             }
         }
 
-        public Game game;
-        public SpriteBatch spriteBatch;
 
-        float offset;
         public float Offset
         {
             set
@@ -59,9 +79,9 @@ namespace Robuddies.Levels
                 foreach (Layer l in layers) { l.Offset = offset; }
 
                 // todo.begin
-                Bud.setPosition(offset, Bud.Position.Y);
-                Budi.setPosition(offset, Budi.Position.Y);
-                BudBudi.setPosition(offset, BudBudi.Position.Y);
+                bud.setPosition(offset, bud.Position.Y);
+                budi.setPosition(offset, budi.Position.Y);
+                budBudi.setPosition(offset, budBudi.Position.Y);
                 // todo.end
             }
 
@@ -71,13 +91,14 @@ namespace Robuddies.Levels
         public Level(Game game)
         {
             this.game = game;
+            this.gameWorld = new World(Vector2.Zero);
             layers = new List<Layer>();
             seperated = false;
             offset = 0;
             backgroundColor = Color.Black;
         }
 
-        public virtual void LoadContent()
+        public  virtual void LoadContent()
         {
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
@@ -87,16 +108,15 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            Bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); Bud.Size *= 0.3f;
-            Budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); Budi.Size *= 0.3f;
-            BudBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); BudBudi.Size *= 0.3f;
-            mainLayer.add(BudBudi);
-            ControledObject = BudBudi;
+            bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); bud.Size *= 0.3f;
+            budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
+            budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
+            mainLayer.add(budBudi);
+            controledObject = budBudi;
 
             layers.Add(mainLayer);
         }
 
-        Rectangle titleSafe;
         public Rectangle TitleSafe
         {
             get { return titleSafe; }
@@ -111,8 +131,8 @@ namespace Robuddies.Levels
         {
             // todo
             seperationDelay--;
-            if (!seperated) { Offset = BudBudi.Position.X; }
-            if (seperated) { Offset = Bud.Position.X; }
+            if (!seperated) { Offset = budBudi.Position.X; }
+            if (seperated) { Offset = bud.Position.X; }
             mainLayer.Update(gameTime);
         }
 
