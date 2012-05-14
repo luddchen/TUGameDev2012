@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
 using Robuddies.Objects;
 
 namespace Robuddies.Levels
@@ -35,6 +37,8 @@ namespace Robuddies.Levels
             Texture2D tree2 = game.Content.Load<Texture2D>("Sprites\\tree2");
             Texture2D tree3 = game.Content.Load<Texture2D>("Sprites\\tree3");
             Texture2D tree4 = game.Content.Load<Texture2D>("Sprites\\tree4");
+
+            Texture2D square = game.Content.Load<Texture2D>("Sprites\\Cloud1");
 
             Layer layer10 = new Layer(); layer10.LoadContent(); layer10.Depth = 0.98f;
             Layer layer11 = new Layer(); layer11.LoadContent(); layer11.Depth = 0.96f;
@@ -135,6 +139,12 @@ namespace Robuddies.Levels
             layers.Add(layer32);
             layers.Add(layer4);
             layers.Add(layer5);
+
+            PhysicObject squareObj = new PhysicObject(square, new Vector2(100, 200), gameWorld);
+            squareObj.Color = Color.Red;
+            squareObj.Size = 0.5f;
+            squareObj.Body.BodyType = BodyType.Dynamic;
+            mainLayer.add(squareObj);
         }
 
     }

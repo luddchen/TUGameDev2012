@@ -87,14 +87,15 @@ namespace Robuddies.Objects
 
         public virtual void Draw(GameTime gameTime, SpriteBatch spriteBatch)
         {
-
-            Rectangle dest = new Rectangle();
             foreach (GameObject obj in objects)
             {
                 float xPos = (float)titleSafe.Width / 2.0f + obj.Position.X - offset;
-                dest.X = (int)(xPos); dest.Y = (int)((float)titleSafe.Height - (obj.Position.Y + 20));
-                dest.Width = (int)obj.Width; dest.Height = (int)obj.Height;
-                spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.origin, obj.effects, layerDepth);
+                obj.Destination.X = (int)(xPos);
+                obj.Destination.Y = (int)((float)titleSafe.Height - (obj.Position.Y + 20));
+                obj.Destination.Width = (int)obj.Width; 
+                obj.Destination.Height = (int)obj.Height;
+                obj.LayerDepth = layerDepth;
+                obj.Draw(spriteBatch);
             }
 
         }

@@ -6,6 +6,9 @@ namespace Robuddies.Objects
 {
     class GameObject
     {
+        public Rectangle Destination;
+        public float LayerDepth;
+
         public Texture2D texture;
         public virtual Texture2D Texture
         {
@@ -61,23 +64,25 @@ namespace Robuddies.Objects
 
         public GameObject() 
         {
+            init();
             position = new Vector2();
-            size = 1;
-            rotation = 0;
-            origin = new Vector2();
-            color = Color.White;
-            effects = SpriteEffects.None;
         }
 
         public GameObject(Texture2D tex, Vector2 pos)
         {
+            init();
             position = pos;
+            Texture = tex;
+        }
+
+        private void init()
+        {
             size = 1;
             rotation = 0;
             origin = new Vector2();
             color = Color.White;
             effects = SpriteEffects.None;
-            Texture = tex;
+            Destination = new Rectangle();
         }
 
         public void setPosition(float x, float y)
@@ -86,5 +91,9 @@ namespace Robuddies.Objects
             position.Y = y;
         }
 
+        public virtual void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Destination, null, Color, Rotation, origin, effects, LayerDepth);
+        }
     }
 }

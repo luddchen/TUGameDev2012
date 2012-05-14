@@ -97,7 +97,7 @@ namespace Robuddies.Levels
         public Level(Game game)
         {
             this.game = game;
-            this.gameWorld = new World(Vector2.Zero);
+            this.gameWorld = new World(new Vector2(0, 9.82f));
             layers = new List<Layer>();
             seperated = false;
             offset = 0;
@@ -140,6 +140,8 @@ namespace Robuddies.Levels
             if (!seperated) { Offset = budBudi.Position.X; }
             if (seperated) { Offset = bud.Position.X; }
             mainLayer.Update(gameTime);
+
+            gameWorld.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
         }
 
         public void Draw(GameTime gameTime)
