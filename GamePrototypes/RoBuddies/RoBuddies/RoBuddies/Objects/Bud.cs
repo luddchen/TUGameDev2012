@@ -35,14 +35,14 @@ namespace Robuddies.Objects
 
         public Bud(ContentManager content, Vector2 pos)
         {
-            textureList = new List<Texture2D>();
+            TextureList = new List<Texture2D>();
             for (int i = 1; i < 10; i++)
             {
-                textureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_00" + i));
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_00" + i));
             }
             for (int i = 10; i < 41; i++)
             {
-                textureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_0" + i));
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_0" + i));
             }
 
             Position = pos;
@@ -51,47 +51,47 @@ namespace Robuddies.Objects
             effects = SpriteEffects.None;
             origin = new Vector2();
             Color = Color.White;
-            Texture = textureList[0];
-            state = State.Waiting;
-            directionX = 0;
+            Texture = TextureList[0];
+            CurrentState = State.Waiting;
+            DirectionX = 0;
             speedTemp = 0;
         }
 
         public override void Update(GameTime gameTime)
         {
-            if (texNr > textureList.Count - 1) { texNr = textureList.Count - 1; }
+            if (texNr > TextureList.Count - 1) { texNr = TextureList.Count - 1; }
             if (texNr < 0) { texNr = 0; }
             //Console.Out.WriteLine(texNr);
-            Texture = textureList[(int)(texNr)];
+            Texture = TextureList[(int)(texNr)];
 
-            if (state != State.Waiting)
+            if (CurrentState != State.Waiting)
             {
                 texNr += 0.5f;
-                if (texNr > textureList.Count) { texNr = textureList.Count-1; }
-                setPosition(Position.X + directionX * 2, Position.Y);
+                if (texNr > TextureList.Count) { texNr = TextureList.Count-1; }
+                setPosition(Position.X + DirectionX * 2, Position.Y);
             }
 
-            if (state == State.Walking)
+            if (CurrentState == State.Walking)
             {
                 if (texNr > 24) texNr = 4;
             }
 
-            if (state == State.StartWalking)
+            if (CurrentState == State.StartWalking)
             {
-                if (texNr > 3) state = State.Walking;
+                if (texNr > 3) CurrentState = State.Walking;
             }
 
-            if (state == State.StopWalking)
+            if (CurrentState == State.StopWalking)
             {
                 if (texNr > 28)
                 {
                     texNr = 0;
-                    state = State.Waiting;
+                    CurrentState = State.Waiting;
                     DirectionX = 0.0f;
                 }
             }
 
-            if (state == State.StartJumping)
+            if (CurrentState == State.StartJumping)
             {
                 if (texNr < 4) { 
                     texNr = 30; 
@@ -103,23 +103,23 @@ namespace Robuddies.Objects
                 }
                 if (texNr >= 39)
                 {
-                    state = State.Jumping;
+                    CurrentState = State.Jumping;
                     DirectionX = speedTemp;
                 }
             }
 
-            if (state == State.Jumping)
+            if (CurrentState == State.Jumping)
             {
                 texNr = 39;
                 setPosition(Position.X, Position.Y + DirectionY * 2);
                 DirectionY -= 0.1f;
                 if (Position.Y <= 0)
                 {
-                    state = State.StopJumping;
+                    CurrentState = State.StopJumping;
                 }
             }
 
-            if (state == State.StopJumping)
+            if (CurrentState == State.StopJumping)
             {
                 if (texNr == 39)
                 {
@@ -131,7 +131,7 @@ namespace Robuddies.Objects
                 {
                     DirectionX = speedTemp;
                     texNr = 0;
-                    state = State.Waiting;
+                    CurrentState = State.Waiting;
                 }
             }
         }

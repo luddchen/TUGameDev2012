@@ -33,8 +33,8 @@ namespace Robuddies.Objects
 
         public Budi(ContentManager content, Vector2 pos)
         {
-            textureList = new List<Texture2D>();
-            textureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi_001"));
+            TextureList = new List<Texture2D>();
+            TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi_001"));
 
             Position = pos;
             Size = 1;
@@ -42,9 +42,9 @@ namespace Robuddies.Objects
             effects = SpriteEffects.None;
             origin = new Vector2();
             Color = Color.White;
-            Texture = textureList[0];
-            state = State.Waiting;
-            directionX = 1;
+            Texture = TextureList[0];
+            CurrentState = State.Waiting;
+            DirectionX = 1;
         }
 
         public override void Update(GameTime gameTime)

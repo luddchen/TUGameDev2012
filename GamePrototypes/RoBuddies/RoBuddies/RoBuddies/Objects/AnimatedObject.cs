@@ -8,28 +8,50 @@ namespace Robuddies.Objects
     class AnimatedObject : GameObject
     {
 
-        public enum State { Waiting, Walking, StartWalking, StopWalking, Jumping, StartJumping, StopJumping };
-        public State state;
+        public enum State 
+        { 
+            Waiting,
+            Walking, 
+            StartWalking, 
+            StopWalking, 
+            Jumping, 
+            StartJumping, 
+            StopJumping 
+        };
 
-        public float directionX;
+        private State currentState;
+        private List<Texture2D> textureList;
+
+        protected float directionX;
+        protected float directionY;
+
         public virtual float DirectionX 
         {
             set { directionX = value; }
             get { return directionX; }
         }
 
-        public float directionY;
         public virtual float DirectionY
         {
             set { directionY = value; }
             get { return directionY; }
         }
 
-        public List<Texture2D> textureList;
-
-        public virtual void Update(GameTime gameTime)
+        public State CurrentState
         {
+            get { return currentState; }
+            set { currentState = value; }
         }
 
+        public List<Texture2D> TextureList
+        {
+            get { return textureList; }
+            set { textureList = value; }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+        }
     }
 }

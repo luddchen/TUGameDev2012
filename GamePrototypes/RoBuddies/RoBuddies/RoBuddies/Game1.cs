@@ -80,43 +80,43 @@ namespace Robuddies
             AnimatedObject obj = (AnimatedObject)level.ControledObject;
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                if (obj.state == AnimatedObject.State.Waiting)
+                if (obj.CurrentState == AnimatedObject.State.Waiting)
                 {
-                    obj.state = AnimatedObject.State.StartWalking;
+                    obj.CurrentState = AnimatedObject.State.StartWalking;
                     obj.DirectionX = -1; ;
                 }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (obj.state == AnimatedObject.State.Waiting)
+                if (obj.CurrentState == AnimatedObject.State.Waiting)
                 {
-                    obj.state = AnimatedObject.State.StartWalking;
+                    obj.CurrentState = AnimatedObject.State.StartWalking;
                     obj.DirectionX = 1;
                 }
             }
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Right) && obj.DirectionX == 1)
             {
-                if (obj.state == AnimatedObject.State.Walking)
+                if (obj.CurrentState == AnimatedObject.State.Walking)
                 {
-                    obj.state = AnimatedObject.State.StopWalking;
+                    obj.CurrentState = AnimatedObject.State.StopWalking;
                 }
             }
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Left) && obj.DirectionX == -1)
             {
-                if (obj.state == AnimatedObject.State.Walking)
+                if (obj.CurrentState == AnimatedObject.State.Walking)
                 {
-                    obj.state = AnimatedObject.State.StopWalking;
+                    obj.CurrentState = AnimatedObject.State.StopWalking;
                 }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if ((obj.state != AnimatedObject.State.Jumping) && (obj.state != AnimatedObject.State.StartJumping) && (obj.state != AnimatedObject.State.StopJumping))
+                if ((obj.CurrentState != AnimatedObject.State.Jumping) && (obj.CurrentState != AnimatedObject.State.StartJumping) && (obj.CurrentState != AnimatedObject.State.StopJumping))
                 {
-                    obj.state = AnimatedObject.State.StartJumping;
+                    obj.CurrentState = AnimatedObject.State.StartJumping;
                     if (level.IsSeperated) { obj.DirectionY = 3.5f; }
                     if (!level.IsSeperated) { obj.DirectionY = 2.5f; }
                 }

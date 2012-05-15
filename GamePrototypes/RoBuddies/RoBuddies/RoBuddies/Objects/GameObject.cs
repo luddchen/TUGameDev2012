@@ -30,7 +30,7 @@ namespace Robuddies.Objects
         public Vector2 origin;
 
         Vector2 position;
-        public Vector2 Position
+        public virtual Vector2 Position
         {
             get { return position; }
             set { position = value; }
@@ -54,7 +54,7 @@ namespace Robuddies.Objects
         }
 
         float rotation;
-        public float Rotation
+        public virtual float Rotation
         {
             get { return rotation; }
             set { rotation = value; }
@@ -89,6 +89,10 @@ namespace Robuddies.Objects
         {
             position.X = x;
             position.Y = y;
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)

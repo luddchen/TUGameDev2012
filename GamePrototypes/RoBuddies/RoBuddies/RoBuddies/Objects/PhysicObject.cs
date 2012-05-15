@@ -29,9 +29,21 @@ namespace Robuddies.Objects
             get { return world; }
         }
 
+        public override Vector2 Position
+        {
+            get { return body.Position; }
+            set { body.Position = value; }
+        }
+
+        public override float Rotation
+        {
+            get { return body.Rotation; }
+            set { body.Rotation = value; }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle dest = new Rectangle((int)this.body.Position.X + Destination.X, (int)this.body.Position.Y, (int)Width, (int)Height);
+            Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)Width, (int)Height);
             spriteBatch.Draw(Texture, dest, null, Color, Rotation, origin, effects, LayerDepth);
         }
     }
