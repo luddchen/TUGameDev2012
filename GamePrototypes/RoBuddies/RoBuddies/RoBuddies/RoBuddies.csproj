@@ -112,6 +112,7 @@
     <Compile Include="Objects\Bud.cs" />
     <Compile Include="Objects\BudBudi.cs" />
     <Compile Include="Objects\Budi.cs" />
+    <Compile Include="Objects\Head.cs" />
     <Compile Include="Objects\PhysicObject.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Objects\Layer.cs" />
@@ -122,6 +123,8 @@
     <Compile Include="Levels\Level_Hospital.cs" />
     <Compile Include="Levels\Level_See.cs" />
     <Compile Include="Levels\Level_Underwater.cs" />
+    <Compile Include="Objects\Robot.cs" />
+    <Compile Include="Objects\RobotPart.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Robuddies.Objects
 {
-    class Budi : AnimatedObject
+    class Budi : RobotPart
     {
         float texNr = 0;
 
@@ -32,18 +32,11 @@ namespace Robuddies.Objects
         }
 
         public Budi(ContentManager content, Vector2 pos)
+            : base(content, pos)
         {
-            TextureList = new List<Texture2D>();
-            TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi_001"));
+            TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi\\Budi_001"));
 
-            Position = pos;
-            Size = 1;
-            Rotation = 0;
-            effects = SpriteEffects.None;
-            origin = new Vector2();
-            Color = Color.White;
             Texture = TextureList[0];
-            CurrentState = State.Waiting;
             DirectionX = 1;
         }
 

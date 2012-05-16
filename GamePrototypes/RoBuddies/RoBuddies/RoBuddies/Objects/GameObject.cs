@@ -47,7 +47,7 @@ namespace Robuddies.Objects
             get { return texture.Height * size; }
         }
 
-        public float Size
+        public virtual float Size
         {
             get { return size; }
             set { size = value; }

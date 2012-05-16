@@ -17,10 +17,10 @@ namespace Robuddies.Levels
         protected Layer backgroundLayer;
         protected Layer mainLayer;
 
-        protected GameObject bud;
-        protected GameObject budi;
+        protected Robot robot;
+        //protected GameObject budi;
         //protected GameObject Bro;
-        protected GameObject budBudi;
+        //protected GameObject budBudi;
         protected GameObject controledObject;
 
         protected World gameWorld;
@@ -58,19 +58,19 @@ namespace Robuddies.Levels
 
             if (!seperated)
             {
-                mainLayer.remove(budBudi);
-                mainLayer.add(bud);
-                mainLayer.add(budi);
-                controledObject = bud;
+                //mainLayer.remove(budBudi);
+                //mainLayer.add(bud);
+                //mainLayer.add(budi);
+                //controledObject = bud;
                 seperated = true;
                 seperationDelay = 10;
             }
             else
             {
-                mainLayer.add(budBudi);
-                controledObject = budBudi;
-                mainLayer.remove(bud);
-                mainLayer.remove(budi);
+                //mainLayer.add(budBudi);
+                //controledObject = budBudi;
+                //mainLayer.remove(bud);
+                //mainLayer.remove(budi);
                 seperated = false;
                 seperationDelay = 10;
             }
@@ -85,9 +85,9 @@ namespace Robuddies.Levels
                 foreach (Layer l in layers) { l.Offset = offset; }
 
                 // todo.begin
-                bud.setPosition(offset, bud.Position.Y);
-                budi.setPosition(offset, budi.Position.Y);
-                budBudi.setPosition(offset, budBudi.Position.Y);
+                robot.setPosition(offset, robot.Position.Y);
+                //budi.setPosition(offset, budi.Position.Y);
+                //budBudi.setPosition(offset, budBudi.Position.Y);
                 // todo.end
             }
 
@@ -114,11 +114,11 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            bud = new Bud(game.Content, new Vector2(TitleSafe.Width / 2, 0)); bud.Size *= 0.3f;
-            budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
-            budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
-            mainLayer.add(budBudi);
-            controledObject = budBudi;
+            robot = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0)); robot.Size *= 0.3f;
+            //budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
+            //budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
+            mainLayer.add(robot.ActivePart);
+            controledObject = robot.ActivePart;
 
             layers.Add(mainLayer);
         }
@@ -137,8 +137,8 @@ namespace Robuddies.Levels
         {
             // todo
             seperationDelay--;
-            if (!seperated) { Offset = budBudi.Position.X; }
-            if (seperated) { Offset = bud.Position.X; }
+            if (!seperated) { Offset = robot.ActivePart.Position.X; }
+            //if (seperated) { Offset = bud.Position.X; }
             mainLayer.Update(gameTime);
 
             gameWorld.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));

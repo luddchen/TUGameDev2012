@@ -77,46 +77,46 @@ namespace Robuddies
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Q) )
                 this.Exit();
 
-            AnimatedObject obj = (AnimatedObject)level.ControledObject;
+            RobotPart obj = (RobotPart)level.ControledObject;
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
-                if (obj.CurrentState == AnimatedObject.State.Waiting)
+                if (obj.CurrentState == RobotPart.State.Waiting)
                 {
-                    obj.CurrentState = AnimatedObject.State.StartWalking;
+                    obj.CurrentState = RobotPart.State.StartWalking;
                     obj.DirectionX = -1; ;
                 }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Right))
             {
-                if (obj.CurrentState == AnimatedObject.State.Waiting)
+                if (obj.CurrentState == RobotPart.State.Waiting)
                 {
-                    obj.CurrentState = AnimatedObject.State.StartWalking;
+                    obj.CurrentState = RobotPart.State.StartWalking;
                     obj.DirectionX = 1;
                 }
             }
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Right) && obj.DirectionX == 1)
             {
-                if (obj.CurrentState == AnimatedObject.State.Walking)
+                if (obj.CurrentState == RobotPart.State.Walking)
                 {
-                    obj.CurrentState = AnimatedObject.State.StopWalking;
+                    obj.CurrentState = RobotPart.State.StopWalking;
                 }
             }
 
             if (!Keyboard.GetState().IsKeyDown(Keys.Left) && obj.DirectionX == -1)
             {
-                if (obj.CurrentState == AnimatedObject.State.Walking)
+                if (obj.CurrentState == RobotPart.State.Walking)
                 {
-                    obj.CurrentState = AnimatedObject.State.StopWalking;
+                    obj.CurrentState = RobotPart.State.StopWalking;
                 }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.Space))
             {
-                if ((obj.CurrentState != AnimatedObject.State.Jumping) && (obj.CurrentState != AnimatedObject.State.StartJumping) && (obj.CurrentState != AnimatedObject.State.StopJumping))
+                if ((obj.CurrentState != RobotPart.State.Jumping) && (obj.CurrentState != RobotPart.State.StartJumping) && (obj.CurrentState != RobotPart.State.StopJumping))
                 {
-                    obj.CurrentState = AnimatedObject.State.StartJumping;
+                    obj.CurrentState = RobotPart.State.StartJumping;
                     if (level.IsSeperated) { obj.DirectionY = 3.5f; }
                     if (!level.IsSeperated) { obj.DirectionY = 2.5f; }
                 }

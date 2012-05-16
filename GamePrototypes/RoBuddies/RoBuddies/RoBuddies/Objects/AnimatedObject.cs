@@ -7,19 +7,6 @@ namespace Robuddies.Objects
 {
     class AnimatedObject : GameObject
     {
-
-        public enum State 
-        { 
-            Waiting,
-            Walking, 
-            StartWalking, 
-            StopWalking, 
-            Jumping, 
-            StartJumping, 
-            StopJumping 
-        };
-
-        private State currentState;
         private List<Texture2D> textureList;
 
         protected float directionX;
@@ -35,12 +22,6 @@ namespace Robuddies.Objects
         {
             set { directionY = value; }
             get { return directionY; }
-        }
-
-        public State CurrentState
-        {
-            get { return currentState; }
-            set { currentState = value; }
         }
 
         public List<Texture2D> TextureList

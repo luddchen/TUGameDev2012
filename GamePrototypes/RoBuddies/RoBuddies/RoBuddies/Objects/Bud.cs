@@ -6,8 +6,10 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Robuddies.Objects
 {
-    class Bud : AnimatedObject
+    class Bud : RobotPart
     {
+        private const int ANIMATION_END = 10;
+
         float texNr = 0;
         float speedTemp;
 
@@ -34,25 +36,14 @@ namespace Robuddies.Objects
         }
 
         public Bud(ContentManager content, Vector2 pos)
+            : base(content, pos)
         {
-            TextureList = new List<Texture2D>();
-            for (int i = 1; i < 10; i++)
+            for (int i = 1; i <= ANIMATION_END; i++)
             {
-                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_00" + i));
-            }
-            for (int i = 10; i < 41; i++)
-            {
-                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud_0" + i));
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud\\Bud_" + String.Format("{0:000}", i)));
             }
 
-            Position = pos;
-            Size = 1;
-            Rotation = 0;
-            effects = SpriteEffects.None;
-            origin = new Vector2();
-            Color = Color.White;
             Texture = TextureList[0];
-            CurrentState = State.Waiting;
             DirectionX = 0;
             speedTemp = 0;
         }
