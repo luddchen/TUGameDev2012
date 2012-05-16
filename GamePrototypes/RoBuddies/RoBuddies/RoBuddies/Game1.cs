@@ -77,56 +77,6 @@ namespace Robuddies
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Q) )
                 this.Exit();
 
-            RobotPart obj = (RobotPart)level.ControledObject;
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
-            {
-                if (obj.CurrentState == RobotPart.State.Waiting)
-                {
-                    obj.CurrentState = RobotPart.State.StartWalking;
-                    obj.DirectionX = -1; ;
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
-            {
-                if (obj.CurrentState == RobotPart.State.Waiting)
-                {
-                    obj.CurrentState = RobotPart.State.StartWalking;
-                    obj.DirectionX = 1;
-                }
-            }
-
-            if (!Keyboard.GetState().IsKeyDown(Keys.Right) && obj.DirectionX == 1)
-            {
-                if (obj.CurrentState == RobotPart.State.Walking)
-                {
-                    obj.CurrentState = RobotPart.State.StopWalking;
-                }
-            }
-
-            if (!Keyboard.GetState().IsKeyDown(Keys.Left) && obj.DirectionX == -1)
-            {
-                if (obj.CurrentState == RobotPart.State.Walking)
-                {
-                    obj.CurrentState = RobotPart.State.StopWalking;
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
-            {
-                if ((obj.CurrentState != RobotPart.State.Jumping) && (obj.CurrentState != RobotPart.State.StartJumping) && (obj.CurrentState != RobotPart.State.StopJumping))
-                {
-                    obj.CurrentState = RobotPart.State.StartJumping;
-                    if (level.IsSeperated) { obj.DirectionY = 3.5f; }
-                    if (!level.IsSeperated) { obj.DirectionY = 2.5f; }
-                }
-            }
-
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
-            {
-                level.seperate();
-            }
-
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
             {
                 overlay.SwitchMenuVisible();

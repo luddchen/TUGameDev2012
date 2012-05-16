@@ -17,22 +17,17 @@ namespace Robuddies.Levels
         protected Layer backgroundLayer;
         protected Layer mainLayer;
 
-        protected Robot robot;
-        //protected GameObject budi;
-        //protected GameObject Bro;
-        //protected GameObject budBudi;
-        protected GameObject controledObject;
+        protected Robot player;
+        protected GameObject activePart;
 
         protected World gameWorld;
         protected Game game;
         protected SpriteBatch spriteBatch;
         protected Color backgroundColor;
-        protected bool seperated;
 
-        public bool IsSeperated
+        public Robot Player
         {
-            get { return seperated; }
-            set { seperated = value; }
+            get { return player; }
         }
 
         public Color BackgroundColor
@@ -41,41 +36,16 @@ namespace Robuddies.Levels
             set { backgroundColor = value; }
         }
 
-        public GameObject ControledObject
+        public GameObject ActivePart
         {
-            get { return controledObject; }
-            set { controledObject = value; }
+            get { return activePart; }
+            set { activePart = value; }
         }
 
         public World GameWorld
         {
             get { return gameWorld; }
         }
-
-        public void seperate()
-        {
-            if (seperationDelay > 0) return;
-
-            if (!seperated)
-            {
-                //mainLayer.remove(budBudi);
-                //mainLayer.add(bud);
-                //mainLayer.add(budi);
-                //controledObject = bud;
-                seperated = true;
-                seperationDelay = 10;
-            }
-            else
-            {
-                //mainLayer.add(budBudi);
-                //controledObject = budBudi;
-                //mainLayer.remove(bud);
-                //mainLayer.remove(budi);
-                seperated = false;
-                seperationDelay = 10;
-            }
-        }
-
 
         public float Offset
         {
@@ -85,7 +55,7 @@ namespace Robuddies.Levels
                 foreach (Layer l in layers) { l.Offset = offset; }
 
                 // todo.begin
-                robot.setPosition(offset, robot.Position.Y);
+                player.setPosition(offset, player.Position.Y);
                 //budi.setPosition(offset, budi.Position.Y);
                 //budBudi.setPosition(offset, budBudi.Position.Y);
                 // todo.end
@@ -99,7 +69,7 @@ namespace Robuddies.Levels
             this.game = game;
             this.gameWorld = new World(new Vector2(0, 9.82f));
             layers = new List<Layer>();
-            seperated = false;
+            //seperated = false;
             offset = 0;
             backgroundColor = Color.Black;
         }
@@ -114,11 +84,11 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            robot = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0)); robot.Size *= 0.3f;
+            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0)); player.Size *= 0.3f;
             //budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
             //budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
-            mainLayer.add(robot.ActivePart);
-            controledObject = robot.ActivePart;
+            mainLayer.add(player.ActivePart);
+            activePart = player.ActivePart;
 
             layers.Add(mainLayer);
         }
@@ -137,8 +107,10 @@ namespace Robuddies.Levels
         {
             // todo
             seperationDelay--;
-            if (!seperated) { Offset = robot.ActivePart.Position.X; }
+            if (!player.IsSeperated) { Offset = player.ActivePart.Position.X; }
             //if (seperated) { Offset = bud.Position.X; }
+
+            player.Update(gameTime);
             mainLayer.Update(gameTime);
 
             gameWorld.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));

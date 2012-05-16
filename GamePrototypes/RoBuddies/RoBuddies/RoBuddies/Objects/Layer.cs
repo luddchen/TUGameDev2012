@@ -14,7 +14,7 @@ namespace Robuddies.Objects
         public List<AnimatedObject> animatedObjects;
 
         public void add(GameObject obj) 
-        { 
+        {
             objects.Add(obj);
             if (obj is AnimatedObject) animatedObjects.Add((AnimatedObject)obj);
         }
