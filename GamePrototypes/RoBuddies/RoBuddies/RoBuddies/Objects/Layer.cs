@@ -10,8 +10,13 @@ namespace Robuddies.Objects
     {
         #region Fields and Properties
 
-        public List<GameObject> objects;
-        public List<AnimatedObject> animatedObjects;
+        protected List<GameObject> objects;
+        protected List<AnimatedObject> animatedObjects;
+
+        private float offset;
+        private float scrollSpeed;
+        private float layerDepth;
+        private Rectangle titleSafe;
 
         public void add(GameObject obj) 
         {
@@ -23,9 +28,6 @@ namespace Robuddies.Objects
             objects.Remove(obj);
             if (obj is AnimatedObject) animatedObjects.Remove((AnimatedObject)obj);
         }
-
-        float scrollSpeed;
-        float layerDepth;
 
         /// <summary>
         /// Depth or Z-Coord of this Layer 
@@ -44,14 +46,17 @@ namespace Robuddies.Objects
             }
         }
 
-        float offset;
+        public List<GameObject> Objects
+        {
+            get { return objects; }
+        }
+
         public float Offset
         {
             get { return offset; }
             set { offset = value * scrollSpeed; }
         }
 
-        Rectangle titleSafe;
         public Rectangle TitleSafe
         {
             get { return titleSafe; }
@@ -78,7 +83,10 @@ namespace Robuddies.Objects
 
         public void Update(GameTime gameTime) 
         {
-            foreach (AnimatedObject obj in animatedObjects) { obj.Update(gameTime); }
+            foreach (AnimatedObject obj in animatedObjects) 
+            { 
+                obj.Update(gameTime); 
+            }
         }
 
         #endregion

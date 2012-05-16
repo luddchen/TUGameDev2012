@@ -19,11 +19,13 @@ namespace Robuddies.Objects
         private int seperationDelay = 0;
 
         private List<RobotPart> robotParts;
+        private List<RobotPart> inactiveParts;
 
         public Robot(ContentManager content, Vector2 pos)
             : base()
         {
             robotParts = new List<RobotPart>();
+            inactiveParts = new List<RobotPart>();
 
             bud = new Bud(content, pos);
             budi = new Budi(content, new Vector2(pos.X, pos.Y + 200));
@@ -31,6 +33,9 @@ namespace Robuddies.Objects
 
             activePart = budBudi;
             robotParts.Add(budBudi);
+
+            inactiveParts.Add(bud);
+            inactiveParts.Add(budi);
         }
 
         public List<RobotPart> RobotParts
@@ -42,11 +47,10 @@ namespace Robuddies.Objects
         public override float Size
         {
             get { return activePart.Size; }
-            set { 
-                foreach (RobotPart part in robotParts)
-                {
-                    part.Size = value;
-                }
+            set {
+                bud.Size = value;
+                budBudi.Size = value;
+                budi.Size = value;
             }
         }
 
@@ -73,6 +77,9 @@ namespace Robuddies.Objects
             if (!IsSeperated)
             {
                 robotParts.Remove(budBudi);
+                inactiveParts.Add(budBudi);
+                inactiveParts.Remove(bud);
+                inactiveParts.Remove(budi);
                 robotParts.Add(bud);
                 robotParts.Add(budi);
                 activePart = bud;
@@ -81,9 +88,12 @@ namespace Robuddies.Objects
             }
             else
             {
+                inactiveParts.Remove(budBudi);
                 robotParts.Add(budBudi);
                 robotParts.Remove(bud);
                 robotParts.Remove(budi);
+                inactiveParts.Add(bud);
+                inactiveParts.Add(budi);
                 activePart = budBudi;
                 seperated = false;
                 seperationDelay = 10;
@@ -119,6 +129,8 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
+            seperationDelay--;
+
             if (Keyboard.GetState().IsKeyDown(Keys.Left))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
@@ -178,11 +190,18 @@ namespace Robuddies.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            activePart.Draw(spriteBatch);
+            //activePart.Draw(spriteBatch);
 
             foreach (RobotPart part in robotParts)
             {
+                part.Destination = Destination;
+                Position = ActivePart.Position;
                 part.Draw(spriteBatch);
+            }
+
+            foreach (RobotPart part in inactiveParts)
+            {
+                part.Position = ActivePart.Position;
             }
         }
     }

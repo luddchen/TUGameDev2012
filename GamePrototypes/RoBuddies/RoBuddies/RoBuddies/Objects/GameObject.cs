@@ -85,7 +85,7 @@ namespace Robuddies.Objects
             Destination = new Rectangle();
         }
 
-        public void setPosition(float x, float y)
+        public virtual void setPosition(float x, float y)
         {
             position.X = x;
             position.Y = y;

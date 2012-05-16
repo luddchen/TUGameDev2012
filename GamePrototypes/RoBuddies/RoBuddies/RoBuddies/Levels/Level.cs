@@ -9,7 +9,6 @@ namespace Robuddies.Levels
 {
     class Level
     {
-        private int seperationDelay = 0;
         private float offset;
         private Rectangle titleSafe;
 
@@ -53,12 +52,7 @@ namespace Robuddies.Levels
             {
                 offset = value;
                 foreach (Layer l in layers) { l.Offset = offset; }
-
-                // todo.begin
                 player.setPosition(offset, player.Position.Y);
-                //budi.setPosition(offset, budi.Position.Y);
-                //budBudi.setPosition(offset, budBudi.Position.Y);
-                // todo.end
             }
 
             get { return offset; }
@@ -87,7 +81,7 @@ namespace Robuddies.Levels
             player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0)); player.Size *= 0.3f;
             //budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
             //budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
-            mainLayer.add(player.ActivePart);
+            mainLayer.add(player);
             activePart = player.ActivePart;
 
             layers.Add(mainLayer);
@@ -106,9 +100,8 @@ namespace Robuddies.Levels
         public void Update(GameTime gameTime)
         {
             // todo
-            seperationDelay--;
             if (!player.IsSeperated) { Offset = player.ActivePart.Position.X; }
-            //if (seperated) { Offset = bud.Position.X; }
+            if (player.IsSeperated) { Offset = player.ActivePart.Position.X; }
 
             player.Update(gameTime);
             mainLayer.Update(gameTime);

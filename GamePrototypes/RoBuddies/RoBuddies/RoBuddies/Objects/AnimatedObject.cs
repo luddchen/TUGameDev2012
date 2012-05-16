@@ -29,10 +29,5 @@ namespace Robuddies.Objects
             get { return textureList; }
             set { textureList = value; }
         }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            base.Draw(spriteBatch);
-        }
     }
 }
