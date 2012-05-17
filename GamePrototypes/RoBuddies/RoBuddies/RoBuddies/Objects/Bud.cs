@@ -15,6 +15,18 @@ namespace Robuddies.Objects
 
         private RobotPart budi;
 
+        public Bud(ContentManager content, Vector2 pos)
+            : base(content, pos)
+        {
+            for (int i = 1; i <= ANIMATION_END; i++)
+            {
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud\\Bud_" + String.Format("{0:000}", i)));
+            }
+            Texture = TextureList[0];
+            DirectionX = 0;
+            speedTemp = 0;
+        }
+
         public override float DirectionX
         {
             set
@@ -37,17 +49,9 @@ namespace Robuddies.Objects
             }
         }
 
-        public Bud(ContentManager content, Vector2 pos, RobotPart budi)
-            : base(content, pos)
+        public RobotPart Budi
         {
-            for (int i = 1; i <= ANIMATION_END; i++)
-            {
-                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud\\Bud_" + String.Format("{0:000}", i)));
-            }
-            Texture = TextureList[0];
-            DirectionX = 0;
-            speedTemp = 0;
-            this.budi = budi;
+            set { budi = value; }
         }
 
         public override void Update(GameTime gameTime)

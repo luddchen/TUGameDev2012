@@ -9,8 +9,8 @@ namespace Robuddies.Objects
 {
     class Robot : GameObject
     {
-        private RobotPart bud;
-        private RobotPart budi;
+        private Bud bud;
+        private Budi budi;
         private RobotPart budBudi;
         private RobotPart head;
         private RobotPart activePart;
@@ -30,8 +30,10 @@ namespace Robuddies.Objects
             inactiveParts = new List<RobotPart>();
 
             budi = new Budi(content, new Vector2(pos.X, pos.Y + 200));
-            bud = new Bud(content, pos, budi);
+            bud = new Bud(content, pos);
             budBudi = new BudBudi(content, pos);
+            bud.Budi = budi;
+            budi.Bud = bud;
 
             activePart = budBudi;
             robotParts.Add(budBudi);
@@ -81,6 +83,10 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(budBudi);
                 robotParts.Add(budi);
                 bud.setPosition(budBudi.Position.X, bud.Position.Y);
+                bud.Destination.X = budBudi.Destination.X;
+                bud.Destination.Y = budBudi.Destination.Y;
+                bud.Destination.Width = (int) bud.Width;
+                bud.Destination.Height = (int) bud.Height;
                 budi.setPosition(budBudi.Position.X, budi.Position.Y);
                 activePart = budi;
                 seperated = true;
@@ -180,15 +186,26 @@ namespace Robuddies.Objects
 
             if (Keyboard.GetState().IsKeyDown(Keys.S))
             {
-                this.Seperate();
+                if (activePart.CurrentState == RobotPart.State.Waiting)
+                {
+                    this.Seperate();
+                }
             }
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
             {
-                this.changeActivePart();
+                if (activePart.CurrentState == RobotPart.State.Waiting)
+                {
+                    this.changeActivePart();
+                }
             }
 
             foreach (RobotPart part in robotParts)
+            {
+                part.Update(gameTime);
+            }
+
+            foreach (RobotPart part in inactiveParts)
             {
                 part.Update(gameTime);
             }
@@ -206,7 +223,7 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(budi);
                 robotParts.Add(budi);
                 bud.Destination.X = (int) (bud.Position.X - budi.Position.X + bud.Destination.X);
-                //bud.Destination.Y = (int) (bud.Position.Y - budi.Position.Y);
+                //bud.Destination.Y = (int) (bud.Position.Y - budi.Position.Y + bud.Destination.Y);
                 activePart = budi;
             }
             // switch from budi to bud
@@ -217,7 +234,7 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(bud);
                 robotParts.Add(bud);
                 budi.Destination.X = (int)(budi.Position.X - bud.Position.X + budi.Destination.X);
-                //budi.Destination.Y = (int) (budi.Position.Y - bud.Position.Y);
+                //budi.Destination.Y = (int) (budi.Position.Y - bud.Position.Y + budi.Destination.Y);
                 activePart = bud;
             }
         }
@@ -226,8 +243,6 @@ namespace Robuddies.Objects
         {
             foreach (RobotPart part in robotParts)
             {
-                Console.WriteLine("Position: " + part.Position);
-                Console.WriteLine("Destination: " + part.Destination);
                 part.Destination = Destination;
                 Position = ActivePart.Position;
                 part.Draw(spriteBatch);
@@ -235,6 +250,8 @@ namespace Robuddies.Objects
 
             foreach (RobotPart part in inactiveParts)
             {
+                Console.WriteLine("Position: " + part.Position);
+                Console.WriteLine("Destination: " + part.Destination);
                 part.Draw(spriteBatch);
             }
         }
