@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Levels\Level_2.cs" />
     <Compile Include="Objects\AnimatedObject.cs" />
     <Compile Include="Objects\BackgroundLayer.cs" />
     <Compile Include="Objects\Bud.cs" />

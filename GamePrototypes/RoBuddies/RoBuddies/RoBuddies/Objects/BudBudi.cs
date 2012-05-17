@@ -13,6 +13,8 @@ namespace Robuddies.Objects
         private float texNr = 0;
         private float speedTemp;
 
+        float goundHeight;
+
         public override float DirectionX
         {
             set
@@ -95,6 +97,7 @@ namespace Robuddies.Objects
                 }
                 if (texNr >= 39)
                 {
+                    goundHeight = Position.Y;
                     CurrentState = State.Jumping;
                     DirectionX = speedTemp;
                 }
@@ -103,9 +106,10 @@ namespace Robuddies.Objects
             if (CurrentState == State.Jumping)
             {
                 texNr = 39;
+
                 setPosition(Position.X, Position.Y + DirectionY * 2);
                 DirectionY -= 0.1f;
-                if (Position.Y <= 0)
+                if (Position.Y <= goundHeight)
                 {
                     CurrentState = State.StopJumping;
                 }

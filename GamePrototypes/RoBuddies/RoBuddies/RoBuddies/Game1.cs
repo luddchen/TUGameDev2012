@@ -163,6 +163,17 @@ namespace Robuddies
                     Console.Out.WriteLine("Level_Underwater loaded");
                 }
             }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.D7))
+            {
+                if (!(level is Level_2))
+                {
+                    level = new Level_2(this);
+                    level.LoadContent();
+                    Window_ClientSizeChanged(null, null);
+                    Console.Out.WriteLine("Level_2 loaded");
+                }
+            }
         }
     }
 }
