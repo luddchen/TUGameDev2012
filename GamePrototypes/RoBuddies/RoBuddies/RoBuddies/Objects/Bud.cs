@@ -13,6 +13,8 @@ namespace Robuddies.Objects
         float texNr = 0;
         float speedTemp;
 
+        private RobotPart budi;
+
         public override float DirectionX
         {
             set
@@ -35,17 +37,17 @@ namespace Robuddies.Objects
             }
         }
 
-        public Bud(ContentManager content, Vector2 pos)
+        public Bud(ContentManager content, Vector2 pos, RobotPart budi)
             : base(content, pos)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
                 TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Bud\\Bud_" + String.Format("{0:000}", i)));
             }
-
             Texture = TextureList[0];
             DirectionX = 0;
             speedTemp = 0;
+            this.budi = budi;
         }
 
         public override void Update(GameTime gameTime)
@@ -60,6 +62,7 @@ namespace Robuddies.Objects
                 texNr += 0.5f;
                 if (texNr > TextureList.Count) { texNr = TextureList.Count-1; }
                 setPosition(Position.X + DirectionX * 2, Position.Y);
+                budi.Destination.Offset( (int)- DirectionX * 2, 0);
             }
 
             if (CurrentState == State.Walking)
