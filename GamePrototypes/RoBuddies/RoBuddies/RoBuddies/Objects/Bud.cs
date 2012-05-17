@@ -8,7 +8,7 @@ namespace Robuddies.Objects
 {
     class Bud : RobotPart
     {
-        private const int ANIMATION_END = 10;
+        private const int ANIMATION_END = 40;
 
         float texNr = 0;
         float speedTemp;
