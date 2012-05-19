@@ -10,6 +10,7 @@ namespace Robuddies.Objects
 {
     class Robot : GameObject
     {
+        private KeyboardState oldState;
         private Bud bud;
         private Budi budi;
         private RobotPart budBudi;
@@ -17,9 +18,6 @@ namespace Robuddies.Objects
         private RobotPart activePart;
 
         private bool seperated;
-        private int seperationDelay = 0;
-        // delay for changing between active part
-        private int changeActivePartDelay = 0;
 
         private List<RobotPart> robotParts;
         private List<RobotPart> inactiveParts;
@@ -74,8 +72,6 @@ namespace Robuddies.Objects
 
         private void Seperate()
         {
-            if (seperationDelay > 0) return;
-
             if (!IsSeperated)
             {
                 robotParts.Remove(budBudi);
@@ -83,15 +79,14 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(budi);
                 inactiveParts.Remove(budBudi);
                 robotParts.Add(budi);
-                bud.setPosition(budBudi.Position.X, bud.Position.Y);
-                bud.Destination.X = budBudi.Destination.X;
-                bud.Destination.Y = budBudi.Destination.Y;
-                bud.Destination.Width = (int) bud.Width;
-                bud.Destination.Height = (int) bud.Height;
-                budi.setPosition(budBudi.Position.X, budi.Position.Y);
+                //bud.setPosition(budBudi.Position.X, bud.Position.Y);
+                //bud.Destination.X = budBudi.Destination.X;
+                //bud.Destination.Y = budBudi.Destination.Y;
+                //bud.Destination.Width = (int)bud.Width;
+                //bud.Destination.Height = (int)bud.Height;
+                //budi.setPosition(budBudi.Position.X, budi.Position.Y);
                 activePart = budi;
                 seperated = true;
-                seperationDelay = 10;
             }
             else
             {
@@ -101,9 +96,8 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(bud);
                 inactiveParts.Remove(budi);
                 activePart = budBudi;
-                budBudi.setPosition(bud.Position.X, bud.Position.Y);
+                //budBudi.setPosition(bud.Position.X, bud.Position.Y);
                 seperated = false;
-                seperationDelay = 10;
             }
         }
 
@@ -136,10 +130,9 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
-            seperationDelay--;
-            changeActivePartDelay--;
+            KeyboardState currentState = Keyboard.GetState();
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Left))
+            if (currentState.IsKeyDown(Keys.Left))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
                 {
@@ -148,7 +141,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Right))
+            if (currentState.IsKeyDown(Keys.Right))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
                 {
@@ -157,7 +150,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (!Keyboard.GetState().IsKeyDown(Keys.Right) && activePart.DirectionX == 1)
+            if (!currentState.IsKeyDown(Keys.Right) && activePart.DirectionX == 1)
             {
                 if (activePart.CurrentState == RobotPart.State.Walking)
                 {
@@ -165,7 +158,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (!Keyboard.GetState().IsKeyDown(Keys.Left) && activePart.DirectionX == -1)
+            if (!currentState.IsKeyDown(Keys.Left) && activePart.DirectionX == -1)
             {
                 if (activePart.CurrentState == RobotPart.State.Walking)
                 {
@@ -173,7 +166,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
             {
                 if ((activePart.CurrentState != RobotPart.State.Jumping) &&
                     (activePart.CurrentState != RobotPart.State.StartJumping) &&
@@ -185,7 +178,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.S))
+            if (currentState.IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
                 {
@@ -193,7 +186,7 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftAlt))
+            if (currentState.IsKeyDown(Keys.LeftAlt) && oldState.IsKeyUp(Keys.LeftAlt))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
                 {
@@ -210,31 +203,31 @@ namespace Robuddies.Objects
             {
                 part.Update(gameTime);
             }
+
+            oldState = currentState;
         }
 
         // changes the active robot part if seperated
         private void changeActivePart()
         {
             // switch from bud to budi
-            if (changeActivePartDelay <= 0 && IsSeperated && activePart == bud)
+            if (IsSeperated && activePart == bud)
             {
-                changeActivePartDelay = 10;
                 robotParts.Remove(bud);
                 inactiveParts.Add(bud);
                 inactiveParts.Remove(budi);
                 robotParts.Add(budi);
-                bud.Destination.X = (int) (bud.Position.X - budi.Position.X + bud.Destination.X);
+                //bud.Destination.X = (int) (bud.Position.X - budi.Position.X + bud.Destination.X);
                 //bud.Destination.Y = (int) (bud.Position.Y - budi.Position.Y + bud.Destination.Y);
                 activePart = budi;
             }
             // switch from budi to bud
-            if (changeActivePartDelay <= 0 && IsSeperated && activePart == budi) {
-                changeActivePartDelay = 10;
+            if (IsSeperated && activePart == budi) {
                 robotParts.Remove(budi);
                 inactiveParts.Add(budi);
                 inactiveParts.Remove(bud);
                 robotParts.Add(bud);
-                budi.Destination.X = (int)(budi.Position.X - bud.Position.X + budi.Destination.X);
+                //budi.Destination.X = (int)(budi.Position.X - bud.Position.X + budi.Destination.X);
                 //budi.Destination.Y = (int) (budi.Position.Y - bud.Position.Y + budi.Destination.Y);
                 activePart = bud;
             }
@@ -244,6 +237,8 @@ namespace Robuddies.Objects
         {
             foreach (RobotPart part in robotParts)
             {
+                Console.WriteLine("Position: " + Position);
+                Console.WriteLine("Destination: " + Destination);
                 part.Destination = Destination;
                 Position = ActivePart.Position;
                 part.Draw(spriteBatch);
