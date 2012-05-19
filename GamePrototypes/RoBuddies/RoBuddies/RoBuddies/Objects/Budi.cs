@@ -9,16 +9,31 @@ namespace Robuddies.Objects
 {
     class Budi : RobotPart
     {
-        private const int ANIMATION_END = 1;
-        float texNr = 0;
+        public enum BudiState
+        {
+            Seperation,
+            Unseperation,
+            StartClimbing,
+            Climbing,
+            StopClimbing,
+            UseLadder,
+            UseLever
+        };
 
+        private const int ANIMATION_BEGIN = 80;
+        private const int ANIMATION_END = 130;
+        private float texNr = ANIMATION_BEGIN;
+        private BudiState CurrentBudiState;
         private RobotPart bud;
 
         public Budi(ContentManager content, Vector2 pos, World world)
             : base(content, pos, world)
         {
-            TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi\\Budi_001"));
-
+            for (int i = ANIMATION_BEGIN; i <= ANIMATION_END; i++)
+            {
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi\\0" + String.Format("{0:000}", i)));
+            }
+            
             Texture = TextureList[0];
             DirectionX = 1;
         }
@@ -51,10 +66,10 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
-            if (texNr > TextureList.Count - 1) { texNr = TextureList.Count - 1; }
-            if (texNr < 0) { texNr = 0; }
+            if (texNr > TextureList.Count + ANIMATION_BEGIN) { texNr = TextureList.Count + ANIMATION_BEGIN; }
+            if (texNr < ANIMATION_BEGIN) { texNr = ANIMATION_BEGIN; }
             //Console.Out.WriteLine(texNr);
-            Texture = TextureList[(int)(texNr)];
+            Texture = TextureList[(int)(texNr - ANIMATION_BEGIN)];
 
             if (CurrentState != State.Waiting)
             {
@@ -62,34 +77,9 @@ namespace Robuddies.Objects
                 bud.Destination.Offset((int)-DirectionX * 2, 0);
             }
 
-            if (CurrentState == State.Walking)
+            if (CurrentBudiState == BudiState.Climbing)
             {
                 // walk animation
-            }
-
-            if (CurrentState == State.StartWalking)
-            {
-                CurrentState = State.Walking;
-            }
-
-            if (CurrentState == State.StopWalking)
-            {
-                CurrentState = State.Waiting;
-            }
-
-            if (CurrentState == State.StartJumping)
-            {
-                CurrentState = State.Jumping;
-            }
-
-            if (CurrentState == State.Jumping)
-            {
-                CurrentState = State.StopJumping;
-            }
-
-            if (CurrentState == State.StopJumping)
-            {
-                    CurrentState = State.Waiting;
             }
         }
 

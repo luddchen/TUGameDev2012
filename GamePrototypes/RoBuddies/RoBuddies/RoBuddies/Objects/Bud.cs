@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
 
 namespace Robuddies.Objects
@@ -10,9 +11,9 @@ namespace Robuddies.Objects
     class Bud : RobotPart
     {
         private const int ANIMATION_END = 40;
-
-        float texNr = 0;
-        float speedTemp;
+        private KeyboardState oldState;
+        private float texNr = 0;
+        private float speedTemp;
 
         private RobotPart budi;
 
@@ -57,6 +58,8 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
+            GetInput();
+
             if (texNr > TextureList.Count - 1) { texNr = TextureList.Count - 1; }
             if (texNr < 0) { texNr = 0; }
             //Console.Out.WriteLine(texNr);
@@ -135,5 +138,57 @@ namespace Robuddies.Objects
             }
         }
 
+        private void GetInput()
+        {
+            KeyboardState currentState = Keyboard.GetState();
+
+            if (currentState.IsKeyDown(Keys.Left))
+            {
+                if (this.CurrentState == RobotPart.State.Waiting)
+                {
+                    this.CurrentState = RobotPart.State.StartWalking;
+                    this.DirectionX = -1; ;
+                }
+            }
+
+            if (currentState.IsKeyDown(Keys.Right))
+            {
+                if (this.CurrentState == RobotPart.State.Waiting)
+                {
+                    this.CurrentState = RobotPart.State.StartWalking;
+                    this.DirectionX = 1;
+                }
+            }
+
+            if (!currentState.IsKeyDown(Keys.Right) && this.DirectionX == 1)
+            {
+                if (this.CurrentState == RobotPart.State.Walking)
+                {
+                    this.CurrentState = RobotPart.State.StopWalking;
+                }
+            }
+
+            if (!currentState.IsKeyDown(Keys.Left) && this.DirectionX == -1)
+            {
+                if (this.CurrentState == RobotPart.State.Walking)
+                {
+                    this.CurrentState = RobotPart.State.StopWalking;
+                }
+            }
+
+            if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
+            {
+                if ((this.CurrentState != RobotPart.State.Jumping) &&
+                    (this.CurrentState != RobotPart.State.StartJumping) &&
+                    (this.CurrentState != RobotPart.State.StopJumping))
+                {
+                    this.CurrentState = RobotPart.State.StartJumping;
+                    if (this.IsSeperated) { this.DirectionY = 3.5f; }
+                    if (!this.IsSeperated) { this.DirectionY = 2.5f; }
+                }
+            }
+
+            oldState = currentState;
+        }
     }
 }

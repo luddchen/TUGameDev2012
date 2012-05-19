@@ -132,52 +132,6 @@ namespace Robuddies.Objects
         {
             KeyboardState currentState = Keyboard.GetState();
 
-            if (currentState.IsKeyDown(Keys.Left))
-            {
-                if (activePart.CurrentState == RobotPart.State.Waiting)
-                {
-                    activePart.CurrentState = RobotPart.State.StartWalking;
-                    activePart.DirectionX = -1; ;
-                }
-            }
-
-            if (currentState.IsKeyDown(Keys.Right))
-            {
-                if (activePart.CurrentState == RobotPart.State.Waiting)
-                {
-                    activePart.CurrentState = RobotPart.State.StartWalking;
-                    activePart.DirectionX = 1;
-                }
-            }
-
-            if (!currentState.IsKeyDown(Keys.Right) && activePart.DirectionX == 1)
-            {
-                if (activePart.CurrentState == RobotPart.State.Walking)
-                {
-                    activePart.CurrentState = RobotPart.State.StopWalking;
-                }
-            }
-
-            if (!currentState.IsKeyDown(Keys.Left) && activePart.DirectionX == -1)
-            {
-                if (activePart.CurrentState == RobotPart.State.Walking)
-                {
-                    activePart.CurrentState = RobotPart.State.StopWalking;
-                }
-            }
-
-            if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
-            {
-                if ((activePart.CurrentState != RobotPart.State.Jumping) &&
-                    (activePart.CurrentState != RobotPart.State.StartJumping) &&
-                    (activePart.CurrentState != RobotPart.State.StopJumping))
-                {
-                    activePart.CurrentState = RobotPart.State.StartJumping;
-                    if (activePart.IsSeperated) { activePart.DirectionY = 3.5f; }
-                    if (!activePart.IsSeperated) { activePart.DirectionY = 2.5f; }
-                }
-            }
-
             if (currentState.IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S))
             {
                 if (activePart.CurrentState == RobotPart.State.Waiting)
