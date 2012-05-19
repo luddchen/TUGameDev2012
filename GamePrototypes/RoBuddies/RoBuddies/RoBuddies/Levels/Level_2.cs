@@ -73,7 +73,7 @@ namespace Robuddies.Levels
             layers.Add(layerHighWall);
 
             mainLayer.remove(player);
-            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, groundTex.Height * 14), gameWorld);
+            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, groundTex.Height * 14), gameWorld, this);
             player.Size *= 0.3f;
             mainLayer.add(player);
             //player.Position = new Vector2(TitleSafe.Width / 2, groundTex.Height * 14);

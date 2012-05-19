@@ -47,6 +47,11 @@ namespace Robuddies.Levels
             get { return gameWorld; }
         }
 
+        public Layer MainLayer
+        {
+            get { return mainLayer; }
+        }
+
         public float Offset
         {
             set
@@ -79,7 +84,8 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0), gameWorld); player.Size *= 0.3f;
+
+            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0), gameWorld, this); player.Size *= 0.3f;
             //budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
             //budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
             mainLayer.add(player);

@@ -126,6 +126,7 @@
     <Compile Include="Levels\Level_Underwater.cs" />
     <Compile Include="Objects\Robot.cs" />
     <Compile Include="Objects\RobotPart.cs" />
+    <Compile Include="Objects\Wall.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

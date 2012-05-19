@@ -9,7 +9,8 @@ namespace Robuddies.Objects
         public Rectangle Destination;
         public float LayerDepth;
 
-        public Texture2D texture;
+        protected Texture2D texture;
+
         public virtual Texture2D Texture
         {
             get { return texture; }
@@ -39,12 +40,30 @@ namespace Robuddies.Objects
         float size;
         public virtual float Width
         {
-            get { return texture.Width * size; }
+            get {
+                if (texture != null)
+                {
+                    return texture.Width * size;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         }
 
         public virtual float Height
         {
-            get { return texture.Height * size; }
+            get {
+                if (texture != null)
+                {
+                    return texture.Height * size;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         }
 
         public virtual float Size
@@ -72,8 +91,7 @@ namespace Robuddies.Objects
         {
             init();
             position = pos;
-            if (tex != null)
-            {
+            if (tex != null) {
                 Texture = tex;
             }
         }

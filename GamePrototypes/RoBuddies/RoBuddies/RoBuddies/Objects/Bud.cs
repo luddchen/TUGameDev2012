@@ -17,8 +17,8 @@ namespace Robuddies.Objects
 
         private RobotPart budi;
 
-        public Bud(ContentManager content, Vector2 pos, World world)
-            : base(content, pos, world)
+        public Bud(ContentManager content, Vector2 pos, World world, PhysicObject physics)
+            : base(content, pos, world, physics)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
@@ -64,6 +64,7 @@ namespace Robuddies.Objects
             if (texNr < 0) { texNr = 0; }
             //Console.Out.WriteLine(texNr);
             Texture = TextureList[(int)(texNr)];
+            Physics.Texture = TextureList[(int)(texNr)];
 
             if (CurrentState != State.Waiting)
             {

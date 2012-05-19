@@ -18,7 +18,7 @@ namespace Robuddies.Objects
             {
                 float drawSize = ((float)(TitleSafe.Height)) * obj.Size;
                 dest.X = (int)(TitleSafe.Width * obj.Position.X); dest.Y = (int)(TitleSafe.Height - TitleSafe.Height * obj.Position.Y);
-                dest.Width = (int)(drawSize * ((float)obj.texture.Width) / ((float)obj.texture.Height)); dest.Height = (int)(drawSize);
+                dest.Width = (int)(drawSize * ((float)obj.Texture.Width) / ((float)obj.Texture.Height)); dest.Height = (int)(drawSize);
                 spriteBatch.Draw(obj.Texture, dest, null, obj.Color, obj.Rotation, obj.origin, obj.effects, 0.99f);
             }
 

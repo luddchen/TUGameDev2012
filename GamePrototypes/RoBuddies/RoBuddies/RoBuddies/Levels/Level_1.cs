@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Robuddies.Objects;
+using FarseerPhysics.Dynamics.Contacts;
 
 namespace Robuddies.Levels
 {
@@ -38,7 +39,9 @@ namespace Robuddies.Levels
             Texture2D tree3 = game.Content.Load<Texture2D>("Sprites\\tree3");
             Texture2D tree4 = game.Content.Load<Texture2D>("Sprites\\tree4");
 
-            Texture2D square = game.Content.Load<Texture2D>("Sprites\\Cloud1");
+            Texture2D squareCloud = game.Content.Load<Texture2D>("Sprites\\Cloud1");
+
+            Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
 
             Layer layer10 = new Layer(); layer10.LoadContent(); layer10.Depth = 0.98f;
             Layer layer11 = new Layer(); layer11.LoadContent(); layer11.Depth = 0.96f;
@@ -140,12 +143,41 @@ namespace Robuddies.Levels
             layers.Add(layer4);
             layers.Add(layer5);
 
-            PhysicObject squareObj = new PhysicObject(square, new Vector2(100, 200), gameWorld);
-            squareObj.Color = Color.Red;
-            squareObj.Size = 0.5f;
-            squareObj.Body.BodyType = BodyType.Dynamic;
-            mainLayer.add(squareObj);
+            // testing collision
+            //PhysicObject squareObj = new PhysicObject(square, new Vector2(100, 200), gameWorld);
+            //squareObj.Color = Color.Red;
+            //squareObj.Size = 0.5f;
+            //squareObj.Body.BodyType = BodyType.Dynamic;
+            //FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, squareObj.Body);
+            //addToMyOnCollision(squareObj);
+            //mainLayer.add(squareObj);
+
+            //PhysicObject squareObj2 = new PhysicObject(square, new Vector2(200, 200), gameWorld);
+            //squareObj2.Color = Color.Red;
+            //squareObj2.Size = 0.5f;
+            //squareObj2.Body.BodyType = BodyType.Dynamic;
+            //FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, squareObj2.Body);
+            //addToMyOnCollision(squareObj2);
+            //mainLayer.add(squareObj2);
+
+            // testing wall
+            Wall wall1 = new Wall(new Vector2(100, 500), new Vector2(50000, 100), new Vector2(10, 5), 0.0f, Color.Green, Color.LightGreen, square, gameWorld);
+            wall1.Body.BodyType = BodyType.Static;
+            FixtureFactory.AttachRectangle(50, 200, 10, Vector2.Zero, wall1.Body);
+            addToMyOnCollision(wall1);
+            mainLayer.add(wall1);
         }
 
+        public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            Console.WriteLine("test");
+            // test collision both balls
+            //if ((f1.Body == BudBudi.body && f2.Body == ball2.body) || (f1.Body == ball2.body && f2.Body == ball1.body))
+            //{
+            //    if (overlay != null) overlay.CenterString = "ball collision";
+            //    return true;
+            //}
+            return true;
+        }
     }
 }

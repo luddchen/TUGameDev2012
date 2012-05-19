@@ -9,6 +9,13 @@ namespace Robuddies.Objects
 {
     class RobotPart : AnimatedObject
     {
+        // force for moving the robotPart
+        private const float movementForce = 1000.0f;
+        private State currentState;
+        private PhysicObject physics;
+
+        protected bool seperated;
+
         public enum State
         {
             Waiting,
@@ -23,11 +30,7 @@ namespace Robuddies.Objects
             StopPushing
         };
 
-        private State currentState;
-
-        protected bool seperated;
-
-        public RobotPart(ContentManager content, Vector2 pos, World world)
+        public RobotPart(ContentManager content, Vector2 pos, World world, PhysicObject physics)
         {
             TextureList = new List<Texture2D>();
             Position = pos;
@@ -37,6 +40,12 @@ namespace Robuddies.Objects
             origin = new Vector2();
             Color = Color.White;
             CurrentState = State.Waiting;
+            this.Physics = physics;
+        }
+
+        public float MovementForce 
+        {
+            get { return movementForce; }
         }
 
         public State CurrentState
@@ -49,6 +58,12 @@ namespace Robuddies.Objects
         {
             get { return seperated; }
             set { seperated = value; }
+        }
+
+        public PhysicObject Physics
+        {
+            get { return physics; }
+            set { physics = value; }
         }
     }
 }

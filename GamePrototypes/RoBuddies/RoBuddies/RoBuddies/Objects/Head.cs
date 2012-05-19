@@ -9,8 +9,8 @@ namespace Robuddies.Objects
 {
     class Head : RobotPart
     {
-        public Head(ContentManager content, Vector2 pos, World world)
-            : base(content, pos, world)
+        public Head(ContentManager content, Vector2 pos, World world, PhysicObject physics)
+            : base(content, pos, world, physics)
         {
         }
     }

@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
 
 namespace Robuddies.Objects
 {
@@ -39,8 +41,8 @@ namespace Robuddies.Objects
             }
         }
 
-        public BudBudi(ContentManager content, Vector2 pos, World world)
-            : base(content, pos, world)
+        public BudBudi(ContentManager content, Vector2 pos, World world, PhysicObject physics)
+            : base(content, pos, world, physics)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
@@ -60,6 +62,7 @@ namespace Robuddies.Objects
             if (texNr < 0) { texNr = 0; }
             //Console.Out.WriteLine(texNr);
             Texture = TextureList[(int)(texNr)];
+            Physics.Texture = TextureList[(int)(texNr)];
 
             if (CurrentState != State.Waiting)
             {
@@ -144,6 +147,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
+                    Physics.Body.ApplyForce(new Vector2(-MovementForce * Physics.Body.Mass, 0));
                     this.CurrentState = RobotPart.State.StartWalking;
                     this.DirectionX = -1; ;
                 }
@@ -153,6 +157,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
+                    Physics.Body.ApplyForce(new Vector2(MovementForce * Physics.Body.Mass, 0));
                     this.CurrentState = RobotPart.State.StartWalking;
                     this.DirectionX = 1;
                 }
@@ -162,6 +167,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
+                    Physics.Body.ApplyForce(new Vector2(-MovementForce * Physics.Body.Mass, 0));
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }
@@ -170,6 +176,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
+                    Physics.Body.ApplyForce(new Vector2(MovementForce * Physics.Body.Mass, 0));
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }

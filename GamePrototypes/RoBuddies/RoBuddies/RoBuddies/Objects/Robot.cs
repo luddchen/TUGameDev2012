@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
+using Robuddies.Levels;
+using FarseerPhysics.Factories;
 
 namespace Robuddies.Objects
 {
@@ -16,26 +18,81 @@ namespace Robuddies.Objects
         private RobotPart budBudi;
         private RobotPart head;
         private RobotPart activePart;
+        // the current level of the robot
+        private Level level;
 
         private bool seperated;
 
         private List<RobotPart> robotParts;
         private List<RobotPart> inactiveParts;
 
-        public Robot(ContentManager content, Vector2 pos, World world)
+        public Robot(ContentManager content, Vector2 pos, World world, Level level)
             : base()
         {
             robotParts = new List<RobotPart>();
             inactiveParts = new List<RobotPart>();
+            this.level = level;
 
-            budi = new Budi(content, new Vector2(pos.X, pos.Y + 200), world);
-            bud = new Bud(content, pos, world);
-            budBudi = new BudBudi(content, pos, world);
+            initRobots(content, pos, world);
+
+        }
+
+        /**
+         * Setups the robots and its physics in the current level
+         */
+        private void initRobots(ContentManager content, Vector2 pos, World world) 
+        {
+            // init physics for budBudi
+            PhysicObject budBudiPhysics = new PhysicObject(null, new Vector2(100, 200), world);
+            budBudiPhysics.Color = Color.White;
+            budBudiPhysics.Size = 0.3f;
+            budBudiPhysics.Body.FixedRotation = true;
+            budBudiPhysics.Body.BodyType = BodyType.Dynamic;
+            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budBudiPhysics.Body);
+            level.MainLayer.add(budBudiPhysics);
+            level.addToMyOnCollision(budBudiPhysics);
+
+            // init physics for budi
+            PhysicObject budiPhysics = new PhysicObject(null, new Vector2(250, 200), world);
+            budiPhysics.Body.FixedRotation = true;
+            budiPhysics.Color = Color.White;
+            budiPhysics.Size = 0.3f;
+            budBudiPhysics.Body.FixedRotation = true;
+            budiPhysics.Body.BodyType = BodyType.Dynamic;
+            budiPhysics.Body.Enabled = false;
+            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budiPhysics.Body);
+            level.MainLayer.add(budiPhysics);
+            level.addToMyOnCollision(budiPhysics);
+
+            // init physics for bud
+            PhysicObject budPhysics = new PhysicObject(null, new Vector2(300, 200), world);
+            budPhysics.Color = Color.White;
+            budPhysics.Size = 0.3f;
+            budBudiPhysics.Body.FixedRotation = true;
+            budPhysics.Body.BodyType = BodyType.Dynamic;
+            budPhysics.Body.Enabled = false;
+            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budPhysics.Body);
+            level.MainLayer.add(budPhysics);
+            level.addToMyOnCollision(budPhysics);
+
+            budi = new Budi(content, new Vector2(pos.X, pos.Y + 200), world, budiPhysics);
+            bud = new Bud(content, pos, world, budPhysics);
+            budBudi = new BudBudi(content, pos, world, budBudiPhysics);
             bud.Budi = budi;
             budi.Bud = bud;
-
             activePart = budBudi;
             robotParts.Add(budBudi);
+        }
+
+        /**
+         * !UNTESTED!
+         * Changes the current level of the robot
+         * 
+         */
+        private void changeLevel(Level level, ContentManager content, Vector2 pos, World world)
+        {
+            this.level = level;
+            initRobots(content, pos, world);
         }
 
         public List<RobotPart> RobotParts
@@ -191,8 +248,8 @@ namespace Robuddies.Objects
         {
             foreach (RobotPart part in robotParts)
             {
-                Console.WriteLine("Position: " + Position);
-                Console.WriteLine("Destination: " + Destination);
+                //Console.WriteLine("Position: " + Position);
+                //Console.WriteLine("Destination: " + Destination);
                 part.Destination = Destination;
                 Position = ActivePart.Position;
                 part.Draw(spriteBatch);
