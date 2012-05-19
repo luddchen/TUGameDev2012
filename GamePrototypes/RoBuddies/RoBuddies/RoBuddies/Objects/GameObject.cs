@@ -72,7 +72,10 @@ namespace Robuddies.Objects
         {
             init();
             position = pos;
-            Texture = tex;
+            if (tex != null)
+            {
+                Texture = tex;
+            }
         }
 
         private void init()

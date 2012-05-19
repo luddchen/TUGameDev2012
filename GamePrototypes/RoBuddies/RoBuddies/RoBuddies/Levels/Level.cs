@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics;
 using Robuddies.Objects;
+using FarseerPhysics.Dynamics.Contacts;
 
 namespace Robuddies.Levels
 {
@@ -78,7 +79,7 @@ namespace Robuddies.Levels
             mainLayer = new Layer();
             mainLayer.LoadContent();
             mainLayer.Depth = 0.5f;
-            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0)); player.Size *= 0.3f;
+            player = new Robot(game.Content, new Vector2(TitleSafe.Width / 2, 0), gameWorld); player.Size *= 0.3f;
             //budi = new Budi(game.Content, new Vector2(TitleSafe.Width / 2, 200)); budi.Size *= 0.3f;
             //budBudi = new BudBudi(game.Content, new Vector2(TitleSafe.Width / 2, 0)); budBudi.Size *= 0.3f;
             mainLayer.add(player);
@@ -119,6 +120,27 @@ namespace Robuddies.Levels
             }
 
             spriteBatch.End();
+        }
+
+        public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            return true;
+        }
+
+        public void addToMyOnCollision(PhysicObject physicObject)
+        {
+            foreach (Fixture fix in physicObject.Body.FixtureList)
+            {
+                fix.OnCollision += MyOnCollision;
+            }
+        }
+
+        public void removeFromMyOnCollision(PhysicObject physicObject)
+        {
+            foreach (Fixture fix in physicObject.Body.FixtureList)
+            {
+                fix.OnCollision -= MyOnCollision;
+            }
         }
 
     }

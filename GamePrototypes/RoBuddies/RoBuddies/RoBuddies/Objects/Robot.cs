@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
+using FarseerPhysics.Dynamics;
 
 namespace Robuddies.Objects
 {
@@ -23,15 +24,15 @@ namespace Robuddies.Objects
         private List<RobotPart> robotParts;
         private List<RobotPart> inactiveParts;
 
-        public Robot(ContentManager content, Vector2 pos)
+        public Robot(ContentManager content, Vector2 pos, World world)
             : base()
         {
             robotParts = new List<RobotPart>();
             inactiveParts = new List<RobotPart>();
 
-            budi = new Budi(content, new Vector2(pos.X, pos.Y + 200));
-            bud = new Bud(content, pos);
-            budBudi = new BudBudi(content, pos);
+            budi = new Budi(content, new Vector2(pos.X, pos.Y + 200), world);
+            bud = new Bud(content, pos, world);
+            budBudi = new BudBudi(content, pos, world);
             bud.Budi = budi;
             budi.Bud = bud;
 
@@ -250,8 +251,8 @@ namespace Robuddies.Objects
 
             foreach (RobotPart part in inactiveParts)
             {
-                Console.WriteLine("Position: " + part.Position);
-                Console.WriteLine("Destination: " + part.Destination);
+                //Console.WriteLine("Position: " + part.Position);
+                //Console.WriteLine("Destination: " + part.Destination);
                 part.Draw(spriteBatch);
             }
         }

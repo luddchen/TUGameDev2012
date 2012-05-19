@@ -3,16 +3,22 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using System.Collections.Generic;
 
 namespace Robuddies.Objects
 {
     class PhysicObject : GameObject
     {
         private Body body;
-        private World world;
+        protected World world;
+        private List<Texture2D> textureList;
+
+        protected float directionX;
+        protected float directionY;
+
 
         public PhysicObject(Texture2D tex, Vector2 pos, World world)
-        : base(tex, pos)
+            : base(tex, pos)
         {
             this.world = world;
             body = BodyFactory.CreateBody(this.world, pos);
@@ -27,6 +33,7 @@ namespace Robuddies.Objects
         public World World
         {
             get { return world; }
+            set { world = value; }
         }
 
         public override Vector2 Position
@@ -45,6 +52,24 @@ namespace Robuddies.Objects
         {
             Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)Width, (int)Height);
             spriteBatch.Draw(Texture, dest, null, Color, Rotation, origin, effects, LayerDepth);
+        }
+
+        public virtual float DirectionX
+        {
+            set { directionX = value; }
+            get { return directionX; }
+        }
+
+        public virtual float DirectionY
+        {
+            set { directionY = value; }
+            get { return directionY; }
+        }
+
+        public List<Texture2D> TextureList
+        {
+            get { return textureList; }
+            set { textureList = value; }
         }
     }
 }

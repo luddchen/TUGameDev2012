@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using FarseerPhysics.Dynamics;
 
 namespace Robuddies.Objects
 {
@@ -26,7 +27,7 @@ namespace Robuddies.Objects
 
         protected bool seperated;
 
-        public RobotPart(ContentManager content, Vector2 pos)
+        public RobotPart(ContentManager content, Vector2 pos, World world)
         {
             TextureList = new List<Texture2D>();
             Position = pos;

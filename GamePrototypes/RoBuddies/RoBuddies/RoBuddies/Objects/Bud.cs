@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using FarseerPhysics.Dynamics;
 
 namespace Robuddies.Objects
 {
@@ -15,8 +16,8 @@ namespace Robuddies.Objects
 
         private RobotPart budi;
 
-        public Bud(ContentManager content, Vector2 pos)
-            : base(content, pos)
+        public Bud(ContentManager content, Vector2 pos, World world)
+            : base(content, pos, world)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
