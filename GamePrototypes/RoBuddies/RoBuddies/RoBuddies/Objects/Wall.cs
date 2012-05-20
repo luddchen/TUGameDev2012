@@ -27,7 +27,7 @@ namespace Robuddies.Objects
         {
             this.size = size;
             this.color = color;
-            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(0, this.size.Y / 2), this.Body);
+            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             this.Body.Friction = 0;
             this.Body.BodyType = BodyType.Static;
             this.Position = pos;

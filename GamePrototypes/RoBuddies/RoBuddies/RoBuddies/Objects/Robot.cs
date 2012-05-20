@@ -54,7 +54,7 @@ namespace Robuddies.Objects
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
             // TODO: set better bounding box
-            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 3, budBudiPhysics.Height, 10, new Vector2(0, budBudiPhysics.Height / 2), budBudiPhysics.Body);
+            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 3, budBudiPhysics.Height, 10, new Vector2(budBudiPhysics.Width / 2, budBudiPhysics.Height / 2), budBudiPhysics.Body);
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
 
