@@ -75,7 +75,7 @@ namespace Robuddies.Objects
             if (CurrentState != State.Waiting)
             {
                 setPosition(Position.X + DirectionX * 2, Position.Y);
-                bud.Destination.Offset((int)-DirectionX * 2, 0);
+                //bud.Destination.Offset((int)-DirectionX * 2, 0);
             }
 
             if (CurrentBudiState == BudiState.Climbing)

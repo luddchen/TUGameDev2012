@@ -8,7 +8,7 @@ namespace Robuddies.Levels
 {
     class Level_Forest : Level
     {
-        public Level_Forest(Game game)
+        public Level_Forest(Game1 game)
             : base(game)
         {
         }

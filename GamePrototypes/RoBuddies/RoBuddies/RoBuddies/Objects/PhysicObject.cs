@@ -45,10 +45,10 @@ namespace Robuddies.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)Width, (int)Height);
+            //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)Width, (int)Height);
             if (Texture != null)
             {
-                spriteBatch.Draw(Texture, dest, null, Color, Rotation, origin, effects, LayerDepth);
+                spriteBatch.Draw(Texture, Position, Color);
             }
         }
 

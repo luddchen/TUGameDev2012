@@ -49,7 +49,7 @@ namespace Robuddies.Objects
             // init physics for budBudi
             budBudiPhysics = new PhysicObject(null, new Vector2(50, 200), world);
             budBudiPhysics.Color = Color.White;
-            budBudiPhysics.Size = 0.3f;
+            budBudiPhysics.Scale = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
             // TODO: set better bounding box
@@ -61,7 +61,7 @@ namespace Robuddies.Objects
             budiPhysics = new PhysicObject(null, new Vector2(250, 200), world);
             budiPhysics.Body.FixedRotation = true;
             budiPhysics.Color = Color.White;
-            budiPhysics.Size = 0.3f;
+            budiPhysics.Scale = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
             budiPhysics.Body.BodyType = BodyType.Dynamic;
             budiPhysics.Body.Enabled = false;
@@ -73,7 +73,7 @@ namespace Robuddies.Objects
             // init physics for bud
             budPhysics = new PhysicObject(null, new Vector2(300, 200), world);
             budPhysics.Color = Color.White;
-            budPhysics.Size = 0.3f;
+            budPhysics.Scale = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
             budPhysics.Body.BodyType = BodyType.Dynamic;
             budPhysics.Body.Enabled = false;
@@ -108,13 +108,13 @@ namespace Robuddies.Objects
             set { robotParts = value; }
         }
 
-        public override float Size
+        public override float Scale
         {
-            get { return activePart.Size; }
+            get { return activePart.Scale; }
             set {
-                bud.Size = value;
-                budBudi.Size = value;
-                budi.Size = value;
+                bud.Scale = value;
+                budBudi.Scale = value;
+                budi.Scale = value;
             }
         }
 
@@ -253,17 +253,17 @@ namespace Robuddies.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Console.WriteLine("PhysicPosition: " + budBudiPhysics.Position);
+            //Console.WriteLine("PhysicPosition: " + budBudiPhysics.Position);
 
-            budBudiPhysics.Destination = Destination;
-            budBudiPhysics.Position = ActivePart.Position;
+            //budBudiPhysics.Destination = Destination;
+            //budBudiPhysics.Position = ActivePart.Position;
 
             foreach (RobotPart part in robotParts)
             {
                 //Console.WriteLine("Position: " + Position);
                 //Console.WriteLine("Destination: " + Destination);
-                part.Destination = Destination;
-                Position = ActivePart.Position;
+                //part.Destination = Destination;
+                //Position = ActivePart.Position;
                 part.Draw(spriteBatch);
             }
 

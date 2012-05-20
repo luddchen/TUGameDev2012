@@ -37,8 +37,8 @@ namespace Robuddies.Objects
         {
             //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
             //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
-            Rectangle dest = new Rectangle((int)Destination.X, (int)Destination.Y, (int)size.X, (int)size.Y);
-            spriteBatch.Draw(Texture, dest, this.color);
+            //Rectangle dest = new Rectangle((int)Destination.X, (int)Destination.Y, (int)size.X, (int)size.Y);
+            spriteBatch.Draw(Texture, Position, this.color);
         }
     }
 }

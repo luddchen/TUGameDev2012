@@ -8,7 +8,7 @@ namespace Robuddies.Levels
 {
     class Level_See : Level
     {
-        public Level_See(Game game)
+        public Level_See(Game1 game)
             : base(game)
         {
         }

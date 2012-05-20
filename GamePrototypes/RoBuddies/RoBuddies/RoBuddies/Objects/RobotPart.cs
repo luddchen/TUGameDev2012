@@ -34,15 +34,15 @@ namespace Robuddies.Objects
         {
             TextureList = new List<Texture2D>();
             Position = pos;
-            Size = 1;
+            Scale = 1;
             Rotation = 0;
             effects = SpriteEffects.None;
             origin = new Vector2();
             Color = Color.White;
             CurrentState = State.Waiting;
             this.Physics = physics;
-            this.Physics.Destination = this.Destination;
-            this.Physics.Position = this.Position;
+            //this.Physics.Destination = this.Destination;
+            //this.Physics.Position = this.Position;
         }
 
         public float MovementForce 

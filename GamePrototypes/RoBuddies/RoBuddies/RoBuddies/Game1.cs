@@ -16,7 +16,7 @@ namespace Robuddies
 
     public class Game1 : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Overlay overlay;
         Level level;
@@ -37,9 +37,6 @@ namespace Robuddies
 
             overlay = new Overlay(this);
             Components.Add(overlay);
-
-            level = new Level_1(this);
-
         }
 
 
@@ -49,7 +46,7 @@ namespace Robuddies
             titleSafe.Width = graphics.GraphicsDevice.Viewport.Width;
             titleSafe.Height = graphics.GraphicsDevice.Viewport.Height;
             overlay.TitleSafe = titleSafe;
-            level.TitleSafe = titleSafe;
+            level.ChangeViewport(graphics.GraphicsDevice.Viewport);
         }
 
 
@@ -61,6 +58,7 @@ namespace Robuddies
 
         protected override void LoadContent()
         {
+            level = new Level_1(this);
             spriteBatch = new SpriteBatch(GraphicsDevice);
             level.LoadContent();
             Window_ClientSizeChanged(null, null);

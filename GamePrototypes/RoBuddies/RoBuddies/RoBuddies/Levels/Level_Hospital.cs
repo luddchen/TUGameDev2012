@@ -8,7 +8,7 @@ namespace Robuddies.Levels
 {
     class Level_Hospital : Level
     {
-        public Level_Hospital(Game game)
+        public Level_Hospital(Game1 game)
             : base(game)
         {
         }

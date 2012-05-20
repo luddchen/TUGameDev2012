@@ -8,7 +8,7 @@ namespace Robuddies.Levels
 {
     class Level_Underwater : Level
     {
-        public Level_Underwater(Game game)
+        public Level_Underwater(Game1 game)
             : base(game)
         {
         }

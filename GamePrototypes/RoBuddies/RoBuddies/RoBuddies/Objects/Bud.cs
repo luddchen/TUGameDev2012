@@ -71,7 +71,7 @@ namespace Robuddies.Objects
                 texNr += 0.5f;
                 if (texNr > TextureList.Count) { texNr = TextureList.Count-1; }
                 setPosition(Position.X + DirectionX * 2, Position.Y);
-                budi.Destination.Offset( (int)- DirectionX * 2, 0);
+                //budi.Destination.Offset( (int)- DirectionX * 2, 0);
             }
 
             if (CurrentState == State.Walking)

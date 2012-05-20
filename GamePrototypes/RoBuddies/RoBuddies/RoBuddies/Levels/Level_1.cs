@@ -12,7 +12,8 @@ namespace Robuddies.Levels
     class Level_1 : Level
     {
 
-        public Level_1(Game game) : base(game)
+        public Level_1(Game1 game) 
+            : base(game)
         {
         }
 
@@ -26,9 +27,9 @@ namespace Robuddies.Levels
             Texture2D groundTex = game.Content.Load<Texture2D>("Sprites\\Ground1");
             Texture2D ground2Tex = game.Content.Load<Texture2D>("Sprites\\Ground2");
 
-            GameObject cloud1 = new GameObject(cloudTex, new Vector2(0.25f, 0.8f)); cloud1.Size = 0.4f;
-            GameObject cloud2 = new GameObject(cloudTex, new Vector2(0.75f, 0.7f)); cloud2.Size = 0.3f;
-            GameObject sun = new GameObject(sunTex, new Vector2(0.4f, 0.7f)); sun.Size = 0.3f;
+            GameObject cloud1 = new GameObject(cloudTex, new Vector2(0.25f, 0.8f)); cloud1.Scale = 0.4f;
+            GameObject cloud2 = new GameObject(cloudTex, new Vector2(0.75f, 0.7f)); cloud2.Scale = 0.3f;
+            GameObject sun = new GameObject(sunTex, new Vector2(0.4f, 0.7f)); sun.Scale = 0.3f;
             backgroundLayer.add(cloud1);
             backgroundLayer.add(cloud2);
             backgroundLayer.add(sun);
@@ -43,48 +44,48 @@ namespace Robuddies.Levels
 
             Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
 
-            Layer layer10 = new Layer(); layer10.LoadContent(); layer10.Depth = 0.98f;
-            Layer layer11 = new Layer(); layer11.LoadContent(); layer11.Depth = 0.96f;
-            Layer layer12 = new Layer(); layer12.LoadContent(); layer12.Depth = 0.94f;
-            Layer layer13 = new Layer(); layer13.LoadContent(); layer13.Depth = 0.92f;
-            Layer layer14 = new Layer(); layer14.LoadContent(); layer14.Depth = 0.90f;
+            Layer layer10 = new Layer(Camera); layer10.LoadContent(); layer10.Depth = 0.98f;
+            Layer layer11 = new Layer(Camera); layer11.LoadContent(); layer11.Depth = 0.96f;
+            Layer layer12 = new Layer(Camera); layer12.LoadContent(); layer12.Depth = 0.94f;
+            Layer layer13 = new Layer(Camera); layer13.LoadContent(); layer13.Depth = 0.92f;
+            Layer layer14 = new Layer(Camera); layer14.LoadContent(); layer14.Depth = 0.90f;
             Random random = new Random();
             GameObject cloud;
             for (int i = 0; i < 5; i++)
             {
                 cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next((int)(home.Height*0.5f), (int)(home.Height*1.9f)))); 
-                cloud.Size = (float)(random.NextDouble()/8 + 0.3d);
+                cloud.Scale = (float)(random.NextDouble()/8 + 0.3d);
                 cloud.Color = new Color(random.Next(192,255), random.Next(192,255), random.Next(192,255));
                 cloud.Rotation = (float)((random.NextDouble()-0.5d) * MathHelper.PiOver4);
                 layer10.add(cloud);
                 cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next((int)(home.Height * 0.5f), (int)(home.Height * 1.9f))));
-                cloud.Size = (float)(random.NextDouble() / 7 + 0.3d);
+                cloud.Scale = (float)(random.NextDouble() / 7 + 0.3d);
                 cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
                 cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
                 layer11.add(cloud);
                 cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next((int)(home.Height * 0.5f), (int)(home.Height * 1.9f))));
-                cloud.Size = (float)(random.NextDouble() / 6 + 0.3d);
+                cloud.Scale = (float)(random.NextDouble() / 6 + 0.3d);
                 cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
                 cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
                 layer12.add(cloud);
                 cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next((int)(home.Height * 0.5f), (int)(home.Height * 1.9f))));
-                cloud.Size = (float)(random.NextDouble() / 5 + 0.3d);
+                cloud.Scale = (float)(random.NextDouble() / 5 + 0.3d);
                 cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
                 cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
                 layer13.add(cloud);
                 cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next((int)(home.Height * 0.5f), (int)(home.Height * 1.9f))));
-                cloud.Size = (float)(random.NextDouble() / 4 + 0.3d);
+                cloud.Scale = (float)(random.NextDouble() / 4 + 0.3d);
                 cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
                 cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
                 layer14.add(cloud);
             }
 
-            Layer layer2 = new Layer();
+            Layer layer2 = new Layer(Camera);
             layer2.LoadContent();
             layer2.Depth = 0.7f;
             layer2.add(new GameObject(home, new Vector2(home.Width / 2, groundTex.Height + home.Height / 2)));
 
-            Layer layer30 = new Layer();
+            Layer layer30 = new Layer(Camera);
             layer30.LoadContent();
             layer30.Depth = 0.72f;
             GameObject tree;
@@ -94,7 +95,7 @@ namespace Robuddies.Levels
                 layer30.add(tree);
             }
 
-            Layer layer31 = new Layer();
+            Layer layer31 = new Layer(Camera);
             layer31.LoadContent();
             layer31.Depth = 0.8f;
             for (int i = 0; i < 10; i++)
@@ -103,7 +104,7 @@ namespace Robuddies.Levels
                 layer31.add(tree);
             }
 
-            Layer layer32 = new Layer();
+            Layer layer32 = new Layer(Camera);
             layer32.LoadContent();
             layer32.Depth = 0.85f;
             for (int i = 0; i < 10; i++)
@@ -112,7 +113,7 @@ namespace Robuddies.Levels
                 layer32.add(tree);
             }
 
-            Layer layer4 = new Layer();  // the road to walk
+            Layer layer4 = new Layer(Camera);  // the road to walk
             layer4.LoadContent();
             layer4.Depth = 0.52f;
 
@@ -123,25 +124,25 @@ namespace Robuddies.Levels
                 layer4.add(ground);
             }
 
-            Layer layer5 = new Layer();
+            Layer layer5 = new Layer(Camera);
             layer5.LoadContent();
             layer5.Depth = 0.88f;
-            GameObject ground2 = new GameObject(ground2Tex, new Vector2(ground2Tex.Width * 30, ground2Tex.Height * 20)); ground2.Size = 60;
+            GameObject ground2 = new GameObject(ground2Tex, new Vector2(ground2Tex.Width * 30, ground2Tex.Height * 20)); ground2.Scale = 60;
             layer5.add(ground2);
-            ground2 = new GameObject(ground2Tex, new Vector2(-ground2Tex.Width * 30, ground2Tex.Height * 20)); ground2.Size = 60;
+            ground2 = new GameObject(ground2Tex, new Vector2(-ground2Tex.Width * 30, ground2Tex.Height * 20)); ground2.Scale = 60;
             layer5.add(ground2);
 
-            layers.Add(layer10);
-            layers.Add(layer11);
-            layers.Add(layer12);
-            layers.Add(layer13);
-            layers.Add(layer14);
-            layers.Add(layer2);
-            layers.Add(layer30);
-            layers.Add(layer31);
-            layers.Add(layer32);
-            layers.Add(layer4);
-            layers.Add(layer5);
+            //layers.Add(layer10);
+            //layers.Add(layer11);
+            //layers.Add(layer12);
+            //layers.Add(layer13);
+            //layers.Add(layer14);
+            //layers.Add(layer2);
+            //layers.Add(layer30);
+            //layers.Add(layer31);
+            //layers.Add(layer32);
+            //layers.Add(layer4);
+            //layers.Add(layer5);
 
             // testing collision
             //PhysicObject squareObj = new PhysicObject(square, new Vector2(100, 200), gameWorld);

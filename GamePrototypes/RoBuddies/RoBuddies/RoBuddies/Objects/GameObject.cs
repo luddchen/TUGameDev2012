@@ -6,8 +6,8 @@ namespace Robuddies.Objects
 {
     class GameObject
     {
-        public Rectangle Destination;
-        public float LayerDepth;
+        //public Rectangle Destination;
+        //public float LayerDepth;
 
         protected Texture2D texture;
 
@@ -37,13 +37,13 @@ namespace Robuddies.Objects
             set { position = value; }
         }
 
-        float size;
+        float scale;
         public virtual float Width
         {
             get {
                 if (texture != null)
                 {
-                    return texture.Width * size;
+                    return texture.Width * scale;
                 }
                 else
                 {
@@ -57,7 +57,7 @@ namespace Robuddies.Objects
             get {
                 if (texture != null)
                 {
-                    return texture.Height * size;
+                    return texture.Height * scale;
                 }
                 else
                 {
@@ -66,10 +66,10 @@ namespace Robuddies.Objects
             }
         }
 
-        public virtual float Size
+        public virtual float Scale
         {
-            get { return size; }
-            set { size = value; }
+            get { return scale; }
+            set { scale = value; }
         }
 
         float rotation;
@@ -98,12 +98,12 @@ namespace Robuddies.Objects
 
         private void init()
         {
-            size = 1;
+            scale = 1;
             rotation = 0;
             origin = new Vector2();
             color = Color.White;
             effects = SpriteEffects.None;
-            Destination = new Rectangle();
+            //Destination = new Rectangle();
         }
 
         public virtual void setPosition(float x, float y)
@@ -118,7 +118,7 @@ namespace Robuddies.Objects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Destination, null, Color, Rotation, origin, effects, LayerDepth);
+            spriteBatch.Draw(Texture, Position, Color);
         }
     }
 }
