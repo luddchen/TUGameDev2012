@@ -43,12 +43,13 @@ namespace Robuddies.Objects
         private void initRobots(ContentManager content, Vector2 pos, World world) 
         {
             // init physics for budBudi
-            PhysicObject budBudiPhysics = new PhysicObject(null, new Vector2(100, 200), world);
+            PhysicObject budBudiPhysics = new PhysicObject(null, new Vector2(50, 200), world);
             budBudiPhysics.Color = Color.White;
             budBudiPhysics.Size = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budBudiPhysics.Body);
+            // TODO: set better bounding box
+            FixtureFactory.AttachRectangle(100, 30, 10, Vector2.Zero, budBudiPhysics.Body);
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
 
@@ -60,7 +61,8 @@ namespace Robuddies.Objects
             budBudiPhysics.Body.FixedRotation = true;
             budiPhysics.Body.BodyType = BodyType.Dynamic;
             budiPhysics.Body.Enabled = false;
-            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budiPhysics.Body);
+            // TODO: set better bounding box
+            FixtureFactory.AttachRectangle(100, 30, 10, Vector2.Zero, budiPhysics.Body);
             level.MainLayer.add(budiPhysics);
             level.addToMyOnCollision(budiPhysics);
 
@@ -71,7 +73,8 @@ namespace Robuddies.Objects
             budBudiPhysics.Body.FixedRotation = true;
             budPhysics.Body.BodyType = BodyType.Dynamic;
             budPhysics.Body.Enabled = false;
-            FixtureFactory.AttachRectangle(150, 150, 10, Vector2.Zero, budPhysics.Body);
+            // TODO: set better bounding box
+            FixtureFactory.AttachRectangle(100, 30, 10, Vector2.Zero, budPhysics.Body);
             level.MainLayer.add(budPhysics);
             level.addToMyOnCollision(budPhysics);
 

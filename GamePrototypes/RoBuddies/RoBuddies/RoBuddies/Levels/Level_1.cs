@@ -161,11 +161,12 @@ namespace Robuddies.Levels
             //mainLayer.add(squareObj2);
 
             // testing wall
-            Wall wall1 = new Wall(new Vector2(100, 500), new Vector2(50000, 100), new Vector2(10, 5), 0.0f, Color.Green, Color.LightGreen, square, gameWorld);
-            wall1.Body.BodyType = BodyType.Static;
-            FixtureFactory.AttachRectangle(50, 200, 10, Vector2.Zero, wall1.Body);
+            Wall wall1 = new Wall(new Vector2(0, 300), new Vector2(100, 10), Color.White, square, gameWorld);
             addToMyOnCollision(wall1);
             mainLayer.add(wall1);
+            Wall wall2 = new Wall(new Vector2(0, 460), new Vector2(400, 10), Color.White, square, gameWorld);
+            addToMyOnCollision(wall2);
+            mainLayer.add(wall2);
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

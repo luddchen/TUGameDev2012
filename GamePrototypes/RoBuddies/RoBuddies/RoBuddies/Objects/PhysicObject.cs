@@ -18,7 +18,6 @@ namespace Robuddies.Objects
             this.world = world;
             body = BodyFactory.CreateBody(this.world, pos);
             body.BodyType = BodyType.Static;
-            FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body);
         }
 
         public Body Body
