@@ -167,6 +167,10 @@ namespace Robuddies.Levels
             Wall wall2 = new Wall(new Vector2(0, 460), new Vector2(400, 10), Color.White, square, gameWorld);
             addToMyOnCollision(wall2);
             mainLayer.add(wall2);
+
+            Wall wall3 = new Wall(new Vector2(20, 400), new Vector2(10, 400), Color.Red, square, gameWorld);
+            addToMyOnCollision(wall3);
+            mainLayer.add(wall3);
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

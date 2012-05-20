@@ -21,6 +21,10 @@ namespace Robuddies.Objects
         // the current level of the robot
         private Level level;
 
+        private PhysicObject budBudiPhysics;
+        private PhysicObject budiPhysics;
+        private PhysicObject budPhysics;
+
         private bool seperated;
 
         private List<RobotPart> robotParts;
@@ -43,7 +47,7 @@ namespace Robuddies.Objects
         private void initRobots(ContentManager content, Vector2 pos, World world) 
         {
             // init physics for budBudi
-            PhysicObject budBudiPhysics = new PhysicObject(null, new Vector2(50, 200), world);
+            budBudiPhysics = new PhysicObject(null, new Vector2(50, 200), world);
             budBudiPhysics.Color = Color.White;
             budBudiPhysics.Size = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
@@ -54,7 +58,7 @@ namespace Robuddies.Objects
             level.addToMyOnCollision(budBudiPhysics);
 
             // init physics for budi
-            PhysicObject budiPhysics = new PhysicObject(null, new Vector2(250, 200), world);
+            budiPhysics = new PhysicObject(null, new Vector2(250, 200), world);
             budiPhysics.Body.FixedRotation = true;
             budiPhysics.Color = Color.White;
             budiPhysics.Size = 0.3f;
@@ -67,7 +71,7 @@ namespace Robuddies.Objects
             level.addToMyOnCollision(budiPhysics);
 
             // init physics for bud
-            PhysicObject budPhysics = new PhysicObject(null, new Vector2(300, 200), world);
+            budPhysics = new PhysicObject(null, new Vector2(300, 200), world);
             budPhysics.Color = Color.White;
             budPhysics.Size = 0.3f;
             budBudiPhysics.Body.FixedRotation = true;
@@ -249,6 +253,11 @@ namespace Robuddies.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            Console.WriteLine("PhysicPosition: " + budBudiPhysics.Position);
+
+            budBudiPhysics.Destination = Destination;
+            budBudiPhysics.Position = ActivePart.Position;
+
             foreach (RobotPart part in robotParts)
             {
                 //Console.WriteLine("Position: " + Position);

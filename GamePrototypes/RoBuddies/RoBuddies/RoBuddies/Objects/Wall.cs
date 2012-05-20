@@ -29,14 +29,15 @@ namespace Robuddies.Objects
             this.size = size;
             this.color = color;
             this.Body.BodyType = BodyType.Static;
-            this.setPosition(pos.X, pos.Y);
+            this.Position = pos;
             FixtureFactory.AttachRectangle(size.X, size.Y, 1, Vector2.Zero, this.Body);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
-            Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
+            //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
+            Rectangle dest = new Rectangle((int)Destination.X, (int)Destination.Y, (int)size.X, (int)size.Y);
             spriteBatch.Draw(Texture, dest, this.color);
         }
     }

@@ -41,6 +41,8 @@ namespace Robuddies.Objects
             Color = Color.White;
             CurrentState = State.Waiting;
             this.Physics = physics;
+            this.Physics.Destination = this.Destination;
+            this.Physics.Position = this.Position;
         }
 
         public float MovementForce 
