@@ -23,6 +23,7 @@ namespace Robuddies.Objects
         public Body Body
         {
             get { return body; }
+            set { body = value; }
         }
 
         public World World
@@ -45,7 +46,8 @@ namespace Robuddies.Objects
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)Width, (int)Height);
+            Console.WriteLine("Pos: " + this.body.Position);
+            Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)Width, (int)Height);
             if (Texture != null)
             {
                 spriteBatch.Draw(Texture, Position, Color);

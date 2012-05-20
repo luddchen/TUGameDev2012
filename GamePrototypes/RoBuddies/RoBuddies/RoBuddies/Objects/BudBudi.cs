@@ -113,7 +113,7 @@ namespace Robuddies.Objects
             if (CurrentState == State.Jumping)
             {
                 texNr = 39;
-
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, - 3 * MovementForce);
                 setPosition(Position.X, Position.Y + DirectionY * 2);
                 DirectionY -= 0.1f;
                 if (Position.Y <= goundHeight)
@@ -126,6 +126,8 @@ namespace Robuddies.Objects
             {
                 if (texNr == 39)
                 {
+                    //don't stop jumping in physics for testing
+                    //Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, Physics.Body.LinearVelocity.X + MovementForce);
                     speedTemp = DirectionX;
                     DirectionX = 0;
                 }
@@ -145,9 +147,10 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.Left))
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X - MovementForce, Physics.Body.LinearVelocity.Y);
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
-                    Physics.Body.ApplyForce(new Vector2(-MovementForce * Physics.Body.Mass, 0));
+                    
                     this.CurrentState = RobotPart.State.StartWalking;
                     this.DirectionX = -1; ;
                 }
@@ -155,9 +158,9 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.Right))
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X + MovementForce, Physics.Body.LinearVelocity.Y);
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
-                    Physics.Body.ApplyForce(new Vector2(MovementForce * Physics.Body.Mass, 0));
                     this.CurrentState = RobotPart.State.StartWalking;
                     this.DirectionX = 1;
                 }
@@ -167,7 +170,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
-                    Physics.Body.ApplyForce(new Vector2(-MovementForce * Physics.Body.Mass, 0));
+                    Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }
@@ -176,7 +179,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
-                    Physics.Body.ApplyForce(new Vector2(MovementForce * Physics.Body.Mass, 0));
+                    Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }

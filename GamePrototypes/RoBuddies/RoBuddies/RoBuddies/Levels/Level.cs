@@ -125,21 +125,17 @@ namespace Robuddies.Levels
 
             player.Update(gameTime);
             mainLayer.Update(gameTime);
-            Camera.LookAt(player.ActivePart.Position);
+            Camera.LookAt(player.ActivePart.Physics.Position);
 
             gameWorld.Step(Math.Min((float)gameTime.ElapsedGameTime.TotalSeconds, (1f / 30f)));
         }
 
         public void Draw(GameTime gameTime)
         {
-            //spriteBatch.Begin( SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-
             foreach (Layer l in layers)
             {
                 l.Draw(spriteBatch);
             }
-
-            //spriteBatch.End();
         }
 
         public void ChangeViewport(Viewport viewport)

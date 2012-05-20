@@ -46,14 +46,15 @@ namespace Robuddies.Objects
          */
         private void initRobots(ContentManager content, Vector2 pos, World world) 
         {
+            Texture2D budBudiTexture = content.Load<Texture2D>("Sprites\\Buddies\\BudBudi\\BudBudi_001");
             // init physics for budBudi
-            budBudiPhysics = new PhysicObject(null, new Vector2(50, 200), world);
+            budBudiPhysics = new PhysicObject(budBudiTexture, new Vector2(100, 1600), world);
             budBudiPhysics.Color = Color.White;
-            budBudiPhysics.Scale = 0.3f;
+            //budBudiPhysics.Scale = 1f;
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
             // TODO: set better bounding box
-            FixtureFactory.AttachRectangle(100, 30, 10, Vector2.Zero, budBudiPhysics.Body);
+            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 3, budBudiPhysics.Height, 10, new Vector2(0, budBudiPhysics.Height / 2), budBudiPhysics.Body);
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
 
@@ -134,6 +135,7 @@ namespace Robuddies.Objects
             set { seperated = value; }
         }
 
+        // TODO: rewrite seperation logic!
         private void Seperate()
         {
             if (!IsSeperated)
@@ -143,12 +145,6 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(budi);
                 inactiveParts.Remove(budBudi);
                 robotParts.Add(budi);
-                //bud.setPosition(budBudi.Position.X, bud.Position.Y);
-                //bud.Destination.X = budBudi.Destination.X;
-                //bud.Destination.Y = budBudi.Destination.Y;
-                //bud.Destination.Width = (int)bud.Width;
-                //bud.Destination.Height = (int)bud.Height;
-                //budi.setPosition(budBudi.Position.X, budi.Position.Y);
                 activePart = budi;
                 seperated = true;
             }
@@ -160,7 +156,6 @@ namespace Robuddies.Objects
                 inactiveParts.Remove(bud);
                 inactiveParts.Remove(budi);
                 activePart = budBudi;
-                //budBudi.setPosition(bud.Position.X, bud.Position.Y);
                 seperated = false;
             }
         }
@@ -226,6 +221,7 @@ namespace Robuddies.Objects
         }
 
         // changes the active robot part if seperated
+        // TODO: Rewrite changeActivePart logic
         private void changeActivePart()
         {
             // switch from bud to budi
@@ -235,8 +231,6 @@ namespace Robuddies.Objects
                 inactiveParts.Add(bud);
                 inactiveParts.Remove(budi);
                 robotParts.Add(budi);
-                //bud.Destination.X = (int) (bud.Position.X - budi.Position.X + bud.Destination.X);
-                //bud.Destination.Y = (int) (bud.Position.Y - budi.Position.Y + bud.Destination.Y);
                 activePart = budi;
             }
             // switch from budi to bud
@@ -245,8 +239,6 @@ namespace Robuddies.Objects
                 inactiveParts.Add(budi);
                 inactiveParts.Remove(bud);
                 robotParts.Add(bud);
-                //budi.Destination.X = (int)(budi.Position.X - bud.Position.X + budi.Destination.X);
-                //budi.Destination.Y = (int) (budi.Position.Y - bud.Position.Y + budi.Destination.Y);
                 activePart = bud;
             }
         }
@@ -255,23 +247,15 @@ namespace Robuddies.Objects
         {
             //Console.WriteLine("PhysicPosition: " + budBudiPhysics.Position);
 
-            //budBudiPhysics.Destination = Destination;
-            //budBudiPhysics.Position = ActivePart.Position;
-
             foreach (RobotPart part in robotParts)
             {
-                //Console.WriteLine("Position: " + Position);
-                //Console.WriteLine("Destination: " + Destination);
-                //part.Destination = Destination;
-                //Position = ActivePart.Position;
-                part.Draw(spriteBatch);
+                //robot will be drawn from the Physics object
+                //part.Draw(spriteBatch);
             }
 
             foreach (RobotPart part in inactiveParts)
             {
-                //Console.WriteLine("Position: " + part.Position);
-                //Console.WriteLine("Destination: " + part.Destination);
-                part.Draw(spriteBatch);
+                //part.Draw(spriteBatch);
             }
         }
     }

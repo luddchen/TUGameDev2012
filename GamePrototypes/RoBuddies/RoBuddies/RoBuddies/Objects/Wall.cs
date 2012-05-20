@@ -12,7 +12,6 @@ using FarseerPhysics.Factories;
 namespace Robuddies.Objects
 {
 
-
     /**
      * Simple wall for the game environment
      * 
@@ -28,17 +27,17 @@ namespace Robuddies.Objects
         {
             this.size = size;
             this.color = color;
+            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(0, this.size.Y / 2), this.Body);
+            this.Body.Friction = 0;
             this.Body.BodyType = BodyType.Static;
             this.Position = pos;
-            FixtureFactory.AttachRectangle(size.X, size.Y, 1, Vector2.Zero, this.Body);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
-            //Rectangle dest = new Rectangle((int)this.Position.X + Destination.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
-            //Rectangle dest = new Rectangle((int)Destination.X, (int)Destination.Y, (int)size.X, (int)size.Y);
-            spriteBatch.Draw(Texture, Position, this.color);
+            //Console.WriteLine("Test: " + this.Position);
+            Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
+            spriteBatch.Draw(Texture, dest, this.color);
         }
     }
 }
