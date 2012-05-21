@@ -83,414 +83,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_001.png">
-      <Name>BudBudi_001</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_002.png">
-      <Name>BudBudi_002</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_003.png">
-      <Name>BudBudi_003</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_004.png">
-      <Name>BudBudi_004</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_005.png">
-      <Name>BudBudi_005</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_006.png">
-      <Name>BudBudi_006</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_007.png">
-      <Name>BudBudi_007</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_008.png">
-      <Name>BudBudi_008</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_009.png">
-      <Name>BudBudi_009</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_010.png">
-      <Name>BudBudi_010</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_011.png">
-      <Name>BudBudi_011</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_012.png">
-      <Name>BudBudi_012</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_013.png">
-      <Name>BudBudi_013</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_014.png">
-      <Name>BudBudi_014</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_015.png">
-      <Name>BudBudi_015</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_016.png">
-      <Name>BudBudi_016</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_017.png">
-      <Name>BudBudi_017</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_018.png">
-      <Name>BudBudi_018</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_019.png">
-      <Name>BudBudi_019</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_020.png">
-      <Name>BudBudi_020</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_021.png">
-      <Name>BudBudi_021</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_022.png">
-      <Name>BudBudi_022</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_023.png">
-      <Name>BudBudi_023</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_024.png">
-      <Name>BudBudi_024</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_025.png">
-      <Name>BudBudi_025</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_026.png">
-      <Name>BudBudi_026</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_027.png">
-      <Name>BudBudi_027</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_028.png">
-      <Name>BudBudi_028</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_029.png">
-      <Name>BudBudi_029</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_030.png">
-      <Name>BudBudi_030</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\Bud\Bud_001.png">
-      <Name>Bud_001</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_002.png">
-      <Name>Bud_002</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_003.png">
-      <Name>Bud_003</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_004.png">
-      <Name>Bud_004</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_005.png">
-      <Name>Bud_005</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_006.png">
-      <Name>Bud_006</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_007.png">
-      <Name>Bud_007</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_008.png">
-      <Name>Bud_008</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_009.png">
-      <Name>Bud_009</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_010.png">
-      <Name>Bud_010</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_011.png">
-      <Name>Bud_011</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_012.png">
-      <Name>Bud_012</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_013.png">
-      <Name>Bud_013</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_014.png">
-      <Name>Bud_014</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_015.png">
-      <Name>Bud_015</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_016.png">
-      <Name>Bud_016</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_017.png">
-      <Name>Bud_017</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_018.png">
-      <Name>Bud_018</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_019.png">
-      <Name>Bud_019</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_020.png">
-      <Name>Bud_020</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_021.png">
-      <Name>Bud_021</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_022.png">
-      <Name>Bud_022</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_023.png">
-      <Name>Bud_023</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_024.png">
-      <Name>Bud_024</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_025.png">
-      <Name>Bud_025</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_026.png">
-      <Name>Bud_026</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_027.png">
-      <Name>Bud_027</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_028.png">
-      <Name>Bud_028</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_029.png">
-      <Name>Bud_029</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_030.png">
-      <Name>Bud_030</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\Bud\Bud_031.png">
-      <Name>Bud_031</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_032.png">
-      <Name>Bud_032</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_033.png">
-      <Name>Bud_033</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_034.png">
-      <Name>Bud_034</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_035.png">
-      <Name>Bud_035</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_036.png">
-      <Name>Bud_036</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_037.png">
-      <Name>Bud_037</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_038.png">
-      <Name>Bud_038</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_039.png">
-      <Name>Bud_039</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_040.png">
-      <Name>Bud_040</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_031.png">
-      <Name>BudBudi_031</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_032.png">
-      <Name>BudBudi_032</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_033.png">
-      <Name>BudBudi_033</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_034.png">
-      <Name>BudBudi_034</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_035.png">
-      <Name>BudBudi_035</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_036.png">
-      <Name>BudBudi_036</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_037.png">
-      <Name>BudBudi_037</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_038.png">
-      <Name>BudBudi_038</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_039.png">
-      <Name>BudBudi_039</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_040.png">
-      <Name>BudBudi_040</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\Sun.png">
       <Name>Sun</Name>
       <Importer>TextureImporter</Importer>
@@ -521,287 +113,6 @@
   <ItemGroup>
     <Compile Include="Sprites\Square.png">
       <Name>Square</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_041.png">
-      <Name>BudBudi_041</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_042.png">
-      <Name>BudBudi_042</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_043.png">
-      <Name>BudBudi_043</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_044.png">
-      <Name>BudBudi_044</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_045.png">
-      <Name>BudBudi_045</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_046.png">
-      <Name>BudBudi_046</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_047.png">
-      <Name>BudBudi_047</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_048.png">
-      <Name>BudBudi_048</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_049.png">
-      <Name>BudBudi_049</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_050.png">
-      <Name>BudBudi_050</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_051.png">
-      <Name>BudBudi_051</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_052.png">
-      <Name>BudBudi_052</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_053.png">
-      <Name>BudBudi_053</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_054.png">
-      <Name>BudBudi_054</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_055.png">
-      <Name>BudBudi_055</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_056.png">
-      <Name>BudBudi_056</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_057.png">
-      <Name>BudBudi_057</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_058.png">
-      <Name>BudBudi_058</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_059.png">
-      <Name>BudBudi_059</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_060.png">
-      <Name>BudBudi_060</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_061.png">
-      <Name>BudBudi_061</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_062.png">
-      <Name>BudBudi_062</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_063.png">
-      <Name>BudBudi_063</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_064.png">
-      <Name>BudBudi_064</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_065.png">
-      <Name>BudBudi_065</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_066.png">
-      <Name>BudBudi_066</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_067.png">
-      <Name>BudBudi_067</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_068.png">
-      <Name>BudBudi_068</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_069.png">
-      <Name>BudBudi_069</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_070.png">
-      <Name>BudBudi_070</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\Bud\Bud_041.png">
-      <Name>Bud_041</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_042.png">
-      <Name>Bud_042</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_043.png">
-      <Name>Bud_043</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_044.png">
-      <Name>Bud_044</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_045.png">
-      <Name>Bud_045</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_046.png">
-      <Name>Bud_046</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_047.png">
-      <Name>Bud_047</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_048.png">
-      <Name>Bud_048</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_049.png">
-      <Name>Bud_049</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_050.png">
-      <Name>Bud_050</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_051.png">
-      <Name>Bud_051</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_052.png">
-      <Name>Bud_052</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_053.png">
-      <Name>Bud_053</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_054.png">
-      <Name>Bud_054</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\Bud\Bud_055.png">
-      <Name>Bud_055</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_071.png">
-      <Name>BudBudi_071</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_072.png">
-      <Name>BudBudi_072</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_073.png">
-      <Name>BudBudi_073</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_074.png">
-      <Name>BudBudi_074</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_075.png">
-      <Name>BudBudi_075</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_076.png">
-      <Name>BudBudi_076</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_077.png">
-      <Name>BudBudi_077</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_078.png">
-      <Name>BudBudi_078</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_079.png">
-      <Name>BudBudi_079</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-    <Compile Include="Sprites\Buddies\BudBudi\BudBudi_080.png">
-      <Name>BudBudi_080</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -1064,8 +375,680 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Buddies\Budi\Budi_001.png">
-      <Name>Budi_001</Name>
+    <Compile Include="Sprites\Buddies\Bud\0001.png">
+      <Name>0001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0002.png">
+      <Name>0002</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0003.png">
+      <Name>0003</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0004.png">
+      <Name>0004</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0005.png">
+      <Name>0005</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0006.png">
+      <Name>0006</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0007.png">
+      <Name>0007</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0008.png">
+      <Name>0008</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0009.png">
+      <Name>0009</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0010.png">
+      <Name>0010</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0011.png">
+      <Name>0011</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0012.png">
+      <Name>0012</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0013.png">
+      <Name>0013</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0014.png">
+      <Name>0014</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0015.png">
+      <Name>0015</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0016.png">
+      <Name>0016</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0017.png">
+      <Name>0017</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0018.png">
+      <Name>0018</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0019.png">
+      <Name>0019</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0020.png">
+      <Name>0020</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0021.png">
+      <Name>0021</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0022.png">
+      <Name>0022</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0023.png">
+      <Name>0023</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0024.png">
+      <Name>0024</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0025.png">
+      <Name>0025</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0026.png">
+      <Name>0026</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0027.png">
+      <Name>0027</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0028.png">
+      <Name>0028</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0029.png">
+      <Name>0029</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0030.png">
+      <Name>0030</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0031.png">
+      <Name>0031</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0032.png">
+      <Name>0032</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0033.png">
+      <Name>0033</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0034.png">
+      <Name>0034</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0035.png">
+      <Name>0035</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0036.png">
+      <Name>0036</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0037.png">
+      <Name>0037</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0038.png">
+      <Name>0038</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0039.png">
+      <Name>0039</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0040.png">
+      <Name>0040</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0041.png">
+      <Name>0041</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0042.png">
+      <Name>0042</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0043.png">
+      <Name>0043</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0044.png">
+      <Name>0044</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0045.png">
+      <Name>0045</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0046.png">
+      <Name>0046</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0047.png">
+      <Name>0047</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0048.png">
+      <Name>0048</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0049.png">
+      <Name>0049</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0050.png">
+      <Name>0050</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0051.png">
+      <Name>0051</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0052.png">
+      <Name>0052</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0053.png">
+      <Name>0053</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0054.png">
+      <Name>0054</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\Bud\0055.png">
+      <Name>0055</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Sprites\Buddies\BudBudi\0001.png">
+      <Name>0001</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0002.png">
+      <Name>0002</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0003.png">
+      <Name>0003</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0004.png">
+      <Name>0004</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0005.png">
+      <Name>0005</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0006.png">
+      <Name>0006</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0007.png">
+      <Name>0007</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0008.png">
+      <Name>0008</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0009.png">
+      <Name>0009</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0010.png">
+      <Name>0010</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0011.png">
+      <Name>0011</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0012.png">
+      <Name>0012</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0013.png">
+      <Name>0013</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0014.png">
+      <Name>0014</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0015.png">
+      <Name>0015</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0016.png">
+      <Name>0016</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0017.png">
+      <Name>0017</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0018.png">
+      <Name>0018</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0019.png">
+      <Name>0019</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0020.png">
+      <Name>0020</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0021.png">
+      <Name>0021</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0022.png">
+      <Name>0022</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0023.png">
+      <Name>0023</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0024.png">
+      <Name>0024</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0025.png">
+      <Name>0025</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0026.png">
+      <Name>0026</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0027.png">
+      <Name>0027</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0028.png">
+      <Name>0028</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0029.png">
+      <Name>0029</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0030.png">
+      <Name>0030</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0031.png">
+      <Name>0031</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0032.png">
+      <Name>0032</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0033.png">
+      <Name>0033</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0034.png">
+      <Name>0034</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0035.png">
+      <Name>0035</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0036.png">
+      <Name>0036</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0037.png">
+      <Name>0037</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0038.png">
+      <Name>0038</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0039.png">
+      <Name>0039</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0040.png">
+      <Name>0040</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0041.png">
+      <Name>0041</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0042.png">
+      <Name>0042</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0043.png">
+      <Name>0043</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0044.png">
+      <Name>0044</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0045.png">
+      <Name>0045</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0046.png">
+      <Name>0046</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0047.png">
+      <Name>0047</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0048.png">
+      <Name>0048</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0049.png">
+      <Name>0049</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0050.png">
+      <Name>0050</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0051.png">
+      <Name>0051</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0052.png">
+      <Name>0052</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0053.png">
+      <Name>0053</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0054.png">
+      <Name>0054</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0055.png">
+      <Name>0055</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0056.png">
+      <Name>0056</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0057.png">
+      <Name>0057</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0058.png">
+      <Name>0058</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0059.png">
+      <Name>0059</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0060.png">
+      <Name>0060</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0061.png">
+      <Name>0061</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0062.png">
+      <Name>0062</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0063.png">
+      <Name>0063</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0064.png">
+      <Name>0064</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0065.png">
+      <Name>0065</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0066.png">
+      <Name>0066</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0067.png">
+      <Name>0067</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0068.png">
+      <Name>0068</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0069.png">
+      <Name>0069</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0070.png">
+      <Name>0070</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0071.png">
+      <Name>0071</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0072.png">
+      <Name>0072</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0073.png">
+      <Name>0073</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0074.png">
+      <Name>0074</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0075.png">
+      <Name>0075</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0076.png">
+      <Name>0076</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0077.png">
+      <Name>0077</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0078.png">
+      <Name>0078</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0079.png">
+      <Name>0079</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+    <Compile Include="Sprites\Buddies\BudBudi\0080.png">
+      <Name>0080</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

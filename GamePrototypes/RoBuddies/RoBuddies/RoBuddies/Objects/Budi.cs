@@ -31,7 +31,7 @@ namespace Robuddies.Objects
         {
             for (int i = ANIMATION_BEGIN; i <= ANIMATION_END; i++)
             {
-                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi\\0" + String.Format("{0:000}", i)));
+                TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\Budi\\" + String.Format("{0:0000}", i)));
             }
             
             Texture = TextureList[0];

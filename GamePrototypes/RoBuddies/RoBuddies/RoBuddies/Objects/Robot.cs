@@ -52,9 +52,9 @@ namespace Robuddies.Objects
         {
             IsCombinable = false;
 
-            Texture2D budBudiTexture = content.Load<Texture2D>("Sprites\\Buddies\\BudBudi\\BudBudi_001");
-            Texture2D budTexture = content.Load<Texture2D>("Sprites\\Buddies\\Bud\\Bud_001");
-            Texture2D budiTexture = content.Load<Texture2D>("Sprites\\Buddies\\Budi\\Budi_001");
+            Texture2D budBudiTexture = content.Load<Texture2D>("Sprites\\Buddies\\BudBudi\\0001");
+            Texture2D budTexture = content.Load<Texture2D>("Sprites\\Buddies\\Bud\\0001");
+            Texture2D budiTexture = content.Load<Texture2D>("Sprites\\Buddies\\Budi\\0080");
 
             // init physics for budBudi
             budBudiPhysics = new PhysicObject(budBudiTexture, new Vector2(100, 1600), world);
@@ -206,9 +206,9 @@ namespace Robuddies.Objects
                 this.changeActivePart();
             }
 
-            bud.Update(gameTime);
-            budi.Update(gameTime);
-            budBudi.Update(gameTime);
+            bud.Update(gameTime); budPhysics.effects = bud.effects;
+            budi.Update(gameTime); budiPhysics.effects = budi.effects;
+            budBudi.Update(gameTime); budBudiPhysics.effects = budBudi.effects;
 
             oldState = currentState;
         }
