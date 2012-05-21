@@ -10,9 +10,10 @@ namespace Robuddies.Objects
     class RobotPart : AnimatedObject
     {
         // force for moving the robotPart
-        private const float movementForce = 1000.0f;
+        private const float MOVEMENT_FORCE = 1000.0f;
         private State currentState;
         private PhysicObject physics;
+        private Robot robot;
 
         protected bool seperated;
 
@@ -30,7 +31,7 @@ namespace Robuddies.Objects
             StopPushing
         };
 
-        public RobotPart(ContentManager content, Vector2 pos, World world, PhysicObject physics)
+        public RobotPart(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
         {
             TextureList = new List<Texture2D>();
             Position = pos;
@@ -41,19 +42,24 @@ namespace Robuddies.Objects
             Color = Color.White;
             CurrentState = State.Waiting;
             this.Physics = physics;
-            //this.Physics.Destination = this.Destination;
-            //this.Physics.Position = this.Position;
+            this.Robot = robot;
         }
 
         public float MovementForce 
         {
-            get { return movementForce; }
+            get { return MOVEMENT_FORCE; }
         }
 
         public State CurrentState
         {
             get { return currentState; }
             set { currentState = value; }
+        }
+
+        public Robot Robot
+        {
+            get { return robot; }
+            set { robot = value; }
         }
 
         public bool IsSeperated
@@ -66,6 +72,11 @@ namespace Robuddies.Objects
         {
             get { return physics; }
             set { physics = value; }
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
         }
     }
 }

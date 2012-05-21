@@ -17,8 +17,8 @@ namespace Robuddies.Objects
 
         private RobotPart budi;
 
-        public Bud(ContentManager content, Vector2 pos, World world, PhysicObject physics)
-            : base(content, pos, world, physics)
+        public Bud(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
+            : base(content, pos, robot, world, physics)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
@@ -58,11 +58,13 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
-            GetInput();
+            if (Robot.ActivePart == this)
+            {
+                GetInput();
+            }
 
             if (texNr > TextureList.Count - 1) { texNr = TextureList.Count - 1; }
             if (texNr < 0) { texNr = 0; }
-            //Console.Out.WriteLine(texNr);
             Texture = TextureList[(int)(texNr)];
             Physics.Texture = TextureList[(int)(texNr)];
 
@@ -71,7 +73,6 @@ namespace Robuddies.Objects
                 texNr += 0.5f;
                 if (texNr > TextureList.Count) { texNr = TextureList.Count-1; }
                 setPosition(Position.X + DirectionX * 2, Position.Y);
-                //budi.Destination.Offset( (int)- DirectionX * 2, 0);
             }
 
             if (CurrentState == State.Walking)
@@ -124,6 +125,7 @@ namespace Robuddies.Objects
 
             if (CurrentState == State.StopJumping)
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, -3 * MovementForce);
                 if (texNr == 39)
                 {
                     speedTemp = DirectionX;
@@ -139,12 +141,14 @@ namespace Robuddies.Objects
             }
         }
 
+        // TODO: rework control of the robot. See farseer car example
         private void GetInput()
         {
             KeyboardState currentState = Keyboard.GetState();
 
             if (currentState.IsKeyDown(Keys.Left))
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X - MovementForce, Physics.Body.LinearVelocity.Y);
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
                     this.CurrentState = RobotPart.State.StartWalking;
@@ -154,6 +158,7 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.Right))
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X + MovementForce, Physics.Body.LinearVelocity.Y);
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
                     this.CurrentState = RobotPart.State.StartWalking;
@@ -165,6 +170,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
+                    Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }
@@ -173,6 +179,7 @@ namespace Robuddies.Objects
             {
                 if (this.CurrentState == RobotPart.State.Walking)
                 {
+                    Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                     this.CurrentState = RobotPart.State.StopWalking;
                 }
             }
@@ -187,6 +194,11 @@ namespace Robuddies.Objects
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
                     if (!this.IsSeperated) { this.DirectionY = 2.5f; }
                 }
+            }
+
+            if (currentState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
+            {
+                CurrentState = State.StopJumping;
             }
 
             oldState = currentState;

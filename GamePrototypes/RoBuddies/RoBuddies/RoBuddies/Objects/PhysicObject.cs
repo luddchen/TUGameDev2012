@@ -7,15 +7,18 @@ using System.Collections.Generic;
 
 namespace Robuddies.Objects
 {
+    // TODO: create a class like AnimatedPhysicsObject
     class PhysicObject : GameObject
     {
         private Body body;
         protected World world;
+        private bool visible;
 
         public PhysicObject(Texture2D tex, Vector2 pos, World world)
             : base(tex, pos)
         {
             this.world = world;
+            this.visible = true;
             body = BodyFactory.CreateBody(this.world, pos);
             body.BodyType = BodyType.Static;
         }
@@ -23,7 +26,6 @@ namespace Robuddies.Objects
         public Body Body
         {
             get { return body; }
-            set { body = value; }
         }
 
         public World World
@@ -44,12 +46,17 @@ namespace Robuddies.Objects
             set { body.Rotation = value; }
         }
 
+        public bool Visible
+        {
+            get { return visible; }
+            set { this.visible = value; }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            Console.WriteLine("Pos: " + this.body.Position);
-            Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)Width, (int)Height);
-            if (Texture != null)
+            if (visible)
             {
+                Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)Width, (int)Height);
                 spriteBatch.Draw(Texture, Position, Color);
             }
         }

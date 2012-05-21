@@ -17,8 +17,6 @@ namespace Robuddies.Objects
         private float texNr = 0;
         private float speedTemp;
 
-        float goundHeight;
-
         public override float DirectionX
         {
             set
@@ -41,8 +39,8 @@ namespace Robuddies.Objects
             }
         }
 
-        public BudBudi(ContentManager content, Vector2 pos, World world, PhysicObject physics)
-            : base(content, pos, world, physics)
+        public BudBudi(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
+            : base(content, pos, robot, world, physics)
         {
             for (int i = 1; i <= ANIMATION_END; i++)
             {
@@ -104,7 +102,6 @@ namespace Robuddies.Objects
                 }
                 if (texNr >= 39)
                 {
-                    goundHeight = Position.Y;
                     CurrentState = State.Jumping;
                     DirectionX = speedTemp;
                 }
@@ -116,18 +113,13 @@ namespace Robuddies.Objects
                 Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, - 3 * MovementForce);
                 setPosition(Position.X, Position.Y + DirectionY * 2);
                 DirectionY -= 0.1f;
-                if (Position.Y <= goundHeight)
-                {
-                    CurrentState = State.StopJumping;
-                }
             }
 
             if (CurrentState == State.StopJumping)
             {
+                Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, Physics.Body.LinearVelocity.X + MovementForce);
                 if (texNr == 39)
                 {
-                    //don't stop jumping in physics for testing
-                    //Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X, Physics.Body.LinearVelocity.X + MovementForce);
                     speedTemp = DirectionX;
                     DirectionX = 0;
                 }
@@ -194,6 +186,11 @@ namespace Robuddies.Objects
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
                     if (!this.IsSeperated) { this.DirectionY = 2.5f; }
                 }
+            }
+
+            if (currentState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
+            {
+                CurrentState = State.StopJumping;
             }
 
             oldState = currentState;

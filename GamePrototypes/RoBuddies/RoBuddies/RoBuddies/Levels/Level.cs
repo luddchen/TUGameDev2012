@@ -9,11 +9,8 @@ using Robuddies.Utilities;
 
 namespace Robuddies.Levels
 {
-    class Level
+    abstract class Level
     {
-        //private float offset;
-        //private Rectangle titleSafe;
-
         protected List<Layer> layers;
         protected Layer backgroundLayer;
         protected Layer mainLayer;
@@ -63,25 +60,11 @@ namespace Robuddies.Levels
             set { camera = value; }
         }
 
-        //public float Offset
-        //{
-        //    set
-        //    {
-        //        offset = value;
-        //        foreach (Layer l in layers) { l.Offset = offset; }
-        //        player.setPosition(offset, player.Position.Y);
-        //    }
-
-        //    get { return offset; }
-        //}
-
         public Level(Game1 game)
         {
             this.game = game;
             this.gameWorld = new World(new Vector2(0, 9.82f));
             layers = new List<Layer>();
-            //seperated = false;
-            //offset = 0;
             backgroundColor = Color.Black;
         }
 
@@ -95,11 +78,9 @@ namespace Robuddies.Levels
 
             mainLayer = new Layer(Camera);
             mainLayer.LoadContent();
-            //mainLayer.Depth = 0.5f;
 
             player = new Robot(game.Content, new Vector2(0, 0), gameWorld, this); 
             player.Scale *= 0.3f;
-            //Camera.LookAt(player.ActivePart.Position);
 
             mainLayer.add(player);
             activePart = player.ActivePart;
@@ -107,22 +88,8 @@ namespace Robuddies.Levels
             layers.Add(mainLayer);
         }
 
-        //public Rectangle TitleSafe
-        //{
-        //    get { return titleSafe; }
-        //    set
-        //    {
-        //        titleSafe = value;
-        //        foreach (Layer l in layers) { l.TitleSafe = titleSafe; }
-        //    }
-        //}
-
         public void Update(GameTime gameTime)
         {
-            // todo
-            //if (!player.IsSeperated) { Offset = player.ActivePart.Position.X; }
-            //if (player.IsSeperated) { Offset = player.ActivePart.Position.X; }
-
             player.Update(gameTime);
             mainLayer.Update(gameTime);
             Camera.LookAt(player.ActivePart.Physics.Position);
@@ -143,10 +110,9 @@ namespace Robuddies.Levels
             Camera.Viewport = viewport;
         }
 
-        public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
-        {
-            return true;
-        }
+        public abstract bool MyOnCollision(Fixture f1, Fixture f2, Contact contact);
+
+        public abstract void MyOnSeperation(Fixture f1, Fixture f2);
 
         public void addToMyOnCollision(PhysicObject physicObject)
         {
@@ -156,11 +122,27 @@ namespace Robuddies.Levels
             }
         }
 
+        public void addToMyOnSeperation(PhysicObject physicObject)
+        {
+            foreach (Fixture fix in physicObject.Body.FixtureList)
+            {
+                fix.OnSeparation += MyOnSeperation;
+            }
+        }
+
         public void removeFromMyOnCollision(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
             {
                 fix.OnCollision -= MyOnCollision;
+            }
+        }
+
+        public void removeFromMyOnSeperation(PhysicObject physicObject)
+        {
+            foreach (Fixture fix in physicObject.Body.FixtureList)
+            {
+                fix.OnSeparation -= MyOnSeperation;
             }
         }
 

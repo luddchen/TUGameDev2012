@@ -44,8 +44,23 @@ namespace Robuddies.Levels
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            Console.WriteLine("test");
+            // test collision between upper and lower part
+            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
+            {
+                player.IsCombinable = true;
+                return true;
+            }            
             return true;
+        }
+
+        public override void MyOnSeperation(Fixture f1, Fixture f2)
+        {
+            // test seperation between upper and lower part
+            // damn this only happens if myOnCollision returned true. This will need an other approach.
+            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
+            {
+                player.IsCombinable = false;
+            }            
         }
     }
 }

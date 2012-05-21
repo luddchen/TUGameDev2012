@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Robuddies.Objects
 {
+    // TODO: create a class like AnimatedPhysicsObject
     class AnimatedObject : GameObject
     {
         private List<Texture2D> textureList;

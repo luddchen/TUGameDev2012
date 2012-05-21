@@ -10,7 +10,7 @@ namespace Robuddies.Utilities
         public Camera(Viewport viewport)
         {
             Viewport = viewport;
-            Zoom = 0.1f;
+            Zoom = 0.2f;
         }
 
         private Viewport viewport;

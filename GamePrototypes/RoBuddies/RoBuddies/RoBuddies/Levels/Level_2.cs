@@ -8,6 +8,7 @@ using Robuddies.Objects;
 
 using System.Linq;
 using System.Text;
+using FarseerPhysics.Dynamics.Contacts;
 
 namespace Robuddies.Levels
 {
@@ -80,6 +81,16 @@ namespace Robuddies.Levels
             //player.Position = new Vector2(TitleSafe.Width / 2, groundTex.Height * 14);
             activePart = player.ActivePart;
         
+        }
+
+        public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            return true;
+        }
+
+        public override void MyOnSeperation(Fixture f1, Fixture f2)
+        {
+
         }
     }
 }

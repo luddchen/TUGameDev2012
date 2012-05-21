@@ -26,8 +26,8 @@ namespace Robuddies.Objects
         private BudiState CurrentBudiState;
         private RobotPart bud;
 
-        public Budi(ContentManager content, Vector2 pos, World world, PhysicObject physics)
-            : base(content, pos, world, physics)
+        public Budi(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
+            : base(content, pos, robot, world, physics)
         {
             for (int i = ANIMATION_BEGIN; i <= ANIMATION_END; i++)
             {
@@ -68,14 +68,12 @@ namespace Robuddies.Objects
         {
             if (texNr > TextureList.Count + ANIMATION_BEGIN) { texNr = TextureList.Count + ANIMATION_BEGIN; }
             if (texNr < ANIMATION_BEGIN) { texNr = ANIMATION_BEGIN; }
-            //Console.Out.WriteLine(texNr);
             Texture = TextureList[(int)(texNr - ANIMATION_BEGIN)];
             Physics.Texture = TextureList[(int)(texNr - ANIMATION_BEGIN)];
 
             if (CurrentState != State.Waiting)
             {
-                setPosition(Position.X + DirectionX * 2, Position.Y);
-                //bud.Destination.Offset((int)-DirectionX * 2, 0);
+                
             }
 
             if (CurrentBudiState == BudiState.Climbing)
