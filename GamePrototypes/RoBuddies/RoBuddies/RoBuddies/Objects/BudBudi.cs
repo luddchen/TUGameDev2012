@@ -64,7 +64,7 @@ namespace Robuddies.Objects
 
             if (CurrentState != State.Waiting)
             {
-                texNr += 0.5f;
+                texNr += 0.2f;
                 if (texNr > TextureList.Count) { texNr = TextureList.Count - 1; }
                 setPosition(Position.X + DirectionX * 2, Position.Y);
             }
@@ -142,9 +142,8 @@ namespace Robuddies.Objects
                 Physics.Body.LinearVelocity = new Vector2(Physics.Body.LinearVelocity.X - MovementForce, Physics.Body.LinearVelocity.Y);
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
-                    
                     this.CurrentState = RobotPart.State.StartWalking;
-                    this.DirectionX = -1; ;
+                    this.DirectionX = -1;
                 }
             }
 

@@ -80,7 +80,7 @@ namespace Robuddies.Levels
             mainLayer.LoadContent();
 
             player = new Robot(game.Content, new Vector2(0, 0), gameWorld, this); 
-            player.Scale *= 0.3f;
+            //player.Scale *= 0.3f;
 
             mainLayer.add(player);
             activePart = player.ActivePart;

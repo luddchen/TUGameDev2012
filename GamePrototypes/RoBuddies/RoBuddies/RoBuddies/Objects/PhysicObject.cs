@@ -57,7 +57,7 @@ namespace Robuddies.Objects
             if (visible)
             {
                 Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)Width, (int)Height);
-                spriteBatch.Draw(Texture, Position, Color);
+                spriteBatch.Draw(Texture, Position, null, Color, Rotation, Vector2.Zero, 1.0f, effects, 0.0f);
                 //spriteBatch.Draw(Texture, dest, null, Color, Rotation, origin, effects, 0.5f);    <-- desired part to draw direction of robot
             }
         }
