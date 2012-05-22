@@ -25,13 +25,13 @@ namespace Robuddies.Levels
             Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
 
             List<PhysicObject> levelPhysicObjects = new List<PhysicObject>();
-            levelPhysicObjects.Add(new Wall(new Vector2(0, 1000), new Vector2(2000, 100), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(0, 2000), new Vector2(3000, 100), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(0, 1000), new Vector2(100, 1000), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(2000, 0), new Vector2(100, 1000), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(2000, 0), new Vector2(1000, 100), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(3000, 0), new Vector2(100, 2000), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(2500, 1000), new Vector2(100, 1000), Color.Red, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(0, 100), new Vector2(200, 10), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(0, 200), new Vector2(300, 10), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(0, 100), new Vector2(10, 100), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(10, 100), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(100, 10), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(300, 0), new Vector2(10, 200), Color.White, square, gameWorld));
+            levelPhysicObjects.Add(new Wall(new Vector2(250, 100), new Vector2(10, 100), Color.Red, square, gameWorld));
 
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {

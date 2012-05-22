@@ -57,39 +57,39 @@ namespace Robuddies.Objects
             Texture2D budiTexture = content.Load<Texture2D>("Sprites\\Buddies\\Budi\\0080");
 
             // init physics for budBudi
-            budBudiPhysics = new PhysicObject(budBudiTexture, new Vector2(100, 1600), world);
+            budBudiPhysics = new PhysicObject(budBudiTexture, new Vector2(10, 160), world);
             budBudiPhysics.Color = Color.White;
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 3, budBudiPhysics.Height, 10, new Vector2(budBudiPhysics.Width / 2, budBudiPhysics.Height / 2), budBudiPhysics.Body);
+            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 30, budBudiPhysics.Height / 10, 10, new Vector2(budBudiPhysics.Width / 20, budBudiPhysics.Height / 20), budBudiPhysics.Body);
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
 
             // init physics for budi
-            budiPhysics = new PhysicObject(budiTexture, new Vector2(100, 1600), world);
+            budiPhysics = new PhysicObject(budiTexture, new Vector2(10, 160), world);
             budiPhysics.Body.FixedRotation = true;
             budiPhysics.Color = Color.White;
             budiPhysics.Body.BodyType = BodyType.Dynamic;
             budiPhysics.Body.Enabled = false;
             budiPhysics.Visible = false;
-            FixtureFactory.AttachRectangle(budiPhysics.Width / 3, budiPhysics.Height / 3, 10, new Vector2(budiPhysics.Width / 2, budiPhysics.Height / 2), budiPhysics.Body);
+            FixtureFactory.AttachRectangle(budiPhysics.Width / 30, budiPhysics.Height / 30, 10, new Vector2(budiPhysics.Width / 20, budiPhysics.Height / 20), budiPhysics.Body);
             level.MainLayer.add(budiPhysics);
             level.addToMyOnCollision(budiPhysics);
             level.addToMyOnSeperation(budiPhysics);
 
             // init physics for bud
-            budPhysics = new PhysicObject(budTexture, new Vector2(100, 1600), world);
+            budPhysics = new PhysicObject(budTexture, new Vector2(10, 160), world);
             budPhysics.Color = Color.White;
             budPhysics.Body.FixedRotation = true;
             budPhysics.Body.BodyType = BodyType.Dynamic;
             budPhysics.Body.Enabled = false;
             budPhysics.Visible = false;
-            FixtureFactory.AttachRectangle(budPhysics.Width, budPhysics.Height, 10, new Vector2(budPhysics.Width / 2, budPhysics.Height / 2), budPhysics.Body);
+            FixtureFactory.AttachRectangle(budPhysics.Width / 10, budPhysics.Height / 10, 10, new Vector2(budPhysics.Width / 20, budPhysics.Height / 20), budPhysics.Body);
             level.MainLayer.add(budPhysics);
             level.addToMyOnCollision(budPhysics);
             level.addToMyOnSeperation(budPhysics);
 
-            budi = new Budi(content, new Vector2(startingPos.X, startingPos.Y + 200), this, world, budiPhysics);
+            budi = new Budi(content, new Vector2(startingPos.X, startingPos.Y), this, world, budiPhysics);
             bud = new Bud(content, startingPos, this, world, budPhysics);
             budBudi = new BudBudi(content, startingPos, this, world, budBudiPhysics);
             bud.Budi = budi;
