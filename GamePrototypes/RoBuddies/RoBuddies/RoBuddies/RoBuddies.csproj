@@ -134,6 +134,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="Utilities\Camera.cs" />
+    <Compile Include="Utilities\RaycastUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

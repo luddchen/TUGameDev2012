@@ -190,7 +190,6 @@ namespace Robuddies.Objects
                     (this.CurrentState != RobotPart.State.StopJumping) &&
                     IsOnGround)
                 {
-                    Console.Out.WriteLine("bla: " + IsOnGround);
                     Physics.Body.ApplyForce(new Vector2(0, -40 * MovementForce));
                     this.CurrentState = RobotPart.State.StartJumping;
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
@@ -198,7 +197,9 @@ namespace Robuddies.Objects
                 }
             }
 
-            if (currentState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
+            if (currentState.IsKeyUp(Keys.Space) 
+                && oldState.IsKeyDown(Keys.Space)
+                && !IsOnGround)
             {
                 Physics.Body.ApplyForce(new Vector2(0, 40 * MovementForce));
                 CurrentState = State.StopJumping;

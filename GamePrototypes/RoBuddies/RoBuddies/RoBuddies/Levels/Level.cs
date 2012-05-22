@@ -63,7 +63,7 @@ namespace Robuddies.Levels
         public Level(Game1 game)
         {
             this.game = game;
-            this.gameWorld = new World(new Vector2(0, 20.0f));
+            this.gameWorld = new World(new Vector2(0, 20f));
             layers = new List<Layer>();
             backgroundColor = Color.Black;
         }
@@ -125,17 +125,17 @@ namespace Robuddies.Levels
                 return true;
             }
             // test if budBudi is on ground
-            if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
-            {
-                Player.BudBudi.IsOnGround = true;
-                return true;
-            }
-            // test if bud is on ground
-            if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
-            {
-                Player.Bud.IsOnGround = true;
-                return true;
-            }
+            //if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
+            //{
+            //    Player.BudBudi.IsOnGround = true;
+            //    return true;
+            //}
+            //// test if bud is on ground
+            //if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
+            //{
+            //    Player.Bud.IsOnGround = true;
+            //    return true;
+            //}
             return true;
         }
 
@@ -154,15 +154,15 @@ namespace Robuddies.Levels
                 player.IsCombinable = false;
             }
             // test if budBudi is on ground
-            if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
-            {
-                Player.BudBudi.IsOnGround = false;
-            }
-            // test if player is on ground
-            if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
-            {
-                Player.Bud.IsOnGround = false;
-            }
+            //if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
+            //{
+            //    Player.BudBudi.IsOnGround = false;
+            //}
+            //// test if player is on ground
+            //if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
+            //{
+            //    Player.Bud.IsOnGround = false;
+            //}
         }
 
         /*

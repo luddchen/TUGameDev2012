@@ -176,7 +176,6 @@ namespace Robuddies.Objects
                 this.CurrentState = RobotPart.State.StopWalking;
             }
 
-            Console.Out.WriteLine("Vel: " + Physics.Body.LinearVelocity.X);
             if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
             {
                 if ((this.CurrentState != RobotPart.State.Jumping) &&
@@ -184,16 +183,25 @@ namespace Robuddies.Objects
                     (this.CurrentState != RobotPart.State.StopJumping) &&
                     IsOnGround )
                 {
-                    Physics.Body.ApplyForce(new Vector2(0, -20 * MovementForce));
+                    if (Physics.Body.LinearVelocity.X > MovementForce / 2)
+                    {
+                        Physics.Body.LinearVelocity = new Vector2(0, -50000 * MovementForce);
+                    }
+                    else
+                    {
+                        Physics.Body.ApplyForce(new Vector2(0, -5 * MovementForce));
+                    }
                     this.CurrentState = RobotPart.State.StartJumping;
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
                     if (!this.IsSeperated) { this.DirectionY = 2.5f; }
                 }
             }
 
-            if (currentState.IsKeyUp(Keys.Space) && oldState.IsKeyDown(Keys.Space))
+            if (currentState.IsKeyUp(Keys.Space)
+                && oldState.IsKeyDown(Keys.Space)
+                && !IsOnGround)
             {
-                Physics.Body.ApplyForce(new Vector2(0, 20 * MovementForce));
+                Physics.Body.ApplyForce(new Vector2(0, 5 * MovementForce));
                 CurrentState = State.StopJumping;
             }
 

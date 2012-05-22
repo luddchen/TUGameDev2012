@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using FarseerPhysics.Dynamics;
+using Robuddies.Utilities;
 
 namespace Robuddies.Objects
 {
@@ -16,8 +17,6 @@ namespace Robuddies.Objects
         private Robot robot;
 
         protected bool seperated;
-
-        private bool isOnGround = true;
 
         public enum State
         {
@@ -37,8 +36,9 @@ namespace Robuddies.Objects
         // the myOnCollision and myOnSeperation method isn't working well
         public bool IsOnGround 
         {
-            get { return isOnGround; }
-            set { isOnGround = value; }
+            get {
+                Console.Out.WriteLine(physics.Height);
+                return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position, physics.Position + new Vector2(0.0f, physics.Height / 10 + 5)); }
         }
 
         public RobotPart(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)

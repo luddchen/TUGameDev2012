@@ -174,6 +174,11 @@ namespace Robuddies.Objects
             get { return budi; }
         }
 
+        public World World
+        {
+            get { return level.GameWorld; }
+        }
+
         private void Seperate()
         {
             if (!IsSeperated)
