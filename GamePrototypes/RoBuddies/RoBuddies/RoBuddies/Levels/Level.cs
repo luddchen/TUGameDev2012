@@ -79,7 +79,7 @@ namespace Robuddies.Levels
             mainLayer = new Layer(Camera);
             mainLayer.LoadContent();
 
-            player = new Robot(game.Content, new Vector2(0, 0), gameWorld, this); 
+            player = new Robot(game.Content, new Vector2(10, 160), gameWorld, this); 
             //player.Scale *= 0.3f;
 
             mainLayer.add(player);
@@ -124,18 +124,6 @@ namespace Robuddies.Levels
                 player.IsCombinable = true;
                 return true;
             }
-            // test if budBudi is on ground
-            //if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
-            //{
-            //    Player.BudBudi.IsOnGround = true;
-            //    return true;
-            //}
-            //// test if bud is on ground
-            //if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
-            //{
-            //    Player.Bud.IsOnGround = true;
-            //    return true;
-            //}
             return true;
         }
 
@@ -153,16 +141,6 @@ namespace Robuddies.Levels
             {
                 player.IsCombinable = false;
             }
-            // test if budBudi is on ground
-            //if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
-            //{
-            //    Player.BudBudi.IsOnGround = false;
-            //}
-            //// test if player is on ground
-            //if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
-            //{
-            //    Player.Bud.IsOnGround = false;
-            //}
         }
 
         /*

@@ -26,7 +26,6 @@ namespace Robuddies.Utilities
                 }
                 return fraction;
             }, rayStart, rayEnd);
-            Console.Out.WriteLine(isIntersecting);
             return isIntersecting;
         }
 

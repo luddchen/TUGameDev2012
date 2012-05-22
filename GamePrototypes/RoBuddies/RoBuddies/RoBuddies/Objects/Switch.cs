@@ -59,7 +59,7 @@ namespace Robuddies.Objects
             Console.WriteLine("Pos Player: " + _player.ActivePart.Physics.Body.Position);
             Console.WriteLine("Pos Switch: " + Position);
 
-            if (Vector2.Distance(Position, _player.ActivePart.Physics.Body.Position) < 15)
+            if (Vector2.Distance(Position, _player.ActivePart.Physics.Body.Position + new Vector2(_player.ActivePart.Physics.Height / 20, _player.ActivePart.Physics.Width / 20)) < 15)
             {
                 Console.WriteLine("Switch activate");
 
