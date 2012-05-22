@@ -165,8 +165,8 @@ namespace Robuddies.Objects
             if (!IsSeperated)
             {
                 // TODO: calculate(!) position value
-                budPhysics.Position = new Vector2(budBudiPhysics.Position.X + 50, budBudiPhysics.Position.Y + 150 );
-                budiPhysics.Position = new Vector2(budBudiPhysics.Position.X - 300, budBudiPhysics.Position.Y - 250);
+                budPhysics.Position = new Vector2(budBudiPhysics.Position.X + 5, budBudiPhysics.Position.Y + 15 );
+                budiPhysics.Position = new Vector2(budBudiPhysics.Position.X - 7, budBudiPhysics.Position.Y - 5);
                 budiPhysics.Body.Enabled = true;
                 budiPhysics.Visible = true;
                 budPhysics.Body.Enabled = true;
@@ -180,7 +180,7 @@ namespace Robuddies.Objects
             else if (IsCombinable)
             {
                 // TODO: calculate(!) position value
-                budBudiPhysics.Position = new Vector2(budPhysics.Position.X, budPhysics.Position.Y - 150 );
+                budBudiPhysics.Position = new Vector2(budPhysics.Position.X, budPhysics.Position.Y - 15 );
                 budiPhysics.Body.Enabled = false;
                 budiPhysics.Visible = false;
                 budPhysics.Body.Enabled = false;
