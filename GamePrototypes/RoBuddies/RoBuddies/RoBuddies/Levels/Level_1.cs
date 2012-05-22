@@ -44,35 +44,12 @@ namespace Robuddies.Levels
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            // test collision between upper and lower part
-            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
-            {
-                player.IsCombinable = true;
-                return true;
-            }
-            // test if player is on ground
-            if ( f1.Body == Player.groundChecker || f2.Body ==Player.groundChecker )
-            {
-                Player.ActivePart.IsOnGround = true;
-                return true;
-            }   
-            return true;
+            return base.MyOnCollision(f1, f2, contact);
         }
 
         public override void MyOnSeperation(Fixture f1, Fixture f2)
         {
-            // test seperation between upper and lower part
-            // damn this only happens if myOnCollision returned true. This will need an other approach.
-            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
-            {
-                Player.ActivePart.IsOnGround = false;
-                player.IsCombinable = false;
-            }
-            // test if player is on ground
-            if (f1.Body == Player.groundChecker || f2.Body == Player.groundChecker)
-            {
-                Player.ActivePart.IsOnGround = false;
-            } 
+            base.MyOnSeperation(f1, f2);
         }
     }
 }

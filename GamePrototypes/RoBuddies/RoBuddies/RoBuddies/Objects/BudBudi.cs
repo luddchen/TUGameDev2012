@@ -17,8 +17,6 @@ namespace Robuddies.Objects
         private float texNr = 0;
         private float speedTemp;
 
-        public Body groundChecker;
-
         public override float DirectionX
         {
             set
@@ -177,6 +175,7 @@ namespace Robuddies.Objects
                 this.CurrentState = RobotPart.State.StopWalking;
             }
 
+            Console.Out.WriteLine("Vel: " + Physics.Body.LinearVelocity.X);
             if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
             {
                 if ((this.CurrentState != RobotPart.State.Jumping) &&

@@ -27,7 +27,8 @@ namespace Robuddies.Objects
         private PhysicObject budiPhysics;
         private PhysicObject budPhysics;
 
-        public Body groundChecker;
+        public Body budBudiGroundChecker;
+        public Body budGroundChecker;
 
         private bool seperated;
 
@@ -66,13 +67,13 @@ namespace Robuddies.Objects
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
             FixtureFactory.AttachRectangle(budBudiPhysics.Width / 30, budBudiPhysics.Height / 10, 1, new Vector2(budBudiPhysics.Width / 20, budBudiPhysics.Height / 20), budBudiPhysics.Body);
             // attach little circle for checking if the robot stands on the ground
-            groundChecker = BodyFactory.CreateCircle(world, 0.5f, 0, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
-            groundChecker.BodyType = BodyType.Dynamic;
-            RevoluteJoint joint = JointFactory.CreateRevoluteJoint(world, groundChecker, budBudiPhysics.Body, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
+            budBudiGroundChecker = BodyFactory.CreateCircle(world, 0.5f, 0, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
+            budBudiGroundChecker.BodyType = BodyType.Dynamic;
+            JointFactory.CreateRevoluteJoint(world, budBudiGroundChecker, budBudiPhysics.Body, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
-            level.addToMyOnCollision(groundChecker);
-            level.addToMyOnSeperation(groundChecker);
+            level.addToMyOnCollision(budBudiGroundChecker);
+            level.addToMyOnSeperation(budBudiGroundChecker);
 
             // init physics for budi
             budiPhysics = new PhysicObject(budiTexture, new Vector2(10, 160), world);
@@ -93,7 +94,11 @@ namespace Robuddies.Objects
             budPhysics.Body.BodyType = BodyType.Dynamic;
             budPhysics.Body.Enabled = false;
             budPhysics.Visible = false;
-            FixtureFactory.AttachRectangle(budPhysics.Width / 10, budPhysics.Height / 10, 10, new Vector2(budPhysics.Width / 20, budPhysics.Height / 20), budPhysics.Body);
+            FixtureFactory.AttachRectangle(budPhysics.Width / 10, budPhysics.Height / 10, 1, new Vector2(budPhysics.Width / 20, budPhysics.Height / 20), budPhysics.Body);
+            // attach little circle for checking if the robot stands on the ground
+            budGroundChecker = BodyFactory.CreateCircle(world, 0.5f, 0, new Vector2(10 + budPhysics.Width / 20, 160 + budPhysics.Height / 10));
+            budGroundChecker.BodyType = BodyType.Dynamic;
+            RevoluteJoint joint = JointFactory.CreateRevoluteJoint(world, budGroundChecker, budPhysics.Body, new Vector2(10 + budPhysics.Width / 20, 160 + budPhysics.Height / 10));
             level.MainLayer.add(budPhysics);
             level.addToMyOnCollision(budPhysics);
             level.addToMyOnSeperation(budPhysics);
@@ -101,7 +106,6 @@ namespace Robuddies.Objects
             budi = new Budi(content, new Vector2(startingPos.X, startingPos.Y), this, world, budiPhysics);
             bud = new Bud(content, startingPos, this, world, budPhysics);
             budBudi = new BudBudi(content, startingPos, this, world, budBudiPhysics);
-            ((BudBudi)budBudi).groundChecker = groundChecker;
             bud.Budi = budi;
             budi.Bud = bud;
             activePart = budBudi;

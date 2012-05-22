@@ -23,12 +23,12 @@ namespace Robuddies.Levels
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            return true;
+            return base.MyOnCollision(f1, f2, contact);
         }
 
         public override void MyOnSeperation(Fixture f1, Fixture f2)
         {
-
+            base.MyOnSeperation(f1, f2);
         }
     }
 }

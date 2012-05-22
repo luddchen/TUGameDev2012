@@ -33,6 +33,8 @@ namespace Robuddies.Objects
             StopPushing
         };
 
+        // TODO: calculate IsOnGround by the real distance to the ground under the robot
+        // the myOnCollision and myOnSeperation method isn't working well
         public bool IsOnGround 
         {
             get { return isOnGround; }

@@ -110,10 +110,64 @@ namespace Robuddies.Levels
             Camera.Viewport = viewport;
         }
 
-        public abstract bool MyOnCollision(Fixture f1, Fixture f2, Contact contact);
+        /*
+         * 
+         * This method will be called if the objects you added to the collission detection collide.
+         * If you return false, the collission will be ignored from the physic engine.
+         * 
+         */
+        public virtual bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
+        {
+            // test collision between upper and lower part
+            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
+            {
+                player.IsCombinable = true;
+                return true;
+            }
+            // test if budBudi is on ground
+            if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
+            {
+                Player.BudBudi.IsOnGround = true;
+                return true;
+            }
+            // test if bud is on ground
+            if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
+            {
+                Player.Bud.IsOnGround = true;
+                return true;
+            }
+            return true;
+        }
 
-        public abstract void MyOnSeperation(Fixture f1, Fixture f2);
+        /*
+         * 
+         * This method will be called if the objects you added to the seperation detection are 
+         * not touching anymore afer a not ignored collission (returned true before in the MyOnCollision)
+         * 
+         */
+        public virtual void MyOnSeperation(Fixture f1, Fixture f2)
+        {
+            // test seperation between upper and lower part
+            // damn this only happens if myOnCollision returned true. This will need an other approach.
+            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
+            {
+                player.IsCombinable = false;
+            }
+            // test if budBudi is on ground
+            if (f1.Body == Player.budBudiGroundChecker || f2.Body == Player.budBudiGroundChecker)
+            {
+                Player.BudBudi.IsOnGround = false;
+            }
+            // test if player is on ground
+            if (f1.Body == Player.budGroundChecker || f2.Body == Player.budGroundChecker)
+            {
+                Player.Bud.IsOnGround = false;
+            }
+        }
 
+        /*
+         * Add PhysicObjects here to detect collisions with the myOnCollision Method.
+         */
         public void addToMyOnCollision(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
@@ -122,6 +176,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Add Body objects here to detect collisions with the myOnCollision Method.
+         */
         public void addToMyOnCollision(Body body)
         {
             foreach (Fixture fix in body.FixtureList)
@@ -130,6 +187,10 @@ namespace Robuddies.Levels
             }
         }
 
+
+        /*
+         * Add PhysicObjects here to detect seperations with the myOnSeperation Method.
+         */
         public void addToMyOnSeperation(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
@@ -138,6 +199,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Add Body objects here to detect seperations with the myOnSeperation Method.
+         */
         public void addToMyOnSeperation(Body body)
         {
             foreach (Fixture fix in body.FixtureList)
@@ -146,6 +210,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Removes a PhysicObject from the collision detection
+         */
         public void removeFromMyOnCollision(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
@@ -154,6 +221,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Removes a Body object from the collision detection
+         */
         public void removeFromMyOnCollision(Body body)
         {
             foreach (Fixture fix in body.FixtureList)
@@ -162,6 +232,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Removes a Body object from the seperation detection
+         */
         public void removeFromMyOnSeperation(Body body)
         {
             foreach (Fixture fix in body.FixtureList)
@@ -170,6 +243,9 @@ namespace Robuddies.Levels
             }
         }
 
+        /*
+         * Removes a PhysicObject object from the seperation detection
+         */
         public void removeFromMyOnSeperation(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
