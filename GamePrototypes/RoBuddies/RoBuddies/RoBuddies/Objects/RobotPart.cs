@@ -7,8 +7,12 @@ using FarseerPhysics.Dynamics;
 
 namespace Robuddies.Objects
 {
+    public delegate void ActivateEventHandler(object sender, EventArgs e);
+
     class RobotPart : AnimatedObject
     {
+        public event ActivateEventHandler Activate;
+
         // force for moving the robotPart
         private const float MOVEMENT_FORCE = 35000.0f;
         private State currentState;
@@ -89,5 +93,12 @@ namespace Robuddies.Objects
             base.Draw(spriteBatch);
         }
 
+        protected void OnActivate(EventArgs e)
+        {
+            if (Activate != null)
+            {
+                Activate(this, e);
+            }
+        }
     }
 }

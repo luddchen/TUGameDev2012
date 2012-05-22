@@ -7,6 +7,6 @@ namespace Robuddies.Interfaces
 {
     interface ISwitchable
     {
-        public void activate();
+        void activate();
     }
 }

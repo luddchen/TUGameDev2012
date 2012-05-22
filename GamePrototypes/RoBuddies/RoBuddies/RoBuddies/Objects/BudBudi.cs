@@ -176,7 +176,7 @@ namespace Robuddies.Objects
                 this.CurrentState = RobotPart.State.StopWalking;
             }
 
-            Console.Out.WriteLine("Vel: " + Physics.Body.LinearVelocity.X);
+            //Console.Out.WriteLine("Vel: " + Physics.Body.LinearVelocity.X);
             if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
             {
                 if ((this.CurrentState != RobotPart.State.Jumping) &&
@@ -197,8 +197,12 @@ namespace Robuddies.Objects
                 CurrentState = State.StopJumping;
             }
 
+            if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
+            {
+                OnActivate(EventArgs.Empty);
+            }
+
             oldState = currentState;
         }
-
     }
 }

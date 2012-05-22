@@ -107,6 +107,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\ISwitchable.cs" />
     <Compile Include="Levels\Level_2.cs" />
     <Compile Include="Levels\Level_Test.cs" />
     <Compile Include="Objects\AnimatedObject.cs" />
@@ -128,6 +129,8 @@
     <Compile Include="Levels\Level_Underwater.cs" />
     <Compile Include="Objects\Robot.cs" />
     <Compile Include="Objects\RobotPart.cs" />
+    <Compile Include="Objects\Switch.cs" />
+    <Compile Include="Objects\SwitchableWall.cs" />
     <Compile Include="Objects\Wall.cs" />
     <Compile Include="Overlay.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
