@@ -205,8 +205,12 @@ namespace Robuddies.Objects
                 CurrentState = State.StopJumping;
             }
 
+            if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
+            {
+                OnActivate(EventArgs.Empty);
+            }
+
             oldState = currentState;
         }
-
     }
 }

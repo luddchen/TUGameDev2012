@@ -118,8 +118,8 @@ namespace Robuddies.Objects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Console.WriteLine("test");
-            spriteBatch.Draw(Texture, Position, null, Color, 0, origin, 1, effects, 0);
+            //Console.WriteLine("test");
+            spriteBatch.Draw(Texture, Position, null, Color, 0, origin, Scale, effects, 0);
         }
     }
 }

@@ -5,12 +5,15 @@ using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Robuddies.Objects;
+using Robuddies.Interfaces;
 using FarseerPhysics.Dynamics.Contacts;
 
 namespace Robuddies.Levels
 {
     class Level_1 : Level
     {
+        private List<Switch> switches;
+        private SwitchableWall switchWall;
 
         public Level_1(Game1 game) 
             : base(game)
@@ -31,7 +34,12 @@ namespace Robuddies.Levels
             levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(10, 100), Color.White, square, gameWorld));
             levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(100, 10), Color.White, square, gameWorld));
             levelPhysicObjects.Add(new Wall(new Vector2(300, 0), new Vector2(10, 200), Color.White, square, gameWorld));
-            levelPhysicObjects.Add(new Wall(new Vector2(250, 100), new Vector2(10, 100), Color.Red, square, gameWorld));
+
+            switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), Color.Red, square, gameWorld);
+            Switch doorSwitch = new Switch(switchWall, player, square, new Vector2(50, 170));
+            mainLayer.add(doorSwitch);
+
+            levelPhysicObjects.Add(switchWall);
 
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {
@@ -39,7 +47,15 @@ namespace Robuddies.Levels
                 mainLayer.add(physicObj);
             }
 
+            List<Switch> switches = new List<Switch>();
+            switches.Add(doorSwitch);
+        }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            //switchWall.Position += new Vector2(0, 1);
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

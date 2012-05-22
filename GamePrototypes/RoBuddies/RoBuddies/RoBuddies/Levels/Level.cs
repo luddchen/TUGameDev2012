@@ -88,7 +88,7 @@ namespace Robuddies.Levels
             layers.Add(mainLayer);
         }
 
-        public void Update(GameTime gameTime)
+        public virtual void Update(GameTime gameTime)
         {
             player.Update(gameTime);
             mainLayer.Update(gameTime);
