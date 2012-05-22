@@ -63,7 +63,7 @@ namespace Robuddies.Levels
         public Level(Game1 game)
         {
             this.game = game;
-            this.gameWorld = new World(new Vector2(0, 9.82f));
+            this.gameWorld = new World(new Vector2(0, 20.0f));
             layers = new List<Layer>();
             backgroundColor = Color.Black;
         }

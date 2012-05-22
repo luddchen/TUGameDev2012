@@ -47,6 +47,7 @@ namespace Robuddies.Objects
                 TextureList.Add(content.Load<Texture2D>("Sprites\\Buddies\\BudBudi\\" + String.Format("{0:0000}", i)));
             }
 
+            Physics.Body.Mass = 100;
             Texture = TextureList[0];
             DirectionX = 0;
             speedTemp = 0;
