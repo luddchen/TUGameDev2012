@@ -10,12 +10,14 @@ namespace Robuddies.Objects
     class RobotPart : AnimatedObject
     {
         // force for moving the robotPart
-        private const float MOVEMENT_FORCE = 1000.0f;
+        private const float MOVEMENT_FORCE = 35000.0f;
         private State currentState;
         private PhysicObject physics;
         private Robot robot;
 
         protected bool seperated;
+
+        private bool isOnGround = true;
 
         public enum State
         {
@@ -30,6 +32,12 @@ namespace Robuddies.Objects
             StartPushing,
             StopPushing
         };
+
+        public bool IsOnGround 
+        {
+            get { return isOnGround; }
+            set { isOnGround = value; }
+        }
 
         public RobotPart(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
         {
@@ -78,5 +86,6 @@ namespace Robuddies.Objects
         {
             base.Draw(spriteBatch);
         }
+
     }
 }

@@ -122,9 +122,25 @@ namespace Robuddies.Levels
             }
         }
 
+        public void addToMyOnCollision(Body body)
+        {
+            foreach (Fixture fix in body.FixtureList)
+            {
+                fix.OnCollision += MyOnCollision;
+            }
+        }
+
         public void addToMyOnSeperation(PhysicObject physicObject)
         {
             foreach (Fixture fix in physicObject.Body.FixtureList)
+            {
+                fix.OnSeparation += MyOnSeperation;
+            }
+        }
+
+        public void addToMyOnSeperation(Body body)
+        {
+            foreach (Fixture fix in body.FixtureList)
             {
                 fix.OnSeparation += MyOnSeperation;
             }
@@ -135,6 +151,22 @@ namespace Robuddies.Levels
             foreach (Fixture fix in physicObject.Body.FixtureList)
             {
                 fix.OnCollision -= MyOnCollision;
+            }
+        }
+
+        public void removeFromMyOnCollision(Body body)
+        {
+            foreach (Fixture fix in body.FixtureList)
+            {
+                fix.OnCollision += MyOnCollision;
+            }
+        }
+
+        public void removeFromMyOnSeperation(Body body)
+        {
+            foreach (Fixture fix in body.FixtureList)
+            {
+                fix.OnSeparation -= MyOnSeperation;
             }
         }
 

@@ -49,7 +49,13 @@ namespace Robuddies.Levels
             {
                 player.IsCombinable = true;
                 return true;
-            }            
+            }
+            // test if player is on ground
+            if ( f1.Body == Player.groundChecker || f2.Body ==Player.groundChecker )
+            {
+                Player.ActivePart.IsOnGround = true;
+                return true;
+            }   
             return true;
         }
 
@@ -59,8 +65,14 @@ namespace Robuddies.Levels
             // damn this only happens if myOnCollision returned true. This will need an other approach.
             if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
             {
+                Player.ActivePart.IsOnGround = false;
                 player.IsCombinable = false;
-            }            
+            }
+            // test if player is on ground
+            if (f1.Body == Player.groundChecker || f2.Body == Player.groundChecker)
+            {
+                Player.ActivePart.IsOnGround = false;
+            } 
         }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using FarseerPhysics.Dynamics;
 using Robuddies.Levels;
 using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics.Joints;
 
 namespace Robuddies.Objects
 {
@@ -25,6 +26,8 @@ namespace Robuddies.Objects
         private PhysicObject budBudiPhysics;
         private PhysicObject budiPhysics;
         private PhysicObject budPhysics;
+
+        public Body groundChecker;
 
         private bool seperated;
 
@@ -61,9 +64,15 @@ namespace Robuddies.Objects
             budBudiPhysics.Color = Color.White;
             budBudiPhysics.Body.FixedRotation = true;
             budBudiPhysics.Body.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 30, budBudiPhysics.Height / 10, 10, new Vector2(budBudiPhysics.Width / 20, budBudiPhysics.Height / 20), budBudiPhysics.Body);
+            FixtureFactory.AttachRectangle(budBudiPhysics.Width / 30, budBudiPhysics.Height / 10, 1, new Vector2(budBudiPhysics.Width / 20, budBudiPhysics.Height / 20), budBudiPhysics.Body);
+            // attach little circle for checking if the robot stands on the ground
+            groundChecker = BodyFactory.CreateCircle(world, 0.5f, 0, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
+            groundChecker.BodyType = BodyType.Dynamic;
+            RevoluteJoint joint = JointFactory.CreateRevoluteJoint(world, groundChecker, budBudiPhysics.Body, new Vector2(10 + budBudiPhysics.Width / 20, 160 + budBudiPhysics.Height / 10));
             level.MainLayer.add(budBudiPhysics);
             level.addToMyOnCollision(budBudiPhysics);
+            level.addToMyOnCollision(groundChecker);
+            level.addToMyOnSeperation(groundChecker);
 
             // init physics for budi
             budiPhysics = new PhysicObject(budiTexture, new Vector2(10, 160), world);
@@ -72,7 +81,7 @@ namespace Robuddies.Objects
             budiPhysics.Body.BodyType = BodyType.Dynamic;
             budiPhysics.Body.Enabled = false;
             budiPhysics.Visible = false;
-            FixtureFactory.AttachRectangle(budiPhysics.Width / 30, budiPhysics.Height / 30, 10, new Vector2(budiPhysics.Width / 20, budiPhysics.Height / 20), budiPhysics.Body);
+            FixtureFactory.AttachRectangle(budiPhysics.Width / 30, budiPhysics.Height / 30, 1, new Vector2(budiPhysics.Width / 20, budiPhysics.Height / 20), budiPhysics.Body);
             level.MainLayer.add(budiPhysics);
             level.addToMyOnCollision(budiPhysics);
             level.addToMyOnSeperation(budiPhysics);
@@ -92,6 +101,7 @@ namespace Robuddies.Objects
             budi = new Budi(content, new Vector2(startingPos.X, startingPos.Y), this, world, budiPhysics);
             bud = new Bud(content, startingPos, this, world, budPhysics);
             budBudi = new BudBudi(content, startingPos, this, world, budBudiPhysics);
+            ((BudBudi)budBudi).groundChecker = groundChecker;
             bud.Budi = budi;
             budi.Bud = bud;
             activePart = budBudi;
@@ -165,8 +175,8 @@ namespace Robuddies.Objects
             if (!IsSeperated)
             {
                 // TODO: calculate(!) position value
-                budPhysics.Position = new Vector2(budBudiPhysics.Position.X + 5, budBudiPhysics.Position.Y + 15 );
-                budiPhysics.Position = new Vector2(budBudiPhysics.Position.X - 7, budBudiPhysics.Position.Y - 5);
+                budPhysics.Position = new Vector2(budBudiPhysics.Position.X, budBudiPhysics.Position.Y + budPhysics.Height / 20);
+                budiPhysics.Position = new Vector2(budBudiPhysics.Position.X - budiPhysics.Width / 40, budBudiPhysics.Position.Y - budiPhysics.Height / 20);
                 budiPhysics.Body.Enabled = true;
                 budiPhysics.Visible = true;
                 budPhysics.Body.Enabled = true;
@@ -180,7 +190,7 @@ namespace Robuddies.Objects
             else if (IsCombinable)
             {
                 // TODO: calculate(!) position value
-                budBudiPhysics.Position = new Vector2(budPhysics.Position.X, budPhysics.Position.Y - 15 );
+                budBudiPhysics.Position = new Vector2(budPhysics.Position.X, budPhysics.Position.Y - budBudi.Height / 20);
                 budiPhysics.Body.Enabled = false;
                 budiPhysics.Visible = false;
                 budPhysics.Body.Enabled = false;
