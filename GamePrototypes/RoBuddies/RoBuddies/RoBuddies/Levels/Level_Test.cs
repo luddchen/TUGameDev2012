@@ -44,11 +44,11 @@ namespace Robuddies.Levels
 
             Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
 
-            Layer layer10 = new Layer(Camera); layer10.LoadContent(); layer10.Depth = 0.98f;
-            Layer layer11 = new Layer(Camera); layer11.LoadContent(); layer11.Depth = 0.96f;
-            Layer layer12 = new Layer(Camera); layer12.LoadContent(); layer12.Depth = 0.94f;
-            Layer layer13 = new Layer(Camera); layer13.LoadContent(); layer13.Depth = 0.92f;
-            Layer layer14 = new Layer(Camera); layer14.LoadContent(); layer14.Depth = 0.90f;
+            Layer layer10 = new Layer(Camera, new Vector2(0.0f, 1.0f)); layer10.LoadContent(); layer10.Depth = 0.98f;
+            Layer layer11 = new Layer(Camera, new Vector2(0.1f, 1.0f)); layer11.LoadContent(); layer11.Depth = 0.96f;
+            Layer layer12 = new Layer(Camera, new Vector2(0.2f, 1.0f)); layer12.LoadContent(); layer12.Depth = 0.94f;
+            Layer layer13 = new Layer(Camera, new Vector2(0.3f, 1.0f)); layer13.LoadContent(); layer13.Depth = 0.92f;
+            Layer layer14 = new Layer(Camera, new Vector2(0.4f, 1.0f)); layer14.LoadContent(); layer14.Depth = 0.90f;
             Random random = new Random();
             GameObject cloud;
             for (int i = 0; i < 5; i++)
@@ -80,12 +80,12 @@ namespace Robuddies.Levels
                 layer14.add(cloud);
             }
 
-            Layer layer2 = new Layer(Camera);
+            Layer layer2 = new Layer(Camera, new Vector2(0.5f, 1.0f));
             layer2.LoadContent();
             layer2.Depth = 0.7f;
             layer2.add(new GameObject(home, new Vector2(home.Width / 2, groundTex.Height + home.Height / 2)));
 
-            Layer layer30 = new Layer(Camera);
+            Layer layer30 = new Layer(Camera, new Vector2(0.6f, 1.0f));
             layer30.LoadContent();
             layer30.Depth = 0.72f;
             GameObject tree;
@@ -95,7 +95,7 @@ namespace Robuddies.Levels
                 layer30.add(tree);
             }
 
-            Layer layer31 = new Layer(Camera);
+            Layer layer31 = new Layer(Camera, new Vector2(0.7f, 1.0f));
             layer31.LoadContent();
             layer31.Depth = 0.8f;
             for (int i = 0; i < 10; i++)
@@ -104,7 +104,7 @@ namespace Robuddies.Levels
                 layer31.add(tree);
             }
 
-            Layer layer32 = new Layer(Camera);
+            Layer layer32 = new Layer(Camera, new Vector2(0.8f, 1.0f));
             layer32.LoadContent();
             layer32.Depth = 0.85f;
             for (int i = 0; i < 10; i++)
@@ -113,7 +113,7 @@ namespace Robuddies.Levels
                 layer32.add(tree);
             }
 
-            Layer layer4 = new Layer(Camera);  // the road to walk
+            Layer layer4 = new Layer(Camera, new Vector2(0.9f, 1.0f));  // the road to walk
             layer4.LoadContent();
             layer4.Depth = 0.52f;
 
@@ -124,7 +124,7 @@ namespace Robuddies.Levels
                 layer4.add(ground);
             }
 
-            Layer layer5 = new Layer(Camera);
+            Layer layer5 = new Layer(Camera, new Vector2(0.92f, 1.0f));
             layer5.LoadContent();
             layer5.Depth = 0.88f;
             GameObject ground2 = new GameObject(ground2Tex, new Vector2(ground2Tex.Width * 30, ground2Tex.Height * 20)); ground2.Scale = 60;

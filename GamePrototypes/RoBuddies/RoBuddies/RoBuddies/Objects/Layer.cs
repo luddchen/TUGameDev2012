@@ -67,9 +67,10 @@ namespace Robuddies.Objects
 
         #region Construction and Initialization
 
-        public Layer(Camera camera)
+        public Layer(Camera camera, Vector2 parallax)
         {
             this.camera = camera;
+            this.parallax = parallax;
             objects = new List<GameObject>();
         }
 
@@ -105,7 +106,7 @@ namespace Robuddies.Objects
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.getViewMatrix(new Vector2(1.0f, 1.0f)));
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.getViewMatrix(parallax));
 
             foreach (GameObject obj in objects)
             {

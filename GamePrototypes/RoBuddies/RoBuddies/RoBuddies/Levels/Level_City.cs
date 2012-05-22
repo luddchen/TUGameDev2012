@@ -26,7 +26,7 @@ namespace Robuddies.Levels
 
             Texture2D tree = game.Content.Load<Texture2D>("Sprites\\tree4");
 
-            Layer layer1 = new Layer(Camera);
+            Layer layer1 = new Layer(Camera, new Vector2(1,1));
             layer1.LoadContent();
             layer1.Depth = 0.75f;
             layer1.add(new GameObject(tree, new Vector2(200, tree.Height / 2)));

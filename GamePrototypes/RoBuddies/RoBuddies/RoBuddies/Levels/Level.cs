@@ -71,15 +71,17 @@ namespace Robuddies.Levels
             backgroundColor = Color.Black;
         }
 
-        public  virtual void LoadContent()
+        public virtual void LoadContent()
         {
             camera = new Camera(game.GraphicsDevice.Viewport);
             spriteBatch = new SpriteBatch(game.GraphicsDevice);
 
-            backgroundLayer = new BackgroundLayer(Camera);
+            backgroundLayer = new BackgroundLayer(Camera, new Vector2(0.5f, 1.0f));
             layers.Add( backgroundLayer );
 
-            mainLayer = new Layer(Camera);
+            LoadContentBackground();
+
+            mainLayer = new Layer(Camera, new Vector2(1.0f,1.0f));
             mainLayer.LoadContent();
 
             player = new Robot(game.Content, new Vector2(10, 160), gameWorld, this); 
@@ -89,7 +91,13 @@ namespace Robuddies.Levels
             activePart = player.ActivePart;
 
             layers.Add(mainLayer);
+
+            LoadContentForeground();
         }
+
+        protected virtual void LoadContentBackground() {}
+
+        protected virtual void LoadContentForeground() {}
 
         public virtual void Update(GameTime gameTime)
         {

@@ -27,7 +27,7 @@ namespace Robuddies.Levels
 
             Texture2D groundTex = game.Content.Load<Texture2D>("Sprites\\Ground1");
 
-            Layer layerHighWall = new Layer(Camera);
+            Layer layerHighWall = new Layer(Camera, new Vector2(1,1));
             layerHighWall.LoadContent();
             layerHighWall.Depth = 0.8f;
 

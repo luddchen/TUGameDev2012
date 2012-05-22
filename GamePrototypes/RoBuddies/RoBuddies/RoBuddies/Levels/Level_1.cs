@@ -14,18 +14,69 @@ namespace Robuddies.Levels
     {
         private List<Switch> switches;
         private SwitchableWall switchWall;
+        private Texture2D square;
 
         public Level_1(Game1 game) 
             : base(game)
         {
+            square = game.Content.Load<Texture2D>("Sprites\\Square");
+        }
+
+        protected override void LoadContentBackground()
+        {
+            Texture2D sunTex = game.Content.Load<Texture2D>("Sprites\\Sun");
+            Texture2D cloudTex = game.Content.Load<Texture2D>("Sprites\\Cloud1");
+
+            GameObject sun = new GameObject(sunTex, new Vector2(50f, 0.7f)); sun.Scale = 0.7f;
+            backgroundLayer.add(sun);
+
+            Layer layer10 = new Layer(Camera, new Vector2(0.0f, 1.0f)); layer10.LoadContent(); layer10.Depth = 0.98f;
+            Layer layer11 = new Layer(Camera, new Vector2(0.1f, 1.0f)); layer11.LoadContent(); layer11.Depth = 0.96f;
+            Layer layer12 = new Layer(Camera, new Vector2(0.2f, 1.0f)); layer12.LoadContent(); layer12.Depth = 0.94f;
+            Layer layer13 = new Layer(Camera, new Vector2(0.3f, 1.0f)); layer13.LoadContent(); layer13.Depth = 0.92f;
+            Layer layer14 = new Layer(Camera, new Vector2(0.4f, 1.0f)); layer14.LoadContent(); layer14.Depth = 0.90f;
+            Random random = new Random();
+            GameObject cloud;
+            for (int i = 0; i < 5; i++)
+            {
+                cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next(-100, 0)));
+                cloud.Scale = (float)(random.NextDouble() / 50 + 0.3d);
+                cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
+                cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
+                layer10.add(cloud);
+                cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000),random.Next(-100, 0)));
+                cloud.Scale = (float)(random.NextDouble() / 50 + 0.3d);
+                cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
+                cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
+                layer11.add(cloud);
+                cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next(-100, 0)));
+                cloud.Scale = (float)(random.NextDouble() / 50 + 0.3d);
+                cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
+                cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
+                layer12.add(cloud);
+                cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next(-100, 0)));
+                cloud.Scale = (float)(random.NextDouble() / 50 + 0.3d);
+                cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
+                cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
+                layer13.add(cloud);
+                cloud = new GameObject(cloudTex, new Vector2(random.Next(-500, 2000), random.Next(-100, 0)));
+                cloud.Scale = (float)(random.NextDouble() / 50 + 0.3d);
+                cloud.Color = new Color(random.Next(192, 255), random.Next(192, 255), random.Next(192, 255));
+                cloud.Rotation = (float)((random.NextDouble() - 0.5d) * MathHelper.PiOver4);
+                layer14.add(cloud);
+            }
+
+            layers.Add(layer10);
+            layers.Add(layer11);
+            layers.Add(layer12);
+            layers.Add(layer13);
+            layers.Add(layer14);
         }
 
         public override void LoadContent()
         {
             base.LoadContent(); 
             backgroundColor = Color.LightBlue;
-
-            Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
 
             List<PhysicObject> levelPhysicObjects = new List<PhysicObject>();
             levelPhysicObjects.Add(new Wall(new Vector2(0, 100), new Vector2(200, 10), Color.White, square, gameWorld));
@@ -53,9 +104,6 @@ namespace Robuddies.Levels
                 addToMyOnCollision(pipe);
                 mainLayer.add(pipe);
             }
-
-            List<Switch> switches = new List<Switch>();
-            switches.Add(doorSwitch);
         }
 
         public override void Update(GameTime gameTime)
