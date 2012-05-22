@@ -34,9 +34,10 @@ namespace Robuddies.Levels
             levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(10, 100), Color.White, square, gameWorld));
             levelPhysicObjects.Add(new Wall(new Vector2(200, 0), new Vector2(100, 10), Color.White, square, gameWorld));
             levelPhysicObjects.Add(new Wall(new Vector2(300, 0), new Vector2(10, 200), Color.White, square, gameWorld));
+            pipes.Add(new Pipe(new Vector2(215, 20), 80, Color.Gray, square, gameWorld));
 
             switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), Color.Red, square, gameWorld);
-            Switch doorSwitch = new Switch(switchWall, player, square, new Vector2(50, 170));
+            Switch doorSwitch = new Switch(switchWall, player, square, new Vector2(280, 190));
             mainLayer.add(doorSwitch);
 
             levelPhysicObjects.Add(switchWall);
@@ -47,6 +48,12 @@ namespace Robuddies.Levels
                 mainLayer.add(physicObj);
             }
 
+            foreach (Pipe pipe in pipes)
+            {
+                addToMyOnCollision(pipe);
+                mainLayer.add(pipe);
+            }
+
             List<Switch> switches = new List<Switch>();
             switches.Add(doorSwitch);
         }
@@ -54,8 +61,6 @@ namespace Robuddies.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            //switchWall.Position += new Vector2(0, 1);
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)

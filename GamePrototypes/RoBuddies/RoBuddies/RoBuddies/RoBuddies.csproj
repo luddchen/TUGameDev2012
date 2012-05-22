@@ -127,6 +127,7 @@
     <Compile Include="Levels\Level_Hospital.cs" />
     <Compile Include="Levels\Level_See.cs" />
     <Compile Include="Levels\Level_Underwater.cs" />
+    <Compile Include="Objects\Pipe.cs" />
     <Compile Include="Objects\Robot.cs" />
     <Compile Include="Objects\RobotPart.cs" />
     <Compile Include="Objects\Switch.cs" />

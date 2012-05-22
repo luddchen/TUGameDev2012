@@ -24,6 +24,8 @@ namespace Robuddies.Levels
         protected Color backgroundColor;
         protected Camera camera;
 
+        protected List<Pipe> pipes;
+
         public Robot Player 
         {
             get { return player; }
@@ -65,6 +67,7 @@ namespace Robuddies.Levels
             this.game = game;
             this.gameWorld = new World(new Vector2(0, 20f));
             layers = new List<Layer>();
+            pipes = new List<Pipe>();
             backgroundColor = Color.Black;
         }
 
@@ -124,6 +127,18 @@ namespace Robuddies.Levels
                 player.IsCombinable = true;
                 return true;
             }
+
+            // test if bodi reached a pipe
+
+            foreach (Pipe pipe in pipes)
+            {
+                if ((f1.Body == Player.Budi.Physics.Body && f2.Body == pipe.Body) || (f1.Body == pipe.Body && f2.Body == Player.Budi.Physics.Body))
+                {
+                    ((Budi)(Player.Budi)).CurrentBudiState = Budi.BudiState.StartClimbing;
+                    return true;
+                }
+            }
+
             return true;
         }
 

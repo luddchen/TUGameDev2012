@@ -136,7 +136,7 @@ namespace Robuddies.Objects
                 {
                     Physics.Body.LinearVelocity = new Vector2(-MovementForce, Physics.Body.LinearVelocity.Y);
                 }
-                else
+                else // slower movement while in air
                 {
                     Physics.Body.ApplyForce(new Vector2(-MovementForce / 2, 0));
                 }
@@ -153,7 +153,7 @@ namespace Robuddies.Objects
                 {
                     Physics.Body.LinearVelocity = new Vector2(MovementForce, Physics.Body.LinearVelocity.Y);
                 }
-                else
+                else // slower movement while in air
                 {
                     Physics.Body.ApplyForce(new Vector2(MovementForce / 2, 0));
                 }
