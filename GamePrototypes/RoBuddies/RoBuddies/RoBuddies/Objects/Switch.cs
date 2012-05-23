@@ -19,7 +19,8 @@ namespace Robuddies.Objects
             Color = Color.Red;
             Scale = 0.03f;
             _player = player;
-            _player.ActivePart.Activate += Activate;
+            _player.Budi.Activate += Activate;
+            _player.BudBudi.Activate += Activate;
             _switchable = switchable;
             _isRevertable = false;
             _isActivated = false;
