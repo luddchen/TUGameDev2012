@@ -98,9 +98,7 @@ namespace Robuddies.Levels
             mainLayer.add(doorSwitch);
             levelPhysicObjects.Add(switchDoor);
 
-            //MovableBox box = new MovableBox(square, new Vector2(200, 150), gameWorld, player);
-            //addToMyOnCollision(box);
-            //mainLayer.add(box);
+            boxes.Add(new MovableBox(square, new Vector2(200, 150), gameWorld, false, player));
 
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {
@@ -113,6 +111,14 @@ namespace Robuddies.Levels
                 addToMyOnCollision(pipe);
                 mainLayer.add(pipe);
             }
+
+            foreach (MovableBox box in boxes)
+            {
+                addToMyOnCollision(box);
+                mainLayer.add(box);
+            }
+
+
         }
 
         public override void Update(GameTime gameTime)

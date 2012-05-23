@@ -55,7 +55,10 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
-            GetInput();
+            if (Robot.ActivePart == this)
+            {
+                GetInput();
+            }
 
             if (texNr > TextureList.Count - 1) { texNr = TextureList.Count - 1; }
             if (texNr < 0) { texNr = 0; }

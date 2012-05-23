@@ -74,7 +74,10 @@ namespace Robuddies.Objects
 
         public override void Update(GameTime gameTime)
         {
-            GetInput();
+            if (Robot.ActivePart == this)
+            {
+                GetInput();
+            }
 
             if (texNr > TextureList.Count + ANIMATION_BEGIN) { texNr = TextureList.Count + ANIMATION_BEGIN; }
             if (texNr < ANIMATION_BEGIN) { texNr = ANIMATION_BEGIN; }
@@ -88,13 +91,13 @@ namespace Robuddies.Objects
 
             if (CurrentBudiState == BudiState.StartClimbing)
             {
-                this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, 0);
+                this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, -1);
                 // walk animation
             }
 
             if (CurrentBudiState == BudiState.Climbing)
             {
-                this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, 0);
+                this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, -1);
                 // walk animation
             }
 

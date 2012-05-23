@@ -25,6 +25,7 @@ namespace Robuddies.Levels
         protected Camera camera;
 
         protected List<Pipe> pipes;
+        protected List<MovableBox> boxes;
 
         public Overlay overlay;
 
@@ -70,6 +71,7 @@ namespace Robuddies.Levels
             this.gameWorld = new World(new Vector2(0, 20f));
             layers = new List<Layer>();
             pipes = new List<Pipe>();
+            boxes = new List<MovableBox>();
             backgroundColor = Color.Black;
             this.overlay = game.overlay;
         }
@@ -138,12 +140,23 @@ namespace Robuddies.Levels
                 return false;
             }
 
-            // test if bodi reached a pipe
+            // test if budi reached a pipe
             foreach (Pipe pipe in pipes)
             {
                 if ((f1.Body == Player.Budi.Physics.Body && f2.Body == pipe.Body) || (f1.Body == pipe.Body && f2.Body == Player.Budi.Physics.Body))
                 {
                     ((Budi)(Player.Budi)).CurrentBudiState = Budi.BudiState.StartClimbing;
+                    return true;
+                }
+            }
+
+            // test which robot part touches a MovableBox
+            foreach (MovableBox box in boxes)
+            {
+                // combined robot can move boxes
+                if ((f1.Body == Player.ActivePart.Physics.Body && f2.Body == box.Body) || (f1.Body == box.Body && f2.Body == Player.ActivePart.Physics.Body))
+                {
+                    box.TouchingPart = player.ActivePart;
                     return true;
                 }
             }
