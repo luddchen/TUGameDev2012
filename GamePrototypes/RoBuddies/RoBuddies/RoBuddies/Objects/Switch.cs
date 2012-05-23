@@ -27,13 +27,13 @@ namespace Robuddies.Objects
         }
 
         public Switch(ISwitchable switchable, Robot player, Texture2D texture, Vector2 pos, bool isRevertable)
-            : base (texture, pos)
+            : this(switchable, player, texture, pos)
         {
-            _player = player;
-            _player.ActivePart.Activate += Activate;
-            _switchable = switchable;
             _isRevertable = isRevertable;
-            _isActivated = false;
+        }
+
+        private void init()
+        {
         }
 
         public ISwitchable Switchable
