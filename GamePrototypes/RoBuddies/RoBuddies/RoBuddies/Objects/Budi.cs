@@ -100,7 +100,12 @@ namespace Robuddies.Objects
                 this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, -1);
             }
 
-            
+            if (CurrentBudiState == BudiState.UseLever)
+            {
+                texNr += 0.3f;
+                if (texNr > 116.0f && texNr < 116.5f) { OnActivate(EventArgs.Empty); }
+                if (texNr >= 120) { CurrentBudiState = BudiState.StopClimbing; }
+            }
         }
 
         private void GetInput()
@@ -153,7 +158,9 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
             {
-                OnActivate(EventArgs.Empty);
+                if (texNr < 110 || texNr > 120) { texNr = 110; }
+                this.CurrentBudiState = BudiState.UseLever;
+                //OnActivate(EventArgs.Empty);
             }
 
             oldState = currentState;

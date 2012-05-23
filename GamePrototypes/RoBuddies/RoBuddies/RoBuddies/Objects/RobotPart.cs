@@ -34,6 +34,7 @@ namespace Robuddies.Objects
             StartPushing,
             Pushing,
             StopPushing,
+            UseLever,
         };
 
         public bool IsOnGround 

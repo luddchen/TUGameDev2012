@@ -12,7 +12,7 @@ namespace Robuddies.Objects
 {
     class BudBudi : RobotPart
     {
-        private const int ANIMATION_END = 70;
+        private const int ANIMATION_END = 80;
         private KeyboardState oldState;
         private float texNr = 0;
         private float speedTemp;
@@ -134,6 +134,14 @@ namespace Robuddies.Objects
                     CurrentState = State.Waiting;
                 }
             }
+
+            if (CurrentState == State.UseLever)
+            {
+                //Console.WriteLine("use " + texNr);
+                //texNr += 0.3f;
+                if (texNr > 76.0f && texNr < 76.5f) { OnActivate(EventArgs.Empty); }
+                if (texNr >= 79) { CurrentState = State.Waiting; texNr = 0; }
+            }
         }
 
         private void GetInput()
@@ -217,7 +225,8 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
             {
-                OnActivate(EventArgs.Empty);
+                if (texNr < 70 || texNr > 80) { texNr = 70; }
+                this.CurrentState = State.UseLever; this.DirectionX = 0.0f;
             }
 
             if (currentState.IsKeyDown(Keys.LeftControl) && oldState.IsKeyUp(Keys.LeftControl))
