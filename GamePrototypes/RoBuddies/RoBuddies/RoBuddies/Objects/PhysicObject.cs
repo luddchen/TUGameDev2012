@@ -26,6 +26,7 @@ namespace Robuddies.Objects
         public Body Body
         {
             get { return body; }
+            set { body = value; }
         }
 
         public World World

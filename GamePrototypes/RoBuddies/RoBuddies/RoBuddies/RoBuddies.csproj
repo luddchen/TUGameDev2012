@@ -117,6 +117,7 @@
     <Compile Include="Objects\BudBudi.cs" />
     <Compile Include="Objects\Budi.cs" />
     <Compile Include="Objects\Head.cs" />
+    <Compile Include="Objects\MovableBox.cs" />
     <Compile Include="Objects\PhysicObject.cs" />
     <Compile Include="Objects\GameObject.cs" />
     <Compile Include="Objects\Layer.cs" />

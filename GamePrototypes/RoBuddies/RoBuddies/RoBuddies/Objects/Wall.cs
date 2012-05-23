@@ -29,6 +29,7 @@ namespace Robuddies.Objects
             this.color = color;
             FixtureFactory.AttachRectangle(size.X, size.Y, 1, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             this.Body.BodyType = BodyType.Static;
+            this.Body.Restitution = 0.0f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

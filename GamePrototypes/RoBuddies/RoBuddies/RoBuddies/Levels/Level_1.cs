@@ -99,6 +99,10 @@ namespace Robuddies.Levels
             mainLayer.add(doorSwitch);
             //levelPhysicObjects.Add(switchDoor);
 
+            MovableBox box = new MovableBox(square, new Vector2(200, 150), gameWorld, player);
+            addToMyOnCollision(box);
+            mainLayer.add(box);
+
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {
                 addToMyOnCollision(physicObj);

@@ -57,6 +57,7 @@ namespace Robuddies.Objects
             CurrentState = State.Waiting;
             this.Physics = physics;
             this.Robot = robot;
+            this.Physics.Body.Restitution = 0.0f;
         }
 
         public float MovementForce 
