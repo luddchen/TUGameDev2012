@@ -73,12 +73,13 @@ namespace Robuddies.Objects
             base.Update(gameTime);
 
             // we need this, because otherwise the box will keep the players motion while pulling
-            if (pulling)
+            if (pulling && _player.ActivePart == _player.BudBudi)
             {
                 this.Body.LinearVelocity = Vector2.Zero;
             }
             else // with this the box is better controllable after pushing it
             {
+                stopPulling();
                 this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y / 2);
             }
         }
@@ -106,11 +107,19 @@ namespace Robuddies.Objects
                 }
                 else
                 {
-                    standardColors();
-                    world.RemoveJoint(djd);
-                    Body.FixedRotation = true;
-                    pulling = false;
+                    stopPulling();
                 }
+            }
+        }
+
+        private void stopPulling()
+        {
+            if (djd != null)
+            {
+                standardColors();
+                world.RemoveJoint(djd);
+                Body.FixedRotation = true;
+                pulling = false;
             }
         }
     }
