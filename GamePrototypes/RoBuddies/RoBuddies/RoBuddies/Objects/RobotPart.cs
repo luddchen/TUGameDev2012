@@ -31,9 +31,9 @@ namespace Robuddies.Objects
             Jumping,
             StartJumping,
             StopJumping,
-            Pushing,
             StartPushing,
-            StopPushing
+            Pushing,
+            StopPushing,
         };
 
         // TODO: calculate IsOnGround by the real distance to the ground under the robot

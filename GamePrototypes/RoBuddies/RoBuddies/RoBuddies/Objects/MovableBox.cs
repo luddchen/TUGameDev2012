@@ -26,7 +26,7 @@ namespace Robuddies.Objects
             _player.ActivePart.Activate += Activate;
             size = new Vector2(35, 35);
             this.isHeavyBox = isHeavyBox;
-            FixtureFactory.AttachRectangle(size.X, size.Y, 1, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
+            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             Body.BodyType = BodyType.Dynamic;
             Body.Friction = 0.9f;
             if (isHeavyBox)
@@ -36,6 +36,10 @@ namespace Robuddies.Objects
                 color = Color.CadetBlue;
             }
 
+        }
+
+        public bool IsPulled {
+            get { return pulling; }
         }
 
         public RobotPart TouchingPart
@@ -56,6 +60,21 @@ namespace Robuddies.Objects
             }
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            // we need this, because otherwise the box will keep the players motion while pulling
+            if (pulling)
+            {
+                this.Body.LinearVelocity = Vector2.Zero;
+            }
+            else // with this the box is better controllable after pushing it
+            {
+                this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y);
+            }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)size.X, (int)size.Y);
@@ -70,8 +89,8 @@ namespace Robuddies.Objects
                 Console.WriteLine("Box activate");
                 if (!pulling)
                 {
-                    djd = new WeldJoint(Body, _player.ActivePart.Physics.Body, this.Body.WorldCenter,
-                                                  _player.ActivePart.Physics.Body.WorldCenter);
+                    djd = new WeldJoint(_player.ActivePart.Physics.Body, Body, this.Body.WorldCenter,
+                              _player.ActivePart.Physics.Body.WorldCenter);
                     world.AddJoint(djd);
                     pulling = true;
                 }

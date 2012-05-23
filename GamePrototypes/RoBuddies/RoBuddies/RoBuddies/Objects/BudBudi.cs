@@ -17,6 +17,8 @@ namespace Robuddies.Objects
         private float texNr = 0;
         private float speedTemp;
 
+        private bool isPulling = false;
+
         public override float DirectionX
         {
             set
@@ -37,6 +39,11 @@ namespace Robuddies.Objects
                 origin.X = texture.Width / 2;
                 origin.Y = texture.Height;
             }
+        }
+
+        public bool IsPulling
+        {
+            get { return isPulling; }
         }
 
         public BudBudi(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
@@ -70,7 +77,7 @@ namespace Robuddies.Objects
                 if (texNr > TextureList.Count) { texNr = TextureList.Count - 1; }
             }
 
-            if (CurrentState == State.Walking)
+            if (CurrentState == State.Walking )
             {
                 if (texNr > 24) texNr = 4;
             }
@@ -211,6 +218,17 @@ namespace Robuddies.Objects
             if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
             {
                 OnActivate(EventArgs.Empty);
+            }
+
+            if (currentState.IsKeyDown(Keys.LeftControl) && oldState.IsKeyUp(Keys.LeftControl))
+            {
+                OnActivate(EventArgs.Empty);
+                this.isPulling = true;
+            }
+            
+            if (currentState.IsKeyUp(Keys.LeftControl) && oldState.IsKeyDown(Keys.LeftControl))
+            {
+                this.isPulling = false;
             }
 
             oldState = currentState;
