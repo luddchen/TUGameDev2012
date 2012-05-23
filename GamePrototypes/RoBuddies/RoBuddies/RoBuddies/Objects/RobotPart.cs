@@ -41,7 +41,6 @@ namespace Robuddies.Objects
         public bool IsOnGround 
         {
             get {
-                Console.Out.WriteLine(physics.Height);
                 return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position, physics.Position + new Vector2(0.0f, physics.Height / 10 + 5)); }
         }
 
