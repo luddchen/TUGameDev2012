@@ -91,13 +91,12 @@ namespace Robuddies.Levels
             switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), true, Color.Red, square, gameWorld);
             Switch wallSwitch = new Switch(switchWall, player, square, new Vector2(280, 190));
             mainLayer.add(wallSwitch);
-
             levelPhysicObjects.Add(switchWall);
 
             switchDoor = new SwitchableWall(new Vector2(300, 150), new Vector2(10, 50), false, Color.Green, square, gameWorld);
             Switch doorSwitch = new Switch(switchDoor, player, square, new Vector2(280, 165));
             mainLayer.add(doorSwitch);
-            //levelPhysicObjects.Add(switchDoor);
+            levelPhysicObjects.Add(switchDoor);
 
             MovableBox box = new MovableBox(square, new Vector2(200, 150), gameWorld, player);
             addToMyOnCollision(box);
@@ -123,14 +122,22 @@ namespace Robuddies.Levels
             if (switchDoor.visible && !player.IsSeperated)
             {
                 mainLayer.add(switchDoor);
-                if (overlay != null) overlay.CenterString = "test";             
+                if (overlay != null) overlay.CenterString = "Level Completed";             
             }
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
+            if (f1.Body == player.BudBudi.Physics.Body && f2.Body == switchDoor.Body ||
+                f2.Body == player.BudBudi.Physics.Body && f1.Body == switchDoor.Body)
+            {
+                game.level = new Level_2(game);
+                game.level.LoadContent();
+                Console.Out.WriteLine("Level_2 loaded");
+                return true;
+            }
+
             return base.MyOnCollision(f1, f2, contact);
-            
         }
 
         public override void MyOnSeperation(Fixture f1, Fixture f2)

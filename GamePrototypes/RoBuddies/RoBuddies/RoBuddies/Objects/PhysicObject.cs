@@ -8,7 +8,7 @@ using System.Collections.Generic;
 namespace Robuddies.Objects
 {
     // TODO: create a class like AnimatedPhysicsObject
-    class PhysicObject : GameObject
+    public class PhysicObject : GameObject
     {
         private Body body;
         protected World world;

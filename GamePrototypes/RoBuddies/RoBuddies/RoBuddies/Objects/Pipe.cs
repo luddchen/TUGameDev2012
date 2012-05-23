@@ -16,7 +16,7 @@ namespace Robuddies.Objects
      *  Author: Thomas
      * 
      */
-    class Pipe : PhysicObject
+    public class Pipe : PhysicObject
     {
         private const int PIPE_HEIGHT = 2;
         private Color color;

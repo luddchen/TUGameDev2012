@@ -36,7 +36,7 @@ namespace Robuddies.Objects
         private void Activate(object sender, EventArgs e)
         {
             if (_player.ActivePart == _player.BudBudi && 
-                Vector2.Distance(this.Body.WorldCenter, _player.ActivePart.Physics.Body.WorldCenter) < 30)
+                Vector2.Distance(this.Body.WorldCenter, _player.ActivePart.Physics.Body.WorldCenter) < 35)
             {
                 Console.WriteLine("Box activate");
                 if (!pulling)

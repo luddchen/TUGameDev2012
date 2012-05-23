@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace Robuddies.Objects
 {
-    class GameObject
+    public class GameObject
     {
         //public Rectangle Destination;
         //public float LayerDepth;

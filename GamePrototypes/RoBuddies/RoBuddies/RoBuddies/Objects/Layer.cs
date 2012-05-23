@@ -7,7 +7,7 @@ using Robuddies.Utilities;
 namespace Robuddies.Objects
 {
 
-    class Layer
+    public class Layer
     {
         #region Fields and Properties
 

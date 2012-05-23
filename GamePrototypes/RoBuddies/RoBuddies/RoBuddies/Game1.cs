@@ -14,12 +14,12 @@ using Robuddies.Levels;
 namespace Robuddies
 {
 
-    public class Game1 : Microsoft.Xna.Framework.Game
+    class Game1 : Microsoft.Xna.Framework.Game
     {
         public GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Overlay overlay;
-        Level level;
+        public Overlay overlay;
+        public Level level;
 
         Rectangle titleSafe;
         public Rectangle TitleSafe
@@ -38,7 +38,6 @@ namespace Robuddies
             overlay = new Overlay(this);
             Components.Add(overlay);
         }
-
 
         void Window_ClientSizeChanged(object sender, EventArgs e) {
             titleSafe.X = graphics.GraphicsDevice.Viewport.X;

@@ -19,7 +19,7 @@ namespace Robuddies.Levels
         protected GameObject activePart;
 
         protected World gameWorld;
-        protected Game game;
+        protected Game1 game;
         protected SpriteBatch spriteBatch;
         protected Color backgroundColor;
         protected Camera camera;
@@ -71,6 +71,7 @@ namespace Robuddies.Levels
             layers = new List<Layer>();
             pipes = new List<Pipe>();
             backgroundColor = Color.Black;
+            this.overlay = game.overlay;
         }
 
         public virtual void LoadContent()
