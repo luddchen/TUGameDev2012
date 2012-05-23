@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Interfaces\ISwitchable.cs" />
     <Compile Include="Levels\Level_2.cs" />
+    <Compile Include="Levels\Level_3.cs" />
     <Compile Include="Levels\Level_Test.cs" />
     <Compile Include="Objects\AnimatedObject.cs" />
     <Compile Include="Objects\AnimatedPhysicsObject.cs" />

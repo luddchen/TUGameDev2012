@@ -21,6 +21,7 @@ namespace Robuddies.Objects
         public bool Activated
         {
             get { return activated; }
+            set { activated = value; }
         }
 
         public void activate()

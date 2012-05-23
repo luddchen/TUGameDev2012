@@ -111,13 +111,13 @@ namespace Robuddies
                 Console.Out.WriteLine("Level_2 loaded");   
             }
 
-            //if (Keyboard.GetState().IsKeyDown(Keys.D3))
-            //{
-            //    level = new Level_Forest(this);
-            //    level.LoadContent();
-            //    Window_ClientSizeChanged(null, null);
-            //    Console.Out.WriteLine("Level_Forest loaded");
-            //}
+            if (Keyboard.GetState().IsKeyDown(Keys.D3))
+            {
+                level = new Level_3(this);
+                level.LoadContent();
+                Window_ClientSizeChanged(null, null);
+                Console.Out.WriteLine("Level_2 loaded");
+            }
 
             //if (Keyboard.GetState().IsKeyDown(Keys.D4))
             //{

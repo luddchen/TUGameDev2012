@@ -29,7 +29,7 @@ namespace Robuddies.Objects
             FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             Body.BodyType = BodyType.Dynamic;
             Body.FixedRotation = true;
-            //Body.Friction = 0.9f;
+            Body.Friction = 0.9f;
             standardColors();
 
         }
@@ -80,7 +80,7 @@ namespace Robuddies.Objects
             else // with this the box is better controllable after pushing it
             {
                 stopPulling();
-                this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y / 2);
+                this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y);
             }
         }
 
@@ -98,8 +98,8 @@ namespace Robuddies.Objects
                 Console.WriteLine("Box activate");
                 if (!pulling)
                 {
-                    djd = new WeldJoint(_player.ActivePart.Physics.Body, Body, this.Body.WorldCenter,
-                              _player.ActivePart.Physics.Body.WorldCenter);
+                    djd = new WeldJoint(_player.ActivePart.Physics.Body, Body, new Vector2(this.Body.WorldCenter.X, this.Body.Position.Y),
+                              new Vector2(_player.ActivePart.Physics.Body.WorldCenter.X, _player.ActivePart.Physics.Body.Position.Y));
                     this.color = Color.DarkGreen;
                     world.AddJoint(djd);
                     Body.FixedRotation = false;

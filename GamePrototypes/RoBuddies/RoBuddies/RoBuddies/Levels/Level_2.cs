@@ -142,9 +142,9 @@ namespace Robuddies.Levels
                 f2.Body == player.BudBudi.Physics.Body && f1.Body == switchDoor.Body)
                 && switchDoor.Activated)
             {
-                game.level = new Level_2(game);
+                game.level = new Level_3(game);
                 game.level.LoadContent();
-                Console.Out.WriteLine("Level_2 loaded");
+                Console.Out.WriteLine("Level_3 loaded");
                 return true;
             }
 
