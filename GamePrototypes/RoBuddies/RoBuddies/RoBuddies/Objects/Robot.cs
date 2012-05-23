@@ -164,7 +164,7 @@ namespace Robuddies.Objects
         {
             if (!IsSeperated)
             {
-                budPhysics.Position = new Vector2(budBudiPhysics.Position.X, budBudiPhysics.Position.Y + budPhysics.Height / 20);
+                budPhysics.Position = new Vector2(budBudiPhysics.Position.X, budBudiPhysics.Position.Y + budPhysics.Height / 20 + 5);
                 budiPhysics.Position = new Vector2(budBudiPhysics.Position.X - budiPhysics.Width / 40, budBudiPhysics.Position.Y - budiPhysics.Height / 20);
                 budiPhysics.Body.Enabled = true;
                 budiPhysics.Visible = true;

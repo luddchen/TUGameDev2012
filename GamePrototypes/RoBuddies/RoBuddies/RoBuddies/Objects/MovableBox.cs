@@ -26,9 +26,10 @@ namespace Robuddies.Objects
             _player.ActivePart.Activate += Activate;
             this.size = size;
             this.isHeavyBox = isHeavyBox;
-            FixtureFactory.AttachRectangle(size.X, size.Y, 1, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
+            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             Body.BodyType = BodyType.Dynamic;
-            Body.Friction = 0.9f;
+            Body.FixedRotation = true;
+            //Body.Friction = 0.9f;
             standardColors();
 
         }
@@ -100,12 +101,14 @@ namespace Robuddies.Objects
                               _player.ActivePart.Physics.Body.WorldCenter);
                     this.color = Color.DarkGreen;
                     world.AddJoint(djd);
+                    Body.FixedRotation = false;
                     pulling = true;
                 }
                 else
                 {
                     standardColors();
                     world.RemoveJoint(djd);
+                    Body.FixedRotation = true;
                     pulling = false;
                 }
             }

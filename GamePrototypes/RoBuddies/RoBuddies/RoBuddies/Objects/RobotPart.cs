@@ -36,12 +36,13 @@ namespace Robuddies.Objects
             StopPushing,
         };
 
-        // TODO: calculate IsOnGround by the real distance to the ground under the robot
-        // the myOnCollision and myOnSeperation method isn't working well
         public bool IsOnGround 
         {
             get {
-                return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position, physics.Position + new Vector2(0.0f, physics.Height / 10 + 5)); }
+                // the offset is really dirty, but this will allow better jumping at the moment
+                float offsetX = 20f;
+                return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position + new Vector2(offsetX, 0f), physics.Position + new Vector2(offsetX, physics.Height / 10 + 5));
+            }
         }
 
         public RobotPart(ContentManager content, Vector2 pos, Robot robot, World world, PhysicObject physics)
