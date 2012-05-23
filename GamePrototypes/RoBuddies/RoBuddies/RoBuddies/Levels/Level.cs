@@ -26,6 +26,8 @@ namespace Robuddies.Levels
 
         protected List<Pipe> pipes;
 
+        public Overlay overlay;
+
         public Robot Player 
         {
             get { return player; }

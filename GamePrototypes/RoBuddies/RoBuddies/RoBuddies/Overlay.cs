@@ -43,10 +43,12 @@ namespace Robuddies
         float menuStringSize = 1.0f;
 
         string bottomCenterString = "(escape) : menu ";
-
         Vector2 bottomCenterPos = new Vector2();
-
         float bouttomCenterSize = 0.5f;
+
+        string centerString = "";
+        Vector2 centerPos = new Vector2();
+        float centerSize = 1.32f;
 
         TimeSpan elapsedTime = TimeSpan.Zero;
 
@@ -65,6 +67,8 @@ namespace Robuddies
                 bottomCenterPos.Y = titleSafe.Y + titleSafe.Height;
                 menuSafe.X = titleSafe.Width / 2;
                 menuSafe.Y = titleSafe.Height / 2;
+                centerPos.X = titleSafe.X + titleSafe.Width / 2;
+                centerPos.Y = titleSafe.Y + titleSafe.Height / 2;
                 menuSafe.Width = (int)(titleSafe.Width * 0.8f);
                 menuSafe.Height = (int)(titleSafe.Height * 0.8f);
                 menuSafe2.X = titleSafe.Width / 2;
@@ -80,6 +84,12 @@ namespace Robuddies
         {
             get { return bottomCenterString; }
             set { bottomCenterString = value; }
+        }
+
+        public String CenterString
+        {
+            get { return centerString; }
+            set { centerString = value; }
         }
 
         #endregion
@@ -139,6 +149,9 @@ namespace Robuddies
                 spriteBatch.DrawString(font, menuString, menuStringPos, foreground,
                                         0, font.MeasureString(menuString)/2, menuStringSize, SpriteEffects.None, 0.0f);
             }
+
+            spriteBatch.DrawString(font, centerString, centerPos + font.MeasureString(centerString) / 2, Color.Red,
+    0, font.MeasureString(centerString), centerSize, SpriteEffects.None, 0.5f);
 
 
             spriteBatch.DrawString(font, bottomCenterString, bottomCenterPos, foreground,

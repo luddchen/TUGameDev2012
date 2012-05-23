@@ -14,6 +14,7 @@ namespace Robuddies.Levels
     {
         private List<Switch> switches;
         private SwitchableWall switchWall;
+        private SwitchableWall switchDoor;
         private Texture2D square;
 
         public Level_1(Game1 game) 
@@ -87,11 +88,16 @@ namespace Robuddies.Levels
             levelPhysicObjects.Add(new Wall(new Vector2(300, 0), new Vector2(10, 200), Color.White, square, gameWorld));
             pipes.Add(new Pipe(new Vector2(215, 20), 80, Color.Gray, square, gameWorld));
 
-            switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), Color.Red, square, gameWorld);
-            Switch doorSwitch = new Switch(switchWall, player, square, new Vector2(280, 190));
-            mainLayer.add(doorSwitch);
+            switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), true, Color.Red, square, gameWorld);
+            Switch wallSwitch = new Switch(switchWall, player, square, new Vector2(280, 190));
+            mainLayer.add(wallSwitch);
 
             levelPhysicObjects.Add(switchWall);
+
+            switchDoor = new SwitchableWall(new Vector2(300, 150), new Vector2(10, 50), false, Color.Green, square, gameWorld);
+            Switch doorSwitch = new Switch(switchDoor, player, square, new Vector2(280, 165));
+            mainLayer.add(doorSwitch);
+            //levelPhysicObjects.Add(switchDoor);
 
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {
@@ -109,11 +115,18 @@ namespace Robuddies.Levels
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (switchDoor.visible && !player.IsSeperated)
+            {
+                mainLayer.add(switchDoor);
+                if (overlay != null) overlay.CenterString = "test";             
+            }
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
             return base.MyOnCollision(f1, f2, contact);
+            
         }
 
         public override void MyOnSeperation(Fixture f1, Fixture f2)
