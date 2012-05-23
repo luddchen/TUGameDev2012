@@ -15,7 +15,7 @@ namespace Robuddies.Objects
         public event ActivateEventHandler Activate;
 
         // force for moving the robotPart
-        private const float MOVEMENT_FORCE = 35000.0f;
+        private const float MOVEMENT_FORCE = 70000.0f;
         private State currentState;
         private PhysicObject physics;
         private Robot robot;
@@ -41,7 +41,7 @@ namespace Robuddies.Objects
             get {
                 // the offset is really dirty, but this will allow better jumping at the moment
                 float offsetX = 20f;
-                return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position + new Vector2(offsetX, 0f), physics.Position + new Vector2(offsetX, physics.Height / 10 + 5));
+                return RaycastUtility.isIntesectingAnObject(robot.World, physics.Position + new Vector2(offsetX, 0f), physics.Position + new Vector2(offsetX, physics.Height / 10 + 1));
             }
         }
 

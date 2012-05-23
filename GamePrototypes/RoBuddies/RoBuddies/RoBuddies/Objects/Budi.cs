@@ -131,14 +131,14 @@ namespace Robuddies.Objects
 
             if (!currentState.IsKeyDown(Keys.Right) && oldState.IsKeyDown(Keys.Right) && this.DirectionX == 1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, 0);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                 //this.CurrentState = RobotPart.State.StopWalking;
                 texNr = 90;
             }
 
             if (!currentState.IsKeyDown(Keys.Left) && oldState.IsKeyDown(Keys.Left) && this.DirectionX == -1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, 0);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                 //this.CurrentState = RobotPart.State.StopWalking;
                 texNr = 90;
             }
