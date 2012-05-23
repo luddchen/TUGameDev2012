@@ -190,7 +190,7 @@ namespace Robuddies.Objects
                     (this.CurrentState != RobotPart.State.StopJumping) &&
                     IsOnGround)
                 {
-                    Physics.Body.ApplyForce(new Vector2(0, -40 * MovementForce));
+                    Physics.Body.ApplyForce(new Vector2(0, -20 * MovementForce));
                     this.CurrentState = RobotPart.State.StartJumping;
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
                     if (!this.IsSeperated) { this.DirectionY = 2.5f; }
