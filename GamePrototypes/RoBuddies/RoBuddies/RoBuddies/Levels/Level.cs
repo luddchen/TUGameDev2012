@@ -135,12 +135,10 @@ namespace Robuddies.Levels
             // test collision between upper and lower part
             if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
             {
-                player.IsCombinable = true;
-                return true;
+                return false;
             }
 
             // test if bodi reached a pipe
-
             foreach (Pipe pipe in pipes)
             {
                 if ((f1.Body == Player.Budi.Physics.Body && f2.Body == pipe.Body) || (f1.Body == pipe.Body && f2.Body == Player.Budi.Physics.Body))
@@ -161,12 +159,6 @@ namespace Robuddies.Levels
          */
         public virtual void MyOnSeperation(Fixture f1, Fixture f2)
         {
-            // test seperation between upper and lower part
-            // damn this only happens if myOnCollision returned true. This will need an other approach.
-            if ((f1.Body == Player.Bud.Physics.Body && f2.Body == Player.Budi.Physics.Body) || (f1.Body == Player.Budi.Physics.Body && f2.Body == Player.Bud.Physics.Body))
-            {
-                player.IsCombinable = false;
-            }
         }
 
         /*
