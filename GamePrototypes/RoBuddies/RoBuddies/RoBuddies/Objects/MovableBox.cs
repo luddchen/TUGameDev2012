@@ -12,7 +12,7 @@ namespace Robuddies.Objects
         private Vector2 size;
         private Robot _player;
         private bool pulling;
-        private DistanceJoint djd;
+        private WeldJoint djd;
 
         public MovableBox(Texture2D texture, Vector2 pos, World world, Robot player)
             : base (texture, pos, world)
@@ -36,13 +36,13 @@ namespace Robuddies.Objects
         private void Activate(object sender, EventArgs e)
         {
             if (_player.ActivePart == _player.BudBudi && 
-                Vector2.Distance(this.Body.Position, _player.ActivePart.Physics.Body.Position) < 30)
+                Vector2.Distance(this.Body.WorldCenter, _player.ActivePart.Physics.Body.WorldCenter) < 30)
             {
                 Console.WriteLine("Box activate");
                 if (!pulling)
                 {
-                    djd = new DistanceJoint(Body, _player.ActivePart.Physics.Body, this.Body.GetLocalPoint(Body.Position),
-                                                  _player.ActivePart.Physics.Body.GetLocalPoint(_player.ActivePart.Physics.Body.Position));
+                    djd = new WeldJoint(Body, _player.ActivePart.Physics.Body, this.Body.WorldCenter,
+                                                  _player.ActivePart.Physics.Body.WorldCenter);
                     world.AddJoint(djd);
                     pulling = true;
                 }
