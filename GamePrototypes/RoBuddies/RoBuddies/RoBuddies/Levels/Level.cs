@@ -68,7 +68,7 @@ namespace Robuddies.Levels
         public Level(Game1 game)
         {
             this.game = game;
-            this.gameWorld = new World(new Vector2(0, 20f));
+            this.gameWorld = new World(new Vector2(0, 40f));
             layers = new List<Layer>();
             pipes = new List<Pipe>();
             boxes = new List<MovableBox>();

@@ -145,7 +145,7 @@ namespace Robuddies.Objects
                 }
                 else
                 {
-                    Physics.Body.ApplyForce(new Vector2(-MovementForce / 2, 0));
+                    Physics.Body.ApplyForce(new Vector2(-MovementForce / 2, Physics.Body.LinearVelocity.Y * 2));
                 }
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
@@ -162,7 +162,7 @@ namespace Robuddies.Objects
                 }
                 else
                 {
-                    Physics.Body.ApplyForce(new Vector2(MovementForce / 2, 0));
+                    Physics.Body.ApplyForce(new Vector2(MovementForce / 2, Physics.Body.LinearVelocity.Y * 2));
                 }
                 if (this.CurrentState == RobotPart.State.Waiting)
                 {
@@ -173,13 +173,13 @@ namespace Robuddies.Objects
 
             if (!currentState.IsKeyDown(Keys.Right) && this.DirectionX == 1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y / 2);
                 this.CurrentState = RobotPart.State.StopWalking;
             }
 
             if (!currentState.IsKeyDown(Keys.Left) && this.DirectionX == -1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y / 2);
                 this.CurrentState = RobotPart.State.StopWalking;
             }
 
@@ -190,7 +190,15 @@ namespace Robuddies.Objects
                     (this.CurrentState != RobotPart.State.StopJumping) &&
                     IsOnGround)
                 {
-                    Physics.Body.ApplyForce(new Vector2(0, -20 * MovementForce));
+                    if (this.CurrentState == RobotPart.State.StartWalking
+                        || this.CurrentState == State.Walking)
+                    {
+                        Physics.Body.ApplyForce(new Vector2(0, -30000 * MovementForce));
+                    }
+                    else
+                    {
+                        Physics.Body.ApplyForce(new Vector2(0, -15 * MovementForce));
+                    }
                     this.CurrentState = RobotPart.State.StartJumping;
                     if (this.IsSeperated) { this.DirectionY = 3.5f; }
                     if (!this.IsSeperated) { this.DirectionY = 2.5f; }

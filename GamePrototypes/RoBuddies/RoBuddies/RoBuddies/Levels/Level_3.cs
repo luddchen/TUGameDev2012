@@ -95,7 +95,7 @@ namespace Robuddies.Levels
             levelPhysicObjects.Add(new Wall(new Vector2(350, 200), new Vector2(250, 10), Color.White, square, gameWorld));
             levelPhysicObjects.Add(new Wall(new Vector2(600, 50), new Vector2(10, 150), Color.White, square, gameWorld));
 
-            switchDoor = new SwitchableWall(new Vector2(600, 160), new Vector2(10, 40), false, Color.Brown, square, gameWorld);
+            switchDoor = new SwitchableWall(new Vector2(600, 160), new Vector2(10, 40), false, Color.Green, square, gameWorld);
             switchDoor.Activated = true;
             levelPhysicObjects.Add(switchDoor);
 
