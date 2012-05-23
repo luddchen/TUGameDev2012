@@ -16,7 +16,7 @@ namespace Robuddies.Objects
         private Color color;
         private bool isHeavyBox; // heavyBoxes can only moved together
 
-        public MovableBox(Texture2D texture, Vector2 pos, World world, bool isHeavyBox, Robot player)
+        public MovableBox(Texture2D texture, Vector2 pos, Vector2 size, World world, bool isHeavyBox, Robot player)
             : base (texture, pos, world)
         {
             djd = null;
@@ -24,18 +24,25 @@ namespace Robuddies.Objects
             pulling = false;
             _player = player;
             _player.ActivePart.Activate += Activate;
-            size = new Vector2(35, 35);
+            this.size = size;
             this.isHeavyBox = isHeavyBox;
-            FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
+            FixtureFactory.AttachRectangle(size.X, size.Y, 1, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             Body.BodyType = BodyType.Dynamic;
             Body.Friction = 0.9f;
+            standardColors();
+
+        }
+
+        private void standardColors()
+        {
             if (isHeavyBox)
             {
                 color = Color.DarkBlue;
-            } else {
+            }
+            else
+            {
                 color = Color.CadetBlue;
             }
-
         }
 
         public bool IsPulled {
@@ -71,7 +78,7 @@ namespace Robuddies.Objects
             }
             else // with this the box is better controllable after pushing it
             {
-                this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y);
+                this.Body.LinearVelocity = new Vector2(this.Body.LinearVelocity.X / 2, this.Body.LinearVelocity.Y / 2);
             }
         }
 
@@ -91,11 +98,13 @@ namespace Robuddies.Objects
                 {
                     djd = new WeldJoint(_player.ActivePart.Physics.Body, Body, this.Body.WorldCenter,
                               _player.ActivePart.Physics.Body.WorldCenter);
+                    this.color = Color.DarkGreen;
                     world.AddJoint(djd);
                     pulling = true;
                 }
                 else
                 {
+                    standardColors();
                     world.RemoveJoint(djd);
                     pulling = false;
                 }

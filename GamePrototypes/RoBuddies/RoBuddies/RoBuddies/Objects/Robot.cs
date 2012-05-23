@@ -32,7 +32,7 @@ namespace Robuddies.Objects
 
         // flag if seperated robots is able to combine again
         public bool IsCombinable {
-            get { return Vector2.Distance(budi.Physics.Body.Position, bud.Physics.Body.Position + new Vector2(bud.Physics.Height / 20, bud.Physics.Width / 20)) < 40; }
+            get { return Vector2.Distance(budi.Physics.Body.Position + new Vector2(budi.Physics.Width / 20, budi.Physics.Height / 20), bud.Physics.Body.Position + new Vector2(bud.Physics.Width / 20, bud.Physics.Height / 20)) <= 11; }
         }
 
         public Robot(ContentManager content, Vector2 pos, World world, Level level)
@@ -47,7 +47,6 @@ namespace Robuddies.Objects
          */
         private void initRobots(ContentManager content, Vector2 startingPos, World world) 
         {
-
             Texture2D budBudiTexture = content.Load<Texture2D>("Sprites\\Buddies\\BudBudi\\0001");
             Texture2D budTexture = content.Load<Texture2D>("Sprites\\Buddies\\Bud\\0001");
             Texture2D budiTexture = content.Load<Texture2D>("Sprites\\Buddies\\Budi\\0080");
@@ -194,7 +193,6 @@ namespace Robuddies.Objects
         public override void Update(GameTime gameTime)
         {
             KeyboardState currentState = Keyboard.GetState();
-
             if (currentState.IsKeyDown(Keys.S) && oldState.IsKeyUp(Keys.S))
             {
                 this.Seperate();

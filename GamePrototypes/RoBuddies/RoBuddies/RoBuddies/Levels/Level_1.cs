@@ -15,12 +15,11 @@ namespace Robuddies.Levels
         private List<Switch> switches;
         private SwitchableWall switchWall;
         private SwitchableWall switchDoor;
-        private Texture2D square;
 
         public Level_1(Game1 game) 
             : base(game)
         {
-            square = game.Content.Load<Texture2D>("Sprites\\Square");
+            
         }
 
         protected override void LoadContentBackground()
@@ -76,7 +75,10 @@ namespace Robuddies.Levels
 
         public override void LoadContent()
         {
-            base.LoadContent(); 
+            base.LoadContent();
+            loadRobot(new Vector2(10, 160));
+
+            Texture2D square = game.Content.Load<Texture2D>("Sprites\\Square");
             backgroundColor = Color.LightBlue;
 
             List<PhysicObject> levelPhysicObjects = new List<PhysicObject>();
@@ -88,17 +90,17 @@ namespace Robuddies.Levels
             levelPhysicObjects.Add(new Wall(new Vector2(300, 0), new Vector2(10, 200), Color.White, square, gameWorld));
             pipes.Add(new Pipe(new Vector2(215, 20), 80, Color.Gray, square, gameWorld));
 
-            switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), true, Color.Red, square, gameWorld);
+            switchWall = new SwitchableWall(new Vector2(250, 100), new Vector2(10, 100), true, Color.Brown, square, gameWorld);
             Switch wallSwitch = new Switch(switchWall, player, square, new Vector2(280, 190));
             mainLayer.add(wallSwitch);
             levelPhysicObjects.Add(switchWall);
 
-            switchDoor = new SwitchableWall(new Vector2(300, 150), new Vector2(10, 50), false, Color.Green, square, gameWorld);
+            switchDoor = new SwitchableWall(new Vector2(300, 150), new Vector2(10, 50), false, Color.Brown, square, gameWorld);
             Switch doorSwitch = new Switch(switchDoor, player, square, new Vector2(280, 165));
             mainLayer.add(doorSwitch);
             levelPhysicObjects.Add(switchDoor);
 
-            //boxes.Add(new MovableBox(square, new Vector2(200, 150), gameWorld, true, player));
+            //boxes.Add(new MovableBox(square, new Vector2(200, 150), new Vector2(35, 35), gameWorld, true, player));
 
             foreach (PhysicObject physicObj in levelPhysicObjects)
             {
@@ -123,17 +125,18 @@ namespace Robuddies.Levels
         {
             base.Update(gameTime);
 
-            if (switchDoor.visible && !player.IsSeperated)
+            if (switchDoor.Activated && !player.IsSeperated)
             {
                 mainLayer.add(switchDoor);
-                if (overlay != null) overlay.CenterString = "Level Completed";             
+                //if (overlay != null) overlay.CenterString = "Level Completed";             
             }
         }
 
         public override bool MyOnCollision(Fixture f1, Fixture f2, Contact contact)
         {
-            if (f1.Body == player.BudBudi.Physics.Body && f2.Body == switchDoor.Body ||
-                f2.Body == player.BudBudi.Physics.Body && f1.Body == switchDoor.Body)
+            if ((f1.Body == player.BudBudi.Physics.Body && f2.Body == switchDoor.Body ||
+                f2.Body == player.BudBudi.Physics.Body && f1.Body == switchDoor.Body) 
+                && switchDoor.Activated)
             {
                 game.level = new Level_2(game);
                 game.level.LoadContent();
