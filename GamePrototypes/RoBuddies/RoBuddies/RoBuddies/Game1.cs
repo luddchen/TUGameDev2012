@@ -116,7 +116,7 @@ namespace Robuddies
                 level = new Level_3(this);
                 level.LoadContent();
                 Window_ClientSizeChanged(null, null);
-                Console.Out.WriteLine("Level_2 loaded");
+                Console.Out.WriteLine("Level_3 loaded");
             }
 
             //if (Keyboard.GetState().IsKeyDown(Keys.D4))
