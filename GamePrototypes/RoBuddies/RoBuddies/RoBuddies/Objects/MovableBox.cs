@@ -29,7 +29,7 @@ namespace Robuddies.Objects
             FixtureFactory.AttachRectangle(size.X, size.Y, 10, new Vector2(this.size.X / 2, this.size.Y / 2), this.Body);
             Body.BodyType = BodyType.Dynamic;
             Body.FixedRotation = true;
-            Body.Friction = 0.9f;
+            Body.Friction = 9000f;
             standardColors();
 
         }
