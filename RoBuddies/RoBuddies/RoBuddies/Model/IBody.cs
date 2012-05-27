@@ -29,6 +29,8 @@ namespace RoBuddies.Model
 
         Vector2 Origin { get; set; }
 
+        Layer Layer { get; set; }
+
         void Update(GameTime gameTime);
     }
 }

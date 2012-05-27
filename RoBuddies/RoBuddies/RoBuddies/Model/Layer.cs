@@ -28,6 +28,11 @@ namespace RoBuddies.Model
         public float LayerDepth { get; set; }
 
         /// <summary>
+        /// referecnce to the level
+        /// </summary>
+        public Level Level { get; set; }
+
+        /// <summary>
         /// list of all objects on this layer
         /// </summary>
         public List<IBody> AllObjects;
@@ -41,12 +46,13 @@ namespace RoBuddies.Model
         /// /// <param name="name">name for this layer, only for identification without knowing a reference</param>
         /// /// <param name="parallax">value for paralax-scrolling</param>
         /// /// <param name="layerDepth">the depth for drawing, see SpriteBatch.Draw</param>
-        public Layer(String name, Vector2 parallax, float layerDepth)
+        public Layer(String name, Vector2 parallax, float layerDepth, Level level)
         {
             this.Name = name;
             this.Parallax = parallax;
             this.LayerDepth = layerDepth;
-            this.AllObjects = new List<IBody>; 
+            this.Level = level;
+            this.AllObjects = new List<IBody>(); 
         }
 
 
