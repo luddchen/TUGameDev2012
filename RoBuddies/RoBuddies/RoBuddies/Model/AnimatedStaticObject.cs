@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
+using RoBuddies.Control;
+
 namespace RoBuddies.Model
 {
 
@@ -11,7 +13,7 @@ namespace RoBuddies.Model
     /// </summary>
     class AnimatedStaticObject : StaticObject
     {
-
+        public StateMachine StateMachine { get; set; }
 
         /// <summary>
         /// update the object
