@@ -19,7 +19,7 @@ namespace Robuddies.Objects
      */
     class Wall : PhysicObject
     {
-        private Color color;
+        protected Color color;
         private Vector2 size;
 
         public Wall(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)

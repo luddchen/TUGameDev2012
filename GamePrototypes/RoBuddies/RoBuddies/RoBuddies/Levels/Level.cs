@@ -68,12 +68,13 @@ namespace Robuddies.Levels
         public Level(Game1 game)
         {
             this.game = game;
-            this.gameWorld = new World(new Vector2(0, 20f));
+            this.gameWorld = new World(new Vector2(0, 40f));
             layers = new List<Layer>();
             pipes = new List<Pipe>();
             boxes = new List<MovableBox>();
             backgroundColor = Color.Black;
             this.overlay = game.overlay;
+            overlay.CenterString = "";
         }
 
         public virtual void LoadContent()
@@ -89,15 +90,17 @@ namespace Robuddies.Levels
             mainLayer = new Layer(Camera, new Vector2(1.0f,1.0f));
             mainLayer.LoadContent();
 
-            player = new Robot(game.Content, new Vector2(10, 160), gameWorld, this); 
-            //player.Scale *= 0.3f;
-
-            mainLayer.add(player);
-            activePart = player.ActivePart;
-
             layers.Add(mainLayer);
 
             LoadContentForeground();
+        }
+
+        protected void loadRobot(Vector2 startPos)
+        {
+            player = new Robot(game.Content, startPos, gameWorld, this);
+
+            mainLayer.add(player);
+            activePart = player.ActivePart;
         }
 
         protected virtual void LoadContentBackground() {}
@@ -106,6 +109,7 @@ namespace Robuddies.Levels
 
         public virtual void Update(GameTime gameTime)
         {
+            overlay.CenterString = "";
             player.Update(gameTime);
             mainLayer.Update(gameTime);
             Camera.LookAt(player.ActivePart.Physics.Position);

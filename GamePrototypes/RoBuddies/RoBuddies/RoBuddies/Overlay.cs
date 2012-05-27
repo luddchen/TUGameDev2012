@@ -38,11 +38,19 @@ namespace Robuddies
             }
         }
 
-        string menuString = " (space) : jump \n (s) : seperate \n (q) : quit \n (1) - (6) : choose level \n (escape) : this menu";
+        string menuString =
+                " (space)     : jump"
+            + "\n (a)         : use buttons"
+            + "\n (s)         : seperate"
+            + "\n (left alt)  : switch robot part"
+            +" \n (left ctrl) : grab box"
+            + "\n (1) - (3)   : choose level"
+            + "\n (q)         : quit"
+            + "\n (escape)    : this menu";
         Vector2 menuStringPos = new Vector2();
         float menuStringSize = 1.0f;
 
-        string bottomCenterString = "(escape) : menu ";
+        string bottomCenterString = "(escape) : controls ";
         Vector2 bottomCenterPos = new Vector2();
         float bouttomCenterSize = 0.5f;
 

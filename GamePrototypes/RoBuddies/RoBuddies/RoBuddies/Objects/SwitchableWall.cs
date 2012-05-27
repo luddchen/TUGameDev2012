@@ -9,6 +9,7 @@ namespace Robuddies.Objects
     class SwitchableWall : Wall, ISwitchable
     {
         private bool _switched;
+        private bool activated = false;
         public bool visible;
 
         public SwitchableWall(Vector2 pos, Vector2 size, bool vis, Color color, Texture2D texture, World world)
@@ -17,8 +18,16 @@ namespace Robuddies.Objects
             this.visible = vis;
         }
 
+        public bool Activated
+        {
+            get { return activated; }
+            set { activated = value; }
+        }
+
         public void activate()
         {
+            this.color = Color.Green;
+            this.activated = true;
 
             if (visible)
             {
@@ -39,7 +48,6 @@ namespace Robuddies.Objects
             if (_switched)
             {
                 Position += new Vector2(0, 1);
-                //this.Color = Color.Brown;
             }
         }
     }

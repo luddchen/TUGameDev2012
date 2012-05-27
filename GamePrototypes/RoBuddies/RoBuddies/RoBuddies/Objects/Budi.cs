@@ -79,29 +79,33 @@ namespace Robuddies.Objects
                 GetInput();
             }
 
-            if (texNr > TextureList.Count + ANIMATION_BEGIN) { texNr = TextureList.Count + ANIMATION_BEGIN; }
+            if (texNr > TextureList.Count + ANIMATION_BEGIN - 1) { texNr = TextureList.Count + ANIMATION_BEGIN - 1; }
             if (texNr < ANIMATION_BEGIN) { texNr = ANIMATION_BEGIN; }
             Texture = TextureList[(int)(texNr - ANIMATION_BEGIN)];
             Physics.Texture = TextureList[(int)(texNr - ANIMATION_BEGIN)];
 
-            if (CurrentState != State.Waiting)
+            if (CurrentBudiState == BudiState.StopClimbing)
             {
-                
+                texNr = 100;
             }
 
             if (CurrentBudiState == BudiState.StartClimbing)
             {
                 this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, -1);
-                // walk animation
+                if (texNr < 90 || texNr >= 100) texNr = 90;
             }
 
             if (CurrentBudiState == BudiState.Climbing)
             {
                 this.Physics.Body.LinearVelocity = new Vector2(this.Physics.Body.LinearVelocity.X, -1);
-                // walk animation
             }
 
-            
+            if (CurrentBudiState == BudiState.UseLever)
+            {
+                texNr += 0.3f;
+                if (texNr > 116.0f && texNr < 116.5f) { OnActivate(EventArgs.Empty); }
+                if (texNr >= 120) { CurrentBudiState = BudiState.StopClimbing; }
+            }
         }
 
         private void GetInput()
@@ -113,7 +117,8 @@ namespace Robuddies.Objects
                 if (CurrentBudiState == BudiState.StartClimbing
                     || CurrentBudiState == BudiState.Climbing)
                 {
-                    Physics.Body.LinearVelocity = new Vector2(-MovementForce, Physics.Body.LinearVelocity.Y);
+                    Physics.Body.LinearVelocity = new Vector2(-MovementForce, Physics.Body.LinearVelocity.Y); texNr += 0.4f;
+                    if (texNr < 90 || texNr >= 100) texNr = 90;
                 }
                 this.DirectionX = -1;
             }
@@ -123,21 +128,24 @@ namespace Robuddies.Objects
                 if (CurrentBudiState == BudiState.StartClimbing
                     || CurrentBudiState == BudiState.Climbing)
                 {
-                    Physics.Body.LinearVelocity = new Vector2(MovementForce, Physics.Body.LinearVelocity.Y);
+                    Physics.Body.LinearVelocity = new Vector2(MovementForce, Physics.Body.LinearVelocity.Y); texNr += 0.4f;
+                    if (texNr < 90 || texNr >= 100) texNr = 90;
                 }
                 this.DirectionX = 1;
             }
 
             if (!currentState.IsKeyDown(Keys.Right) && oldState.IsKeyDown(Keys.Right) && this.DirectionX == 1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, 0);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                 //this.CurrentState = RobotPart.State.StopWalking;
+                texNr = 90;
             }
 
             if (!currentState.IsKeyDown(Keys.Left) && oldState.IsKeyDown(Keys.Left) && this.DirectionX == -1)
             {
-                Physics.Body.LinearVelocity = new Vector2(0, 0);
+                Physics.Body.LinearVelocity = new Vector2(0, Physics.Body.LinearVelocity.Y);
                 //this.CurrentState = RobotPart.State.StopWalking;
+                texNr = 90;
             }
             if (currentState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space))
             {
@@ -150,7 +158,9 @@ namespace Robuddies.Objects
 
             if (currentState.IsKeyDown(Keys.A) && oldState.IsKeyUp(Keys.A))
             {
-                OnActivate(EventArgs.Empty);
+                if (texNr < 110 || texNr > 120) { texNr = 110; }
+                this.CurrentBudiState = BudiState.UseLever;
+                //OnActivate(EventArgs.Empty);
             }
 
             oldState = currentState;
