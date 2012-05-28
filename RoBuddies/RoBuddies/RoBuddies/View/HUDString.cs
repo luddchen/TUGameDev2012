@@ -38,8 +38,8 @@ namespace RoBuddies.View
         public Vector2 MeasureString
         {
             get 
-            { 
-                this.measureString = this.font.MeasureString(this.String) * this.Scale;
+            {
+                this.measureString = this.font.MeasureString(this.String);
                 return this.measureString;
             }
         }

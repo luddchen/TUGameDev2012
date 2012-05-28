@@ -18,6 +18,8 @@ namespace RoBuddies.View.MenuPages
         private HUDString quit;
 
         public MenuPage quitPage { get; set; }
+        public MenuPage optionPage { get; set; }
+        public MenuPage helpPage { get; set; }
 
         public override Viewport Viewport
         {
@@ -70,6 +72,16 @@ namespace RoBuddies.View.MenuPages
                     if (this.ActiveElement == quit)
                     {
                         this.Menu.ActivePage = this.quitPage;
+                    }
+
+                    if (this.ActiveElement == options)
+                    {
+                        this.Menu.ActivePage = this.optionPage;
+                    }
+
+                    if (this.ActiveElement == help)
+                    {
+                        this.Menu.ActivePage = this.helpPage;
                     }
                 }
             }

@@ -18,6 +18,8 @@ namespace RoBuddies
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
+        private const int HUDsize = 30; 
+
         GraphicsDeviceManager graphics;
         public SpriteBatch SpriteBatch {get; set; } // need that somehow in LevelView, Menu and HUD
 
@@ -45,7 +47,7 @@ namespace RoBuddies
 
             // LevelView size
             viewport = graphics.GraphicsDevice.Viewport;
-            viewport.Height = viewport.Height - 30;
+            viewport.Height = viewport.Height - HUDsize;
             LevelView.Viewport = viewport;
 
             // menu size
@@ -64,8 +66,8 @@ namespace RoBuddies
 
             // HUD size
             viewport = graphics.GraphicsDevice.Viewport;
-            viewport.Y = viewport.Height - 30;
-            viewport.Height = 30;
+            viewport.Y = viewport.Height - HUDsize;
+            viewport.Height = HUDsize;
             HUD.Viewport = viewport;
         }
 

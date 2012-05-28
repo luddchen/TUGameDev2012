@@ -13,6 +13,7 @@ namespace RoBuddies.View
     {
         private const int MenuPageBorder = 50;
         private const int MenuPageTopExtraBorder = 15;
+        private Color HeadLineColor = Color.Orchid;
 
         private MenuPage activePage;
         private Texture2D square;
@@ -113,6 +114,7 @@ namespace RoBuddies.View
             // some decoration -------------------------------------------------------------------
             this.AllMenuDecoration = new List<IHUDElement>();
             this.AllMenuDecoration.Add(new HUDString( "Robuddies Menu", this.Game.Content));
+            this.AllMenuDecoration[0].Color = HeadLineColor;
             this.AllMenuDecoration.Add(new HUDTexture(this.Game.Content));
             this.AllMenuDecoration.Add(new HUDTexture(this.Game.Content));
             this.AllMenuDecoration.Add(new HUDTexture(this.Game.Content));
@@ -121,8 +123,12 @@ namespace RoBuddies.View
 
             MainMenu mainMenu = new MainMenu(this, this.Game.Content);
             QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
+            OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
+            HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
 
             mainMenu.quitPage = quitMenu;
+            mainMenu.optionPage = optionMenu;
+            mainMenu.helpPage = helpMenu;
 
             this.DefaultPage = mainMenu ;
             this.ActivePage = this.DefaultPage;
