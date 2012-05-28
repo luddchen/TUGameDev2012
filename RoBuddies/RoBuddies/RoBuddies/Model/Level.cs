@@ -24,7 +24,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// list of all layers in this level
         /// </summary>
-        private List<Layer> AllLayers { get; set; }
+        public List<Layer> AllLayers { get; set; } // here some better solution -> private vs public -> need in LevelView an Iterator over this list
 
 
         /// <summary>

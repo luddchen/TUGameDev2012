@@ -19,7 +19,7 @@ namespace RoBuddies
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch {get; set; } // need that somehow in LevelView, Menu and HUD
 
         LevelView LevelView;
         Menu Menu;
@@ -50,7 +50,7 @@ namespace RoBuddies
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
             Menu = new Menu(this);
             HUD = new HUD(this);

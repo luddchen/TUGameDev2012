@@ -9,7 +9,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing an layer
     /// </summary>
-    class Layer
+    public class Layer
     {
 
         /// <summary>
