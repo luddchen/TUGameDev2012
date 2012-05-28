@@ -40,12 +40,15 @@ namespace RoBuddies.View
 
         public Color Color { get; set; }
 
+        public float Scale { get; set; }
+
         public HUDTexture(ContentManager content)
         {
             this.Position = Vector2.Zero;
             this.Color = Color.White;
             this.Texture = content.Load<Texture2D>("Sprites//Circle");
             this.Width = 10;
+            this.Scale = 1.0f;
         }
 
         public void Update(GameTime gameTime){}
@@ -58,7 +61,7 @@ namespace RoBuddies.View
                             this.Color,
                             -this.Rotation,
                             this.Origin,
-                            this.Width / this.Texture.Width,
+                            this.Scale * this.Width / this.Texture.Width,
                             this.Effect,
                             0.0f);
         }

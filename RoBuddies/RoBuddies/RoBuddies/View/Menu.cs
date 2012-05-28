@@ -5,17 +5,24 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using RoBuddies.View.MenuPages;
+
 namespace RoBuddies.View
 {
     class Menu
     {
-        private float animationValue = 0.0f;
+        private const int MenuPageBorder = 50;
+        private const int MenuPageTopExtraBorder = 15;
+
+        private MenuPage activePage;
         private Texture2D square;
         private Rectangle squareDest;
         private Viewport viewport;
         private bool isVisible;
         private Color squareColor = Color.Black;
-        private KeyboardState oldKeybordState;
+
+        public KeyboardState oldKeyboardState { get; set; }
+        public KeyboardState newKeyboardState { get; set; }
 
         private List<IHUDElement> AllMenuDecoration;
 
@@ -42,6 +49,15 @@ namespace RoBuddies.View
             {
                 this.viewport = value;
                 this.squareDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
+                if (this.ActivePage != null)
+                {
+                    Viewport temp = this.viewport;
+                    temp.Width -= 2 * MenuPageBorder;
+                    temp.Height -= 2 * MenuPageBorder;
+                    temp.X += MenuPageBorder;
+                    temp.Y += MenuPageBorder + MenuPageTopExtraBorder;
+                    this.ActivePage.Viewport = temp;
+                }
             }
         }
 
@@ -64,7 +80,15 @@ namespace RoBuddies.View
         /// <summary>
         /// actual menu page
         /// </summary>
-        public MenuPage ActivePage { get; set; }
+        public MenuPage ActivePage 
+        {
+            get { return this.activePage; }
+            set
+            {
+                this.activePage = value;
+                this.Viewport = this.viewport;
+            }
+        }
 
         /// <summary>
         /// default menu page 
@@ -83,7 +107,7 @@ namespace RoBuddies.View
             this.Viewport = this.Game.GraphicsDevice.Viewport;
             this.square = this.Game.Content.Load<Texture2D>("Sprites//Menu//Menu_Background");
             this.IsVisible = false;
-            this.oldKeybordState = Keyboard.GetState();
+            this.newKeyboardState = Keyboard.GetState();
 
 
             // some decoration -------------------------------------------------------------------
@@ -95,8 +119,12 @@ namespace RoBuddies.View
             this.AllMenuDecoration.Add(new HUDTexture(this.Game.Content));
             // end decoration -------------------------------------------------------------------
 
+            MainMenu mainMenu = new MainMenu(this, this.Game.Content);
+            QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
 
-            this.DefaultPage = new MenuPage(this.Game.Content);
+            mainMenu.quitPage = quitMenu;
+
+            this.DefaultPage = mainMenu ;
             this.ActivePage = this.DefaultPage;
         }
 
@@ -104,34 +132,28 @@ namespace RoBuddies.View
 
         public void Update(GameTime gameTime)
         {
-            KeyboardState currentKeybordState = Keyboard.GetState();
+            this.oldKeyboardState = this.newKeyboardState;
+            this.newKeyboardState = Keyboard.GetState();
 
-            if (currentKeybordState.IsKeyDown(Keys.Escape) && oldKeybordState.IsKeyUp(Keys.Escape)) 
+            if (this.newKeyboardState.IsKeyDown(Keys.Escape) && this.oldKeyboardState.IsKeyUp(Keys.Escape)) 
             {
                 IsVisible = !IsVisible;
             }
 
-            this.oldKeybordState = currentKeybordState;
-
-            if (this.ActivePage != null)
+            if (this.ActivePage != null && IsVisible)
             {
                 this.ActivePage.Update(gameTime);
-
-                this.ActivePage.Viewport = this.Viewport;
             }
 
-            this.AllMenuDecoration[0].Position = new Vector2(this.Viewport.Width / 2 + (float)(Math.Cos(this.animationValue) * 1), 60 + (float)(Math.Sin(this.animationValue * 2) * 0.5f));
-            this.AllMenuDecoration[1].Position = new Vector2(42, 62);
-            this.AllMenuDecoration[2].Position = new Vector2(this.Viewport.Width - 42, 42);
-            this.AllMenuDecoration[3].Position = new Vector2(52, this.Viewport.Height - 42);
-            this.AllMenuDecoration[4].Position = new Vector2(this.Viewport.Width - 72, this.Viewport.Height - 62);
+            this.AllMenuDecoration[0].Position = new Vector2(this.Viewport.Width / 2, MenuPageBorder);
+            this.AllMenuDecoration[1].Position = new Vector2(MenuPageBorder - MenuPageTopExtraBorder, MenuPageBorder - MenuPageTopExtraBorder);
+            this.AllMenuDecoration[2].Position = new Vector2(this.Viewport.Width + MenuPageTopExtraBorder - MenuPageBorder, MenuPageBorder - MenuPageTopExtraBorder);
+            this.AllMenuDecoration[3].Position = new Vector2(MenuPageBorder - MenuPageTopExtraBorder, this.Viewport.Height + MenuPageTopExtraBorder - MenuPageBorder);
+            this.AllMenuDecoration[4].Position = new Vector2(this.Viewport.Width + MenuPageTopExtraBorder - MenuPageBorder, this.Viewport.Height + MenuPageTopExtraBorder - MenuPageBorder);
             foreach (IHUDElement element in this.AllMenuDecoration)
             {
                 element.Update(gameTime);
             }
-
-            this.animationValue += 0.25f;
-            if (this.animationValue > MathHelper.Pi * 2) { this.animationValue = 0.0f; }
         }
 
         public void Draw(GameTime gameTime)
@@ -141,19 +163,25 @@ namespace RoBuddies.View
                 this.Game.GraphicsDevice.Viewport = this.Viewport;
                 this.Game.SpriteBatch.Begin();
 
-                this.Game.SpriteBatch.Draw(this.square, this.squareDest, this.squareColor);
+                    this.Game.SpriteBatch.Draw(this.square, this.squareDest, this.squareColor);
 
-                foreach (IHUDElement element in this.AllMenuDecoration)
-                {
-                    element.Draw(this.Game.SpriteBatch);
-                }
+                    foreach (IHUDElement element in this.AllMenuDecoration)
+                    {
+                        element.Draw(this.Game.SpriteBatch);
+                    }
+
+                this.Game.SpriteBatch.End();
 
                 if (this.ActivePage != null)
                 {
-                    this.ActivePage.Draw(this.Game.SpriteBatch);
+                    this.Game.GraphicsDevice.Viewport = this.ActivePage.Viewport;
+                    this.Game.SpriteBatch.Begin();
+
+                        this.ActivePage.Draw(this.Game.SpriteBatch);
+
+                    this.Game.SpriteBatch.End();
                 }
 
-                this.Game.SpriteBatch.End();
             }
         }
     }
