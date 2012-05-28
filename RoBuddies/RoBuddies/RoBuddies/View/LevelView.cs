@@ -28,7 +28,6 @@ namespace RoBuddies.View
             set
             {
                 this.viewport = value;
-                this.viewport.Height = (int)(this.viewport.Height - bottomBorder);
                 this.Camera.Viewport = this.viewport;
             }
         }
@@ -94,35 +93,51 @@ namespace RoBuddies.View
         }
 
 
-
+        /// <summary>
+        /// update content
+        /// </summary>
+        /// <param name="gameTime">gametime</param>
         public void Update(GameTime gameTime)
         {
             this.Level.Update(gameTime);
         }
 
-        public void Draw(GameTime gameTime)
-        {
+        /// <summary>
+        /// draw a specified layer
+        /// </summary>
+        /// <param name="layer">layer to draw</param>
+        public void Draw(Layer layer) {
+
             this.Game.GraphicsDevice.Viewport = this.Viewport;
+
+            this.Game.SpriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
+
+            foreach (IBody body in layer.AllObjects)
+            {
+                this.Game.SpriteBatch.Draw( body.Texture,
+                                            new Vector2(body.Position.X, -body.Position.Y) * Scale,
+                                            null,
+                                            body.Color,
+                                            -body.Rotation,
+                                            body.Origin,
+                                            Scale * body.Width / body.Texture.Width,
+                                            body.Effect,
+                                            layer.LayerDepth);
+            }
+
+            this.Game.SpriteBatch.End();
+        }
+
+        /// <summary>
+        /// draw all layers
+        /// </summary>
+        public void Draw()
+        {
             foreach (Layer layer in this.Level.AllLayers)
             {
                 // todo : order layer (layerDepth)
 
-                this.Game.SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, this.Camera.GetViewMatrix( layer.Parallax ) );
-
-                foreach (IBody body in layer.AllObjects)
-                {
-                    this.Game.SpriteBatch.Draw( body.Texture, 
-                                                new Vector2(body.Position.X, -body.Position.Y) * Scale, 
-                                                null, 
-                                                body.Color, 
-                                                -body.Rotation, 
-                                                body.Origin, 
-                                                Scale * body.Width / body.Texture.Width, 
-                                                body.Effect, 
-                                                layer.LayerDepth);
-                }
-
-                this.Game.SpriteBatch.End();
+                Draw(layer);
             }
         }
     }

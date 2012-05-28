@@ -33,6 +33,7 @@ namespace RoBuddies
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
         }
 
+
         /// <summary>
         /// called if client size change
         /// </summary>
@@ -40,10 +41,32 @@ namespace RoBuddies
         /// <param name="e">event</param>
         void Window_ClientSizeChanged(object sender, EventArgs e)
         {
-            LevelView.Viewport = graphics.GraphicsDevice.Viewport;
-            Menu.Viewport = graphics.GraphicsDevice.Viewport;
-            HUD.Viewport = graphics.GraphicsDevice.Viewport;
+            Viewport viewport;
 
+            // LevelView size
+            viewport = graphics.GraphicsDevice.Viewport;
+            viewport.Height = viewport.Height - 30;
+            LevelView.Viewport = viewport;
+
+            // menu size
+            viewport = graphics.GraphicsDevice.Viewport;
+            if (viewport.Width > Menu.PreferedWidth) 
+            {
+                viewport.X = viewport.Width / 2 - Menu.PreferedWidth / 2;
+                viewport.Width = Menu.PreferedWidth;
+            }
+            if (viewport.Height > Menu.PreferedHeight)
+            {
+                viewport.Y = viewport.Height / 2 - Menu.PreferedHeight / 2;
+                viewport.Height = Menu.PreferedHeight;
+            }
+            Menu.Viewport = viewport;
+
+            // HUD size
+            viewport = graphics.GraphicsDevice.Viewport;
+            viewport.Y = viewport.Height - 30;
+            viewport.Height = 30;
+            HUD.Viewport = viewport;
         }
 
         /// <summary>
@@ -63,6 +86,8 @@ namespace RoBuddies
             LevelView = new LevelView(this);
             Menu = new Menu(this);
             HUD = new HUD(this);
+
+            Window_ClientSizeChanged(null, null);
         }
 
         /// <summary>
@@ -85,6 +110,10 @@ namespace RoBuddies
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.LevelView.Camera.Zoom *= 1.01f; }
                 if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.LevelView.Camera.Zoom /= 1.01f; }
+
+                if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.LevelView.Camera.Rotation -= 0.005f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.LevelView.Camera.Rotation += 0.005f; }
+
                 if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(-1, 0)); }
                 if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(+1, 0)); }
                 if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, -1)); }
@@ -101,7 +130,7 @@ namespace RoBuddies
         {
             GraphicsDevice.Clear(this.LevelView.Level.Background);
 
-            LevelView.Draw(gameTime);
+            LevelView.Draw();
             Menu.Draw(gameTime);
             HUD.Draw(gameTime);
         }

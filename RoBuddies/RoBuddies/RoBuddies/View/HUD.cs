@@ -15,7 +15,7 @@ namespace RoBuddies.View
         /// </summary>
         public Viewport Viewport { get; set; }
 
-        public List<HUDElement> AllElements;
+        public List<IHUDElement> AllElements;
 
         /// <summary>
         /// the game
@@ -27,14 +27,14 @@ namespace RoBuddies.View
         {
             this.Game = game;
             this.Viewport = this.Game.GraphicsDevice.Viewport;
-            this.AllElements = new List<HUDElement>();
+            this.AllElements = new List<IHUDElement>();
         }
 
 
 
         public void Update(GameTime gameTime)
         {
-            foreach (HUDElement element in AllElements)
+            foreach (IHUDElement element in AllElements)
             {
                 element.Update(gameTime);
             }
@@ -42,10 +42,16 @@ namespace RoBuddies.View
 
         public void Draw(GameTime gameTime)
         {
-            foreach (HUDElement element in AllElements)
+            this.Game.GraphicsDevice.Viewport = this.Viewport;
+
+            this.Game.SpriteBatch.Begin();
+
+            foreach (IHUDElement element in AllElements)
             {
-                element.Draw(gameTime);
+                element.Draw(this.Game.SpriteBatch);
             }
+
+            this.Game.SpriteBatch.End();
         }
     }
 }
