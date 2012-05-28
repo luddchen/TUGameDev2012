@@ -115,7 +115,7 @@
     <Compile Include="Control\StateMachine.cs" />
     <Compile Include="Model\AnimatedPhysicObject.cs" />
     <Compile Include="Model\AnimatedStaticObject.cs" />
-    <Compile Include="Model\HUDElement.cs" />
+    <Compile Include="View\HUDElement.cs" />
     <Compile Include="Model\IBody.cs" />
     <Compile Include="Model\Layer.cs" />
     <Compile Include="Model\Level.cs" />
