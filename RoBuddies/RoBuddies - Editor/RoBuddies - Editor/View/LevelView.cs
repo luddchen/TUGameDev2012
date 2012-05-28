@@ -8,6 +8,7 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
+using RoBuddies.View;
 
 namespace RoBuddies___Editor.View
 {
@@ -66,7 +67,7 @@ namespace RoBuddies___Editor.View
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(11.5005f, 2);
+                    body1.Position = new Vector2(2f, -2f);
                     body1.BodyType = BodyType.Static;
                     FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
                     body1.Width = 1;
@@ -114,6 +115,7 @@ namespace RoBuddies___Editor.View
 
             foreach (IBody body in layer.AllObjects)
             {
+                //Console.Out.WriteLine(body.Position);
                 this.Game.SpriteBatch.Draw( body.Texture,
                                             new Vector2(body.Position.X, -body.Position.Y) * Scale,
                                             null,

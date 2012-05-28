@@ -6,6 +6,9 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies___Editor.Model;
 using RoBuddies.Model;
+using RoBuddies.Utilities;
+using FarseerPhysics.Dynamics;
+using RoBuddies.View;
 
 namespace RoBuddies___Editor.Controls
 {
@@ -15,20 +18,22 @@ namespace RoBuddies___Editor.Controls
     class MouseController
     {
         private RoBuddiesEditor game;
-
-        private Mouse mouse;
-
+        private Camera camera;
         private Level level;
+        private Mouse mouse;
 
         /// <summary>
         /// creates a new MouseController
         /// </summary>
         /// <param name="game">the game instance</param>
         /// <param name="level">the level which will be controlled by the mouse</param>
+        /// <param name="camera">the camera of the level</param>
         /// <param name="mouse">the mouse model, which will be controlled</param>
-        public MouseController(RoBuddiesEditor game, Level level, Mouse mouse)
+        public MouseController(RoBuddiesEditor game, Level level, Camera camera, Mouse mouse)
         {
             this.game = game;
+            this.level = level;
+            this.camera = camera;
             this.mouse = mouse;
         }
 
@@ -37,6 +42,32 @@ namespace RoBuddies___Editor.Controls
         /// </summary>
         /// <param name="gameTime">the current game time</param>
         public void Update(GameTime gameTime)
+        {
+            
+            //Console.Out.WriteLine("Units" + mouse.Position);
+            updateMousePosition();
+            updateMouseButtons();
+        }
+
+        private void updateMouseButtons()
+        {
+            Vector2 globalMousePos = this.camera.screenToWorld(mouse.Position, new Vector2(1, 1));
+            if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+            {
+                Console.Out.WriteLine("Sim Units" + ConvertUnits.ToSimUnits(globalMousePos));
+                Fixture savedFixture = this.level.TestPoint(ConvertUnits.ToSimUnits(globalMousePos));
+                if (savedFixture != null)
+                {
+                    Console.Out.WriteLine("jap");
+                }
+                else
+                {
+                    Console.Out.WriteLine("neee");
+                }
+            }
+        }
+
+        private void updateMousePosition()
         {
             this.mouse.LastMouseState = this.mouse.CurrentMouseState;
             this.mouse.CurrentMouseState = Microsoft.Xna.Framework.Input.Mouse.GetState();
@@ -54,7 +85,7 @@ namespace RoBuddies___Editor.Controls
         /// </summary>
         /// <param name="button">the left or right mousebutton</param>
         /// <returns></returns>
-        public bool IsNewMouseButtonPressed(MouseButtons button)
+        public bool isNewMouseButtonPressed(MouseButtons button)
         {
             switch (button)
             {
@@ -74,7 +105,7 @@ namespace RoBuddies___Editor.Controls
         /// </summary>
         /// <param name="button"></param>
         /// <returns>the left or right mousebuttons</returns>
-        public bool IsNewMouseButtonReleased(MouseButtons button)
+        public bool isNewMouseButtonReleased(MouseButtons button)
         {
             switch (button)
             {

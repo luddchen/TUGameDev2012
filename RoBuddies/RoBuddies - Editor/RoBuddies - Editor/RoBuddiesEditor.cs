@@ -95,7 +95,7 @@ namespace RoBuddies___Editor
             HUD = new HUD(this);
             RoBuddies___Editor.Model.Mouse mouse = new RoBuddies___Editor.Model.Mouse();
             mouseView = new MouseView(this, mouse);
-            mouseController = new MouseController(this, null, mouse);
+            mouseController = new MouseController(this, LevelView.Level, LevelView.Camera, mouse);
 
             Window_ClientSizeChanged(null, null);
         }

@@ -116,7 +116,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="RoBuddiesEditor.cs" />
     <Compile Include="Serializer\LevelWriter.cs" />
-    <Compile Include="View\Camera.cs" />
     <Compile Include="View\HUD.cs" />
     <Compile Include="View\HUDString.cs" />
     <Compile Include="View\HUDTexture.cs" />
