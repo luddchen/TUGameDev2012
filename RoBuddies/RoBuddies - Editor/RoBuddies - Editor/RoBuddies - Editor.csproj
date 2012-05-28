@@ -124,11 +124,6 @@
       <Project>{0A850700-1ABB-4288-A391-6726B90EBEB9}</Project>
       <Name>Farseer Physics XNA</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\RoBuddies\RoBuddiesContent\RoBuddiesContent.contentproj">
-      <Project>{619AE7A6-AE3C-4930-86FE-42D907D7674C}</Project>
-      <Name>RoBuddiesContent %28Content%29</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
-    </ProjectReference>
     <ProjectReference Include="..\..\RoBuddies\RoBuddies\RoBuddies.csproj">
       <Project>{ACC47B9B-1154-4599-8D09-D72F6A5157DC}</Project>
       <Name>RoBuddies</Name>
