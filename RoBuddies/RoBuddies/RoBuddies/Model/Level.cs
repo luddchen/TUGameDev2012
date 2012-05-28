@@ -35,7 +35,7 @@ namespace RoBuddies.Model
             : base(gravity)
         {
             this.AllLayers = new List<Layer>();
-            this.Background = Color.DarkBlue;
+            this.Background = Color.DeepSkyBlue;
         }
 
         /// <summary>

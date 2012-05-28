@@ -9,10 +9,7 @@ namespace RoBuddies.View
 {
     class HUDString : IHUDElement
     {
-
-        protected int fontSpacing = 4;
         protected SpriteFont font;
-        protected SpriteFont smallFont;
 
         private Vector2 measureString;
          
@@ -47,11 +44,17 @@ namespace RoBuddies.View
 
         public HUDString(ContentManager content)
         {
-            this.font = content.Load<SpriteFont>("Fonts\\Font");
-            this.font.Spacing = fontSpacing;
-            this.smallFont = content.Load<SpriteFont>("Fonts\\FontSmall");
+            this.font = content.Load<SpriteFont>("Fonts\\Linds");
             this.Position = Vector2.Zero;
             this.String = "RoBuddies";
+            this.Color = Color.Beige;
+        }
+
+        public HUDString(String text, ContentManager content)
+        {
+            this.font = content.Load<SpriteFont>("Fonts\\Linds");
+            this.Position = Vector2.Zero;
+            this.String = text;
             this.Color = Color.Beige;
         }
 

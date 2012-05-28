@@ -45,7 +45,7 @@ namespace RoBuddies.View
             this.Position = Vector2.Zero;
             this.Color = Color.White;
             this.Texture = content.Load<Texture2D>("Sprites//Circle");
-            this.Width = 20;
+            this.Width = 10;
         }
 
         public void Update(GameTime gameTime){}
