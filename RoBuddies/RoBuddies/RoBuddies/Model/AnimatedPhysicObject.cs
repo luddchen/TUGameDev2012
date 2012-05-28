@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework;
 using FarseerPhysics.Dynamics;
 
 using RoBuddies.Control;
+using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Model
 {
