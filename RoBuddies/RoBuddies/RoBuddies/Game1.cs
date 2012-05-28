@@ -19,7 +19,7 @@ namespace RoBuddies
     public class Game1 : Microsoft.Xna.Framework.Game
     {
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
+        public SpriteBatch SpriteBatch { get; set; }
 
         LevelView LevelView;
         Menu Menu;
@@ -29,44 +29,50 @@ namespace RoBuddies
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
         }
 
         /// <summary>
-        /// Ermöglicht dem Spiel die Durchführung einer Initialisierung, die es benötigt, bevor es ausgeführt werden kann.
-        /// Dort kann es erforderliche Dienste abfragen und nicht mit der Grafik
-        /// verbundenen Content laden.  Bei Aufruf von base.Initialize werden alle Komponenten aufgezählt
-        /// sowie initialisiert.
+        /// on clientsize changed
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event</param>
+        void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            LevelView.Viewport = GraphicsDevice.Viewport;
+            Menu.Viewport = GraphicsDevice.Viewport;
+            HUD.Viewport = GraphicsDevice.Viewport;
+        }
+
+        /// <summary>
+        /// initialize
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Fügen Sie Ihre Initialisierungslogik hier hinzu
-
             base.Initialize();
         }
 
         /// <summary>
-        /// LoadContent wird einmal pro Spiel aufgerufen und ist der Platz, wo
-        /// Ihr gesamter Content geladen wird.
+        /// LoadContent
         /// </summary>
         protected override void LoadContent()
         {
-            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
             Menu = new Menu(this);
             HUD = new HUD(this);
         }
 
         /// <summary>
-        /// UnloadContent wird einmal pro Spiel aufgerufen und ist der Ort, wo
-        /// Ihr gesamter Content entladen wird.
+        /// UnloadContent
         /// </summary>
         protected override void UnloadContent(){}
 
         /// <summary>
-        /// Ermöglicht dem Spiel die Ausführung der Logik, wie zum Beispiel Aktualisierung der Welt,
-        /// Überprüfung auf Kollisionen, Erfassung von Eingaben und Abspielen von Ton.
+        /// Update
         /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+        /// <param name="gameTime">gameTime</param>
         protected override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -77,9 +83,9 @@ namespace RoBuddies
         }
 
         /// <summary>
-        /// Dies wird aufgerufen, wenn das Spiel selbst zeichnen soll.
+        /// Draw
         /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+        /// <param name="gameTime">gametime.</param>
         protected override void Draw(GameTime gameTime)
         {
             base.Draw(gameTime);

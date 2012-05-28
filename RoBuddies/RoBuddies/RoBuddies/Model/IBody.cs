@@ -22,6 +22,8 @@ namespace RoBuddies.Model
 
         Vector2 Position { get; set; }
 
+        float Rotation { get; set; }
+
         SpriteEffects Effect { get; set; }
 
         Texture2D Texture { get; set; }

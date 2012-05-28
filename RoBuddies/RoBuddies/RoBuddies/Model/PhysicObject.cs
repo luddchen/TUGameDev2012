@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using FarseerPhysics.Dynamics;
 
@@ -13,113 +14,67 @@ namespace RoBuddies.Model
     /// </summary>
     class PhysicObject : FarseerPhysics.Dynamics.Body , IBody
     {
+        private Texture2D texture;
+
 
         public bool IsVisible
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
-        public Microsoft.Xna.Framework.Graphics.SpriteEffects Effect
+        public SpriteEffects Effect
+        {
+            get;
+            set;
+        }
+
+        public Texture2D Texture
         {
             get
             {
-                throw new NotImplementedException();
+                return texture;
             }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-
-        public Microsoft.Xna.Framework.Graphics.Texture2D Texture
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
+            set {
+                texture = value;
+                Origin = new Vector2(texture.Width / 2, texture.Height / 2);
             }
         }
 
         public float Width
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public float Height
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Color Color
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Vector2 Origin
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Layer Layer
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Level World
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
 
@@ -127,12 +82,14 @@ namespace RoBuddies.Model
             : base(world)
         {
             this.World = (Level)world;
+            this.Effect = SpriteEffects.None;
         }
 
 
         public virtual void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            //Console.Out.WriteLine("PhysicObject.Position = ("+Position.X + " , " + Position.Y+")");
         }
     }
 }

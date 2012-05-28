@@ -37,6 +37,18 @@ namespace RoBuddies.Model
             }
         }
 
+        public float Rotation
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+            set
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public Microsoft.Xna.Framework.Graphics.SpriteEffects Effect
         {
             get
@@ -137,5 +149,6 @@ namespace RoBuddies.Model
         {
             throw new NotImplementedException();
         }
+
     }
 }

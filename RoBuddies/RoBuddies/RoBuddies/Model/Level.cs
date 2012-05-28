@@ -35,7 +35,7 @@ namespace RoBuddies.Model
             : base(gravity)
         {
             this.AllLayers = new List<Layer>();
-            this.Background = Color.HotPink;
+            this.Background = Color.DarkBlue;
         }
 
         /// <summary>
@@ -48,6 +48,7 @@ namespace RoBuddies.Model
             {
                 layer.Update(gameTime);
             }
+            this.Step(gameTime.ElapsedGameTime.Milliseconds * 0.001f);
         }
 
     }
