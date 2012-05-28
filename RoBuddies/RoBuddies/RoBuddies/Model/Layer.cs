@@ -43,9 +43,9 @@ namespace RoBuddies.Model
         /// <summary>
         /// creates a new layer
         /// </summary>
-        /// /// <param name="name">name for this layer, only for identification without knowing a reference</param>
-        /// /// <param name="parallax">value for paralax-scrolling</param>
-        /// /// <param name="layerDepth">the depth for drawing, see SpriteBatch.Draw</param>
+        /// <param name="name">name for this layer, only for identification without knowing a reference</param>
+        /// <param name="parallax">value for paralax-scrolling</param>
+        /// <param name="layerDepth">the depth for drawing, see SpriteBatch.Draw</param>
         public Layer(String name, Vector2 parallax, float layerDepth, Level level)
         {
             this.Name = name;
@@ -59,8 +59,13 @@ namespace RoBuddies.Model
         /// <summary>
         /// update all objects on this layer
         /// </summary>
+        /// <param name="gameTime">time of game</param>
         public void Update(GameTime gameTime)
         {
+            foreach (IBody body in AllObjects)
+            {
+                body.Update(gameTime);
+            }
         }
 
     }

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using FarseerPhysics.Dynamics;
+
 namespace RoBuddies.Model
 {
 
@@ -13,6 +15,9 @@ namespace RoBuddies.Model
     interface IBody
     {
 
+        /// <summary>
+        /// set or get the visibility of this object
+        /// </summary>
         bool IsVisible { get; set; }
 
         Vector2 Position { get; set; }
@@ -30,6 +35,8 @@ namespace RoBuddies.Model
         Vector2 Origin { get; set; }
 
         Layer Layer { get; set; }
+
+        Level World { get; set; }
 
         void Update(GameTime gameTime);
     }

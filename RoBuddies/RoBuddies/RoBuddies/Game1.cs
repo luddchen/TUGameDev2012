@@ -9,6 +9,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
+using RoBuddies.View;
+
 namespace RoBuddies
 {
     /// <summary>
@@ -18,6 +20,10 @@ namespace RoBuddies
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        LevelView LevelView;
+        Menu Menu;
+        HUD HUD;
 
         public Game1()
         {
@@ -44,20 +50,17 @@ namespace RoBuddies
         /// </summary>
         protected override void LoadContent()
         {
-            // Erstellen Sie einen neuen SpriteBatch, der zum Zeichnen von Texturen verwendet werden kann.
             spriteBatch = new SpriteBatch(GraphicsDevice);
-
-            // TODO: Verwenden Sie this.Content, um Ihren Spiel-Content hier zu laden
+            LevelView = new LevelView(this);
+            Menu = new Menu(this);
+            HUD = new HUD(this);
         }
 
         /// <summary>
         /// UnloadContent wird einmal pro Spiel aufgerufen und ist der Ort, wo
         /// Ihr gesamter Content entladen wird.
         /// </summary>
-        protected override void UnloadContent()
-        {
-            // TODO: Entladen Sie jeglichen Nicht-ContentManager-Content hier
-        }
+        protected override void UnloadContent(){}
 
         /// <summary>
         /// Ermöglicht dem Spiel die Ausführung der Logik, wie zum Beispiel Aktualisierung der Welt,
@@ -66,13 +69,11 @@ namespace RoBuddies
         /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
         protected override void Update(GameTime gameTime)
         {
-            // Ermöglicht ein Beenden des Spiels
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
-                this.Exit();
-
-            // TODO: Fügen Sie Ihre Aktualisierungslogik hier hinzu
-
             base.Update(gameTime);
+
+            LevelView.Update(gameTime);
+            Menu.Update(gameTime);
+            HUD.Update(gameTime);
         }
 
         /// <summary>
@@ -81,11 +82,11 @@ namespace RoBuddies
         /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            // TODO: Fügen Sie Ihren Zeichnungscode hier hinzu
-
             base.Draw(gameTime);
+
+            LevelView.Draw(gameTime);
+            Menu.Draw(gameTime);
+            HUD.Draw(gameTime);
         }
     }
 }

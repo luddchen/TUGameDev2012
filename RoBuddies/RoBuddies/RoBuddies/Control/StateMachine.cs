@@ -11,12 +11,12 @@ namespace RoBuddies.Control
 
         public List<State> AllStates;
 
-        public IBody body;
+        public IBody Body;
 
 
         public StateMachine(IBody body)
         {
-            this.body = body;
+            this.Body = body;
             this.AllStates = new List<State>();
         }
 

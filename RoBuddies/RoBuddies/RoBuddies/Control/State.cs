@@ -7,6 +7,6 @@ namespace RoBuddies.Control
     {
         public String Name { get; set; }
 
-
+        public StateMachine StateMachine { get; set; }
     }
 }

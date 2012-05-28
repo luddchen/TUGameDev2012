@@ -112,6 +112,7 @@
     <Compile Include="Control\StateMachine.cs" />
     <Compile Include="Model\AnimatedPhysicObject.cs" />
     <Compile Include="Model\AnimatedStaticObject.cs" />
+    <Compile Include="Model\HUDElement.cs" />
     <Compile Include="Model\IBody.cs" />
     <Compile Include="Model\Layer.cs" />
     <Compile Include="Model\Level.cs" />
@@ -121,6 +122,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="View\Camera.cs" />
+    <Compile Include="View\HUD.cs" />
+    <Compile Include="View\LevelView.cs" />
+    <Compile Include="View\Menu.cs" />
+    <Compile Include="View\MenuPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />

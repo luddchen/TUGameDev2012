@@ -15,13 +15,10 @@ namespace RoBuddies.Model
     {
         public StateMachine StateMachine { get; set; }
 
-        /// <summary>
-        /// update the object
-        /// </summary>
-        /// /// <param name="gametime">time of game</param>
-        public void Update(GameTime gameTime)
-        {
-        }
 
+        public override void Update(GameTime gameTime)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -11,6 +11,15 @@ namespace RoBuddies.Model
     /// </summary>
     class Level : FarseerPhysics.Dynamics.World
     {
+        /// <summary>
+        /// background color of level
+        /// </summary>
+        public Color Background { get; set; }
+
+        /// <summary>
+        /// our holy robot
+        /// </summary>
+        public Robot Robot { get; set; }
 
         /// <summary>
         /// list of all layers in this level
@@ -18,23 +27,27 @@ namespace RoBuddies.Model
         public List<Layer> AllLayers;
 
 
-
         /// <summary>
         /// creates a new world / level
         /// </summary>
-        /// /// <param name="gravity">initial gravity of physics</param>
+        /// <param name="gravity">initial gravity of physics</param>
         public Level(Vector2 gravity)
             : base(gravity)
         {
             this.AllLayers = new List<Layer>();
+            this.Background = Color.HotPink;
         }
 
         /// <summary>
         /// update the world / level
         /// </summary>
-        /// /// <param name="gametime">time of game</param>
+        /// <param name="gameTime">time of game</param>
         public void Update( GameTime gameTime) 
         {
+            foreach (Layer layer in AllLayers)
+            {
+                layer.Update(gameTime);
+            }
         }
 
     }
