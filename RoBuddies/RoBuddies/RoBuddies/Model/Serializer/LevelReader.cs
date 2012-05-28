@@ -14,7 +14,7 @@ namespace RoBuddies.Model.Serializer
     {
 
         /// <summary>
-        /// creates a new Level from a json level object
+        /// creates a new LevelReader
         /// </summary>
         public LevelReader()
         {

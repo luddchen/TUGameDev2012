@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public interface IHUDElement
     { 
@@ -13,8 +13,6 @@ namespace RoBuddies.View
         Vector2 Position { get; set; }
 
         Color Color { get; set; }
-
-        float Scale { get; set; }
 
         float Width { get; set; }
 

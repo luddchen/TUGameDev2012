@@ -10,7 +10,7 @@ namespace RoBuddies.View
     /// <summary>
     /// representation of a global camera
     /// </summary>
-    class Camera
+    public class Camera
     {
         private Viewport viewport;
         private float zoom;
@@ -55,7 +55,6 @@ namespace RoBuddies.View
         /// </summary>
         public float Rotation { get; set; }
 
-
         /// <summary>
         /// creates a new camera object
         /// </summary>
@@ -66,6 +65,27 @@ namespace RoBuddies.View
             this.Rotation = 0.0f;
         }
 
+        /// <summary>
+        /// transforms a screen position of a layer into the world coordinate system
+        /// </summary>
+        /// <param name="screenPosition">the specific screen position</param>
+        /// <param name="parallax">the parallax of the layer</param>
+        /// <returns></returns>
+        public Vector2 screenToWorld(Vector2 screenPosition, Vector2 parallax)
+        {
+            return Vector2.Transform(screenPosition, Matrix.Invert(this.GetViewMatrix(parallax)));
+        }
+
+        /// <summary>
+        /// Transforms a world position int the screen position of a layer
+        /// </summary>
+        /// <param name="worldPosition">the world position which will be transformed</param>
+        /// <param name="parallax">the parallax of the layer</param>
+        /// <returns></returns>
+        public Vector2 worldToScreen(Vector2 worldPosition, Vector2 parallax)
+        {
+            return Vector2.Transform(worldPosition, this.GetViewMatrix(parallax));
+        }
 
         /// <summary>
         /// move the camera to given global coordinates

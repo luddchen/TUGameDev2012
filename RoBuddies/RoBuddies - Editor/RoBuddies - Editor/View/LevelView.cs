@@ -8,8 +8,9 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
+using RoBuddies.View;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public class LevelView
     {
@@ -40,7 +41,7 @@ namespace RoBuddies.View
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddiesEditor Game { get; set; }
 
         /// <summary>
         /// the active camera
@@ -53,7 +54,7 @@ namespace RoBuddies.View
         public Level Level { get; set; }
 
 
-        public LevelView(Game1 game)
+        public LevelView(RoBuddiesEditor game)
         {
             this.Game = game;
             this.Camera = new Camera();
@@ -66,8 +67,8 @@ namespace RoBuddies.View
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(11.5005f, 2);
-                    body1.BodyType = BodyType.Dynamic;
+                    body1.Position = new Vector2(2f, -2f);
+                    body1.BodyType = BodyType.Static;
                     FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
                     body1.Width = 1;
                     body1.Height = 1;
@@ -114,6 +115,7 @@ namespace RoBuddies.View
 
             foreach (IBody body in layer.AllObjects)
             {
+                //Console.Out.WriteLine(body.Position);
                 this.Game.SpriteBatch.Draw( body.Texture,
                                             new Vector2(body.Position.X, -body.Position.Y) * Scale,
                                             null,

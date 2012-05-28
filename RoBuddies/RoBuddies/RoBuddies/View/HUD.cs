@@ -8,7 +8,7 @@ using RoBuddies.Model;
 
 namespace RoBuddies.View
 {
-    class HUD
+    public class HUD
     {
         private HUDString timeElapsed;
         private Viewport viewport;

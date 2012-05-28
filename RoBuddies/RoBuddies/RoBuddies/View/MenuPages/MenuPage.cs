@@ -10,7 +10,7 @@ using RoBuddies.View;
 
 namespace RoBuddies.View.MenuPages
 {
-    class MenuPage
+    public class MenuPage
     {
         private float activeScale;
         private float animationValue;
