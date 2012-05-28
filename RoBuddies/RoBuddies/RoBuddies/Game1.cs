@@ -14,7 +14,7 @@ using RoBuddies.View;
 namespace RoBuddies
 {
     /// <summary>
-    /// Dies ist der Haupttyp für Ihr Spiel
+    /// main class for robot game
     /// </summary>
     public class Game1 : Microsoft.Xna.Framework.Game
     {
@@ -29,24 +29,33 @@ namespace RoBuddies
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Window.AllowUserResizing = true;
+            Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
         }
 
         /// <summary>
-        /// Ermöglicht dem Spiel die Durchführung einer Initialisierung, die es benötigt, bevor es ausgeführt werden kann.
-        /// Dort kann es erforderliche Dienste abfragen und nicht mit der Grafik
-        /// verbundenen Content laden.  Bei Aufruf von base.Initialize werden alle Komponenten aufgezählt
-        /// sowie initialisiert.
+        /// called if client size change
+        /// </summary>
+        /// <param name="sender">sender</param>
+        /// <param name="e">event</param>
+        void Window_ClientSizeChanged(object sender, EventArgs e)
+        {
+            LevelView.Viewport = graphics.GraphicsDevice.Viewport;
+            Menu.Viewport = graphics.GraphicsDevice.Viewport;
+            HUD.Viewport = graphics.GraphicsDevice.Viewport;
+
+        }
+
+        /// <summary>
+        /// init
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Fügen Sie Ihre Initialisierungslogik hier hinzu
-
             base.Initialize();
         }
 
         /// <summary>
-        /// LoadContent wird einmal pro Spiel aufgerufen und ist der Platz, wo
-        /// Ihr gesamter Content geladen wird.
+        /// LoadContent
         /// </summary>
         protected override void LoadContent()
         {
@@ -57,32 +66,40 @@ namespace RoBuddies
         }
 
         /// <summary>
-        /// UnloadContent wird einmal pro Spiel aufgerufen und ist der Ort, wo
-        /// Ihr gesamter Content entladen wird.
+        /// UnloadContent
         /// </summary>
         protected override void UnloadContent(){}
 
         /// <summary>
-        /// Ermöglicht dem Spiel die Ausführung der Logik, wie zum Beispiel Aktualisierung der Welt,
-        /// Überprüfung auf Kollisionen, Erfassung von Eingaben und Abspielen von Ton.
+        /// Update
         /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+        /// <param name="gameTime">gametime</param>
         protected override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             LevelView.Update(gameTime);
             Menu.Update(gameTime);
             HUD.Update(gameTime);
+
+            // testing camera
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.LevelView.Camera.Zoom *= 1.01f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.LevelView.Camera.Zoom /= 1.01f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(-1, 0)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(+1, 0)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, -1)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, +1)); }
+            }
+
         }
 
         /// <summary>
-        /// Dies wird aufgerufen, wenn das Spiel selbst zeichnen soll.
+        /// Draw
         /// </summary>
-        /// <param name="gameTime">Bietet einen Schnappschuss der Timing-Werte.</param>
+        /// <param name="gameTime">gametime</param>
         protected override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
+            GraphicsDevice.Clear(this.LevelView.Level.Background);
 
             LevelView.Draw(gameTime);
             Menu.Draw(gameTime);

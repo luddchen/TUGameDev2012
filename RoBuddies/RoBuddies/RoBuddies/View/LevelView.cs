@@ -14,19 +14,39 @@ namespace RoBuddies.View
     class LevelView
     {
         /// <summary>
+        /// space between levelbottom and screen bottom
+        /// </summary>
+        private const float bottomBorder = 30;
+        private Viewport viewport;
+
+        /// <summary>
+        /// viewport for this gamecomponent
+        /// </summary>
+        public Viewport Viewport 
+        {
+            get { return viewport; }
+            set
+            {
+                this.viewport = value;
+                this.viewport.Height = (int)(this.viewport.Height - bottomBorder);
+                this.Camera.Viewport = this.viewport;
+            }
+        }
+
+        /// <summary>
         /// scale physic to screen
         /// </summary>
         public float Scale { get; set; }
 
         /// <summary>
-        /// viewport for this gamecomponent
-        /// </summary>
-        public Viewport Viewport { get; set; }
-
-        /// <summary>
         /// the game
         /// </summary>
         public Game1 Game { get; set; }
+
+        /// <summary>
+        /// the active camera
+        /// </summary>
+        public Camera Camera { get; set; }
 
         /// <summary>
         /// the level
@@ -37,35 +57,40 @@ namespace RoBuddies.View
         public LevelView(Game1 game)
         {
             this.Game = game;
+            this.Camera = new Camera();
             this.Viewport = this.Game.GraphicsDevice.Viewport;
-
-            //  some testing code here
             Scale = 50;
-            this.Level = new Level( new Vector2( 0, -9.8f));
+            this.Level = new Level(new Vector2(0, -9.8f));
 
-            Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            PhysicObject body = new PhysicObject(this.Level);
-            body.Position = new Vector2(11.5005f, 10);
-            body.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body);
-            body.Width = 1;
-            body.Height = 1;
-            body.Texture = square;
-            body.Color = Color.YellowGreen;
+            //  some testing code here --------------------------------------------------------------------------
 
-            PhysicObject body2 = new PhysicObject(this.Level);
-            body2.Position = new Vector2(10, 1);
-            body2.BodyType = BodyType.Static;
-            FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
-            body2.Width = 3;
-            body2.Height = 3;
-            body2.Texture = square;
-            body2.Color = Color.Tomato;
+                // body1
+                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+                    PhysicObject body1 = new PhysicObject(this.Level);
+                    body1.Position = new Vector2(11.5005f, 2);
+                    body1.BodyType = BodyType.Dynamic;
+                    FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
+                    body1.Width = 1;
+                    body1.Height = 1;
+                    body1.Texture = square;
+                    body1.Color = Color.YellowGreen;
 
-            Layer mainLayer = new Layer("mainLayer", Vector2.Zero, 0.5f, this.Level);
-            mainLayer.AllObjects.Add(body);
-            mainLayer.AllObjects.Add(body2);
-            this.Level.AllLayers.Add(mainLayer);
+                // body 2
+                    PhysicObject body2 = new PhysicObject(this.Level);
+                    body2.Position = new Vector2(10, -8);
+                    body2.BodyType = BodyType.Static;
+                    FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
+                    body2.Width = 3;
+                    body2.Height = 3;
+                    body2.Texture = square;
+                    body2.Color = Color.Tomato;
+
+                // layer
+                    Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
+                    mainLayer.AllObjects.Add(body1);
+                    mainLayer.AllObjects.Add(body2);
+                    this.Level.AllLayers.Add(mainLayer);
+            // end testing code ---------------------------------------------------------------------------------
         }
 
 
@@ -77,11 +102,12 @@ namespace RoBuddies.View
 
         public void Draw(GameTime gameTime)
         {
-            this.Game.GraphicsDevice.Clear(this.Level.Background);
+            this.Game.GraphicsDevice.Viewport = this.Viewport;
             foreach (Layer layer in this.Level.AllLayers)
             {
-                Matrix matrix = Matrix.CreateTranslation(0, Viewport.Height, 0);
-                this.Game.SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, matrix);
+                // todo : order layer (layerDepth)
+
+                this.Game.SpriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, this.Camera.GetViewMatrix( layer.Parallax ) );
 
                 foreach (IBody body in layer.AllObjects)
                 {
