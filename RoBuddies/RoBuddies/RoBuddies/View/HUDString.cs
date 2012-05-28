@@ -21,15 +21,17 @@ namespace RoBuddies.View
 
         public Color Color { get; set; }
 
+        public float Scale { get; set; }
+
         public float Width
         {
-            get { return this.MeasureString.X; }
+            get { return this.MeasureString.X * this.Scale; }
             set { } 
         }
 
         public float Height
         {
-            get { return this.MeasureString.Y; }
+            get { return this.MeasureString.Y * this.Scale; }
             set { }
         }
 
@@ -37,7 +39,7 @@ namespace RoBuddies.View
         {
             get 
             { 
-                this.measureString = this.font.MeasureString(this.String);
+                this.measureString = this.font.MeasureString(this.String) * this.Scale;
                 return this.measureString;
             }
         }
@@ -48,6 +50,7 @@ namespace RoBuddies.View
             this.Position = Vector2.Zero;
             this.String = "RoBuddies";
             this.Color = Color.Beige;
+            this.Scale = 1.0f;
         }
 
         public HUDString(String text, ContentManager content)
@@ -56,13 +59,14 @@ namespace RoBuddies.View
             this.Position = Vector2.Zero;
             this.String = text;
             this.Color = Color.Beige;
+            this.Scale = 1.0f;
         }
 
         public void Update(GameTime gameTime){}
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, 0, this.MeasureString / 2, 1, SpriteEffects.None, 0.0f);
+            spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, 0, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
         }
     }
 }

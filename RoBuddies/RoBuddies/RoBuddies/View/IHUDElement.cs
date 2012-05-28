@@ -14,6 +14,8 @@ namespace RoBuddies.View
 
         Color Color { get; set; }
 
+        float Scale { get; set; }
+
         float Width { get; set; }
 
         float Height { get; set; }

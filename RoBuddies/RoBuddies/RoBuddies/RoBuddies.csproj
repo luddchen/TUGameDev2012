@@ -146,7 +146,9 @@
     <Compile Include="View\IHUDElement.cs" />
     <Compile Include="View\LevelView.cs" />
     <Compile Include="View\Menu.cs" />
-    <Compile Include="View\MenuPage.cs" />
+    <Compile Include="View\MenuPages\MainMenu.cs" />
+    <Compile Include="View\MenuPages\MenuPage.cs" />
+    <Compile Include="View\MenuPages\QuitMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
