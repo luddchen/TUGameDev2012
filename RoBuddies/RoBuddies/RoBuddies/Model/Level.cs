@@ -14,7 +14,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// background color of level
         /// </summary>
-        private Color Background { get; set; }
+        public Color Background { get; set; }
 
         /// <summary>
         /// our holy robot
