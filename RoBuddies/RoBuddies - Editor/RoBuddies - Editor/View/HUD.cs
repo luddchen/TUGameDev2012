@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 using RoBuddies.Model;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public class HUD
     {
@@ -20,10 +20,10 @@ namespace RoBuddies.View
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddiesEditor Game { get; set; }
 
 
-        public HUD(Game1 game)
+        public HUD(RoBuddiesEditor game)
         {
             this.Game = game;
             this.Viewport = this.Game.GraphicsDevice.Viewport;

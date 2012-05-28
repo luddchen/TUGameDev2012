@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public interface IHUDElement
     { 

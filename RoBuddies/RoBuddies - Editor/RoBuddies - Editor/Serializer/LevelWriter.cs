@@ -18,7 +18,7 @@ namespace RoBuddies___Editor.Serializer
         private Level level;
 
         /// <summary>
-        /// creates a new LevelWrite for a level
+        /// creates a new LevelWriter for a level
         /// </summary>
         /// <param name="level">The Level, which will be serialized</param>
         public LevelWriter(Level level)

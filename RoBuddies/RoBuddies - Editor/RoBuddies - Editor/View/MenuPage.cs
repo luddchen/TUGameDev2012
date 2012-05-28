@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public class MenuPage
     {

@@ -10,7 +10,7 @@ namespace RoBuddies___Editor
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (RoBuddiesEditor game = new RoBuddiesEditor())
             {
                 game.Run();
             }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace RoBuddies.View
+namespace RoBuddies___Editor.View
 {
     public class Menu
     {
@@ -74,10 +74,10 @@ namespace RoBuddies.View
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddiesEditor Game { get; set; }
 
 
-        public Menu(Game1 game)
+        public Menu(RoBuddiesEditor game)
         {
             this.Game = game;
             this.Viewport = this.Game.GraphicsDevice.Viewport;

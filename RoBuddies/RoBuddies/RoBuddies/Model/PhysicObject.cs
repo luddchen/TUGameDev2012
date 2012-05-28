@@ -12,7 +12,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing objects with physical behavior
     /// </summary>
-    class PhysicObject : FarseerPhysics.Dynamics.Body , IBody
+    public class PhysicObject : FarseerPhysics.Dynamics.Body , IBody
     {
         private Texture2D texture;
 
