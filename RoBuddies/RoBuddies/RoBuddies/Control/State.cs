@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Control
 {
-    class State
+    abstract class State
     {
         public String Name { get; set; }
 
