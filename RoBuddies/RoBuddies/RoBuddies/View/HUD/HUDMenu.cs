@@ -17,6 +17,8 @@ namespace RoBuddies.View.HUD
 
         protected HUDMenuPage activePage;
 
+        protected List<HUDMenuPage> pageHistory;
+
         public KeyboardState oldKeyboardState { get; set; }
         public KeyboardState newKeyboardState { get; set; }
 
@@ -60,6 +62,7 @@ namespace RoBuddies.View.HUD
             {
                 this.activePage = value;
                 this.Viewport = this.viewport; // dirty way to get actual (sub-)viewport
+                if (this.activePage != null) { this.pageHistory.Add(this.activePage); }
             }
         }
 
@@ -72,6 +75,7 @@ namespace RoBuddies.View.HUD
         public HUDMenu(RoBuddies game)
             : base(game)
         {
+            this.pageHistory = new List<HUDMenuPage>();
             this.backgroundColor = Color.Black;
             this.IsVisible = false;
             this.PreferedWidth = 800;
@@ -89,7 +93,24 @@ namespace RoBuddies.View.HUD
 
             if (this.newKeyboardState.IsKeyDown(Keys.Escape) && this.oldKeyboardState.IsKeyUp(Keys.Escape))
             {
-                IsVisible = !IsVisible;
+                if (!this.isVisible)
+                {
+                    this.pageHistory.Clear();
+                    this.ActivePage = this.DefaultPage;
+                    this.IsVisible = true;
+                }
+                else
+                {
+                    if (this.pageHistory.Count > 0) { this.pageHistory.RemoveAt(this.pageHistory.Count - 1); }  // active page should be always here, but nobody knows ..
+                    if (this.pageHistory.Count == 0 || this.ActivePage == this.DefaultPage)
+                    {
+                        IsVisible = !IsVisible;
+                    }
+                    else
+                    {
+                        this.ActivePage = this.pageHistory[this.pageHistory.Count - 1];
+                    }
+                }
             }
 
             if (this.ActivePage != null && IsVisible)
