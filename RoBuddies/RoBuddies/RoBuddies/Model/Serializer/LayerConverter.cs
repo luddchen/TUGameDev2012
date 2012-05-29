@@ -21,10 +21,11 @@ namespace RoBuddies.Model.Serializer
         public override void WriteJson(Newtonsoft.Json.JsonWriter writer, object value, Newtonsoft.Json.JsonSerializer serializer)
         {
             Layer layer = (Layer)value;
-            writer.WriteStartObject();
+            
             writer.WritePropertyName("Layer");
-                writer.WriteStartObject();
+            writer.WriteStartObject();
                 writer.WritePropertyName("Walls");
+                writer.WriteStartObject();
                 foreach (IBody obj in layer.AllObjects)
                 {
                     serializer.Serialize(writer, obj);

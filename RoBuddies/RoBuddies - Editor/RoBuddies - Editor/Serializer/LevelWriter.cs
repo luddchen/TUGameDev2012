@@ -42,6 +42,7 @@ namespace RoBuddies___Editor.Serializer
             JsonSerializer serializer = new JsonSerializer();
             serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             serializer.Converters.Add(new LevelConverter());
+            serializer.Converters.Add(new LayerConverter());
             serializer.Converters.Add(new WallConverter());
             serializer.Serialize(writer, this.level);
             writer.Flush();

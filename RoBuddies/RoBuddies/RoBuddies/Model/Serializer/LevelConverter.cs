@@ -23,11 +23,13 @@ namespace RoBuddies.Model.Serializer
         {
             Level level = (Level)value;
             writer.WriteStartObject();
-            writer.WritePropertyName("Layers");
-                foreach(Layer layer in level.AllLayers) {
-                    serializer.Serialize(writer, layer);
-                }
-            writer.WriteEndObject();
+                writer.WritePropertyName("Layers");
+                writer.WriteStartObject();
+                    foreach(Layer layer in level.AllLayers) {
+                        serializer.Serialize(writer, layer);
+                    }
+                writer.WriteEndObject();
+           writer.WriteEndObject();
         }
     }
 }
