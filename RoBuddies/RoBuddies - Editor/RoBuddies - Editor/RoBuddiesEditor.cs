@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 using RoBuddies___Editor.View;
 using RoBuddies___Editor.Controls;
+using RoBuddies___Editor.Serializer;
 
 namespace RoBuddies___Editor
 {
@@ -129,6 +130,11 @@ namespace RoBuddies___Editor
                 if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(+1, 0)); }
                 if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, -1)); }
                 if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, +1)); }
+            }
+
+            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.S)) { (new LevelWriter(LevelView.Level)).writeLevel("", ""); }
             }
 
         }

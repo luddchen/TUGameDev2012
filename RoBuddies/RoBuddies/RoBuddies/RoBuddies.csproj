@@ -138,7 +138,11 @@
     <Compile Include="Model\Objects\Wall.cs" />
     <Compile Include="Model\PhysicObject.cs" />
     <Compile Include="Model\Robot.cs" />
+    <Compile Include="Model\Serializer\Converter.cs" />
+    <Compile Include="Model\Serializer\LayerConverter.cs" />
     <Compile Include="Model\Serializer\LevelReader.cs" />
+    <Compile Include="Model\Serializer\LevelConverter.cs" />
+    <Compile Include="Model\Serializer\WallConverter.cs" />
     <Compile Include="Model\StaticObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />

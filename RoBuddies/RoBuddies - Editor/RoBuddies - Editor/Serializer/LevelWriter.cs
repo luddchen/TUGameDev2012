@@ -6,6 +6,9 @@ using Newtonsoft.Json.Linq;
 using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using RoBuddies.Model;
+using System.IO;
+
+using RoBuddies.Model.Serializer;
 
 namespace RoBuddies___Editor.Serializer
 {
@@ -34,9 +37,14 @@ namespace RoBuddies___Editor.Serializer
         /// <param name="filename">the name of the file</param>
         public void writeLevel(String path, String filename) 
         {
-            string output = JsonConvert.SerializeObject(this.level);
-            Console.Out.WriteLine(output);
-            Level deserializedLevel = JsonConvert.DeserializeObject<Level>(output);
+            StreamWriter sw = new StreamWriter(@".\\SerializationTest.txt", false);
+            JsonWriter writer = new JsonTextWriter(sw);
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            serializer.Converters.Add(new LevelConverter());
+            serializer.Converters.Add(new WallConverter());
+            serializer.Serialize(writer, this.level);
+            writer.Flush();
         }
     }
 }
