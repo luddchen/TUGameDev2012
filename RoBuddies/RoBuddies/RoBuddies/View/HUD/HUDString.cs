@@ -7,35 +7,65 @@ using Microsoft.Xna.Framework.Content;
 
 namespace RoBuddies.View.HUD
 {
+
+    /// <summary>
+    /// a Head Up Display String
+    /// </summary>
     class HUDString : IHUDElement
     {
         protected SpriteFont font;
 
         private Vector2 measureString;
-         
+
+        /// <summary>
+        /// name of this element
+        /// </summary>
         public String Name { get; set; }
 
         public String String { get; set; }
 
+        /// <summary>
+        /// local position of this element 
+        /// </summary>
         public Vector2 Position { get; set; }
 
+        /// <summary>
+        /// color of this element
+        /// </summary>
         public Color Color { get; set; }
 
+        /// <summary>
+        /// scale of this element
+        /// </summary>
         public float Scale { get; set; }
 
+        /// <summary>
+        /// get width of this element
+        /// </summary>
         public float Width
         {
             get { return this.MeasureString.X * this.Scale; }
             set { } 
         }
 
+        /// <summary>
+        /// get height of this element
+        /// </summary>
         public float Height
         {
             get { return this.MeasureString.Y * this.Scale; }
             set { }
         }
 
-        public Vector2 MeasureString
+        /// <summary>
+        /// rotation of this element
+        /// </summary>
+        public float Rotation { get; set; }
+
+        /// <summary>
+        /// size of unscaled String
+        /// </summary>
+        protected Vector2 MeasureString
         {
             get 
             {
@@ -62,11 +92,40 @@ namespace RoBuddies.View.HUD
             this.Scale = 1.0f;
         }
 
+        public HUDString(String text, SpriteFont font, Vector2? position, Color? color, float? scale, float? rotation, ContentManager content)
+        {
+            if (text == null) { this.String = " "; }
+            if (text != null) { this.String = text; }
+
+            if (font == null) { this.font = content.Load<SpriteFont>("Fonts\\Linds"); }
+            if (font != null) { this.font = font; }
+
+            if (position == null) { this.Position = Vector2.Zero; }
+            if (position != null) { this.Position = (Vector2)position; }
+
+            if (color == null) { this.Color = Color.Beige; }
+            if (color != null) { this.Color = (Color)color; }
+
+            if (scale == null) { this.Scale = 1.0f; }
+            if (scale != null) { this.Scale = (float)scale; }
+
+            if (rotation == null) { this.Rotation = 0.0f; }
+            if (rotation != null) { this.Rotation = (float)rotation; }
+        }
+
+        /// <summary>
+        /// for update of values and effects 
+        /// </summary>
+        /// <param name="gameTime">the gametime</param>
         public void Update(GameTime gameTime){}
 
+        /// <summary>
+        /// draw this element
+        /// </summary>
+        /// <param name="spriteBatch">the spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, 0, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
+            spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
         }
     }
 }

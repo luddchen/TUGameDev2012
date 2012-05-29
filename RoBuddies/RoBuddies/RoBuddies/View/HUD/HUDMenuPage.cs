@@ -11,18 +11,41 @@ using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.HUD
 {
+
+    /// <summary>
+    /// basis class for Head Up Display Menu Pages
+    /// </summary>
     public class HUDMenuPage : HUD
     {
+
+        /// <summary>
+        /// sclae of the active element
+        /// </summary>
         private float activeScale;
+
+        /// <summary>
+        /// value to control the animation of active / selected element
+        /// </summary>
         private float animationValue;
 
-        //protected Viewport viewPort;
+        /// <summary>
+        /// the active / selected element
+        /// </summary>
         protected IHUDElement activeElement;
 
+        /// <summary>
+        /// list of all elements that can be choosen
+        /// </summary>
         protected List<IHUDElement> ChoiceList { get; set; }
 
-        public GameMenu Menu { get; set; }
+        /// <summary>
+        /// the Head Up Display Menu containing this page
+        /// </summary>
+        public HUDMenu Menu { get; set; }
 
+        /// <summary>
+        /// get and set the active / selected element
+        /// </summary>
         public IHUDElement ActiveElement
         {
             get { return this.activeElement; }
@@ -38,6 +61,11 @@ namespace RoBuddies.View.HUD
             }
         }
 
+        /// <summary>
+        /// constructor for a new Head Up Display Menu Page
+        /// </summary>
+        /// <param name="menu">the menu containing this page</param>
+        /// <param name="content">Content Manager</param>
         public HUDMenuPage(GameMenu menu, ContentManager content) : base(menu.Game)
         {
             this.backgroundColor = new Color(0,0,0,20);
@@ -45,6 +73,10 @@ namespace RoBuddies.View.HUD
             this.Menu = menu;
         }
 
+        /// <summary>
+        /// updates all elements
+        /// </summary>
+        /// <param name="gameTime">gametime</param>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -86,6 +118,10 @@ namespace RoBuddies.View.HUD
             }
         }
 
+        /// <summary>
+        /// draw all elements and background
+        /// </summary>
+        /// <param name="spriteBtach">spritebatch</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);

@@ -6,17 +6,43 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.View.HUD
 {
+
+    /// <summary>
+    /// basis class for HeadUpDisplay
+    /// </summary>
     public class HUD
     {
+        /// <summary>
+        /// a background texture , if null there will be no background
+        /// </summary>
         protected Texture2D background;
+
+        /// <summary>
+        /// internal destination rectangle for background texture, same coordinates as in viewport
+        /// </summary>
         protected Rectangle backgroundDest;
+
+        /// <summary>
+        /// color for background texture, if background texture is null this color has no effect
+        /// </summary>
         protected Color     backgroundColor = Color.White;
 
         protected Viewport  viewport;
-        protected bool      isVisible; 
+        protected bool      isVisible;
+
+        /// <summary>
+        /// contains all elements on this HUD
+        /// </summary>
         protected List<IHUDElement> AllElements;
 
+        /// <summary>
+        /// called if viewport resized
+        /// </summary>
         public virtual void OnViewPortResize() { }
+
+        /// <summary>
+        /// called if visibility of the HUD is changed
+        /// </summary>
         public virtual void OnVisibilityChange() { }
 
         /// <summary>
@@ -34,7 +60,7 @@ namespace RoBuddies.View.HUD
         }
 
         /// <summary>
-        /// visibility of this menu
+        /// visibility of this HUD
         /// </summary>
         public bool IsVisible
         {
@@ -47,14 +73,14 @@ namespace RoBuddies.View.HUD
         }
 
         /// <summary>
-        /// the game
+        /// reference to game
         /// </summary>
         public RoBuddies Game { get; set; }
 
         /// <summary>
         /// HUD constructor
         /// </summary>
-        /// <param name="game"></param>
+        /// <param name="game">the game</param>
         public HUD(RoBuddies game)
         {
             this.Game = game;
@@ -64,7 +90,7 @@ namespace RoBuddies.View.HUD
         }
 
         /// <summary>
-        /// update
+        /// updates all elements
         /// </summary>
         /// <param name="gameTime">gametime</param>
         public virtual void Update(GameTime gameTime) 
@@ -76,7 +102,7 @@ namespace RoBuddies.View.HUD
         }
 
         /// <summary>
-        /// draw
+        /// draw all elements and background
         /// </summary>
         /// <param name="spriteBtach">spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)

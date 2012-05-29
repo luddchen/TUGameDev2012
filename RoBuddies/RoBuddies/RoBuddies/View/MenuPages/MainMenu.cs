@@ -35,23 +35,19 @@ namespace RoBuddies.View.MenuPages
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
 
-            game = new HUDString("Game", content);
-            game.Scale = 0.7f;
+            game = new HUDString("Game", null, null, null, 0.7f, null, content);
             this.AllElements.Add(game);
             this.ChoiceList.Add(game);
 
-            help = new HUDString("Help", content);
-            help.Scale = 0.7f;
+            help = new HUDString("Help", null, null, null, 0.7f, null, content);
             this.AllElements.Add(help);
             this.ChoiceList.Add(help);
 
-            options = new HUDString("Options", content);
-            options.Scale = 0.7f;
+            options = new HUDString("Options", null, null, null, 0.7f, null, content);
             this.AllElements.Add(options);
             this.ChoiceList.Add(options);
 
-            quit = new HUDString("Quit", content);
-            quit.Scale = 0.7f;
+            quit = new HUDString("Quit", null, null, null, 0.7f, null, content);
             this.AllElements.Add(quit);
             this.ChoiceList.Add(quit);
 

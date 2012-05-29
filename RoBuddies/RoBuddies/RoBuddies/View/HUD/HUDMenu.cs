@@ -9,17 +9,44 @@ using RoBuddies.View.MenuPages;
 
 namespace RoBuddies.View.HUD
 {
+    /// <summary>
+    /// basis class for HeadUpDisplay Menue
+    /// </summary>
     public class HUDMenu : HUD
     {
+        /// <summary>
+        /// border size of contained menu page 
+        /// </summary>
         protected int MenuPageBorder = 50;
+
+        /// <summary>
+        /// extra border size on top of contained menu page
+        /// </summary>
         protected int MenuPageTopExtraBorder = 15;
+
+        /// <summary>
+        /// color of menu headline
+        /// </summary>
         protected Color HeadLineColor = Color.Orchid;
 
+        /// <summary>
+        /// the active menu page
+        /// </summary>
         protected HUDMenuPage activePage;
 
+        /// <summary>
+        /// history of all previous menu pages to enable a back feature
+        /// </summary>
         protected List<HUDMenuPage> pageHistory;
 
+        /// <summary>
+        /// old keyboard state
+        /// </summary>
         public KeyboardState oldKeyboardState { get; set; }
+
+        /// <summary>
+        /// new keyboard state
+        /// </summary>
         public KeyboardState newKeyboardState { get; set; }
 
         /// <summary>
@@ -32,7 +59,9 @@ namespace RoBuddies.View.HUD
         /// </summary>
         public int PreferedHeight { get; set; }
 
-
+        /// <summary>
+        /// called if viewport resized
+        /// </summary>
         public override void OnViewPortResize()
         {
             if (this.ActivePage != null)
@@ -46,7 +75,9 @@ namespace RoBuddies.View.HUD
             }
         }
 
-
+        /// <summary>
+        /// called if visibility of the HUD is changed
+        /// </summary>
         public override void OnVisibilityChange()
         {
             this.ActivePage = this.DefaultPage;
@@ -71,7 +102,10 @@ namespace RoBuddies.View.HUD
         /// </summary>
         public HUDMenuPage DefaultPage { get; set; }
 
-
+        /// <summary>
+        /// constructor for a new Head Up Display Menu
+        /// </summary>
+        /// <param name="game">the game</param>
         public HUDMenu(RoBuddies game)
             : base(game)
         {
@@ -84,7 +118,10 @@ namespace RoBuddies.View.HUD
         }
 
 
-
+        /// <summary>
+        /// updates all elements
+        /// </summary>
+        /// <param name="gameTime">gametime</param>
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -119,20 +156,19 @@ namespace RoBuddies.View.HUD
             }
         }
 
+        /// <summary>
+        /// draw all elements and background
+        /// </summary>
+        /// <param name="spriteBtach">spritebatch</param>
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+
             if (IsVisible)
             {
-
                 if (this.ActivePage != null)
                 {
-                    //this.Game.GraphicsDevice.Viewport = this.ActivePage.Viewport;
-                    //spriteBatch.Begin();
-
                     this.ActivePage.Draw(spriteBatch);
-
-                    //spriteBatch.End();
                 }
 
             }
