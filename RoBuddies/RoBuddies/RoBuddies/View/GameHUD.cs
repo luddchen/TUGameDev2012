@@ -24,7 +24,7 @@ namespace RoBuddies.View
         public GameHUD(RoBuddies game) : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            this.backgroundColor = new Color(0,0,0,128);
+            this.backgroundColor = new Color(0,0,0,160);
 
             timeElapsed = new HUDString("", this.Game.Content);
             timeElapsed.Scale = 0.5f;

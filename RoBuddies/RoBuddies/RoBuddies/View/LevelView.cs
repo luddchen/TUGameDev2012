@@ -30,11 +30,6 @@ namespace RoBuddies.View
             }
         }
 
-        ///// <summary>
-        ///// scale physic to screen
-        ///// </summary>
-        //public float Scale { get; set; }
-
         /// <summary>
         /// the active camera
         /// </summary>
@@ -48,6 +43,7 @@ namespace RoBuddies.View
 
         public LevelView(RoBuddies game) : base(game)
         {
+            this.backgroundColor = new Color(255,255,255,230);
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             this.Camera = new Camera();
             this.Level = new Level(new Vector2(0, -9.8f));
@@ -55,15 +51,15 @@ namespace RoBuddies.View
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
-                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Circle"); 
+                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001"); 
                     PhysicObject body1 = new PhysicObject(this.Level);
                     body1.Position = new Vector2(11.501f, -2);
                     body1.BodyType = BodyType.Dynamic;
-                    FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
-                    body1.Width = 1;
-                    body1.Height = 1;
-                    body1.Texture = square;
+                    FixtureFactory.AttachRectangle(2, 2, 1, Vector2.Zero, body1);
+                    body1.Width = 2;
+                    body1.Height = 2;
+                    body1.Texture = circle;
                     body1.Color = Color.YellowGreen;
 
                 // body 2
