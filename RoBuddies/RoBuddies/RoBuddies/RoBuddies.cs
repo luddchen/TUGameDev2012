@@ -16,7 +16,7 @@ namespace RoBuddies
     /// <summary>
     /// main class for robot game
     /// </summary>
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class RoBuddies : Microsoft.Xna.Framework.Game
     {
         private const int HUDsize = 30; 
 
@@ -27,7 +27,7 @@ namespace RoBuddies
         Menu Menu;
         HUD HUD;
 
-        public Game1()
+        public RoBuddies()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";

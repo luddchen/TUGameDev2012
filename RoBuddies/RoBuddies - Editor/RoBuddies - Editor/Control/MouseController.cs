@@ -125,7 +125,7 @@ namespace RoBuddies___Editor.Controls
 
         private Vector2 adjustAtGrid(Vector2 pos)
         {
-            return new Vector2((int)pos.X, (int)pos.Y);
+            return new Vector2((int) Math.Round(pos.X), (int) Math.Round(pos.Y));
         }
 
         /// <summary>

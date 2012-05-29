@@ -99,10 +99,10 @@ namespace RoBuddies.View
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddies Game { get; set; }
 
 
-        public Menu(Game1 game)
+        public Menu(RoBuddies game)
         {
             this.Game = game;
             this.Viewport = this.Game.GraphicsDevice.Viewport;

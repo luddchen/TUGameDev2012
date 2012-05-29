@@ -35,10 +35,10 @@ namespace RoBuddies.View
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddies Game { get; set; }
 
 
-        public HUD(Game1 game)
+        public HUD(RoBuddies game)
         {
             this.Game = game;
             this.AllElements = new List<IHUDElement>();

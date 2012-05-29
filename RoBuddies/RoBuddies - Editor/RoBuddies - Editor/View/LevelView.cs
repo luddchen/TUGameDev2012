@@ -9,6 +9,7 @@ using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
 using RoBuddies.View;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies___Editor.View
 {
@@ -34,11 +35,6 @@ namespace RoBuddies___Editor.View
         }
 
         /// <summary>
-        /// scale physic to screen
-        /// </summary>
-        public float Scale { get; set; }
-
-        /// <summary>
         /// the game
         /// </summary>
         public RoBuddiesEditor Game { get; set; }
@@ -59,36 +55,21 @@ namespace RoBuddies___Editor.View
             this.Game = game;
             this.Camera = new Camera();
             this.Viewport = this.Game.GraphicsDevice.Viewport;
-            Scale = 50;
             this.Level = new Level(new Vector2(0, -9.8f));
 
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(2f, -2f);
-                    body1.BodyType = BodyType.Static;
-                    FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
-                    body1.Width = 1;
-                    body1.Height = 1;
-                    body1.Texture = square;
-                    body1.Color = Color.YellowGreen;
+                    Wall wall1 = new Wall(new Vector2(550f, 200f), new Vector2(80f, 80f), Color.YellowGreen, square, this.Level);
 
                 // body 2
-                    PhysicObject body2 = new PhysicObject(this.Level);
-                    body2.Position = new Vector2(10, -8);
-                    body2.BodyType = BodyType.Static;
-                    FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
-                    body2.Width = 3;
-                    body2.Height = 3;
-                    body2.Texture = square;
-                    body2.Color = Color.Tomato;
-
+                    Wall wall2 = new Wall(new Vector2(480f, 380f), new Vector2(100f, 100f), Color.Tomato, square, this.Level);
+                    
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    mainLayer.AllObjects.Add(body1);
-                    mainLayer.AllObjects.Add(body2);
+                    mainLayer.AllObjects.Add(wall1);
+                    mainLayer.AllObjects.Add(wall2);
                     this.Level.AllLayers.Add(mainLayer);
             // end testing code ---------------------------------------------------------------------------------
         }
@@ -115,14 +96,13 @@ namespace RoBuddies___Editor.View
 
             foreach (IBody body in layer.AllObjects)
             {
-                //Console.Out.WriteLine(body.Position);
                 this.Game.SpriteBatch.Draw( body.Texture,
-                                            new Vector2(body.Position.X, -body.Position.Y) * Scale,
+                                            new Vector2(body.Position.X, body.Position.Y),
                                             null,
                                             body.Color,
                                             -body.Rotation,
                                             body.Origin,
-                                            Scale * body.Width / body.Texture.Width,
+                                            body.Width / body.Texture.Width,
                                             body.Effect,
                                             layer.LayerDepth);
             }

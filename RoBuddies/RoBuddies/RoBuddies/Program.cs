@@ -10,7 +10,7 @@ namespace RoBuddies
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (RoBuddies game = new RoBuddies())
             {
                 game.Run();
             }
