@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
+using Microsoft.Xna.Framework;
+
 using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
@@ -10,6 +11,10 @@ namespace RoBuddies.Control.StateMachines
     {
         public HeadStateMachine(IBody body)
             : base(body)
+        {
+        }
+
+        public override void Update(GameTime gameTime)
         {
         }
     }

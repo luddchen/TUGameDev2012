@@ -111,6 +111,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\AnimatedState.cs" />
+    <Compile Include="Control\ExampleState.cs" />
     <Compile Include="Control\RobotStates\ClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />
     <Compile Include="Control\RobotStates\FallingState.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Control\RobotStates\SeperateState.cs" />
     <Compile Include="Control\RobotStates\WaitingState.cs" />
     <Compile Include="Control\State.cs" />
+    <Compile Include="Control\StateMachines\ExampleStateMachine.cs" />
     <Compile Include="Control\StateMachines\HeadStateMachine.cs" />
     <Compile Include="Control\StateMachines\LowerPartStateMachine.cs" />
     <Compile Include="Control\StateMachines\PartsCombinedStateMachine.cs" />

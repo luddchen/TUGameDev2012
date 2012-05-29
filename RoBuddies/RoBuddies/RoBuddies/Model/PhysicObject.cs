@@ -60,7 +60,7 @@ namespace RoBuddies.Model
             set;
         }
 
-        public Vector2 Origin
+        public virtual Vector2 Origin
         {
             get;
             set;

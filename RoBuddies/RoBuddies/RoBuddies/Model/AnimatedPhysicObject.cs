@@ -31,6 +31,12 @@ namespace RoBuddies.Model
             }
         }
 
+        public override Vector2 Origin
+        {
+            get { return new Vector2(Texture.Width / 2, Texture.Height / 2);  }
+            set { }
+        }
+
 
         public AnimatedPhysicObject(World world) : base(world) { }
 

@@ -10,6 +10,8 @@ using FarseerPhysics.Factories;
 using RoBuddies.Model;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
+using RoBuddies.Control;
+using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.View
 {
@@ -53,6 +55,7 @@ namespace RoBuddies.View
 
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Circle"); 
                     PhysicObject body1 = new PhysicObject(this.Level);
                     body1.Position = new Vector2(11.501f, -2);
                     body1.BodyType = BodyType.Dynamic;
@@ -63,15 +66,22 @@ namespace RoBuddies.View
                     body1.Color = Color.YellowGreen;
 
                 // body 2
-                    PhysicObject body2 = new PhysicObject(this.Level);
+                    AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
                     body2.Position = new Vector2(10, -8);
                     body2.BodyType = BodyType.Static;
                     FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
                     body2.Width = 3;
                     body2.Height = 3;
-                    body2.Texture = square;
-                    body2.Color = Color.Tomato;
 
+                    StateMachine stateMachine = new ExampleStateMachine(body2);
+                    State example1 = new ExampleState("ExampleState1", square, stateMachine);
+                    stateMachine.AllStates.Add(example1);
+                    State example2 = new ExampleState("ExampleState2", circle, stateMachine);
+                    stateMachine.AllStates.Add(example2);
+                    stateMachine.SwitchToState("ExampleState1");
+
+                    body2.Color = Color.Tomato;
+                    body2.StateMachine = stateMachine;
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     mainLayer.AllObjects.Add(body1);
