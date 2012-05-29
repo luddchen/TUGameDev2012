@@ -14,11 +14,12 @@ namespace RoBuddies.View
     {
         private Viewport viewport;
         private float zoom;
+        private Vector2 position;
 
-        /// <summary>
-        /// global position
-        /// </summary>
-        public Vector2 Position { get; set; }
+        public Vector2 Position
+        {
+            get { return this.position; }
+        }
 
         /// <summary>
         /// origin on screen
@@ -60,7 +61,7 @@ namespace RoBuddies.View
         /// </summary>
         public Camera()
         {
-            this.Position = Vector2.Zero;
+            this.position = Vector2.Zero;
             this.Zoom = 1.0f;
             this.Rotation = 0.0f;
         }
@@ -95,7 +96,7 @@ namespace RoBuddies.View
         {
             // need here something for smooth camera movement
             // replace following code
-            this.Position = to;
+            this.position = to;
         }
 
         /// <summary>
