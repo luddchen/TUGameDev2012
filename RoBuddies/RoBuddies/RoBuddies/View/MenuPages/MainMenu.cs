@@ -7,36 +7,34 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.MenuPages
 {
-    class MainMenu : MenuPage
+    class MainMenu : HUDMenuPage
     {
         private HUDString game;
         private HUDString help;  
         private HUDString options; 
         private HUDString quit;
 
-        public MenuPage quitPage { get; set; }
-        public MenuPage optionPage { get; set; }
-        public MenuPage helpPage { get; set; }
+        public HUDMenuPage quitPage { get; set; }
+        public HUDMenuPage optionPage { get; set; }
+        public HUDMenuPage helpPage { get; set; }
 
-        public override Viewport Viewport
+        public override void OnViewPortResize()
         {
-            get { return this.viewPort; }
-            set 
-            {
-                this.viewPort = value;
-                game.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f);
-                help.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.4f);
-                options.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f);
-                quit.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f);
-            }
+            if (game != null) { game.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
+            if (help != null) { help.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.4f); }
+            if (options != null) { options.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
+            if (quit != null) { quit.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
         }
 
-        public MainMenu(Menu menu, ContentManager content)
+        public MainMenu(GameMenu menu, ContentManager content)
             : base(menu, content)
         {
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+
             game = new HUDString("Game", content);
             game.Scale = 0.7f;
             this.AllElements.Add(game);

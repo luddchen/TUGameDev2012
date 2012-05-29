@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.MenuPages
 {
-    class HelpMenu : MenuPage
+    class HelpMenu : HUDMenuPage
     {
         private HUDString help;
 
@@ -51,22 +52,18 @@ namespace RoBuddies.View.MenuPages
                                 + "\n";
                               
 
-        public MenuPage quitPage { get; set; }
-        public MenuPage optionPage { get; set; }
+        public HUDMenuPage quitPage { get; set; }
+        public HUDMenuPage optionPage { get; set; }
 
-        public override Viewport Viewport
+        public override void OnViewPortResize()
         {
-            get { return this.viewPort; }
-            set
-            {
-                this.viewPort = value;
-                help.Position = new Vector2(this.Viewport.Width / 2, help.Height / 2);
-            }
+            if (help != null) { help.Position = new Vector2(this.Viewport.Width / 2, help.Height / 2); }
         }
 
-        public HelpMenu(Menu menu, ContentManager content)
+        public HelpMenu(GameMenu menu, ContentManager content)
             : base(menu, content)
         {
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
             help = new HUDString(helpText, content);
             help.Scale = 0.5f;
             this.AllElements.Add(help);

@@ -7,21 +7,21 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
-namespace RoBuddies.View.MenuPages
+namespace RoBuddies.View.HUD
 {
-    public class MenuPage
+    public class HUDMenuPage : HUD
     {
         private float activeScale;
         private float animationValue;
 
-        protected Viewport viewPort;
+        //protected Viewport viewPort;
         protected IHUDElement activeElement;
 
-        public List<IHUDElement> AllElements { get; set; }
-        public List<IHUDElement> ChoiceList { get; set; }
+        protected List<IHUDElement> ChoiceList { get; set; }
 
-        public Menu Menu { get; set; }
+        public GameMenu Menu { get; set; }
 
         public IHUDElement ActiveElement
         {
@@ -38,21 +38,16 @@ namespace RoBuddies.View.MenuPages
             }
         }
 
-        public virtual Viewport Viewport 
+        public HUDMenuPage(GameMenu menu, ContentManager content) : base(menu.Game)
         {
-            get { return this.viewPort; }
-            set { this.viewPort = value; }
-        }
-
-        public MenuPage(Menu menu, ContentManager content)
-        {
-            this.AllElements = new List<IHUDElement>();
+            this.backgroundColor = new Color(0,0,0,20);
             this.ChoiceList = new List<IHUDElement>();
             this.Menu = menu;
         }
 
-        public virtual void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
 
             if (this.activeElement != null)
             {
@@ -60,12 +55,6 @@ namespace RoBuddies.View.MenuPages
                 this.animationValue += (float)(gameTime.ElapsedGameTime.Milliseconds * MathHelper.TwoPi / 700);
                 if (this.animationValue > MathHelper.TwoPi) { this.animationValue = 0.0f; }
             }
-
-            foreach (IHUDElement element in this.AllElements)
-            {
-                element.Update(gameTime);
-            }
-
 
             if (this.ChoiceList.Count > 0)   // at least one element
             {
@@ -99,10 +88,7 @@ namespace RoBuddies.View.MenuPages
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            foreach (IHUDElement element in this.AllElements)
-            {
-                element.Draw(spriteBatch);
-            }
+            base.Draw(spriteBatch);
         }
     }
 }

@@ -8,26 +8,21 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {
-    public class LevelView
+    public class LevelView : HUD.HUD
     {
         /// <summary>
         /// space between levelbottom and screen bottom
         /// </summary>
         private const float bottomBorder = 30;
-        private Viewport viewport;
 
-        /// <summary>
-        /// viewport for this gamecomponent
-        /// </summary>
-        public Viewport Viewport 
+        public override void OnViewPortResize()
         {
-            get { return viewport; }
-            set
+            if (this.Camera != null)
             {
-                this.viewport = value;
                 this.Camera.Viewport = this.viewport;
             }
         }
@@ -36,11 +31,6 @@ namespace RoBuddies.View
         /// scale physic to screen
         /// </summary>
         public float Scale { get; set; }
-
-        /// <summary>
-        /// the game
-        /// </summary>
-        public Game1 Game { get; set; }
 
         /// <summary>
         /// the active camera
@@ -53,11 +43,9 @@ namespace RoBuddies.View
         public Level Level { get; set; }
 
 
-        public LevelView(Game1 game)
+        public LevelView(Game1 game) : base(game)
         {
-            this.Game = game;
             this.Camera = new Camera();
-            this.Viewport = this.Game.GraphicsDevice.Viewport;
             Scale = 50;
             this.Level = new Level(new Vector2(0, -9.8f));
 
@@ -97,8 +85,9 @@ namespace RoBuddies.View
         /// update content
         /// </summary>
         /// <param name="gameTime">gametime</param>
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             this.Level.Update(gameTime);
         }
 
@@ -106,7 +95,8 @@ namespace RoBuddies.View
         /// draw a specified layer
         /// </summary>
         /// <param name="layer">layer to draw</param>
-        public void Draw(Layer layer) {
+        /// <param name="spriteBtach">spritebatch</param>
+        public void Draw(Layer layer, SpriteBatch spriteBatch) {
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
 
@@ -131,13 +121,15 @@ namespace RoBuddies.View
         /// <summary>
         /// draw all layers
         /// </summary>
-        public void Draw()
+        /// <param name="spriteBtach">spritebatch</param>
+        public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
             foreach (Layer layer in this.Level.AllLayers)
             {
                 // todo : order layer (layerDepth)
 
-                Draw(layer);
+                Draw(layer, spriteBatch); 
             }
         }
     }
