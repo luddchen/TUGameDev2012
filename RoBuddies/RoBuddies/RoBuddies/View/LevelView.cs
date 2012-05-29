@@ -9,6 +9,7 @@ using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
 using RoBuddies.View.HUD;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
@@ -27,10 +28,10 @@ namespace RoBuddies.View
             }
         }
 
-        /// <summary>
-        /// scale physic to screen
-        /// </summary>
-        public float Scale { get; set; }
+        ///// <summary>
+        ///// scale physic to screen
+        ///// </summary>
+        //public float Scale { get; set; }
 
         /// <summary>
         /// the active camera
@@ -46,7 +47,6 @@ namespace RoBuddies.View
         public LevelView(RoBuddies game) : base(game)
         {
             this.Camera = new Camera();
-            Scale = 50;
             this.Level = new Level(new Vector2(0, -9.8f));
 
             //  some testing code here --------------------------------------------------------------------------
@@ -54,7 +54,7 @@ namespace RoBuddies.View
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(11.5005f, 2);
+                    body1.Position = new Vector2(11.501f, -2);
                     body1.BodyType = BodyType.Dynamic;
                     FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
                     body1.Width = 1;
@@ -105,12 +105,12 @@ namespace RoBuddies.View
             foreach (IBody body in layer.AllObjects)
             {
                 this.Game.SpriteBatch.Draw( body.Texture,
-                                            new Vector2(body.Position.X, -body.Position.Y) * Scale,
+                                            body.Position,
                                             null,
                                             body.Color,
                                             -body.Rotation,
                                             body.Origin,
-                                            Scale * body.Width / body.Texture.Width,
+                                            ConvertUnits.ToDisplayUnits( body.Width / body.Texture.Width ),
                                             body.Effect,
                                             layer.LayerDepth);
             }

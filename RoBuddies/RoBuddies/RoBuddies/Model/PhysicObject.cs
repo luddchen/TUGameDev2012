@@ -80,8 +80,8 @@ namespace RoBuddies.Model
 
         public new Vector2 Position
         {
-            get { Console.Out.WriteLine(ConvertUnits.ToDisplayUnits(base.Position)); return ConvertUnits.ToDisplayUnits(base.Position); }
-            set { Console.Out.WriteLine(ConvertUnits.ToSimUnits(base.Position)); base.Position = ConvertUnits.ToSimUnits(value); }
+            get { Console.Out.WriteLine(ConvertUnits.ToDisplayUnits(base.Position)); return ConvertUnits.ToDisplayUnits(base.Position); } // i think that is no good way to convert positions within a model
+            set { Console.Out.WriteLine(ConvertUnits.ToSimUnits(base.Position)); base.Position = ConvertUnits.ToSimUnits(value); }        // in special dynamic bodys actualy got other values than static, please convert where it is used 
         }
 
         public PhysicObject(World world)
