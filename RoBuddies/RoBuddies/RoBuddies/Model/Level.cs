@@ -24,7 +24,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// list of all layers in this level
         /// </summary>
-        public List<Layer> AllLayers { get; set; } // here some better solution -> private vs public -> need in LevelView an Iterator over this list
+        public List<Layer> AllLayers { get; set; }
 
 
         /// <summary>
@@ -36,6 +36,25 @@ namespace RoBuddies.Model
         {
             this.AllLayers = new List<Layer>();
             this.Background = Color.DeepSkyBlue;
+        }
+
+        /// <summary>
+        /// get an layer by name
+        /// </summary>
+        /// <param name="layerName">the name of layer you look for</param>
+        /// <returns>a layer with the given name , null if unknown in this level</returns>
+        public Layer GetLayerByName(String layerName) 
+        {
+            Layer layer = null;
+            foreach (Layer l in AllLayers)
+            {
+                if (l.Name == layerName)
+                {
+                    layer = l;
+                    break;
+                }
+            }
+            return layer;
         }
 
         /// <summary>
