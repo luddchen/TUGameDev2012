@@ -78,11 +78,11 @@ namespace RoBuddies.Model
             set;
         }
 
-        public new Vector2 Position
-        {
-            get { return ConvertUnits.ToDisplayUnits(base.Position); } // i think that is no good way to convert positions within a model
-            set { base.Position = ConvertUnits.ToSimUnits(value); }  // in special dynamic bodys actualy got other values than static, please convert where it is used 
-        }
+        //public new Vector2 Position
+        //{
+        //    get { return ConvertUnits.ToDisplayUnits(base.Position); } // i think that is no good way to convert positions within a model
+        //    set { base.Position = ConvertUnits.ToSimUnits(value); }  // in special dynamic bodys actualy got other values than static, please convert where it is used 
+        //}
 
         public PhysicObject(World world)
             : base(world)

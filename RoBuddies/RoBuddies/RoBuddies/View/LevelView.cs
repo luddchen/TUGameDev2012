@@ -105,7 +105,7 @@ namespace RoBuddies.View
             foreach (IBody body in layer.AllObjects)
             {
                 this.Game.SpriteBatch.Draw( body.Texture,
-                                            body.Position,
+                                            ConvertUnits.ToDisplayUnits(body.Position),     // here i have to know what coordinates i get -> dont want to filter here what type of body that is
                                             null,
                                             body.Color,
                                             -body.Rotation,
