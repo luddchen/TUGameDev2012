@@ -26,7 +26,7 @@ namespace RoBuddies.View
             }
         }
 
-        public GameMenu(Game1 game) : base(game)
+        public GameMenu(RoBuddies game) : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//Menu_Background");
 

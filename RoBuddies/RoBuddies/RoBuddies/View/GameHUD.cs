@@ -21,7 +21,7 @@ namespace RoBuddies.View
             }
         }
 
-        public GameHUD(Game1 game) : base(game)
+        public GameHUD(RoBuddies game) : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
             this.backgroundColor = new Color(0,0,0,128);

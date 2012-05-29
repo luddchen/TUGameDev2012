@@ -69,7 +69,7 @@ namespace RoBuddies.View.HUD
         public HUDMenuPage DefaultPage { get; set; }
 
 
-        public HUDMenu(Game1 game)
+        public HUDMenu(RoBuddies game)
             : base(game)
         {
             this.backgroundColor = Color.Black;

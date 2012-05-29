@@ -49,13 +49,13 @@ namespace RoBuddies.View.HUD
         /// <summary>
         /// the game
         /// </summary>
-        public Game1 Game { get; set; }
+        public RoBuddies Game { get; set; }
 
         /// <summary>
         /// HUD constructor
         /// </summary>
         /// <param name="game"></param>
-        public HUD(Game1 game)
+        public HUD(RoBuddies game)
         {
             this.Game = game;
             this.Viewport = this.Game.GraphicsDevice.Viewport; // only for initialization, will be overwriten later by game

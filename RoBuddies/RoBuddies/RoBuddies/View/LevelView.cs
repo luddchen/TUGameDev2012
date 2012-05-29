@@ -43,7 +43,7 @@ namespace RoBuddies.View
         public Level Level { get; set; }
 
 
-        public LevelView(Game1 game) : base(game)
+        public LevelView(RoBuddies game) : base(game)
         {
             this.Camera = new Camera();
             Scale = 50;
