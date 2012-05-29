@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
+using FarseerPhysics.Dynamics;
 
 namespace RoBuddies.Model.Serializer
 {
@@ -11,7 +12,7 @@ namespace RoBuddies.Model.Serializer
 
         private String fullNameOfClass;
 
-        public Converter( String fullNameOfClass)
+        public Converter(String fullNameOfClass)
         {
             this.fullNameOfClass = fullNameOfClass;
         }

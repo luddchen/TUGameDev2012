@@ -37,15 +37,15 @@ namespace RoBuddies___Editor.Serializer
         /// <param name="filename">the name of the file</param>
         public void writeLevel(String path, String filename) 
         {
-            StreamWriter sw = new StreamWriter(@".\\SerializationTest.txt", false);
+            StreamWriter sw = new StreamWriter(@".\\SerializationTest.json", false);
             JsonWriter writer = new JsonTextWriter(sw);
             JsonSerializer serializer = new JsonSerializer();
-            serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             serializer.Converters.Add(new LevelConverter());
             serializer.Converters.Add(new LayerConverter());
             serializer.Converters.Add(new WallConverter());
             serializer.Serialize(writer, this.level);
             writer.Flush();
+            writer.Close();
         }
     }
 }

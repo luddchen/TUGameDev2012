@@ -20,8 +20,8 @@ namespace RoBuddies___Editor.Controls
     {
         private RoBuddiesEditor game;
         private Camera camera;
-        private Level level;
         private Mouse mouse;
+        public Level level { get; set; }
 
         /// <summary>
         /// the joint for moving the objects in the editor
