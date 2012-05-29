@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework.Media;
 using RoBuddies___Editor.View;
 using RoBuddies___Editor.Controls;
 using RoBuddies___Editor.Serializer;
+using RoBuddies.Model.Serializer;
+using RoBuddies.Model;
 
 namespace RoBuddies___Editor
 {
@@ -135,6 +137,12 @@ namespace RoBuddies___Editor
             if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
             {
                 if (Keyboard.GetState().IsKeyDown(Keys.S)) { (new LevelWriter(LevelView.Level)).writeLevel("", ""); }
+                if (Keyboard.GetState().IsKeyDown(Keys.L)) 
+                {
+                    Level loadedLevel = (new LevelReader(Content)).readLevel("", "");
+                    this.mouseController.level = loadedLevel;
+                    this.LevelView.Level = loadedLevel;
+                }
             }
 
         }
