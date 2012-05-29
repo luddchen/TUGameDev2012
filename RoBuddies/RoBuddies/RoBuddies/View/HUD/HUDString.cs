@@ -100,17 +100,10 @@ namespace RoBuddies.View.HUD
             if (font == null) { this.font = content.Load<SpriteFont>("Fonts\\Linds"); }
             if (font != null) { this.font = font; }
 
-            if (position == null) { this.Position = Vector2.Zero; }
-            if (position != null) { this.Position = (Vector2)position; }
-
-            if (color == null) { this.Color = Color.Beige; }
-            if (color != null) { this.Color = (Color)color; }
-
-            if (scale == null) { this.Scale = 1.0f; }
-            if (scale != null) { this.Scale = (float)scale; }
-
-            if (rotation == null) { this.Rotation = 0.0f; }
-            if (rotation != null) { this.Rotation = (float)rotation; }
+            this.Position = position ?? Vector2.Zero;
+            this.Color = color ?? Color.Beige;
+            this.Scale = scale ?? 1.0f;
+            this.Rotation = rotation ?? 0.0f;
         }
 
         /// <summary>

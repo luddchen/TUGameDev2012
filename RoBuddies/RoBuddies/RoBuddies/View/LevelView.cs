@@ -48,6 +48,7 @@ namespace RoBuddies.View
 
         public LevelView(RoBuddies game) : base(game)
         {
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             this.Camera = new Camera();
             this.Level = new Level(new Vector2(0, -9.8f));
 
