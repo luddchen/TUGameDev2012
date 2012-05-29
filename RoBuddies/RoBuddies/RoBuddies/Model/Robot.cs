@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model
 {
@@ -28,7 +29,8 @@ namespace RoBuddies.Model
         }
 
         private void initRobot(ContentManager content, Vector2 pos) 
-        { 
+        {
+            Texture2D textureLowerPart = content.Load<Texture2D>("Sprite//Robot//Bud//0001");
         }
 
         public IBody LowerPart 
