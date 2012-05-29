@@ -7,10 +7,11 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.MenuPages
 {
-    class OptionMenu : MenuPage
+    class OptionMenu : HUDMenuPage
     {
         private HUDString sound;
         private HUDString soundValue;
@@ -18,24 +19,21 @@ namespace RoBuddies.View.MenuPages
         private HUDString music;
         private HUDString musicValue;
 
-        public MenuPage quitPage { get; set; }
+        public HUDMenuPage quitPage { get; set; }
 
-        public override Viewport Viewport
+        public override void OnViewPortResize()
         {
-            get { return this.viewPort; }
-            set
-            {
-                this.viewPort = value;
-                sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f);
-                soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f);
-                music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f);
-                musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f);
-            }
+            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
+            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
+            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
+            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
         }
 
-        public OptionMenu(Menu menu, ContentManager content)
+        public OptionMenu(GameMenu menu, ContentManager content)
             : base(menu, content)
         {
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+
             sound = new HUDString("Sound", content);
             sound.Scale = 0.7f;
             this.AllElements.Add(sound);

@@ -7,30 +7,28 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.MenuPages
 {
-    class QuitMenu : MenuPage
+    class QuitMenu : HUDMenuPage
     {
         private HUDString question; 
         private HUDString yes;
         private HUDString no;
 
-        public override Viewport Viewport
+        public override void OnViewPortResize()
         {
-            get { return this.viewPort; }
-            set
-            {
-                this.viewPort = value;
-                question.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.3f);
-                yes.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f);
-                no.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f);
-            }
+            if (question != null) { question.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.3f); }
+            if (yes != null) { yes.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
+            if (no != null) { no.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
         }
 
-        public QuitMenu(Menu menu, ContentManager content)
+        public QuitMenu(GameMenu menu, ContentManager content)
             : base(menu, content)
         {
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+
             question = new HUDString("realy quit ?", content);
             question.Scale = 0.7f;
             this.AllElements.Add(question);

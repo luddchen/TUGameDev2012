@@ -24,8 +24,8 @@ namespace RoBuddies
         public SpriteBatch SpriteBatch {get; set; } // need that somehow in LevelView, Menu and HUD
 
         LevelView LevelView;
-        Menu Menu;
-        HUD HUD;
+        GameMenu Menu;
+        GameHUD HUD;
 
         public RoBuddies()
         {
@@ -86,8 +86,8 @@ namespace RoBuddies
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
-            Menu = new Menu(this);
-            HUD = new HUD(this);
+            Menu = new GameMenu(this);
+            HUD = new GameHUD(this);
 
             Window_ClientSizeChanged(null, null);
         }
@@ -132,9 +132,9 @@ namespace RoBuddies
         {
             GraphicsDevice.Clear(this.LevelView.Level.Background);
 
-            LevelView.Draw();
-            Menu.Draw(gameTime);
-            HUD.Draw(gameTime);
+            LevelView.Draw(SpriteBatch);
+            Menu.Draw(SpriteBatch);
+            HUD.Draw(SpriteBatch);
         }
     }
 }

@@ -8,40 +8,30 @@ using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 
 using RoBuddies.Model;
-using RoBuddies.Model.Objects;
+using RoBuddies.View.HUD;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
-    public class LevelView
+    public class LevelView : HUD.HUD
     {
         /// <summary>
         /// space between levelbottom and screen bottom
         /// </summary>
         private const float bottomBorder = 30;
-        private Viewport viewport;
 
-        /// <summary>
-        /// viewport for this gamecomponent
-        /// </summary>
-        public Viewport Viewport 
+        public override void OnViewPortResize()
         {
-            get { return viewport; }
-            set
+            if (this.Camera != null)
             {
-                this.viewport = value;
                 this.Camera.Viewport = this.viewport;
             }
         }
 
-        /// <summary>
-        /// scale physic to screen
-        /// </summary>
-        public float Scale { get; set; } // <--- please use ConvertUnits Utility instead (thomas)
-
-        /// <summary>
-        /// the game
-        /// </summary>
-        public RoBuddies Game { get; set; }
+        ///// <summary>
+        ///// scale physic to screen
+        ///// </summary>
+        //public float Scale { get; set; }
 
         /// <summary>
         /// the active camera
@@ -54,28 +44,38 @@ namespace RoBuddies.View
         public Level Level { get; set; }
 
 
-        public LevelView(RoBuddies game)
+        public LevelView(RoBuddies game) : base(game)
         {
-            this.Game = game;
             this.Camera = new Camera();
-            this.Viewport = this.Game.GraphicsDevice.Viewport;
-            Scale = 1;
             this.Level = new Level(new Vector2(0, -9.8f));
 
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    Wall wall1 = new Wall(new Vector2(550f, 200f), new Vector2(80f, 80f), Color.YellowGreen, square, this.Level);
-                    wall1.BodyType = BodyType.Dynamic;
+                    PhysicObject body1 = new PhysicObject(this.Level);
+                    body1.Position = new Vector2(11.501f, -2);
+                    body1.BodyType = BodyType.Dynamic;
+                    FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, body1);
+                    body1.Width = 1;
+                    body1.Height = 1;
+                    body1.Texture = square;
+                    body1.Color = Color.YellowGreen;
 
                 // body 2
-                    Wall wall2 = new Wall(new Vector2(480f, 380f), new Vector2(100f, 100f), Color.Tomato, square, this.Level);
-                    
+                    PhysicObject body2 = new PhysicObject(this.Level);
+                    body2.Position = new Vector2(10, -8);
+                    body2.BodyType = BodyType.Static;
+                    FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
+                    body2.Width = 3;
+                    body2.Height = 3;
+                    body2.Texture = square;
+                    body2.Color = Color.Tomato;
+
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    mainLayer.AllObjects.Add(wall1);
-                    mainLayer.AllObjects.Add(wall2);
+                    mainLayer.AllObjects.Add(body1);
+                    mainLayer.AllObjects.Add(body2);
                     this.Level.AllLayers.Add(mainLayer);
             // end testing code ---------------------------------------------------------------------------------
         }
@@ -85,8 +85,9 @@ namespace RoBuddies.View
         /// update content
         /// </summary>
         /// <param name="gameTime">gametime</param>
-        public void Update(GameTime gameTime)
+        public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
             this.Level.Update(gameTime);
         }
 
@@ -94,7 +95,8 @@ namespace RoBuddies.View
         /// draw a specified layer
         /// </summary>
         /// <param name="layer">layer to draw</param>
-        public void Draw(Layer layer) {
+        /// <param name="spriteBtach">spritebatch</param>
+        public void Draw(Layer layer, SpriteBatch spriteBatch) {
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
 
@@ -103,12 +105,12 @@ namespace RoBuddies.View
             foreach (IBody body in layer.AllObjects)
             {
                 this.Game.SpriteBatch.Draw( body.Texture,
-                                            new Vector2(body.Position.X, body.Position.Y) * Scale,
+                                            body.Position,
                                             null,
                                             body.Color,
                                             -body.Rotation,
                                             body.Origin,
-                                            Scale * body.Width / body.Texture.Width,
+                                            ConvertUnits.ToDisplayUnits( body.Width / body.Texture.Width ),
                                             body.Effect,
                                             layer.LayerDepth);
             }
@@ -119,13 +121,15 @@ namespace RoBuddies.View
         /// <summary>
         /// draw all layers
         /// </summary>
-        public void Draw()
+        /// <param name="spriteBtach">spritebatch</param>
+        public override void Draw(SpriteBatch spriteBatch)
         {
+            base.Draw(spriteBatch);
             foreach (Layer layer in this.Level.AllLayers)
             {
                 // todo : order layer (layerDepth)
 
-                Draw(layer);
+                Draw(layer, spriteBatch); 
             }
         }
     }

@@ -149,15 +149,17 @@
     <Compile Include="RoBuddies.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
     <Compile Include="View\Camera.cs" />
-    <Compile Include="View\HUD.cs" />
-    <Compile Include="View\HUDString.cs" />
-    <Compile Include="View\HUDTexture.cs" />
-    <Compile Include="View\IHUDElement.cs" />
+    <Compile Include="View\GameHUD.cs" />
+    <Compile Include="View\HUD\HUD.cs" />
+    <Compile Include="View\HUD\HUDMenu.cs" />
+    <Compile Include="View\HUD\HUDString.cs" />
+    <Compile Include="View\HUD\HUDTexture.cs" />
+    <Compile Include="View\HUD\IHUDElement.cs" />
     <Compile Include="View\LevelView.cs" />
-    <Compile Include="View\Menu.cs" />
+    <Compile Include="View\GameMenu.cs" />
     <Compile Include="View\MenuPages\HelpMenu.cs" />
     <Compile Include="View\MenuPages\MainMenu.cs" />
-    <Compile Include="View\MenuPages\MenuPage.cs" />
+    <Compile Include="View\HUD\HUDMenuPage.cs" />
     <Compile Include="View\MenuPages\OptionMenu.cs" />
     <Compile Include="View\MenuPages\QuitMenu.cs" />
   </ItemGroup>
