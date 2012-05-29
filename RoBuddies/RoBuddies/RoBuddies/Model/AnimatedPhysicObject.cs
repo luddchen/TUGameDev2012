@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 using FarseerPhysics.Dynamics;
 
@@ -18,12 +19,24 @@ namespace RoBuddies.Model
     {
         public StateMachine StateMachine { get; set; }
 
+        public override Texture2D Texture
+        {
+            get
+            {
+                return StateMachine.CurrentState.Texture;   // get the texture of current state
+            }
+            set
+            {
+                // all textures have to set within the states 
+            }
+        }
+
 
         public AnimatedPhysicObject(World world) : base(world) { }
 
         public override void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            StateMachine.Update(gameTime);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Microsoft.Xna.Framework;
+
 using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
@@ -53,6 +55,10 @@ namespace RoBuddies.Control.StateMachines
                     break;
                 }
             }
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
         }
 
     }

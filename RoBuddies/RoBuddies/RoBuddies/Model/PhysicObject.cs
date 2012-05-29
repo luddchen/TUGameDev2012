@@ -30,7 +30,7 @@ namespace RoBuddies.Model
             set;
         }
 
-        public Texture2D Texture
+        public virtual Texture2D Texture
         {
             get
             {
@@ -94,8 +94,7 @@ namespace RoBuddies.Model
 
         public virtual void Update(GameTime gameTime)
         {
-            //throw new NotImplementedException();
-            //Console.Out.WriteLine("PhysicObject.Position = ("+Position.X + " , " + Position.Y+")");
+            // no need to update here anything i think !?
         }
     }
 }

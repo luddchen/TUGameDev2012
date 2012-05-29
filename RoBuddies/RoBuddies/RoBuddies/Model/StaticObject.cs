@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model
 {
@@ -11,7 +12,7 @@ namespace RoBuddies.Model
     /// </summary>
     public class StaticObject : IBody
     {
-
+        private Texture2D texture;
 
         public bool IsVisible
         {
@@ -31,16 +32,23 @@ namespace RoBuddies.Model
             set;
         }
 
-        public Microsoft.Xna.Framework.Graphics.SpriteEffects Effect
+        public SpriteEffects Effect
         {
             get;
             set;
         }
 
-        public Microsoft.Xna.Framework.Graphics.Texture2D Texture
+        public virtual Texture2D Texture
         {
-            get;
-            set;
+            get
+            {
+                return texture;
+            }
+            set
+            {
+                texture = value;
+                Origin = new Vector2(texture.Width / 2, texture.Height / 2);
+            }
         }
 
         public float Width
@@ -81,7 +89,7 @@ namespace RoBuddies.Model
 
         public virtual void Update(GameTime gameTime)
         {
-            throw new NotImplementedException();
+            // no need to update here anything i think !?
         }
 
     }
