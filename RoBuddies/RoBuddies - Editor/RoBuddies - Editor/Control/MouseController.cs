@@ -9,6 +9,7 @@ using RoBuddies.Model;
 using RoBuddies.Utilities;
 using FarseerPhysics.Dynamics;
 using RoBuddies.View;
+using FarseerPhysics.Dynamics.Joints;
 
 namespace RoBuddies___Editor.Controls
 {
@@ -21,6 +22,25 @@ namespace RoBuddies___Editor.Controls
         private Camera camera;
         private Level level;
         private Mouse mouse;
+
+        /// <summary>
+        /// the joint for moving the objects in the editor
+        /// </summary>
+        private FixedMouseJoint fixedMouseJoint;
+        /// <summary>
+        /// the current body, which was clicked
+        /// </summary>
+        Body clickedBody;
+
+        private Vector2 CursorSimPos
+        {
+            get { return ConvertUnits.ToSimUnits(this.camera.screenToWorld(mouse.Position, new Vector2(1, 1))); }
+        }
+
+        private bool isMovingObject
+        {
+            get { return fixedMouseJoint != null; }
+        }
 
         /// <summary>
         /// creates a new MouseController
@@ -51,18 +71,36 @@ namespace RoBuddies___Editor.Controls
 
         private void updateMouseButtons()
         {
-            Vector2 globalMousePos = this.camera.screenToWorld(mouse.Position, new Vector2(1, 1));
             if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
             {
-                Console.Out.WriteLine("Sim Units" + ConvertUnits.ToSimUnits(globalMousePos));
-                Fixture savedFixture = this.level.TestPoint(ConvertUnits.ToSimUnits(globalMousePos));
-                if (savedFixture != null)
+                if (!isMovingObject)
                 {
-                    Console.Out.WriteLine("jap");
+                    Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
+                    Fixture savedFixture = this.level.TestPoint(this.CursorSimPos);
+                    if (savedFixture != null)
+                    {
+                        Console.Out.WriteLine("jap");
+                        clickedBody = savedFixture.Body;
+                        clickedBody.BodyType = BodyType.Dynamic;
+                        clickedBody.CollidesWith = Category.None;
+                        clickedBody.FixedRotation = true;
+                        fixedMouseJoint = new FixedMouseJoint(clickedBody, this.CursorSimPos);
+                        fixedMouseJoint.MaxForce = 1000.0f * clickedBody.Mass;
+                        this.level.AddJoint(fixedMouseJoint);
+                    }
+                    else // no object behind cursor position
+                    {
+                        Console.Out.WriteLine("neee");
+                    }
                 }
-                else
+                else // drop current object
                 {
-                    Console.Out.WriteLine("neee");
+                    clickedBody.BodyType = BodyType.Static;
+                    clickedBody.CollidesWith = Category.All;
+                    clickedBody.Position = adjustAtGrid(clickedBody.Position);
+                    this.level.RemoveJoint(fixedMouseJoint);
+                    clickedBody = null;
+                    fixedMouseJoint = null;
                 }
             }
         }
@@ -78,6 +116,16 @@ namespace RoBuddies___Editor.Controls
                 MathHelper.Clamp(this.mouse.Position.Y, 0f, game.GraphicsDevice.Viewport.Height)
                 );
             this.mouse.Position = mousePosition;
+
+            if (fixedMouseJoint != null)
+            {
+                fixedMouseJoint.WorldAnchorB = this.CursorSimPos;
+            }
+        }
+
+        private Vector2 adjustAtGrid(Vector2 pos)
+        {
+            return new Vector2((int)pos.X, (int)pos.Y);
         }
 
         /// <summary>
