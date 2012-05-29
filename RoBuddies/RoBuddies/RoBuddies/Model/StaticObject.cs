@@ -9,140 +9,74 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing objects without physical behavior
     /// </summary>
-    class StaticObject : IBody
+    public class StaticObject : IBody
     {
 
 
         public bool IsVisible
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Vector2 Position
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public float Rotation
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Microsoft.Xna.Framework.Graphics.SpriteEffects Effect
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Microsoft.Xna.Framework.Graphics.Texture2D Texture
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public float Width
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public float Height
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Color Color
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Vector2 Origin
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Layer Layer
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public Level World
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get;
+            set;
         }
 
         public virtual void Update(GameTime gameTime)

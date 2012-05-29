@@ -16,8 +16,8 @@
     <XnaProfile>HiDef</XnaProfile>
     <XnaCrossPlatformGroupID>ad26ce40-5606-4480-8545-99bb6a762fb6</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
-    <ApplicationIcon>Game.ico</ApplicationIcon>
-    <Thumbnail>GameThumbnail.png</Thumbnail>
+    <ApplicationIcon>RoBuddies.ico</ApplicationIcon>
+    <Thumbnail>RoBuddiesThumbnail.png</Thumbnail>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -131,13 +131,18 @@
     <Compile Include="Model\IBody.cs" />
     <Compile Include="Model\Layer.cs" />
     <Compile Include="Model\Level.cs" />
+    <Compile Include="Model\Objects\Crate.cs" />
+    <Compile Include="Model\Objects\Door.cs" />
+    <Compile Include="Model\Objects\Pipe.cs" />
+    <Compile Include="Model\Objects\Switch.cs" />
+    <Compile Include="Model\Objects\Wall.cs" />
     <Compile Include="Model\PhysicObject.cs" />
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\Serializer\LevelReader.cs" />
     <Compile Include="Model\StaticObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
-    <Compile Include="Game1.cs" />
+    <Compile Include="RoBuddies.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\GameHUD.cs" />
@@ -155,8 +160,8 @@
     <Compile Include="View\MenuPages\QuitMenu.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Game.ico" />
-    <Content Include="GameThumbnail.png" />
+    <Content Include="RoBuddies.ico" />
+    <Content Include="RoBuddiesThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\GamePrototypes\Farseer Physics Engine 3.3.1 Samples XNA\Farseer Physics Engine 3.3 XNA\Farseer Physics XNA.csproj">

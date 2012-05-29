@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 using FarseerPhysics.Dynamics;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Model
 {
@@ -77,6 +78,11 @@ namespace RoBuddies.Model
             set;
         }
 
+        public new Vector2 Position
+        {
+            get { Console.Out.WriteLine(ConvertUnits.ToDisplayUnits(base.Position)); return ConvertUnits.ToDisplayUnits(base.Position); }
+            set { Console.Out.WriteLine(ConvertUnits.ToSimUnits(base.Position)); base.Position = ConvertUnits.ToSimUnits(value); }
+        }
 
         public PhysicObject(World world)
             : base(world)
