@@ -10,6 +10,7 @@ using FarseerPhysics.Factories;
 using RoBuddies.Model;
 using RoBuddies.View;
 using RoBuddies.Model.Objects;
+using RoBuddies.Utilities;
 
 namespace RoBuddies___Editor.View
 {
@@ -61,10 +62,10 @@ namespace RoBuddies___Editor.View
 
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    Wall wall1 = new Wall(new Vector2(550f, 200f), new Vector2(80f, 80f), Color.YellowGreen, square, this.Level);
+                    Wall wall1 = new Wall(new Vector2(11.501f, -2f), new Vector2(1f, 1f), Color.YellowGreen, square, this.Level);
 
                 // body 2
-                    Wall wall2 = new Wall(new Vector2(480f, 380f), new Vector2(100f, 100f), Color.Tomato, square, this.Level);
+                    Wall wall2 = new Wall(new Vector2(10f, -8f), new Vector2(3f, 3f), Color.Tomato, square, this.Level);
                     
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
@@ -96,13 +97,13 @@ namespace RoBuddies___Editor.View
 
             foreach (IBody body in layer.AllObjects)
             {
-                this.Game.SpriteBatch.Draw( body.Texture,
-                                            new Vector2(body.Position.X, body.Position.Y),
+                this.Game.SpriteBatch.Draw(body.Texture,
+                                            ConvertUnits.ToDisplayUnits(body.Position),     // here i have to know what coordinates i get -> dont want to filter here what type of body that is
                                             null,
                                             body.Color,
                                             -body.Rotation,
                                             body.Origin,
-                                            body.Width / body.Texture.Width,
+                                            ConvertUnits.ToDisplayUnits(body.Width / body.Texture.Width),
                                             body.Effect,
                                             layer.LayerDepth);
             }

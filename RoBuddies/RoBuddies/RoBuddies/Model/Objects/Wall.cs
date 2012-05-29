@@ -21,7 +21,7 @@ namespace RoBuddies.Model.Objects
             this.Color = color;
             this.Texture = texture;
             this.BodyType = BodyType.Static;
-            FixtureFactory.AttachRectangle(ConvertUnits.ToSimUnits(Width), ConvertUnits.ToSimUnits(Width), 1, Vector2.Zero, this);
+            FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
         }
 
     }
