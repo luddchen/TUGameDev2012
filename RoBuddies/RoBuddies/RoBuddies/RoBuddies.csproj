@@ -115,6 +115,10 @@
     <Compile Include="Control\RobotStates\ClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />
     <Compile Include="Control\RobotStates\FallingState.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IHeadState.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IIPartsCombinedState.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IIUpperpartState.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\ILowerPartState.cs" />
     <Compile Include="Control\RobotStates\JumpingState.cs" />
     <Compile Include="Control\RobotStates\PullingState.cs" />
     <Compile Include="Control\RobotStates\PushingState.cs" />

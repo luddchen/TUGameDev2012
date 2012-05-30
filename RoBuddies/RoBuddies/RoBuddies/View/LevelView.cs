@@ -12,6 +12,7 @@ using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
 using RoBuddies.Control;
 using RoBuddies.Control.StateMachines;
+using RoBuddies.Control.RobotStates;
 
 namespace RoBuddies.View
 {
@@ -52,7 +53,8 @@ namespace RoBuddies.View
 
                 // body1
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
-                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001"); 
+                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                    Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
                     PhysicObject body1 = new PhysicObject(this.Level);
                     body1.Position = new Vector2(11.501f, -2);
                     body1.BodyType = BodyType.Dynamic;
@@ -70,15 +72,20 @@ namespace RoBuddies.View
                     body2.Width = 3;
                     body2.Height = 3;
 
-                    StateMachine stateMachine = new ExampleStateMachine(body2);
-                    State example1 = new ExampleState("ExampleState1", square, stateMachine);
-                    stateMachine.AllStates.Add(example1);
-                    State example2 = new ExampleState("ExampleState2", circle, stateMachine);
-                    stateMachine.AllStates.Add(example2);
-                    stateMachine.SwitchToState("ExampleState1");
+                    StateMachine stateMachine = new PartsCombinedStateMachine(body2);
+                    State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, circle, stateMachine);
+                    State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
+                    State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, circle, stateMachine);
+                    stateMachine.AllStates.Add(waitingState);
+                    //State example2 = new ExampleState("ExampleState2", circle, stateMachine);
+                    stateMachine.AllStates.Add(jumpState);
+                    stateMachine.AllStates.Add(walkingState);
+                    stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
 
                     body2.Color = Color.Tomato;
                     body2.StateMachine = stateMachine;
+
+
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     mainLayer.AllObjects.Add(body1);

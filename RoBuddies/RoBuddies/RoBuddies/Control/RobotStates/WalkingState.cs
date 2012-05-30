@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using RoBuddies.Control.StateMachines;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Control.RobotStates
 {
     class WalkingState : AnimatedState
     {
-        public void ToWaiting()
+        public WalkingState(String name, Texture2D texture, StateMachine machine)
+            : base(name, texture, machine)
         {
-            StateMachine.CurrentState = new WaitingState();
         }
 
-        public void ToJumping()
+        public void ToWaiting(WaitingState state)
         {
-            StateMachine.CurrentState = new JumpingState();
+            StateMachine.CurrentState = state;
+        }
+
+        public void ToJumping(JumpingState state)
+        {
+            StateMachine.CurrentState = state;
         }
     }
 }
