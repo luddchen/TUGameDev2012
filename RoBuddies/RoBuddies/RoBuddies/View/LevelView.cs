@@ -13,6 +13,7 @@ using RoBuddies.Utilities;
 using RoBuddies.Control;
 using RoBuddies.Control.StateMachines;
 using RoBuddies.Control.RobotStates;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.View
 {
@@ -47,48 +48,54 @@ namespace RoBuddies.View
             this.backgroundColor = new Color(255,255,255,230);
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             this.Camera = new Camera();
-            this.Level = new Level(new Vector2(0, -9.8f));
+            this.Level = new Level(new Vector2(0, 10f));
 
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
-                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
-                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+                    Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-                    PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(11.501f, -2);
-                    body1.BodyType = BodyType.Dynamic;
-                    FixtureFactory.AttachRectangle(2, 2, 1, Vector2.Zero, body1);
-                    body1.Width = 2;
-                    body1.Height = 2;
-                    body1.Texture = circle;
-                    body1.Color = Color.YellowGreen;
+                    //PhysicObject body1 = new PhysicObject(this.Level);
+                    //body1.Position = new Vector2(0f, -10f);
+                    //body1.BodyType = BodyType.Static;
+                    //FixtureFactory.AttachRectangle(20, 2, 1, Vector2.Zero, body1);
+                    //body1.Width = 20;
+                    //body1.Height = 2;
+                    //body1.Texture = square;
+                    //body1.Color = Color.YellowGreen;
+                    Wall box1 = new Wall(new Vector2(10f, 7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
+                    box1.BodyType = BodyType.Dynamic;
+                    Wall wall1 = new Wall(new Vector2(0f, 8f), new Vector2(100f, 0.5f), Color.YellowGreen, square, this.Level);
 
                 // body 2
                     AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
-                    body2.Position = new Vector2(10, -8);
+                    body2.FixedRotation = true;
+                    body2.Position = new Vector2(5f, 7f);
                     body2.BodyType = BodyType.Dynamic;
-                    FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
+                    body2.Color = Color.White;
+                    FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, body2);
                     body2.Width = 3;
                     body2.Height = 3;
 
                     StateMachine stateMachine = new PartsCombinedStateMachine(body2);
-                    State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, circle, stateMachine);
+                    State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
                     State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
-                    State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, circle, stateMachine);
+                    State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
                     stateMachine.AllStates.Add(waitingState);
-                    //State example2 = new ExampleState("ExampleState2", circle, stateMachine);
+                    //State example2 = new ExampleState("ExampleState2", waitTex, stateMachine);
                     stateMachine.AllStates.Add(jumpState);
                     stateMachine.AllStates.Add(walkingState);
                     stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
 
-                    body2.Color = Color.Tomato;
                     body2.StateMachine = stateMachine;
 
 
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    mainLayer.AllObjects.Add(body1);
+                    mainLayer.AllObjects.Add(box1);
+                    mainLayer.AllObjects.Add(wall1);
                     mainLayer.AllObjects.Add(body2);
                     this.Level.AllLayers.Add(mainLayer);
             // end testing code ---------------------------------------------------------------------------------
@@ -118,15 +125,13 @@ namespace RoBuddies.View
 
             foreach (IBody body in layer.AllObjects)
             {
-                this.Game.SpriteBatch.Draw( body.Texture,
-                                            ConvertUnits.ToDisplayUnits(body.Position),     // here i have to know what coordinates i get -> dont want to filter here what type of body that is
-                                            null,
-                                            body.Color,
-                                            -body.Rotation,
-                                            body.Origin,
-                                            ConvertUnits.ToDisplayUnits( body.Width / body.Texture.Width ),
-                                            body.Effect,
-                                            layer.LayerDepth);
+                Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
+                Rectangle dest = new Rectangle(
+                    (int) displayPos.X,
+                    (int) -displayPos.Y,
+                    (int) ConvertUnits.ToDisplayUnits(body.Width),
+                    (int) ConvertUnits.ToDisplayUnits(body.Height));
+                this.Game.SpriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
             }
 
             this.Game.SpriteBatch.End();

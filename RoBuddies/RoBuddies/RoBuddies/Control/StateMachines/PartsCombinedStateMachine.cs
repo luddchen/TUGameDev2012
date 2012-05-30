@@ -30,19 +30,19 @@ namespace RoBuddies.Control.StateMachines
             {
                 Console.WriteLine("Jump!");
                 SwitchToState(JUMP_STATE);
-                ((Body)Body).ApplyForce(new Vector2(0, 10000));
+                ((Body)Body).ApplyForce(new Vector2(0, -1500));
             }
 
             if (newState.IsKeyDown(Keys.Left))
             {
                 SwitchToState(WALK_STATE);
-                ((Body)Body).LinearVelocity = new Vector2(-10, 0);
+                ((Body)Body).LinearVelocity = new Vector2(-2, ((Body)Body).LinearVelocity.Y);
             }
 
             if (newState.IsKeyDown(Keys.Right))
             {
                 SwitchToState(WALK_STATE);
-                ((Body)Body).LinearVelocity = new Vector2(10, 0);
+                ((Body)Body).LinearVelocity = new Vector2(2, ((Body)Body).LinearVelocity.Y);
             }
 
             SwitchToState(WAIT_STATE);
