@@ -14,6 +14,7 @@ using RoBuddies___Editor.Controls;
 using RoBuddies___Editor.Serializer;
 using RoBuddies.Model.Serializer;
 using RoBuddies.Model;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies___Editor
 {
@@ -30,6 +31,8 @@ namespace RoBuddies___Editor
         private HUD HUD;
         private MouseView mouseView;
         private MouseController mouseController;
+
+        private KeyboardState oldKeyboardState;
 
         public RoBuddiesEditor()
         {
@@ -145,6 +148,15 @@ namespace RoBuddies___Editor
                 }
             }
 
+            // just for the presentation:
+            if (Keyboard.GetState().IsKeyDown(Keys.A) && oldKeyboardState.IsKeyUp(Keys.A))
+            {
+                Texture2D square = this.Content.Load<Texture2D>("Sprites//Square");
+                Wall wall1 = new Wall(new Vector2(1f, -1f), new Vector2(1f, 1f), Color.YellowGreen, square, this.LevelView.Level);
+                this.LevelView.mainLayer.AllObjects.Add(wall1);
+            }
+
+            oldKeyboardState = Keyboard.GetState();
         }
 
         /// <summary>

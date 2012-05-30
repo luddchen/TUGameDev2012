@@ -50,6 +50,9 @@ namespace RoBuddies___Editor.View
         /// </summary>
         public Level Level { get; set; }
 
+        // dirty stuff for the presentation:
+        public Layer mainLayer;
+
 
         public LevelView(RoBuddiesEditor game)
         {
@@ -68,7 +71,7 @@ namespace RoBuddies___Editor.View
                     Wall wall2 = new Wall(new Vector2(10f, -8f), new Vector2(3f, 3f), Color.Tomato, square, this.Level);
                     
                 // layer
-                    Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
+                    mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     mainLayer.AllObjects.Add(wall1);
                     mainLayer.AllObjects.Add(wall2);
                     this.Level.AllLayers.Add(mainLayer);
@@ -97,15 +100,13 @@ namespace RoBuddies___Editor.View
 
             foreach (IBody body in layer.AllObjects)
             {
-                this.Game.SpriteBatch.Draw(body.Texture,
-                                            ConvertUnits.ToDisplayUnits(body.Position),     // here i have to know what coordinates i get -> dont want to filter here what type of body that is
-                                            null,
-                                            body.Color,
-                                            -body.Rotation,
-                                            body.Origin,
-                                            ConvertUnits.ToDisplayUnits(body.Width / body.Texture.Width),
-                                            body.Effect,
-                                            layer.LayerDepth);
+                Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
+                Rectangle dest = new Rectangle(
+                    (int)displayPos.X,
+                    (int)displayPos.Y,
+                    (int)ConvertUnits.ToDisplayUnits(body.Width),
+                    (int)ConvertUnits.ToDisplayUnits(body.Height));
+                this.Game.SpriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
             }
 
             this.Game.SpriteBatch.End();

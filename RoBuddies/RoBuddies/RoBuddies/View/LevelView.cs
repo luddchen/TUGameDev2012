@@ -48,7 +48,7 @@ namespace RoBuddies.View
             this.backgroundColor = new Color(255,255,255,230);
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             this.Camera = new Camera();
-            this.Level = new Level(new Vector2(0, 10f));
+            this.Level = new Level(new Vector2(0, -10f));
 
             //  some testing code here --------------------------------------------------------------------------
 
@@ -57,14 +57,13 @@ namespace RoBuddies.View
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-                    Wall box1 = new Wall(new Vector2(10f, 7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
+                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
                     box1.BodyType = BodyType.Dynamic;
-                    Wall wall1 = new Wall(new Vector2(0f, 8f), new Vector2(100f, 0.5f), Color.YellowGreen, square, this.Level);
 
                 // body 2
                     AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
                     body2.FixedRotation = true;
-                    body2.Position = new Vector2(5f, 7f);
+                    body2.Position = new Vector2(5f, -6f);
                     body2.BodyType = BodyType.Dynamic;
                     body2.Color = Color.White;
                     FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, body2);
@@ -86,7 +85,6 @@ namespace RoBuddies.View
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     mainLayer.AllObjects.Add(box1);
-                    //mainLayer.AllObjects.Add(wall1);
                     mainLayer.AllObjects.Add(body2);
                     this.Level.AllLayers.Add(mainLayer);
 
@@ -95,7 +93,7 @@ namespace RoBuddies.View
                     for (int i = 0; i < 24; i++)
                     {
                         body3 = new PhysicObject(this.Level);
-                        body3.Position = new Vector2(1 + i * 0.6f, 8);
+                        body3.Position = new Vector2(1 + i * 0.6f, -8);
                         body3.BodyType = BodyType.Static;
                         FixtureFactory.AttachRectangle(0.5f, 0.5f, 1, Vector2.Zero, body3);
                         body3.Width = 0.5f;
@@ -134,7 +132,7 @@ namespace RoBuddies.View
                 Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
                 Rectangle dest = new Rectangle(
                     (int) displayPos.X,
-                    (int) -displayPos.Y,
+                    (int) displayPos.Y,
                     (int) ConvertUnits.ToDisplayUnits(body.Width),
                     (int) ConvertUnits.ToDisplayUnits(body.Height));
                 this.Game.SpriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);

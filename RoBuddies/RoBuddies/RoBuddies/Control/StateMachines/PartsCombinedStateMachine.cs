@@ -30,7 +30,7 @@ namespace RoBuddies.Control.StateMachines
             {
                 Console.WriteLine("Jump!");
                 SwitchToState(JUMP_STATE);
-                ((Body)Body).ApplyForce(new Vector2(0, -1500));
+                ((Body)Body).ApplyForce(new Vector2(0, 1500));
             }
 
             if (newState.IsKeyDown(Keys.Left))
