@@ -51,24 +51,26 @@ namespace RoBuddies.View
 
             //  some testing code here --------------------------------------------------------------------------
 
-                // body1
-                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
-                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                    Texture2D circle = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001"); 
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
+
+                // body1
                     PhysicObject body1 = new PhysicObject(this.Level);
-                    body1.Position = new Vector2(11.501f, -2);
+                    body1.Position = new Vector2(10, -6.5f);
                     body1.BodyType = BodyType.Dynamic;
                     FixtureFactory.AttachRectangle(2, 2, 1, Vector2.Zero, body1);
                     body1.Width = 2;
                     body1.Height = 2;
-                    body1.Texture = circle;
+                    body1.Texture = crate;
                     body1.Color = Color.YellowGreen;
 
                 // body 2
                     AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
-                    body2.Position = new Vector2(10, -8);
+                    body2.Position = new Vector2(6, -4);
                     body2.BodyType = BodyType.Dynamic;
-                    FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
+                    FixtureFactory.AttachRectangle(1, 3, 3, Vector2.Zero, body2);
                     body2.Width = 3;
                     body2.Height = 3;
 
@@ -82,7 +84,7 @@ namespace RoBuddies.View
                     stateMachine.AllStates.Add(walkingState);
                     stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
 
-                    body2.Color = Color.Tomato;
+                    body2.Color = Color.White;
                     body2.StateMachine = stateMachine;
 
 
@@ -91,6 +93,21 @@ namespace RoBuddies.View
                     mainLayer.AllObjects.Add(body1);
                     mainLayer.AllObjects.Add(body2);
                     this.Level.AllLayers.Add(mainLayer);
+
+                // body 3
+                    PhysicObject body3;
+                    for (int i = 0; i < 24; i++)
+                    {
+                        body3 = new PhysicObject(this.Level);
+                        body3.Position = new Vector2(1 + i * 0.6f, -8);
+                        body3.BodyType = BodyType.Static;
+                        FixtureFactory.AttachRectangle(0.5f, 0.5f, 1, Vector2.Zero, body3);
+                        body3.Width = 0.5f;
+                        body3.Height = 0.5f;
+                        body3.Texture = square;
+                        body3.Color = Color.DarkKhaki;
+                        mainLayer.AllObjects.Add(body3);
+                    }
             // end testing code ---------------------------------------------------------------------------------
         }
 
