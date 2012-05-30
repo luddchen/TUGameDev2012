@@ -36,13 +36,13 @@ namespace RoBuddies.Control.StateMachines
             if (newState.IsKeyDown(Keys.Left))
             {
                 SwitchToState(WALK_STATE);
-                ((Body)Body).LinearVelocity = new Vector2(-2, ((Body)Body).LinearVelocity.Y);
+                ((Body)Body).LinearVelocity = new Vector2(-3, ((Body)Body).LinearVelocity.Y);
             }
 
             if (newState.IsKeyDown(Keys.Right))
             {
                 SwitchToState(WALK_STATE);
-                ((Body)Body).LinearVelocity = new Vector2(2, ((Body)Body).LinearVelocity.Y);
+                ((Body)Body).LinearVelocity = new Vector2(3, ((Body)Body).LinearVelocity.Y);
             }
 
             SwitchToState(WAIT_STATE);

@@ -57,14 +57,6 @@ namespace RoBuddies.View
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-                    //PhysicObject body1 = new PhysicObject(this.Level);
-                    //body1.Position = new Vector2(0f, -10f);
-                    //body1.BodyType = BodyType.Static;
-                    //FixtureFactory.AttachRectangle(20, 2, 1, Vector2.Zero, body1);
-                    //body1.Width = 20;
-                    //body1.Height = 2;
-                    //body1.Texture = square;
-                    //body1.Color = Color.YellowGreen;
                     Wall box1 = new Wall(new Vector2(10f, 7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
                     box1.BodyType = BodyType.Dynamic;
                     Wall wall1 = new Wall(new Vector2(0f, 8f), new Vector2(100f, 0.5f), Color.YellowGreen, square, this.Level);
@@ -88,16 +80,30 @@ namespace RoBuddies.View
                     stateMachine.AllStates.Add(jumpState);
                     stateMachine.AllStates.Add(walkingState);
                     stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-
                     body2.StateMachine = stateMachine;
 
 
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     mainLayer.AllObjects.Add(box1);
-                    mainLayer.AllObjects.Add(wall1);
+                    //mainLayer.AllObjects.Add(wall1);
                     mainLayer.AllObjects.Add(body2);
                     this.Level.AllLayers.Add(mainLayer);
+
+                // body 3
+                    PhysicObject body3;
+                    for (int i = 0; i < 24; i++)
+                    {
+                        body3 = new PhysicObject(this.Level);
+                        body3.Position = new Vector2(1 + i * 0.6f, 8);
+                        body3.BodyType = BodyType.Static;
+                        FixtureFactory.AttachRectangle(0.5f, 0.5f, 1, Vector2.Zero, body3);
+                        body3.Width = 0.5f;
+                        body3.Height = 0.5f;
+                        body3.Texture = square;
+                        body3.Color = Color.DarkKhaki;
+                        mainLayer.AllObjects.Add(body3);
+                    }
             // end testing code ---------------------------------------------------------------------------------
         }
 
