@@ -67,7 +67,7 @@ namespace RoBuddies.View
                 // body 2
                     AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
                     body2.Position = new Vector2(10, -8);
-                    body2.BodyType = BodyType.Static;
+                    body2.BodyType = BodyType.Dynamic;
                     FixtureFactory.AttachRectangle(3, 3, 1, Vector2.Zero, body2);
                     body2.Width = 3;
                     body2.Height = 3;
