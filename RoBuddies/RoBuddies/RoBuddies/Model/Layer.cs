@@ -55,18 +55,5 @@ namespace RoBuddies.Model
             this.AllObjects = new List<IBody>(); 
         }
 
-
-        /// <summary>
-        /// update all objects on this layer
-        /// </summary>
-        /// <param name="gameTime">time of game</param>
-        public void Update(GameTime gameTime)
-        {
-            foreach (IBody body in AllObjects)
-            {
-                body.Update(gameTime);
-            }
-        }
-
     }
 }

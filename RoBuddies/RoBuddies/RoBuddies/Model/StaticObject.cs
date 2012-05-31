@@ -87,10 +87,5 @@ namespace RoBuddies.Model
             set;
         }
 
-        public virtual void Update(GameTime gameTime)
-        {
-            // no need to update here anything i think !?
-        }
-
     }
 }

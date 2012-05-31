@@ -7,7 +7,7 @@ using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
 {
-    class StateMachine
+    public class StateMachine
     {
         /// <summary>
         /// the current state
@@ -38,6 +38,7 @@ namespace RoBuddies.Control.StateMachines
         public void SwitchToState(State state)
         {
             CurrentState = state;
+            state.Enter();
         }
 
         /// <summary>
@@ -52,6 +53,7 @@ namespace RoBuddies.Control.StateMachines
                 if (state.Name == stateName)
                 {
                     CurrentState = state;
+                    state.Enter();
                     break;
                 }
             }

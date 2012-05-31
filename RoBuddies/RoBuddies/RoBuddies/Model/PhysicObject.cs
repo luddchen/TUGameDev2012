@@ -85,10 +85,5 @@ namespace RoBuddies.Model
             this.Effect = SpriteEffects.None;
         }
 
-
-        public virtual void Update(GameTime gameTime)
-        {
-            // no need to update here anything i think !?
-        }
     }
 }

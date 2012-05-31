@@ -13,5 +13,6 @@ namespace RoBuddies.Control
             this.Texture = texture;
             this.StateMachine = machine;
         }
+
     }
 }

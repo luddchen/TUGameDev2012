@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 
+using RoBuddies.Control.StateMachines;
+
 namespace RoBuddies.Model
 {
 
@@ -26,6 +28,10 @@ namespace RoBuddies.Model
         /// </summary>
         public List<Layer> AllLayers { get; set; }
 
+        /// <summary>
+        /// list of all active Statemachines
+        /// </summary>
+        public List<StateMachine> AllStateMachines;
 
         /// <summary>
         /// creates a new world / level
@@ -35,6 +41,7 @@ namespace RoBuddies.Model
             : base(gravity)
         {
             this.AllLayers = new List<Layer>();
+            this.AllStateMachines = new List<StateMachine>();
             this.Background = Color.DeepSkyBlue;
         }
 
@@ -63,10 +70,11 @@ namespace RoBuddies.Model
         /// <param name="gameTime">time of game</param>
         public void Update( GameTime gameTime) 
         {
-            foreach (Layer layer in AllLayers)
+            foreach (StateMachine machine in this.AllStateMachines)
             {
-                layer.Update(gameTime);
+                machine.Update(gameTime);
             }
+
             this.Step(gameTime.ElapsedGameTime.Milliseconds * 0.001f);
         }
 

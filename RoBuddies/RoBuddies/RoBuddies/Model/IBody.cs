@@ -40,6 +40,5 @@ namespace RoBuddies.Model
 
         Level World { get; set; }
 
-        void Update(GameTime gameTime);
     }
 }

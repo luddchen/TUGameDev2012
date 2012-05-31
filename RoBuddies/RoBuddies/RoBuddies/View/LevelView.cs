@@ -19,6 +19,7 @@ namespace RoBuddies.View
 {
     public class LevelView : HUD.HUD
     {
+        private Texture2D stop;
         /// <summary>
         /// space between levelbottom and screen bottom
         /// </summary>
@@ -47,6 +48,7 @@ namespace RoBuddies.View
         {
             this.backgroundColor = new Color(255,255,255,230);
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
+            this.stop = this.Game.Content.Load<Texture2D>("Sprites//stop");
             this.Camera = new Camera();
             this.Level = new Level(new Vector2(0, -10f));
 
@@ -61,7 +63,7 @@ namespace RoBuddies.View
                     box1.BodyType = BodyType.Dynamic;
 
                 // body 2
-                    AnimatedPhysicObject body2 = new AnimatedPhysicObject(this.Level);
+                    PhysicObject body2 = new PhysicObject(this.Level);
                     body2.FixedRotation = true;
                     body2.Position = new Vector2(5f, -6f);
                     body2.BodyType = BodyType.Dynamic;
@@ -79,8 +81,7 @@ namespace RoBuddies.View
                     stateMachine.AllStates.Add(jumpState);
                     stateMachine.AllStates.Add(walkingState);
                     stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-                    body2.StateMachine = stateMachine;
-
+                    this.Level.AllStateMachines.Add(stateMachine);
 
                 // layer
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
@@ -129,6 +130,7 @@ namespace RoBuddies.View
 
             foreach (IBody body in layer.AllObjects)
             {
+                if (body.Texture == null) { body.Texture = stop; }
                 Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
                 Rectangle dest = new Rectangle(
                     (int) displayPos.X,

@@ -13,7 +13,7 @@
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <XnaFrameworkVersion>v4.0</XnaFrameworkVersion>
     <XnaPlatform>Windows</XnaPlatform>
-    <XnaProfile>HiDef</XnaProfile>
+    <XnaProfile>Reach</XnaProfile>
     <XnaCrossPlatformGroupID>ad26ce40-5606-4480-8545-99bb6a762fb6</XnaCrossPlatformGroupID>
     <XnaOutputType>Game</XnaOutputType>
     <ApplicationIcon>RoBuddies.ico</ApplicationIcon>
@@ -132,8 +132,6 @@
     <Compile Include="Control\StateMachines\StateMachine.cs" />
     <Compile Include="Control\RobotStates\WalkingState.cs" />
     <Compile Include="Control\StateMachines\UpperPartStateMachine.cs" />
-    <Compile Include="Model\AnimatedPhysicObject.cs" />
-    <Compile Include="Model\AnimatedStaticObject.cs" />
     <Compile Include="Model\IBody.cs" />
     <Compile Include="Model\Layer.cs" />
     <Compile Include="Model\Level.cs" />
