@@ -24,7 +24,7 @@ namespace RoBuddies.View.MenuPages
             if (no != null) { no.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
         }
 
-        public QuitMenu(GameMenu menu, ContentManager content)
+        public QuitMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");

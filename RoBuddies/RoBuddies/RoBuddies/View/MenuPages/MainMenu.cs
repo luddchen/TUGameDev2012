@@ -13,7 +13,7 @@ namespace RoBuddies.View.MenuPages
 {
     class MainMenu : HUDMenuPage
     {
-        private HUDString game;
+        private HUDString editor;
         private HUDString help;  
         private HUDString options; 
         private HUDString quit;
@@ -24,20 +24,20 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnViewPortResize()
         {
-            if (game != null) { game.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
+            if (editor != null) { editor.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
             if (help != null) { help.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.4f); }
             if (options != null) { options.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
             if (quit != null) { quit.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
         }
 
-        public MainMenu(GameMenu menu, ContentManager content)
+        public MainMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
 
-            game = new HUDString("Game", null, null, null, 0.7f, null, content);
-            this.AllElements.Add(game);
-            this.ChoiceList.Add(game);
+            editor = new HUDString("Editor", null, null, null, 0.7f, null, content);
+            this.AllElements.Add(editor);
+            this.ChoiceList.Add(editor);
 
             help = new HUDString("Help", null, null, null, 0.7f, null, content);
             this.AllElements.Add(help);
@@ -51,7 +51,7 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(quit);
             this.ChoiceList.Add(quit);
 
-            this.ActiveElement = game;
+            this.ActiveElement = editor;
         }
 
         public override void Update(GameTime gameTime)
@@ -63,6 +63,10 @@ namespace RoBuddies.View.MenuPages
             {
                 if (this.ActiveElement != null)
                 {
+                    if (this.ActiveElement == editor)
+                    {
+                        this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
+                    }
                     if (this.ActiveElement == quit)
                     {
                         this.Menu.ActivePage = this.quitPage;

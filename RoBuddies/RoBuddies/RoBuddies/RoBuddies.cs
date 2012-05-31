@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies
 {
@@ -18,14 +19,29 @@ namespace RoBuddies
     /// </summary>
     public class RoBuddies : Microsoft.Xna.Framework.Game
     {
+        public enum ViewMode{ Level, Editor }
+
         private const int HUDsize = 30; 
 
         GraphicsDeviceManager graphics;
+        Viewport ViewPort;
         public SpriteBatch SpriteBatch {get; set; } // need that somehow in LevelView, Menu and HUD
 
-        LevelView LevelView;
-        GameMenu Menu;
-        GameHUD HUD;
+        HUDLevelView LevelView;
+        HUDMenu LevelMenu;
+        HUD LevelHUD; 
+
+        HUDLevelView EditorView;
+        HUDMenu EditorMenu;
+        HUD EditorHUD;
+
+        HUDLevelView View;
+        HUDMenu Menu;
+        HUD HUD;
+
+        public ViewMode currentViewMode = ViewMode.Level;
+
+        private bool viewModeChanged = false;
 
         public RoBuddies()
         {
@@ -43,32 +59,33 @@ namespace RoBuddies
         /// <param name="e">event</param>
         void Window_ClientSizeChanged(object sender, EventArgs e)
         {
-            Viewport viewport;
+            this.ViewPort = GraphicsDevice.Viewport;
+            Viewport newViewport;
 
             // LevelView size
-            viewport = graphics.GraphicsDevice.Viewport;
-            viewport.Height = viewport.Height - HUDsize;
-            LevelView.Viewport = viewport;
+            newViewport = this.ViewPort;
+            newViewport.Height = newViewport.Height - HUDsize;
+            View.Viewport = newViewport;
 
             // menu size
-            viewport = graphics.GraphicsDevice.Viewport;
-            if (viewport.Width > Menu.PreferedWidth) 
+            newViewport = this.ViewPort;
+            if (newViewport.Width > Menu.PreferedWidth) 
             {
-                viewport.X = viewport.Width / 2 - Menu.PreferedWidth / 2;
-                viewport.Width = Menu.PreferedWidth;
+                newViewport.X = newViewport.Width / 2 - Menu.PreferedWidth / 2;
+                newViewport.Width = Menu.PreferedWidth;
             }
-            if (viewport.Height > Menu.PreferedHeight)
+            if (newViewport.Height > Menu.PreferedHeight)
             {
-                viewport.Y = viewport.Height / 2 - Menu.PreferedHeight / 2;
-                viewport.Height = Menu.PreferedHeight;
+                newViewport.Y = newViewport.Height / 2 - Menu.PreferedHeight / 2;
+                newViewport.Height = Menu.PreferedHeight;
             }
-            Menu.Viewport = viewport;
+            Menu.Viewport = newViewport;
 
             // HUD size
-            viewport = graphics.GraphicsDevice.Viewport;
-            viewport.Y = viewport.Height - HUDsize;
-            viewport.Height = HUDsize;
-            HUD.Viewport = viewport;
+            newViewport = this.ViewPort;
+            newViewport.Y = newViewport.Height - HUDsize;
+            newViewport.Height = HUDsize;
+            HUD.Viewport = newViewport;
         }
 
         /// <summary>
@@ -86,9 +103,14 @@ namespace RoBuddies
         {
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
-            Menu = new GameMenu(this);
-            HUD = new GameHUD(this);
+            LevelMenu = new LevelMenu(this);
+            LevelHUD = new LevelHUD(this);
 
+            EditorView = new EditorView(this);
+            EditorMenu = new EditorMenu(this);
+            EditorHUD = new LevelHUD(this);
+
+            SwitchViewMode();
             Window_ClientSizeChanged(null, null);
         }
 
@@ -103,25 +125,50 @@ namespace RoBuddies
         /// <param name="gameTime">gametime</param>
         protected override void Update(GameTime gameTime)
         {
-            LevelView.Update(gameTime);
+            View.Update(gameTime);
             Menu.Update(gameTime);
             HUD.Update(gameTime);
 
             // testing camera
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.LevelView.Camera.Zoom *= 1.01f; }
-                if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.LevelView.Camera.Zoom /= 1.01f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.LevelView.Camera.Rotation -= 0.005f; }
-                if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.LevelView.Camera.Rotation += 0.005f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.View.Camera.Rotation -= 0.005f; }
+                if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.View.Camera.Rotation += 0.005f; }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(-1, 0)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(+1, 0)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, -1)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.LevelView.Camera.Move(this.LevelView.Camera.Position + new Vector2(0, +1)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
+                if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
             }
 
+        }
+
+        private void SwitchViewMode()
+        {
+            if (this.currentViewMode == ViewMode.Level)
+            {
+                this.View = this.LevelView;
+                this.Menu = this.LevelMenu;
+                this.HUD = this.LevelHUD;
+            }
+            if (this.currentViewMode == ViewMode.Editor)
+            {
+                this.View = this.EditorView;
+                this.Menu = this.EditorMenu;
+                this.HUD = this.EditorHUD;
+            }
+
+            Window_ClientSizeChanged(null, null);
+            this.viewModeChanged = false;
+        }
+
+        public void SwitchToViewMode( ViewMode mode ) 
+        {
+            this.currentViewMode = mode;
+            this.viewModeChanged = true;
         }
 
         /// <summary>
@@ -130,11 +177,20 @@ namespace RoBuddies
         /// <param name="gameTime">gametime</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(this.LevelView.Level.Background);
+            this.ViewPort = GraphicsDevice.Viewport;
 
-            LevelView.Draw(SpriteBatch);
+            GraphicsDevice.Clear(this.View.Level.Background);
+
+            if (this.viewModeChanged)
+            {
+                SwitchViewMode();
+            }
+
+            View.Draw(SpriteBatch);
             Menu.Draw(SpriteBatch);
             HUD.Draw(SpriteBatch);
+
+            GraphicsDevice.Viewport = this.ViewPort;
         }
     }
 }

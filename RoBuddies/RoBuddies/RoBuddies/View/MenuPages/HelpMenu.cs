@@ -60,7 +60,7 @@ namespace RoBuddies.View.MenuPages
             if (help != null) { help.Position = new Vector2(this.Viewport.Width / 2, help.Height / 2); }
         }
 
-        public HelpMenu(GameMenu menu, ContentManager content)
+        public HelpMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");

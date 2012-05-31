@@ -66,7 +66,7 @@ namespace RoBuddies.View.HUD
         /// </summary>
         /// <param name="menu">the menu containing this page</param>
         /// <param name="content">Content Manager</param>
-        public HUDMenuPage(GameMenu menu, ContentManager content) : base(menu.Game)
+        public HUDMenuPage(HUDMenu menu, ContentManager content) : base(menu.Game)
         {
             this.backgroundColor = new Color(0,0,0,20);
             this.ChoiceList = new List<IHUDElement>();

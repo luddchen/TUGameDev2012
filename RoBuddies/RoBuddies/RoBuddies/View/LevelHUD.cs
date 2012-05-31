@@ -9,7 +9,7 @@ using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {
-    public class GameHUD : HUD.HUD
+    public class LevelHUD : HUD.HUD
     {
         private HUDString timeElapsed;
 
@@ -21,7 +21,7 @@ namespace RoBuddies.View
             }
         }
 
-        public GameHUD(RoBuddies game) : base(game)
+        public LevelHUD(RoBuddies game) : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
             this.backgroundColor = new Color(0,0,0,160);

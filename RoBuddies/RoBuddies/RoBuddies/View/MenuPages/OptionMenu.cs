@@ -29,7 +29,7 @@ namespace RoBuddies.View.MenuPages
             if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
         }
 
-        public OptionMenu(GameMenu menu, ContentManager content)
+        public OptionMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");

@@ -10,7 +10,7 @@ using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {
-    public class GameMenu : HUDMenu
+    public class EditorMenu : HUDMenu
     {
 
         public override void OnViewPortResize()
@@ -26,28 +26,22 @@ namespace RoBuddies.View
             }
         }
 
-        public GameMenu(RoBuddies game) : base(game)
+        public EditorMenu(RoBuddies game)
+            : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//Menu_Background");
 
             // some decoration -------------------------------------------------------------------
-            this.AllElements.Add(new HUDString( "Robuddies Menu", this.Game.Content));
+            this.AllElements.Add(new HUDString("Robuddies Editor", this.Game.Content));
             this.AllElements[0].Color = HeadLineColor;
             this.AllElements.Add(new HUDTexture(this.Game.Content));
             this.AllElements.Add(new HUDTexture(this.Game.Content));
             this.AllElements.Add(new HUDTexture(this.Game.Content));
             this.AllElements.Add(new HUDTexture(this.Game.Content));
 
-            MainMenu mainMenu = new MainMenu(this, this.Game.Content);
-            QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
-            OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
-            HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
+            HUDMenuPage mainMenu = new EditorMainMenu(this, this.Game.Content);
 
-            mainMenu.quitPage = quitMenu;
-            mainMenu.optionPage = optionMenu;
-            mainMenu.helpPage = helpMenu;
-
-            this.DefaultPage = mainMenu ;
+            this.DefaultPage = mainMenu;
             this.ActivePage = this.DefaultPage;
             // end decoration -------------------------------------------------------------------
         }
