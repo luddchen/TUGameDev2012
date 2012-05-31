@@ -41,14 +41,18 @@ namespace RoBuddies.Model.Serializer
         /// <returns>returns the desirialized level as a Level object</returns>
         public Level readLevel(String path, String filename)
         {
-            StreamReader sr = new StreamReader(@".\\SerializationTest.json");
-            JsonReader reader = new JsonTextReader(sr);
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.Converters.Add(new LevelConverter(level));
-            serializer.Converters.Add(new LayerConverter(level));
-            serializer.Converters.Add(new WallConverter(level, content));
-            Level loadedLevel = serializer.Deserialize<Level>(reader);
-            reader.Close();
+            Level loadedLevel = null;
+            if (File.Exists(@".\\SerializationTest.json"))
+            {
+                StreamReader sr = new StreamReader(@".\\SerializationTest.json");
+                JsonReader reader = new JsonTextReader(sr);
+                JsonSerializer serializer = new JsonSerializer();
+                serializer.Converters.Add(new LevelConverter(level));
+                serializer.Converters.Add(new LayerConverter(level));
+                serializer.Converters.Add(new WallConverter(level, content));
+                loadedLevel = serializer.Deserialize<Level>(reader);
+                reader.Close();
+            }
             return loadedLevel;
         }
 

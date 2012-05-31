@@ -75,11 +75,11 @@ namespace RoBuddies___Editor.Controls
             {
                 if (!isMovingObject)
                 {
-                    Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
+                    //Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
                     Fixture savedFixture = this.level.TestPoint(this.CursorSimPos);
                     if (savedFixture != null)
                     {
-                        Console.Out.WriteLine("jap");
+                        //Console.Out.WriteLine("jap");
                         clickedBody = savedFixture.Body;
                         clickedBody.BodyType = BodyType.Dynamic;
                         clickedBody.CollidesWith = Category.None;
@@ -90,7 +90,7 @@ namespace RoBuddies___Editor.Controls
                     }
                     else // no object behind cursor position
                     {
-                        Console.Out.WriteLine("neee");
+                        //Console.Out.WriteLine("neee");
                     }
                 }
                 else // drop current object

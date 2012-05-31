@@ -52,7 +52,7 @@ namespace RoBuddies___Editor.View
 
         // dirty stuff for the presentation:
         public Layer mainLayer;
-
+        private Texture2D background;
 
         public LevelView(RoBuddiesEditor game)
         {
@@ -60,7 +60,7 @@ namespace RoBuddies___Editor.View
             this.Camera = new Camera();
             this.Viewport = this.Game.GraphicsDevice.Viewport;
             this.Level = new Level(new Vector2(0, -9.8f));
-
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
@@ -95,9 +95,9 @@ namespace RoBuddies___Editor.View
         public void Draw(Layer layer) {
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
-
+            Rectangle backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
             this.Game.SpriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
-
+            this.Game.SpriteBatch.Draw(this.background, backgroundDest, null, Color.White, 0f, Vector2.Zero, SpriteEffects.None, 1);
             foreach (IBody body in layer.AllObjects)
             {
                 Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);

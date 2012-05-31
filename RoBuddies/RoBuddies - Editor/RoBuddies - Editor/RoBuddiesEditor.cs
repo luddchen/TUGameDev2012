@@ -139,12 +139,20 @@ namespace RoBuddies___Editor
 
             if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.S)) { (new LevelWriter(LevelView.Level)).writeLevel("", ""); }
-                if (Keyboard.GetState().IsKeyDown(Keys.L)) 
+                if (Keyboard.GetState().IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
+                { 
+                    (new LevelWriter(LevelView.Level)).writeLevel("", "");
+                    Console.Out.WriteLine("Game saved!");
+                }
+                if (Keyboard.GetState().IsKeyDown(Keys.L) && oldKeyboardState.IsKeyUp(Keys.L)) 
                 {
                     Level loadedLevel = (new LevelReader(Content)).readLevel("", "");
-                    this.mouseController.level = loadedLevel;
-                    this.LevelView.Level = loadedLevel;
+                    if (loadedLevel != null)
+                    {
+                        this.mouseController.level = loadedLevel;
+                        this.LevelView.Level = loadedLevel;
+                        Console.Out.WriteLine("Game loaded!");
+                    }
                 }
             }
 
@@ -152,7 +160,17 @@ namespace RoBuddies___Editor
             if (Keyboard.GetState().IsKeyDown(Keys.A) && oldKeyboardState.IsKeyUp(Keys.A))
             {
                 Texture2D square = this.Content.Load<Texture2D>("Sprites//Square");
-                Wall wall1 = new Wall(new Vector2(1f, -1f), new Vector2(1f, 1f), Color.YellowGreen, square, this.LevelView.Level);
+                Random ran = new Random();
+                Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+                Wall wall1 = new Wall(new Vector2(2f, -2f), new Vector2(5f, 1f), color, square, this.LevelView.Level);
+                this.LevelView.mainLayer.AllObjects.Add(wall1);
+            }
+            if (Keyboard.GetState().IsKeyDown(Keys.Q) && oldKeyboardState.IsKeyUp(Keys.Q))
+            {
+                Texture2D square = this.Content.Load<Texture2D>("Sprites//Square");
+                Random ran = new Random();
+                Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+                Wall wall1 = new Wall(new Vector2(2f, -2f), new Vector2(1f, 5f), color, square, this.LevelView.Level);
                 this.LevelView.mainLayer.AllObjects.Add(wall1);
             }
 
