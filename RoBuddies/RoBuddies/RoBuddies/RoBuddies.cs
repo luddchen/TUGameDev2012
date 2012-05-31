@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using RoBuddies.Control;
 
 namespace RoBuddies
 {
@@ -20,8 +21,6 @@ namespace RoBuddies
     public class RoBuddies : Microsoft.Xna.Framework.Game
     {
         public enum ViewMode{ Level, Editor }
-
-        private const int HUDsize = 30; 
 
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
@@ -40,6 +39,9 @@ namespace RoBuddies
         HUD HUD;
 
         public ViewMode currentViewMode = ViewMode.Level;
+
+
+        private MouseController mouseController;
 
         private bool viewModeChanged = false;
 
@@ -60,32 +62,10 @@ namespace RoBuddies
         void Window_ClientSizeChanged(object sender, EventArgs e)
         {
             this.ViewPort = GraphicsDevice.Viewport;
-            Viewport newViewport;
 
-            // LevelView size
-            newViewport = this.ViewPort;
-            newViewport.Height = newViewport.Height - HUDsize;
-            View.Viewport = newViewport;
-
-            // menu size
-            newViewport = this.ViewPort;
-            if (newViewport.Width > Menu.PreferedWidth) 
-            {
-                newViewport.X = newViewport.Width / 2 - Menu.PreferedWidth / 2;
-                newViewport.Width = Menu.PreferedWidth;
-            }
-            if (newViewport.Height > Menu.PreferedHeight)
-            {
-                newViewport.Y = newViewport.Height / 2 - Menu.PreferedHeight / 2;
-                newViewport.Height = Menu.PreferedHeight;
-            }
-            Menu.Viewport = newViewport;
-
-            // HUD size
-            newViewport = this.ViewPort;
-            newViewport.Y = newViewport.Height - HUDsize;
-            newViewport.Height = HUDsize;
-            HUD.Viewport = newViewport;
+            View.Viewport = this.ViewPort;
+            Menu.Viewport = this.ViewPort;
+            HUD.Viewport = this.ViewPort;
         }
 
         /// <summary>
@@ -108,10 +88,12 @@ namespace RoBuddies
 
             EditorView = new EditorView(this);
             EditorMenu = new EditorMenu(this);
-            EditorHUD = new LevelHUD(this);
+            EditorHUD = new EditorHUD(this);
 
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
+
+            this.mouseController = new MouseController(this, this.EditorView.Level, this.EditorView.Camera, ((EditorView)this.EditorView).Mouse );
         }
 
         /// <summary>
@@ -128,6 +110,7 @@ namespace RoBuddies
             View.Update(gameTime);
             Menu.Update(gameTime);
             HUD.Update(gameTime);
+            this.mouseController.Update(gameTime);
 
             // testing camera
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
@@ -160,6 +143,7 @@ namespace RoBuddies
                 this.Menu = this.EditorMenu;
                 this.HUD = this.EditorHUD;
             }
+            this.Menu.IsVisible = false;
 
             Window_ClientSizeChanged(null, null);
             this.viewModeChanged = false;

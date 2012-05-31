@@ -16,6 +16,7 @@ namespace RoBuddies.View
         public override void OnViewPortResize()
         {
             base.OnViewPortResize();
+
             if (this.AllElements != null && this.AllElements.Count > 0)
             {
                 this.AllElements[0].Position = new Vector2(this.Viewport.Width / 2, MenuPageBorder);

@@ -13,8 +13,13 @@ namespace RoBuddies.View
     {
         private HUDString timeElapsed;
 
+        private int HUD_height = 30; 
+
         public override void OnViewPortResize()
         {
+            this.viewport.Y = this.viewport.Height - this.HUD_height;
+            this.viewport.Height = this.HUD_height; 
+            this.backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
             if (timeElapsed != null)
             {
                 timeElapsed.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height / 2);

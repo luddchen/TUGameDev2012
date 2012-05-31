@@ -64,6 +64,20 @@ namespace RoBuddies.View.HUD
         /// </summary>
         public override void OnViewPortResize()
         {
+            Viewport newViewport = this.viewport;
+            if (newViewport.Width > this.PreferedWidth)
+            {
+                newViewport.X = newViewport.Width / 2 - this.PreferedWidth / 2;
+                newViewport.Width = this.PreferedWidth;
+            }
+            if (newViewport.Height > this.PreferedHeight)
+            {
+                newViewport.Y = newViewport.Height / 2 - this.PreferedHeight / 2;
+                newViewport.Height = this.PreferedHeight;
+            }
+            this.viewport = newViewport;
+            this.backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
+
             if (this.ActivePage != null)
             {
                 Viewport temp = this.viewport;
