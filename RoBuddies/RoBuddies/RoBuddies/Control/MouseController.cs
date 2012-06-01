@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RoBuddies.Model;
-using RoBuddies.Utilities;
+
 using FarseerPhysics.Dynamics;
-using RoBuddies.View;
 using FarseerPhysics.Dynamics.Joints;
 
+using RoBuddies.Model;
+using RoBuddies.Model.Objects;
+using RoBuddies.Utilities;
+using RoBuddies.View;
 using RoBuddies.View.HUD;
+using RoBuddies.Model.Serializer;
 
 namespace RoBuddies.Control
 {
@@ -20,12 +22,12 @@ namespace RoBuddies.Control
     class MouseController
     {
 
-        private HUDLevelView HUD;
+        private EditorView HUD;
         private EditorToolbar Toolbar;
         //private Camera camera;
         private HUDMouse mouse;
         private bool useToolbar = false;
-        public Level level { get; set; }
+        //public Level level { get; set; }
 
         /// <summary>
         /// the joint for moving the objects in the editor
@@ -53,11 +55,10 @@ namespace RoBuddies.Control
         /// <param name="level">the level which will be controlled by the mouse</param>
         /// <param name="camera">the camera of the level</param>
         /// <param name="mouse">the mouse model, which will be controlled</param>
-        public MouseController(HUDLevelView HUD, Level level, HUDMouse mouse)
+        public MouseController(EditorView HUD, HUDMouse mouse)
         {
             this.HUD = HUD;
-            this.Toolbar = ((EditorView)this.HUD).Toolbar;
-            this.level = level;
+            this.Toolbar = this.HUD.Toolbar;
             this.mouse = mouse;
         }
 
@@ -96,6 +97,9 @@ namespace RoBuddies.Control
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         ResetCamera();
+                        this.HUD.Level = new Level(new Vector2(0, 10));
+                        Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+                        this.HUD.Level.AddLayer(mainLayer);
                     }
                 }
                 else
@@ -109,6 +113,12 @@ namespace RoBuddies.Control
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         ResetCamera();
+                        Level loadedLevel = (new LevelReader(this.HUD.Game.Content)).readLevel("", "");
+                        if (loadedLevel != null)
+                        {
+                            this.HUD.Level = loadedLevel;
+                            Console.Out.WriteLine("Game loaded!");
+                        }
                     }
                 }
                 else
@@ -121,7 +131,8 @@ namespace RoBuddies.Control
                     this.Toolbar.saveButton.Scale = 0.45f;
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
-                        ResetCamera();
+                        (new LevelWriter(this.HUD.Level)).writeLevel("", "");
+                        Console.Out.WriteLine("Game saved!");
                     }
                 }
                 else
@@ -129,6 +140,49 @@ namespace RoBuddies.Control
                     this.Toolbar.saveButton.Scale = 0.4f;
                 }
 
+                if (this.Toolbar.WallButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+                {
+                    this.Toolbar.WallButton.Scale = 0.55f;
+                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                    {
+                        if (!isMovingObject)
+                        {
+                            Texture2D square = this.HUD.Game.Content.Load<Texture2D>("Sprites//Square");
+                            Random ran = new Random();
+                            Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+                            Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.HUD.Level);
+                            this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
+
+                            DragObject();
+                        }
+                    }
+                }
+                else
+                {
+                    this.Toolbar.WallButton.Scale = 0.5f;
+                }
+
+                if (this.Toolbar.WallButton2.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+                {
+                    this.Toolbar.WallButton2.Scale = 0.55f;
+                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                    {
+                        if (!isMovingObject)
+                        {
+                            Texture2D square = this.HUD.Game.Content.Load<Texture2D>("Sprites//Square");
+                            Random ran = new Random();
+                            Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+                            Wall wall1 = new Wall(this.CursorSimPos, new Vector2(1f, 5f), color, square, this.HUD.Level);
+                            this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
+
+                            DragObject();
+                        }
+                    }
+                }
+                else
+                {
+                    this.Toolbar.WallButton2.Scale = 0.5f;
+                }
 
             }
 
@@ -138,32 +192,11 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        //Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
-                        Fixture savedFixture = this.level.TestPoint(this.CursorSimPos);
-                        if (savedFixture != null)
-                        {
-                            //Console.Out.WriteLine("jap");
-                            clickedBody = savedFixture.Body;
-                            clickedBody.BodyType = BodyType.Dynamic;
-                            clickedBody.CollidesWith = Category.None;
-                            clickedBody.FixedRotation = true;
-                            fixedMouseJoint = new FixedMouseJoint(clickedBody, this.CursorSimPos);
-                            fixedMouseJoint.MaxForce = 1000.0f * clickedBody.Mass;
-                            this.level.AddJoint(fixedMouseJoint);
-                        }
-                        else // no object behind cursor position
-                        {
-                            //Console.Out.WriteLine("neee");
-                        }
+                        DragObject();
                     }
-                    else // drop current object
+                    else
                     {
-                        clickedBody.BodyType = BodyType.Static;
-                        clickedBody.CollidesWith = Category.All;
-                        clickedBody.Position = adjustAtGrid(clickedBody.Position);
-                        this.level.RemoveJoint(fixedMouseJoint);
-                        clickedBody = null;
-                        fixedMouseJoint = null;
+                        DropObject();
                     }
                 }
             }
@@ -285,6 +318,37 @@ namespace RoBuddies.Control
             this.HUD.Camera.Move(Vector2.Zero);
             this.HUD.Camera.Rotation = 0.0f;
             this.HUD.Camera.Zoom = 1.0f;
+        }
+
+        private void DragObject()
+        {
+            //Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
+            Fixture savedFixture = this.HUD.Level.TestPoint(this.CursorSimPos);
+            if (savedFixture != null)
+            {
+                //Console.Out.WriteLine("jap");
+                clickedBody = savedFixture.Body;
+                clickedBody.BodyType = BodyType.Dynamic;
+                clickedBody.CollidesWith = Category.None;
+                clickedBody.FixedRotation = true;
+                fixedMouseJoint = new FixedMouseJoint(clickedBody, this.CursorSimPos);
+                fixedMouseJoint.MaxForce = 1000.0f * clickedBody.Mass;
+                this.HUD.Level.AddJoint(fixedMouseJoint);
+            }
+            else // no object behind cursor position
+            {
+                //Console.Out.WriteLine("neee");
+            }
+        }
+
+        private void DropObject() 
+        {
+            clickedBody.BodyType = BodyType.Static;
+            clickedBody.CollidesWith = Category.All;
+            clickedBody.Position = adjustAtGrid(clickedBody.Position);
+            this.HUD.Level.RemoveJoint(fixedMouseJoint);
+            clickedBody = null;
+            fixedMouseJoint = null;
         }
 
     }

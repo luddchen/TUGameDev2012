@@ -46,7 +46,7 @@ namespace RoBuddies.View
 
             this.Mouse = new HUDMouse(game.Content);
             this.AllElements.Add(this.Mouse);
-            this.mouseController = new MouseController(this, this.Level, this.Mouse);
+            this.mouseController = new MouseController(this, this.Mouse);
 
             this.DownArrow = new HUDTexture(game.Content);
             this.DownArrow.Color = new Color(128, 128, 128, 128);
@@ -77,6 +77,9 @@ namespace RoBuddies.View
             this.UpArrow.Height = 25;
             this.UpArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
             this.AllElements.Add(this.UpArrow);
+
+            Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            this.Level.AddLayer(mainLayer);
         }
 
         public override void Update(GameTime gameTime)
@@ -86,53 +89,6 @@ namespace RoBuddies.View
             this.Toolbar.Update(gameTime);
 
             KeyboardState newKeyboardState = Keyboard.GetState();
-
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftControl))
-            {
-                if (Keyboard.GetState().IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
-                {
-                    (new LevelWriter(this.Level)).writeLevel("", "");
-                    Console.Out.WriteLine("Game saved!");
-                }
-                if (Keyboard.GetState().IsKeyDown(Keys.L) && oldKeyboardState.IsKeyUp(Keys.L))
-                {
-                    Level loadedLevel = (new LevelReader(this.Game.Content)).readLevel("", "");
-                    if (loadedLevel != null)
-                    {
-                        this.mouseController.level = loadedLevel;
-                        this.Level = loadedLevel;
-                        Console.Out.WriteLine("Game loaded!");
-                    }
-                }
-            }
-
-            // just for the presentation:
-            if (newKeyboardState.IsKeyDown(Keys.A) && oldKeyboardState.IsKeyUp(Keys.A))
-            {
-                Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                Random ran = new Random();
-                Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                Wall wall1 = new Wall(this.mouseController.CursorSimPos, new Vector2(5f, 1f), color, square, this.Level);
-                this.Level.GetLayerByName("mainLayer").AddObject(wall1);
-            }
-            if (newKeyboardState.IsKeyDown(Keys.Q) && oldKeyboardState.IsKeyUp(Keys.Q))
-            {
-                Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                Random ran = new Random();
-                Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                Wall wall1 = new Wall(this.mouseController.CursorSimPos, new Vector2(1f, 5f), color, square, this.Level);
-                this.Level.GetLayerByName("mainLayer").AddObject(wall1);
-            }
-
-            // testing the layer - bug
-            if (newKeyboardState.IsKeyDown(Keys.X) && oldKeyboardState.IsKeyUp(Keys.X))
-            {
-                Console.Out.WriteLine(this.Level.AllLayers.Count +" layer(s)");
-                foreach (Layer layer in this.Level.AllLayers)
-                {
-                    Console.Out.WriteLine("Layer : " + layer.Name);
-                }
-            }
 
             oldKeyboardState = newKeyboardState;
         }

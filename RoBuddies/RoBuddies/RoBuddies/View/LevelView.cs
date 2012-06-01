@@ -35,6 +35,10 @@ namespace RoBuddies.View
             this.HUD = new LevelHUD(game);
 
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
+
+            Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            this.Level.AddLayer(mainLayer);
+
             //  some testing code here --------------------------------------------------------------------------
                 // ladder test
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
@@ -71,9 +75,9 @@ namespace RoBuddies.View
                     this.Level.AddStateMachine(stateMachine);
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    this.mainLayer.AddObject(ladder);
-                    this.mainLayer.AddObject(box1);
-                    this.mainLayer.AddObject(body2);
+                    mainLayer.AddObject(ladder);
+                    mainLayer.AddObject(box1);
+                    mainLayer.AddObject(body2);
                     this.Level.AllLayers.Add(mainLayer);
 
                 // body 3

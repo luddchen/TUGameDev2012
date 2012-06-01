@@ -21,7 +21,7 @@ namespace RoBuddies.View.HUD
     {
         protected Texture2D stop;
 
-        protected Layer mainLayer;
+        //protected Layer mainLayer;
 
         /// <summary>
         /// space between levelbottom and screen bottom
@@ -56,8 +56,8 @@ namespace RoBuddies.View.HUD
             this.Level = new Level(new Vector2(0, -10f));
 
             // layer
-            this.mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
-            this.Level.AddLayer(mainLayer);
+            //this.mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            //this.Level.AddLayer(mainLayer);
         }
 
 
