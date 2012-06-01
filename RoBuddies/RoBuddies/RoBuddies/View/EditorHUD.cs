@@ -12,8 +12,8 @@ namespace RoBuddies.View
     public class EditorHUD : HUD.HUD
     {
 
-        private int HUD_height = 150;
-        private int HUD_width = 250;
+        private int HUD_height = 200;
+        private int HUD_width = 200;
 
         public override void OnViewPortResize()
         {
@@ -27,7 +27,7 @@ namespace RoBuddies.View
         public EditorHUD(RoBuddies game)
             : base(game)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
             this.backgroundColor = new Color(0, 0, 0, 160);
             this.AllElements.Add( new HUDString("Toolbar", null, new Vector2(this.HUD_width/2, this.HUD_height/2), Color.Red, 0.7f, 0, game.Content) );
 

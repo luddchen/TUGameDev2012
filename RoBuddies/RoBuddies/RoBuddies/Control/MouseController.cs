@@ -33,7 +33,7 @@ namespace RoBuddies.Control
         /// </summary>
         Body clickedBody;
 
-        private Vector2 CursorSimPos
+        public Vector2 CursorSimPos
         {
             get { return ConvertUnits.ToSimUnits(this.camera.screenToWorld(mouse.Position, new Vector2(1, 1))); }
         }
