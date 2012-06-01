@@ -56,8 +56,8 @@ namespace RoBuddies.View.HUD
             this.Level = new Level(new Vector2(0, -10f));
 
             // layer
-            this.mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f, this.Level);
-            this.Level.AllLayers.Add(mainLayer);
+            this.mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            this.Level.AddLayer(mainLayer);
         }
 
 
@@ -81,7 +81,7 @@ namespace RoBuddies.View.HUD
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
 
-            this.Game.SpriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
+            spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
 
             foreach (IBody body in layer.AllObjects)
             {
@@ -92,19 +92,14 @@ namespace RoBuddies.View.HUD
                     (int)displayPos.Y,
                     (int)ConvertUnits.ToDisplayUnits(body.Width),
                     (int)ConvertUnits.ToDisplayUnits(body.Height));
-                this.Game.SpriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
+                spriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
             }
 
-            this.Game.SpriteBatch.End();
+            spriteBatch.End();
         }
 
-        /// <summary>
-        /// draw all layers
-        /// </summary>
-        /// <param name="spriteBtach">spritebatch</param>
-        public override void Draw(SpriteBatch spriteBatch)
+        protected override void DrawContent(SpriteBatch spriteBatch)
         {
-            base.Draw(spriteBatch);
             foreach (Layer layer in this.Level.AllLayers)
             {
                 // todo : order layer (layerDepth)
@@ -112,5 +107,6 @@ namespace RoBuddies.View.HUD
                 Draw(layer, spriteBatch);
             }
         }
+
     }
 }

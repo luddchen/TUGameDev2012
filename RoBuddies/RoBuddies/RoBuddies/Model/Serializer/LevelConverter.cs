@@ -33,8 +33,10 @@ namespace RoBuddies.Model.Serializer
             foreach (JToken layerToken in layerTokens)
             {
                 Layer layer = serializer.Deserialize<Layer>(layerToken.CreateReader());
-                layer.Level = level;
-                level.AllLayers.Add(layer);
+                if (level.GetLayerByName(layer.Name) == null)
+                {
+                    level.AddLayer(layer);
+                }
             }
             return level;
         }

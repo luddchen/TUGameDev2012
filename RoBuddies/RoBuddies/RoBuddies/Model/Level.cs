@@ -23,15 +23,34 @@ namespace RoBuddies.Model
         /// </summary>
         private Robot Robot { get; set; }
 
+        private List<Layer> allLayers;
+
+        private List<StateMachine> allStateMachines;
+
         /// <summary>
         /// list of all layers in this level
         /// </summary>
-        public List<Layer> AllLayers { get; set; }
+        public List<Layer> AllLayers { get { return this.allLayers; } }
+
+        public void AddLayer(Layer layer)
+        {
+            if (this.GetLayerByName(layer.Name) != null)
+            {
+                throw new System.ArgumentException("a layer with this name already exists", layer.Name);
+            }
+            this.AllLayers.Add(layer);
+            layer.Level = this;
+        }
 
         /// <summary>
         /// list of all active Statemachines
         /// </summary>
-        public List<StateMachine> AllStateMachines;
+        public List<StateMachine> AllStateMachines { get { return this.allStateMachines; } }
+
+        public void AddStateMachine(StateMachine stateMachine)
+        {
+            this.AllStateMachines.Add(stateMachine);
+        }
 
         /// <summary>
         /// creates a new world / level
@@ -40,8 +59,8 @@ namespace RoBuddies.Model
         public Level(Vector2 gravity)
             : base(gravity)
         {
-            this.AllLayers = new List<Layer>();
-            this.AllStateMachines = new List<StateMachine>();
+            this.allLayers = new List<Layer>();
+            this.allStateMachines = new List<StateMachine>();
             this.Background = Color.DeepSkyBlue;
         }
 

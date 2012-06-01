@@ -102,6 +102,12 @@ namespace RoBuddies.View.HUD
         }
 
         /// <summary>
+        /// draw the content in front of background and back of HUD elements
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        protected virtual void DrawContent(SpriteBatch spriteBatch) { }
+
+        /// <summary>
         /// draw all elements and background
         /// </summary>
         /// <param name="spriteBtach">spritebatch</param>
@@ -118,9 +124,15 @@ namespace RoBuddies.View.HUD
                     spriteBatch.Draw(this.background, this.backgroundDest, this.backgroundColor);
                 }
 
+                spriteBatch.End();
+
+                this.DrawContent(spriteBatch);
+
+                spriteBatch.Begin();
+
                 foreach (IHUDElement element in AllElements)
                 {
-                    element.Draw(this.Game.SpriteBatch);
+                    element.Draw(spriteBatch);
                 }
 
                 spriteBatch.End();

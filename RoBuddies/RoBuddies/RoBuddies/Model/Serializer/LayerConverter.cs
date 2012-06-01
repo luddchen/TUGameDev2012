@@ -30,15 +30,19 @@ namespace RoBuddies.Model.Serializer
             JToken tokens = JObject.ReadFrom(reader).First();
             String name = tokens.SelectToken("Name").ToObject<String>();
             Vector2 parallax = tokens.SelectToken("Parallax").ToObject<Vector2>();
-            float LayerDepth = tokens.SelectToken("LayerDepth").ToObject<float>();;
-            Layer layer = new Layer(name, parallax, LayerDepth, null);
+            float LayerDepth = tokens.SelectToken("LayerDepth").ToObject<float>();
+
+            // test if layer exists
+            Layer layer = level.GetLayerByName(name);
+            if (layer == null) { layer = new Layer(name, parallax, LayerDepth); }
+
             IJEnumerable<JToken> wallTokens = tokens.SelectToken("Walls").Values();
             foreach (JToken wallToken in wallTokens)
             {
                 Wall wall = serializer.Deserialize<Wall>(wallToken.CreateReader());
-                layer.AllObjects.Add(wall);
+                layer.AddObject(wall);
             }
-            level.AllLayers.Add(layer);
+            level.AddLayer(layer);
             return layer;
         }
 

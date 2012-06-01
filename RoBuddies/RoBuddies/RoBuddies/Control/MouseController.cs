@@ -118,6 +118,11 @@ namespace RoBuddies.Control
                 );
             this.mouse.Position = mousePosition;
 
+            if (this.mouse.Position.Y < 50) { this.camera.Move(this.camera.Position + new Vector2(0, -3)); }
+            if (this.mouse.Position.Y > this.camera.Viewport.Height - 50) { this.camera.Move(this.camera.Position + new Vector2(0, 3)); }
+            if (this.mouse.Position.X < 50) { this.camera.Move(this.camera.Position + new Vector2(-3,0)); }
+            if (this.mouse.Position.X > this.camera.Viewport.Width - 50) { this.camera.Move(this.camera.Position + new Vector2(3,0)); }
+
             if (fixedMouseJoint != null)
             {
                 fixedMouseJoint.WorldAnchorB = this.CursorSimPos;

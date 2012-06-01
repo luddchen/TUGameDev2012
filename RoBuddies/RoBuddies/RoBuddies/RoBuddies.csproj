@@ -152,6 +152,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="RoBuddies.cs" />
+    <Compile Include="Model\Serializer\LevelWriter.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\EditorHUD.cs" />

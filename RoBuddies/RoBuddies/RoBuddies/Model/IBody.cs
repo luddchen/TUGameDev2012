@@ -38,7 +38,5 @@ namespace RoBuddies.Model
 
         Layer Layer { get; set; }
 
-        Level World { get; set; }
-
     }
 }

@@ -11,6 +11,7 @@ namespace RoBuddies.Model
     /// </summary>
     public class Layer
     {
+        private List<IBody> allObjects;
 
         /// <summary>
         /// name for this layer, only for identification without knowing a reference, dont know if we need
@@ -35,10 +36,17 @@ namespace RoBuddies.Model
         /// <summary>
         /// list of all objects on this layer
         /// </summary>
-        public List<IBody> AllObjects;
+        public List<IBody> AllObjects { get { return this.allObjects; } }
 
-
-
+        /// <summary>
+        /// add a object to this layer
+        /// </summary>
+        /// <param name="body"></param>
+        public void AddObject(IBody body)
+        {
+            this.AllObjects.Add(body);
+            body.Layer = this;
+        }
 
         /// <summary>
         /// creates a new layer
@@ -46,13 +54,12 @@ namespace RoBuddies.Model
         /// <param name="name">name for this layer, only for identification without knowing a reference</param>
         /// <param name="parallax">value for paralax-scrolling</param>
         /// <param name="layerDepth">the depth for drawing, see SpriteBatch.Draw</param>
-        public Layer(String name, Vector2 parallax, float layerDepth, Level level)
+        public Layer(String name, Vector2 parallax, float layerDepth)
         {
             this.Name = name;
             this.Parallax = parallax;
             this.LayerDepth = layerDepth;
-            this.Level = level;
-            this.AllObjects = new List<IBody>(); 
+            this.allObjects = new List<IBody>(); 
         }
 
     }

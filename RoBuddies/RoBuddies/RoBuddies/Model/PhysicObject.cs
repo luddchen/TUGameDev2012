@@ -30,7 +30,7 @@ namespace RoBuddies.Model
             set;
         }
 
-        public virtual Texture2D Texture
+        public Texture2D Texture
         {
             get
             {
@@ -60,7 +60,7 @@ namespace RoBuddies.Model
             set;
         }
 
-        public virtual Vector2 Origin
+        public Vector2 Origin
         {
             get;
             set;
@@ -72,17 +72,10 @@ namespace RoBuddies.Model
             set;
         }
 
-        public Level World
-        {
-            get;
-            set;
-        }
-
         public PhysicObject(World world)
             : base(world)
         {
-            this.World = (Level)world;
-            this.Effect = SpriteEffects.None;
+            //this.Effect = SpriteEffects.None;
         }
 
     }

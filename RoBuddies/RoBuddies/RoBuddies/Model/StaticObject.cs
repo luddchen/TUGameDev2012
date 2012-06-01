@@ -38,7 +38,7 @@ namespace RoBuddies.Model
             set;
         }
 
-        public virtual Texture2D Texture
+        public Texture2D Texture
         {
             get
             {
@@ -76,12 +76,6 @@ namespace RoBuddies.Model
         }
 
         public Layer Layer
-        {
-            get;
-            set;
-        }
-
-        public Level World
         {
             get;
             set;

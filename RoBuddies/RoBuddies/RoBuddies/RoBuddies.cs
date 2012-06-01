@@ -24,7 +24,7 @@ namespace RoBuddies
 
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
-        public SpriteBatch SpriteBatch {get; set; } // need that somehow in LevelView, Menu and HUD
+        SpriteBatch SpriteBatch;
 
         HUDLevelView LevelView;
         HUDMenu LevelMenu;
@@ -34,16 +34,13 @@ namespace RoBuddies
         HUDMenu EditorMenu;
         HUD EditorHUD;
 
-        HUDLevelView View;
-        HUDMenu Menu;
-        HUD HUD;
+        public HUDLevelView View;
+        public HUDMenu Menu;
+        public HUD HUD;
 
-        public ViewMode currentViewMode = ViewMode.Level;
+        ViewMode currentViewMode = ViewMode.Level;
 
-
-        private MouseController mouseController;
-
-        private bool viewModeChanged = false;
+        bool viewModeChanged = false;
 
         public RoBuddies()
         {
@@ -92,8 +89,6 @@ namespace RoBuddies
 
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
-
-            this.mouseController = new MouseController(this, this.EditorView.Level, this.EditorView.Camera, ((EditorView)this.EditorView).Mouse );
         }
 
         /// <summary>
@@ -110,7 +105,6 @@ namespace RoBuddies
             View.Update(gameTime);
             Menu.Update(gameTime);
             HUD.Update(gameTime);
-            this.mouseController.Update(gameTime);
 
             // testing camera
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
@@ -149,6 +143,10 @@ namespace RoBuddies
             this.viewModeChanged = false;
         }
 
+        /// <summary>
+        /// switch between game and editor
+        /// </summary>
+        /// <param name="mode">the new viewmode</param>
         public void SwitchToViewMode( ViewMode mode ) 
         {
             this.currentViewMode = mode;

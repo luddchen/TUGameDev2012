@@ -52,7 +52,7 @@ namespace RoBuddies.View
                     stateMachine.AllStates.Add(jumpState);
                     stateMachine.AllStates.Add(walkingState);
                     stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-                    this.Level.AllStateMachines.Add(stateMachine);
+                    this.Level.AddStateMachine(stateMachine);
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     this.mainLayer.AllObjects.Add(box1);
