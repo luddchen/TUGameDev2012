@@ -138,6 +138,7 @@
     <Compile Include="Model\Level.cs" />
     <Compile Include="Model\Objects\Crate.cs" />
     <Compile Include="Model\Objects\Door.cs" />
+    <Compile Include="Model\Objects\Ladder.cs" />
     <Compile Include="Model\Objects\Pipe.cs" />
     <Compile Include="Model\Objects\Switch.cs" />
     <Compile Include="Model\Objects\Wall.cs" />

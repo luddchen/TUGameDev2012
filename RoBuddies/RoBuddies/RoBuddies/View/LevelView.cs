@@ -38,11 +38,12 @@ namespace RoBuddies.View
             //  some testing code here --------------------------------------------------------------------------
 
                 // body1
-                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
+                    //Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
+                    Pipe box1 = new Pipe(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);                   
                     box1.BodyType = BodyType.Dynamic;
 
                 // body 2
