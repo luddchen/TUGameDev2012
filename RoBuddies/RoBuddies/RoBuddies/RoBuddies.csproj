@@ -155,6 +155,7 @@
     <Compile Include="RoBuddies.cs" />
     <Compile Include="Model\Serializer\LevelWriter.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
+    <Compile Include="Utilities\TextureConverter.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\EditorToolbar.cs" />
     <Compile Include="View\EditorView.cs" />

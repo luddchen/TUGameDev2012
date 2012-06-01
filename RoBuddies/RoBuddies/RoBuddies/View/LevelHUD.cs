@@ -31,7 +31,7 @@ namespace RoBuddies.View
         public LevelHUD(RoBuddies game)
             : base(game)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Circle");
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
             this.backgroundColor = new Color(0, 0, 0, 160);
 
             timeElapsed = new HUDString("", null, null, null, null, 0.5f, null, this.Game.Content);
