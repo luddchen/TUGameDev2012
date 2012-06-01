@@ -40,32 +40,35 @@ namespace RoBuddies.View
         {
             this.Mouse = new HUDMouse(game.Content);
             this.AllElements.Add(this.Mouse);
-            this.mouseController = new MouseController(this.Game, this.Level, this.Camera, this.Mouse);
+            this.mouseController = new MouseController(this, this.Level, this.Mouse);
 
             this.DownArrow = new HUDTexture(game.Content);
             this.DownArrow.Color = new Color(0, 0, 0, 128);
             this.DownArrow.Width = 100;
-            this.DownArrow.Rotation = MathHelper.ToRadians(180);
+            this.DownArrow.Height = 25;
+            this.DownArrow.Effect = SpriteEffects.FlipVertically;
             this.DownArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
             this.AllElements.Add(this.DownArrow);
 
             this.LeftArrow = new HUDTexture(game.Content);
             this.LeftArrow.Color = new Color(0, 0, 0, 128);
-            this.LeftArrow.Width = 100;
-            this.LeftArrow.Rotation = MathHelper.ToRadians(90);
-            this.LeftArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
+            this.LeftArrow.Width = 25;
+            this.LeftArrow.Height = 100;
+            this.LeftArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow90");
             this.AllElements.Add(this.LeftArrow);
 
             this.RightArrow = new HUDTexture(game.Content);
             this.RightArrow.Color = new Color(0, 0, 0, 128);
-            this.RightArrow.Width = 100;
-            this.RightArrow.Rotation = MathHelper.ToRadians(-90);
-            this.RightArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
+            this.RightArrow.Width = 25;
+            this.RightArrow.Height = 100;
+            this.RightArrow.Effect = SpriteEffects.FlipHorizontally;
+            this.RightArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow90");
             this.AllElements.Add(this.RightArrow);
 
             this.UpArrow = new HUDTexture(game.Content);
             this.UpArrow.Color = new Color(0, 0, 0, 128);
             this.UpArrow.Width = 100;
+            this.UpArrow.Height = 25;
             this.UpArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
             this.AllElements.Add(this.UpArrow);
         }

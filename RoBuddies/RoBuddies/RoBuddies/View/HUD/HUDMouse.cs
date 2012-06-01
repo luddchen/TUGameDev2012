@@ -58,6 +58,7 @@ namespace RoBuddies.View.HUD
             this.Position = new Vector2(100,100);
             this.Texture = content.Load<Texture2D>("Sprites//Cursor");
             this.Width = 20;
+            this.Height = 20;
         }
 
     }

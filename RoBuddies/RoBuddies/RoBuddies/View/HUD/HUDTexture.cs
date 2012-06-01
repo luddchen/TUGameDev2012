@@ -83,6 +83,7 @@ namespace RoBuddies.View.HUD
             this.Color = Color.White;
             this.Texture = content.Load<Texture2D>("Sprites//Circle");
             this.Width = 10;
+            this.Height = 10;
             this.Scale = 1.0f;
         }
 
@@ -99,15 +100,38 @@ namespace RoBuddies.View.HUD
         /// <param name="spriteBatch">the spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
+            Rectangle dest = new Rectangle(
+                    (int)Position.X,
+                    (int)Position.Y,
+                    (int)(Width * Scale),
+                    (int)(Height* Scale));
             spriteBatch.Draw(this.Texture,
-                            this.Position,
+                            dest,
                             null,
                             this.Color,
                             -this.Rotation,
                             this.Origin,
-                            this.Scale * this.Width / this.Texture.Width,
                             this.Effect,
                             0.0f);
+        }
+
+        /// <summary>
+        /// testing intersection with point
+        /// </summary>
+        /// <param name="point">the test point</param>
+        /// <returns>true if there is an intersetion</returns>
+        public bool Intersects(Vector2 point)
+        {
+            if (Rotation != 0)
+            {
+                return false;
+            }
+            if (point.X < Position.X - Scale*Width/2 || point.X > Position.X + Scale*Width/2 ||
+                point.Y < Position.Y - Scale*Height/2 || point.Y > Position.Y + Scale*Height/2)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

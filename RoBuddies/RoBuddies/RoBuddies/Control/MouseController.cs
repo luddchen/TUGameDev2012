@@ -19,8 +19,9 @@ namespace RoBuddies.Control
     /// </summary>
     class MouseController
     {
-        private RoBuddies game;
-        private Camera camera;
+
+        private HUDLevelView HUD; 
+        //private Camera camera;
         private HUDMouse mouse;
         public Level level { get; set; }
 
@@ -35,7 +36,7 @@ namespace RoBuddies.Control
 
         public Vector2 CursorSimPos
         {
-            get { return ConvertUnits.ToSimUnits(this.camera.screenToWorld(mouse.Position, new Vector2(1, 1))); }
+            get { return ConvertUnits.ToSimUnits(this.HUD.Camera.screenToWorld(mouse.Position, new Vector2(1, 1))); }
         }
 
         private bool isMovingObject
@@ -50,11 +51,10 @@ namespace RoBuddies.Control
         /// <param name="level">the level which will be controlled by the mouse</param>
         /// <param name="camera">the camera of the level</param>
         /// <param name="mouse">the mouse model, which will be controlled</param>
-        public MouseController(RoBuddies game, Level level, Camera camera, HUDMouse mouse)
+        public MouseController(HUDLevelView HUD, Level level, HUDMouse mouse)
         {
-            this.game = game;
+            this.HUD = HUD;
             this.level = level;
-            this.camera = camera;
             this.mouse = mouse;
         }
 
@@ -113,15 +113,15 @@ namespace RoBuddies.Control
 
             this.mouse.Position = new Vector2(this.mouse.CurrentMouseState.X, this.mouse.CurrentMouseState.Y);
             Vector2 mousePosition = new Vector2(
-                MathHelper.Clamp(this.mouse.Position.X, 0f, game.GraphicsDevice.Viewport.Width),
-                MathHelper.Clamp(this.mouse.Position.Y, 0f, game.GraphicsDevice.Viewport.Height)
+                MathHelper.Clamp(this.mouse.Position.X, 0f, this.HUD.Viewport.Width),
+                MathHelper.Clamp(this.mouse.Position.Y, 0f, this.HUD.Viewport.Height)
                 );
             this.mouse.Position = mousePosition;
 
-            if (this.mouse.Position.Y < 50) { this.camera.Move(this.camera.Position + new Vector2(0, -3)); }
-            if (this.mouse.Position.Y > this.camera.Viewport.Height - 50) { this.camera.Move(this.camera.Position + new Vector2(0, 3)); }
-            if (this.mouse.Position.X < 50) { this.camera.Move(this.camera.Position + new Vector2(-3,0)); }
-            if (this.mouse.Position.X > this.camera.Viewport.Width - 50) { this.camera.Move(this.camera.Position + new Vector2(3,0)); }
+            this.CameraMoveConstraint(((EditorView)(this.HUD)).UpArrow, new Vector2(0, -3));
+            this.CameraMoveConstraint(((EditorView)(this.HUD)).DownArrow, new Vector2(0, 3));
+            this.CameraMoveConstraint(((EditorView)(this.HUD)).LeftArrow, new Vector2(-3, 0));
+            this.CameraMoveConstraint(((EditorView)(this.HUD)).RightArrow, new Vector2(3, 0));
 
             if (fixedMouseJoint != null)
             {
@@ -173,5 +173,19 @@ namespace RoBuddies.Control
                     return false;
             }
         }
+
+        private void CameraMoveConstraint(HUDTexture obj, Vector2 moveStep)
+        {
+            if (obj.Intersects(this.mouse.Position))
+            {
+                obj.Scale = 1.2f;
+                this.HUD.Camera.Move(this.HUD.Camera.Position + moveStep);
+            }
+            else
+            {
+                obj.Scale = 1.0f;
+            }
+        }
+
     }
 }
