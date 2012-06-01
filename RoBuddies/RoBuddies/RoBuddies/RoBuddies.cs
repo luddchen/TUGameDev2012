@@ -28,15 +28,12 @@ namespace RoBuddies
 
         HUDLevelView LevelView;
         HUDMenu LevelMenu;
-        HUD LevelHUD; 
 
         HUDLevelView EditorView;
         HUDMenu EditorMenu;
-        HUD EditorHUD;
 
         public HUDLevelView View;
         public HUDMenu Menu;
-        public HUD HUD;
 
         ViewMode currentViewMode = ViewMode.Level;
 
@@ -62,7 +59,6 @@ namespace RoBuddies
 
             View.Viewport = this.ViewPort;
             Menu.Viewport = this.ViewPort;
-            HUD.Viewport = this.ViewPort;
         }
 
         /// <summary>
@@ -81,11 +77,9 @@ namespace RoBuddies
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
             LevelMenu = new LevelMenu(this);
-            LevelHUD = new LevelHUD(this);
 
             EditorView = new EditorView(this);
             EditorMenu = new EditorMenu(this);
-            EditorHUD = new EditorHUD(this);
 
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
@@ -104,7 +98,6 @@ namespace RoBuddies
         {
             View.Update(gameTime);
             Menu.Update(gameTime);
-            HUD.Update(gameTime);
 
             // testing camera
             if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
@@ -129,13 +122,11 @@ namespace RoBuddies
             {
                 this.View = this.LevelView;
                 this.Menu = this.LevelMenu;
-                this.HUD = this.LevelHUD;
             }
             if (this.currentViewMode == ViewMode.Editor)
             {
                 this.View = this.EditorView;
                 this.Menu = this.EditorMenu;
-                this.HUD = this.EditorHUD;
             }
             this.Menu.IsVisible = false;
 
@@ -170,7 +161,6 @@ namespace RoBuddies
 
             View.Draw(SpriteBatch);
             Menu.Draw(SpriteBatch);
-            HUD.Draw(SpriteBatch);
 
             GraphicsDevice.Viewport = this.ViewPort;
         }

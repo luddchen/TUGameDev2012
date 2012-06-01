@@ -17,6 +17,8 @@ namespace RoBuddies.View
     {
         MouseController mouseController;
 
+        public HUD.HUD Toolbar;
+
         private KeyboardState oldKeyboardState;
 
         public HUDMouse Mouse;
@@ -33,17 +35,21 @@ namespace RoBuddies.View
             if (this.DownArrow != null) this.DownArrow.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height - 15);
             if (this.LeftArrow != null) this.LeftArrow.Position = new Vector2(15, this.viewport.Height/2);
             if (this.RightArrow != null) this.RightArrow.Position = new Vector2(this.viewport.Width - 15, this.viewport.Height / 2);
+
+            if (this.Toolbar != null) { this.Toolbar.Viewport = this.viewport; }
         }
 
         public EditorView(RoBuddies game)
             : base(game)
         {
+            this.Toolbar = new EditorToolbar(game);
+
             this.Mouse = new HUDMouse(game.Content);
             this.AllElements.Add(this.Mouse);
             this.mouseController = new MouseController(this, this.Level, this.Mouse);
 
             this.DownArrow = new HUDTexture(game.Content);
-            this.DownArrow.Color = new Color(0, 0, 0, 128);
+            this.DownArrow.Color = new Color(128, 128, 128, 128);
             this.DownArrow.Width = 100;
             this.DownArrow.Height = 25;
             this.DownArrow.Effect = SpriteEffects.FlipVertically;
@@ -51,14 +57,14 @@ namespace RoBuddies.View
             this.AllElements.Add(this.DownArrow);
 
             this.LeftArrow = new HUDTexture(game.Content);
-            this.LeftArrow.Color = new Color(0, 0, 0, 128);
+            this.LeftArrow.Color = new Color(128, 128, 128, 128);
             this.LeftArrow.Width = 25;
             this.LeftArrow.Height = 100;
             this.LeftArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow90");
             this.AllElements.Add(this.LeftArrow);
 
             this.RightArrow = new HUDTexture(game.Content);
-            this.RightArrow.Color = new Color(0, 0, 0, 128);
+            this.RightArrow.Color = new Color(128, 128, 128, 128);
             this.RightArrow.Width = 25;
             this.RightArrow.Height = 100;
             this.RightArrow.Effect = SpriteEffects.FlipHorizontally;
@@ -66,7 +72,7 @@ namespace RoBuddies.View
             this.AllElements.Add(this.RightArrow);
 
             this.UpArrow = new HUDTexture(game.Content);
-            this.UpArrow.Color = new Color(0, 0, 0, 128);
+            this.UpArrow.Color = new Color(128, 128, 128, 128);
             this.UpArrow.Width = 100;
             this.UpArrow.Height = 25;
             this.UpArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
@@ -77,6 +83,7 @@ namespace RoBuddies.View
         {
             base.Update(gameTime);
             this.mouseController.Update(gameTime);
+            this.Toolbar.Update(gameTime);
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
@@ -128,6 +135,13 @@ namespace RoBuddies.View
             }
 
             oldKeyboardState = newKeyboardState;
+        }
+
+
+        protected override void DrawContent(SpriteBatch spriteBatch)
+        {
+            base.DrawContent(spriteBatch);
+            this.Toolbar.Draw(spriteBatch);
         }
     }
 }

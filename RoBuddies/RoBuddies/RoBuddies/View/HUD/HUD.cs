@@ -127,6 +127,7 @@ namespace RoBuddies.View.HUD
                 spriteBatch.End();
 
                 this.DrawContent(spriteBatch);
+                this.Game.GraphicsDevice.Viewport = this.Viewport;
 
                 spriteBatch.Begin();
 

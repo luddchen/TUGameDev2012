@@ -19,9 +19,21 @@ namespace RoBuddies.View
 {
     public class LevelView : HUD.HUDLevelView
     {
+        public HUD.HUD HUD;
+
+        public override void OnViewPortResize()
+        {
+            base.OnViewPortResize();
+            if (this.HUD != null)
+            {
+                this.HUD.Viewport = this.viewport;
+            }
+        }
 
         public LevelView(RoBuddies game) : base(game)
         {
+            this.HUD = new LevelHUD(game);
+
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             //  some testing code here --------------------------------------------------------------------------
 
@@ -74,6 +86,18 @@ namespace RoBuddies.View
                         mainLayer.AllObjects.Add(body3);
                     }
             // end testing code ---------------------------------------------------------------------------------
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            this.HUD.Update(gameTime);
+        }
+
+        protected override void DrawContent(SpriteBatch spriteBatch)
+        {
+            base.DrawContent(spriteBatch);
+            this.HUD.Draw(spriteBatch);
         }
 
     }

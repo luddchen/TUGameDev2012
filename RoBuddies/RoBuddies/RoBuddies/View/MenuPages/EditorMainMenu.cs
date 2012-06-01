@@ -25,7 +25,7 @@ namespace RoBuddies.View.MenuPages
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
 
-            level = new HUDString("Game", null, null, null, 0.7f, null, content);
+            level = new HUDString("Game", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(level);
             this.ChoiceList.Add(level);
 

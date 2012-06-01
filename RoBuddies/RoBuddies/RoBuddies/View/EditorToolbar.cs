@@ -9,7 +9,7 @@ using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {
-    public class EditorHUD : HUD.HUD
+    public class EditorToolbar : HUD.HUD
     {
 
         private int HUD_height = 200;
@@ -17,19 +17,19 @@ namespace RoBuddies.View
 
         public override void OnViewPortResize()
         {
-            this.viewport.Y = -10 + this.viewport.Height - this.HUD_height;
-            this.viewport.X += 10;
+            this.viewport.Y = -1 + this.viewport.Height - this.HUD_height;
+            this.viewport.X += 1;
             this.viewport.Height = this.HUD_height;
             this.viewport.Width = this.HUD_width;
             this.backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
         }
 
-        public EditorHUD(RoBuddies game)
+        public EditorToolbar(RoBuddies game)
             : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
-            this.backgroundColor = new Color(0, 0, 0, 160);
-            this.AllElements.Add( new HUDString("Toolbar", null, new Vector2(this.HUD_width/2, this.HUD_height/2), Color.Red, 0.7f, 0, game.Content) );
+            this.backgroundColor = new Color(0, 0, 0, 192);
+            this.AllElements.Add( new HUDString("Toolbar", null, new Vector2(this.HUD_width/2, this.HUD_height/2), Color.Red, null, 0.7f, 0, game.Content) );
 
         }
 

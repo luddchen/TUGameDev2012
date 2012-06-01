@@ -16,6 +16,9 @@ namespace RoBuddies.View.HUD
         protected SpriteFont font;
 
         private Vector2 measureString;
+        private Color BackgroundColor;
+        private Texture2D BackgroundTexture;
+        private Vector2 BackgroundTextureOrigin;
 
         /// <summary>
         /// name of this element
@@ -92,7 +95,7 @@ namespace RoBuddies.View.HUD
             this.Scale = 1.0f;
         }
 
-        public HUDString(String text, SpriteFont font, Vector2? position, Color? color, float? scale, float? rotation, ContentManager content)
+        public HUDString(String text, SpriteFont font, Vector2? position, Color? color, Color? backgroundColor, float? scale, float? rotation, ContentManager content)
         {
             if (text == null) { this.String = " "; }
             if (text != null) { this.String = text; }
@@ -104,6 +107,14 @@ namespace RoBuddies.View.HUD
             this.Color = color ?? Color.Beige;
             this.Scale = scale ?? 1.0f;
             this.Rotation = rotation ?? 0.0f;
+
+
+            if (backgroundColor != null) 
+            { 
+                this.BackgroundColor = (Color)backgroundColor;
+                this.BackgroundTexture = content.Load<Texture2D>("Sprites\\Square");
+                this.BackgroundTextureOrigin = new Vector2(BackgroundTexture.Width/2, BackgroundTexture.Height/2);
+            }
         }
 
         /// <summary>
@@ -118,6 +129,11 @@ namespace RoBuddies.View.HUD
         /// <param name="spriteBatch">the spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
+            if (this.BackgroundTexture != null)
+            {
+                Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)this.Width, (int)this.Height);
+                spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 0.0f);
+            }
             spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
         }
     }
