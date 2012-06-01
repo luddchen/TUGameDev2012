@@ -17,7 +17,7 @@ namespace RoBuddies.View
     {
         MouseController mouseController;
 
-        public HUD.HUD Toolbar;
+        public EditorToolbar Toolbar;
 
         private KeyboardState oldKeyboardState;
 

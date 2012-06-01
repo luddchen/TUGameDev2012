@@ -49,16 +49,27 @@ namespace RoBuddies.View.HUD
             }
         }
 
+        public bool IsVisible { get; set; }
+
         /// <summary>
         /// constructs a Head Up Display Element Texture
         /// </summary>
         /// <param name="content"></param>
         public HUDMouse(ContentManager content) : base(content)
         {
-            this.Position = new Vector2(100,100);
+            //this.Position = new Vector2(100,100);
             this.Texture = content.Load<Texture2D>("Sprites//Cursor");
             this.Width = 20;
             this.Height = 20;
+            this.IsVisible = true;
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (IsVisible)
+            {
+                base.Draw(spriteBatch);
+            }
         }
 
     }

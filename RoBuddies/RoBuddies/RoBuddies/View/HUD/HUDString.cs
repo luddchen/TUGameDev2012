@@ -131,10 +131,29 @@ namespace RoBuddies.View.HUD
         {
             if (this.BackgroundTexture != null)
             {
-                Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)this.Width, (int)this.Height);
+                Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)(this.Width*1.2f), (int)this.Height);
                 spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 0.0f);
             }
             spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
+        }
+
+        /// <summary>
+        /// testing intersection with point
+        /// </summary>
+        /// <param name="point">the test point</param>
+        /// <returns>true if there is an intersetion</returns>
+        public bool Intersects(Vector2 point)
+        {
+            if (Rotation != 0)
+            {
+                return false;
+            }
+            if (point.X < Position.X - Width / 2 || point.X > Position.X + Width / 2 ||
+                point.Y < Position.Y - Height / 2 || point.Y > Position.Y + Height / 2)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -98,7 +98,7 @@ namespace RoBuddies.View.HUD
         /// draw this element
         /// </summary>
         /// <param name="spriteBatch">the spritebatch</param>
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             Rectangle dest = new Rectangle(
                     (int)Position.X,
