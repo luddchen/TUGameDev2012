@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model.Objects
 {
-    public class Switch : PhysicObject
+    class Switch : PhysicObject
     {
         public Switch(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
             : base(world)

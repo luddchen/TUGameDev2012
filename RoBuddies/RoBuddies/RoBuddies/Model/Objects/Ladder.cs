@@ -39,6 +39,9 @@ namespace RoBuddies.Model.Objects
             Texture2D center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
             Texture2D bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
             this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, top, center, bottom, ladderSteps);
+
+            this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, top, center, bottom, ladderSteps);
+
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;

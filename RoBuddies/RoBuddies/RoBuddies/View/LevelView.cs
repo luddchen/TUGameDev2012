@@ -44,7 +44,6 @@ namespace RoBuddies.View
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
                     ladder.BodyType = BodyType.Dynamic;
 
-
                 // body1
                     Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");

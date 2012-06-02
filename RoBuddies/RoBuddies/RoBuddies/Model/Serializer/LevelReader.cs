@@ -15,7 +15,7 @@ namespace RoBuddies.Model.Serializer
     /// This class can be used for creating Level objects from
     /// serialized levels
     /// </summary>
-    public class LevelReader
+    class LevelReader
     {
 
         private ContentManager content;
@@ -47,6 +47,7 @@ namespace RoBuddies.Model.Serializer
                 StreamReader sr = new StreamReader(@".\\SerializationTest.json");
                 JsonReader reader = new JsonTextReader(sr);
                 JsonSerializer serializer = new JsonSerializer();
+                // add your converter of the level objects here:
                 serializer.Converters.Add(new LevelConverter(level));
                 serializer.Converters.Add(new LayerConverter(level));
                 serializer.Converters.Add(new WallConverter(level, content));

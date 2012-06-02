@@ -10,12 +10,11 @@ using FarseerPhysics.Factories;
 
 namespace RoBuddies.Model.Objects
 {
-
     /// <summary>
     /// pipe line which hangs up on the ceiling
     /// upperPart can climb along it
     /// </summary>
-    public class Pipe : PhysicObject
+    class Pipe : PhysicObject
     {
         public Pipe(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
             : base(world)
