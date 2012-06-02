@@ -80,7 +80,7 @@ namespace RoBuddies.Control
             {
                 if (this.Toolbar.resetCamButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
                 {
-                    this.Toolbar.resetCamButton.Scale = 0.45f;
+                    this.Toolbar.resetCamButton.Scale = 0.55f;
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         ResetCamera();
@@ -88,12 +88,12 @@ namespace RoBuddies.Control
                 }
                 else
                 {
-                    this.Toolbar.resetCamButton.Scale = 0.4f;
+                    this.Toolbar.resetCamButton.Scale = 0.5f;
                 }
 
                 if (this.Toolbar.clearButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
                 {
-                    this.Toolbar.clearButton.Scale = 0.45f;
+                    this.Toolbar.clearButton.Scale = 0.55f;
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         ResetCamera();
@@ -104,12 +104,12 @@ namespace RoBuddies.Control
                 }
                 else
                 {
-                    this.Toolbar.clearButton.Scale = 0.4f;
+                    this.Toolbar.clearButton.Scale = 0.5f;
                 }
 
                 if (this.Toolbar.loadButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
                 {
-                    this.Toolbar.loadButton.Scale = 0.45f;
+                    this.Toolbar.loadButton.Scale = 0.55f;
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         ResetCamera();
@@ -123,12 +123,12 @@ namespace RoBuddies.Control
                 }
                 else
                 {
-                    this.Toolbar.loadButton.Scale = 0.4f;
+                    this.Toolbar.loadButton.Scale = 0.5f;
                 }
 
                 if (this.Toolbar.saveButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
                 {
-                    this.Toolbar.saveButton.Scale = 0.45f;
+                    this.Toolbar.saveButton.Scale = 0.55f;
                     if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                     {
                         (new LevelWriter(this.HUD.Level)).writeLevel("", "");
@@ -137,7 +137,28 @@ namespace RoBuddies.Control
                 }
                 else
                 {
-                    this.Toolbar.saveButton.Scale = 0.4f;
+                    this.Toolbar.saveButton.Scale = 0.5f;
+                }
+
+                if (this.Toolbar.gridButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+                {
+                    this.Toolbar.gridButton.Scale = 0.55f;
+                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                    {
+                        this.HUD.IsGridVisible = !this.HUD.IsGridVisible;
+                        if (this.HUD.IsGridVisible)
+                        {
+                            this.Toolbar.gridButton.Color = Color.Red;
+                        }
+                        else
+                        {
+                            this.Toolbar.gridButton.Color = Color.Black;
+                        }
+                    }
+                }
+                else
+                {
+                    this.Toolbar.gridButton.Scale = 0.5f;
                 }
 
                 if (this.Toolbar.WallButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
@@ -317,16 +338,14 @@ namespace RoBuddies.Control
         {
             this.HUD.Camera.Move(Vector2.Zero);
             this.HUD.Camera.Rotation = 0.0f;
-            this.HUD.Camera.Zoom = 1.0f;
+            this.HUD.Camera.Zoom = 0.5f;
         }
 
         private void DragObject()
         {
-            //Console.Out.WriteLine("Sim Units" + this.CursorSimPos);
             Fixture savedFixture = this.HUD.Level.TestPoint(this.CursorSimPos);
             if (savedFixture != null)
             {
-                //Console.Out.WriteLine("jap");
                 clickedBody = savedFixture.Body;
                 clickedBody.BodyType = BodyType.Dynamic;
                 clickedBody.CollidesWith = Category.None;
@@ -334,10 +353,6 @@ namespace RoBuddies.Control
                 fixedMouseJoint = new FixedMouseJoint(clickedBody, this.CursorSimPos);
                 fixedMouseJoint.MaxForce = 1000.0f * clickedBody.Mass;
                 this.HUD.Level.AddJoint(fixedMouseJoint);
-            }
-            else // no object behind cursor position
-            {
-                //Console.Out.WriteLine("neee");
             }
         }
 
