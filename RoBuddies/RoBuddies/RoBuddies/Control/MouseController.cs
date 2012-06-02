@@ -360,7 +360,7 @@ namespace RoBuddies.Control
         {
             clickedBody.BodyType = BodyType.Static;
             clickedBody.CollidesWith = Category.All;
-            clickedBody.Position = adjustAtGrid(clickedBody.Position);
+            if (this.HUD.IsGridVisible) { clickedBody.Position = adjustAtGrid(clickedBody.Position); }
             this.HUD.Level.RemoveJoint(fixedMouseJoint);
             clickedBody = null;
             fixedMouseJoint = null;
