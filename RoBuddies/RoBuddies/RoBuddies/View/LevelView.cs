@@ -46,7 +46,7 @@ namespace RoBuddies.View
 
 
                 // body1
-                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
