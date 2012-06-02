@@ -17,14 +17,17 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     public class Pipe : PhysicObject
     {
-        public Pipe(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
+        public Pipe(Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
         {
+            Texture2D texture = game.Content.Load<Texture2D>("Sprites//LadderTop");
+            this.Texture = texture;
+
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;
-            this.Color = color;
-            this.Texture = texture;
+            this.Color = color;         
+
             this.BodyType = BodyType.Static;
             this.Friction = 10f;
 
