@@ -131,7 +131,7 @@ namespace RoBuddies.View
         /// <param name="gameTime">gametime</param>
         public void Update(GameTime gameTime)
         {
-            Console.Out.WriteLine("cam speed : " + this.movingSpeed);
+            //Console.Out.WriteLine("cam speed : " + this.movingSpeed);
             if (this.movingSpeed > 0.1f)
             {
                 this.position += this.movingSpeed * this.movingDirection;

@@ -43,7 +43,9 @@ namespace RoBuddies.View
             QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
             OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
             HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
+            GameMenu gameMenu = new GameMenu(this, this.Game.Content);
 
+            mainMenu.gamePage = gameMenu;
             mainMenu.quitPage = quitMenu;
             mainMenu.optionPage = optionMenu;
             mainMenu.helpPage = helpMenu;

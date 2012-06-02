@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
@@ -17,8 +18,11 @@ using RoBuddies.Model.Objects;
 
 namespace RoBuddies.View
 {
-    public class LevelView : HUD.HUDLevelView
+    class LevelView : HUD.HUDLevelView
     {
+        public Model.Snapshot.Snapshot SnapShot;
+        private KeyboardState oldKeyboardState;
+
         public HUD.HUD HUD;
 
         public override void OnViewPortResize()
@@ -98,12 +102,42 @@ namespace RoBuddies.View
                         mainLayer.AddObject(body3);
                     }
             // end testing code ---------------------------------------------------------------------------------
+
+            this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
+
+            this.Level.ClearForces();
+            this.SnapShot.MakeSnapshot();
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
             this.HUD.Update(gameTime);
+
+            KeyboardState newKeyboardState = Keyboard.GetState();
+
+            if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
+            {
+                this.Level.ClearForces();
+                this.SnapShot.MakeSnapshot();
+                this.Level.ClearForces();
+            }
+
+            if (newKeyboardState.IsKeyDown(Keys.R) && oldKeyboardState.IsKeyUp(Keys.R))
+            {
+                this.Level.ClearForces();
+                this.SnapShot.Rewind(1);
+                this.Level.ClearForces();
+            }
+
+            if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E))
+            {
+                this.Level.ClearForces();
+                this.SnapShot.Rewind(2);
+                this.Level.ClearForces();
+            }
+
+            this.oldKeyboardState = newKeyboardState;
         }
 
         protected override void DrawContent(SpriteBatch spriteBatch)

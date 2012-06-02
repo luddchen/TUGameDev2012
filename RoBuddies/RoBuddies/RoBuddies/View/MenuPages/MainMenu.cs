@@ -13,18 +13,19 @@ namespace RoBuddies.View.MenuPages
 {
     class MainMenu : HUDMenuPage
     {
-        private HUDString editor;
+        private HUDString game;
         private HUDString help;  
         private HUDString options; 
         private HUDString quit;
 
+        public HUDMenuPage gamePage { get; set; }
         public HUDMenuPage quitPage { get; set; }
         public HUDMenuPage optionPage { get; set; }
         public HUDMenuPage helpPage { get; set; }
 
         public override void OnViewPortResize()
         {
-            if (editor != null) { editor.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
+            if (game != null) { game.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
             if (help != null) { help.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.4f); }
             if (options != null) { options.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
             if (quit != null) { quit.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
@@ -35,9 +36,9 @@ namespace RoBuddies.View.MenuPages
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
 
-            editor = new HUDString("Editor", null, null, null, null, 0.7f, null, content);
-            this.AllElements.Add(editor);
-            this.ChoiceList.Add(editor);
+            game = new HUDString("Game", null, null, null, null, 0.7f, null, content);
+            this.AllElements.Add(game);
+            this.ChoiceList.Add(game);
 
             help = new HUDString("Help", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(help);
@@ -51,7 +52,7 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(quit);
             this.ChoiceList.Add(quit);
 
-            this.ActiveElement = editor;
+            this.ActiveElement = game;
         }
 
         public override void Update(GameTime gameTime)
@@ -63,9 +64,9 @@ namespace RoBuddies.View.MenuPages
             {
                 if (this.ActiveElement != null)
                 {
-                    if (this.ActiveElement == editor)
+                    if (this.ActiveElement == game)
                     {
-                        this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
+                        this.Menu.ActivePage = this.gamePage;
                     }
                     if (this.ActiveElement == quit)
                     {
