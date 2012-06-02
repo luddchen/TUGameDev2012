@@ -6,7 +6,7 @@ using FarseerPhysics.Dynamics;
 
 namespace RoBuddies.Model.Objects
 {
-    public class Crate : PhysicObject
+    class Crate : PhysicObject
     {
         public Crate(World world)
             : base(world)

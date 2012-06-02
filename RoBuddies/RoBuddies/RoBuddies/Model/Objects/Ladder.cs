@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model.Objects
 {
-    public class Ladder : PhysicObject
+    class Ladder : PhysicObject
     {
 
         public Ladder(Vector2 pos, Vector2 size, Color color, World world, Game game, int ladderSteps)

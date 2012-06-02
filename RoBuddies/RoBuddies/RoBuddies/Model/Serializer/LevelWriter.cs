@@ -31,7 +31,6 @@ namespace RoBuddies.Model.Serializer
 
         /// <summary>
         /// writes a level into a json file
-        /// !currently not implemented!
         /// </summary>
         /// <param name="path">The path to the file</param>
         /// <param name="filename">the name of the file</param>
@@ -40,6 +39,7 @@ namespace RoBuddies.Model.Serializer
             StreamWriter sw = new StreamWriter(@".\\SerializationTest.json", false);
             JsonWriter writer = new JsonTextWriter(sw);
             JsonSerializer serializer = new JsonSerializer();
+            // add your converter of the level objects here:
             serializer.Converters.Add(new LevelConverter());
             serializer.Converters.Add(new LayerConverter());
             serializer.Converters.Add(new WallConverter());

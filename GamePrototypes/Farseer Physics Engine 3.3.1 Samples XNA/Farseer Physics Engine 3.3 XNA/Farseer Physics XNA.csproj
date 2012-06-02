@@ -72,7 +72,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <PlatformTarget>x86</PlatformTarget>
     <XnaCompressContent>True</XnaCompressContent>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>GlobalizationRules.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\x86\Release\FarseerPhysicsXNA.XML</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
