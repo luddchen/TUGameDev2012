@@ -11,6 +11,10 @@ namespace RoBuddies.Model.Objects
     class Ladder : PhysicObject
     {
 
+        /// <summary>
+        /// Ladder stays on the floor
+        /// Robot can climb up with the upper part and combined part
+        /// </summary>
         public Ladder(Vector2 pos, Vector2 size, Color color, World world, Game game, int ladderSteps)
             : base(world)
         {
