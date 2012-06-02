@@ -15,6 +15,15 @@ namespace RoBuddies.View
         private Viewport viewport;
         private float zoom;
         private Vector2 position;
+        private Vector2 targetPosition;
+        private Vector2 movingDirection;
+        private float movingSpeed;
+        private float movingDistance;
+
+        /// <summary>
+        /// if the new position from move() is to far away the new position will not be set direct
+        /// </summary>
+        public float maxDirectMoveDistance = 1;
 
         public Vector2 Position
         {
@@ -62,6 +71,10 @@ namespace RoBuddies.View
         public Camera()
         {
             this.position = Vector2.Zero;
+            this.targetPosition = Vector2.Zero;
+            this.movingSpeed = 0;
+            this.movingDirection = Vector2.Zero;
+            this.movingDistance = 0;
             this.Zoom = 1.0f;
             this.Rotation = 0.0f;
         }
@@ -96,7 +109,49 @@ namespace RoBuddies.View
         {
             // need here something for smooth camera movement
             // replace following code
-            this.position = to;
+            this.targetPosition = to;
+            Vector2 direction = this.targetPosition - this.position; 
+            this.movingDistance = (float)Math.Sqrt(Math.Pow(direction.X, 2) + Math.Pow(direction.Y, 2));
+
+            if (this.movingDistance > this.maxDirectMoveDistance)
+            {
+                this.movingDirection = direction / this.movingDistance;
+                if (this.movingSpeed == 0) { this.movingSpeed = 0.3f; }
+            }
+            else
+            {
+                this.movingSpeed = 0;
+                this.position = this.targetPosition;
+            }
+        }
+
+        /// <summary>
+        /// update to make camera moves more smooth
+        /// </summary>
+        /// <param name="gameTime">gametime</param>
+        public void Update(GameTime gameTime)
+        {
+            Console.Out.WriteLine("cam speed : " + this.movingSpeed);
+            if (this.movingSpeed > 0.1f)
+            {
+                this.position += this.movingSpeed * this.movingDirection;
+                this.movingDistance -= this.movingSpeed;
+
+                if (this.movingDistance > Math.Pow(this.movingSpeed,2)*2)
+                {
+                    this.movingSpeed += 0.3f;
+                }
+                else
+                {
+                    this.movingSpeed -= 0.3f;
+                }
+            }
+            else
+            {
+                this.movingDirection = Vector2.Zero;
+                this.movingSpeed = 0;
+                //this.position = this.targetPosition;
+            }
         }
 
         /// <summary>

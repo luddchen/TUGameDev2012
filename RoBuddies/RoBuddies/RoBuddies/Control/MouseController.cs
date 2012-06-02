@@ -252,10 +252,10 @@ namespace RoBuddies.Control
             {
                 this.mouse.Color = Color.White;
                 this.useToolbar = false;
-                CameraMoveConstraint(((EditorView)(this.HUD)).UpArrow, new Vector2(0, -3));
-                CameraMoveConstraint(((EditorView)(this.HUD)).DownArrow, new Vector2(0, 3));
-                CameraMoveConstraint(((EditorView)(this.HUD)).LeftArrow, new Vector2(-3, 0));
-                CameraMoveConstraint(((EditorView)(this.HUD)).RightArrow, new Vector2(3, 0));
+                CameraMoveConstraint(((EditorView)(this.HUD)).UpArrow, new Vector2(0, -20 / this.HUD.Camera.Zoom));
+                CameraMoveConstraint(((EditorView)(this.HUD)).DownArrow, new Vector2(0, 20 / this.HUD.Camera.Zoom));
+                CameraMoveConstraint(((EditorView)(this.HUD)).LeftArrow, new Vector2(-20 / this.HUD.Camera.Zoom, 0));
+                CameraMoveConstraint(((EditorView)(this.HUD)).RightArrow, new Vector2(20 / this.HUD.Camera.Zoom, 0));
 
                 if (fixedMouseJoint != null)
                 {

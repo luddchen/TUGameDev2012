@@ -69,6 +69,7 @@ namespace RoBuddies.View.HUD
         {
             base.Update(gameTime);
             this.Level.Update(gameTime);
+            this.Camera.Update(gameTime);
         }
 
         /// <summary>
