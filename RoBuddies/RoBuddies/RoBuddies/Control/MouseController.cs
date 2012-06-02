@@ -26,23 +26,32 @@ namespace RoBuddies.Control
         private EditorToolbar Toolbar;
         //private Camera camera;
         private HUDMouse mouse;
+        /// <summary>
+        /// flag if the mouse is within the toolbar box
+        /// </summary>
         private bool useToolbar = false;
-        //public Level level { get; set; }
 
         /// <summary>
         /// the joint for moving the objects in the editor
         /// </summary>
         private FixedMouseJoint fixedMouseJoint;
+
         /// <summary>
         /// the current body, which was clicked
         /// </summary>
         Body clickedBody;
 
+        /// <summary>
+        /// the current position of the cursor in sim coordinates
+        /// </summary>
         public Vector2 CursorSimPos
         {
             get { return ConvertUnits.ToSimUnits(this.HUD.Camera.screenToWorld(mouse.Position, new Vector2(1, 1))); }
         }
 
+        /// <summary>
+        /// true, if the cursor is currently moving a object like a wall
+        /// </summary>
         private bool isMovingObject
         {
             get { return fixedMouseJoint != null; }
@@ -76,150 +85,170 @@ namespace RoBuddies.Control
 
         private void updateMouseButtons()
         {
-            if (this.useToolbar)
+            if (this.useToolbar) // mouse is within the toolbar box
             {
-                if (this.Toolbar.resetCamButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.resetCamButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        ResetCamera();
-                    }
-                }
-                else
-                {
-                    this.Toolbar.resetCamButton.Scale = 0.5f;
-                }
+                updateCameraResetButton();
 
-                if (this.Toolbar.clearButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.clearButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        ResetCamera();
-                        this.HUD.Level = new Level(new Vector2(0, 10));
-                        Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
-                        this.HUD.Level.AddLayer(mainLayer);
-                    }
-                }
-                else
-                {
-                    this.Toolbar.clearButton.Scale = 0.5f;
-                }
+                updateClearButton();
 
-                if (this.Toolbar.loadButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.loadButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        ResetCamera();
-                        Level loadedLevel = (new LevelReader(this.HUD.Game.Content)).readLevel("", "");
-                        if (loadedLevel != null)
-                        {
-                            this.HUD.Level = loadedLevel;
-                            Console.Out.WriteLine("Game loaded!");
-                        }
-                    }
-                }
-                else
-                {
-                    this.Toolbar.loadButton.Scale = 0.5f;
-                }
+                updateLoadButton();
 
-                if (this.Toolbar.saveButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.saveButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        (new LevelWriter(this.HUD.Level)).writeLevel("", "");
-                        Console.Out.WriteLine("Game saved!");
-                    }
-                }
-                else
-                {
-                    this.Toolbar.saveButton.Scale = 0.5f;
-                }
+                updateSaveButton();
 
-                if (this.Toolbar.gridButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.gridButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        this.HUD.IsGridVisible = !this.HUD.IsGridVisible;
-                        if (this.HUD.IsGridVisible)
-                        {
-                            this.Toolbar.gridButton.Color = Color.Red;
-                        }
-                        else
-                        {
-                            this.Toolbar.gridButton.Color = Color.Black;
-                        }
-                    }
-                }
-                else
-                {
-                    this.Toolbar.gridButton.Scale = 0.5f;
-                }
+                UpdateGridButton();
 
-                if (this.Toolbar.WallButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.WallButton.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        if (!isMovingObject)
-                        {
-                            Texture2D square = this.HUD.Game.Content.Load<Texture2D>("Sprites//Square");
-                            Random ran = new Random();
-                            Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                            Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.HUD.Level);
-                            this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
-
-                            DragObject();
-                        }
-                    }
-                }
-                else
-                {
-                    this.Toolbar.WallButton.Scale = 0.5f;
-                }
-
-                if (this.Toolbar.WallButton2.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
-                {
-                    this.Toolbar.WallButton2.Scale = 0.55f;
-                    if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
-                    {
-                        if (!isMovingObject)
-                        {
-                            Texture2D square = this.HUD.Game.Content.Load<Texture2D>("Sprites//Square");
-                            Random ran = new Random();
-                            Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                            Wall wall1 = new Wall(this.CursorSimPos, new Vector2(1f, 5f), color, square, this.HUD.Level);
-                            this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
-
-                            DragObject();
-                        }
-                    }
-                }
-                else
-                {
-                    this.Toolbar.WallButton2.Scale = 0.5f;
-                }
+                UpdateWallButton();
 
             }
 
-            if (!this.useToolbar)
+            if (!this.useToolbar) // mouse is not in the toolbar box
             {
+                UpdateMovingObject();
+            }
+        }
+
+        /// <summary>
+        /// handles the movement and rotation of the objects with the mouse
+        /// </summary>
+        private void UpdateMovingObject()
+        {
+            if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON)) // drag or drop objects
+            {
+                if (!isMovingObject)
+                {
+                    DragObject();
+                }
+                else
+                {
+                    DropObject();
+                }
+            }
+            if (isNewMouseButtonPressed(MouseButtons.RIGHT_BUTTON) && isMovingObject) // rotate dragged objects
+            {
+                clickedBody.Rotation += MathHelper.ToRadians(90);
+            }
+        }
+
+        private void UpdateWallButton()
+        {
+            if (this.Toolbar.WallButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.WallButton.Scale = 0.55f;
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
                     if (!isMovingObject)
                     {
+                        Texture2D square = this.HUD.Game.Content.Load<Texture2D>("Sprites//Square");
+                        Random ran = new Random();
+                        Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
+                        Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.HUD.Level);
+                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
+
                         DragObject();
+                    }
+                }
+            }
+            else
+            {
+                this.Toolbar.WallButton.Scale = 0.5f;
+            }
+        }
+
+        private void UpdateGridButton()
+        {
+            if (this.Toolbar.gridButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.gridButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    this.HUD.IsGridVisible = !this.HUD.IsGridVisible;
+                    if (this.HUD.IsGridVisible)
+                    {
+                        this.Toolbar.gridButton.Color = Color.Red;
                     }
                     else
                     {
-                        DropObject();
+                        this.Toolbar.gridButton.Color = Color.Black;
                     }
                 }
+            }
+            else
+            {
+                this.Toolbar.gridButton.Scale = 0.5f;
+            }
+        }
+
+        private void updateSaveButton()
+        {
+            if (this.Toolbar.saveButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.saveButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    (new LevelWriter(this.HUD.Level)).writeLevel("", "");
+                    Console.Out.WriteLine("Game saved!");
+                }
+            }
+            else
+            {
+                this.Toolbar.saveButton.Scale = 0.5f;
+            }
+        }
+
+        private void updateLoadButton()
+        {
+            if (this.Toolbar.loadButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.loadButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    ResetCamera();
+                    Level loadedLevel = (new LevelReader(this.HUD.Game.Content)).readLevel("", "");
+                    if (loadedLevel != null)
+                    {
+                        this.HUD.Level = loadedLevel;
+                        Console.Out.WriteLine("Game loaded!");
+                    }
+                }
+            }
+            else
+            {
+                this.Toolbar.loadButton.Scale = 0.5f;
+            }
+        }
+
+        private void updateClearButton()
+        {
+            if (this.Toolbar.clearButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.clearButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    ResetCamera();
+                    this.HUD.Level = new Level(new Vector2(0, 10));
+                    Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+                    this.HUD.Level.AddLayer(mainLayer);
+                }
+            }
+            else
+            {
+                this.Toolbar.clearButton.Scale = 0.5f;
+            }
+        }
+
+        private void updateCameraResetButton()
+        {
+            if (this.Toolbar.resetCamButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.resetCamButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    ResetCamera();
+                }
+            }
+            else
+            {
+                this.Toolbar.resetCamButton.Scale = 0.5f;
             }
         }
 

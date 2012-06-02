@@ -65,15 +65,6 @@ namespace RoBuddies.View
             this.WallButton.Height = this.WallButton.Width / 5;
             this.WallButton.Scale = 0.5f;
             this.AllElements.Add(this.WallButton);
-
-            this.WallButton2 = new HUDTexture(game.Content);
-            this.WallButton2.Texture = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            this.WallButton2.Color = Color.Green;
-            this.WallButton2.Position = new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f);
-            this.WallButton2.Height = this.HUD_height;
-            this.WallButton2.Width = this.WallButton2.Height / 5;
-            this.WallButton2.Scale = 0.5f;
-            this.AllElements.Add(this.WallButton2);
         }
 
 
