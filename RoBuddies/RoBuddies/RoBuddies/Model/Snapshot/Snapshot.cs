@@ -59,10 +59,10 @@ namespace RoBuddies.Model.Snapshot
         {
             if (steps < 1) { return; }  // nothing to do
 
-            Console.Out.WriteLine("rewind " + steps + " from "+ this.AllKeyFrames.Count + " available Snapshots");
-
             if (this.AllKeyFrames.Count > (steps - 1))
             {
+                Console.Out.WriteLine("rewind " + steps + " from " + this.AllKeyFrames.Count + " available Snapshots");
+
                 int newLastFrame = this.AllKeyFrames.Count - steps;
                 KeyFrame keyFrame = this.AllKeyFrames[newLastFrame];
                 keyFrame.Restore();
@@ -73,9 +73,13 @@ namespace RoBuddies.Model.Snapshot
                     this.AllKeyFrames[this.AllKeyFrames.Count - 1].Release();
                     this.AllKeyFrames.RemoveAt(this.AllKeyFrames.Count - 1);
                 }
-            }
 
-            Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
+                Console.Out.WriteLine("left Snapshots : " + this.AllKeyFrames.Count);
+            }
+            else
+            {
+                Console.Out.WriteLine("not enough Snapshots available");
+            }
         }
 
     }

@@ -44,7 +44,7 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(restoreSnapshot);
             this.ChoiceList.Add(restoreSnapshot);
 
-            this.ActiveElement = restoreSnapshot;
+            this.ActiveElement = editor;
         }
 
         public override void Update(GameTime gameTime)
