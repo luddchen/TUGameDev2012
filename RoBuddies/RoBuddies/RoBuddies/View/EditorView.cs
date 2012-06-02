@@ -10,17 +10,17 @@ using RoBuddies.Control;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Model.Serializer;
+using RoBuddies.Control.Editor;
 
 namespace RoBuddies.View
 {
     class EditorView : HUD.HUDLevelView
     {
-        MouseController mouseController;
+        private MouseController mouseController;
+        private KeyboardController keyboardController;
 
         public EditorToolbar Toolbar;
         public bool IsGridVisible;
-
-        private KeyboardState oldKeyboardState;
 
         public HUDMouse Mouse;
 
@@ -54,6 +54,7 @@ namespace RoBuddies.View
             this.Mouse = new HUDMouse(game.Content);
             this.AllElements.Add(this.Mouse);
             this.mouseController = new MouseController(this, this.Mouse);
+            this.keyboardController = new KeyboardController(this, this.mouseController);
 
             this.DownArrow = new HUDTexture(game.Content);
             this.DownArrow.Color = new Color(128, 128, 128, 128);
@@ -98,9 +99,12 @@ namespace RoBuddies.View
             this.mouseController.Update(gameTime);
             this.Toolbar.Update(gameTime);
 
-            KeyboardState newKeyboardState = Keyboard.GetState();
+            getInput();
+        }
 
-            oldKeyboardState = newKeyboardState;
+        private void getInput()
+        {
+            keyboardController.handleInput();
         }
 
 

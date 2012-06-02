@@ -22,7 +22,7 @@ namespace RoBuddies.View
         public HUDString gridButton;
 
         public HUDTexture WallButton;
-        public HUDTexture WallButton2;
+        public HUDTexture BudBudiButton;
 
         public override void OnViewPortResize()
         {
@@ -65,6 +65,16 @@ namespace RoBuddies.View
             this.WallButton.Height = this.WallButton.Width / 5;
             this.WallButton.Scale = 0.5f;
             this.AllElements.Add(this.WallButton);
+
+            // add BudBudi button for setting the starting position of the player in the level
+            this.BudBudiButton = new HUDTexture(game.Content);
+            this.BudBudiButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//Editor//BudBudi");
+            this.BudBudiButton.Color = Color.White;
+            this.BudBudiButton.Position = new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f);
+            this.BudBudiButton.Height = this.BudBudiButton.Texture.Height / 2;
+            this.BudBudiButton.Width = this.BudBudiButton.Texture.Width / 2;
+            this.BudBudiButton.Scale = 0.5f;
+            this.AllElements.Add(this.BudBudiButton);
         }
 
 

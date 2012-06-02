@@ -112,8 +112,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Control\AnimatedState.cs" />
+    <Compile Include="Control\Editor\KeyboardController.cs" />
     <Compile Include="Control\ExampleState.cs" />
-    <Compile Include="Control\MouseController.cs" />
+    <Compile Include="Control\Editor\MouseController.cs" />
     <Compile Include="Control\RobotStates\ClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />
     <Compile Include="Control\RobotStates\FallingState.cs" />

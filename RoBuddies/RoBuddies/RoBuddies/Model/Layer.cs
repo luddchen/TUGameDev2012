@@ -39,13 +39,23 @@ namespace RoBuddies.Model
         public List<IBody> AllObjects { get { return this.allObjects; } }
 
         /// <summary>
-        /// add a object to this layer
+        /// add an object to this layer
         /// </summary>
-        /// <param name="body"></param>
+        /// <param name="body">the object, which will be added</param>
         public void AddObject(IBody body)
         {
             this.AllObjects.Add(body);
             body.Layer = this;
+        }
+
+        /// <summary>
+        /// removes an object from this layer
+        /// </summary>
+        /// <param name="body">the object, which will be removed</param>
+        public void RemoveObject(IBody body)
+        {
+            this.allObjects.Remove(body);
+            body.Layer = null;
         }
 
         /// <summary>

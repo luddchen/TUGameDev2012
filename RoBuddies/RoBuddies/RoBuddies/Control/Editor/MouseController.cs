@@ -39,7 +39,7 @@ namespace RoBuddies.Control
         /// <summary>
         /// the current body, which was clicked
         /// </summary>
-        Body clickedBody;
+        public Body clickedBody;
 
         /// <summary>
         /// the current position of the cursor in sim coordinates
@@ -52,9 +52,9 @@ namespace RoBuddies.Control
         /// <summary>
         /// true, if the cursor is currently moving a object like a wall
         /// </summary>
-        private bool isMovingObject
+        public bool isMovingObject
         {
-            get { return fixedMouseJoint != null; }
+            get { return clickedBody != null; }
         }
 
         /// <summary>
@@ -77,8 +77,6 @@ namespace RoBuddies.Control
         /// <param name="gameTime">the current game time</param>
         public void Update(GameTime gameTime)
         {
-
-            //Console.Out.WriteLine("Units" + mouse.Position);
             updateMousePosition();
             updateMouseButtons();
         }
@@ -98,6 +96,8 @@ namespace RoBuddies.Control
                 UpdateGridButton();
 
                 UpdateWallButton();
+
+                UpdateBudBudiButton();
 
             }
 
@@ -125,7 +125,37 @@ namespace RoBuddies.Control
             }
             if (isNewMouseButtonPressed(MouseButtons.RIGHT_BUTTON) && isMovingObject) // rotate dragged objects
             {
-                clickedBody.Rotation += MathHelper.ToRadians(90);
+                // rotate walls
+                if (clickedBody is Wall)
+                {
+                    Wall clickedWall = (Wall)clickedBody;
+                    Vector2 newSize = new Vector2(clickedWall.Height, clickedWall.Width);
+                    clickedWall.changeWallSize(newSize);
+                }
+            }
+        }
+
+        private void UpdateBudBudiButton()
+        {
+            if (this.Toolbar.BudBudiButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.BudBudiButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    if (!isMovingObject)
+                    {
+                        Texture2D robot = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                        // Todo: change to Robot Model:
+                        Wall wall1 = new Wall(this.CursorSimPos, new Vector2(3, 3), Color.White, robot, this.HUD.Level);
+                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
+
+                        DragObject();
+                    }
+                }
+            }
+            else
+            {
+                this.Toolbar.BudBudiButton.Scale = 0.5f;
             }
         }
 
@@ -286,9 +316,10 @@ namespace RoBuddies.Control
                 CameraMoveConstraint(((EditorView)(this.HUD)).LeftArrow, new Vector2(-20 / this.HUD.Camera.Zoom, 0));
                 CameraMoveConstraint(((EditorView)(this.HUD)).RightArrow, new Vector2(20 / this.HUD.Camera.Zoom, 0));
 
-                if (fixedMouseJoint != null)
+                if (clickedBody != null)
                 {
                     fixedMouseJoint.WorldAnchorB = this.CursorSimPos;
+                    clickedBody.Position = this.CursorSimPos;
                 }
             }
         }

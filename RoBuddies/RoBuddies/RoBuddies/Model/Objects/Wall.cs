@@ -15,6 +15,9 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Wall : PhysicObject
     {
+
+        private Fixture wallFixture;
+
         /// <summary>
         /// constructs a new wall object
         /// </summary>
@@ -33,7 +36,18 @@ namespace RoBuddies.Model.Objects
             this.Texture = texture;
             this.BodyType = BodyType.Static;
             this.Friction = 1f;
-            FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+        }
+
+        /// <summary>
+        /// Changes the size of this wall object and the attached rectangle fixture
+        /// </summary>
+        /// <param name="newSize">the new size of the wall</param>
+        public void changeWallSize(Vector2 newSize) {
+            this.Width = Math.Max(1, newSize.X);
+            this.Height = Math.Max(1, newSize.Y);
+            this.DestroyFixture(wallFixture);
+            wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
         }
 
     }
