@@ -44,10 +44,13 @@ namespace RoBuddies.View
                     //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
                     //ladder.BodyType = BodyType.Dynamic;
 
+<<<<<<< HEAD
                     Crate crateExm = new Crate(new Vector2(4f, -7f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);    
 
+=======
+>>>>>>> 7f1be7faabd2d2827d37e1078c16a6e07a464538
                 // body1
-                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");

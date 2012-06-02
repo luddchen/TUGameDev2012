@@ -9,7 +9,7 @@ using FarseerPhysics.Factories;
 
 namespace RoBuddies.Model.Objects
 {
-    public class Crate : PhysicObject
+    class Crate : PhysicObject
     {
         public Crate(Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
