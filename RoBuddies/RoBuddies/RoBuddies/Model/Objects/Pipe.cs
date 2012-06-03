@@ -2,6 +2,7 @@
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 
 namespace RoBuddies.Model.Objects
@@ -12,27 +13,52 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Pipe : PhysicObject
     {
+        private Game game;
+        private Fixture pipeFixture;
+
+        // TODO: make good looking Pipe with starts and ends
+        private Texture2D left;
+        private Texture2D center;
+        private Texture2D right;
+
         public Pipe(Vector2 pos, float width, Color color, World world, Game game)
             : base(world)
         {
-            int pipeSteps = (int)width / 2;
             // TODO: make good looking Pipe with starts and ends
-            Texture2D left = game.Content.Load<Texture2D>("Sprites//PipeStart");
-            Texture2D center = game.Content.Load<Texture2D>("Sprites//PipeCenter");
-            Texture2D right = game.Content.Load<Texture2D>("Sprites//PipeEnd");
-            Texture2D texture = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, center, center, center, pipeSteps);
-            this.Texture = texture;
+            left = game.Content.Load<Texture2D>("Sprites//PipeStart");
+            center = game.Content.Load<Texture2D>("Sprites//PipeCenter");
+            right = game.Content.Load<Texture2D>("Sprites//PipeEnd");
 
+            this.game = game;
             this.Position = pos;
             this.Width = width;
             this.Height = 0.25f;
-            this.Color = color;         
+            this.Color = color;
+            attachTexture();
 
             this.BodyType = BodyType.Static;
             this.Friction = 10f;
 
-            FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
 
+        }
+
+        private void attachTexture()
+        {
+            int pipeSteps = (int)this.Width / 2;
+            this.Texture = Utilities.TextureConverter.connectLCR(this.game.GraphicsDevice, center, center, center, pipeSteps);
+        }
+
+        /// <summary>
+        ///  Changes the size of this pipe object and the attached rectangle fixture
+        /// </summary>
+        /// <param name="newLength">the new length of this pipe</param>
+        public void changePipeLength(float newLength)
+        {
+            this.Width = Math.Max(1, newLength);
+            this.DestroyFixture(pipeFixture);
+            attachTexture();
+            pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
         }
     }
 }

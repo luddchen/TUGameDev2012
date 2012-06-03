@@ -45,6 +45,7 @@ namespace RoBuddies.Model.Serializer
             serializer.Converters.Add(new LayerConverter());
             serializer.Converters.Add(new WallConverter());
             serializer.Converters.Add(new CrateConverter());
+            serializer.Converters.Add(new PipeConverter());
             serializer.Serialize(writer, this.level);
             writer.Flush();
             writer.Close();

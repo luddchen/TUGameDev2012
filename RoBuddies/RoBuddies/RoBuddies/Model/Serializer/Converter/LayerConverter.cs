@@ -57,6 +57,7 @@ namespace RoBuddies.Model.Serializer
                 layer = level.GetLayerByName(name);
                 if (layer == null) { layer = new Layer(name, parallax, LayerDepth); }
 
+                // deserialize all walls
                 IJEnumerable<JToken> wallTokens = tokens.SelectToken("Walls").Values();
                 foreach (JToken wallToken in wallTokens)
                 {
@@ -64,11 +65,20 @@ namespace RoBuddies.Model.Serializer
                     layer.AddObject(wall);
                 }
 
+                // deserialize all crates
                 IJEnumerable<JToken> crateTokens = tokens.SelectToken("Crates").Values();
                 foreach (JToken crateToken in crateTokens)
                 {
                     Crate crate = serializer.Deserialize<Crate>(crateToken.CreateReader());
                     layer.AddObject(crate);
+                }
+
+                // deserialize all pipes
+                IJEnumerable<JToken> pipeTokens = tokens.SelectToken("Pipes").Values();
+                foreach (JToken pipeToken in pipeTokens)
+                {
+                    Pipe pipe = serializer.Deserialize<Pipe>(pipeToken.CreateReader());
+                    layer.AddObject(pipe);
                 }
                 level.AddLayer(layer);
             }
@@ -103,6 +113,10 @@ namespace RoBuddies.Model.Serializer
                 writer.WritePropertyName("Crates");
                 writer.WriteStartArray();
                     writeGameObject<Crate>(writer, serializer, layer);
+                writer.WriteEndArray();
+                writer.WritePropertyName("Pipes");
+                writer.WriteStartArray();
+                    writeGameObject<Pipe>(writer, serializer, layer);
                 writer.WriteEndArray();
             writer.WriteEndObject();
         }

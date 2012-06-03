@@ -102,6 +102,8 @@ namespace RoBuddies.Control
 
                 UpdateCrateButton();
 
+                UpdatePipeButton();
+
             }
 
             if (!this.useToolbar) // mouse is not in the toolbar box
@@ -207,6 +209,28 @@ namespace RoBuddies.Control
             else
             {
                 this.Toolbar.WallButton.Scale = 0.5f;
+            }
+        }
+
+        private void UpdatePipeButton()
+        {
+            if (this.Toolbar.PipeButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.PipeButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    if (!isMovingObject)
+                    {
+                        Pipe pipe = new Pipe(this.CursorSimPos, 3, Color.White, this.HUD.Level, this.HUD.Game);
+                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(pipe);
+
+                        DragObject();
+                    }
+                }
+            }
+            else
+            {
+                this.Toolbar.PipeButton.Scale = 0.5f;
             }
         }
 

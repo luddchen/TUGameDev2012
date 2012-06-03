@@ -52,7 +52,7 @@ namespace RoBuddies.Control.Editor
             if (inputState == InputState.NORMAL)
             {
                 changeObjectSizeInput(newKeyboardState);
-                deleteObject(newKeyboardState);
+                deleteObjectInput(newKeyboardState);
             }
             if (inputState == InputState.SAVE)
             {
@@ -69,7 +69,7 @@ namespace RoBuddies.Control.Editor
         {
             if (newKeyboardState.IsKeyDown(Keys.Enter) && oldKeyboardState.IsKeyUp(Keys.Enter)) // start loading
             {
-                Level loadedLevel = (new LevelReader(this.HUD.Game.Content)).readLevel(SAVE_LOAD_PATH, loadSaveFileString + ".json");
+                Level loadedLevel = (new LevelReader(this.HUD.Game)).readLevel(SAVE_LOAD_PATH, loadSaveFileString + ".json");
                 if (loadedLevel != null)
                 {
                     this.HUD.Level = loadedLevel;
@@ -193,6 +193,12 @@ namespace RoBuddies.Control.Editor
                     Vector2 newWallSize = new Vector2(wallObject.Width + 2, wallObject.Height);
                     wallObject.changeWallSize(newWallSize);
                 }
+                if (mouseController.clickedBody is Pipe)
+                {
+                    Pipe pipeObject = (Pipe)mouseController.clickedBody;
+                    float newPipeLength = pipeObject.Width + 2;
+                    pipeObject.changePipeLength(newPipeLength);
+                }
             }
             // decrease height
             if (newKeyboardState.IsKeyDown(Keys.Down) && oldKeyboardState.IsKeyUp(Keys.Down) && mouseController.isMovingObject)
@@ -213,6 +219,12 @@ namespace RoBuddies.Control.Editor
                     Vector2 newWallSize = new Vector2(wallObject.Width - 2, wallObject.Height);
                     wallObject.changeWallSize(newWallSize);
                 }
+                if (mouseController.clickedBody is Pipe)
+                {
+                    Pipe pipeObject = (Pipe)mouseController.clickedBody;
+                    float newPipeLength = pipeObject.Width - 2;
+                    pipeObject.changePipeLength(newPipeLength);
+                }
             }
         }
 
@@ -220,7 +232,7 @@ namespace RoBuddies.Control.Editor
         /// deletes the current object of the mouse
         /// </summary>
         /// <param name="newKeyboardState">the current state of the keyboard</param>
-        private void deleteObject(KeyboardState newKeyboardState)
+        private void deleteObjectInput(KeyboardState newKeyboardState)
         {
             if (newKeyboardState.IsKeyDown(Keys.Delete) && oldKeyboardState.IsKeyUp(Keys.Delete) && mouseController.isMovingObject)
             {
