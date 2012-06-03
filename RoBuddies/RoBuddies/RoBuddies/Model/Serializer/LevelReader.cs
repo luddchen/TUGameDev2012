@@ -16,16 +16,17 @@ namespace RoBuddies.Model.Serializer
         private ContentManager content;
 
         private Level level;
+        private Game game;
 
         /// <summary>
         /// creates a new LevelReader
-        /// <param name="content">content manager for loading default textures</param>
-        /// <param name="level">the level which will be filled with the loaded objects</param>
+        /// <param name="game">the game object (will be needed for some deserialization)</param>
         /// </summary>
-        public LevelReader(ContentManager content)
+        public LevelReader(Game game)
         {
-            this.content = content;
+            this.content = game.Content;
             this.level = new Level(Vector2.Zero);
+            this.game = game;
         }
 
         /// <summary>
@@ -43,10 +44,11 @@ namespace RoBuddies.Model.Serializer
                 JsonReader reader = new JsonTextReader(sr);
                 JsonSerializer serializer = new JsonSerializer();
                 // add your converter of the level objects here:
-                serializer.Converters.Add(new LevelConverter(level));
-                serializer.Converters.Add(new LayerConverter(level));
-                serializer.Converters.Add(new WallConverter(level, content));
-                serializer.Converters.Add(new CrateConverter(level, content));
+                serializer.Converters.Add(new LevelConverter(this.level));
+                serializer.Converters.Add(new LayerConverter(this.level));
+                serializer.Converters.Add(new WallConverter(this.level, this.content));
+                serializer.Converters.Add(new CrateConverter(this.level, this.content));
+                serializer.Converters.Add(new PipeConverter(this.level, this.game));
                 loadedLevel = serializer.Deserialize<Level>(reader);
                 reader.Close();
             }

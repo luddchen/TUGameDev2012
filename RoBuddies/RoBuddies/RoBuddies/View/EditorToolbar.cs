@@ -21,6 +21,7 @@ namespace RoBuddies.View
         public HUDTexture WallButton;
         public HUDTexture BudBudiButton;
         public HUDTexture CrateButton;
+        public HUDTexture PipeButton;
 
         public override void OnViewPortResize()
         {
@@ -83,6 +84,16 @@ namespace RoBuddies.View
             this.CrateButton.Width = this.CrateButton.Texture.Width / 2;
             this.CrateButton.Scale = 0.5f;
             this.AllElements.Add(this.CrateButton);
+
+            // add pipe button
+            this.PipeButton = new HUDTexture(game.Content);
+            this.PipeButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//PipeCenter");
+            this.PipeButton.Color = Color.White;
+            this.PipeButton.Position = new Vector2(this.HUD_width * 0.3f, 90);
+            this.PipeButton.Height = this.PipeButton.Texture.Height;
+            this.PipeButton.Width = this.PipeButton.Texture.Width * 2;
+            this.PipeButton.Scale = 0.5f;
+            this.AllElements.Add(this.PipeButton);
         }
 
 
