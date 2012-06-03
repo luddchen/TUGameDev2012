@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-using RoBuddies.Model;
 using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
@@ -23,6 +20,7 @@ namespace RoBuddies.View
 
         public HUDTexture WallButton;
         public HUDTexture BudBudiButton;
+        public HUDTexture CrateButton;
 
         public override void OnViewPortResize()
         {
@@ -75,6 +73,16 @@ namespace RoBuddies.View
             this.BudBudiButton.Width = this.BudBudiButton.Texture.Width / 2;
             this.BudBudiButton.Scale = 0.5f;
             this.AllElements.Add(this.BudBudiButton);
+
+            // add crate button
+            this.CrateButton = new HUDTexture(game.Content);
+            this.CrateButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+            this.CrateButton.Color = Color.White;
+            this.CrateButton.Position = new Vector2(this.HUD_width * 0.3f, 160);
+            this.CrateButton.Height = this.CrateButton.Texture.Height / 2;
+            this.CrateButton.Width = this.CrateButton.Texture.Width / 2;
+            this.CrateButton.Scale = 0.5f;
+            this.AllElements.Add(this.CrateButton);
         }
 
 

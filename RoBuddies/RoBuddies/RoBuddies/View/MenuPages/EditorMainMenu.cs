@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using RoBuddies.View;
 using RoBuddies.View.HUD;
  
 namespace RoBuddies.View.MenuPages
@@ -50,6 +46,7 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == level)
                     {
+                        this.Game.LevelView = new LevelView(this.Game);
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
                     }
 

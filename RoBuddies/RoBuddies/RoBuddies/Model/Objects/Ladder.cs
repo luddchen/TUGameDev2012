@@ -1,12 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model.Objects
 {
@@ -35,12 +31,8 @@ namespace RoBuddies.Model.Objects
         public Ladder(Vector2 pos, Vector2 size, Color color, World world, Game game, int ladderSteps)
            : base(world)
         {
-            Texture2D top = game.Content.Load<Texture2D>("Sprites//LadderTop");
             Texture2D center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
-            Texture2D bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
-            this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, top, center, bottom, ladderSteps);
-
-            this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, top, center, bottom, ladderSteps);
+            this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, center, center, center, ladderSteps);
 
             this.Position = pos;
             this.Width = size.X;

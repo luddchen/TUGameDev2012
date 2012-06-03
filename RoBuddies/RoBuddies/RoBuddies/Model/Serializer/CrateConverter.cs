@@ -12,7 +12,7 @@ namespace RoBuddies.Model.Serializer
     /// <summary>
     /// This class manages the serialization of a crate.
     /// </summary>
-    class WallConverter : Converter
+    class CrateConverter : Converter
     {
 
         private Level level;
@@ -20,26 +20,26 @@ namespace RoBuddies.Model.Serializer
         private Texture2D defaultTexture;
 
         /// <summary>
-        /// Creates a new WallConverter. If you only want to generate json and not deserialize json code,
+        /// Creates a new CrateConverter. If you only want to generate json and not deserialize json code,
         /// then you can use this constructer. For deserialization you have to use the constructor with the
         /// level and contentManager parameter.
         /// </summary>
-        public WallConverter()
-            : base("RoBuddies.Model.Objects.Wall")
+        public CrateConverter()
+            : base("RoBuddies.Model.Objects.Crate")
         {
         }
 
         /// <summary>
-        /// Creates a new WallConverter, which can generate json
+        /// Creates a new CrateConverter, which can generate json
         /// </summary>
         /// <param name="level">a level object where the deserialized crate state will be added to</param>
         /// <param name="content">the contentManager which is needed to add a default texture to the crate objects</param>
-        public WallConverter(Level level, ContentManager content)
-            : base("RoBuddies.Model.Objects.Wall")
+        public CrateConverter(Level level, ContentManager content)
+            : base("RoBuddies.Model.Objects.Crate")
         {
             this.level = level;
             this.content = content;
-            this.defaultTexture = content.Load<Texture2D>("Sprites//Square");
+            this.defaultTexture = content.Load<Texture2D>("Sprites//Crate2");
         }
 
         /// <summary>
@@ -53,7 +53,7 @@ namespace RoBuddies.Model.Serializer
         /// <returns>the deserialized crate</returns>
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-            Wall wall = null;
+            Crate crate = null;
             if (level != null && defaultTexture != null)
             {
                 JToken tokens = JObject.ReadFrom(reader).First();
@@ -61,13 +61,13 @@ namespace RoBuddies.Model.Serializer
                 Color color = tokens.SelectToken("Color").ToObject<Color>();
                 float width = tokens.SelectToken("Size.Width").ToObject<float>();
                 float height = tokens.SelectToken("Size.Heigth").ToObject<float>();
-                wall = new Wall(pos, new Vector2(width, height), color, defaultTexture, level);
+                crate = new Crate(pos, new Vector2(width, height), color, defaultTexture, level);
             }
             else
             {
                 throw new InvalidOperationException("no level or contentManager reference");
             }
-            return wall;
+            return crate;
         }
 
         /// <summary>
@@ -78,20 +78,20 @@ namespace RoBuddies.Model.Serializer
         /// <param name="serializer">the calling serializer</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            Wall wall = (Wall)value;
-            writer.WritePropertyName("Wall");
+            Crate crate = (Crate)value;
+            writer.WritePropertyName("Crate");
             writer.WriteStartObject();
-                writer.WritePropertyName("Position");
-                serializer.Serialize(writer, wall.Position);
-                writer.WritePropertyName("Color");
-                serializer.Serialize(writer, wall.Color);
-                writer.WritePropertyName("Size");
-                writer.WriteStartObject();
-                    writer.WritePropertyName("Width");
-                    serializer.Serialize(writer, wall.Width);
-                    writer.WritePropertyName("Heigth");
-                    serializer.Serialize(writer, wall.Height);
-                writer.WriteEndObject();
+            writer.WritePropertyName("Position");
+            serializer.Serialize(writer, crate.Position);
+            writer.WritePropertyName("Color");
+            serializer.Serialize(writer, crate.Color);
+            writer.WritePropertyName("Size");
+            writer.WriteStartObject();
+            writer.WritePropertyName("Width");
+            serializer.Serialize(writer, crate.Width);
+            writer.WritePropertyName("Heigth");
+            serializer.Serialize(writer, crate.Height);
+            writer.WriteEndObject();
             writer.WriteEndObject();
         }
     }

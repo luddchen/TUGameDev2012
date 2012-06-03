@@ -1,8 +1,8 @@
-﻿using System;
-using RoBuddies.Control.StateMachines;
-using RoBuddies.Control.RobotStates.Interfaces;
+using System;
 using Microsoft.Xna.Framework.Graphics;
-
+using RoBuddies.Control.RobotStates.Interfaces;
+using RoBuddies.Control.StateMachines;
+﻿
 namespace RoBuddies.Control.RobotStates
 {
     class JumpingState : AnimatedState, IPartsCombinedTransition

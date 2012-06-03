@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using FarseerPhysics.Dynamics;
-using RoBuddies.View;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
-using FarseerPhysics.Factories;
-using Microsoft.Xna.Framework;
-using System.Text.RegularExpressions;
 using RoBuddies.Model.Serializer;
+using RoBuddies.View;
 
 namespace RoBuddies.Control.Editor
 {
@@ -56,6 +52,7 @@ namespace RoBuddies.Control.Editor
             if (inputState == InputState.NORMAL)
             {
                 changeObjectSizeInput(newKeyboardState);
+                deleteObject(newKeyboardState);
             }
             if (inputState == InputState.SAVE)
             {
@@ -215,6 +212,24 @@ namespace RoBuddies.Control.Editor
                     Wall wallObject = (Wall)mouseController.clickedBody;
                     Vector2 newWallSize = new Vector2(wallObject.Width - 2, wallObject.Height);
                     wallObject.changeWallSize(newWallSize);
+                }
+            }
+        }
+
+        /// <summary>
+        /// deletes the current object of the mouse
+        /// </summary>
+        /// <param name="newKeyboardState">the current state of the keyboard</param>
+        private void deleteObject(KeyboardState newKeyboardState)
+        {
+            if (newKeyboardState.IsKeyDown(Keys.Delete) && oldKeyboardState.IsKeyUp(Keys.Delete) && mouseController.isMovingObject)
+            {
+                
+                if (mouseController.clickedBody is IBody)
+                {
+                    IBody clickedBody = (IBody)mouseController.clickedBody;
+                    mouseController.DropObject();
+                    this.HUD.Level.removeObject(clickedBody);
                 }
             }
         }

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using RoBuddies.Control.StateMachines;
 using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Control
 {

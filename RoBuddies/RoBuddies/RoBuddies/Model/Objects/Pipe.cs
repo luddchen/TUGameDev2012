@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
 
 
 namespace RoBuddies.Model.Objects
@@ -16,15 +12,20 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Pipe : PhysicObject
     {
-        public Pipe(Vector2 pos, Vector2 size, Color color, World world, Game game)
+        public Pipe(Vector2 pos, float width, Color color, World world, Game game)
             : base(world)
         {
-            Texture2D texture = game.Content.Load<Texture2D>("Sprites//LadderTop");
+            int pipeSteps = (int)width / 2;
+            // TODO: make good looking Pipe with starts and ends
+            Texture2D left = game.Content.Load<Texture2D>("Sprites//PipeStart");
+            Texture2D center = game.Content.Load<Texture2D>("Sprites//PipeCenter");
+            Texture2D right = game.Content.Load<Texture2D>("Sprites//PipeEnd");
+            Texture2D texture = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, center, center, center, pipeSteps);
             this.Texture = texture;
 
             this.Position = pos;
-            this.Width = size.X;
-            this.Height = size.Y;
+            this.Width = width;
+            this.Height = 0.25f;
             this.Color = color;         
 
             this.BodyType = BodyType.Static;

@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
 using Microsoft.Xna.Framework;
+using Newtonsoft.Json.Linq;
 using RoBuddies.Model.Objects;
-using FarseerPhysics.Dynamics;
 
 namespace RoBuddies.Model.Serializer
 {
@@ -66,6 +63,13 @@ namespace RoBuddies.Model.Serializer
                     Wall wall = serializer.Deserialize<Wall>(wallToken.CreateReader());
                     layer.AddObject(wall);
                 }
+
+                IJEnumerable<JToken> crateTokens = tokens.SelectToken("Crates").Values();
+                foreach (JToken crateToken in crateTokens)
+                {
+                    Crate crate = serializer.Deserialize<Crate>(crateToken.CreateReader());
+                    layer.AddObject(crate);
+                }
                 level.AddLayer(layer);
             }
             else
@@ -94,14 +98,26 @@ namespace RoBuddies.Model.Serializer
                 serializer.Serialize(writer, layer.LayerDepth);
                 writer.WritePropertyName("Walls");
                 writer.WriteStartArray();
-                foreach (IBody obj in layer.AllObjects)
-                {
-                    writer.WriteStartObject();
-                    serializer.Serialize(writer, obj);
-                    writer.WriteEndObject();
-                }
+                    writeGameObject<Wall>(writer, serializer, layer);
+                writer.WriteEndArray();
+                writer.WritePropertyName("Crates");
+                writer.WriteStartArray();
+                    writeGameObject<Crate>(writer, serializer, layer);
                 writer.WriteEndArray();
             writer.WriteEndObject();
+        }
+
+        private void writeGameObject<ObjectType>(Newtonsoft.Json.JsonWriter writer, Newtonsoft.Json.JsonSerializer serializer, Layer layer)
+        {
+            foreach (IBody obj in layer.AllObjects)
+            {
+                if (obj is ObjectType)
+                {
+                    writer.WriteStartObject();
+                    serializer.Serialize(writer, (ObjectType)obj);
+                    writer.WriteEndObject();
+                }
+            }
         }
     }
 }

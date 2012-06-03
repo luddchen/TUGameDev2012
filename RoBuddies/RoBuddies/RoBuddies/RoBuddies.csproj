@@ -148,6 +148,7 @@
     <Compile Include="Model\PhysicObject.cs" />
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\Serializer\Converter.cs" />
+    <Compile Include="Model\Serializer\CrateConverter.cs" />
     <Compile Include="Model\Serializer\LayerConverter.cs" />
     <Compile Include="Model\Serializer\LevelReader.cs" />
     <Compile Include="Model\Serializer\LevelConverter.cs" />

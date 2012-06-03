@@ -1,16 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
-
-using RoBuddies.View.HUD;
 using RoBuddies.Control;
-using RoBuddies.Model;
-using RoBuddies.Model.Objects;
-using RoBuddies.Model.Serializer;
 using RoBuddies.Control.Editor;
+using RoBuddies.Model;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {

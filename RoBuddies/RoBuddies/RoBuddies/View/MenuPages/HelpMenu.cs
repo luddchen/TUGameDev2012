@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using RoBuddies.View;
 using RoBuddies.View.HUD;
 
 namespace RoBuddies.View.MenuPages
@@ -22,7 +18,7 @@ namespace RoBuddies.View.MenuPages
                                 + "---------------------------------\n"
                                 + "<space> : jump\n"
                                 + "<s> : separate or unseparate the parts\n"
-                                + "<alt> : switch between the robot parts\n"
+                                + "<alt> : switch between the crateTex parts\n"
                                 + "<ctrl> : grab a crate to pull\n"
                                 + "<esc> : open / close menu\n"
                                 + "<left> : walk to left\n"
@@ -35,14 +31,14 @@ namespace RoBuddies.View.MenuPages
                                 + "\n"
                                 + "lower part can't climb armless \n"
                                 + "\n"
-                                + "lower part can jump higher than the combined robot\n"
+                                + "lower part can jump higher than the combined crateTex\n"
                                 + "\n"
                                 + "lower part can't pull crates only push\n"
                                 + "\n"
-                                + "combined robot can pull crates\n"
+                                + "combined crateTex can pull crates\n"
                                 + "and push bigger crates than lower part\n"
                                 + "\n"
-                                + "only the combined robot can pass the door to next level\n"
+                                + "only the combined crateTex can pass the door to next level\n"
                                 + "\n"
                                 + "\n"
                                 + "\n"

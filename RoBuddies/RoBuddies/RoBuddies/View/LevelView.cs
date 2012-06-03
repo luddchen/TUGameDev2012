@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
-
-using RoBuddies.Model;
-using RoBuddies.View.HUD;
-using RoBuddies.Utilities;
 using RoBuddies.Control;
-using RoBuddies.Control.StateMachines;
 using RoBuddies.Control.RobotStates;
+using RoBuddies.Control.StateMachines;
+using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 
 namespace RoBuddies.View
@@ -45,18 +39,20 @@ namespace RoBuddies.View
 
             //  some testing code here --------------------------------------------------------------------------
                 // ladder test
-                    //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
-                    //ladder.BodyType = BodyType.Dynamic;
-
-                    Crate crateExm = new Crate(new Vector2(4f, -7f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);    
-
+                    Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
+                    ladder.BodyType = BodyType.Dynamic;
+                    Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
+                    
+                    
                 // body1
-                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
+                    Texture2D crate2 = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
                     Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);
-                    //Pipe box1 = new Pipe(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate, this.Level);                   
+
+                    Crate crateExm = new Crate(new Vector2(4f, -7f), new Vector2(2f, 4f), Color.BurlyWood, crate, this.Level);
+                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);                 
                     box1.BodyType = BodyType.Dynamic;
 
                 // body 2
@@ -81,7 +77,8 @@ namespace RoBuddies.View
                     this.Level.AddStateMachine(stateMachine);
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    //mainLayer.AddObject(ladder);
+                    mainLayer.AddObject(ladder);
+                    mainLayer.AddObject(pipe);
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
                     mainLayer.AddObject(body2);

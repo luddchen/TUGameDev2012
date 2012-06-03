@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
-
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Control.Editor;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Utilities;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
-using RoBuddies.Model.Serializer;
-using RoBuddies.Control.Editor;
 
 namespace RoBuddies.Control
 {
@@ -56,7 +51,7 @@ namespace RoBuddies.Control
         }
 
         /// <summary>
-        /// true, if the cursor is currently moving a object like a wall
+        /// true, if the cursor is currently moving a object like a crate
         /// </summary>
         public bool isMovingObject
         {
@@ -104,6 +99,8 @@ namespace RoBuddies.Control
                 UpdateWallButton();
 
                 UpdateBudBudiButton();
+
+                UpdateCrateButton();
 
             }
 
@@ -162,6 +159,29 @@ namespace RoBuddies.Control
             else
             {
                 this.Toolbar.BudBudiButton.Scale = 0.5f;
+            }
+        }
+
+        private void UpdateCrateButton()
+        {
+            if (this.Toolbar.CrateButton.Intersects(this.mouse.Position - new Vector2(this.Toolbar.Viewport.X, this.Toolbar.Viewport.Y)))
+            {
+                this.Toolbar.CrateButton.Scale = 0.55f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    if (!isMovingObject)
+                    {
+                        Texture2D crateTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Crate2");
+                        Crate crate = new Crate(this.CursorSimPos, new Vector2(3, 3), Color.White, crateTex, this.HUD.Level);
+                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(crate);
+
+                        DragObject();
+                    }
+                }
+            }
+            else
+            {
+                this.Toolbar.CrateButton.Scale = 0.5f;
             }
         }
 
@@ -422,14 +442,20 @@ namespace RoBuddies.Control
             }
         }
 
-        private void DropObject() 
+        /// <summary>
+        /// Drops the current clickedBody
+        /// </summary>
+        public void DropObject() 
         {
-            clickedBody.BodyType = BodyType.Static;
-            clickedBody.CollidesWith = Category.All;
-            if (this.HUD.IsGridVisible) { clickedBody.Position = adjustAtGrid(clickedBody.Position); }
-            this.HUD.Level.RemoveJoint(fixedMouseJoint);
-            clickedBody = null;
-            fixedMouseJoint = null;
+            if (clickedBody != null)
+            {
+                clickedBody.BodyType = BodyType.Static;
+                clickedBody.CollidesWith = Category.All;
+                if (this.HUD.IsGridVisible) { clickedBody.Position = adjustAtGrid(clickedBody.Position); }
+                this.HUD.Level.RemoveJoint(fixedMouseJoint);
+                clickedBody = null;
+                fixedMouseJoint = null;
+            }
         }
 
     }
