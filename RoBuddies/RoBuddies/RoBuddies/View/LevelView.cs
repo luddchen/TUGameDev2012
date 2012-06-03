@@ -44,7 +44,6 @@ namespace RoBuddies.View
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     
                     
-
                 // body1
                     Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
                     Texture2D crate2 = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
@@ -66,7 +65,7 @@ namespace RoBuddies.View
                     body2.Width = 3;
                     body2.Height = 3;
 
-                    StateMachine stateMachine = new PartsCombinedStateMachine(body2);
+                    StateMachine stateMachine = new PartsCombinedStateMachine(body2, this.Game);
                     State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
                     State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
                     State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);

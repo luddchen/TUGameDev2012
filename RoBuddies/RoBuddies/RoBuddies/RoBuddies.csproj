@@ -118,10 +118,10 @@
     <Compile Include="Control\RobotStates\ClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />
     <Compile Include="Control\RobotStates\FallingState.cs" />
-    <Compile Include="Control\RobotStates\Interfaces\IHeadState.cs" />
-    <Compile Include="Control\RobotStates\Interfaces\IIPartsCombinedState.cs" />
-    <Compile Include="Control\RobotStates\Interfaces\IIUpperpartState.cs" />
-    <Compile Include="Control\RobotStates\Interfaces\ILowerPartState.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IHeadTransition.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IPartsCombinedTransition.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\IUpperpartTransition.cs" />
+    <Compile Include="Control\RobotStates\Interfaces\ILowerPartTransition.cs" />
     <Compile Include="Control\RobotStates\JumpingState.cs" />
     <Compile Include="Control\RobotStates\PullingState.cs" />
     <Compile Include="Control\RobotStates\PushingState.cs" />
@@ -135,6 +135,7 @@
     <Compile Include="Control\StateMachines\StateMachine.cs" />
     <Compile Include="Control\RobotStates\WalkingState.cs" />
     <Compile Include="Control\StateMachines\UpperPartStateMachine.cs" />
+    <Compile Include="Control\Transition.cs" />
     <Compile Include="Model\IBody.cs" />
     <Compile Include="Model\Layer.cs" />
     <Compile Include="Model\Level.cs" />

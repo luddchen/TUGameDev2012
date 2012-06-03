@@ -11,12 +11,12 @@ namespace RoBuddies.Control.RobotStates
         {
         }
 
-        public void ToWaiting(WaitingState state)
+        public void ToWaiting(State state)
         {
             StateMachine.CurrentState = state;
         }
 
-        public void ToFalling(FallingState state)
+        public void ToFalling(State state)
         {
             StateMachine.CurrentState = state;
         }

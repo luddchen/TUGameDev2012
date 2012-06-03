@@ -1,7 +1,7 @@
 ﻿
 namespace RoBuddies.Control.RobotStates.Interfaces
 {
-    interface ILowerPartState
+    interface ILowerPartTransition
     {
         void ToWalking();
         void ToWaiting();

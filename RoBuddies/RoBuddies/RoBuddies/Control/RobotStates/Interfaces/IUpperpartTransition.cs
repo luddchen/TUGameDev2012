@@ -1,7 +1,7 @@
 ﻿
 namespace RoBuddies.Control.RobotStates.Interfaces
 {
-    interface IIUpperpartState
+    interface IUpperpartTransition
     {
         void ToClimbing();
         void ToCombine();
