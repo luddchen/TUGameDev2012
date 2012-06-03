@@ -5,12 +5,12 @@ using System.Text;
 
 namespace RoBuddies.Control.RobotStates.Interfaces
 {
-    interface IIUpperpartState
+    interface ILowerPartTransition
     {
-        void ToClimbing();
-        void ToCombine();
-        void ToFalling();
-        void ToShooting();
+        void ToWalking();
         void ToWaiting();
+        void ToPushing();
+        void ToCombine();
+        void ToJumping();
     }
 }

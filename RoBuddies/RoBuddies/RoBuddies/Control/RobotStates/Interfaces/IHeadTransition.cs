@@ -5,7 +5,7 @@ using System.Text;
 
 namespace RoBuddies.Control.RobotStates.Interfaces
 {
-    interface IHeadState
+    interface IHeadTransition
     {
     }
 }

@@ -69,7 +69,7 @@ namespace RoBuddies.View
                     body2.Width = 3;
                     body2.Height = 3;
 
-                    StateMachine stateMachine = new PartsCombinedStateMachine(body2);
+                    StateMachine stateMachine = new PartsCombinedStateMachine(body2, this.Game);
                     State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
                     State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
                     State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
