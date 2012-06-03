@@ -39,9 +39,9 @@ namespace RoBuddies.View
 
             //  some testing code here --------------------------------------------------------------------------
                 // ladder test
-                    //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
-                    //ladder.BodyType = BodyType.Dynamic;
-
+                    Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
+                    ladder.BodyType = BodyType.Dynamic;
+                    Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     
                     
 
@@ -53,8 +53,7 @@ namespace RoBuddies.View
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
 
                     Crate crateExm = new Crate(new Vector2(4f, -7f), new Vector2(2f, 4f), Color.BurlyWood, crate, this.Level);
-                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);
-                    //Pipe box1 = new Pipe(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);                   
+                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);                 
                     box1.BodyType = BodyType.Dynamic;
 
                 // body 2
@@ -79,7 +78,8 @@ namespace RoBuddies.View
                     this.Level.AddStateMachine(stateMachine);
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    //mainLayer.AddObject(ladder);
+                    mainLayer.AddObject(ladder);
+                    mainLayer.AddObject(pipe);
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
                     mainLayer.AddObject(body2);
