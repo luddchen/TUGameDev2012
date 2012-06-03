@@ -13,6 +13,7 @@ using RoBuddies.Utilities;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
 using RoBuddies.Model.Serializer;
+using RoBuddies.Control.Editor;
 
 namespace RoBuddies.Control
 {
@@ -40,6 +41,11 @@ namespace RoBuddies.Control
         /// the current body, which was clicked
         /// </summary>
         public Body clickedBody;
+
+        /// <summary>
+        /// get & set the keyboardController of the level editor
+        /// </summary>
+        public KeyboardController keyboardController;
 
         /// <summary>
         /// the current position of the cursor in sim coordinates
@@ -215,8 +221,14 @@ namespace RoBuddies.Control
                 this.Toolbar.saveButton.Scale = 0.55f;
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
-                    (new LevelWriter(this.HUD.Level)).writeLevel("", "");
-                    Console.Out.WriteLine("Game saved!");
+                    if (keyboardController != null)
+                    {
+                        keyboardController.savingInput();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("no keyboardController reference");
+                    }
                 }
             }
             else
@@ -232,12 +244,13 @@ namespace RoBuddies.Control
                 this.Toolbar.loadButton.Scale = 0.55f;
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
-                    ResetCamera();
-                    Level loadedLevel = (new LevelReader(this.HUD.Game.Content)).readLevel("", "");
-                    if (loadedLevel != null)
+                    if (keyboardController != null)
                     {
-                        this.HUD.Level = loadedLevel;
-                        Console.Out.WriteLine("Game loaded!");
+                        keyboardController.loadingInput();
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException("no keyboardController reference");
                     }
                 }
             }
@@ -254,7 +267,7 @@ namespace RoBuddies.Control
                 this.Toolbar.clearButton.Scale = 0.55f;
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
-                    ResetCamera();
+                    this.HUD.ResetCamera();
                     this.HUD.Level = new Level(new Vector2(0, 10));
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
                     this.HUD.Level.AddLayer(mainLayer);
@@ -273,7 +286,7 @@ namespace RoBuddies.Control
                 this.Toolbar.resetCamButton.Scale = 0.55f;
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
-                    ResetCamera();
+                    this.HUD.ResetCamera();
                 }
             }
             else
@@ -392,13 +405,6 @@ namespace RoBuddies.Control
                 return false;
             }
             return true;
-        }
-
-        private void ResetCamera()
-        {
-            this.HUD.Camera.Move(Vector2.Zero);
-            this.HUD.Camera.Rotation = 0.0f;
-            this.HUD.Camera.Zoom = 0.5f;
         }
 
         private void DragObject()

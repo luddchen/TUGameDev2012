@@ -29,6 +29,8 @@ namespace RoBuddies.View
         public HUDTexture LeftArrow;
         public HUDTexture RightArrow;
 
+        public HUDString hudString;
+
         private Texture2D dot;
         private Vector2 dotOrigin;
         private Color gridColor = new Color(128, 128, 128, 128);
@@ -36,17 +38,39 @@ namespace RoBuddies.View
         public override void OnViewPortResize()
         {
             base.OnViewPortResize();
-            if (this.UpArrow != null) this.UpArrow.Position = new Vector2(this.viewport.Width / 2, 15);
-            if (this.DownArrow != null) this.DownArrow.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height - 15);
-            if (this.LeftArrow != null) this.LeftArrow.Position = new Vector2(15, this.viewport.Height/2);
-            if (this.RightArrow != null) this.RightArrow.Position = new Vector2(this.viewport.Width - 15, this.viewport.Height / 2);
-
-            if (this.Toolbar != null) { this.Toolbar.Viewport = this.viewport; }
+            if (this.hudString != null)
+            {
+                this.hudString.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height / 2);
+            }
+            if (this.UpArrow != null)
+            {
+                this.UpArrow.Position = new Vector2(this.viewport.Width / 2, 15);
+            }
+            if (this.DownArrow != null)
+            {
+                this.DownArrow.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height - 15); 
+            }
+            if (this.LeftArrow != null)
+            {
+                this.LeftArrow.Position = new Vector2(15, this.viewport.Height / 2);
+            }
+            if (this.RightArrow != null)
+            { 
+                this.RightArrow.Position = new Vector2(this.viewport.Width - 15, this.viewport.Height / 2); 
+            }
+            if (this.Toolbar != null)
+            {
+                this.Toolbar.Viewport = this.viewport; 
+            }
         }
 
         public EditorView(RoBuddies game)
             : base(game)
         {
+            hudString = new HUDString(this.Game.Content);
+            hudString.String = "";
+            this.AllElements.Add(hudString);
+
             this.Toolbar = new EditorToolbar(game);
             this.Camera.Zoom = 0.5f;
             this.IsGridVisible = true;
@@ -55,6 +79,7 @@ namespace RoBuddies.View
             this.AllElements.Add(this.Mouse);
             this.mouseController = new MouseController(this, this.Mouse);
             this.keyboardController = new KeyboardController(this, this.mouseController);
+            this.mouseController.keyboardController = this.keyboardController;
 
             this.DownArrow = new HUDTexture(game.Content);
             this.DownArrow.Color = new Color(128, 128, 128, 128);
@@ -146,6 +171,16 @@ namespace RoBuddies.View
                 }
 
             spriteBatch.End();
+        }
+
+        /// <summary>
+        /// resets the camera to the origin of the level
+        /// </summary>
+        public void ResetCamera()
+        {
+            this.Camera.Move(Vector2.Zero);
+            this.Camera.Rotation = 0.0f;
+            this.Camera.Zoom = 0.5f;
         }
     }
 }

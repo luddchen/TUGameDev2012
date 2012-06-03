@@ -42,9 +42,9 @@ namespace RoBuddies.Model.Serializer
         public Level readLevel(String path, String filename)
         {
             Level loadedLevel = null;
-            if (File.Exists(@".\\SerializationTest.json"))
+            if (File.Exists(@path + "\\" + filename))
             {
-                StreamReader sr = new StreamReader(@".\\SerializationTest.json");
+                StreamReader sr = new StreamReader(@path + "\\" + filename);
                 JsonReader reader = new JsonTextReader(sr);
                 JsonSerializer serializer = new JsonSerializer();
                 // add your converter of the level objects here:

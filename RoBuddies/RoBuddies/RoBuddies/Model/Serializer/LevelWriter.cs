@@ -36,7 +36,15 @@ namespace RoBuddies.Model.Serializer
         /// <param name="filename">the name of the file</param>
         public void writeLevel(String path, String filename) 
         {
-            StreamWriter sw = new StreamWriter(@".\\SerializationTest.json", false);
+            if(!File.Exists(@path)) {
+                System.IO.Directory.CreateDirectory(path);
+            }
+            if (filename.Length == ".json".Length)
+            {
+                filename = DateTime.Now.ToLongTimeString().Replace(":", "_") + ".json";
+            }
+            Console.Out.WriteLine(filename);
+            StreamWriter sw = new StreamWriter(@path + "\\" + filename, false);
             JsonWriter writer = new JsonTextWriter(sw);
             JsonSerializer serializer = new JsonSerializer();
             // add your converter of the level objects here:
