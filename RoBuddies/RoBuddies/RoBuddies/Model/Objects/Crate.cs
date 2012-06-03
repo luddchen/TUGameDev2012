@@ -11,14 +11,14 @@ namespace RoBuddies.Model.Objects
 {
     class Crate : PhysicObject
     {
-        public Crate(Vector2 pos, Vector2 size, Color color, World world, Game game)
+        public Crate(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
             : base(world)
         {
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;   
             this.Color = color;
-            this.Texture = game.Content.Load<Texture2D>("Sprites//Crate");
+            this.Texture = texture;
 
             this.FixedRotation = true;
             this.BodyType = BodyType.Dynamic;

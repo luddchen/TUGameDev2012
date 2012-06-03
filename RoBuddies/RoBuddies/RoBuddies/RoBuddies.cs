@@ -16,7 +16,7 @@ using RoBuddies.Control;
 namespace RoBuddies
 {
     /// <summary>
-    /// main class for robot game
+    /// main class for crateTex game
     /// </summary>
     public class RoBuddies : Microsoft.Xna.Framework.Game
     {

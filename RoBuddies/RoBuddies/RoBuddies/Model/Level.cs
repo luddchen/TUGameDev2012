@@ -19,7 +19,7 @@ namespace RoBuddies.Model
         public Color Background { get; set; }
 
         /// <summary>
-        /// our holy robot
+        /// our holy crateTex
         /// </summary>
         private Robot Robot { get; set; }
 
@@ -95,6 +95,19 @@ namespace RoBuddies.Model
             }
 
             this.Step(gameTime.ElapsedGameTime.Milliseconds * 0.001f);
+        }
+
+        /// <summary>
+        /// Removes a IBody object from all possible layers of the level.
+        /// If the IBody object is no object of any layer, then nothing will happen.
+        /// </summary>
+        /// <param name="iBody">the iBody which will be removed</param>
+        public void removeObject(IBody iBody)
+        {
+            foreach(Layer layer in allLayers)
+            {
+                layer.RemoveObject(iBody);
+            }
         }
 
     }

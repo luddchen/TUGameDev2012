@@ -54,8 +54,11 @@ namespace RoBuddies.Model
         /// <param name="body">the object, which will be removed</param>
         public void RemoveObject(IBody body)
         {
-            this.allObjects.Remove(body);
-            body.Layer = null;
+            if (this.allObjects.Contains(body))
+            {
+                this.allObjects.Remove(body);
+                body.Layer = null;
+            }
         }
 
         /// <summary>
