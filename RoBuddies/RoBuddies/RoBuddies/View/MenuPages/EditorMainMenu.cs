@@ -50,6 +50,7 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == level)
                     {
+                        this.Game.LevelView = new LevelView(this.Game);
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
                     }
 
