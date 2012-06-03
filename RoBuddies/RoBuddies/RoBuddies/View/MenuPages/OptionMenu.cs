@@ -13,6 +13,9 @@ namespace RoBuddies.View.MenuPages
 {
     class OptionMenu : HUDMenuPage
     {
+        private HUDString fullscreen;
+        private HUDString fullscreenValue;
+
         private HUDString sound;
         private HUDString soundValue;
 
@@ -23,16 +26,29 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnViewPortResize()
         {
-            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
-            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
-            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
-            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
+            if (fullscreen != null) { fullscreen.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
+            if (fullscreenValue != null) { fullscreenValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
+
+            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
+            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
+
+            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.6f); }
+            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.6f); }
         }
 
         public OptionMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+
+            fullscreen = new HUDString("Fullscreen", content);
+            fullscreen.Scale = 0.7f;
+            this.AllElements.Add(fullscreen);
+            this.ChoiceList.Add(fullscreen);
+
+            fullscreenValue = new HUDString("on", content);
+            fullscreenValue.Scale = 0.7f;
+            this.AllElements.Add(fullscreenValue);
 
             sound = new HUDString("Sound", content);
             sound.Scale = 0.7f;
@@ -52,7 +68,7 @@ namespace RoBuddies.View.MenuPages
             musicValue.Scale = 0.7f;
             this.AllElements.Add(musicValue);
 
-            this.ActiveElement = sound;
+            this.ActiveElement = fullscreen;
         }
 
         public override void Update(GameTime gameTime)
@@ -64,6 +80,18 @@ namespace RoBuddies.View.MenuPages
             {
                 if (this.ActiveElement != null)
                 {
+                    if (this.ActiveElement == fullscreen)
+                    {
+                        if (fullscreenValue.String == "on")
+                        {
+                            fullscreenValue.String = "off";
+                        }
+                        else
+                        {
+                            fullscreenValue.String = "on";
+                        }
+                    }
+
                     if (this.ActiveElement == sound)
                     {
                         if (soundValue.String == "on")

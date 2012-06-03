@@ -26,10 +26,10 @@ namespace RoBuddies
         Viewport ViewPort;
         SpriteBatch SpriteBatch;
 
-        HUDLevelView LevelView;
+        public HUDLevelView LevelView;
         HUDMenu LevelMenu;
 
-        HUDLevelView EditorView;
+        public HUDLevelView EditorView;
         HUDMenu EditorMenu;
 
         public HUDLevelView View;

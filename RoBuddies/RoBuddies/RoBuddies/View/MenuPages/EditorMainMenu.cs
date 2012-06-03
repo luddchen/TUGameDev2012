@@ -15,9 +15,12 @@ namespace RoBuddies.View.MenuPages
     {
         private HUDString level;
 
+        private HUDString testLevel;
+
         public override void OnViewPortResize()
         {
             if (level != null) { level.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.2f); }
+            if (testLevel != null) { testLevel.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.4f); }
         }
 
         public EditorMainMenu(HUDMenu menu, ContentManager content)
@@ -28,6 +31,10 @@ namespace RoBuddies.View.MenuPages
             level = new HUDString("Game", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(level);
             this.ChoiceList.Add(level);
+
+            testLevel = new HUDString("Test Level", null, null, null, null, 0.7f, null, content);
+            this.AllElements.Add(testLevel);
+            this.ChoiceList.Add(testLevel);
 
             this.ActiveElement = level;
         }
@@ -43,6 +50,12 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == level)
                     {
+                        this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
+                    }
+
+                    if (this.ActiveElement == testLevel)
+                    {
+                        this.Game.LevelView.Level = this.Game.EditorView.Level;
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
                     }
 
