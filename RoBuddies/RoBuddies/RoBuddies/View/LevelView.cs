@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
+using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
-
-using RoBuddies.Model;
-using RoBuddies.View.HUD;
-using RoBuddies.Utilities;
 using RoBuddies.Control;
-using RoBuddies.Control.StateMachines;
 using RoBuddies.Control.RobotStates;
+using RoBuddies.Control.StateMachines;
+using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 
 namespace RoBuddies.View

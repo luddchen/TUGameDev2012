@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Text.RegularExpressions;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
-using FarseerPhysics.Dynamics;
-using RoBuddies.View;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
-using FarseerPhysics.Factories;
-using Microsoft.Xna.Framework;
-using System.Text.RegularExpressions;
 using RoBuddies.Model.Serializer;
+using RoBuddies.View;
 
 namespace RoBuddies.Control.Editor
 {

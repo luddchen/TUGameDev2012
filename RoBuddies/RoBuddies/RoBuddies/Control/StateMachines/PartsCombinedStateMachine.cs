@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
-using RoBuddies.Control.RobotStates;
-using FarseerPhysics.Dynamics;
 
 namespace RoBuddies.Control.StateMachines
 {

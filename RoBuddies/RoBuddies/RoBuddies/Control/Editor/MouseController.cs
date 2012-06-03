@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
-
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Control.Editor;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Utilities;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
-using RoBuddies.Model.Serializer;
-using RoBuddies.Control.Editor;
 
 namespace RoBuddies.Control
 {
@@ -56,7 +51,7 @@ namespace RoBuddies.Control
         }
 
         /// <summary>
-        /// true, if the cursor is currently moving a object like a wall
+        /// true, if the cursor is currently moving a object like a crate
         /// </summary>
         public bool isMovingObject
         {

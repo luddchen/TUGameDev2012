@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
 using System.IO;
-using Newtonsoft.Json.Linq;
-using FarseerPhysics.Dynamics;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Newtonsoft.Json;
 
 namespace RoBuddies.Model.Serializer
 {
@@ -51,6 +46,7 @@ namespace RoBuddies.Model.Serializer
                 serializer.Converters.Add(new LevelConverter(level));
                 serializer.Converters.Add(new LayerConverter(level));
                 serializer.Converters.Add(new WallConverter(level, content));
+                serializer.Converters.Add(new CrateConverter(level, content));
                 loadedLevel = serializer.Deserialize<Level>(reader);
                 reader.Close();
             }

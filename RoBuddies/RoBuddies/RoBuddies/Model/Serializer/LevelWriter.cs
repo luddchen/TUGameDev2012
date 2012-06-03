@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json.Linq;
-using Microsoft.Xna.Framework;
-using Newtonsoft.Json;
-using RoBuddies.Model;
 using System.IO;
+using Newtonsoft.Json;
 
-using RoBuddies.Model.Serializer;
 
 namespace RoBuddies.Model.Serializer  
 {
@@ -51,6 +44,7 @@ namespace RoBuddies.Model.Serializer
             serializer.Converters.Add(new LevelConverter());
             serializer.Converters.Add(new LayerConverter());
             serializer.Converters.Add(new WallConverter());
+            serializer.Converters.Add(new CrateConverter());
             serializer.Serialize(writer, this.level);
             writer.Flush();
             writer.Close();

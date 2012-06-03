@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
+﻿
+using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-
-using FarseerPhysics.Dynamics;
-using RoBuddies.Utilities;
 
 namespace RoBuddies.Model
 {
