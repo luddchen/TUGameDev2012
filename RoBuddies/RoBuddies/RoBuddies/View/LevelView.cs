@@ -39,7 +39,7 @@ namespace RoBuddies.View
 
             //  some testing code here --------------------------------------------------------------------------
                 // ladder test
-                    Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game, 7);
+                    Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
                     ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     
