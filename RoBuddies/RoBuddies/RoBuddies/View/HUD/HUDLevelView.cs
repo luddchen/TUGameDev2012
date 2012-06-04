@@ -59,7 +59,7 @@ namespace RoBuddies.View.HUD
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            this.Level.Update(gameTime);
+            //this.Level.Update(gameTime);  // seems to create assertion bugs in editor
             this.Camera.Update(gameTime);
         }
 

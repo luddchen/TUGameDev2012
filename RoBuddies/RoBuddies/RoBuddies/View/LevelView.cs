@@ -110,6 +110,7 @@ namespace RoBuddies.View
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            this.Level.Update(gameTime);    // taken from HUDLevelView because editor need no level update
             this.HUD.Update(gameTime);
 
             KeyboardState newKeyboardState = Keyboard.GetState();
