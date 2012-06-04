@@ -7,14 +7,14 @@ namespace RoBuddies.Model.Objects
 {
     class Switch : PhysicObject
     {
-        public Switch(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
+        public Switch(Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
         {
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;
             this.Color = color;
-            this.Texture = texture;
+            //this.Texture = texture;
             this.BodyType = BodyType.Static;
             this.Friction = 10f; //not know exactly
 

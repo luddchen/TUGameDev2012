@@ -174,8 +174,8 @@ namespace RoBuddies.Control
                     if (!isMovingObject)
                     {
                         Texture2D crateTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Crate2");
-                        Crate crate = new Crate(this.CursorSimPos, new Vector2(3, 3), Color.White, crateTex, this.HUD.Level);
-                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(crate);
+                        //Crate crate = new Crate(this.CursorSimPos, new Vector2(3, 3), Color.White, crateTex, this.HUD.Level);
+                        //this.HUD.Level.GetLayerByName("mainLayer").AddObject(crate);
 
                         DragObject();
                     }

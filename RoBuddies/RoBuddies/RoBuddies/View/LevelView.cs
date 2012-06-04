@@ -51,7 +51,8 @@ namespace RoBuddies.View
                     Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
 
-                    Crate crateExm = new Crate(new Vector2(4f, -7f), new Vector2(2f, 4f), Color.BurlyWood, crate, this.Level);
+                    //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);
+                    Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
                     Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);                 
                     box1.BodyType = BodyType.Dynamic;
 

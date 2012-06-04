@@ -61,7 +61,7 @@ namespace RoBuddies.Model.Serializer
                 Color color = tokens.SelectToken("Color").ToObject<Color>();
                 float width = tokens.SelectToken("Size.Width").ToObject<float>();
                 float height = tokens.SelectToken("Size.Heigth").ToObject<float>();
-                crate = new Crate(pos, new Vector2(width, height), color, defaultTexture, level);
+                //crate = new Crate(pos, new Vector2(width, height), color, defaultTexture, level);
             }
             else
             {
