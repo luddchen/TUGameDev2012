@@ -56,43 +56,30 @@ namespace RoBuddies.View
             this.saveButton = new HUDString("save", font, new Vector2(3 * this.HUD_width / 4, 70), Color.Black, Color.Gray, 0.5f, 0, game.Content);
             this.AllElements.Add(this.saveButton);
 
-            this.WallButton = new HUDTexture(game.Content);
-            this.WallButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            this.WallButton.Color = Color.Green;
-            this.WallButton.Position = new Vector2(this.HUD_width * 0.3f, 110);
-            this.WallButton.Width = this.HUD_width;
-            this.WallButton.Height = this.WallButton.Width / 5;
-            this.WallButton.Scale = 0.5f;
+            // add Wall Button
+            this.WallButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Square"), new Vector2(this.HUD_width * 0.3f, 110), 
+                                             this.HUD_width, this.HUD_width / 5, Color.Green, 0.5f, 0, game.Content);
             this.AllElements.Add(this.WallButton);
 
             // add BudBudi button for setting the starting position of the player in the level
-            this.BudBudiButton = new HUDTexture(game.Content);
-            this.BudBudiButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//Editor//BudBudi");
-            this.BudBudiButton.Color = Color.White;
-            this.BudBudiButton.Position = new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f);
+            this.BudBudiButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Editor//BudBudi"), new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f),
+                                                null, null, null, 0.5f, null, game.Content); 
             this.BudBudiButton.Height = this.BudBudiButton.Texture.Height / 2;
             this.BudBudiButton.Width = this.BudBudiButton.Texture.Width / 2;
-            this.BudBudiButton.Scale = 0.5f;
             this.AllElements.Add(this.BudBudiButton);
 
             // add crate button
-            this.CrateButton = new HUDTexture(game.Content);
-            this.CrateButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
-            this.CrateButton.Color = Color.White;
-            this.CrateButton.Position = new Vector2(this.HUD_width * 0.3f, 160);
+            this.CrateButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Crate2"), new Vector2(this.HUD_width * 0.3f, 160),
+                                              null, null, null, 0.5f, null, game.Content);
             this.CrateButton.Height = this.CrateButton.Texture.Height / 2;
             this.CrateButton.Width = this.CrateButton.Texture.Width / 2;
-            this.CrateButton.Scale = 0.5f;
             this.AllElements.Add(this.CrateButton);
 
             // add pipe button
-            this.PipeButton = new HUDTexture(game.Content);
-            this.PipeButton.Texture = this.Game.Content.Load<Texture2D>("Sprites//PipeCenter");
-            this.PipeButton.Color = Color.White;
-            this.PipeButton.Position = new Vector2(this.HUD_width * 0.3f, 90);
+            this.PipeButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//PipeCenter"), new Vector2(this.HUD_width * 0.3f, 90),
+                                             null, null, null, 0.5f, null, game.Content);
             this.PipeButton.Height = this.PipeButton.Texture.Height;
             this.PipeButton.Width = this.PipeButton.Texture.Width * 2;
-            this.PipeButton.Scale = 0.5f;
             this.AllElements.Add(this.PipeButton);
         }
 

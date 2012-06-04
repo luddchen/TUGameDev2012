@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Objects
         public Crate(Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
         {
-            crate = game.Content.Load<Texture2D>("Sprites//Crate");
+            crate = game.Content.Load<Texture2D>("Sprites//Crate2");
 
             this.Position = pos;
             this.Width = size.X;

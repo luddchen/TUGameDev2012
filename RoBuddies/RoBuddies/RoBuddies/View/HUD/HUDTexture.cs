@@ -85,6 +85,21 @@ namespace RoBuddies.View.HUD
             this.Scale = 1.0f;
         }
 
+        public HUDTexture(Texture2D texture, Vector2? position, float? width, float? height, Color? color, float? scale, float? rotation, ContentManager content)
+        {
+            if (texture == null) { this.Texture = content.Load<Texture2D>("Sprites//Circle"); }
+            if (texture != null) { this.Texture = texture; }
+
+            this.Position = position ?? Vector2.Zero;
+            this.Width = width ?? 10;
+            this.Height = height ?? 10;
+            this.Color = color ?? Color.Beige;
+            this.Scale = scale ?? 1.0f;
+            this.Rotation = rotation ?? 0.0f;
+
+
+        }
+
         /// <summary>
         /// for update of values and effects 
         /// </summary>

@@ -57,5 +57,12 @@ namespace RoBuddies.View.HUD
         /// </summary>
         /// <param name="spriteBatch">the spritebatch</param>
         void Draw(SpriteBatch spriteBatch);
+
+        /// <summary>
+        /// testing intersection with point
+        /// </summary>
+        /// <param name="point">the test point</param>
+        /// <returns>true if there is an intersetion</returns>
+        bool Intersects(Vector2 point);
     }
 }
