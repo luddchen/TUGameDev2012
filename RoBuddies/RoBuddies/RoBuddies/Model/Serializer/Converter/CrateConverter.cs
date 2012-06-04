@@ -16,13 +16,13 @@ namespace RoBuddies.Model.Serializer
     {
 
         private Level level;
+        private Game game;
         private ContentManager content;
-        private Texture2D defaultTexture;
 
         /// <summary>
         /// Creates a new CrateConverter. If you only want to generate json and not deserialize json code,
         /// then you can use this constructer. For deserialization you have to use the constructor with the
-        /// level and contentManager parameter.
+        /// level and game parameter.
         /// </summary>
         public CrateConverter()
             : base("RoBuddies.Model.Objects.Crate")
@@ -33,18 +33,19 @@ namespace RoBuddies.Model.Serializer
         /// Creates a new CrateConverter, which can generate json
         /// </summary>
         /// <param name="level">a level object where the deserialized crate state will be added to</param>
+        /// <param name="game">the game of the level</param>
         /// <param name="content">the contentManager which is needed to add a default texture to the crate objects</param>
-        public CrateConverter(Level level, ContentManager content)
+        public CrateConverter(Level level, Game game, ContentManager content)
             : base("RoBuddies.Model.Objects.Crate")
         {
             this.level = level;
+            this.game = game;
             this.content = content;
-            this.defaultTexture = content.Load<Texture2D>("Sprites//Crate2");
         }
 
         /// <summary>
         /// This method deserialize a crate object from the generated json code. In order to use this method,
-        /// you needed to use the constructor with the level and contentManger parameters.
+        /// you needed to use the constructor with the level and game parameters.
         /// </summary>
         /// <param name="reader">the reader which reads the json code</param>
         /// <param name="objectType">the existing value of object being read</param>
@@ -54,14 +55,14 @@ namespace RoBuddies.Model.Serializer
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             Crate crate = null;
-            if (level != null && defaultTexture != null)
+            if (level != null && game != null)
             {
                 JToken tokens = JObject.ReadFrom(reader).First();
                 Vector2 pos = tokens.SelectToken("Position").ToObject<Vector2>();
                 Color color = tokens.SelectToken("Color").ToObject<Color>();
                 float width = tokens.SelectToken("Size.Width").ToObject<float>();
                 float height = tokens.SelectToken("Size.Heigth").ToObject<float>();
-                //crate = new Crate(pos, new Vector2(width, height), color, defaultTexture, level);
+                crate = new Crate(pos, new Vector2(width, height), color, level, game);
             }
             else
             {
