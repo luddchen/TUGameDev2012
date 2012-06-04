@@ -9,7 +9,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing an layer
     /// </summary>
-    public class Layer
+    public class Layer : IComparable<Layer>
     {
         private List<IBody> allObjects;
 
@@ -75,5 +75,10 @@ namespace RoBuddies.Model
             this.allObjects = new List<IBody>(); 
         }
 
+
+        public int CompareTo(Layer other)
+        {
+            return this.LayerDepth.CompareTo(other.LayerDepth);
+        }
     }
 }

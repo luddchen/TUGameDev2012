@@ -40,6 +40,9 @@ namespace RoBuddies.Model
             }
             this.AllLayers.Add(layer);
             layer.Level = this;
+
+            // sort by layerDepth to draw from back to front
+            this.allLayers.Sort();
         }
 
         /// <summary>
