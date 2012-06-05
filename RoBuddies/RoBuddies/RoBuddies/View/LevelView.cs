@@ -31,7 +31,6 @@ namespace RoBuddies.View
         public LevelView(RoBuddies game) : base(game)
         {
             this.HUD = new LevelHUD(game);
-
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
             Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
@@ -58,9 +57,8 @@ namespace RoBuddies.View
                     Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
 
                     //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);
-                    Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
-                    Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
-                    box1.BodyType = BodyType.Dynamic;
+                    Crate crateExm = new Crate("", new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
+                    Crate box1 = new Crate("",new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     backLayer.AddObject(ladder);

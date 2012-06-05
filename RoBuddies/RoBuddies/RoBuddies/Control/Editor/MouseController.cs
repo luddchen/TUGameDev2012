@@ -201,7 +201,7 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        Crate crate = new Crate(this.CursorSimPos, new Vector2(3, 3), Color.White, this.HUD.Level, this.HUD.Game);
+                        Crate crate = new Crate("",this.CursorSimPos, new Vector2(3, 3), Color.White, this.HUD.Level, this.HUD.Game);
                         this.HUD.Level.GetLayerByName("mainLayer").AddObject(crate);
 
                         DragObject();
