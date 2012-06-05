@@ -18,7 +18,7 @@ namespace RoBuddies.Model.Objects
         {
             if (theme.Equals(""))
             {
-                door = game.Content.Load<Texture2D>("Sprites//ClosedDoor");
+                door = game.Content.Load<Texture2D>("Sprites//doorcl");
             }
             this.Texture = door;
 

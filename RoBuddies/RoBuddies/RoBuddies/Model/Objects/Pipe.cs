@@ -26,13 +26,13 @@ namespace RoBuddies.Model.Objects
         {
             // TODO: make good looking Pipe with starts and ends
             left = game.Content.Load<Texture2D>("Sprites//PipeStart");
-            center = game.Content.Load<Texture2D>("Sprites//PipeCenter");
+            center = game.Content.Load<Texture2D>("Sprites//pipe");
             right = game.Content.Load<Texture2D>("Sprites//PipeEnd");
 
             this.game = game;
             this.Position = pos;
             this.Width = width;
-            this.Height = 0.25f;
+            this.Height = 0.5f;
             this.Color = color;
             attachTexture();
 
@@ -47,7 +47,7 @@ namespace RoBuddies.Model.Objects
 
         private void attachTexture()
         {
-            int pipeSteps = (int)this.Width / 2;
+            int pipeSteps = (int)this.Width;
             this.Texture = Utilities.TextureConverter.connectLCR(this.game.GraphicsDevice, center, center, center, pipeSteps);
         }
 
