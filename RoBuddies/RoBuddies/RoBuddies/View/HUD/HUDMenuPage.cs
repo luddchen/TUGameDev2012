@@ -12,7 +12,7 @@ namespace RoBuddies.View.HUD
     /// <summary>
     /// basis class for Head Up Display Menu Pages
     /// </summary>
-    public class HUDMenuPage : HUD
+    class HUDMenuPage : HUD
     {
 
         /// <summary>

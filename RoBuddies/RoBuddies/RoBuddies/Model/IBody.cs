@@ -9,7 +9,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// should be implemented by all GameObjects
     /// </summary>
-    public interface IBody
+    interface IBody
     {
 
         /// <summary>

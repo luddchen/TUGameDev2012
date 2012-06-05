@@ -6,7 +6,7 @@ using RoBuddies.View.MenuPages;
 
 namespace RoBuddies.View
 {
-    public class LevelMenu : HUDMenu
+    class LevelMenu : HUDMenu
     {
 
         public override void OnViewPortResize()

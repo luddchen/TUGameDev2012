@@ -12,7 +12,7 @@ namespace RoBuddies
     /// <summary>
     /// main class for robot game
     /// </summary>
-    public class RoBuddies : Microsoft.Xna.Framework.Game
+    class RoBuddies : Microsoft.Xna.Framework.Game
     {
         public enum ViewMode{ Level, Editor }
 

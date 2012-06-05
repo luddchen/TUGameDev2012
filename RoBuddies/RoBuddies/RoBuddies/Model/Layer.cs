@@ -9,7 +9,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing an layer
     /// </summary>
-    public class Layer : IComparable<Layer>
+    class Layer : IComparable<Layer>
     {
         private List<IBody> allObjects;
 
