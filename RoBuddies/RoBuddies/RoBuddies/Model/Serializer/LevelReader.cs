@@ -3,6 +3,7 @@ using System.IO;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Newtonsoft.Json;
+using RoBuddies.Model.Serializer.Converter;
 
 namespace RoBuddies.Model.Serializer
 {

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
-namespace RoBuddies.Model.Serializer
+namespace RoBuddies.Model.Serializer.Converter
 {
     /// <summary>
     /// This class manages the serialization of a level.
