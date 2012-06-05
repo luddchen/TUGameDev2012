@@ -9,6 +9,9 @@ using RoBuddies.Model.Objects;
 using RoBuddies.Utilities;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using FarseerPhysics.Factories;
+using RoBuddies.Control.StateMachines;
+using RoBuddies.Control.RobotStates;
 
 namespace RoBuddies.Control
 {
@@ -149,10 +152,35 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        Texture2D robot = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
                         // Todo: change to Robot Model:
-                        Wall wall1 = new Wall(this.CursorSimPos, new Vector2(3, 3), Color.White, robot, this.HUD.Level);
-                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(wall1);
+                        //Robot robot = new Robot(this.HUD.Game.Content, this.CursorSimPos, this.HUD.Level);
+
+                        // <very dirty stuff, which will be removed when the robot model is working>
+                        Texture2D waitTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                        Texture2D jumpTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
+
+                        // robot body
+                        PhysicObject robotBody = new PhysicObject(this.HUD.Level);
+                        robotBody.FixedRotation = true;
+                        robotBody.Position = this.CursorSimPos;
+                        robotBody.BodyType = BodyType.Dynamic;
+                        robotBody.Color = Color.White;
+                        FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, robotBody);
+                        robotBody.Width = 3;
+                        robotBody.Height = 3;
+
+                        StateMachine stateMachine = new PartsCombinedStateMachine(robotBody, this.HUD.Game);
+                        State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
+                        State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
+                        State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
+                        stateMachine.AllStates.Add(waitingState);
+                        stateMachine.AllStates.Add(jumpState);
+                        stateMachine.AllStates.Add(walkingState);
+                        stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
+                        this.HUD.Level.AddStateMachine(stateMachine);
+
+                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(robotBody);
+                        // </very dirty stuff, which will be removed when the robot model is working>
 
                         DragObject();
                     }

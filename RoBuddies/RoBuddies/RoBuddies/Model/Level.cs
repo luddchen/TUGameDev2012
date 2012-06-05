@@ -19,7 +19,7 @@ namespace RoBuddies.Model
         public Color Background { get; set; }
 
         /// <summary>
-        /// our holy crateTex
+        /// our holy robot
         /// </summary>
         public Robot Robot { get; set; }
 

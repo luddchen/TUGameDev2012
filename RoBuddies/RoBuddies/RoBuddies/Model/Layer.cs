@@ -44,8 +44,11 @@ namespace RoBuddies.Model
         /// <param name="body">the object, which will be added</param>
         public void AddObject(IBody body)
         {
-            this.AllObjects.Add(body);
-            body.Layer = this;
+            if (body != null)
+            {
+                this.AllObjects.Add(body);
+                body.Layer = this;
+            }
         }
 
         /// <summary>
@@ -54,7 +57,7 @@ namespace RoBuddies.Model
         /// <param name="body">the object, which will be removed</param>
         public void RemoveObject(IBody body)
         {
-            if (this.allObjects.Contains(body))
+            if (body != null && this.allObjects.Contains(body))
             {
                 this.allObjects.Remove(body);
                 body.Layer = null;
