@@ -65,6 +65,13 @@ namespace RoBuddies.View
         public float Rotation { get; set; }
 
         /// <summary>
+        /// set the mode of camera movement ; 
+        /// if false camera position is set directly ;
+        /// if true camera try to move in a smooth way
+        /// </summary>
+        public bool SmoothMove { get; set; }
+
+        /// <summary>
         /// creates a new camera object
         /// </summary>
         public Camera()
@@ -76,6 +83,7 @@ namespace RoBuddies.View
             this.movingDistance = 0;
             this.Zoom = 1.0f;
             this.Rotation = 0.0f;
+            this.SmoothMove = true;
         }
 
         /// <summary>
@@ -106,19 +114,27 @@ namespace RoBuddies.View
         /// <param name="to">target coordinates</param>
         public void Move(Vector2 to)
         {
-            // need here something for smooth camera movement
-            // replace following code
-            this.targetPosition = to;
-            Vector2 direction = this.targetPosition - this.position; 
-            this.movingDistance = (float)Math.Sqrt(Math.Pow(direction.X, 2) + Math.Pow(direction.Y, 2));
+            if (this.SmoothMove)
+            {
+                this.targetPosition = to;
+                Vector2 direction = this.targetPosition - this.position;
+                this.movingDistance = (float)Math.Sqrt(Math.Pow(direction.X, 2) + Math.Pow(direction.Y, 2));
 
-            if (this.movingDistance > this.maxDirectMoveDistance)
-            {
-                this.movingDirection = direction / this.movingDistance;
-                if (this.movingSpeed == 0) { this.movingSpeed = 0.3f; }
+                if (this.movingDistance > this.maxDirectMoveDistance)
+                {
+                    this.movingDirection = direction / this.movingDistance;
+                    if (this.movingSpeed == 0) { this.movingSpeed = 0.3f; }
+                }
+                else
+                {
+                    this.movingSpeed = 0;
+                    this.position = this.targetPosition;
+                }
             }
-            else
+
+            if (!this.SmoothMove)
             {
+                Console.Out.WriteLine("cam test (" + Position.X + " , " + Position.Y + ")");
                 this.movingSpeed = 0;
                 this.position = this.targetPosition;
             }
@@ -130,26 +146,28 @@ namespace RoBuddies.View
         /// <param name="gameTime">gametime</param>
         public void Update(GameTime gameTime)
         {
-            //Console.Out.WriteLine("cam speed : " + this.movingSpeed);
-            if (this.movingSpeed > 0.1f)
+            if (this.SmoothMove)
             {
-                this.position += this.movingSpeed * this.movingDirection;
-                this.movingDistance -= this.movingSpeed;
-
-                if (this.movingDistance > Math.Pow(this.movingSpeed,2)*2)
+                if (this.movingSpeed > 0.1f)
                 {
-                    this.movingSpeed += 0.3f;
+                    this.position += this.movingSpeed * this.movingDirection;
+                    this.movingDistance -= this.movingSpeed;
+
+                    if (this.movingDistance > Math.Pow(this.movingSpeed, 2) * 2)
+                    {
+                        this.movingSpeed += 0.3f;
+                    }
+                    else
+                    {
+                        this.movingSpeed -= 0.3f;
+                    }
                 }
                 else
                 {
-                    this.movingSpeed -= 0.3f;
+                    this.movingDirection = Vector2.Zero;
+                    this.movingSpeed = 0;
+                    //this.position = this.targetPosition;
                 }
-            }
-            else
-            {
-                this.movingDirection = Vector2.Zero;
-                this.movingSpeed = 0;
-                //this.position = this.targetPosition;
             }
         }
 

@@ -45,10 +45,6 @@ namespace RoBuddies.View.HUD
             this.stop = this.Game.Content.Load<Texture2D>("Sprites//stop");
             this.Camera = new Camera();
             this.Level = new Level(new Vector2(0, -10f));
-
-            // layer
-            //this.mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
-            //this.Level.AddLayer(mainLayer);
         }
 
 
