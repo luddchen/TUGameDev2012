@@ -43,12 +43,12 @@ namespace RoBuddies.View
                 // Robot
                     Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
 
-                // ladder test
+                // objects test
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
-                    
-                    
+                    Door door = new Door("", new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game);
+
                 // body1
                     Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
                     Texture2D crate2 = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
@@ -63,6 +63,7 @@ namespace RoBuddies.View
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     backLayer.AddObject(ladder);
                     backLayer.AddObject(pipe);
+                    backLayer.AddObject(door);
 
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
