@@ -7,24 +7,24 @@ namespace RoBuddies.Model.Objects
 {
     class Switch : PhysicObject
     {
-        public Switch(Vector2 pos, Vector2 size, Color color, World world, Game game)
+        private Texture2D switcher;
+
+        public Switch(string thema, Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
         {
+            if (thema.Equals(""))
+            {
+                switcher = game.Content.Load<Texture2D>("Sprites//lever_right");
+            }
+            this.Texture = switcher;
+
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;
             this.Color = color;
-            //this.Texture = texture;
+            
             this.BodyType = BodyType.Static;
             this.Friction = 10f; //not know exactly
-
-//            Scale = 0.03f;
-//           _player = player;
-//            _player.Budi.Activate += Activate;
-//            _player.BudBudi.Activate += Activate;
-//            _switchable = switchable;
-//            _isRevertable = false;
-//            _isActivated = false;
 
             this.CollisionCategories = Category.Cat1;
             this.CollidesWith = Category.None;
