@@ -79,18 +79,16 @@ namespace RoBuddies.View.MenuPages
         /// <param name="level"></param>
         private void activateObjects(Level level)
         {
+            level.Robot.ActivePart.BodyType = BodyType.Dynamic;
+
             foreach (Layer layer in level.AllLayers)
             {
-                // this is a bit dirty, because the robot model isn't ready yet
-                foreach (PhysicObject phyObj  in layer.AllObjects)
+                foreach (IBody body in layer.AllObjects)
                 {
-                    if (phyObj is Wall || phyObj is Ladder || phyObj is Pipe || phyObj is Switch || phyObj is Door)
+                    if (body is Crate)
                     {
-                        phyObj.BodyType = BodyType.Static;
-                    } 
-                    else
-                    {
-                        phyObj.BodyType = BodyType.Dynamic;
+                        Crate crate = (Crate)body;
+                        crate.BodyType = BodyType.Dynamic;
                     }
                 }
             }

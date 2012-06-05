@@ -12,9 +12,8 @@ namespace RoBuddies.Model.Objects
     class Crate : PhysicObject
     {
         private Texture2D crate;
-        private bool moveable = true; //current state of the crate; true for all small crates
         private bool isMoving = false; //statement of the crate, as pulling in prototype
-
+        private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
 
         public Crate(Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
@@ -24,41 +23,22 @@ namespace RoBuddies.Model.Objects
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;   
-            //this.Color = color;
             this.Texture = crate;
 
-            if (size.Y > size.X)    // maybe a better criteria is the volume
+            this.BodyType = BodyType.Dynamic;
+            this.Color = Color.BurlyWood;
+
+            if (size.Y * size.X > size.X * size.X)
             {
-                moveable = false; //heavy crate
-                this.BodyType = BodyType.Static;
-            }
-            else
-            {
-                moveable = true; // light crate
-                this.BodyType = BodyType.Dynamic;
+                isHeavyCrate = true;
             }
 
             this.FixedRotation = true;
             this.Friction = 1f;
             //this.Mass = size.X * size.Y * Int16.MaxValue;
             FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
-
-            standardColors();
         }
 
-        private void standardColors()
-        {
-            if (moveable)
-            {
-                this.Color = Color.BurlyWood; //Color.CadetBlue; //the crate can be moved now
-            }
-            else
-            {
-                Color temp = Color.BurlyWood;
-                temp.R /= 2; temp.G /= 2; temp.B /= 2;
-                this.Color = temp; //the crate cannot be moved now
-            }
-        }
 
         /// <summary>
         /// return the moving state of crate 
@@ -69,13 +49,26 @@ namespace RoBuddies.Model.Objects
         }
 
         /// <summary>
-        /// change the property of heavy crate when the robot is combined 
+        /// change the property and color of heavy crate when the robot is combined 
+        /// bool value show the state of the robot, combined robot is true, seperate robot is false
+        /// call this function when the robot combining state changes
         /// </summary>
-        public bool IsCombinedRobot
+        public bool stateUpdate
         {
             set
             {
-                this.BodyType = BodyType.Dynamic;
+                if (value && isHeavyCrate)
+                {
+                    this.BodyType = BodyType.Dynamic;
+                    this.Color = Color.BurlyWood;
+                }
+                else if (isHeavyCrate)
+                {
+                    this.BodyType = BodyType.Static;
+                    Color temp = Color.BurlyWood;
+                    temp.R /= 2; temp.G /= 2; temp.B /= 2;
+                    this.Color = temp; //the crate cannot be moved now
+                }
             }
         }
     }
