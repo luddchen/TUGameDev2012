@@ -32,7 +32,7 @@ namespace RoBuddies.Model.Objects
                 moveable = false; //heavy crate
                 this.BodyType = BodyType.Static;
             }
-            else 
+            else
             {
                 this.BodyType = BodyType.Dynamic;
             }

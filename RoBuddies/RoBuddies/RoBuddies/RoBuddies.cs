@@ -5,11 +5,12 @@ using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using System.IO;
 
 namespace RoBuddies
 {
     /// <summary>
-    /// main class for crateTex game
+    /// main class for robot game
     /// </summary>
     public class RoBuddies : Microsoft.Xna.Framework.Game
     {
@@ -60,6 +61,10 @@ namespace RoBuddies
         protected override void Initialize()
         {
             base.Initialize();
+            // delete old editor_temp
+            if (File.Exists(@".\\editor_temp.json")) {
+                File.Delete(@".\\editor_temp.json");
+            }
         }
 
         /// <summary>

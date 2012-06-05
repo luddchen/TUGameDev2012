@@ -16,9 +16,9 @@ namespace RoBuddies.Control.Editor
     /// </summary>
     class KeyboardController
     {
-        private enum InputState { NORMAL, LOAD, SAVE };
-
         private const String SAVE_LOAD_PATH = ".\\Levels";
+
+        private enum InputState { NORMAL, LOAD, SAVE };
         private EditorView HUD;
         private MouseController mouseController;
         

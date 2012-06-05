@@ -4,6 +4,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
+using RoBuddies.Model;
+using RoBuddies.Model.Serializer;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -54,6 +56,11 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == editor)
                     {
+                        Level loadedLevel = (new LevelReader(this.Game)).readLevel(".\\", "editor_temp.json");
+                        if (loadedLevel != null)
+                        {
+                            this.Game.EditorView.Level = loadedLevel;
+                        }
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
                     }
 
