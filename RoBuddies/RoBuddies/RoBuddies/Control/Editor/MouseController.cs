@@ -171,7 +171,7 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        Crate crate = new Crate("",this.CursorSimPos, new Vector2(3, 3), Color.White, this.editorView.Level, this.editorView.Game);
+                        Crate crate = new Crate(this.CursorSimPos, new Vector2(3, 3), Color.White, this.editorView.Level, this.editorView.Game);
                         this.editorView.Level.GetLayerByName("mainLayer").AddObject(crate);
 
                         DragObject();
@@ -194,7 +194,7 @@ namespace RoBuddies.Control
                     if (!isMovingObject)
                     {
                         Texture2D square = this.editorView.Game.Content.Load<Texture2D>("Sprites//Square");
-                        Wall wall = new Wall("", this.CursorSimPos, new Vector2(5f, 1f), Color.White, this.editorView.Level, this.editorView.Game, false);
+                        Wall wall = new Wall(this.CursorSimPos, new Vector2(5f, 1f), Color.White, this.editorView.Level, this.editorView.Game, false);
                         this.editorView.Level.GetLayerByName("mainLayer").AddObject(wall);
 
                         DragObject();

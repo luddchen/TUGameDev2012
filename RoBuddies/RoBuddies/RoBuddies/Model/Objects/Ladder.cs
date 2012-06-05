@@ -12,22 +12,22 @@ namespace RoBuddies.Model.Objects
     /// </summary>    
     class Ladder : PhysicObject
     {
-        private Texture2D top;
-        private Texture2D center;
-        private Texture2D bottom;
         private int ladderSteps;  //calculate the repeat number of the center texture by using the parameter size
 
-        public Ladder(Vector2 pos, Vector2 size, Color color, World world, Game game)
-           : base(world)
+        public Ladder(Vector2 pos, Vector2 size, Color color, Level level, Game game)
+           : base(level)
         {
-            top = game.Content.Load<Texture2D>("Sprites//LadderTop");
-            center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
-            bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
+            Texture2D top = game.Content.Load<Texture2D>("Sprites//LadderTop");
+            Texture2D center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
+            Texture2D bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
 
             float heightOfCenter = size.Y - top.Height * size.X * 2 / top.Width;
             ladderSteps = Convert.ToInt32(heightOfCenter * top.Width / (size.X * center.Height));
 
-            this.Texture = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, top, center, bottom, ladderSteps);
+            Texture2D ladderTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, top, center, bottom, ladderSteps);
+
+            defineTextures(ladderTex, ladderTex, ladderTex);
+
 
             this.Position = pos;
             this.Width = size.X;

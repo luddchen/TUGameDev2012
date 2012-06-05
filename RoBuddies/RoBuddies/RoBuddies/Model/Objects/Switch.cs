@@ -9,19 +9,15 @@ namespace RoBuddies.Model.Objects
 {
     class Switch : PhysicObject
     {
-        private Texture2D switcher;
         private bool isActivated = false;
         private ISwitchable switchObject;
         private Robot player;
 
-        public Switch(string thema, Vector2 pos, Vector2 size, Color color, World world, Game game, ISwitchable switchPair, Robot robot)
-            : base(world)
+        public Switch(Vector2 pos, Vector2 size, Color color, Level level, Game game, ISwitchable switchPair, Robot robot)
+            : base(level)
         {
-            if (thema.Equals(""))
-            {
-                switcher = game.Content.Load<Texture2D>("Sprites//lever_right");
-            }
-            this.Texture = switcher;
+            Texture2D switcherTex = game.Content.Load<Texture2D>("Sprites//lever_right");
+            defineTextures(switcherTex, switcherTex, switcherTex);
             
             this.Position = pos;
             this.Width = size.X;

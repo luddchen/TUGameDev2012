@@ -7,6 +7,15 @@ using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Model
 {
+    /// <summary>
+    /// The different graphic themes of a level.
+    /// </summary>
+    public enum LevelTheme
+    {
+        ROBO_LAB,
+        MOUNTAIN,
+        MENTAL_HOSPITAL
+    }
 
     /// <summary>
     /// representing the games world
@@ -22,6 +31,11 @@ namespace RoBuddies.Model
         /// our holy robot
         /// </summary>
         public Robot Robot { get; set; }
+
+        /// <summary>
+        /// The graphic theme of the level
+        /// </summary>
+        public LevelTheme theme = LevelTheme.MENTAL_HOSPITAL;
 
         private List<Layer> allLayers;
 

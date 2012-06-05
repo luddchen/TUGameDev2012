@@ -21,8 +21,8 @@ namespace RoBuddies.Model.Objects
         private Texture2D center;
         private Texture2D right;
 
-        public Pipe(Vector2 pos, float width, Color color, World world, Game game)
-            : base(world)
+        public Pipe(Vector2 pos, float width, Color color, Level level, Game game)
+            : base(level)
         {
             // TODO: make good looking Pipe with starts and ends
             left = game.Content.Load<Texture2D>("Sprites//PipeStart");

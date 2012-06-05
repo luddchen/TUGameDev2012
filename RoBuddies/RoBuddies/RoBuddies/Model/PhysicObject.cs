@@ -12,7 +12,7 @@ namespace RoBuddies.Model
     class PhysicObject : FarseerPhysics.Dynamics.Body , IBody
     {
         private Texture2D texture;
-
+        protected Level level;
 
         public bool IsVisible
         {
@@ -68,10 +68,32 @@ namespace RoBuddies.Model
             set;
         }
 
-        public PhysicObject(World world)
+        /// <summary>
+        /// Defines the textures for the graphic themes
+        /// </summary>
+        /// <param name="roboLabTex">the texture for the robo lab theme</param>
+        /// <param name="mountainTex">the texture for the mountain theme</param>
+        /// <param name="mentalHospitalTex">the texture for the hospital theme</param>
+        protected void defineTextures(Texture2D roboLabTex, Texture2D mountainTex, Texture2D mentalHospitalTex)
+        {
+            if (level.theme == LevelTheme.ROBO_LAB)
+            {
+                Texture = roboLabTex;
+            }
+            else if (level.theme == LevelTheme.MOUNTAIN)
+            {
+                Texture = mountainTex;
+            }
+            else if (level.theme == LevelTheme.MENTAL_HOSPITAL)
+            {
+                Texture = mentalHospitalTex;
+            }
+        }
+
+        public PhysicObject(Level world)
             : base(world)
         {
-            //this.Effect = SpriteEffects.None;
+            this.level = world;
         }
 
     }

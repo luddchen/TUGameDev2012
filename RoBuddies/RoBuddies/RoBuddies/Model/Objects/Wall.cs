@@ -15,7 +15,6 @@ namespace RoBuddies.Model.Objects
     {
         private Fixture wallFixture;
 
-        private Texture2D wall;
         private bool switchable = false;
 
         /// <summary>
@@ -25,15 +24,12 @@ namespace RoBuddies.Model.Objects
         /// <param name="size">the width and height of the crate</param>
         /// <param name="color">the color of the crate</param>
         /// <param name="texture">the texture which will be layed over the crate</param>
-        /// <param name="world">the world object of the physics engine for the physics calculations</param>
-        public Wall(String theme, Vector2 pos, Vector2 size, Color color, World world, Game game, bool switchAble)
-            : base(world)
+        /// <param name="level">the world object of the physics engine for the physics calculations</param>
+        public Wall(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchAble)
+            : base(level)
         {
-            if (theme.Equals("")) 
-            {
-                wall = game.Content.Load<Texture2D>("Sprites//Crate");
-            }
-            this.Texture = wall;
+            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//Crate");
+            defineTextures(wallTex, wallTex, wallTex);
 
             this.Position = pos;
             this.Width = size.X;

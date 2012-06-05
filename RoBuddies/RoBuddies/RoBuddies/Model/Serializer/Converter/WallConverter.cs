@@ -17,7 +17,6 @@ namespace RoBuddies.Model.Serializer.Converter
 
         private Level level;
         private Game game;
-        private ContentManager content;
 
         /// <summary>
         /// Creates a new WallConverter. If you only want to generate json and not deserialize json code,
@@ -60,7 +59,7 @@ namespace RoBuddies.Model.Serializer.Converter
                 Color color = tokens.SelectToken("Color").ToObject<Color>();
                 float width = tokens.SelectToken("Size.Width").ToObject<float>();
                 float height = tokens.SelectToken("Size.Heigth").ToObject<float>();
-                wall = new Wall("", pos, new Vector2(width, height), color, level, game, false);
+                wall = new Wall(pos, new Vector2(width, height), color, level, game, false);
             }
             else
             {

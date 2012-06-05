@@ -11,22 +11,19 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Crate : PhysicObject
     {
-        private Texture2D crate;
         private bool isMoving = false; //statement of the crate, as pulling in prototype
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
 
-        public Crate(String text, Vector2 pos, Vector2 size, Color color, World world, Game game)
-            : base(world)
+        public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
+            : base(level)
         {
-            if (text.Equals(""))
-            {
-                crate = game.Content.Load<Texture2D>("Sprites//Crate2");
-            }
+
+            Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
+            defineTextures(crateTex, crateTex, crateTex);
 
             this.Position = pos;
             this.Width = size.X;
-            this.Height = size.Y;   
-            this.Texture = crate;
+            this.Height = size.Y;
 
             this.BodyType = BodyType.Dynamic;
             this.Color = Color.BurlyWood;

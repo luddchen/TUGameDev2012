@@ -9,18 +9,14 @@ namespace RoBuddies.Model.Objects
 {
     class Door : PhysicObject, ISwitchable
     {
-        private Texture2D door;
         private bool isActivated = false; //[combined robot && isSwitchalbe] to activate it.
         private bool isSwitchedOn = true; //(key || switch) to change it to true if needed.
 
-        public Door(string theme, Vector2 pos, Vector2 size, Color color, World world, Game game, bool switchable)
-            : base(world)
+        public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
+            : base(level)
         {
-            if (theme.Equals(""))
-            {
-                door = game.Content.Load<Texture2D>("Sprites//doorcl");
-            }
-            this.Texture = door;
+            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//doorcl");
+            defineTextures(doorTex, doorTex, doorTex);
 
             this.Position = pos;
             this.Width = size.X;
