@@ -3,9 +3,11 @@ using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Robuddies.Interfaces;
+
 namespace RoBuddies.Model.Objects
 {
-    class Door : PhysicObject
+    class Door : PhysicObject, ISwitchable
     {
         private Texture2D door;
         private bool isActivated = false; //[combined robot && isSwitchalbe] to activate it.
@@ -50,7 +52,7 @@ namespace RoBuddies.Model.Objects
         /// bool value show the state of the robot, combined robot is true, seperate robot is false
         /// TODO: call this function when the robot combining state changes
         /// </summary>
-        public bool ActivateDoor
+        public bool activate
         {
             get { return isActivated; }
             set { 
@@ -65,7 +67,7 @@ namespace RoBuddies.Model.Objects
             }
         }
 
-        public void switchDoorOn()
+        public void switchOn()
         {
             isSwitchedOn = true;
             Color temp = this.Color;
