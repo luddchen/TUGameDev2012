@@ -41,6 +41,8 @@ namespace RoBuddies.Model.Objects
 
             pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
 
+            this.CollisionCategories = Category.Cat1;
+            this.CollidesWith = Category.None;
         }
 
         private void attachTexture()

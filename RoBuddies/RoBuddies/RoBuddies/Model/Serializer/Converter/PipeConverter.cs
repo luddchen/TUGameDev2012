@@ -34,7 +34,7 @@ namespace RoBuddies.Model.Serializer
         /// Creates a new PipeConverter, which can generate json
         /// </summary>
         /// <param name="level">a level object where the deserialized pipe state will be added to</param>
-        /// <param name="game">the game for this level</param>
+        /// <param name="game">the game of the level</param>
         public PipeConverter(Level level, Game game)
             : base("RoBuddies.Model.Objects.Pipe")
         {

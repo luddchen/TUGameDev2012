@@ -36,6 +36,9 @@ namespace RoBuddies.Model.Objects
             this.BodyType = BodyType.Static;
             this.Friction = 10f;
             FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this);
+
+            this.CollisionCategories = Category.Cat1;
+            this.CollidesWith = Category.None;
         }
 
     }

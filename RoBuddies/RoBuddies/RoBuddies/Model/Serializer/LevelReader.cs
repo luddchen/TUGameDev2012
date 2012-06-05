@@ -47,7 +47,7 @@ namespace RoBuddies.Model.Serializer
                 serializer.Converters.Add(new LevelConverter(this.level));
                 serializer.Converters.Add(new LayerConverter(this.level));
                 serializer.Converters.Add(new WallConverter(this.level, this.content));
-                serializer.Converters.Add(new CrateConverter(this.level, this.content));
+                serializer.Converters.Add(new CrateConverter(this.level, this.game, this.content));
                 serializer.Converters.Add(new PipeConverter(this.level, this.game));
                 loadedLevel = serializer.Deserialize<Level>(reader);
                 reader.Close();

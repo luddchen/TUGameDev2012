@@ -24,16 +24,17 @@ namespace RoBuddies.Model.Objects
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;   
-            this.Color = color;
+            //this.Color = color;
             this.Texture = crate;
 
-            if (size.Y > size.X)
+            if (size.Y > size.X)    // maybe a better criteria is the volume
             {
                 moveable = false; //heavy crate
                 this.BodyType = BodyType.Static;
             }
             else
             {
+                moveable = true; // light crate
                 this.BodyType = BodyType.Dynamic;
             }
 
@@ -49,11 +50,13 @@ namespace RoBuddies.Model.Objects
         {
             if (moveable)
             {
-                this.Color = Color.CadetBlue; //the crate can be moved now
+                this.Color = Color.BurlyWood; //Color.CadetBlue; //the crate can be moved now
             }
             else
             {
-                this.Color = Color.DarkBlue; //the crate cannot be moved now
+                Color temp = Color.BurlyWood;
+                temp.R /= 2; temp.G /= 2; temp.B /= 2;
+                this.Color = temp; //the crate cannot be moved now
             }
         }
 
