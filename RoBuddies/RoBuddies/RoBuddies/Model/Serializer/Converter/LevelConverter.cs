@@ -47,8 +47,7 @@ namespace RoBuddies.Model.Serializer.Converter
             if (level != null)
             {
                 JToken tokens = JObject.ReadFrom(reader);
-                Vector2 gravity = tokens.SelectToken("Gravity").ToObject<Vector2>();
-                level.Gravity = gravity;
+                level.Gravity = tokens.SelectToken("Gravity").ToObject<Vector2>();
                 IJEnumerable<JToken> layerTokens = tokens.SelectToken("Layers").Values();
                 foreach (JToken layerToken in layerTokens)
                 {
@@ -58,6 +57,7 @@ namespace RoBuddies.Model.Serializer.Converter
                         level.AddLayer(layer);
                     }
                 }
+                level.Robot = serializer.Deserialize<Robot>(tokens.CreateReader());
             }
             else
             {
@@ -86,6 +86,11 @@ namespace RoBuddies.Model.Serializer.Converter
                         writer.WriteEndObject();
                     }
                 writer.WriteEndArray();
+                // serialize robot
+                if (level.Robot != null)
+                {
+                    serializer.Serialize(writer, level.Robot);
+                }
            writer.WriteEndObject();
         }
     }

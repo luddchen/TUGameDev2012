@@ -17,7 +17,6 @@ namespace RoBuddies.Model.Serializer.Converter
 
         private Level level;
         private Game game;
-        private ContentManager content;
 
         /// <summary>
         /// Creates a new CrateConverter. If you only want to generate json and not deserialize json code,
@@ -34,13 +33,11 @@ namespace RoBuddies.Model.Serializer.Converter
         /// </summary>
         /// <param name="level">a level object where the deserialized crate state will be added to</param>
         /// <param name="game">the game of the level</param>
-        /// <param name="content">the contentManager which is needed to add a default texture to the crate objects</param>
-        public CrateConverter(Level level, Game game, ContentManager content)
+        public CrateConverter(Level level, Game game)
             : base("RoBuddies.Model.Objects.Crate")
         {
             this.level = level;
             this.game = game;
-            this.content = content;
         }
 
         /// <summary>
@@ -66,7 +63,7 @@ namespace RoBuddies.Model.Serializer.Converter
             }
             else
             {
-                throw new InvalidOperationException("no level or contentManager reference");
+                throw new InvalidOperationException("no level or game reference");
             }
             return crate;
         }

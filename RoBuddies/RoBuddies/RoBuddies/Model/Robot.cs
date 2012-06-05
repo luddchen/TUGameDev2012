@@ -26,7 +26,7 @@ namespace RoBuddies.Model
 
         private Level level;
 
-        public Robot(ContentManager content, Vector2 pos, Level level, RoBuddies game) 
+        public Robot(ContentManager content, Vector2 pos, Level level, Game game) 
         {
             this.level = level;
             initRobot(content, pos, game);
@@ -35,7 +35,7 @@ namespace RoBuddies.Model
             this.level.Robot = this;
         }
 
-        private void initRobot(ContentManager content, Vector2 pos, RoBuddies game) 
+        private void initRobot(ContentManager content, Vector2 pos, Game game) 
         {
             //Texture2D textureLowerPart = content.Load<Texture2D>("Sprite//Robot//Bud//0001");
 
