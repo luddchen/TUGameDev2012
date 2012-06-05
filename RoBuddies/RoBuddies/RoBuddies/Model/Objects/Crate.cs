@@ -15,10 +15,13 @@ namespace RoBuddies.Model.Objects
         private bool isMoving = false; //statement of the crate, as pulling in prototype
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
 
-        public Crate(Vector2 pos, Vector2 size, Color color, World world, Game game)
+        public Crate(String text, Vector2 pos, Vector2 size, Color color, World world, Game game)
             : base(world)
         {
-            crate = game.Content.Load<Texture2D>("Sprites//Crate2");
+            if (text.Equals(""))
+            {
+                crate = game.Content.Load<Texture2D>("Sprites//Crate2");
+            }
 
             this.Position = pos;
             this.Width = size.X;

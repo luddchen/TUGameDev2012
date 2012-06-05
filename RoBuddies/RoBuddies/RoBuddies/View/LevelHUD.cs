@@ -43,5 +43,10 @@ namespace RoBuddies.View
             timeElapsed.String = String.Format("{0:00}", gameTime.TotalGameTime.Hours) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Minutes) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Seconds);
         }
 
+        //public string GetHUDString 
+        //{
+        //    get { return timeElapsed.Name; }
+        //}
+
     }
 }
