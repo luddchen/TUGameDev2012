@@ -48,7 +48,10 @@ namespace RoBuddies.View
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     Door door = new Door("", new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
-                    Switch switcher = new Switch("", new Vector2(11f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);        
+                    Switch switcher = new Switch("", new Vector2(11f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
+
+                    Wall switchWall = new Wall("", new Vector2(0f, -5.27f), new Vector2(2f, 6f), Color.BurlyWood, this.Level, this.Game, true);
+                    Switch wallSwitcher = new Switch("", new Vector2(2f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, switchWall, robot);
 
                     Crate crateExm = new Crate("", new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
                     Crate box1 = new Crate("",new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
@@ -56,7 +59,9 @@ namespace RoBuddies.View
                     backLayer.AddObject(ladder);
                     backLayer.AddObject(pipe);
                     backLayer.AddObject(door);
-                    backLayer.AddObject(switcher);  
+                    backLayer.AddObject(switcher);
+                    backLayer.AddObject(switchWall);
+                    backLayer.AddObject(wallSwitcher);
 
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
@@ -66,7 +71,7 @@ namespace RoBuddies.View
                     Wall wall; 
                     for (int i = 0; i < 3; i++)
                     {
-                        wall = new Wall(new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, square, this.Level);
+                        wall = new Wall("", new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, this.Level, this.Game, false);
                         mainLayer.AddObject(wall);
                     }
             // end testing code ---------------------------------------------------------------------------------

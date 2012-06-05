@@ -4,15 +4,19 @@ using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using Robuddies.Interfaces;
+
 namespace RoBuddies.Model.Objects
 {
     /// <summary>
     /// This class can be used to add crate objects to the level.
     /// </summary>
-    class Wall : PhysicObject
+    class Wall : PhysicObject, ISwitchable
     {
-
         private Fixture wallFixture;
+
+        private Texture2D wall;
+        private bool switchable = false;
 
         /// <summary>
         /// constructs a new crate object
@@ -22,17 +26,37 @@ namespace RoBuddies.Model.Objects
         /// <param name="color">the color of the crate</param>
         /// <param name="texture">the texture which will be layed over the crate</param>
         /// <param name="world">the world object of the physics engine for the physics calculations</param>
-        public Wall(Vector2 pos, Vector2 size, Color color, Texture2D texture, World world)
+        public Wall(String theme, Vector2 pos, Vector2 size, Color color, World world, Game game, bool switchAble)
             : base(world)
         {
+            if (theme.Equals("")) 
+            {
+                wall = game.Content.Load<Texture2D>("Sprites//Crate");
+            }
+            this.Texture = wall;
+
             this.Position = pos;
             this.Width = size.X;
             this.Height = size.Y;
-            this.Color = color;
-            this.Texture = texture;
+
+            if (switchAble)
+            {
+                this.switchable = true ;
+                Color temp = color;
+                temp.R /= 2; temp.G /= 2; temp.B /= 2;
+                this.Color = temp;
+                this.CollisionCategories = Category.Cat1;
+                this.CollidesWith = Category.None;
+            }
+            else
+            {
+                this.Color = color;
+            }
+
             this.BodyType = BodyType.Static;
-            this.Friction = 1f;
+            this.Friction = 10f;
             wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+
         }
 
         /// <summary>
@@ -45,6 +69,17 @@ namespace RoBuddies.Model.Objects
             this.DestroyFixture(wallFixture);
             wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
         }
+
+        public void switchOn()
+        {
+            if (switchable)
+            {
+                Color temp = this.Color;
+                temp.R *= 2; temp.G *= 2; temp.B *= 2;
+                this.Color = temp;
+                //Position += new Vector2(0, 1);
+            }
+        }  
 
     }
 }

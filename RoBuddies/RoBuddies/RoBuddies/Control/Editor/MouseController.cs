@@ -202,8 +202,8 @@ namespace RoBuddies.Control
                         Texture2D square = this.editorView.Game.Content.Load<Texture2D>("Sprites//Square");
                         Random ran = new Random();
                         Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                        Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.editorView.Level);
-                        this.editorView.Level.GetLayerByName("mainLayer").AddObject(wall1);
+                        //Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.editorView.Level);
+                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(wall1);
 
                         DragObject();
                     }
