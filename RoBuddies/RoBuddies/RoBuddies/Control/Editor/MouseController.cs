@@ -153,33 +153,33 @@ namespace RoBuddies.Control
                     if (!isMovingObject)
                     {
                         // Todo: change to Robot Model:
-                        //Robot robot = new Robot(this.HUD.Game.Content, this.CursorSimPos, this.HUD.Level);
+                        Robot robot = new Robot(this.HUD.Game.Content, this.CursorSimPos, this.HUD.Level, this.HUD.Game);
 
                         // <very dirty stuff, which will be removed when the robot model is working>
-                        Texture2D waitTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
-                        Texture2D jumpTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
+                        //Texture2D waitTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+                        //Texture2D jumpTex = this.HUD.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
 
-                        // robot body
-                        PhysicObject robotBody = new PhysicObject(this.HUD.Level);
-                        robotBody.FixedRotation = true;
-                        robotBody.Position = this.CursorSimPos;
-                        robotBody.BodyType = BodyType.Dynamic;
-                        robotBody.Color = Color.White;
-                        FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, robotBody);
-                        robotBody.Width = 3;
-                        robotBody.Height = 3;
+                        //// robot body
+                        //PhysicObject robotBody = new PhysicObject(this.HUD.Level);
+                        //robotBody.FixedRotation = true;
+                        //robotBody.Position = this.CursorSimPos;
+                        //robotBody.BodyType = BodyType.Dynamic;
+                        //robotBody.Color = Color.White;
+                        //FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, robotBody);
+                        //robotBody.Width = 3;
+                        //robotBody.Height = 3;
 
-                        StateMachine stateMachine = new PartsCombinedStateMachine(robotBody, this.HUD.Game);
-                        State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
-                        State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
-                        State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
-                        stateMachine.AllStates.Add(waitingState);
-                        stateMachine.AllStates.Add(jumpState);
-                        stateMachine.AllStates.Add(walkingState);
-                        stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-                        this.HUD.Level.AddStateMachine(stateMachine);
+                        //StateMachine stateMachine = new PartsCombinedStateMachine(robotBody, this.HUD.Game);
+                        //State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
+                        //State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
+                        //State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
+                        //stateMachine.AllStates.Add(waitingState);
+                        //stateMachine.AllStates.Add(jumpState);
+                        //stateMachine.AllStates.Add(walkingState);
+                        //stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
+                        //this.HUD.Level.AddStateMachine(stateMachine);
 
-                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(robotBody);
+                        //this.HUD.Level.GetLayerByName("mainLayer").AddObject(robotBody);
                         // </very dirty stuff, which will be removed when the robot model is working>
 
                         DragObject();
@@ -507,7 +507,18 @@ namespace RoBuddies.Control
             if (clickedBody != null)
             {
                 clickedBody.BodyType = BodyType.Static;
-                clickedBody.CollidesWith = Category.All;
+
+                // filtering collisionobjects -> maybe there is an better way to do it (Body.CollisionGroup is not readable)
+                if ( clickedBody is Pipe )
+                {
+                    clickedBody.CollisionCategories = Category.Cat1;
+                    clickedBody.CollidesWith = Category.None;
+                } 
+                else 
+                {
+                    clickedBody.CollidesWith = Category.All;
+                }
+
                 if (this.HUD.IsGridVisible) { clickedBody.Position = adjustAtGrid(clickedBody.Position); }
                 this.HUD.Level.RemoveJoint(fixedMouseJoint);
                 clickedBody = null;

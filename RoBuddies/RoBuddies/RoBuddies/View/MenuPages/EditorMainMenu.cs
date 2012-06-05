@@ -60,6 +60,10 @@ namespace RoBuddies.View.MenuPages
                         (new LevelWriter(this.Game.EditorView.Level)).writeLevel(".\\", "editor_temp.json");
                         this.activateObjects(this.Game.EditorView.Level);
                         this.Game.LevelView.Level = this.Game.EditorView.Level;
+
+                        ((LevelView)this.Game.LevelView).SnapShot.CreateBodyList(this.Game.LevelView.Level);
+                        ((LevelView)this.Game.LevelView).SnapShot.MakeSnapshot();
+
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
                     }
 
