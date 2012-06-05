@@ -7,7 +7,7 @@ using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
 {
-    public class StateMachine
+    class StateMachine
     {
         /// <summary>
         /// the current state

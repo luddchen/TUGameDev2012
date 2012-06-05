@@ -8,7 +8,7 @@ using RoBuddies.Utilities;
 
 namespace RoBuddies.View.HUD
 {
-    public class HUDLevelView : HUD
+    class HUDLevelView : HUD
     {
         protected Texture2D stop;
 

@@ -9,7 +9,7 @@ namespace RoBuddies.View.HUD
     /// <summary>
     /// basis class for HeadUpDisplay
     /// </summary>
-    public class HUD
+    class HUD
     {
         /// <summary>
         /// a background texture , if null there will be no background

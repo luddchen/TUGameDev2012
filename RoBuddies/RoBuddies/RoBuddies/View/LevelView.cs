@@ -40,6 +40,10 @@ namespace RoBuddies.View
             this.Level.AddLayer(backLayer);
 
             //  some testing code here --------------------------------------------------------------------------
+
+                // Robot
+                    Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
+
                 // ladder test
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
                     //ladder.BodyType = BodyType.Dynamic;
@@ -58,34 +62,12 @@ namespace RoBuddies.View
                     Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
                     box1.BodyType = BodyType.Dynamic;
 
-                // body 2
-                    PhysicObject body2 = new PhysicObject(this.Level);
-                    body2.FixedRotation = true;
-                    body2.Position = new Vector2(5f, -6f);
-                    body2.BodyType = BodyType.Dynamic;
-                    body2.Color = Color.White;
-                    FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, body2);
-                    body2.Width = 3;
-                    body2.Height = 3;
-
-                    StateMachine stateMachine = new PartsCombinedStateMachine(body2, this.Game);
-                    State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
-                    State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
-                    State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
-                    stateMachine.AllStates.Add(waitingState);
-                    //State example2 = new ExampleState("ExampleState2", waitTex, stateMachine);
-                    stateMachine.AllStates.Add(jumpState);
-                    stateMachine.AllStates.Add(walkingState);
-                    stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-                    this.Level.AddStateMachine(stateMachine);
-
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     backLayer.AddObject(ladder);
                     backLayer.AddObject(pipe);
 
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
-                    mainLayer.AddObject(body2);
 
                 // body 3
                     PhysicObject body3;
@@ -98,7 +80,7 @@ namespace RoBuddies.View
                         body3.Width = 4f;
                         body3.Height = 0.3f;
                         body3.Texture = square;
-                        body3.Color = Color.DarkKhaki;
+                        body3.Color = Color.BurlyWood;
                         mainLayer.AddObject(body3);
                     }
             // end testing code ---------------------------------------------------------------------------------

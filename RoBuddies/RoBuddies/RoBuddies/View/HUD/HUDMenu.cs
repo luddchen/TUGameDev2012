@@ -10,7 +10,7 @@ namespace RoBuddies.View.HUD
     /// <summary>
     /// basis class for HeadUpDisplay Menue
     /// </summary>
-    public class HUDMenu : HUD
+    class HUDMenu : HUD
     {
         /// <summary>
         /// border size of contained menu page 

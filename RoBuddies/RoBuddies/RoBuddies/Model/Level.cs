@@ -11,7 +11,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing the games world
     /// </summary>
-    public class Level : FarseerPhysics.Dynamics.World
+    class Level : FarseerPhysics.Dynamics.World
     {
         /// <summary>
         /// background color of level
@@ -21,7 +21,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// our holy crateTex
         /// </summary>
-        private Robot Robot { get; set; }
+        public Robot Robot { get; set; }
 
         private List<Layer> allLayers;
 

@@ -7,7 +7,7 @@ using RoBuddies.View.HUD;
 
 namespace RoBuddies.View
 {
-    public class LevelHUD : HUD.HUD
+    class LevelHUD : HUD.HUD
     {
 
         private int HUD_height = 60;

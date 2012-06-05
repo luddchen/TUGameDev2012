@@ -8,7 +8,7 @@ namespace RoBuddies.Model
     /// <summary>
     /// representing objects without physical behavior
     /// </summary>
-    public class StaticObject : IBody
+    class StaticObject : IBody
     {
         private Texture2D texture;
 

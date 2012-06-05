@@ -4,7 +4,7 @@ using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Control
 {
-    public abstract class State
+    abstract class State
     {
         public String Name { get; set; }
 
