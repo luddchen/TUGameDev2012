@@ -152,12 +152,6 @@ namespace RoBuddies.Control
                     {
                         Robot robot = new Robot(this.editorView.Game.Content, this.CursorSimPos, this.editorView.Level, this.editorView.Game);
 
-                        //actually this is done in robot constructor
-                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(robot.PartsCombined);
-                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(robot.LowerPart);
-                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(robot.UpperPart);
-                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(robot.Head);
-
                         DragObject();
                     }
                 }
@@ -200,10 +194,8 @@ namespace RoBuddies.Control
                     if (!isMovingObject)
                     {
                         Texture2D square = this.editorView.Game.Content.Load<Texture2D>("Sprites//Square");
-                        Random ran = new Random();
-                        Color color = new Color(ran.Next(0, 255), ran.Next(0, 255), ran.Next(0, 255));
-                        //Wall wall1 = new Wall(this.CursorSimPos, new Vector2(5f, 1f), color, square, this.editorView.Level);
-                        //this.editorView.Level.GetLayerByName("mainLayer").AddObject(wall1);
+                        Wall wall = new Wall("", this.CursorSimPos, new Vector2(5f, 1f), Color.White, this.editorView.Level, this.editorView.Game, false);
+                        this.editorView.Level.GetLayerByName("mainLayer").AddObject(wall);
 
                         DragObject();
                     }

@@ -47,7 +47,7 @@ namespace RoBuddies.Model.Serializer
                 // add your converter of the level objects here:
                 serializer.Converters.Add(new LevelConverter(this.level));
                 serializer.Converters.Add(new LayerConverter(this.level));
-                serializer.Converters.Add(new WallConverter(this.level, this.content));
+                serializer.Converters.Add(new WallConverter(this.level, this.game));
                 serializer.Converters.Add(new CrateConverter(this.level, this.game));
                 serializer.Converters.Add(new PipeConverter(this.level, this.game));
                 serializer.Converters.Add(new RobotConverter(this.level, this.game, this.content));

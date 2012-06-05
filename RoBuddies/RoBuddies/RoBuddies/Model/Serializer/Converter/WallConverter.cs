@@ -16,13 +16,13 @@ namespace RoBuddies.Model.Serializer.Converter
     {
 
         private Level level;
+        private Game game;
         private ContentManager content;
-        private Texture2D defaultTexture;
 
         /// <summary>
         /// Creates a new WallConverter. If you only want to generate json and not deserialize json code,
         /// then you can use this constructer. For deserialization you have to use the constructor with the
-        /// level and contentManager parameter.
+        /// level and game parameter.
         /// </summary>
         public WallConverter()
             : base("RoBuddies.Model.Objects.Wall")
@@ -33,13 +33,12 @@ namespace RoBuddies.Model.Serializer.Converter
         /// Creates a new WallConverter, which can generate json
         /// </summary>
         /// <param name="level">a level object where the deserialized crate state will be added to</param>
-        /// <param name="content">the contentManager which is needed to add a default texture to the crate objects</param>
-        public WallConverter(Level level, ContentManager content)
+        /// <param name="game">the game of the level</param>
+        public WallConverter(Level level, Game game)
             : base("RoBuddies.Model.Objects.Wall")
         {
             this.level = level;
-            this.content = content;
-            this.defaultTexture = content.Load<Texture2D>("Sprites//Square");
+            this.game = game;
         }
 
         /// <summary>
@@ -54,18 +53,18 @@ namespace RoBuddies.Model.Serializer.Converter
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
             Wall wall = null;
-            if (level != null && defaultTexture != null)
+            if (level != null && game != null)
             {
                 JToken tokens = JObject.ReadFrom(reader).First();
                 Vector2 pos = tokens.SelectToken("Position").ToObject<Vector2>();
                 Color color = tokens.SelectToken("Color").ToObject<Color>();
                 float width = tokens.SelectToken("Size.Width").ToObject<float>();
                 float height = tokens.SelectToken("Size.Heigth").ToObject<float>();
-                //wall = new Wall(pos, new Vector2(width, height), color, defaultTexture, level);
+                wall = new Wall("", pos, new Vector2(width, height), color, level, game, false);
             }
             else
             {
-                throw new InvalidOperationException("no level or contentManager reference");
+                throw new InvalidOperationException("no level or game reference");
             }
             return wall;
         }
