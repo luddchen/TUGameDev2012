@@ -27,7 +27,7 @@ namespace RoBuddies.Model.Objects
             float heightOfCenter = size.Y - top.Height * size.X * 2 / top.Width;
             ladderSteps = Convert.ToInt32(heightOfCenter * top.Width / (size.X * center.Height));
 
-            this.Texture = Utilities.TextureConverter.connectTCD(game.GraphicsDevice, top, center, bottom, ladderSteps);
+            this.Texture = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, top, center, bottom, ladderSteps);
 
             this.Position = pos;
             this.Width = size.X;

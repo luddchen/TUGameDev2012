@@ -487,7 +487,7 @@ namespace RoBuddies.Control
                 this.editorView.Level.RemoveJoint(fixedMouseJoint);
 
                 // filtering collisionobjects -> maybe there is an better way to do it (Body.CollisionGroup is not readable)
-                if ( clickedBody is Pipe )
+                if ( (clickedBody is Pipe) || (clickedBody is Door) || (clickedBody is Ladder) || (clickedBody is Switch) )
                 {
                     clickedBody.CollisionCategories = Category.Cat1;
                     clickedBody.CollidesWith = Category.None;

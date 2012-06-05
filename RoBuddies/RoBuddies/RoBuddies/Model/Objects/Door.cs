@@ -25,10 +25,13 @@ namespace RoBuddies.Model.Objects
             this.Color = color;
 
             this.BodyType = BodyType.Static;
-            this.CollisionCategories = Category.Cat1;
-            this.CollidesWith = Category.None;
+
+
             this.Friction = 10f;
             FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this);
+
+            this.CollisionCategories = Category.Cat1;
+            this.CollidesWith = Category.None;
         }
     }
 }

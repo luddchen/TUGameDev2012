@@ -60,20 +60,20 @@ namespace RoBuddies.Utilities
         /// </summary>
         /// <param name="device"></param>
         /// <param name="top"></param>
-        /// <param name="down"></param>
+        /// <param name="bottom"></param>
         /// <returns></returns>
-        public static Texture2D connectTopDown(GraphicsDevice device, Texture2D top, Texture2D down)
+        public static Texture2D connectTopBottom(GraphicsDevice device, Texture2D top, Texture2D bottom)
         {
             Texture2D result;
-            int newWidth = Math.Min( top.Width, down.Width);
-            int newHeight = top.Height + down.Height;
+            int newWidth = Math.Min( top.Width, bottom.Width);
+            int newHeight = top.Height + bottom.Height;
 
             result = new Texture2D(device, newWidth, newHeight);
 
             Color[] inTop = new Color[top.Width * top.Height];
-            Color[] inDown = new Color[down.Width * down.Height];
+            Color[] inBottom = new Color[bottom.Width * bottom.Height];
             top.GetData<Color>(inTop);
-            down.GetData<Color>(inDown);
+            bottom.GetData<Color>(inBottom);
 
             Color[] outResult = new Color[newWidth * newHeight];
 
@@ -85,9 +85,9 @@ namespace RoBuddies.Utilities
                     outResult[y * newWidth + x] = inTop[y * top.Width + x];
                 }
 
-                for (int y = 0; y < down.Height; y++)
+                for (int y = 0; y < bottom.Height; y++)
                 {
-                    outResult[(y + top.Height) * newWidth + x] = inDown[y * down.Width + x];
+                    outResult[(y + top.Height) * newWidth + x] = inBottom[y * bottom.Width + x];
                 }
 
             }
@@ -128,19 +128,19 @@ namespace RoBuddies.Utilities
         /// <param name="device"></param>
         /// <param name="top"></param>
         /// <param name="center"></param>
-        /// <param name="down"></param>
+        /// <param name="bottom"></param>
         /// <param name="centerRepeat"></param>
         /// <returns></returns>
-        public static Texture2D connectTCD(GraphicsDevice device, Texture2D top, Texture2D center, Texture2D down, int centerRepeat) 
+        public static Texture2D connectTCB(GraphicsDevice device, Texture2D top, Texture2D center, Texture2D bottom, int centerRepeat) 
         {
             Texture2D result = top;
 
             for (int i = 0; i < centerRepeat; i++)
             {
-                result = connectTopDown(device, result, center);
+                result = connectTopBottom(device, result, center);
             }
 
-            result = connectTopDown(device, result, down);
+            result = connectTopBottom(device, result, bottom);
 
             return result;
         }

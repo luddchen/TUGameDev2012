@@ -48,19 +48,10 @@ namespace RoBuddies.View
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     Door door = new Door("", new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game);
-
-                // body1
-                    Texture2D crate = this.Game.Content.Load<Texture2D>("Sprites//Crate");
-                    Texture2D crate2 = this.Game.Content.Load<Texture2D>("Sprites//Crate2");
-                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    Texture2D waitTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
-                    Texture2D jumpTex = this.Game.Content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-
-                    //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);
+                    
                     Crate crateExm = new Crate("", new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
                     Crate box1 = new Crate("",new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
 
-                // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
                     backLayer.AddObject(ladder);
                     backLayer.AddObject(pipe);
                     backLayer.AddObject(door);
@@ -69,18 +60,12 @@ namespace RoBuddies.View
                     mainLayer.AddObject(box1);
 
                 // body 3
-                    PhysicObject body3;
+                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+                    Wall wall; 
                     for (int i = 0; i < 3; i++)
                     {
-                        body3 = new PhysicObject(this.Level);
-                        body3.Position = new Vector2(4 + i * 4f, -7.9f);
-                        body3.BodyType = BodyType.Static;
-                        FixtureFactory.AttachRectangle(4f, 0.3f, 1, Vector2.Zero, body3);
-                        body3.Width = 4f;
-                        body3.Height = 0.3f;
-                        body3.Texture = square;
-                        body3.Color = Color.BurlyWood;
-                        mainLayer.AddObject(body3);
+                        wall = new Wall(new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, square, this.Level);
+                        mainLayer.AddObject(wall);
                     }
             // end testing code ---------------------------------------------------------------------------------
 
