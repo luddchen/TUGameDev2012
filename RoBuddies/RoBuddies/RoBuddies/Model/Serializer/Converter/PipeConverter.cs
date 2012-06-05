@@ -9,7 +9,7 @@ using RoBuddies.Model.Objects;
 using Newtonsoft.Json.Linq;
 using Microsoft.Xna.Framework;
 
-namespace RoBuddies.Model.Serializer
+namespace RoBuddies.Model.Serializer.Converter
 {
     /// <summary>
     /// This class manages the serialization of a pipe.

@@ -1,13 +1,13 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace RoBuddies.Model.Serializer
+namespace RoBuddies.Model.Serializer.Converter
 {
     /// <summary>
     /// This is a abstract class for all converters, which will serialize 
     /// and deserialize a level and its objects with the JsonConverter.
     /// </summary>
-    public abstract class Converter : JsonConverter
+    abstract class Converter : JsonConverter
     {
 
         private String fullNameOfClass;

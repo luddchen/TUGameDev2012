@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Newtonsoft.Json;
+using RoBuddies.Model.Serializer.Converter;
 
 
 namespace RoBuddies.Model.Serializer  
