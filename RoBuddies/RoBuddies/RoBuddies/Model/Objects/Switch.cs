@@ -25,6 +25,9 @@ namespace RoBuddies.Model.Objects
 //            _switchable = switchable;
 //            _isRevertable = false;
 //            _isActivated = false;
+
+            this.CollisionCategories = Category.Cat1;
+            this.CollidesWith = Category.None;
         }
     }
 }

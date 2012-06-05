@@ -221,7 +221,13 @@ namespace RoBuddies.Control
                     if (!isMovingObject)
                     {
                         Pipe pipe = new Pipe(this.CursorSimPos, 3, Color.White, this.HUD.Level, this.HUD.Game);
-                        this.HUD.Level.GetLayerByName("mainLayer").AddObject(pipe);
+                        Layer layer = this.HUD.Level.GetLayerByName("backLayer");
+                        if (layer == null)
+                        {
+                            layer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
+                            this.HUD.Level.AddLayer(layer);
+                        }
+                        layer.AddObject(pipe);
 
                         DragObject();
                     }

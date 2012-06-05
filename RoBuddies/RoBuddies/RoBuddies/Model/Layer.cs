@@ -78,7 +78,7 @@ namespace RoBuddies.Model
 
         public int CompareTo(Layer other)
         {
-            return this.LayerDepth.CompareTo(other.LayerDepth);
+            return other.LayerDepth.CompareTo(this.LayerDepth);
         }
     }
 }

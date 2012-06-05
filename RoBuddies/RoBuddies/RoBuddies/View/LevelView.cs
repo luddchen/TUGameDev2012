@@ -35,12 +35,14 @@ namespace RoBuddies.View
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
             Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            Layer backLayer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
             this.Level.AddLayer(mainLayer);
+            this.Level.AddLayer(backLayer);
 
             //  some testing code here --------------------------------------------------------------------------
                 // ladder test
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
-                    ladder.BodyType = BodyType.Dynamic;
+                    //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     
                     
@@ -53,7 +55,7 @@ namespace RoBuddies.View
 
                     //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);
                     Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
-                    Wall box1 = new Wall(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, crate2, this.Level);                 
+                    Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
                     box1.BodyType = BodyType.Dynamic;
 
                 // body 2
@@ -78,23 +80,23 @@ namespace RoBuddies.View
                     this.Level.AddStateMachine(stateMachine);
 
                 // layerLayer mainLayer = new Layer("mainLayer", new Vector2(1,1) , 0.5f, this.Level);
-                    mainLayer.AddObject(ladder);
-                    mainLayer.AddObject(pipe);
+                    backLayer.AddObject(ladder);
+                    backLayer.AddObject(pipe);
+
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
                     mainLayer.AddObject(body2);
-                    this.Level.AllLayers.Add(mainLayer);
 
                 // body 3
                     PhysicObject body3;
-                    for (int i = 0; i < 24; i++)
+                    for (int i = 0; i < 3; i++)
                     {
                         body3 = new PhysicObject(this.Level);
-                        body3.Position = new Vector2(1 + i * 0.6f, -8);
+                        body3.Position = new Vector2(4 + i * 4f, -7.9f);
                         body3.BodyType = BodyType.Static;
-                        FixtureFactory.AttachRectangle(0.5f, 0.5f, 1, Vector2.Zero, body3);
-                        body3.Width = 0.5f;
-                        body3.Height = 0.5f;
+                        FixtureFactory.AttachRectangle(4f, 0.3f, 1, Vector2.Zero, body3);
+                        body3.Width = 4f;
+                        body3.Height = 0.3f;
                         body3.Texture = square;
                         body3.Color = Color.DarkKhaki;
                         mainLayer.AddObject(body3);
