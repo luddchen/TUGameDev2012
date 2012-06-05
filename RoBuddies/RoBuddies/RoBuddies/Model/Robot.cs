@@ -18,11 +18,11 @@ namespace RoBuddies.Model
     /// </summary>
     class Robot
     {
-        private IBody lowerPart;
-        private IBody upperPart;
-        private IBody partsCombined;
-        private IBody head;
-        private IBody activePart;
+        private PhysicObject lowerPart;
+        private PhysicObject upperPart;
+        private PhysicObject partsCombined;
+        private PhysicObject head;
+        private PhysicObject activePart;
 
         private Level level;
 
@@ -43,16 +43,20 @@ namespace RoBuddies.Model
             Texture2D waitTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
             Texture2D jumpTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
 
-            PhysicObject combined = new PhysicObject(this.level);
-            combined.FixedRotation = true;
-            combined.Position = pos;
-            combined.BodyType = BodyType.Dynamic;
-            combined.Color = Color.White;
-            FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, combined);
-            combined.Width = 3;
-            combined.Height = 3;
+            this.lowerPart = new PhysicObject(this.level);
+            this.upperPart = new PhysicObject(this.level);
+            this.partsCombined = new PhysicObject(this.level);
+            this.head = new PhysicObject(this.level);
+            this.ActivePart = partsCombined;
+            partsCombined.FixedRotation = true;
+            partsCombined.Position = pos;
+            partsCombined.BodyType = BodyType.Dynamic;
+            partsCombined.Color = Color.White;
+            FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, partsCombined);
+            partsCombined.Width = 3;
+            partsCombined.Height = 3;
 
-            StateMachine stateMachine = new PartsCombinedStateMachine(combined, game);
+            StateMachine stateMachine = new PartsCombinedStateMachine(partsCombined, game);
             State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, stateMachine);
             State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, stateMachine);
             State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, stateMachine);
@@ -62,33 +66,33 @@ namespace RoBuddies.Model
             stateMachine.AllStates.Add(walkingState);
             stateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
             this.level.AddStateMachine(stateMachine);
-            this.partsCombined = combined;
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
+            this.level.Robot = this;
             //----------------------------------------------------------------------------------------------------------
         }
 
-        public IBody LowerPart 
+        public PhysicObject LowerPart 
         {
             get { return lowerPart; }
         }
 
-        public IBody UpperPart 
+        public PhysicObject UpperPart 
         {
             get { return upperPart; }
         }
 
-        public IBody PartsCombined
+        public PhysicObject PartsCombined
         {
             get { return partsCombined; }
         }
 
-        public IBody Head 
+        public PhysicObject Head 
         {
             get { return head; }
             set { head = value; }
         }
 
-        public IBody ActivePart
+        public PhysicObject ActivePart
         {
             get { return activePart; }
             set { activePart = value; }

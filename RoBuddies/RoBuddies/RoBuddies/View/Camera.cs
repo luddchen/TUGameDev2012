@@ -161,7 +161,7 @@ namespace RoBuddies.View
         public Matrix GetViewMatrix(Vector2 parallax)
         {
             return Matrix.CreateTranslation(new Vector3(-Position * parallax, 0.0f))
-                    * Matrix.CreateTranslation(new Vector3(-Origin, 0.0f))
+                    //* Matrix.CreateTranslation(new Vector3(-Origin, 0.0f))            // origin should be new center
                     * Matrix.CreateRotationZ(Rotation)
                     * Matrix.CreateScale(Zoom, Zoom, 1)
                     * Matrix.CreateTranslation(new Vector3(Origin, 0.0f));

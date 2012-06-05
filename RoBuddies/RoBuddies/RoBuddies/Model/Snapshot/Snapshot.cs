@@ -30,7 +30,9 @@ namespace RoBuddies.Model.Snapshot
         /// <param name="level">the level</param>
         public void CreateBodyList(Level level)
         {
-            if (this.BodyList == null) { this.BodyList = new List<IBody>(); }
+            //if (this.BodyList == null) {
+                this.BodyList = new List<IBody>(); 
+            //}
 
             foreach (Layer layer in level.AllLayers)
             {
@@ -39,6 +41,9 @@ namespace RoBuddies.Model.Snapshot
                     this.BodyList.Add(body);
                 }
             }
+
+            this.AllKeyFrames = new List<KeyFrame>();
+
         }
 
         /// <summary>

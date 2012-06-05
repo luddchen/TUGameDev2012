@@ -95,6 +95,12 @@ namespace RoBuddies.View
             this.Level.Update(gameTime);    // taken from HUDLevelView because editor need no level update
             this.HUD.Update(gameTime);
 
+            // camera following test
+            if ( this.Level.Robot != null && this.Level.Robot.ActivePart != null)
+            {
+                this.Camera.Move(Utilities.ConvertUnits.ToDisplayUnits(this.Level.Robot.ActivePart.Position));
+            }
+
             KeyboardState newKeyboardState = Keyboard.GetState();
 
             if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
