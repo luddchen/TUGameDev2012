@@ -54,7 +54,7 @@ namespace RoBuddies.Model.Objects
         /// <summary>
         /// change the property and color of heavy crate when the robot is combined 
         /// bool value show the state of the robot, combined robot is true, seperate robot is false
-        /// call this function when the robot combining state changes
+        /// TODO: call this function when the robot combining state changes
         /// </summary>
         public bool stateUpdate
         {

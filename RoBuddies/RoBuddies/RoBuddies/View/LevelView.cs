@@ -47,7 +47,7 @@ namespace RoBuddies.View
                     Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
-                    Door door = new Door("", new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game);
+                    Door door = new Door("", new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
                     
                     Crate crateExm = new Crate("", new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
                     Crate box1 = new Crate("",new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
