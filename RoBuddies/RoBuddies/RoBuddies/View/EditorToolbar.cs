@@ -19,6 +19,7 @@ namespace RoBuddies.View
         public HUDString gridButton;
 
         public HUDTexture WallButton;
+        public HUDTexture LadderButton;
         public HUDTexture BudBudiButton;
         public HUDTexture CrateButton;
         public HUDTexture PipeButton;
@@ -62,11 +63,18 @@ namespace RoBuddies.View
             this.AllElements.Add(this.WallButton);
 
             // add BudBudi button for setting the starting position of the player in the level
-            this.BudBudiButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Editor//BudBudi"), new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f),
-                                                null, null, null, 0.5f, null, game.Content); 
+            this.BudBudiButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Editor//BudBudi"), new Vector2(this.HUD_width * 0.9f, this.HUD_height * 0.7f),
+                                                null, null, null, 0.5f, null, game.Content);
             this.BudBudiButton.Height = this.BudBudiButton.Texture.Height / 2;
             this.BudBudiButton.Width = this.BudBudiButton.Texture.Width / 2;
             this.AllElements.Add(this.BudBudiButton);
+
+            // add ladder
+            this.LadderButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Editor//Ladder"), new Vector2(this.HUD_width * 0.7f, this.HUD_height * 0.7f),
+                                                null, null, null, 0.4f, null, game.Content);
+            this.LadderButton.Height = this.LadderButton.Texture.Height / 2;
+            this.LadderButton.Width = this.LadderButton.Texture.Width / 2;
+            this.AllElements.Add(this.LadderButton);
 
             // add crate button
             this.CrateButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Crate2"), new Vector2(this.HUD_width * 0.3f, 160),

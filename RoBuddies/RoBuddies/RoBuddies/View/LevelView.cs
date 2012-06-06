@@ -49,7 +49,7 @@ namespace RoBuddies.View
                     Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
 
                 // objects test
-                    //sLadder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
+                    //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(15f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     Door door = new Door(new Vector2(25.4f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
