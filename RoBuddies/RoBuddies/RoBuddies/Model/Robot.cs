@@ -44,9 +44,10 @@ namespace RoBuddies.Model
         {
             // partsCombined construction ------------------------------------------------------------------------------    
 
-            initPartsCombined(pos, content);
+            // don't change the order of the initialization. The order of adding the bodys to the world is important for the editor.
             initLowerPart(pos, content);
             initUpperPart(pos, content);
+            initPartsCombined(pos, content);
 
             this.head = new PhysicObject(this.level);
            
