@@ -4,6 +4,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Content;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Control.RobotStates.Interfaces;
 using RoBuddies.Model;
@@ -21,19 +22,21 @@ namespace RoBuddies.Control.StateMachines
         private const int END_ANIMATION = 80;
 
         private KeyboardState oldState;
-        private Game game;
+        private Robot robot;
+        private ContentManager contentManager;
         private List<Texture2D> textureList;
         private float currentTextureIndex;
 
-        public PartsCombinedStateMachine(IBody body, Game game)
+        public PartsCombinedStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base(body)
         {
-            this.game = game;
+            this.robot = robot;
+            this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
-                textureList.Add(game.Content.Load<Texture2D>("Sprites\\Robot\\BudBudi\\" + String.Format("{0:0000}", i)));
+                textureList.Add(contentManager.Load<Texture2D>("Sprites\\Robot\\BudBudi\\" + String.Format("{0:0000}", i)));
             }
 
             body.Texture = textureList[0];
@@ -41,30 +44,42 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
-
-            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
+            if (robot.ActivePart == robot.PartsCombined)
             {
-                ToJumping(CurrentState);
-            }
+                KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Left))
-            {
-                SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.FlipHorizontally;
-                UpdateWalkAnimation(gameTime);
-            }
+                if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
+                {
+                    ToJumping(CurrentState);
+                }
 
-            if (newState.IsKeyDown(Keys.Right))
-            {
-                SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.None;
-                UpdateWalkAnimation(gameTime);
-            }
+                if (newState.IsKeyDown(Keys.Left))
+                {
+                    SwitchToState(WALK_STATE);
+                    (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
+                    Body.Effect = SpriteEffects.FlipHorizontally;
+                    UpdateWalkAnimation(gameTime);
+                }
 
-            oldState = newState;
+                if (newState.IsKeyDown(Keys.Right))
+                {
+                    SwitchToState(WALK_STATE);
+                    (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
+                    Body.Effect = SpriteEffects.None;
+                    UpdateWalkAnimation(gameTime);
+                }
+
+                if (newState.IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X))
+                {
+                    robot.LowerPart.Position = robot.ActivePart.Position;
+                    robot.ActivePart = robot.LowerPart;
+                    
+                    Body.Layer.AddObject(robot.LowerPart);
+                    Body.Layer.RemoveObject(robot.PartsCombined);
+                }
+
+                oldState = newState;
+            }
         }
 
         private void UpdateWalkAnimation(GameTime gameTime)
