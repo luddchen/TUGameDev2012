@@ -186,8 +186,8 @@ namespace RoBuddies.Control.Editor
                 if (mouseController.clickedBody is Ladder)
                 {
                     Ladder ladderObject = (Ladder)mouseController.clickedBody;
-                    Vector2 newLadderSize = new Vector2(ladderObject.Width, ladderObject.Height + 2);
-                    ladderObject.changeLadderSize(newLadderSize);
+                    float newLadderHeight = ladderObject.Height + 2;
+                    ladderObject.changeLadderHeight(newLadderHeight);
                 }
             }
             // increase width
@@ -218,8 +218,8 @@ namespace RoBuddies.Control.Editor
                 if (mouseController.clickedBody is Ladder)
                 {
                     Ladder ladderObject = (Ladder)mouseController.clickedBody;
-                    Vector2 newLadderSize = new Vector2(ladderObject.Width, ladderObject.Height - 2);
-                    ladderObject.changeLadderSize(newLadderSize);
+                    float newLadderHeight = ladderObject.Height - 2;
+                    ladderObject.changeLadderHeight(newLadderHeight);
                 }
             }
             // decrease width

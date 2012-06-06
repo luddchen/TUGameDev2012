@@ -56,7 +56,6 @@ namespace RoBuddies.Model.Serializer.Converter
                 // test if layer exists
                 layer = level.GetLayerByName(name);
                 if (layer == null) { layer = new Layer(name, parallax, LayerDepth); }
-
                 // deserialize all walls
                 IJEnumerable<JToken> wallTokens = tokens.SelectToken("Walls").Values();
                 foreach (JToken wallToken in wallTokens)
@@ -64,7 +63,6 @@ namespace RoBuddies.Model.Serializer.Converter
                     Wall wall = serializer.Deserialize<Wall>(wallToken.CreateReader());
                     layer.AddObject(wall);
                 }
-
                 // deserialize all crates
                 IJEnumerable<JToken> crateTokens = tokens.SelectToken("Crates").Values();
                 foreach (JToken crateToken in crateTokens)
@@ -72,13 +70,19 @@ namespace RoBuddies.Model.Serializer.Converter
                     Crate crate = serializer.Deserialize<Crate>(crateToken.CreateReader());
                     layer.AddObject(crate);
                 }
-
                 // deserialize all pipes
                 IJEnumerable<JToken> pipeTokens = tokens.SelectToken("Pipes").Values();
                 foreach (JToken pipeToken in pipeTokens)
                 {
                     Pipe pipe = serializer.Deserialize<Pipe>(pipeToken.CreateReader());
                     layer.AddObject(pipe);
+                }
+                // deserialize all ladders
+                IJEnumerable<JToken> ladderTokens = tokens.SelectToken("Ladders").Values();
+                foreach (JToken ladderToken in ladderTokens)
+                {
+                    Ladder ladder = serializer.Deserialize<Ladder>(ladderToken.CreateReader());
+                    layer.AddObject(ladder);
                 }
                 level.AddLayer(layer);
             }
@@ -118,6 +122,10 @@ namespace RoBuddies.Model.Serializer.Converter
                 writer.WriteStartArray();
                     writeGameObject<Pipe>(writer, serializer, layer);
                 writer.WriteEndArray();
+                writer.WritePropertyName("Ladders");
+                writer.WriteStartArray();
+                    writeGameObject<Ladder>(writer, serializer, layer);
+                writer.WriteEndArray();
             writer.WriteEndObject();
         }
 
@@ -128,6 +136,7 @@ namespace RoBuddies.Model.Serializer.Converter
                 if (obj is ObjectType)
                 {
                     writer.WriteStartObject();
+                    writer.Flush();
                     serializer.Serialize(writer, (ObjectType)obj);
                     writer.WriteEndObject();
                 }

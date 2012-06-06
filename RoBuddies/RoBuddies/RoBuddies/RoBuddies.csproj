@@ -150,6 +150,7 @@
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\Serializer\Converter\Converter.cs" />
     <Compile Include="Model\Serializer\Converter\CrateConverter.cs" />
+    <Compile Include="Model\Serializer\Converter\LadderConverter.cs" />
     <Compile Include="Model\Serializer\Converter\LayerConverter.cs" />
     <Compile Include="Model\Serializer\Converter\RobotConverter.cs" />
     <Compile Include="Model\Serializer\LevelReader.cs" />

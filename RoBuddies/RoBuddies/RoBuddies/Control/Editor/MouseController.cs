@@ -152,7 +152,7 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        Ladder ladder = new Ladder(this.CursorSimPos, new Vector2(1.5f, 4f), Color.RosyBrown, this.editorView.Level, this.editorView.Game);
+                        Ladder ladder = new Ladder(this.CursorSimPos, 4f, Color.RosyBrown, this.editorView.Level, this.editorView.Game);
                         Layer layer = this.editorView.Level.GetLayerByName("backLayer");
                         if (layer == null)
                         {

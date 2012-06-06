@@ -12,6 +12,8 @@ namespace RoBuddies.Model.Objects
     /// </summary>    
     class Ladder : PhysicObject
     {
+        private const float LADDER_WIDTH = 1.5f;
+
         private int ladderSteps;  //calculate the repeat number of the center texture by using the parameter size
         private Texture2D top;
         private Texture2D center;
@@ -20,7 +22,7 @@ namespace RoBuddies.Model.Objects
 
         private Fixture ladderFixture;
 
-        public Ladder(Vector2 pos, Vector2 size, Color color, Level level, Game game)
+        public Ladder(Vector2 pos, float height, Color color, Level level, Game game)
            : base(level)
         {
             top = game.Content.Load<Texture2D>("Sprites//LadderTop");
@@ -28,8 +30,8 @@ namespace RoBuddies.Model.Objects
             bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
 
             this.Position = pos;
-            this.Width = size.X;
-            this.Height = size.Y;
+            this.Width = LADDER_WIDTH;
+            this.Height = height;
             this.Color = color;
             this.game = game;
             this.BodyType = BodyType.Static;
@@ -53,15 +55,15 @@ namespace RoBuddies.Model.Objects
 
 
         /// <summary>
-        /// Changes the size of this ladder object and the attached rectangle fixture
+        /// Changes the height of this ladder object and the attached rectangle fixture
         /// </summary>
-        /// <param name="newSize">the new size of the crate</param>
-        public void changeLadderSize(Vector2 newSize)
+        /// <param name="newHeight">the new size of the crate</param>
+        public void changeLadderHeight(float newHeight)
         {
-            this.Width = Math.Max(4, newSize.X);
-            this.Height = Math.Max(4, newSize.Y);
+            this.Height = Math.Max(4, newHeight);
             this.DestroyFixture(ladderFixture);
             ladderFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            applyTexture();
         }
     }
 }

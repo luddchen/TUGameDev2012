@@ -47,6 +47,7 @@ namespace RoBuddies.Model.Serializer
             serializer.Converters.Add(new WallConverter());
             serializer.Converters.Add(new CrateConverter());
             serializer.Converters.Add(new PipeConverter());
+            serializer.Converters.Add(new LadderConverter());
             serializer.Converters.Add(new RobotConverter());
             serializer.Serialize(writer, this.level);
             writer.Flush();
