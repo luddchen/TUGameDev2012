@@ -71,9 +71,12 @@ namespace RoBuddies.Model.Objects
         public void switchOn()
         {
             isSwitchedOn = true;
-            this.Texture = doorOpenTex; 
-            Color temp = this.Color;
-            temp.R *= 2; temp.G *= 2; temp.B *= 2;
+            this.Texture = doorOpenTex;
+            this.Height += 1f;
+            this.Width += 1f;
+            this.Position += new Vector2(0.2f, -0.7f);
+            Color temp = this.Color ; 
+              temp.R *= 2; temp.G *= 2; temp.B *= 2;
             this.Color = temp;
         }        
     }
