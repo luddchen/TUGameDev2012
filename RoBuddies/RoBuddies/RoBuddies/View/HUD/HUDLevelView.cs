@@ -73,14 +73,17 @@ namespace RoBuddies.View.HUD
 
             foreach (IBody body in layer.AllObjects)
             {
-                if (body.Texture == null) { body.Texture = stop; }
-                Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
-                Rectangle dest = new Rectangle(
-                    (int)displayPos.X,
-                    (int)displayPos.Y,
-                    (int)ConvertUnits.ToDisplayUnits(body.Width),
-                    (int)ConvertUnits.ToDisplayUnits(body.Height));
-                spriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
+                if (body.IsVisible)
+                {
+                    if (body.Texture == null) { body.Texture = stop; }
+                    Vector2 displayPos = ConvertUnits.ToDisplayUnits(body.Position);
+                    Rectangle dest = new Rectangle(
+                        (int)displayPos.X,
+                        (int)displayPos.Y,
+                        (int)ConvertUnits.ToDisplayUnits(body.Width),
+                        (int)ConvertUnits.ToDisplayUnits(body.Height));
+                    spriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
+                }
             }
 
             spriteBatch.End();
