@@ -44,16 +44,52 @@ namespace RoBuddies.Model
         {
             //Texture2D textureLowerPart = content.Load<Texture2D>("Sprite//Robot//Bud//0001");
 
-            // partsCombined construction ------------------------------------------------------------------------------
-            Texture2D waitTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
-            Texture2D jumpTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
+            // partsCombined construction ------------------------------------------------------------------------------    
+
+            initPartsCombined(pos, content);
+            initLowerPart(pos, content);
+            initUpperPart(pos, content);
+
+            this.head = new PhysicObject(this.level);
+           
+            headStateMachine = new HeadStateMachine(head, content, this);
+
+            //this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
+            this.level.Robot = this;
+            //----------------------------------------------------------------------------------------------------------
+        }
+
+        private void initLowerPart(Vector2 pos, ContentManager content)
+        {
             Texture2D lowerWaitTex = content.Load<Texture2D>("Sprites//Robot//Bud//0001");
 
             this.lowerPart = new PhysicObject(this.level);
-            this.upperPart = new PhysicObject(this.level);
+
+            lowerPart.FixedRotation = true;
+            lowerPart.Position = pos;
+            lowerPart.BodyType = BodyType.Dynamic;
+            lowerPart.Color = Color.White;
+            FixtureFactory.AttachRectangle(1, 1.5f, 1, Vector2.Zero, lowerPart);
+            lowerPart.Width = 3;
+            lowerPart.Height = 1.8f;
+
+            lowerPartStateMachine = new LowerPartStateMachine(lowerPart, content, this);
+            State lowerWaitingState = new WaitingState(LowerPartStateMachine.WAIT_STATE, lowerWaitTex, lowerPartStateMachine);
+
+            lowerPartStateMachine.AllStates.Add(lowerWaitingState);
+            lowerPartStateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
+
+            this.level.AddStateMachine(lowerPartStateMachine);
+        }
+
+        private void initPartsCombined(Vector2 pos, ContentManager content)
+        {
+            Texture2D waitTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
+            Texture2D jumpTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
+
             this.partsCombined = new PhysicObject(this.level);
-            this.head = new PhysicObject(this.level);
-            this.ActivePart = partsCombined;
+            this.ActivePart = partsCombined; 
+
             partsCombined.FixedRotation = true;
             partsCombined.Position = pos;
             partsCombined.BodyType = BodyType.Dynamic;
@@ -62,30 +98,43 @@ namespace RoBuddies.Model
             partsCombined.Width = 3;
             partsCombined.Height = 3;
 
-            partsCombinedStateMachine = new PartsCombinedStateMachine(partsCombined, game.Content, this);
-            lowerPartStateMachine = new LowerPartStateMachine(lowerPart, game.Content, this);
-            upperPartStateMachine = new UpperPartStateMachine(upperPart, game.Content, this);
-            headStateMachine = new HeadStateMachine(head, game.Content, this);
+            partsCombinedStateMachine = new PartsCombinedStateMachine(partsCombined, content, this);
             State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, partsCombinedStateMachine);
             State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, partsCombinedStateMachine);
             State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, partsCombinedStateMachine);
-
-            State lowerWaitingState = new WaitingState(LowerPartStateMachine.WAIT_STATE, lowerWaitTex, lowerPartStateMachine);
 
             partsCombinedStateMachine.AllStates.Add(waitingState);
             partsCombinedStateMachine.AllStates.Add(jumpState);
             partsCombinedStateMachine.AllStates.Add(walkingState);
             partsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
 
-            lowerPartStateMachine.AllStates.Add(lowerWaitingState);
-            lowerPartStateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
-
             this.level.AddStateMachine(partsCombinedStateMachine);
-            this.level.AddStateMachine(lowerPartStateMachine);
+
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
-            //this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
-            this.level.Robot = this;
-            //----------------------------------------------------------------------------------------------------------
+        }
+
+        private void initUpperPart(Vector2 pos, ContentManager content)
+        {
+            Texture2D upperWaitTex = content.Load<Texture2D>("Sprites//Robot//Budi//0080");
+
+            this.upperPart = new PhysicObject(this.level);
+
+            upperPart.FixedRotation = true;
+            upperPart.Position = pos;
+            upperPart.BodyType = BodyType.Dynamic;
+            upperPart.Color = Color.White;
+            FixtureFactory.AttachRectangle(1, 1.5f, 1, Vector2.Zero, upperPart);
+            upperPart.Width = 5;
+            upperPart.Height = 3.7f;
+
+            upperPartStateMachine = new UpperPartStateMachine(upperPart, content, this);
+
+            State upperWaitState = new WaitingState(UpperPartStateMachine.WAIT_STATE, upperWaitTex, upperPartStateMachine);
+
+            upperPartStateMachine.AllStates.Add(upperWaitState);
+            upperPartStateMachine.SwitchToState(UpperPartStateMachine.WAIT_STATE);
+
+            this.level.AddStateMachine(upperPartStateMachine);
         }
 
         public PhysicObject LowerPart 

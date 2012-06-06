@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
@@ -46,6 +47,11 @@ namespace RoBuddies.Control.StateMachines
             {
                 KeyboardState newState = Keyboard.GetState();
 
+                if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
+                {
+                    ToJumping(CurrentState);
+                }
+
                 if (newState.IsKeyDown(Keys.Left))
                 {
                     SwitchToState(WALK_STATE);
@@ -66,10 +72,14 @@ namespace RoBuddies.Control.StateMachines
 
                 if (newState.IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X))
                 {
-                    robot.PartsCombined.Position = robot.LowerPart.Position;
+                    robot.PartsCombined.Position = robot.LowerPart.Position + new Vector2(0, 2);
+                    robot.PartsCombined.Enabled = true;
                     robot.ActivePart = robot.PartsCombined;
 
                     Body.Layer.AddObject(robot.PartsCombined);
+                    robot.LowerPart.Enabled = false;
+                    robot.UpperPart.Enabled = false;
+                    Body.Layer.RemoveObject(robot.UpperPart);
                     Body.Layer.RemoveObject(robot.LowerPart);
                 }
 
@@ -91,6 +101,13 @@ namespace RoBuddies.Control.StateMachines
 
             Body.Texture = textureList[(int)currentTextureIndex];
             currentTextureIndex += 0.6f;
+        }
+
+        public void ToJumping(State state)
+        {
+            Console.WriteLine("Jump!");
+            SwitchToState(JUMP_STATE);
+            ((Body)Body).ApplyForce(new Vector2(0, 1000));
         }
     }
 }
