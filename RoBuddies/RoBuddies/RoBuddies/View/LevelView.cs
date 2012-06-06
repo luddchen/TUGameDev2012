@@ -17,6 +17,8 @@ namespace RoBuddies.View
         public Model.Snapshot.Snapshot SnapShot;
         private KeyboardState oldKeyboardState;
 
+        private Switch doorSwitcher;
+
         public HUD.HUD HUD;
 
         public override void OnViewPortResize()
@@ -48,7 +50,7 @@ namespace RoBuddies.View
                     //ladder.BodyType = BodyType.Dynamic;
                     Pipe pipe = new Pipe(new Vector2(8f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
                     Door door = new Door(new Vector2(13f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
-                    Switch switcher = new Switch(new Vector2(11f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
+                    doorSwitcher = new Switch(new Vector2(11f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
 
                     Wall switchWall = new Wall(new Vector2(0f, -5.27f), new Vector2(2f, 6f), Color.BurlyWood, this.Level, this.Game, true);
                     Switch wallSwitcher = new Switch(new Vector2(2f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, switchWall, robot);
@@ -58,10 +60,10 @@ namespace RoBuddies.View
 
                     backLayer.AddObject(ladder);
                     backLayer.AddObject(pipe);
-                    backLayer.AddObject(door);
-                    backLayer.AddObject(switcher);
-                    backLayer.AddObject(switchWall);
-                    backLayer.AddObject(wallSwitcher);
+                    mainLayer.AddObject(door);
+                    mainLayer.AddObject(doorSwitcher);
+                    mainLayer.AddObject(switchWall);
+                    mainLayer.AddObject(wallSwitcher);
 
                     mainLayer.AddObject(crateExm);
                     mainLayer.AddObject(box1);
@@ -95,6 +97,11 @@ namespace RoBuddies.View
             }
 
             KeyboardState newKeyboardState = Keyboard.GetState();
+
+            if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
+            {
+                doorSwitcher.Activate();
+            }
 
             if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
             {

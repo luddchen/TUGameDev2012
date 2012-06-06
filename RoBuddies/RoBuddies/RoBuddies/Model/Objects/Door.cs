@@ -12,11 +12,15 @@ namespace RoBuddies.Model.Objects
         private bool isActivated = false; //[combined robot && isSwitchalbe] to activate it.
         private bool isSwitchedOn = true; //(key || switch) to change it to true if needed.
 
+        private Texture2D doorOpenTex;
+
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(level)
         {
             Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//doorcl");
             defineTextures(doorTex, doorTex, doorTex);
+            doorOpenTex = game.Content.Load<Texture2D>("Sprites//doorop");
+            //defineTextures(doorOpenTex, doorOpenTex, doorOpenTex);
 
             this.Position = pos;
             this.Width = size.X;
@@ -39,8 +43,8 @@ namespace RoBuddies.Model.Objects
             this.Friction = 10f;
             FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this);
 
-            this.CollisionCategories = Category.Cat1;
-            this.CollidesWith = Category.None;
+            //this.CollisionCategories = Category.Cat1;
+            //this.CollidesWith = Category.None;
         }
 
         /// <summary>
@@ -59,6 +63,7 @@ namespace RoBuddies.Model.Objects
                 else if (isSwitchedOn)
                 {
                     isActivated = value;
+                    //this.Texture = doorOpenTex; 
                 }
             }
         }
@@ -66,6 +71,7 @@ namespace RoBuddies.Model.Objects
         public void switchOn()
         {
             isSwitchedOn = true;
+            this.Texture = doorOpenTex; 
             Color temp = this.Color;
             temp.R *= 2; temp.G *= 2; temp.B *= 2;
             this.Color = temp;
