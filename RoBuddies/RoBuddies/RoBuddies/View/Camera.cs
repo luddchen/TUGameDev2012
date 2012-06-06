@@ -134,9 +134,8 @@ namespace RoBuddies.View
 
             if (!this.SmoothMove)
             {
-                Console.Out.WriteLine("cam test (" + Position.X + " , " + Position.Y + ")");
                 this.movingSpeed = 0;
-                this.position = this.targetPosition;
+                this.position = to;
             }
         }
 

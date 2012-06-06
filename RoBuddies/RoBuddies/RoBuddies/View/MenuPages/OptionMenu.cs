@@ -12,6 +12,9 @@ namespace RoBuddies.View.MenuPages
         private HUDString fullscreen;
         private HUDString fullscreenValue;
 
+        private HUDString cameraMode;
+        private HUDString cameraModeValue;
+
         private HUDString sound;
         private HUDString soundValue;
 
@@ -25,11 +28,14 @@ namespace RoBuddies.View.MenuPages
             if (fullscreen != null) { fullscreen.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
             if (fullscreenValue != null) { fullscreenValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
 
-            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
-            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
+            if (cameraMode != null) { cameraMode.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
+            if (cameraModeValue != null) { cameraModeValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
 
-            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.6f); }
-            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.6f); }
+            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.6f); }
+            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.6f); }
+
+            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.8f); }
+            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.8f); }
         }
 
         public OptionMenu(LevelMenu menu, ContentManager content)
@@ -45,6 +51,15 @@ namespace RoBuddies.View.MenuPages
             fullscreenValue = new HUDString("on", content);
             fullscreenValue.Scale = 0.7f;
             this.AllElements.Add(fullscreenValue);
+
+            cameraMode = new HUDString("Camera Mode", content);
+            cameraMode.Scale = 0.7f;
+            this.AllElements.Add(cameraMode);
+            this.ChoiceList.Add(cameraMode);
+
+            cameraModeValue = new HUDString("smooth", content);
+            cameraModeValue.Scale = 0.7f;
+            this.AllElements.Add(cameraModeValue);
 
             sound = new HUDString("Sound", content);
             sound.Scale = 0.7f;
@@ -85,6 +100,20 @@ namespace RoBuddies.View.MenuPages
                         else
                         {
                             fullscreenValue.String = "on";
+                        }
+                    }
+
+                    if (this.ActiveElement == cameraMode)
+                    {
+                        if (cameraModeValue.String == "smooth")
+                        {
+                            cameraModeValue.String = "normal";
+                            this.Menu.Game.LevelView.Camera.SmoothMove = false;
+                        }
+                        else
+                        {
+                            cameraModeValue.String = "smooth";
+                            this.Menu.Game.LevelView.Camera.SmoothMove = true;
                         }
                     }
 
