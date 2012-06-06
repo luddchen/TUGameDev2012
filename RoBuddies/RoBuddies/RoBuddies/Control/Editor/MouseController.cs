@@ -179,7 +179,15 @@ namespace RoBuddies.Control
                 {
                     if (!isMovingObject)
                     {
-                        Robot robot = new Robot(this.editorView.Game.Content, this.CursorSimPos, this.editorView.Level, this.editorView.Game);
+                        Robot robot;
+                        if (this.editorView.Level.Robot != null) // don't create more than one robot
+                        {
+                            this.editorView.Level.Robot.ActivePart.Position = this.CursorSimPos;
+                        }
+                        else
+                        {
+                            robot = new Robot(this.editorView.Game.Content, this.CursorSimPos, this.editorView.Level, this.editorView.Game);
+                        }
 
                         DragObject();
                     }
