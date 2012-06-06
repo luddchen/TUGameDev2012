@@ -183,6 +183,12 @@ namespace RoBuddies.Control.Editor
                     Vector2 newWallSize = new Vector2(wallObject.Width, wallObject.Height + 2);
                     wallObject.changeWallSize(newWallSize);
                 }
+                if (mouseController.clickedBody is Ladder)
+                {
+                    Ladder ladderObject = (Ladder)mouseController.clickedBody;
+                    Vector2 newLadderSize = new Vector2(ladderObject.Width, ladderObject.Height + 2);
+                    ladderObject.changeLadderSize(newLadderSize);
+                }
             }
             // increase width
             if (newKeyboardState.IsKeyDown(Keys.Right) && oldKeyboardState.IsKeyUp(Keys.Right) && mouseController.isMovingObject)
@@ -208,6 +214,12 @@ namespace RoBuddies.Control.Editor
                     Wall wallObject = (Wall)mouseController.clickedBody;
                     Vector2 newWallSize = new Vector2(wallObject.Width, wallObject.Height - 2);
                     wallObject.changeWallSize(newWallSize);
+                }
+                if (mouseController.clickedBody is Ladder)
+                {
+                    Ladder ladderObject = (Ladder)mouseController.clickedBody;
+                    Vector2 newLadderSize = new Vector2(ladderObject.Width, ladderObject.Height - 2);
+                    ladderObject.changeLadderSize(newLadderSize);
                 }
             }
             // decrease width

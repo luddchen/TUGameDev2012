@@ -99,6 +99,8 @@ namespace RoBuddies.Control
 
                 UpdateWallButton();
 
+                UpdateLadderButton();
+
                 UpdateBudBudiButton();
 
                 UpdateCrateButton();
@@ -138,6 +140,33 @@ namespace RoBuddies.Control
                     Vector2 newSize = new Vector2(clickedWall.Height, clickedWall.Width);
                     clickedWall.changeWallSize(newSize);
                 }
+            }
+        }
+
+        private void UpdateLadderButton()
+        {
+            if (this.toolbar.LadderButton.Intersects(this.hudMouse.Position - new Vector2(this.toolbar.Viewport.X, this.toolbar.Viewport.Y)))
+            {
+                this.toolbar.LadderButton.Scale = 0.45f;
+                if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
+                {
+                    if (!isMovingObject)
+                    {
+                        Ladder ladder = new Ladder(this.CursorSimPos, new Vector2(1.5f, 4f), Color.RosyBrown, this.editorView.Level, this.editorView.Game);
+                        Layer layer = this.editorView.Level.GetLayerByName("backLayer");
+                        if (layer == null)
+                        {
+                            layer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
+                            this.editorView.Level.AddLayer(layer);
+                        }
+                        layer.AddObject(ladder);
+                        DragObject();
+                    }
+                }
+            }
+            else
+            {
+                this.toolbar.LadderButton.Scale = 0.4f;
             }
         }
 
