@@ -73,14 +73,11 @@ namespace RoBuddies.Control.StateMachines
                 if (newState.IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X))
                 {
                     robot.PartsCombined.Position = robot.LowerPart.Position + new Vector2(0, 2);
-                    robot.PartsCombined.Enabled = true;
+                    robot.PartsCombined.IsVisible = true;
                     robot.ActivePart = robot.PartsCombined;
 
-                    Body.Layer.AddObject(robot.PartsCombined);
-                    robot.LowerPart.Enabled = false;
-                    robot.UpperPart.Enabled = false;
-                    Body.Layer.RemoveObject(robot.UpperPart);
-                    Body.Layer.RemoveObject(robot.LowerPart);
+                    robot.LowerPart.IsVisible = false;
+                    robot.UpperPart.IsVisible = false;
                 }
 
                 oldState = newState;

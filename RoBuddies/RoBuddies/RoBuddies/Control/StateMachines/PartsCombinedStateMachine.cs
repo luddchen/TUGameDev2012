@@ -73,14 +73,11 @@ namespace RoBuddies.Control.StateMachines
                 {
                     robot.LowerPart.Position = robot.ActivePart.Position;
                     robot.UpperPart.Position = robot.ActivePart.Position + new Vector2(0, 2);
-                    robot.LowerPart.Enabled = true;
-                    robot.UpperPart.Enabled = true;
+                    robot.LowerPart.IsVisible = true;
+                    robot.UpperPart.IsVisible = true;
                     robot.ActivePart = robot.LowerPart;
                     
-                    Body.Layer.AddObject(robot.LowerPart);
-                    Body.Layer.AddObject(robot.UpperPart);
-                    robot.PartsCombined.Enabled = false;
-                    Body.Layer.RemoveObject(robot.PartsCombined);
+                    robot.PartsCombined.IsVisible = false;
                 }
 
                 oldState = newState;
