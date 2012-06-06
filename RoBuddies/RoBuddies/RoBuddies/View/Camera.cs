@@ -18,12 +18,17 @@ namespace RoBuddies.View
         private Vector2 movingDirection;
         private float movingSpeed;
         private float movingDistance;
+        private Rectangle boundingBox;
+        private bool useBoundingBox;
 
         /// <summary>
         /// if the new position from move() is to far away the new position will not be set direct
         /// </summary>
         public float maxDirectMoveDistance = 1;
 
+        /// <summary>
+        /// Position of this Cam
+        /// </summary>
         public Vector2 Position
         {
             get { return this.position; }
@@ -84,6 +89,7 @@ namespace RoBuddies.View
             this.Zoom = 1.0f;
             this.Rotation = 0.0f;
             this.SmoothMove = true;
+            this.useBoundingBox = false;
         }
 
         /// <summary>
@@ -114,6 +120,13 @@ namespace RoBuddies.View
         /// <param name="to">target coordinates</param>
         public void Move(Vector2 to)
         {
+
+            if (this.useBoundingBox)
+            {
+                to.X = MathHelper.Clamp(to.X, this.boundingBox.X, this.boundingBox.X + boundingBox.Width);
+                to.Y = MathHelper.Clamp(to.Y, this.boundingBox.Y, this.boundingBox.Y + boundingBox.Height);
+            }
+
             if (this.SmoothMove)
             {
                 this.targetPosition = to;
@@ -182,6 +195,18 @@ namespace RoBuddies.View
                     * Matrix.CreateRotationZ(Rotation)
                     * Matrix.CreateScale(Zoom, Zoom, 1)
                     * Matrix.CreateTranslation(new Vector3(Origin, 0.0f));
+        }
+
+
+        public void SetBoundingBox(Rectangle boundingBox)
+        {
+            this.useBoundingBox = true;
+            this.boundingBox = boundingBox;
+        }
+
+        public void ClearBoundingBox()
+        {
+            this.useBoundingBox = false;
         }
     }
 }

@@ -34,6 +34,8 @@ namespace RoBuddies.View
         public LevelView(RoBuddies game) : base(game)
         {
             this.HUD = new LevelHUD(game);
+            this.Camera.SmoothMove = true;
+            this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
             Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
