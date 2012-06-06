@@ -64,7 +64,9 @@ namespace RoBuddies.View.MenuPages
                         ((LevelView)this.Game.LevelView).SnapShot.CreateBodyList(this.Game.LevelView.Level);
                         ((LevelView)this.Game.LevelView).SnapShot.MakeSnapshot();
 
+
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
+                        this.Game.LevelView.Camera.ClearBoundingBox();
                     }
 
                 }
