@@ -13,6 +13,7 @@ namespace RoBuddies.Model.Objects
     {
         private bool isMoving = false; //statement of the crate, as pulling in prototype
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
+        private Fixture crateFixture;
 
         public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
             : base(level)
@@ -28,15 +29,20 @@ namespace RoBuddies.Model.Objects
             this.BodyType = BodyType.Dynamic;
             this.Color = Color.BurlyWood;
 
-            if (size.Y * size.X > size.X * size.X)
-            {
-                isHeavyCrate = true;
-            }
+            calculateHeaviness();
 
             this.FixedRotation = true;
             this.Friction = 1f;
             //this.Mass = size.X * size.Y * Int16.MaxValue;
-            FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+        }
+
+        private void calculateHeaviness()
+        {
+            if (this.Height * this.Width > this.Width * this.Width)
+            {
+                isHeavyCrate = true;
+            }
         }
 
 
@@ -70,6 +76,19 @@ namespace RoBuddies.Model.Objects
                     this.Color = temp; //the crate cannot be moved now
                 }
             }
+        }
+
+        /// <summary>
+        /// Changes the size of this crate object and the attached rectangle fixture
+        /// </summary>
+        /// <param name="newSize">the new size of the crate</param>
+        public void changeCrateSize(Vector2 newSize)
+        {
+            this.Width = Math.Max(1, newSize.X);
+            this.Height = Math.Max(1, newSize.Y);
+            this.DestroyFixture(crateFixture);
+            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            calculateHeaviness();
         }
     }
 }

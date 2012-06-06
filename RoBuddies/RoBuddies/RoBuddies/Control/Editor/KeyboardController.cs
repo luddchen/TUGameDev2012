@@ -189,6 +189,12 @@ namespace RoBuddies.Control.Editor
                     float newLadderHeight = ladderObject.Height + 2;
                     ladderObject.changeLadderHeight(newLadderHeight);
                 }
+                if (mouseController.clickedBody is Crate)
+                {
+                    Crate crateObject = (Crate)mouseController.clickedBody;
+                    Vector2 newCrateSize = new Vector2(crateObject.Width, crateObject.Height + 2);
+                    crateObject.changeCrateSize(newCrateSize);
+                }
             }
             // increase width
             if (newKeyboardState.IsKeyDown(Keys.Right) && oldKeyboardState.IsKeyUp(Keys.Right) && mouseController.isMovingObject)
@@ -204,6 +210,12 @@ namespace RoBuddies.Control.Editor
                     Pipe pipeObject = (Pipe)mouseController.clickedBody;
                     float newPipeLength = pipeObject.Width + 2;
                     pipeObject.changePipeLength(newPipeLength);
+                }
+                if (mouseController.clickedBody is Crate)
+                {
+                    Crate crateObject = (Crate)mouseController.clickedBody;
+                    Vector2 newCrateSize = new Vector2(crateObject.Width + 2, crateObject.Height);
+                    crateObject.changeCrateSize(newCrateSize);
                 }
             }
             // decrease height
@@ -221,6 +233,12 @@ namespace RoBuddies.Control.Editor
                     float newLadderHeight = ladderObject.Height - 2;
                     ladderObject.changeLadderHeight(newLadderHeight);
                 }
+                if (mouseController.clickedBody is Crate)
+                {
+                    Crate crateObject = (Crate)mouseController.clickedBody;
+                    Vector2 newCrateSize = new Vector2(crateObject.Width, crateObject.Height - 2);
+                    crateObject.changeCrateSize(newCrateSize);
+                }
             }
             // decrease width
             if (newKeyboardState.IsKeyDown(Keys.Left) && oldKeyboardState.IsKeyUp(Keys.Left) && mouseController.isMovingObject)
@@ -236,6 +254,12 @@ namespace RoBuddies.Control.Editor
                     Pipe pipeObject = (Pipe)mouseController.clickedBody;
                     float newPipeLength = pipeObject.Width - 2;
                     pipeObject.changePipeLength(newPipeLength);
+                }
+                if (mouseController.clickedBody is Crate)
+                {
+                    Crate crateObject = (Crate)mouseController.clickedBody;
+                    Vector2 newCrateSize = new Vector2(crateObject.Width - 2, crateObject.Height);
+                    crateObject.changeCrateSize(newCrateSize);
                 }
             }
         }

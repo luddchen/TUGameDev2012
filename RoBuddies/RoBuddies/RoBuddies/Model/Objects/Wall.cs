@@ -56,9 +56,9 @@ namespace RoBuddies.Model.Objects
         }
 
         /// <summary>
-        /// Changes the size of this crate object and the attached rectangle fixture
+        /// Changes the size of this wall object and the attached rectangle fixture
         /// </summary>
-        /// <param name="newSize">the new size of the crate</param>
+        /// <param name="newSize">the new size of the wall</param>
         public void changeWallSize(Vector2 newSize) {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
