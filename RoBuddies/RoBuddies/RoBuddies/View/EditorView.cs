@@ -14,6 +14,7 @@ namespace RoBuddies.View
         private KeyboardController keyboardController;
 
         public EditorToolbar Toolbar;
+        public EditorHUD Infobar;
         public bool IsGridVisible;
 
         public HUDMouse Mouse;
@@ -54,7 +55,11 @@ namespace RoBuddies.View
             }
             if (this.Toolbar != null)
             {
-                this.Toolbar.Viewport = this.viewport; 
+                this.Toolbar.Viewport = this.viewport;
+            }
+            if (this.Infobar != null)
+            {
+                this.Infobar.Viewport = this.viewport;
             }
         }
 
@@ -66,6 +71,7 @@ namespace RoBuddies.View
             this.AllElements.Add(hudString);
 
             this.Toolbar = new EditorToolbar(game);
+            this.Infobar = new EditorHUD(this);
             this.Camera.Zoom = 0.5f;
             this.IsGridVisible = true;
 
@@ -117,6 +123,7 @@ namespace RoBuddies.View
             base.Update(gameTime);
             this.mouseController.Update(gameTime);
             this.Toolbar.Update(gameTime);
+            this.Infobar.Update(gameTime, mouseController.CursorSimPos);
 
             getInput();
         }
@@ -134,6 +141,8 @@ namespace RoBuddies.View
             base.DrawContent(spriteBatch);
 
             this.Toolbar.Draw(spriteBatch);
+
+            this.Infobar.Draw(spriteBatch);
         }
 
         private void DrawGrid(SpriteBatch spriteBatch)

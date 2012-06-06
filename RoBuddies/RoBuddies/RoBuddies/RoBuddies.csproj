@@ -167,6 +167,7 @@
     <Compile Include="Utilities\ConvertUnits.cs" />
     <Compile Include="Utilities\TextureConverter.cs" />
     <Compile Include="View\Camera.cs" />
+    <Compile Include="View\EditorHUD.cs" />
     <Compile Include="View\EditorToolbar.cs" />
     <Compile Include="View\EditorView.cs" />
     <Compile Include="View\EditorMenu.cs" />
