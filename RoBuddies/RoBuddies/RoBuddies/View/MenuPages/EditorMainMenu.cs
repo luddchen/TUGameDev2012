@@ -79,7 +79,10 @@ namespace RoBuddies.View.MenuPages
         /// <param name="level"></param>
         private void activateObjects(Level level)
         {
-            level.Robot.ActivePart.BodyType = BodyType.Dynamic;
+            if (level.Robot != null) 
+            { 
+                level.Robot.ActivePart.BodyType = BodyType.Dynamic; 
+            }
 
             foreach (Layer layer in level.AllLayers)
             {

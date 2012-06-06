@@ -94,6 +94,7 @@ namespace RoBuddies.Model
             : base(world)
         {
             this.level = world;
+            this.IsVisible = true;
         }
 
     }
