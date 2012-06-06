@@ -41,6 +41,7 @@ namespace RoBuddies.Model.Objects
                 Color temp = this.Color;
                 temp.R *= 2; temp.G *= 2; temp.B *= 2;
                 this.Color = temp;
+                this.Effect = SpriteEffects.FlipVertically;
 
                 switchObject.switchOn();
                 

@@ -10,7 +10,7 @@ namespace RoBuddies.View
     class LevelHUD : HUD.HUD
     {
 
-        private int HUD_height = 60;
+        private int HUD_height = 30;
         private int HUD_width = 120;
 
         private HUDString timeElapsed;
