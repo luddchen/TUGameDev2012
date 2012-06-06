@@ -42,8 +42,6 @@ namespace RoBuddies.Model
 
         private void initRobot(ContentManager content, Vector2 pos, Game game) 
         {
-            //Texture2D textureLowerPart = content.Load<Texture2D>("Sprite//Robot//Bud//0001");
-
             // partsCombined construction ------------------------------------------------------------------------------    
 
             initPartsCombined(pos, content);
@@ -54,8 +52,17 @@ namespace RoBuddies.Model
            
             headStateMachine = new HeadStateMachine(head, content, this);
 
-            //this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
-            this.level.Robot = this;
+            this.partsCombined.IsVisible = true;
+            this.partsCombined.IgnoreCollisionWith(this.upperPart);
+            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
+
+            this.upperPart.IsVisible = false;
+            this.upperPart.IgnoreCollisionWith(this.partsCombined);
+            this.upperPart.IgnoreCollisionWith(this.lowerPart);
+
+            this.lowerPart.IsVisible = false;
+            this.lowerPart.IgnoreCollisionWith(partsCombined);
+            this.lowerPart.IgnoreCollisionWith(upperPart);
             //----------------------------------------------------------------------------------------------------------
         }
 
@@ -80,6 +87,7 @@ namespace RoBuddies.Model
             lowerPartStateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
 
             this.level.AddStateMachine(lowerPartStateMachine);
+            this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
         }
 
         private void initPartsCombined(Vector2 pos, ContentManager content)
@@ -109,7 +117,6 @@ namespace RoBuddies.Model
             partsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
 
             this.level.AddStateMachine(partsCombinedStateMachine);
-
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
         }
 
@@ -135,6 +142,7 @@ namespace RoBuddies.Model
             upperPartStateMachine.SwitchToState(UpperPartStateMachine.WAIT_STATE);
 
             this.level.AddStateMachine(upperPartStateMachine);
+            this.level.GetLayerByName("mainLayer").AddObject(this.upperPart);
         }
 
         public PhysicObject LowerPart 
