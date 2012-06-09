@@ -46,6 +46,11 @@ namespace RoBuddies.Model
         private List<StateMachine> allStateMachines;
 
         /// <summary>
+        /// Flag if the player has finished the level
+        /// </summary>
+        public bool finished { get; set; }
+
+        /// <summary>
         /// list of all layers in this level
         /// </summary>
         public List<Layer> AllLayers { get { return this.allLayers; } }
@@ -80,6 +85,7 @@ namespace RoBuddies.Model
         public Level()
             : base(new Vector2(INITIAL_GRAVITY_X, INITIAL_GRAVITY_Y))
         {
+            this.finished = false;
             this.allLayers = new List<Layer>();
             this.allStateMachines = new List<StateMachine>();
             this.Background = Color.DeepSkyBlue;

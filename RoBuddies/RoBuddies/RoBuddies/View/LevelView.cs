@@ -10,6 +10,7 @@ using RoBuddies.Control.StateMachines;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Model.Worlds.World1;
+using RoBuddies.Model.Worlds;
 
 namespace RoBuddies.View
 {
@@ -19,6 +20,8 @@ namespace RoBuddies.View
         private KeyboardState oldKeyboardState;
 
         public HUD.HUD HUD;
+
+        private Worlds worlds;
 
         public override void OnViewPortResize()
         {
@@ -33,53 +36,13 @@ namespace RoBuddies.View
         {
             this.HUD = new LevelHUD(game);
             this.Camera.SmoothMove = true;
+            // TODO: calculate level bounds
             //this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
             //this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
-            this.Level = (new Level1_1(game)).Level;
+            this.worlds = new Worlds(game);
 
-            //Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
-            //Layer backLayer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
-            //this.Level.AddLayer(mainLayer);
-            //this.Level.AddLayer(backLayer);
-
-            ////  some testing code here --------------------------------------------------------------------------
-
-            //    // Robot
-            //        Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
-
-            //    // objects test
-            //        //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
-            //        //ladder.BodyType = BodyType.Dynamic;
-            //        Pipe pipe = new Pipe(new Vector2(15f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
-            //        Door door = new Door(new Vector2(25.4f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
-            //        doorSwitcher = new Switch(new Vector2(23.4f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
-
-            //        Wall switchWall = new Wall(new Vector2(18f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, true);
-            //        //wallSwitcher = new Switch(new Vector2(2f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, switchWall, robot);
-
-            //        //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
-            //        Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
-
-            //        //backLayer.AddObject(ladder);
-            //        backLayer.AddObject(pipe);
-            //        mainLayer.AddObject(door);
-            //        mainLayer.AddObject(doorSwitcher);
-            //        mainLayer.AddObject(switchWall);
-            //        //mainLayer.AddObject(wallSwitcher);
-
-            //        //mainLayer.AddObject(crateExm);
-            //        mainLayer.AddObject(box1);
-
-            //    // body 3
-            //        Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            //        Wall wall; 
-            //        for (int i = 0; i < 6; i++)
-            //        {
-            //            wall = new Wall(new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, this.Level, this.Game, false);
-            //            mainLayer.AddObject(wall);
-            //        }
-            //// end testing code ---------------------------------------------------------------------------------
+            this.Level = this.worlds.getNextLevel();
 
             this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
 
@@ -90,6 +53,16 @@ namespace RoBuddies.View
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if (this.Level.finished) // load next level, when current level is finished
+            {
+                Level nextLevel = this.worlds.getNextLevel();
+                if (nextLevel != null)
+                {
+                    this.Level = nextLevel;
+                }
+            }
+
             this.Level.Update(gameTime);    // taken from HUDLevelView because editor need no level update
             this.HUD.Update(gameTime);
 
@@ -101,6 +74,8 @@ namespace RoBuddies.View
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
+            // this is very dirty and won't work in the real game:
+            // TODO: overwork the door logic
             //if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
             //{
             //    doorSwitcher.Activate();
@@ -125,6 +100,12 @@ namespace RoBuddies.View
                 this.Level.ClearForces();
                 this.SnapShot.Rewind(2);
                 this.Level.ClearForces();
+            }
+
+            // test key for switching to the next level
+            if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))
+            {
+                this.Level.finished = true;
             }
 
             this.oldKeyboardState = newKeyboardState;
