@@ -79,5 +79,16 @@ namespace RoBuddies.Model
             set;
         }
 
+        public StaticObject()
+        {
+            this.Color = Color.White;
+            this.Height = 1;
+            this.Width = 1;
+            this.Effect = SpriteEffects.None;
+            this.Rotation = 0;
+            this.Position = new Vector2(0, 0);
+            this.IsVisible = true;
+        }
+
     }
 }

@@ -34,7 +34,7 @@ namespace RoBuddies.View
             this.HUD = new LevelHUD(game);
             this.Camera.SmoothMove = true;
             //this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
+            //this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
             this.Level = (new Level1_1(game)).Level;
 
