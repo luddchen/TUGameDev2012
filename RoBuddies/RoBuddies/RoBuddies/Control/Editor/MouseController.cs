@@ -350,7 +350,7 @@ namespace RoBuddies.Control
                 if (isNewMouseButtonPressed(MouseButtons.LEFT_BUTTON))
                 {
                     this.editorView.ResetCamera();
-                    this.editorView.Level = new Level(new Vector2(0, 10));
+                    this.editorView.Level = new Level();
                     Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
                     this.editorView.Level.AddLayer(mainLayer);
                 }

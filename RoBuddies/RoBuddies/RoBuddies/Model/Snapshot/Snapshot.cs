@@ -30,9 +30,7 @@ namespace RoBuddies.Model.Snapshot
         /// <param name="level">the level</param>
         public void CreateBodyList(Level level)
         {
-            //if (this.BodyList == null) {
-                this.BodyList = new List<IBody>(); 
-            //}
+            this.BodyList = new List<IBody>();
 
             foreach (Layer layer in level.AllLayers)
             {
