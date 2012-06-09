@@ -18,9 +18,6 @@ namespace RoBuddies.View
         public Model.Snapshot.Snapshot SnapShot;
         private KeyboardState oldKeyboardState;
 
-        private Switch doorSwitcher;
-        private Switch wallSwitcher;
-
         public HUD.HUD HUD;
 
         public override void OnViewPortResize()
@@ -104,10 +101,10 @@ namespace RoBuddies.View
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
-            if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
-            {
-                doorSwitcher.Activate();
-            }
+            //if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
+            //{
+            //    doorSwitcher.Activate();
+            //}
 
             if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
             {

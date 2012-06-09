@@ -10,6 +10,7 @@ namespace RoBuddies.View
 {
     class EditorView : HUD.HUDLevelView
     {
+        private Vector2 parallax = new Vector2(1, 1);
         private MouseController mouseController;
         private KeyboardController keyboardController;
 
@@ -111,7 +112,7 @@ namespace RoBuddies.View
             this.UpArrow.Texture = game.Content.Load<Texture2D>("Sprites//Arrow");
             this.AllElements.Add(this.UpArrow);
 
-            Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            Layer mainLayer = new Layer("mainLayer", parallax, 0.5f);
             this.Level.AddLayer(mainLayer);
 
             this.dot = game.Content.Load<Texture2D>("Sprites//Dot");

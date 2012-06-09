@@ -4,27 +4,32 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using RoBuddies.Model.Serializer;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Model.Worlds.World1
 {
-    class Level1_1
+    /// <summary>
+    /// This class loads the level 1 of world 1 and adds 
+    /// objects to the level, which can not be used in the editor
+    /// </summary>
+    class Level1_1 : WorldLevel
     {
         private const string LEVEL_PATH = "Worlds\\World1\\Level1_1.json";
-        private const LevelTheme theme = LevelTheme.MENTAL_HOSPITAL;
-        private Level level;
-
-        /// <summary>
-        /// Getter for the loaded level
-        /// </summary>
-        public Level Level
-        {
-            get { return this.level; }
-        }
+        private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
 
         public Level1_1(Game game)
+            : base(game, LEVEL_PATH, LEVEL_THEME)
         {
-            LevelReader levelReader = new LevelReader(game);
-            this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, LEVEL_PATH);
+
+        }
+
+        protected override void addLevelObjects()
+        {
+            Door door = new Door(new Vector2(8f, 0f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
+            Switch doorSwitcher = new Switch(new Vector2(8f, 5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, door, this.Level.Robot);
+            levelObjects.Add(door);
+            levelObjects.Add(doorSwitcher);
         }
     }
+    
 }
