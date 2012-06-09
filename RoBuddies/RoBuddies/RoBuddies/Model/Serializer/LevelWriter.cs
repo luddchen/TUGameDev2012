@@ -40,6 +40,7 @@ namespace RoBuddies.Model.Serializer
             Console.Out.WriteLine(filename);
             StreamWriter sw = new StreamWriter(@path + "\\" + filename, false);
             JsonWriter writer = new JsonTextWriter(sw);
+            writer.Formatting = Formatting.Indented;
             JsonSerializer serializer = new JsonSerializer();
             // add your converter of the level objects here:
             serializer.Converters.Add(new LevelConverter());
