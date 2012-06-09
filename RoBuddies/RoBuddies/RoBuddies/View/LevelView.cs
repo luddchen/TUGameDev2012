@@ -9,6 +9,7 @@ using RoBuddies.Control.RobotStates;
 using RoBuddies.Control.StateMachines;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
+using RoBuddies.Model.Worlds.World1;
 
 namespace RoBuddies.View
 {
@@ -16,9 +17,6 @@ namespace RoBuddies.View
     {
         public Model.Snapshot.Snapshot SnapShot;
         private KeyboardState oldKeyboardState;
-
-        private Switch doorSwitcher;
-        private Switch wallSwitcher;
 
         public HUD.HUD HUD;
 
@@ -35,51 +33,53 @@ namespace RoBuddies.View
         {
             this.HUD = new LevelHUD(game);
             this.Camera.SmoothMove = true;
-            this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
+            //this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
-            Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
-            Layer backLayer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
-            this.Level.AddLayer(mainLayer);
-            this.Level.AddLayer(backLayer);
+            this.Level = (new Level1_1(game)).Level;
 
-            //  some testing code here --------------------------------------------------------------------------
+            //Layer mainLayer = new Layer("mainLayer", new Vector2(1, 1), 0.5f);
+            //Layer backLayer = new Layer("backLayer", new Vector2(1, 1), 0.51f);
+            //this.Level.AddLayer(mainLayer);
+            //this.Level.AddLayer(backLayer);
 
-                // Robot
-                    Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
+            ////  some testing code here --------------------------------------------------------------------------
 
-                // objects test
-                    //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
-                    //ladder.BodyType = BodyType.Dynamic;
-                    Pipe pipe = new Pipe(new Vector2(15f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
-                    Door door = new Door(new Vector2(25.4f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
-                    doorSwitcher = new Switch(new Vector2(23.4f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
+            //    // Robot
+            //        Robot robot = new Robot(this.Game.Content, new Vector2(5f, -6f), this.Level, this.Game);
 
-                    Wall switchWall = new Wall(new Vector2(18f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, true);
-                    //wallSwitcher = new Switch(new Vector2(2f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, switchWall, robot);
+            //    // objects test
+            //        //Ladder ladder = new Ladder(new Vector2(8f, -4.7f), new Vector2(1.5f, 6f), Color.RosyBrown, this.Level, this.Game);
+            //        //ladder.BodyType = BodyType.Dynamic;
+            //        Pipe pipe = new Pipe(new Vector2(15f, -0.7f), 10f, Color.LightGray, this.Level, this.Game);
+            //        Door door = new Door(new Vector2(25.4f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, false);
+            //        doorSwitcher = new Switch(new Vector2(23.4f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, door, robot);
 
-                    //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
-                    Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
+            //        Wall switchWall = new Wall(new Vector2(18f, -5.27f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.Game, true);
+            //        //wallSwitcher = new Switch(new Vector2(2f, -5.5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.Game, switchWall, robot);
 
-                    //backLayer.AddObject(ladder);
-                    backLayer.AddObject(pipe);
-                    mainLayer.AddObject(door);
-                    mainLayer.AddObject(doorSwitcher);
-                    mainLayer.AddObject(switchWall);
-                    //mainLayer.AddObject(wallSwitcher);
+            //        //Crate crateExm = new Crate(new Vector2(4f, -5.75f), new Vector2(2f, 4f), Color.BurlyWood, this.Level, this.Game);
+            //        Crate box1 = new Crate(new Vector2(10f, -7f), new Vector2(2f, 2f), Color.BurlyWood, this.Level, this.Game);                 
 
-                    //mainLayer.AddObject(crateExm);
-                    mainLayer.AddObject(box1);
+            //        //backLayer.AddObject(ladder);
+            //        backLayer.AddObject(pipe);
+            //        mainLayer.AddObject(door);
+            //        mainLayer.AddObject(doorSwitcher);
+            //        mainLayer.AddObject(switchWall);
+            //        //mainLayer.AddObject(wallSwitcher);
 
-                // body 3
-                    Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
-                    Wall wall; 
-                    for (int i = 0; i < 6; i++)
-                    {
-                        wall = new Wall(new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, this.Level, this.Game, false);
-                        mainLayer.AddObject(wall);
-                    }
-            // end testing code ---------------------------------------------------------------------------------
+            //        //mainLayer.AddObject(crateExm);
+            //        mainLayer.AddObject(box1);
+
+            //    // body 3
+            //        Texture2D square = this.Game.Content.Load<Texture2D>("Sprites//Square");
+            //        Wall wall; 
+            //        for (int i = 0; i < 6; i++)
+            //        {
+            //            wall = new Wall(new Vector2(4 + i * 4f, -7.9f), new Vector2(4f, 0.3f), Color.BurlyWood, this.Level, this.Game, false);
+            //            mainLayer.AddObject(wall);
+            //        }
+            //// end testing code ---------------------------------------------------------------------------------
 
             this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
 
@@ -101,10 +101,10 @@ namespace RoBuddies.View
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
-            if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
-            {
-                doorSwitcher.Activate();
-            }
+            //if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
+            //{
+            //    doorSwitcher.Activate();
+            //}
 
             if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
             {

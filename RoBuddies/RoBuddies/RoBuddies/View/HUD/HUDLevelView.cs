@@ -44,7 +44,7 @@ namespace RoBuddies.View.HUD
             this.backgroundColor = new Color(255, 255, 255, 230);
             this.stop = this.Game.Content.Load<Texture2D>("Sprites//stop");
             this.Camera = new Camera();
-            this.Level = new Level(new Vector2(0, -10f));
+            this.Level = new Level();
         }
 
 

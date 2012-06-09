@@ -22,6 +22,10 @@ namespace RoBuddies.Model
     /// </summary>
     class Level : FarseerPhysics.Dynamics.World
     {
+        // initial gravity constants for the gravity of the level
+        private const float INITIAL_GRAVITY_X = 0f;
+        private const float INITIAL_GRAVITY_Y = -10;
+
         /// <summary>
         /// background color of level
         /// </summary>
@@ -73,8 +77,8 @@ namespace RoBuddies.Model
         /// creates a new world / level
         /// </summary>
         /// <param name="gravity">initial gravity of physics</param>
-        public Level(Vector2 gravity)
-            : base(gravity)
+        public Level()
+            : base(new Vector2(INITIAL_GRAVITY_X, INITIAL_GRAVITY_Y))
         {
             this.allLayers = new List<Layer>();
             this.allStateMachines = new List<StateMachine>();

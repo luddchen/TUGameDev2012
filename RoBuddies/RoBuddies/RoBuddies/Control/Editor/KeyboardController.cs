@@ -278,6 +278,10 @@ namespace RoBuddies.Control.Editor
                     IBody clickedBody = (IBody)mouseController.clickedBody;
                     mouseController.DropObject();
                     this.HUD.Level.removeObject(clickedBody);
+                    if (this.HUD.Level.Robot != null && this.HUD.Level.Robot.ActivePart == clickedBody) // some special treatment for the holy robot
+                    {
+                        this.HUD.Level.Robot = null;
+                    }
                 }
             }
         }

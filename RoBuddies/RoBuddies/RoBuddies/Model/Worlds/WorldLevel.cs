@@ -1,0 +1,75 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Xna.Framework;
+using RoBuddies.Model.Serializer;
+using RoBuddies.Model.Objects;
+
+namespace RoBuddies.Model.Worlds
+{
+    /// <summary>
+    /// This abstract class is the upper class for all levels,
+    /// which will be loaded from the json code of the editor.
+    /// The subclasses can add with the addLevelObjects() method
+    /// new objects to the level.
+    /// </summary>
+    abstract class WorldLevel
+    {
+        private Level level;
+        protected Game game;
+
+        /// <summary>
+        /// Add your new level objects for the level to this list
+        /// </summary>
+        protected List<IBody> levelObjects;
+
+        /// <summary>
+        /// Getter for the loaded level
+        /// </summary>
+        public Level Level
+        {
+            get { return this.level; }
+        }
+
+        /// <summary>
+        /// Creates a new WorldLevel object from a json level file
+        /// </summary>
+        /// <param name="game">The game for the level</param>
+        /// <param name="levelPath">the path to the level file</param>
+        /// <param name="levelTheme">the filename of the level file</param>
+        public WorldLevel(Game game, String levelPath, LevelTheme levelTheme)
+        {
+            this.game = game;
+            this.levelObjects = new List<IBody>();
+            LevelReader levelReader = new LevelReader(game);
+            this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath);
+            this.Level.theme = levelTheme;
+            addLevelObjects();
+            addLevelObjectsToLevel();            
+        }
+
+        /// <summary>
+        /// adds the LevelObjects to the main or background layer
+        /// </summary>
+        private void addLevelObjectsToLevel()
+        {
+            Layer mainLayer = this.Level.GetLayerByName("mainLayer");
+            Layer backLayer = this.Level.GetLayerByName("backLayer");
+            foreach (IBody body in levelObjects)
+            {
+                if (body is Switch || body is Pipe || body is Door) {
+                    backLayer.AddObject(body);
+                } else {
+                    mainLayer.AddObject(body);
+                }
+            }
+        }
+
+        /// <summary>
+        /// In this method you can add your objects, to the level,
+        /// which can not be added with the editor
+        /// </summary>
+        abstract protected void addLevelObjects();
+    }
+}

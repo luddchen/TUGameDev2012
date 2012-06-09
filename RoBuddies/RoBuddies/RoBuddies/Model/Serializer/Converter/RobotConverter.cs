@@ -59,8 +59,11 @@ namespace RoBuddies.Model.Serializer.Converter
             if (level != null && game != null && content != null)
             {
                 JToken tokens = JObject.ReadFrom(reader).SelectToken("Robot");
-                Vector2 pos = tokens.SelectToken("Position").ToObject<Vector2>();
-                robot = new Robot(content, pos, level, game);
+                if (tokens != null)
+                {
+                    Vector2 pos = tokens.SelectToken("Position").ToObject<Vector2>();
+                    robot = new Robot(content, pos, level, game);
+                }
             }
             else
             {

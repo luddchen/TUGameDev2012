@@ -26,7 +26,7 @@ namespace RoBuddies.Model.Serializer
         public LevelReader(Game game)
         {
             this.content = game.Content;
-            this.level = new Level(Vector2.Zero);
+            this.level = new Level();
             this.game = game;
         }
 

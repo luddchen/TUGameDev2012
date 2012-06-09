@@ -51,8 +51,8 @@ namespace RoBuddies.View
         public void Update(GameTime gameTime, Vector2 mousePos)
         {
             base.Update(gameTime);
-            this.xMouse.String = (int)(mousePos.X - 0.5f) + "";
-            this.yMouse.String = (int)(mousePos.Y - 0.5f)+ "";
+            this.xMouse.String = (int)Math.Round(mousePos.X) + "";
+            this.yMouse.String = (int)Math.Round(mousePos.Y) + "";
         }
 
     }
