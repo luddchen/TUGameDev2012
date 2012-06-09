@@ -9,9 +9,6 @@ using RoBuddies.Model.Objects;
 using RoBuddies.Utilities;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
-using FarseerPhysics.Factories;
-using RoBuddies.Control.StateMachines;
-using RoBuddies.Control.RobotStates;
 
 namespace RoBuddies.Control
 {

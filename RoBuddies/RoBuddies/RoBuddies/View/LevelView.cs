@@ -1,15 +1,8 @@
 ﻿
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using RoBuddies.Control;
-using RoBuddies.Control.RobotStates;
-using RoBuddies.Control.StateMachines;
 using RoBuddies.Model;
-using RoBuddies.Model.Objects;
-using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds;
 
 namespace RoBuddies.View

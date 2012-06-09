@@ -46,8 +46,20 @@ namespace RoBuddies.Model.Worlds
             this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath);
             this.Level.theme = levelTheme;
             addLevelObjects();
-            addLevelObjectsToLevel();            
+            addLevelObjectsToLevel();
+            addBackground();
         }
+
+        /// <summary>
+        /// In this method you can add your background stuff for the level.
+        /// </summary>
+        abstract protected void addBackground();
+
+        /// <summary>
+        /// In this method you can add your objects, to the level,
+        /// which can not be added with the editor
+        /// </summary>
+        abstract protected void addLevelObjects();
 
         /// <summary>
         /// adds the LevelObjects to the main or background layer
@@ -66,10 +78,5 @@ namespace RoBuddies.Model.Worlds
             }
         }
 
-        /// <summary>
-        /// In this method you can add your objects, to the level,
-        /// which can not be added with the editor
-        /// </summary>
-        abstract protected void addLevelObjects();
     }
 }

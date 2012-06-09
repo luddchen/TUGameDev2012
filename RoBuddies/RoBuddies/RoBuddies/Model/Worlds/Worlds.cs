@@ -39,7 +39,7 @@ namespace RoBuddies.Model.Worlds
         }
 
         /// <summary>
-        /// add here the levels of world 1. The order of adding is the order of playing the levels.
+        /// add here the levels of world 2. The order of adding is the order of playing the levels.
         /// </summary>
         private void addWorld2()
         {
@@ -47,7 +47,7 @@ namespace RoBuddies.Model.Worlds
         }
 
         /// <summary>
-        /// add here the levels of world 1. The order of adding is the order of playing the levels.
+        /// add here the levels of world 3. The order of adding is the order of playing the levels.
         /// </summary>
         private void addWorld3()
         {

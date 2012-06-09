@@ -163,6 +163,9 @@
     <Compile Include="Model\StaticObject.cs" />
     <Compile Include="Model\Worlds\World1\Level1_1.cs" />
     <Compile Include="Model\Worlds\World1\Level1_2.cs" />
+    <Compile Include="Model\Worlds\World1\World1Level.cs" />
+    <Compile Include="Model\Worlds\World2\World2Level.cs" />
+    <Compile Include="Model\Worlds\World3\World3Level.cs" />
     <Compile Include="Model\Worlds\WorldLevel.cs" />
     <Compile Include="Model\Worlds\Worlds.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -235,10 +238,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\Worlds\World2\" />
-    <Folder Include="Model\Worlds\World3\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\XNA Game Studio\Microsoft.Xna.GameStudio.targets" />
   <!--
