@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
 
@@ -6,39 +7,9 @@ namespace RoBuddies.Control.RobotStates
 {
     class WaitingState : AnimatedState
     {
-        public WaitingState(String name, Texture2D texture, StateMachine machine)
-            : base(name, texture, machine)
+        public WaitingState(String name, List<Texture2D> textureList, StateMachine machine)
+            : base(name, textureList, machine)
         {
-        }
-
-        public void ToJumping(JumpingState state)
-        {
-            StateMachine.CurrentState = state;
-        }
-
-        public void ToWalking(WalkingState state)
-        {
-            StateMachine.CurrentState = state;
-        }
-
-        public void ToPushing(PushingState state)
-        {
-            StateMachine.CurrentState = state;
-        }
-
-        public void ToPulling(PullingState state)
-        {
-            StateMachine.CurrentState = state;
-        }
-
-        public void ToSeperate(SeperateState state)
-        {
-            StateMachine.CurrentState = state;
-        }
-
-        public void ToClimbing(ClimbingState state)
-        {
-            StateMachine.CurrentState = state;
         }
     }
 }

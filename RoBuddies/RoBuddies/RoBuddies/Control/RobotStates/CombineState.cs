@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
 
@@ -6,8 +7,8 @@ namespace RoBuddies.Control.RobotStates
 {
     class CombineState : AnimatedState
     {
-        public CombineState(String name, Texture2D texture, StateMachine machine)
-            : base(name, texture, machine)
+        public CombineState(String name, List<Texture2D> textureList, StateMachine machine)
+            : base(name, textureList, machine)
         {
         }
 

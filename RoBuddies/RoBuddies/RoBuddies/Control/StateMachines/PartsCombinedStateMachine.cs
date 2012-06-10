@@ -11,21 +11,18 @@ using RoBuddies.Model;
 
 namespace RoBuddies.Control.StateMachines
 {
-    class PartsCombinedStateMachine : StateMachine, IPartsCombinedTransition
+    class PartsCombinedStateMachine : StateMachine
     {
         public const String WAIT_STATE = "WaitingState";
         public const String JUMP_STATE = "JumpState";
         public const String WALK_STATE = "WalkingState";
 
-        private const int START_WALKING = 5;
-        private const int STOP_WALKING = 24;
         private const int END_ANIMATION = 80;
 
         private KeyboardState oldState;
         private Robot robot;
         private ContentManager contentManager;
         private List<Texture2D> textureList;
-        private float currentTextureIndex;
 
         public PartsCombinedStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base(body)
@@ -40,6 +37,12 @@ namespace RoBuddies.Control.StateMachines
             }
 
             body.Texture = textureList[0];
+
+            AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
+            AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
+            AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
+
+            SwitchToState(WAIT_STATE);
         }
 
         public override void Update(GameTime gameTime)
@@ -48,7 +51,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
             {
-                ToJumping(CurrentState);
+                SwitchToState(JUMP_STATE);
             }
 
             if (newState.IsKeyDown(Keys.Left))
@@ -56,7 +59,11 @@ namespace RoBuddies.Control.StateMachines
                 SwitchToState(WALK_STATE);
                 (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.FlipHorizontally;
-                UpdateWalkAnimation(gameTime);
+            }
+
+            if (newState.IsKeyUp(Keys.Left))
+            {
+                SwitchToState(WAIT_STATE);
             }
 
             if (newState.IsKeyDown(Keys.Right))
@@ -64,62 +71,10 @@ namespace RoBuddies.Control.StateMachines
                 SwitchToState(WALK_STATE);
                 (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.None;
-                UpdateWalkAnimation(gameTime);
             }
 
+            CurrentState.Update(gameTime);
             oldState = newState;
         }
-
-        private void UpdateWalkAnimation(GameTime gameTime)
-        {
-            if (currentTextureIndex < START_WALKING)
-            {
-                currentTextureIndex = START_WALKING;
-            }
-
-            if (currentTextureIndex > STOP_WALKING)
-            {
-                currentTextureIndex = START_WALKING;
-            }
-
-            Body.Texture = textureList[(int) currentTextureIndex];
-            currentTextureIndex += 0.6f;
-        }
-
-        #region IPartsCombinedTransition Member
-
-        public void ToSeperated(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToJumping(State state)
-        {
-            Console.WriteLine("Jump PartsCombined!");
-            SwitchToState(JUMP_STATE);
-            ((Body)Body).ApplyForce(new Vector2(0, 1500));
-        }
-
-        public void ToPushing(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToPulling(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToWaiting(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ToWalking(State state)
-        {
-            throw new NotImplementedException();
-        }
-
-        #endregion
     }
 }

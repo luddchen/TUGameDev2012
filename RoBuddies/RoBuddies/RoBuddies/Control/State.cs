@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
 
@@ -18,6 +19,10 @@ namespace RoBuddies.Control
         public virtual void Enter()
         {
             this.StateMachine.Body.Texture = this.Texture;
+        }
+
+        public virtual void Update(GameTime gameTime)
+        {
         }
     }
 }

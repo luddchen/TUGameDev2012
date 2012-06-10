@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
 
@@ -6,19 +8,35 @@ namespace RoBuddies.Control.RobotStates
 {
     class WalkingState : AnimatedState
     {
-        public WalkingState(String name, Texture2D texture, StateMachine machine)
-            : base(name, texture, machine)
+        private const int START_WALKING = 5;
+        private const int STOP_WALKING = 24;
+
+        private float currentTextureIndex;
+
+        public WalkingState(String name, List<Texture2D> textureList, StateMachine machine)
+            : base(name, textureList, machine)
         {
         }
 
-        public void ToWaiting(WaitingState state)
+        public override void Update(GameTime gameTime)
         {
-            StateMachine.CurrentState = state;
+            UpdateWalkAnimation(gameTime);
         }
 
-        public void ToJumping(JumpingState state)
+        private void UpdateWalkAnimation(GameTime gameTime)
         {
-            StateMachine.CurrentState = state;
+            if (currentTextureIndex < START_WALKING)
+            {
+                currentTextureIndex = START_WALKING;
+            }
+
+            if (currentTextureIndex > STOP_WALKING)
+            {
+                currentTextureIndex = START_WALKING;
+            }
+
+            StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
+            currentTextureIndex += 0.6f;
         }
     }
 }

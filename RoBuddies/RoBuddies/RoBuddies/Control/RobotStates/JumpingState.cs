@@ -1,40 +1,44 @@
 using System;
+using System.Collections.Generic;
+using FarseerPhysics.Dynamics;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.RobotStates.Interfaces;
 using RoBuddies.Control.StateMachines;
 ﻿
 namespace RoBuddies.Control.RobotStates
 {
-    class JumpingState : AnimatedState, IPartsCombinedTransition
+    class JumpingState : AnimatedState
     {
-        public JumpingState(String name, Texture2D texture, StateMachine machine)
-            : base(name, texture, machine)
+        private const int START_JUMPING = 29;
+        private const int STOP_JUMPING = 38;
+
+        private float currentTextureIndex;
+
+        public JumpingState(String name, List<Texture2D> textureList, StateMachine machine)
+            : base(name, textureList, machine)
         {
         }
 
-        public void ToSeperated(State state)
+        public override void Enter()
         {
+            (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1500));
         }
 
-        public void ToJumping(State state)
+        public override void Update(GameTime gameTime)
         {
-            (StateMachine as PartsCombinedStateMachine).ToJumping(state);
-        }
+            if (currentTextureIndex < START_JUMPING)
+            {
+                currentTextureIndex = START_JUMPING;
+            }
 
-        public void ToPushing(State state)
-        {
-        }
+            if (currentTextureIndex > STOP_JUMPING)
+            {
+                currentTextureIndex = START_JUMPING;
+            }
 
-        public void ToPulling(State state)
-        {
-        }
-
-        public void ToWaiting(State state)
-        {
-        }
-
-        public void ToWalking(State state)
-        {
+            StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
+            currentTextureIndex += 0.6f;
         }
     }
 }
