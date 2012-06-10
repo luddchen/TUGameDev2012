@@ -14,7 +14,11 @@ namespace RoBuddies.Model.Worlds.World1
     /// </summary>
     abstract class World1Level : WorldLevel
     {
-
+        /// <summary>
+        /// Still abstract, but more concrete class of a specific level.
+        /// Here you can add e.g. specific background art, which apply to
+        /// all world 1 levels
+        /// </summary>
         public World1Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
