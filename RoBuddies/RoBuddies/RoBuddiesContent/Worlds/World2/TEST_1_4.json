@@ -1,0 +1,181 @@
+{
+  "Gravity": "0, -10",
+  "Layers": [
+    {
+      "Layer": {
+        "Name": "mainLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.5,
+        "Walls": [
+          {
+            "Wall": {
+              "Position": "-10, 8",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 11.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "2, 1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 35.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, 6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 11.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "15, -6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 17.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-5, -12",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 13.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "4, -12",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-11, -18",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 9.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, -24",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 11.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "4, -26",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 39.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-16, -14",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 25.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "24, -14",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 25.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-16, 7",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 17.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "24, 7",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 17.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "4, 15",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 39.0,
+                "Heigth": 1.0
+              }
+            }
+          }
+        ],
+        "Crates": [
+          {
+            "Crate": {
+              "Position": "-14, 4",
+              "Color": "222, 184, 135, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Crate": {
+              "Position": "8, -24",
+              "Color": "222, 184, 135, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 3.0
+              }
+            }
+          }
+        ],
+        "Pipes": [],
+        "Ladders": []
+      }
+    }
+  ],
+  "Robot": {
+    "Position": "-14, 10"
+  }
+}
