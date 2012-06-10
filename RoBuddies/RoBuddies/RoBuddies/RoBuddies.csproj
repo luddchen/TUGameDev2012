@@ -132,6 +132,7 @@
     <Compile Include="Control\StateMachines\HeadStateMachine.cs" />
     <Compile Include="Control\StateMachines\LowerPartStateMachine.cs" />
     <Compile Include="Control\StateMachines\PartsCombinedStateMachine.cs" />
+    <Compile Include="Control\StateMachines\RobotStateMachine.cs" />
     <Compile Include="Control\StateMachines\StateMachine.cs" />
     <Compile Include="Control\RobotStates\WalkingState.cs" />
     <Compile Include="Control\StateMachines\UpperPartStateMachine.cs" />

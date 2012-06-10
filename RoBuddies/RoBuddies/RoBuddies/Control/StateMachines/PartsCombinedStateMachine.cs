@@ -44,44 +44,30 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            if (robot.ActivePart == robot.PartsCombined)
+            KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
             {
-                KeyboardState newState = Keyboard.GetState();
-
-                if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
-                {
-                    ToJumping(CurrentState);
-                }
-
-                if (newState.IsKeyDown(Keys.Left))
-                {
-                    SwitchToState(WALK_STATE);
-                    (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
-                    Body.Effect = SpriteEffects.FlipHorizontally;
-                    UpdateWalkAnimation(gameTime);
-                }
-
-                if (newState.IsKeyDown(Keys.Right))
-                {
-                    SwitchToState(WALK_STATE);
-                    (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
-                    Body.Effect = SpriteEffects.None;
-                    UpdateWalkAnimation(gameTime);
-                }
-
-                if (newState.IsKeyDown(Keys.X) && oldState.IsKeyUp(Keys.X))
-                {
-                    robot.LowerPart.Position = robot.ActivePart.Position;
-                    robot.UpperPart.Position = robot.ActivePart.Position + new Vector2(0, 2);
-                    robot.LowerPart.IsVisible = true;
-                    robot.UpperPart.IsVisible = true;
-                    robot.ActivePart = robot.LowerPart;
-                    
-                    robot.PartsCombined.IsVisible = false;
-                }
-
-                oldState = newState;
+                ToJumping(CurrentState);
             }
+
+            if (newState.IsKeyDown(Keys.Left))
+            {
+                SwitchToState(WALK_STATE);
+                (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
+                Body.Effect = SpriteEffects.FlipHorizontally;
+                UpdateWalkAnimation(gameTime);
+            }
+
+            if (newState.IsKeyDown(Keys.Right))
+            {
+                SwitchToState(WALK_STATE);
+                (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
+                Body.Effect = SpriteEffects.None;
+                UpdateWalkAnimation(gameTime);
+            }
+
+            oldState = newState;
         }
 
         private void UpdateWalkAnimation(GameTime gameTime)
@@ -109,7 +95,7 @@ namespace RoBuddies.Control.StateMachines
 
         public void ToJumping(State state)
         {
-            Console.WriteLine("Jump!");
+            Console.WriteLine("Jump PartsCombined!");
             SwitchToState(JUMP_STATE);
             ((Body)Body).ApplyForce(new Vector2(0, 1500));
         }

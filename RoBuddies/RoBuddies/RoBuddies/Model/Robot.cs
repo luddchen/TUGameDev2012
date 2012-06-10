@@ -18,18 +18,50 @@ namespace RoBuddies.Model
     /// </summary>
     class Robot
     {
+        #region Members and Properties
+
         private PhysicObject lowerPart;
         private PhysicObject upperPart;
         private PhysicObject partsCombined;
         private PhysicObject head;
         private PhysicObject activePart;
 
-        private PartsCombinedStateMachine partsCombinedStateMachine;
-        private LowerPartStateMachine lowerPartStateMachine;
-        private UpperPartStateMachine upperPartStateMachine;
-        private HeadStateMachine headStateMachine;
-
+        private RobotStateMachine robotStateMachine;
         private Level level;
+
+        public PhysicObject LowerPart
+        {
+            get { return lowerPart; }
+        }
+
+        public PhysicObject UpperPart
+        {
+            get { return upperPart; }
+        }
+
+        public PhysicObject PartsCombined
+        {
+            get { return partsCombined; }
+        }
+
+        public PhysicObject Head
+        {
+            get { return head; }
+            set { head = value; }
+        }
+
+        public PhysicObject ActivePart
+        {
+            get { return activePart; }
+            set { activePart = value; }
+        }
+
+        public RobotStateMachine RobotStateMachine
+        {
+            get { return robotStateMachine; }
+        }
+
+        #endregion
 
         public Robot(ContentManager content, Vector2 pos, Level level, Game game) 
         {
@@ -51,7 +83,10 @@ namespace RoBuddies.Model
 
             this.head = new PhysicObject(this.level);
            
-            headStateMachine = new HeadStateMachine(head, content, this);
+            //headStateMachine = new HeadStateMachine(head, content, this);
+
+            this.robotStateMachine = new RobotStateMachine(activePart, content, this);
+            this.level.AddStateMachine(robotStateMachine);
 
             this.partsCombined.IsVisible = true;
             this.partsCombined.IgnoreCollisionWith(this.upperPart);
@@ -81,13 +116,6 @@ namespace RoBuddies.Model
             lowerPart.Width = 3;
             lowerPart.Height = 1.8f;
 
-            lowerPartStateMachine = new LowerPartStateMachine(lowerPart, content, this);
-            State lowerWaitingState = new WaitingState(LowerPartStateMachine.WAIT_STATE, lowerWaitTex, lowerPartStateMachine);
-
-            lowerPartStateMachine.AllStates.Add(lowerWaitingState);
-            lowerPartStateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
-
-            this.level.AddStateMachine(lowerPartStateMachine);
             this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
         }
 
@@ -107,17 +135,6 @@ namespace RoBuddies.Model
             partsCombined.Width = 3;
             partsCombined.Height = 3;
 
-            partsCombinedStateMachine = new PartsCombinedStateMachine(partsCombined, content, this);
-            State waitingState = new WaitingState(PartsCombinedStateMachine.WAIT_STATE, waitTex, partsCombinedStateMachine);
-            State jumpState = new JumpingState(PartsCombinedStateMachine.JUMP_STATE, jumpTex, partsCombinedStateMachine);
-            State walkingState = new WaitingState(PartsCombinedStateMachine.WALK_STATE, waitTex, partsCombinedStateMachine);
-
-            partsCombinedStateMachine.AllStates.Add(waitingState);
-            partsCombinedStateMachine.AllStates.Add(jumpState);
-            partsCombinedStateMachine.AllStates.Add(walkingState);
-            partsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
-
-            this.level.AddStateMachine(partsCombinedStateMachine);
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
         }
 
@@ -135,62 +152,7 @@ namespace RoBuddies.Model
             upperPart.Width = 5;
             upperPart.Height = 3.7f;
 
-            upperPartStateMachine = new UpperPartStateMachine(upperPart, content, this);
-
-            State upperWaitState = new WaitingState(UpperPartStateMachine.WAIT_STATE, upperWaitTex, upperPartStateMachine);
-
-            upperPartStateMachine.AllStates.Add(upperWaitState);
-            upperPartStateMachine.SwitchToState(UpperPartStateMachine.WAIT_STATE);
-
-            this.level.AddStateMachine(upperPartStateMachine);
             this.level.GetLayerByName("mainLayer").AddObject(this.upperPart);
-        }
-
-        public PhysicObject LowerPart 
-        {
-            get { return lowerPart; }
-        }
-
-        public PhysicObject UpperPart 
-        {
-            get { return upperPart; }
-        }
-
-        public PhysicObject PartsCombined
-        {
-            get { return partsCombined; }
-        }
-
-        public PhysicObject Head 
-        {
-            get { return head; }
-            set { head = value; }
-        }
-
-        public PhysicObject ActivePart
-        {
-            get { return activePart; }
-            set { activePart = value; }
-        }
-
-        public PartsCombinedStateMachine PartsCombinedStateMachine
-        {
-            get { return partsCombinedStateMachine; }
-        }
-
-        public HeadStateMachine HeadStateMachine
-        {
-            get { return headStateMachine; }
-        }
-
-        public LowerPartStateMachine LowerPartStateMachine
-        {
-            get { return lowerPartStateMachine; }
-        }
-
-        public UpperPartStateMachine UpperPartStateMachine
-        {
-            get { return upperPartStateMachine; }
         }
 
         public void Update() 
