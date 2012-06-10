@@ -24,11 +24,7 @@ namespace RoBuddies.Model.Worlds.World1
             StaticObject background;
             for (int i = -2; i < 3; i++)
             {
-                background = new StaticObject();
-                background.Texture = backgroundTexture;
-                background.Width = 10;
-                background.Height = 5;
-                background.Position = new Vector2(i * background.Width, 0.1f);
+                background = new StaticObject(backgroundTexture, new Vector2(i * 10, 0.1f), 10, 5, Color.White, 0);
                 farAwayLayer.AddObject(background);
             }
 
@@ -38,11 +34,7 @@ namespace RoBuddies.Model.Worlds.World1
             StaticObject crate;
             for (int i = -2; i < 3; i++)
             {
-                crate = new StaticObject();
-                crate.Texture = crateTexture;
-                crate.Width = 1;
-                crate.Height = 1;
-                crate.Position = new Vector2(i * crate.Width * 5, -1f);
+                crate = new StaticObject(crateTexture, new Vector2(i * 5, -1f), 1, 1, Color.White, 0);
                 notSoFarAwayLayer.AddObject(crate);
             }
         }
