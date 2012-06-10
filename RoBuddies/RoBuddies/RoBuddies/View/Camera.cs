@@ -2,6 +2,9 @@
 
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Model;
+using RoBuddies.Utilities;
+using System.Collections.Generic;
 
 namespace RoBuddies.View
 {
@@ -9,7 +12,7 @@ namespace RoBuddies.View
     /// <summary>
     /// representation of a global camera
     /// </summary>
-    public class Camera
+    class Camera
     {
         private Viewport viewport;
         private float zoom;
@@ -104,7 +107,7 @@ namespace RoBuddies.View
         }
 
         /// <summary>
-        /// Transforms a world position int the screen position of a layer
+        /// Transforms a world position into the screen position of a layer
         /// </summary>
         /// <param name="worldPosition">the world position which will be transformed</param>
         /// <param name="parallax">the parallax of the layer</param>
@@ -181,6 +184,7 @@ namespace RoBuddies.View
                     //this.position = this.targetPosition;
                 }
             }
+            Console.Out.WriteLine(this.zoom);
         }
 
         /// <summary>
@@ -207,6 +211,33 @@ namespace RoBuddies.View
         public void ClearBoundingBox()
         {
             this.useBoundingBox = false;
+        }
+
+        /// <summary>
+        /// This method calculates and set the bounds for the camera
+        /// of the main and back layer of a level.
+        /// </summary>
+        /// <param name="level">the level which camera bounds will be calculated</param>
+        public void SetBoundingBox(Level level) {
+            float viewWidth = viewport.Width / (2 * zoom);
+            float viewHeight = viewport.Height / (2 * zoom);
+            Rectangle bounds = new Rectangle(int.MaxValue, int.MaxValue, 0, 0);
+            List<Layer> layers = new List<Layer>();
+            layers.Add(level.GetLayerByName("mainLayer"));
+            layers.Add(level.GetLayerByName("backLayer"));
+            foreach (Layer layer in layers)
+            {
+                foreach (IBody body in layer.AllObjects)
+                {
+                    float bodyWidth = body.Width / 2;
+                    float bodyHeight = body.Height / 2;
+                    bounds.X = (int)Math.Min(bounds.X, ConvertUnits.ToDisplayUnits(body.Position.X - bodyWidth) + viewWidth);
+                    bounds.Y = (int)Math.Min(bounds.Y, ConvertUnits.ToDisplayUnits(-body.Position.Y - bodyHeight) + viewHeight);
+                    bounds.Width = (int)Math.Max(bounds.Width, Math.Abs(bounds.X - ConvertUnits.ToDisplayUnits(body.Position.X + bodyWidth)) - viewWidth);
+                    bounds.Height = (int)Math.Max(bounds.Height, Math.Abs(bounds.Y - ConvertUnits.ToDisplayUnits(-body.Position.Y + bodyHeight)) - viewHeight);
+                }
+            }
+            this.SetBoundingBox(bounds);
         }
     }
 }

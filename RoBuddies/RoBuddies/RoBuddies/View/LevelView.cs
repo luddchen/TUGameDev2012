@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Worlds;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
@@ -23,24 +24,37 @@ namespace RoBuddies.View
             {
                 this.HUD.Viewport = this.viewport;
             }
+            if (this.Camera != null)
+            {
+                this.Camera.SetBoundingBox(this.Level);
+            }
         }
 
         public LevelView(RoBuddies game) : base(game)
         {
             this.HUD = new LevelHUD(game);
             this.Camera.SmoothMove = true;
-            // TODO: calculate level bounds
-            //this.Camera.SetBoundingBox( new Rectangle(400, 100, 600, 100) );
-            //this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//back_1");
 
             this.worlds = new Worlds(game);
 
-            this.Level = this.worlds.getNextLevel();
+            viewNextLevel();
 
             this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
 
             this.Level.ClearForces();
             this.SnapShot.MakeSnapshot();
+        }
+
+        /// <summary>
+        /// sets the view to the next level
+        /// </summary>
+        private void viewNextLevel()
+        {
+            Level nextLevel = this.worlds.getNextLevel();
+            if (nextLevel != null)
+            {
+                this.Level = nextLevel;
+            }            
         }
 
         public override void Update(GameTime gameTime)
@@ -49,11 +63,8 @@ namespace RoBuddies.View
 
             if (this.Level.finished) // load next level, when current level is finished
             {
-                Level nextLevel = this.worlds.getNextLevel();
-                if (nextLevel != null)
-                {
-                    this.Level = nextLevel;
-                }
+                viewNextLevel();
+                this.Camera.SetBoundingBox(this.Level);
             }
 
             this.Level.Update(gameTime);    // taken from HUDLevelView because editor need no level update
@@ -66,13 +77,6 @@ namespace RoBuddies.View
             }
 
             KeyboardState newKeyboardState = Keyboard.GetState();
-
-            // this is very dirty and won't work in the real game:
-            // TODO: overwork the door logic
-            //if (newKeyboardState.IsKeyDown(Keys.C) && oldKeyboardState.IsKeyUp(Keys.C))
-            //{
-            //    doorSwitcher.Activate();
-            //}
 
             if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
             {
