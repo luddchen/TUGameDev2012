@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using RoBuddies.Model.Worlds.World1;
+using RoBuddies.Model.Worlds.World2;
 using Microsoft.Xna.Framework;
 
 namespace RoBuddies.Model.Worlds
@@ -36,6 +37,7 @@ namespace RoBuddies.Model.Worlds
         {
             worlds.Enqueue(new Level1_1(this.game));
             worlds.Enqueue(new Level1_2(this.game));
+
         }
 
         /// <summary>
@@ -43,7 +45,7 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld2()
         {
-
+            //worlds.Enqueue(new Level2_1(this.game));
         }
 
         /// <summary>
