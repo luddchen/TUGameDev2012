@@ -17,7 +17,7 @@ namespace RoBuddies.View
 
         public override void OnViewPortResize()
         {
-            this.viewport.Y = -1 + this.viewport.Height - this.HUD_height;
+            this.viewport.Y = 0; //for botton use: -1 + this.viewport.Height - this.HUD_height;
             this.viewport.X = this.viewport.Width/2 - this.HUD_width/2;
             this.viewport.Height = this.HUD_height;
             this.viewport.Width = this.HUD_width;
