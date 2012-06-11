@@ -85,5 +85,18 @@ namespace RoBuddies.Model.Snapshot
             }
         }
 
+        /// <summary>
+        /// clean up all references
+        /// </summary>
+        public void Release()
+        {
+            foreach (KeyFrame keyframe in this.AllKeyFrames)
+            {
+                keyframe.Release();
+            }
+            this.AllKeyFrames.Clear();
+            this.BodyList.Clear();
+        }
+
     }
 }

@@ -22,5 +22,10 @@ namespace RoBuddies.Model.Snapshot
             this.Body.Rotation = this.Rotation;
         }
 
+        public void Release()
+        {
+            this.Body = null;
+        }
+
     }
 }

@@ -48,6 +48,10 @@ namespace RoBuddies.View
             Level nextLevel = this.worlds.getNextLevel();
             if (nextLevel != null)
             {
+                if (this.SnapShot != null)
+                {
+                    this.SnapShot.Release();
+                }
                 this.Level = nextLevel;
                 this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
                 this.Level.ClearForces();

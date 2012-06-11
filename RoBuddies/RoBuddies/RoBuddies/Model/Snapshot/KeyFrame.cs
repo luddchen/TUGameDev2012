@@ -26,6 +26,10 @@ namespace RoBuddies.Model.Snapshot
 
         public void Release()
         {
+            foreach (BodyKeyFrame bodyKeyFrame in this.AllBodyKeyFrames)
+            {
+                bodyKeyFrame.Release();
+            }
             this.AllBodyKeyFrames.Clear();
         }
 
