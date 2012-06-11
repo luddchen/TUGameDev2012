@@ -22,7 +22,7 @@ namespace RoBuddies.Model.Worlds.World1
         public World1Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
- Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.5f, 0.1f), 0.9f);
+            Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.5f, 0.1f), 0.9f);
             this.Level.AddLayer(farAwayLayer);
             Texture2D backgroundTexture = game.Content.Load<Texture2D>("Sprites//Menu//back_1");
             StaticObject background;

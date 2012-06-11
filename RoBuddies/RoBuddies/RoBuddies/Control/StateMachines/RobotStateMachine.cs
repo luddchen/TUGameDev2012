@@ -14,6 +14,8 @@ namespace RoBuddies.Control.StateMachines
         public const String JUMP_STATE = "JumpState";
         public const String WALK_STATE = "WalkingState";
 
+        private const float SHOOTING_FORCE = 1000;
+
         private StateMachine mActiveStateMachine;
         private HeadStateMachine mHeadStateMachine;
         private PartsCombinedStateMachine mPartsCombinedStateMachine;
@@ -75,9 +77,10 @@ namespace RoBuddies.Control.StateMachines
                     mRobot.UpperPart.Position = mRobot.ActivePart.Position;
                     mRobot.LowerPart.Position = mRobot.ActivePart.Position;
                     setCombined(false);
+                    mRobot.UpperPart.ApplyForce(new Vector2(0, SHOOTING_FORCE));
                     mRobot.ActivePart = mRobot.UpperPart;
                 }
-                else
+                else if (canCombine())
                 {
                     mActiveStateMachine = mPartsCombinedStateMachine;
                     mRobot.PartsCombined.Position = mRobot.ActivePart.Position;
@@ -102,6 +105,20 @@ namespace RoBuddies.Control.StateMachines
 
             mOldState = newState;
             mActiveStateMachine.Update(gameTime);
+        }
+
+        /// <summary>
+        /// This method calculates the distance between the upper and lower part 
+        /// and calculates if they are able to combine.
+        /// </summary>
+        /// <returns>returns true if the parts are near enough to combine</returns>
+        private bool canCombine()
+        {
+            bool canCombine = false;
+            if (Vector2.Distance(mRobot.UpperPart.Position, mRobot.LowerPart.Position) < 1) {
+                canCombine = true;
+            }
+            return canCombine;
         }
 
         private void setCombined(bool isCombined)
