@@ -1186,20 +1186,20 @@
       <Name>LEVEL1_2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Worlds\World2\LEVEL_2_1.json">
-      <Name>LEVEL_2_1</Name>
+    <None Include="Worlds\World2\LEVEL2_1.json">
+      <Name>LEVEL2_1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Worlds\World2\LEVEL_2_2.json">
-      <Name>LEVEL_2_2</Name>
+    <None Include="Worlds\World2\LEVEL2_2.json">
+      <Name>LEVEL2_2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Worlds\World2\LEVEL_2_3.json">
-      <Name>LEVEL_2_3</Name>
+    <None Include="Worlds\World2\LEVEL2_3.json">
+      <Name>LEVEL2_3</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="Worlds\World2\LEVEL_2_4.json">
-      <Name>LEVEL_2_4</Name>
+    <None Include="Worlds\World2\LEVEL2_4.json">
+      <Name>LEVEL2_4</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

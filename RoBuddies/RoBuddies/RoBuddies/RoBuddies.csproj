@@ -179,6 +179,7 @@
     <Compile Include="RoBuddies.cs" />
     <Compile Include="Model\Serializer\LevelWriter.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
+    <Compile Include="Utilities\RayCastUtility.cs" />
     <Compile Include="Utilities\TextureConverter.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\EditorHUD.cs" />

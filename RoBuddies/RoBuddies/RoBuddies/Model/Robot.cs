@@ -61,6 +61,11 @@ namespace RoBuddies.Model
             get { return robotStateMachine; }
         }
 
+        public Level Level
+        {
+            get { return level; }
+        }
+
         #endregion
 
         public Robot(ContentManager content, Vector2 pos, Level level, Game game) 

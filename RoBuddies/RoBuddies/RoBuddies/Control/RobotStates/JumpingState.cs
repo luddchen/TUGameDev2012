@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using RoBuddies.Control.RobotStates.Interfaces;
 using RoBuddies.Control.StateMachines;
 ﻿
 namespace RoBuddies.Control.RobotStates

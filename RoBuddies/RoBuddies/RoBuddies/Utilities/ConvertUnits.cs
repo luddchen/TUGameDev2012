@@ -31,12 +31,6 @@ namespace RoBuddies.Utilities
             return new Vector2(simUnits.X, -simUnits.Y) * _displayUnitsToSimUnitsRatio;
         }
 
-        // TODO: y should be multiplied with -1
-        public static void ToDisplayUnits(ref Vector2 simUnits, out Vector2 displayUnits)
-        {
-            Vector2.Multiply(ref simUnits, _displayUnitsToSimUnitsRatio, out displayUnits);
-        }
-
         public static Vector3 ToDisplayUnits(Vector3 simUnits)
         {
             return new Vector3(simUnits.X, -simUnits.Y, simUnits.Z) * _displayUnitsToSimUnitsRatio;
@@ -77,12 +71,6 @@ namespace RoBuddies.Utilities
         public static Vector3 ToSimUnits(Vector3 displayUnits)
         {
             return new Vector3(displayUnits.X, -displayUnits.Y, displayUnits.Z) * _simUnitsToDisplayUnitsRatio;
-        }
-
-        // TODO: y should be multiplied with -1
-        public static void ToSimUnits(ref Vector2 displayUnits, out Vector2 simUnits)
-        {
-            Vector2.Multiply(ref displayUnits, _simUnitsToDisplayUnitsRatio, out simUnits);
         }
 
         public static Vector2 ToSimUnits(float x, float y)
