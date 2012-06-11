@@ -28,7 +28,16 @@ namespace RoBuddies.Model.Objects
         public Wall(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchAble)
             : base(level)
         {
-            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//Crate");
+            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//WallTest");
+            if (size.X > 1)
+            {
+                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(size.X - 2));
+            }
+            if (size.Y > 1)
+            {
+                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(size.Y - 2));
+            }
+
             defineTextures(wallTex, wallTex, wallTex);
 
             this.Position = pos;
