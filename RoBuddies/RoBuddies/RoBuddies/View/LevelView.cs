@@ -38,11 +38,6 @@ namespace RoBuddies.View
             this.worlds = new Worlds(game);
 
             viewNextLevel();
-
-            this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
-
-            this.Level.ClearForces();
-            this.SnapShot.MakeSnapshot();
         }
 
         /// <summary>
@@ -54,6 +49,9 @@ namespace RoBuddies.View
             if (nextLevel != null)
             {
                 this.Level = nextLevel;
+                this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
+                this.Level.ClearForces();
+                this.SnapShot.MakeSnapshot();
             }            
         }
 
