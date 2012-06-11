@@ -16,7 +16,7 @@ namespace RoBuddies.Model.Worlds.World2
     /// </summary>
     class Level2_1 : World2Level
     {
-        private const string LEVEL_PATH = "Worlds\\World2\\TEST_1_1.json";
+        private const string LEVEL_PATH = "Worlds\\World2\\LEVEL_2_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
 
         public Level2_1(Game game)

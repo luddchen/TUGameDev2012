@@ -45,7 +45,7 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld2()
         {
-            //worlds.Enqueue(new Level2_1(this.game));
+            worlds.Enqueue(new Level2_1(this.game));
         }
 
         /// <summary>

@@ -184,7 +184,6 @@ namespace RoBuddies.View
                     //this.position = this.targetPosition;
                 }
             }
-            Console.Out.WriteLine(this.zoom);
         }
 
         /// <summary>
