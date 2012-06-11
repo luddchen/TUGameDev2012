@@ -226,14 +226,17 @@ namespace RoBuddies.View
             layers.Add(level.GetLayerByName("backLayer"));
             foreach (Layer layer in layers)
             {
-                foreach (IBody body in layer.AllObjects)
+                if (layer != null)
                 {
-                    float bodyWidth = body.Width / 2;
-                    float bodyHeight = body.Height / 2;
-                    bounds.X = (int)Math.Min(bounds.X, ConvertUnits.ToDisplayUnits(body.Position.X - bodyWidth) + viewWidth);
-                    bounds.Y = (int)Math.Min(bounds.Y, ConvertUnits.ToDisplayUnits(-body.Position.Y - bodyHeight) + viewHeight);
-                    bounds.Width = (int)Math.Max(bounds.Width, Math.Abs(bounds.X - ConvertUnits.ToDisplayUnits(body.Position.X + bodyWidth)) - viewWidth);
-                    bounds.Height = (int)Math.Max(bounds.Height, Math.Abs(bounds.Y - ConvertUnits.ToDisplayUnits(-body.Position.Y + bodyHeight)) - viewHeight);
+                    foreach (IBody body in layer.AllObjects)
+                    {
+                        float bodyWidth = body.Width / 2;
+                        float bodyHeight = body.Height / 2;
+                        bounds.X = (int)Math.Min(bounds.X, ConvertUnits.ToDisplayUnits(body.Position.X - bodyWidth) + viewWidth);
+                        bounds.Y = (int)Math.Min(bounds.Y, ConvertUnits.ToDisplayUnits(-body.Position.Y - bodyHeight) + viewHeight);
+                        bounds.Width = (int)Math.Max(bounds.Width, Math.Abs(bounds.X - ConvertUnits.ToDisplayUnits(body.Position.X + bodyWidth)) - viewWidth);
+                        bounds.Height = (int)Math.Max(bounds.Height, Math.Abs(bounds.Y - ConvertUnits.ToDisplayUnits(-body.Position.Y + bodyHeight)) - viewHeight);
+                    }
                 }
             }
             this.SetBoundingBox(bounds);
