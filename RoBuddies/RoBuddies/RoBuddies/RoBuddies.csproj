@@ -119,7 +119,8 @@
     <Compile Include="Control\Editor\KeyboardController.cs" />
     <Compile Include="Control\ExampleState.cs" />
     <Compile Include="Control\Editor\MouseController.cs" />
-    <Compile Include="Control\RobotStates\ClimbingState.cs" />
+    <Compile Include="Control\RobotStates\LadderClimbingState.cs" />
+    <Compile Include="Control\RobotStates\PipeClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />
     <Compile Include="Control\RobotStates\FallingState.cs" />
     <Compile Include="Control\RobotStates\Interfaces\IHeadTransition.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Control\RobotStates\PullingState.cs" />
     <Compile Include="Control\RobotStates\PushingState.cs" />
     <Compile Include="Control\RobotStates\SeperateState.cs" />
+    <Compile Include="Control\RobotStates\ShootingState.cs" />
     <Compile Include="Control\RobotStates\WaitingState.cs" />
     <Compile Include="Control\State.cs" />
     <Compile Include="Control\StateMachines\ExampleStateMachine.cs" />

@@ -14,8 +14,6 @@ namespace RoBuddies.Control.StateMachines
         public const String JUMP_STATE = "JumpState";
         public const String WALK_STATE = "WalkingState";
 
-        private const float SHOOTING_FORCE = 1000;
-
         private StateMachine mActiveStateMachine;
         private HeadStateMachine mHeadStateMachine;
         private PartsCombinedStateMachine mPartsCombinedStateMachine;
@@ -77,7 +75,7 @@ namespace RoBuddies.Control.StateMachines
                     mRobot.UpperPart.Position = mRobot.ActivePart.Position;
                     mRobot.LowerPart.Position = mRobot.ActivePart.Position;
                     setCombined(false);
-                    mRobot.UpperPart.ApplyForce(new Vector2(0, SHOOTING_FORCE));
+                    mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                     mRobot.ActivePart = mRobot.UpperPart;
                 }
                 else if (canCombine())

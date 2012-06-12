@@ -12,14 +12,6 @@ namespace RoBuddies.Control.RobotStates
         {
         }
 
-        public void ToCombine(CombineState state)
-        {
-            StateMachine.CurrentState = state;
-        }
 
-        public void ToWaiting(WaitingState state)
-        {
-            StateMachine.CurrentState = state;
-        }
     }
 }
