@@ -85,7 +85,7 @@ namespace RoBuddies.Control.StateMachines
         private bool isOnGround()
         {
             Vector2 lowerPartPos = robot.LowerPart.Position;
-            float rayEnd = lowerPartPos.Y - robot.UpperPart.Height / 2;
+            float rayEnd = lowerPartPos.Y - robot.LowerPart.Height / 2;
             bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, lowerPartPos, new Vector2(lowerPartPos.X, rayEnd));
             return isOnGround;
         }

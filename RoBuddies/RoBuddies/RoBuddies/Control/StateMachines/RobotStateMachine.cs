@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -49,6 +50,11 @@ namespace RoBuddies.Control.StateMachines
             get { return mLowerPartStateMachine; }
         }
 
+        public Level Level
+        {
+            get { return this.mRobot.Level; }
+        }
+
         #endregion
 
         public RobotStateMachine(IBody body, ContentManager content, Robot robot)
@@ -72,8 +78,8 @@ namespace RoBuddies.Control.StateMachines
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
                     mActiveStateMachine = mUpperPartStateMachine;
-                    mRobot.UpperPart.Position = mRobot.ActivePart.Position;
-                    mRobot.LowerPart.Position = mRobot.ActivePart.Position;
+                    mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
+                    mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, findGroundY() + mRobot.LowerPart.Height / 2);
                     setCombined(false);
                     mRobot.ActivePart = mRobot.UpperPart;
                     mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
@@ -81,7 +87,7 @@ namespace RoBuddies.Control.StateMachines
                 else if (canCombine())
                 {
                     mActiveStateMachine = mPartsCombinedStateMachine;
-                    mRobot.PartsCombined.Position = mRobot.ActivePart.Position;
+                    mRobot.PartsCombined.Position = new Vector2(mRobot.UpperPart.Position.X, findGroundY() + mRobot.PartsCombined.Height / 2);
                     setCombined(true);
                     mRobot.ActivePart = mRobot.PartsCombined;
                 }
@@ -106,6 +112,24 @@ namespace RoBuddies.Control.StateMachines
         }
 
         /// <summary>
+        /// this methods finds the y value of the ground straight below the robot
+        /// </summary>
+        /// <returns>the y value of the ground straight below</returns>
+        private float findGroundY()
+        {
+            float groundY = 0;
+            Vector2 upperPartPos = mRobot.PartsCombined.Position;
+            float rayEnd = -float.MaxValue;
+            FarseerPhysics.Dynamics.Body groundObj = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
+            if (groundObj != null && groundObj is PhysicObject)
+            {
+                PhysicObject phyObj = (PhysicObject)groundObj;
+                groundY = phyObj.Position.Y + phyObj.Height / 2;
+            }
+            return groundY;
+        }
+
+        /// <summary>
         /// This method calculates the distance between the upper and lower part 
         /// and calculates if they are able to combine.
         /// </summary>
@@ -113,7 +137,8 @@ namespace RoBuddies.Control.StateMachines
         private bool canCombine()
         {
             bool canCombine = false;
-            if (Vector2.Distance(mRobot.UpperPart.Position, mRobot.LowerPart.Position) < 1) {
+            if (Vector2.Distance(mRobot.UpperPart.Position, mRobot.LowerPart.Position) < 1)
+            {
                 canCombine = true;
             }
             return canCombine;
