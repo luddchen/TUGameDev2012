@@ -26,6 +26,11 @@ namespace RoBuddies.Control.StateMachines
         private Robot robot;
         private List<Texture2D> textureList;
 
+        public Level Level
+        {
+            get { return robot.Level; }
+        }
+
         public UpperPartStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base(body)
         {
@@ -42,7 +47,7 @@ namespace RoBuddies.Control.StateMachines
 
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new ShootingState(SHOOTING_STATE, textureList, this));
-            AllStates.Add(new PipeClimbingState(PIPE_CLIMBING_STATE, textureList, this));
+            AllStates.Add(new PipeClimbingState(PIPE_CLIMBING_STATE, textureList, Level, this));
 
             SwitchToState(WAIT_STATE);
         }
@@ -76,7 +81,7 @@ namespace RoBuddies.Control.StateMachines
         {
             Vector2 upperPartPos = robot.UpperPart.Position;
             float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 2 - 0.5f;
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(robot.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
+            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
             bool hitsPipe = intersectingObject is Pipe;
             return hitsPipe;
         }

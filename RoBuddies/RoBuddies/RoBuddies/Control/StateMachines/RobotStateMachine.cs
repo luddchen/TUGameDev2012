@@ -75,8 +75,8 @@ namespace RoBuddies.Control.StateMachines
                     mRobot.UpperPart.Position = mRobot.ActivePart.Position;
                     mRobot.LowerPart.Position = mRobot.ActivePart.Position;
                     setCombined(false);
-                    mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                     mRobot.ActivePart = mRobot.UpperPart;
+                    mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                 }
                 else if (canCombine())
                 {
