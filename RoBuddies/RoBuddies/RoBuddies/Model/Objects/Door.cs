@@ -41,10 +41,7 @@ namespace RoBuddies.Model.Objects
             this.BodyType = BodyType.Static;
             
             this.Friction = 10f;
-            FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this);
-
-            //this.CollisionCategories = Category.Cat1;
-            //this.CollidesWith = Category.None;
+            //FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this); // I believe it's better if the player can walk in front of the door (thomas)
         }
 
         /// <summary>

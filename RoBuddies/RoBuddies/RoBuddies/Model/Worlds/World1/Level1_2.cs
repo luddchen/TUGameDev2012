@@ -24,7 +24,8 @@ namespace RoBuddies.Model.Worlds.World1
 
         protected override void addLevelObjects()
         {
-
+            Door door = new Door(new Vector2(22f, 0f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
+            levelObjects.Add(door);
         }
     }
 }

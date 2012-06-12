@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
 using RoBuddies.Utilities;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -78,8 +79,35 @@ namespace RoBuddies.Control.StateMachines
                 Body.Effect = SpriteEffects.None;
             }
 
+            if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
+            {
+                Level.finished = true;
+            }
+
+
+
             CurrentState.Update(gameTime);
             oldState = newState;
+        }
+
+        /// <summary>
+        /// Checks if the robot is next to the level ending door and can open it
+        /// </summary>
+        /// <returns>true if the robot can open the level ending door</returns>
+        private bool canOpenLevelEndingDoor()
+        {
+            bool canOpenLevelEndingDoor = false;
+            Layer backLayer = Level.GetLayerByName("backLayer");
+            foreach (IBody body in backLayer.AllObjects) {
+                if (body is Door)
+                {
+                    Door door = (Door)body;
+                    if (Vector2.Distance(robot.PartsCombined.Position, door.Position) < 1) { // TODO: check also if door isn't locked!
+                        canOpenLevelEndingDoor = true;
+                    }
+                }
+            }
+            return canOpenLevelEndingDoor;
         }
 
         private bool isOnGround()
