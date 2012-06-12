@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -22,6 +23,11 @@ namespace RoBuddies.Control.StateMachines
         private Robot robot;
         private ContentManager contentManager;
         private List<Texture2D> textureList;
+
+        public Level Level
+        {
+            get { return robot.Level; }
+        }
 
         public PartsCombinedStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base(body)
@@ -48,7 +54,7 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
+            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
@@ -74,6 +80,14 @@ namespace RoBuddies.Control.StateMachines
 
             CurrentState.Update(gameTime);
             oldState = newState;
+        }
+
+        private bool isOnGround()
+        {
+            Vector2 combinedPartPos = robot.PartsCombined.Position;
+            float rayEnd = combinedPartPos.Y - robot.UpperPart.Height / 2;
+            bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
+            return isOnGround;
         }
     }
 }

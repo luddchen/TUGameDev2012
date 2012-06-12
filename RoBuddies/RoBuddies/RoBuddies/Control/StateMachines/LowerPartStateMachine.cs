@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
+using RoBuddies.Utilities;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -26,7 +28,13 @@ namespace RoBuddies.Control.StateMachines
         private ContentManager contentManager;
         private List<Texture2D> textureList;
         private Robot robot;
+        private Level level;
         private float currentTextureIndex;
+
+        public Level Level
+        {
+            get { return robot.Level; }
+        }
 
         #endregion
 
@@ -49,7 +57,7 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState))
+            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
             {
                 ToJumping(CurrentState);
             }
@@ -73,6 +81,14 @@ namespace RoBuddies.Control.StateMachines
             }
 
             oldState = newState;
+        }
+
+        private bool isOnGround()
+        {
+            Vector2 lowerPartPos = robot.LowerPart.Position;
+            float rayEnd = lowerPartPos.Y - robot.UpperPart.Height / 2;
+            bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, lowerPartPos, new Vector2(lowerPartPos.X, rayEnd));
+            return isOnGround;
         }
 
         private void UpdateWalkAnimation(GameTime gameTime)
