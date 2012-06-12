@@ -73,6 +73,11 @@ namespace RoBuddies.Control.StateMachines
                 Body.Effect = SpriteEffects.None;
             }
 
+            if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Space))
+            {
+                SwitchToState(WAIT_STATE); // TODO: falling state for the lower part
+            }
+
             CurrentState.Update(gameTime);
             oldState = newState;
         }

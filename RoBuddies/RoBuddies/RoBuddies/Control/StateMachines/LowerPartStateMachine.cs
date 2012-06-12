@@ -28,7 +28,6 @@ namespace RoBuddies.Control.StateMachines
         private ContentManager contentManager;
         private List<Texture2D> textureList;
         private Robot robot;
-        private Level level;
         private float currentTextureIndex;
 
         public Level Level

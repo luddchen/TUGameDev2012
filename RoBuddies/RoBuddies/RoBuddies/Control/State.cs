@@ -21,6 +21,14 @@ namespace RoBuddies.Control
             this.StateMachine.Body.Texture = this.Texture;
         }
 
+        /// <summary>
+        /// will be called evertime this state is exited
+        /// </summary>
+        public virtual void Exit()
+        {
+
+        }
+
         public virtual void Update(GameTime gameTime)
         {
         }

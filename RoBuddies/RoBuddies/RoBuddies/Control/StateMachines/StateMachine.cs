@@ -37,6 +37,10 @@ namespace RoBuddies.Control.StateMachines
         /// <param name="state">the new state</param>
         public void SwitchToState(State state)
         {
+            if (CurrentState != null)
+            {
+                CurrentState.Exit();
+            }
             CurrentState = state;
             state.Enter();
         }
@@ -52,6 +56,10 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (state.Name == stateName)
                 {
+                    if (CurrentState != null)
+                    {
+                        CurrentState.Exit();
+                    }
                     CurrentState = state;
                     state.Enter();
                     break;
