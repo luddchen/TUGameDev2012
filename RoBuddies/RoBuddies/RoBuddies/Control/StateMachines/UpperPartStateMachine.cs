@@ -63,19 +63,19 @@ namespace RoBuddies.Control.StateMachines
 
             if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Left) && canClimbLeft())
             {
-                (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
+                (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.FlipHorizontally;
             }
 
             if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Right) && canClimbRight())
             {
-                (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
+                (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.None;
             }
 
             if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Space))
             {
-                SwitchToState(WAIT_STATE); // TODO: falling state for the lower part
+                SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
             }
 
             CurrentState.Update(gameTime);

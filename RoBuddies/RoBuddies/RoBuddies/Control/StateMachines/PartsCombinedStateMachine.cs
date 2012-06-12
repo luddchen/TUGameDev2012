@@ -62,7 +62,7 @@ namespace RoBuddies.Control.StateMachines
             if (newState.IsKeyDown(Keys.Left))
             {
                 SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(-2, (Body as Body).LinearVelocity.Y);
+                (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.FlipHorizontally;
             }
 
@@ -74,7 +74,7 @@ namespace RoBuddies.Control.StateMachines
             if (newState.IsKeyDown(Keys.Right))
             {
                 SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(2, (Body as Body).LinearVelocity.Y);
+                (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.None;
             }
 

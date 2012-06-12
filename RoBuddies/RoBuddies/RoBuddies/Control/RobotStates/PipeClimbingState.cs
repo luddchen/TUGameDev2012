@@ -14,6 +14,8 @@ namespace RoBuddies.Control.RobotStates
 {
     class PipeClimbingState : AnimatedState
     {
+        private const float MAX_MOTOR_FORCE = 1000f;
+
         private Level level;
         private FixedPrismaticJoint prismaticJoint;
         private FixedFrictionJoint frictionJoint;
@@ -29,7 +31,7 @@ namespace RoBuddies.Control.RobotStates
             frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
             prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, 1));
             prismaticJoint.MotorEnabled = true;
-            prismaticJoint.MaxMotorForce = 1000;
+            prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
         }
 
         public override void Exit()
