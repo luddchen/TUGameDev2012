@@ -14,7 +14,7 @@ namespace RoBuddies.Model.Objects
     class Wall : PhysicObject, ISwitchable
     {
         private Fixture wallFixture;
-
+        private Game game;
         private bool switchable = false;
 
         /// <summary>
@@ -28,16 +28,9 @@ namespace RoBuddies.Model.Objects
         public Wall(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchAble)
             : base(level)
         {
-            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//WallTest");
-            if (size.X > 1)
-            {
-                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(size.X - 2));
-            }
-            if (size.Y > 1)
-            {
-                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(size.Y - 2));
-            }
+            this.game = game;
 
+            Texture2D wallTex = createTexture(size);
             defineTextures(wallTex, wallTex, wallTex);
 
             this.Position = pos;
@@ -73,6 +66,23 @@ namespace RoBuddies.Model.Objects
             this.Height = Math.Max(1, newSize.Y);
             this.DestroyFixture(wallFixture);
             wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+
+            Texture2D wallTex = createTexture(newSize);
+            defineTextures(wallTex, wallTex, wallTex);
+        }
+
+        private Texture2D createTexture(Vector2 newSize)
+        {
+            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//WallTest");
+            if (newSize.X > 1)
+            {
+                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
+            }
+            if (newSize.Y > 1)
+            {
+                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
+            }
+            return wallTex;
         }
 
         public void switchOn()
