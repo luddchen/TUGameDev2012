@@ -211,6 +211,10 @@
     <Content Include="RoBuddiesThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\GamePrototypes\Farseer Physics Engine 3.3.1 Samples XNA\DebugView XNA\DebugView XNA.csproj">
+      <Project>{FC7845FA-13FE-4FF8-822A-A577F3F59B00}</Project>
+      <Name>DebugView XNA</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RoBuddiesContent\RoBuddiesContent.contentproj">
       <Name>RoBuddiesContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>

@@ -1,10 +1,11 @@
 ﻿
+using FarseerPhysics;
+using FarseerPhysics.DebugViews;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Worlds;
-using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
@@ -16,6 +17,14 @@ namespace RoBuddies.View
         public HUD.HUD HUD;
 
         private Worlds worlds;
+
+        /// <summary>
+        /// for debugging the physical world
+        /// </summary>
+        public DebugViewXNA debugView;
+
+        private const float MeterInPixels = 64f;
+        private bool showDebug = false;
 
         public override void OnViewPortResize()
         {
@@ -56,6 +65,11 @@ namespace RoBuddies.View
                 this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
                 this.Level.ClearForces();
                 this.SnapShot.MakeSnapshot();
+
+                this.debugView = new DebugViewXNA(this.Level);
+                this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
+                this.debugView.DefaultShapeColor = Color.White;
+                this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
             }            
         }
 
@@ -107,12 +121,32 @@ namespace RoBuddies.View
                 this.Level.finished = true;
             }
 
+            if (newKeyboardState.IsKeyDown(Keys.L) && oldKeyboardState.IsKeyUp(Keys.L))
+            {
+                showDebug = !showDebug;
+            }
+
             this.oldKeyboardState = newKeyboardState;
         }
 
         protected override void DrawContent(SpriteBatch spriteBatch)
         {
             base.DrawContent(spriteBatch);
+
+            if (showDebug)
+            {
+                // calculate the projection and view adjustments for the debug view
+                Matrix projection = Matrix.CreateOrthographicOffCenter(0f, Game.GraphicsDevice.Viewport.Width / MeterInPixels,
+                                                                0f, Game.GraphicsDevice.Viewport.Height / MeterInPixels, 0f,
+                                                                 1f);
+
+                Vector2 _screenCenter = this.Camera.Origin;
+
+                Matrix view = Matrix.CreateTranslation(new Vector3((this.Camera.Position / MeterInPixels) - (_screenCenter / MeterInPixels), 0f)) * Matrix.CreateTranslation(new Vector3((_screenCenter / MeterInPixels), 0f));
+                // draw the debug view
+                this.debugView.RenderDebugData(ref projection, ref view);
+            }
+
             this.HUD.Draw(spriteBatch);
         }
 
