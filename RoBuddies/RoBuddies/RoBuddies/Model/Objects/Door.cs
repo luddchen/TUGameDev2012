@@ -17,9 +17,9 @@ namespace RoBuddies.Model.Objects
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(level)
         {
-            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//doorcl");
+            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//door_closed");
             defineTextures(doorTex, doorTex, doorTex);
-            doorOpenTex = game.Content.Load<Texture2D>("Sprites//doorop");
+            doorOpenTex = game.Content.Load<Texture2D>("Sprites//door_open");
             //defineTextures(doorOpenTex, doorOpenTex, doorOpenTex);
 
             this.Position = pos;
