@@ -122,7 +122,8 @@ namespace RoBuddies.Control.StateMachines
                 if (body is Door)
                 {
                     Door door = (Door)body;
-                    if (Vector2.Distance(robot.PartsCombined.Position, door.Position) < 1) { // TODO: check also if door isn't locked!
+                    if (Vector2.Distance(robot.PartsCombined.Position, door.Position) < 1 && door.IsSwitchedOn)
+                    { 
                         canOpenLevelEndingDoor = true;
                     }
                 }

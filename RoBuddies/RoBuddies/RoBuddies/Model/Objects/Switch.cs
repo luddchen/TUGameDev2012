@@ -48,6 +48,8 @@ namespace RoBuddies.Model.Objects
                 this.Color = temp;
                 
                 isActivated = true;
+
+                switchObject.switchOn();
             }
         }
 

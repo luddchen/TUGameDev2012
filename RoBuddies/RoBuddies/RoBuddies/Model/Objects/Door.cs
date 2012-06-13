@@ -1,4 +1,6 @@
-﻿using FarseerPhysics.Dynamics;
+﻿using System;
+
+using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,6 +15,12 @@ namespace RoBuddies.Model.Objects
         private bool isSwitchedOn = true; //(key || switch) to change it to true if needed.
 
         private Texture2D doorOpenTex;
+
+        public bool IsSwitchedOn
+        {
+            get { return isSwitchedOn; }
+        }
+
 
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(level)
@@ -67,14 +75,14 @@ namespace RoBuddies.Model.Objects
 
         public void switchOn()
         {
+            Console.WriteLine("door switched on");
+            
             isSwitchedOn = true;
             this.Texture = doorOpenTex;
-            this.Height += 1f;
-            this.Width += 1f;
-            this.Position += new Vector2(0.2f, -0.7f);
             Color temp = this.Color ; 
               temp.R *= 2; temp.G *= 2; temp.B *= 2;
             this.Color = temp;
+
         }        
     }
 }
