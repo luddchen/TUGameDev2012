@@ -14,7 +14,8 @@ namespace RoBuddies.Model.Objects
         private bool isActivated = false; //[combined robot && isSwitchalbe] to activate it.
         private bool isSwitchedOn = true; //(key || switch) to change it to true if needed.
 
-        private Texture2D doorOpenTex;
+        private Texture2D doorClosedTex;
+        private Texture2D doorLockedTex;
 
         public bool IsSwitchedOn
         {
@@ -25,10 +26,8 @@ namespace RoBuddies.Model.Objects
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(level)
         {
-            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//door_locked");
-            defineTextures(doorTex, doorTex, doorTex);
-            doorOpenTex = game.Content.Load<Texture2D>("Sprites//door_closed");
-            //defineTextures(doorOpenTex, doorOpenTex, doorOpenTex);
+            doorLockedTex = game.Content.Load<Texture2D>("Sprites//door_locked");
+            doorClosedTex = game.Content.Load<Texture2D>("Sprites//door_closed");
 
             this.Position = pos;
             this.Width = size.X;
@@ -37,8 +36,14 @@ namespace RoBuddies.Model.Objects
             if (switchable)
             {
                 this.isSwitchedOn = false;
+                defineTextures(doorLockedTex, doorLockedTex, doorLockedTex);
             }
-            this.Color = Color.Brown;
+            else
+            {
+                this.isSwitchedOn = true;
+                defineTextures(doorClosedTex, doorClosedTex, doorClosedTex);
+            }
+            this.Color = Color.BurlyWood;
 
             this.BodyType = BodyType.Static;
             
@@ -68,7 +73,8 @@ namespace RoBuddies.Model.Objects
         public void switchOn()
         {            
             isSwitchedOn = true;
-            this.Texture = doorOpenTex;
+            this.Texture = doorClosedTex;
+            this.Color = Color.White;
         }        
     }
 }
