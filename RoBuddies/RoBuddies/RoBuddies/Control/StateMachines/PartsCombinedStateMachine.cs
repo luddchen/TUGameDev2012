@@ -17,7 +17,7 @@ namespace RoBuddies.Control.StateMachines
     {
         public const String WAIT_STATE = "WaitingState";
         public const String JUMP_STATE = "JumpState";
-        public const String WALK_STATE = "WalkingState";
+        public const String PULL_STATE = "PullingState";
 
         private const int END_ANIMATION = 80;
 
@@ -26,7 +26,7 @@ namespace RoBuddies.Control.StateMachines
         private ContentManager contentManager;
         private List<Texture2D> textureList;
         private WeldJoint crateJoint;
-        private bool isPulling;
+        private Crate currentCrate;
 
         public Level Level
         {
@@ -39,7 +39,6 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
-            this.isPulling = false;
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
@@ -48,9 +47,11 @@ namespace RoBuddies.Control.StateMachines
 
             body.Texture = textureList[0];
 
-            AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
+            AllStates.Add(new WalkingState(WalkingState.LEFT_WALK_STATE, textureList, this));
+            AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
+            AllStates.Add(new PullingState(PULL_STATE, textureList, this));
 
             SwitchToState(WAIT_STATE);
         }
@@ -58,43 +59,6 @@ namespace RoBuddies.Control.StateMachines
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
-
-            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
-            {
-                SwitchToState(JUMP_STATE);
-            }
-
-            if (newState.IsKeyDown(Keys.Left))
-            {
-                if (isOnGround())
-                {
-                    SwitchToState(WALK_STATE);
-                }
-
-                (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.FlipHorizontally;
-            }
-
-            if (newState.IsKeyUp(Keys.Left))
-            {
-                SwitchToState(WAIT_STATE);
-            }
-
-            if (newState.IsKeyDown(Keys.Right))
-            {
-                if (isOnGround())
-                {
-                    SwitchToState(WALK_STATE);
-                }
-
-                (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.None;
-            }
-
-            if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
-            {
-                Level.finished = true;
-            }
 
             if (newState.IsKeyDown(Keys.A))
             {
@@ -104,6 +68,40 @@ namespace RoBuddies.Control.StateMachines
             if (oldState.IsKeyDown(Keys.A) && newState.IsKeyUp(Keys.A))
             {
                 stopPulling();
+            }
+
+            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
+            {
+                SwitchToState(JUMP_STATE);
+            }
+
+            if (newState.IsKeyDown(Keys.Left))
+            {
+                if (isOnGround() && !(CurrentState is PullingState))
+                {
+                    SwitchToState(WalkingState.LEFT_WALK_STATE);
+                }
+            }
+
+            if (newState.IsKeyUp(Keys.Left))
+            {
+                if (!(CurrentState is PullingState))
+                {
+                    SwitchToState(WAIT_STATE);
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.Right))
+            {
+                if (isOnGround() && !(CurrentState is PullingState))
+                {
+                    SwitchToState(WalkingState.RIGHT_WALK_STATE);
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
+            {
+                Level.finished = true;
             }
 
             CurrentState.Update(gameTime);
@@ -148,17 +146,18 @@ namespace RoBuddies.Control.StateMachines
 
         private void pullCrate()
         {
-            if (!isPulling)
+            if (!(CurrentState is PullingState))
             {
                 Body movableObject = getMovableObject();
 
                 if (movableObject != null && movableObject is Crate)
                 {
-                    Crate crate = movableObject as Crate;
+                    currentCrate = movableObject as Crate;
 
-                    isPulling = true;
-                    crateJoint = new WeldJoint(robot.PartsCombined, crate, crate.WorldCenter, robot.PartsCombined.WorldCenter);
-                    crate.FixedRotation = false;
+                    SwitchToState(PULL_STATE);
+
+                    crateJoint = new WeldJoint(robot.PartsCombined, currentCrate, currentCrate.WorldCenter, robot.PartsCombined.WorldCenter);
+                    currentCrate.FixedRotation = false;
                     this.Level.AddJoint(crateJoint);
                 }
             }
@@ -168,8 +167,9 @@ namespace RoBuddies.Control.StateMachines
         {
             if (crateJoint != null)
             {
-                isPulling = false;
+                SwitchToState(WAIT_STATE);
                 this.Level.RemoveJoint(crateJoint);
+                currentCrate.FixedRotation = true;
             }
         }
     }
