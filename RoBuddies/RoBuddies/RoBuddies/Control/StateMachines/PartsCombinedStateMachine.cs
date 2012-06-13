@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
+using FarseerPhysics.Dynamics.Joints;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
-using RoBuddies.Utilities;
 using RoBuddies.Model.Objects;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -24,6 +25,8 @@ namespace RoBuddies.Control.StateMachines
         private Robot robot;
         private ContentManager contentManager;
         private List<Texture2D> textureList;
+        private WeldJoint crateJoint;
+        private bool isPulling;
 
         public Level Level
         {
@@ -36,6 +39,7 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
+            this.isPulling = false;
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
@@ -62,7 +66,11 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Left))
             {
-                SwitchToState(WALK_STATE);
+                if (isOnGround())
+                {
+                    SwitchToState(WALK_STATE);
+                }
+
                 (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.FlipHorizontally;
             }
@@ -74,7 +82,11 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Right))
             {
-                SwitchToState(WALK_STATE);
+                if (isOnGround())
+                {
+                    SwitchToState(WALK_STATE);
+                }
+
                 (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
                 Body.Effect = SpriteEffects.None;
             }
@@ -84,7 +96,20 @@ namespace RoBuddies.Control.StateMachines
                 Level.finished = true;
             }
 
+            if (newState.IsKeyDown(Keys.A))
+            {
+                Body movableObject = getMovableObject();
 
+                if (movableObject != null && movableObject is Crate)
+                {
+                    pullCrate((movableObject as Crate));
+                }
+            }
+
+            if (oldState.IsKeyDown(Keys.A) && newState.IsKeyUp(Keys.A))
+            {
+                stopPulling();
+            }
 
             CurrentState.Update(gameTime);
             oldState = newState;
@@ -116,6 +141,34 @@ namespace RoBuddies.Control.StateMachines
             float rayEnd = combinedPartPos.Y - robot.PartsCombined.Height / 2;
             bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
             return isOnGround;
+        }
+
+        private Body getMovableObject()
+        {
+            Vector2 combinedPartPos = robot.PartsCombined.Position;
+            float rayEnd = combinedPartPos.X - robot.PartsCombined.Width / 2;
+            Body body = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
+            return body;
+        }
+
+        private void pullCrate(Crate crate)
+        {
+            if (!isPulling)
+            {
+                isPulling = true;
+                crateJoint = new WeldJoint(robot.PartsCombined, crate, crate.WorldCenter, robot.PartsCombined.WorldCenter);
+                crate.FixedRotation = false;
+                this.Level.AddJoint(crateJoint);
+            }
+        }
+
+        private void stopPulling()
+        {
+            if (crateJoint != null)
+            {
+                isPulling = false;
+                this.Level.RemoveJoint(crateJoint);
+            }
         }
     }
 }

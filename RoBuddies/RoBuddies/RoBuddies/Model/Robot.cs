@@ -94,17 +94,17 @@ namespace RoBuddies.Model
             this.level.AddStateMachine(robotStateMachine);
 
             this.partsCombined.IsVisible = true;
-            this.partsCombined.Friction = 3f;
+            this.partsCombined.Friction = 30f;
             this.partsCombined.IgnoreCollisionWith(this.upperPart);
             this.partsCombined.IgnoreCollisionWith(this.lowerPart);
 
             this.upperPart.IsVisible = false;
-            this.upperPart.Friction = 3f;
+            this.upperPart.Friction = 30f;
             this.upperPart.IgnoreCollisionWith(this.partsCombined);
             this.upperPart.IgnoreCollisionWith(this.lowerPart);
 
             this.lowerPart.IsVisible = false;
-            this.lowerPart.Friction = 3f;
+            this.lowerPart.Friction = 30f;
             this.lowerPart.IgnoreCollisionWith(partsCombined);
             this.lowerPart.IgnoreCollisionWith(upperPart);
             //----------------------------------------------------------------------------------------------------------
