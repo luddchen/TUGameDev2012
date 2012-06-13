@@ -79,7 +79,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Left))
             {
-                if (isOnGround() && !(CurrentState is PullingState))
+                if (!(CurrentState is PullingState))
                 {
                     SwitchToState(WalkingState.LEFT_WALK_STATE);
                 }
@@ -95,7 +95,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Right))
             {
-                if (isOnGround() && !(CurrentState is PullingState))
+                if (!(CurrentState is PullingState))
                 {
                     SwitchToState(WalkingState.RIGHT_WALK_STATE);
                 }
