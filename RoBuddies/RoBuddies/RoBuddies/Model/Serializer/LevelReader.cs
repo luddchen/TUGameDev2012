@@ -38,6 +38,19 @@ namespace RoBuddies.Model.Serializer
         /// <returns>returns the desirialized level as a Level object</returns>
         public Level readLevel(String path, String filename)
         {
+            return readLevel(path, filename, LevelTheme.ROBO_LAB);
+        }
+
+        /// <summary>
+        /// reads a json level file and creates a Level object with the specified theme
+        /// </summary>
+        /// <param name="path">the path to the file</param>
+        /// <param name="filename">the name of the file</param>
+        /// <param name="levelTheme">the theme of the loaded level</param>
+        /// <returns>returns the desirialized level as a Level object</returns>
+        public Level readLevel(String path, String filename, LevelTheme levelTheme)
+        {
+            this.level.theme = levelTheme;
             Level loadedLevel = null;
             if (File.Exists(@path + "\\" + filename))
             {

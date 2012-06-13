@@ -17,6 +17,9 @@ namespace RoBuddies.Model.Objects
         private Game game;
         private bool switchable = false;
 
+        private Texture2D roboLabTex;
+        private Texture2D mountainTex;
+
         /// <summary>
         /// constructs a new crate object
         /// </summary>
@@ -30,8 +33,10 @@ namespace RoBuddies.Model.Objects
         {
             this.game = game;
 
-            Texture2D wallTex = createTexture(size);
-            defineTextures(wallTex, wallTex, wallTex);
+            roboLabTex = game.Content.Load<Texture2D>("Sprites//WallTest");
+            mountainTex = game.Content.Load<Texture2D>("Sprites//CrateSmall");
+
+            defineTextures(createTexture(size, roboLabTex), createTexture(size, mountainTex), createTexture(size, roboLabTex));
 
             this.Position = pos;
             this.Width = size.X;
@@ -67,13 +72,12 @@ namespace RoBuddies.Model.Objects
             this.DestroyFixture(wallFixture);
             wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
 
-            Texture2D wallTex = createTexture(newSize);
+            Texture2D wallTex = createTexture(newSize, roboLabTex);
             defineTextures(wallTex, wallTex, wallTex);
         }
 
-        private Texture2D createTexture(Vector2 newSize)
+        private Texture2D createTexture(Vector2 newSize, Texture2D wallTex)
         {
-            Texture2D wallTex = game.Content.Load<Texture2D>("Sprites//WallTest");
             if (newSize.X > 1)
             {
                 wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));

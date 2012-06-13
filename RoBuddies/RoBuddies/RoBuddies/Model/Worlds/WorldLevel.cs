@@ -43,8 +43,7 @@ namespace RoBuddies.Model.Worlds
             this.game = game;
             this.levelObjects = new List<IBody>();
             LevelReader levelReader = new LevelReader(game);
-            this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath);
-            this.Level.theme = levelTheme;
+            this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath, levelTheme);
             addLevelObjects();
             addLevelObjectsToLevel();
             addBackground();
