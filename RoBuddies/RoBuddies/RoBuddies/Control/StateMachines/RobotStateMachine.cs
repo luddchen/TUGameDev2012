@@ -80,7 +80,7 @@ namespace RoBuddies.Control.StateMachines
                 {
                     mActiveStateMachine = mUpperPartStateMachine;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
-                    mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, findGroundY() + mRobot.LowerPart.Height / 2);
+                    mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
                     setCombined(false);
                     mRobot.ActivePart = mRobot.UpperPart;
                     mRobot.UpperPart.Color = Color.White;
@@ -90,7 +90,7 @@ namespace RoBuddies.Control.StateMachines
                 else if (canCombine())
                 {
                     mActiveStateMachine = mPartsCombinedStateMachine;
-                    mRobot.PartsCombined.Position = new Vector2(mRobot.UpperPart.Position.X, findGroundY() + mRobot.PartsCombined.Height / 2);
+                    mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
                     setCombined(true);
                     mRobot.ActivePart = mRobot.PartsCombined;
                 }
@@ -132,24 +132,6 @@ namespace RoBuddies.Control.StateMachines
 
             mOldState = newState;
             mActiveStateMachine.Update(gameTime);
-        }
-
-        /// <summary>
-        /// this methods finds the y value of the ground straight below the robot
-        /// </summary>
-        /// <returns>the y value of the ground straight below</returns>
-        private float findGroundY()
-        {
-            float groundY = 0;
-            Vector2 upperPartPos = mRobot.PartsCombined.Position;
-            float rayEnd = -float.MaxValue;
-            FarseerPhysics.Dynamics.Body groundObj = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
-            if (groundObj != null && groundObj is PhysicObject)
-            {
-                PhysicObject phyObj = (PhysicObject)groundObj;
-                groundY = phyObj.Position.Y + phyObj.Height / 2;
-            }
-            return groundY;
         }
 
         /// <summary>

@@ -26,8 +26,8 @@ namespace RoBuddies.Model.Worlds.World1
 
         protected override void addLevelObjects()
         {
-            Door door = new Door(new Vector2(8f, 0f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, true);
-            Switch doorSwitcher = new Switch(new Vector2(8f, 5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, door, this.Level.Robot);
+            Door door = new Door(new Vector2(9f, -1f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, true);
+            Switch doorSwitcher = new Switch(new Vector2(9f, 5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, door, this.Level.Robot);
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
         }

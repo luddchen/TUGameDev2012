@@ -147,7 +147,8 @@ namespace RoBuddies.View
                 this.debugView.RenderDebugData(ref projection, ref view);
             }
 
-            this.HUD.Draw(spriteBatch);
+            // uncomment for hud with time:
+            //this.HUD.Draw(spriteBatch);
         }
 
     }

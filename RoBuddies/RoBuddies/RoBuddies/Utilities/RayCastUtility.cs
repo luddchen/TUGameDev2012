@@ -41,6 +41,7 @@ namespace RoBuddies.Utilities
 
         /// <summary>
         /// Returns the nearest object, that intersects the line from rayStart to rayEnd in the world 
+        /// !! I believe this method doesn't work correct!! (thomas)
         /// </summary>
         /// <param name="world">The world with body object for the raycasting</param>
         /// <param name="rayStart">the position of the ray start</param>
@@ -53,7 +54,10 @@ namespace RoBuddies.Utilities
             {
                 if (fixture != null)
                 {
-                    nearestIntersectingBody = fixture.Body;
+                    if (nearestIntersectingBody == null || Vector2.Distance(fixture.Body.Position, rayStart) < Vector2.Distance(nearestIntersectingBody.Position, rayStart))
+                    {
+                        nearestIntersectingBody = fixture.Body;
+                    }
                 }
                 return fraction; // clip the ray to this point and continue
             }, rayStart, rayEnd);
