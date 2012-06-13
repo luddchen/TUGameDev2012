@@ -12,7 +12,7 @@ namespace RoBuddies.Model.Objects
     class Door : PhysicObject, ISwitchable
     {
         private bool isActivated = false; //[combined robot && isSwitchalbe] to activate it.
-        private bool isSwitchedOn = false; //(key || switch) to change it to true if needed.
+        private bool isSwitchedOn = true; //(key || switch) to change it to true if needed.
 
         private Texture2D doorOpenTex;
 
