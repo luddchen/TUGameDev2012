@@ -22,19 +22,27 @@ namespace RoBuddies.Model.Worlds.World2
         public World2Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
-            Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.2f, 0.15f), 0.95f);
             this.Level.Background = Color.Black;
+
+            Layer sunLayer = new Layer("sunLayer", new Vector2(0.05f, 0.25f), 0.99f);
+            this.Level.AddLayer(sunLayer);
+
+            Texture2D sunTexture = game.Content.Load<Texture2D>("Sprites//Mountain//sun1");
+            StaticObject sun = new StaticObject(sunTexture, new Vector2(-3, 4), 2.5f, 2.5f, new Color(192, 192, 0, 255), 0);
+            sunLayer.AddObject(sun);
+
+            Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.2f, 0.15f), 0.95f);
             this.Level.AddLayer(farAwayLayer);
             Texture2D backgroundTexture = game.Content.Load<Texture2D>("Sprites//Mountain//sky");
             StaticObject background;
             for (int i = 0; i < 3; i++)
             {
-                background = new StaticObject(backgroundTexture, new Vector2(i * 40, -2), 40, 8, Color.White, 0);
+                background = new StaticObject(backgroundTexture, new Vector2(i * 40, -2), 40, 8, new Color(255, 255, 255, 180), 0);
                 farAwayLayer.AddObject(background);
-                background = new StaticObject(backgroundTexture, new Vector2(i * 40, 6), 40, 8, Color.White, 0);
+                background = new StaticObject(backgroundTexture, new Vector2(i * 40, 6), 40, 8, new Color(255, 255, 255, 180), 0);
                 background.Effect = SpriteEffects.FlipVertically;
                 farAwayLayer.AddObject(background);
-                background = new StaticObject(backgroundTexture, new Vector2(i * 40, 14), 40, 8, Color.White, 0);
+                background = new StaticObject(backgroundTexture, new Vector2(i * 40, 14), 40, 8, new Color(255, 255, 255, 180), 0);
                 farAwayLayer.AddObject(background);
             }
 
