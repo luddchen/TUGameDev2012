@@ -98,12 +98,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.A))
             {
-                Body movableObject = getMovableObject();
-
-                if (movableObject != null && movableObject is Crate)
-                {
-                    pullCrate((movableObject as Crate));
-                }
+                pullCrate();
             }
 
             if (oldState.IsKeyDown(Keys.A) && newState.IsKeyUp(Keys.A))
@@ -151,14 +146,21 @@ namespace RoBuddies.Control.StateMachines
             return body;
         }
 
-        private void pullCrate(Crate crate)
+        private void pullCrate()
         {
             if (!isPulling)
             {
-                isPulling = true;
-                crateJoint = new WeldJoint(robot.PartsCombined, crate, crate.WorldCenter, robot.PartsCombined.WorldCenter);
-                crate.FixedRotation = false;
-                this.Level.AddJoint(crateJoint);
+                Body movableObject = getMovableObject();
+
+                if (movableObject != null && movableObject is Crate)
+                {
+                    Crate crate = movableObject as Crate;
+
+                    isPulling = true;
+                    crateJoint = new WeldJoint(robot.PartsCombined, crate, crate.WorldCenter, robot.PartsCombined.WorldCenter);
+                    crate.FixedRotation = false;
+                    this.Level.AddJoint(crateJoint);
+                }
             }
         }
 
