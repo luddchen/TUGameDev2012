@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Utilities;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -104,6 +105,22 @@ namespace RoBuddies.Control.StateMachines
                 {
                     mActiveStateMachine = mLowerPartStateMachine;
                     mRobot.ActivePart = mRobot.LowerPart;
+                }
+            }
+
+            if (newState.IsKeyDown(Keys.S) && mOldState.IsKeyUp(Keys.S))
+            {
+                if (mActiveStateMachine == mPartsCombinedStateMachine || mActiveStateMachine == mUpperPartStateMachine)
+                {
+                    Layer backLayer = Level.GetLayerByName("backLayer");
+                    foreach (IBody obj in backLayer.AllObjects)
+                    {
+                        if (obj is Switch && (Vector2.Distance(mRobot.ActivePart.Position, obj.Position) < 5))
+                        {
+                            Switch switcher = (Switch)obj;
+                            switcher.Activate();
+                        }
+                    }
                 }
             }
 
