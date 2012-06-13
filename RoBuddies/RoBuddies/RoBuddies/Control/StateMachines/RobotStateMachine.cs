@@ -83,6 +83,8 @@ namespace RoBuddies.Control.StateMachines
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, findGroundY() + mRobot.LowerPart.Height / 2);
                     setCombined(false);
                     mRobot.ActivePart = mRobot.UpperPart;
+                    mRobot.UpperPart.Color = Color.White;
+                    mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
                     mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                 }
                 else if (canCombine())
@@ -100,11 +102,15 @@ namespace RoBuddies.Control.StateMachines
                 {
                     mActiveStateMachine = mUpperPartStateMachine;
                     mRobot.ActivePart = mRobot.UpperPart;
+                    mRobot.UpperPart.Color = Color.White;
+                    mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
                 }
                 else if (mActiveStateMachine == mUpperPartStateMachine)
                 {
                     mActiveStateMachine = mLowerPartStateMachine;
                     mRobot.ActivePart = mRobot.LowerPart;
+                    mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
+                    mRobot.LowerPart.Color = Color.White;
                 }
             }
 
