@@ -25,9 +25,9 @@ namespace RoBuddies.Model.Objects
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(level)
         {
-            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//door_closed");
+            Texture2D doorTex = game.Content.Load<Texture2D>("Sprites//door_locked");
             defineTextures(doorTex, doorTex, doorTex);
-            doorOpenTex = game.Content.Load<Texture2D>("Sprites//door_open");
+            doorOpenTex = game.Content.Load<Texture2D>("Sprites//door_closed");
             //defineTextures(doorOpenTex, doorOpenTex, doorOpenTex);
 
             this.Position = pos;
@@ -37,19 +37,12 @@ namespace RoBuddies.Model.Objects
             if (switchable)
             {
                 this.isSwitchedOn = false;
-                Color temp = color;
-                temp.R /= 2; temp.G /= 2; temp.B /= 2;
-                this.Color = temp;
             }
-            else
-            {
-                this.Color = color;
-            }
+            this.Color = Color.Brown;
 
             this.BodyType = BodyType.Static;
             
             this.Friction = 10f;
-            //FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this); // I believe it's better if the player can walk in front of the door (thomas)
         }
 
         /// <summary>
@@ -68,21 +61,14 @@ namespace RoBuddies.Model.Objects
                 else if (isSwitchedOn)
                 {
                     isActivated = value;
-                    //this.Texture = doorOpenTex; 
                 }
             }
         }
 
         public void switchOn()
-        {
-            Console.WriteLine("door switched on");
-            
+        {            
             isSwitchedOn = true;
             this.Texture = doorOpenTex;
-            Color temp = this.Color ; 
-              temp.R *= 2; temp.G *= 2; temp.B *= 2;
-            this.Color = temp;
-
         }        
     }
 }

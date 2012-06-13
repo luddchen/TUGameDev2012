@@ -16,18 +16,12 @@ namespace RoBuddies.Model.Objects
         private Game game;
         private Fixture pipeFixture;
 
-        // TODO: make good looking Pipe with starts and ends
-        private Texture2D left;
         private Texture2D center;
-        private Texture2D right;
 
         public Pipe(Vector2 pos, float width, Color color, Level level, Game game)
             : base(level)
         {
-            // TODO: make good looking Pipe with starts and ends
-            left = game.Content.Load<Texture2D>("Sprites//PipeStart");
             center = game.Content.Load<Texture2D>("Sprites//pipe");
-            right = game.Content.Load<Texture2D>("Sprites//PipeEnd");
 
             this.game = game;
             this.Position = pos;

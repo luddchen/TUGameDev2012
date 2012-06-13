@@ -33,7 +33,7 @@ namespace RoBuddies.Model.Worlds.World1
             }
 
             Layer notSoFarAwayLayer = new Layer("notSoFarAwayLayer", new Vector2(0.75f, 0.2f), 0.8f);
-            this.Level.AddLayer(notSoFarAwayLayer);
+            //this.Level.AddLayer(notSoFarAwayLayer);
             Texture2D crateTexture = game.Content.Load<Texture2D>("Sprites//Crate3");
             StaticObject crate;
             for (int i = -2; i < 3; i++)

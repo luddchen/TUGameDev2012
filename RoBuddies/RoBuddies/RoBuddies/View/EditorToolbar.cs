@@ -84,7 +84,7 @@ namespace RoBuddies.View
             this.AllElements.Add(this.CrateButton);
 
             // add pipe button
-            this.PipeButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//PipeCenter"), new Vector2(this.HUD_width * 0.3f, 90),
+            this.PipeButton = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Editor//Pipe"), new Vector2(this.HUD_width * 0.3f, 90),
                                              null, null, null, 0.5f, null, game.Content);
             this.PipeButton.Height = this.PipeButton.Texture.Height;
             this.PipeButton.Width = this.PipeButton.Texture.Width * 2;

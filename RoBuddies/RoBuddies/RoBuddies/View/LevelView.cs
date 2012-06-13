@@ -137,12 +137,12 @@ namespace RoBuddies.View
             {
                 // calculate the projection and view adjustments for the debug view
                 Matrix projection = Matrix.CreateOrthographicOffCenter(0f, Game.GraphicsDevice.Viewport.Width / MeterInPixels,
-                                                                0f, Game.GraphicsDevice.Viewport.Height / MeterInPixels, 0f,
-                                                                 1f);
+                                                                0f, Game.GraphicsDevice.Viewport.Height / MeterInPixels , 0f,
+                                                                 1f) * Matrix.CreateTranslation(new Vector3(1f, 1f, 0)) * Matrix.CreateScale(0.25f);
 
                 Vector2 _screenCenter = this.Camera.Origin;
 
-                Matrix view = Matrix.CreateTranslation(new Vector3((this.Camera.Position / MeterInPixels) - (_screenCenter / MeterInPixels), 0f)) * Matrix.CreateTranslation(new Vector3((_screenCenter / MeterInPixels), 0f));
+                Matrix view =  Matrix.CreateTranslation(new Vector3((new Vector2(-this.Camera.Position.X, this.Camera.Position.Y) / MeterInPixels) - (_screenCenter / MeterInPixels), 0f)) * Matrix.CreateTranslation(new Vector3((_screenCenter / MeterInPixels), 0f));
                 // draw the debug view
                 this.debugView.RenderDebugData(ref projection, ref view);
             }
