@@ -27,6 +27,7 @@ namespace RoBuddies.Control.StateMachines
         private List<Texture2D> textureList;
         private WeldJoint crateJoint;
         private Crate currentCrate;
+        private bool isPulling;
 
         public Level Level
         {
@@ -39,6 +40,7 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
+            this.isPulling = false;
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
@@ -130,31 +132,53 @@ namespace RoBuddies.Control.StateMachines
 
         private bool isOnGround()
         {
+            float rayEnd;
+            bool isOnGround = false;
+
             Vector2 combinedPartPos = robot.PartsCombined.Position;
-            float rayEnd = combinedPartPos.Y - robot.PartsCombined.Height / 2;
-            bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
+            rayEnd = combinedPartPos.Y - robot.PartsCombined.Height / 2;
+            isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
+
             return isOnGround;
         }
 
-        private Body getMovableObject()
+        private Crate getMovableCrate()
         {
+            float rayEnd;
+
             Vector2 combinedPartPos = robot.PartsCombined.Position;
-            float rayEnd = combinedPartPos.X - robot.PartsCombined.Width / 2;
-            Body body = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
-            return body;
+
+            rayEnd = combinedPartPos.X - robot.PartsCombined.Width / 2;
+            Body bodyLeft = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
+
+            if (bodyLeft != null && bodyLeft is Crate)
+            {
+                return bodyLeft as Crate;
+            }
+
+            rayEnd = combinedPartPos.X + robot.PartsCombined.Width / 2;
+            Body bodyRight = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
+
+            if (bodyRight != null && bodyRight is Crate)
+            {
+                return bodyRight as Crate;
+            }
+
+            return null;
         }
 
         private void pullCrate()
         {
-            if (!(CurrentState is PullingState))
+            if (!isPulling)
             {
-                Body movableObject = getMovableObject();
+                Crate crate = getMovableCrate();
 
-                if (movableObject != null && movableObject is Crate)
+                if (crate != null)
                 {
-                    currentCrate = movableObject as Crate;
+                    currentCrate = crate;
 
-                    SwitchToState(PULL_STATE);
+                    isPulling = true;
+                    //SwitchToState(PULL_STATE);
 
                     crateJoint = new WeldJoint(robot.PartsCombined, currentCrate, currentCrate.WorldCenter, robot.PartsCombined.WorldCenter);
                     currentCrate.FixedRotation = false;
@@ -167,7 +191,7 @@ namespace RoBuddies.Control.StateMachines
         {
             if (crateJoint != null)
             {
-                SwitchToState(WAIT_STATE);
+                isPulling = false;
                 this.Level.RemoveJoint(crateJoint);
                 currentCrate.FixedRotation = true;
             }
