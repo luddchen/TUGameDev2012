@@ -28,7 +28,7 @@ namespace RoBuddies.View
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//Menu_Background");
 
             // some decoration -------------------------------------------------------------------
-            this.AllElements.Add(new HUDString( "Robuddies Menu", this.Game.Content));
+            this.AllElements.Add(new HUDString( "RoBuddies Menu", this.Game.Content));
             this.AllElements[0].Color = HeadLineColor;
             this.AllElements.Add(new HUDTexture(this.Game.Content));
             this.AllElements.Add(new HUDTexture(this.Game.Content));
