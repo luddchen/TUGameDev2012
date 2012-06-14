@@ -13,6 +13,8 @@ namespace RoBuddies.Model.Snapshot
 
         private List<IBody> BodyList;
 
+        private int currentKeyFrame;
+
         /// <summary>
         /// creates a new Snapshot unit
         /// </summary>
@@ -22,6 +24,7 @@ namespace RoBuddies.Model.Snapshot
             this.AllKeyFrames = new List<KeyFrame>();
             this.BodyList = new List<IBody>();
             CreateBodyList(level);
+            this.currentKeyFrame = -1;
         }
 
         /// <summary>
@@ -51,37 +54,42 @@ namespace RoBuddies.Model.Snapshot
         {
             KeyFrame keyFrame = new KeyFrame(this.BodyList);
             this.AllKeyFrames.Add(keyFrame);
+            this.currentKeyFrame++;
             Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
         }
 
         /// <summary>
-        /// rewind one or more keyframes
+        /// rewind a single step without clean keyframes
         /// </summary>
-        /// <param name="steps">steps to rewind</param>
-        public void Rewind(int steps)
+        public void Rewind()
         {
-            if (steps < 1) { return; }  // nothing to do
-
-            if (this.AllKeyFrames.Count > (steps - 1))
+            if (this.currentKeyFrame > 0)
             {
-                Console.Out.WriteLine("rewind " + steps + " from " + this.AllKeyFrames.Count + " available Snapshots");
-
-                int newLastFrame = this.AllKeyFrames.Count - steps;
-                KeyFrame keyFrame = this.AllKeyFrames[newLastFrame];
-                keyFrame.Restore();
-
-                //release skipped keyframes
-                while ((this.AllKeyFrames.Count - 1) > newLastFrame)
-                {
-                    this.AllKeyFrames[this.AllKeyFrames.Count - 1].Release();
-                    this.AllKeyFrames.RemoveAt(this.AllKeyFrames.Count - 1);
-                }
-
-                Console.Out.WriteLine("left Snapshots : " + this.AllKeyFrames.Count);
+                this.currentKeyFrame--;
+                this.AllKeyFrames[currentKeyFrame].Restore();
             }
-            else
+        }
+
+        /// <summary>
+        /// forward a single step
+        /// </summary>
+        public void Forward()
+        {
+            if (this.currentKeyFrame < this.AllKeyFrames.Count - 2)
             {
-                Console.Out.WriteLine("not enough Snapshots available");
+                this.currentKeyFrame++;
+                this.AllKeyFrames[currentKeyFrame].Restore();
+            }
+        }
+
+        /// <summary>
+        /// cleanup keyframes that are skipped by rewind/forward
+        /// </summary>
+        public void PlayOn()
+        {
+            for (int i = this.AllKeyFrames.Count - 1; i > this.currentKeyFrame; i--)
+            {
+                this.AllKeyFrames.RemoveAt(i);
             }
         }
 

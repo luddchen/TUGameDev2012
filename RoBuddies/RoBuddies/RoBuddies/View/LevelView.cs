@@ -12,6 +12,10 @@ namespace RoBuddies.View
     class LevelView : HUD.HUDLevelView
     {
         public Model.Snapshot.Snapshot SnapShot;
+        private int snapshotTimer = 15;
+        private int snapshotCounter = 15;
+        private int rewindTimer = 8;
+        private int rewindCounter = 8;
         private KeyboardState oldKeyboardState;
 
         public HUD.HUD HUD;
@@ -83,37 +87,75 @@ namespace RoBuddies.View
                 this.Camera.SetBoundingBox(this.Level);
             }
 
-            this.Level.Update(gameTime);    // taken from HUDLevelView because editor need no level update
-            this.HUD.Update(gameTime);
+            KeyboardState newKeyboardState = Keyboard.GetState();
 
-            // camera following test
-            if ( this.Level.Robot != null && this.Level.Robot.ActivePart != null)
+            if (newKeyboardState.IsKeyDown(Keys.LeftShift))
+            {
+                this.Camera.SmoothMove = false;
+                if (newKeyboardState.IsKeyDown(Keys.Left))
+                {
+                    this.rewindCounter--;
+                    if (this.rewindCounter == 0)
+                    {
+                        this.SnapShot.Rewind();
+                        this.rewindCounter = this.rewindTimer;
+                    }
+                }
+                if (newKeyboardState.IsKeyDown(Keys.Right))
+                {
+                    this.rewindCounter--;
+                    if (this.rewindCounter == 0)
+                    {
+                        this.SnapShot.Forward();
+                        this.rewindCounter = this.rewindTimer;
+                    }
+                }
+            }
+            else
+            {
+                if (oldKeyboardState.IsKeyDown(Keys.LeftShift))
+                {
+                    this.SnapShot.PlayOn();
+                    this.Camera.SmoothMove = true;
+                }
+
+                snapshotCounter--;
+                if (snapshotCounter == 0)
+                {
+                    snapshotCounter = snapshotTimer;
+                    this.SnapShot.MakeSnapshot();
+                }
+
+                this.Level.Update(gameTime);
+                this.HUD.Update(gameTime);
+            }
+
+            // camera following
+            if (this.Level.Robot != null && this.Level.Robot.ActivePart != null)
             {
                 this.Camera.Move(Utilities.ConvertUnits.ToDisplayUnits(this.Level.Robot.ActivePart.Position));
             }
 
-            KeyboardState newKeyboardState = Keyboard.GetState();
+            //if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
+            //{
+            //    this.Level.ClearForces();
+            //    this.SnapShot.MakeSnapshot();
+            //    this.Level.ClearForces();
+            //}
 
-            if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
-            {
-                this.Level.ClearForces();
-                this.SnapShot.MakeSnapshot();
-                this.Level.ClearForces();
-            }
+            //if (newKeyboardState.IsKeyDown(Keys.R) && oldKeyboardState.IsKeyUp(Keys.R))
+            //{
+            //    this.Level.ClearForces();
+            //    this.SnapShot.Rewind(1);
+            //    this.Level.ClearForces();
+            //}
 
-            if (newKeyboardState.IsKeyDown(Keys.R) && oldKeyboardState.IsKeyUp(Keys.R))
-            {
-                this.Level.ClearForces();
-                this.SnapShot.Rewind(1);
-                this.Level.ClearForces();
-            }
-
-            if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E))
-            {
-                this.Level.ClearForces();
-                this.SnapShot.Rewind(2);
-                this.Level.ClearForces();
-            }
+            //if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E))
+            //{
+            //    this.Level.ClearForces();
+            //    this.SnapShot.Rewind(2);
+            //    this.Level.ClearForces();
+            //}
 
             // test key for switching to the next level
             if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))

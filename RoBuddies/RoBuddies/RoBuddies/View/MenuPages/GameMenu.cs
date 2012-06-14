@@ -75,7 +75,7 @@ namespace RoBuddies.View.MenuPages
                     if (this.ActiveElement == restoreSnapshot)
                     {
                         ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
-                        ((LevelView)((RoBuddies)this.Game).View).SnapShot.Rewind(1);
+                        ((LevelView)((RoBuddies)this.Game).View).SnapShot.Rewind();
                         ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
                         this.Menu.IsVisible = false;
                     }
