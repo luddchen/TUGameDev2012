@@ -19,6 +19,10 @@ namespace RoBuddies
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
         SpriteBatch SpriteBatch;
+        Texture2D splash;
+        bool startScreen = true;
+        bool started = false;
+        Color splashColor = Color.White;
 
         public HUDLevelView LevelView;
         HUDMenu LevelMenu;
@@ -81,6 +85,8 @@ namespace RoBuddies
 
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
+
+            splash = Content.Load<Texture2D>("Sprites//Menu//splashscreen");
         }
 
         /// <summary>
@@ -94,22 +100,33 @@ namespace RoBuddies
         /// <param name="gameTime">gametime</param>
         protected override void Update(GameTime gameTime)
         {
-            View.Update(gameTime);
-            Menu.Update(gameTime);
-
-            // testing camera
-            if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+            if (startScreen)
             {
-                if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
-                if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
+                if (Keyboard.GetState().GetPressedKeys().Length > 0)
+                {
+                    startScreen = false;
+                }
+            }
+            
+            if (started)
+            {
+                View.Update(gameTime);
+                Menu.Update(gameTime);
 
-                if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.View.Camera.Rotation -= 0.005f; }
-                if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.View.Camera.Rotation += 0.005f; }
+                // testing camera
+                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                {
+                    if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
+                    if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
 
-                if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
-                if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
+                    if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.View.Camera.Rotation -= 0.005f; }
+                    if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.View.Camera.Rotation += 0.005f; }
+
+                    if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
+                    if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
+                }
             }
 
         }
@@ -152,13 +169,37 @@ namespace RoBuddies
 
             GraphicsDevice.Clear(this.View.Level.Background);
 
+            if (startScreen || !started)
+            {
+                SpriteBatch.Begin();
+                Rectangle dest = new Rectangle(
+                            (int)0,
+                            (int)0,
+                            (int)this.ViewPort.Width,
+                            (int)this.ViewPort.Height);
+                SpriteBatch.Draw(splash, dest, null, splashColor, 0, Vector2.Zero, SpriteEffects.None, 0.5f);
+                SpriteBatch.End();
+
+                if (!startScreen)
+                {
+                    splashColor.A -= 4;
+                    if (splashColor.A < 4)
+                    {
+                        started = true;
+                    }
+                }
+            }
+
             if (this.viewModeChanged)
             {
                 SwitchViewMode();
             }
 
-            View.Draw(SpriteBatch);
-            Menu.Draw(SpriteBatch);
+            if (started)
+            {
+                View.Draw(SpriteBatch);
+                Menu.Draw(SpriteBatch);
+            }
 
             GraphicsDevice.Viewport = this.ViewPort;
         }
