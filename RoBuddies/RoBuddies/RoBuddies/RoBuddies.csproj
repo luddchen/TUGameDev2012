@@ -172,6 +172,7 @@
     <Compile Include="Model\Worlds\World1\Level1_2.cs" />
     <Compile Include="Model\Worlds\World1\World1Level.cs" />
     <Compile Include="Model\Worlds\World2\Level2_1.cs" />
+    <Compile Include="Model\Worlds\World2\Level2_5.cs" />
     <Compile Include="Model\Worlds\World2\World2Level.cs" />
     <Compile Include="Model\Worlds\World3\World3Level.cs" />
     <Compile Include="Model\Worlds\WorldLevel.cs" />

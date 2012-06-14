@@ -1152,6 +1152,10 @@
       <Name>LEVEL2_4</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Worlds\World2\LEVEL2_5.json">
+      <Name>LEVEL2_5</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Sprites\WallTest.png">

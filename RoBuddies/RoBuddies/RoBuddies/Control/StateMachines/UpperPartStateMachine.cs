@@ -56,7 +56,7 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (CurrentState.Name == SHOOTING_STATE && hitsPipe())
+            if (CurrentState.Name != PIPE_CLIMBING_STATE && hitsPipe())
             {
                 SwitchToState(PIPE_CLIMBING_STATE);
             }
