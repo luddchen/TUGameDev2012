@@ -13,6 +13,8 @@ namespace RoBuddies.Model.Snapshot
 
         private List<IBody> BodyList;
 
+        private Level Level;
+
         private int currentKeyFrame;
 
         /// <summary>
@@ -21,6 +23,7 @@ namespace RoBuddies.Model.Snapshot
         /// <param name="level"></param>
         public Snapshot(Level level)
         {
+            this.Level = level;
             this.AllKeyFrames = new List<KeyFrame>();
             this.BodyList = new List<IBody>();
             CreateBodyList(level);
@@ -39,7 +42,10 @@ namespace RoBuddies.Model.Snapshot
             {
                 foreach (IBody body in layer.AllObjects)
                 {
-                    this.BodyList.Add(body);
+                    if (body is PhysicObject)
+                    {
+                        this.BodyList.Add(body);
+                    }
                 }
             }
 
@@ -52,7 +58,7 @@ namespace RoBuddies.Model.Snapshot
         /// </summary>
         public void MakeSnapshot()
         {
-            KeyFrame keyFrame = new KeyFrame(this.BodyList);
+            KeyFrame keyFrame = new KeyFrame(this.BodyList, this.Level);
             this.AllKeyFrames.Add(keyFrame);
             this.currentKeyFrame++;
             Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);

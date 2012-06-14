@@ -5,13 +5,18 @@ namespace RoBuddies.Model.Snapshot
     class KeyFrame
     {
         private List<BodyKeyFrame> AllBodyKeyFrames;
+        private PhysicObject activeRobotPart;
+        private Level Level;
 
-        public KeyFrame(List<IBody> bodyList)
+        public KeyFrame(List<IBody> bodyList, Level level)
         {
+            this.Level = level;
+            this.activeRobotPart = this.Level.Robot.ActivePart;
+
             this.AllBodyKeyFrames = new List<BodyKeyFrame>();
             foreach (IBody body in bodyList)
             {
-                BodyKeyFrame bodyKeyFrame = new BodyKeyFrame(body);
+                BodyKeyFrame bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
                 this.AllBodyKeyFrames.Add(bodyKeyFrame);
             }
         }
@@ -22,6 +27,8 @@ namespace RoBuddies.Model.Snapshot
             {
                 bodyKeyFrame.Restore();
             }
+
+            this.Level.Robot.RobotStateMachine.setActivePart(this.activeRobotPart);
         }
 
         public void Release()

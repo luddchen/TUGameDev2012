@@ -78,21 +78,23 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
-                    mActiveStateMachine = mUpperPartStateMachine;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
-                    setCombined(false);
-                    mRobot.ActivePart = mRobot.UpperPart;
-                    mRobot.UpperPart.Color = Color.White;
-                    mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
+                    setActivePart(mRobot.UpperPart);
+                    //mActiveStateMachine = mUpperPartStateMachine;
+                    //setCombined(false);
+                    //mRobot.ActivePart = mRobot.UpperPart;
+                    //mRobot.UpperPart.Color = Color.White;
+                    //mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
                     mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                 }
                 else if (canCombine())
                 {
-                    mActiveStateMachine = mPartsCombinedStateMachine;
                     mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
-                    setCombined(true);
-                    mRobot.ActivePart = mRobot.PartsCombined;
+                    setActivePart(mRobot.PartsCombined);
+                    //mActiveStateMachine = mPartsCombinedStateMachine;
+                    //setCombined(true);
+                    //mRobot.ActivePart = mRobot.PartsCombined;
                 }
             }
 
@@ -100,17 +102,19 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mLowerPartStateMachine)
                 {
-                    mActiveStateMachine = mUpperPartStateMachine;
-                    mRobot.ActivePart = mRobot.UpperPart;
-                    mRobot.UpperPart.Color = Color.White;
-                    mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
+                    setActivePart(mRobot.UpperPart);
+                    //mActiveStateMachine = mUpperPartStateMachine;
+                    //mRobot.ActivePart = mRobot.UpperPart;
+                    //mRobot.UpperPart.Color = Color.White;
+                    //mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
                 }
                 else if (mActiveStateMachine == mUpperPartStateMachine)
                 {
-                    mActiveStateMachine = mLowerPartStateMachine;
-                    mRobot.ActivePart = mRobot.LowerPart;
-                    mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
-                    mRobot.LowerPart.Color = Color.White;
+                    setActivePart(mRobot.LowerPart);
+                    //mActiveStateMachine = mLowerPartStateMachine;
+                    //mRobot.ActivePart = mRobot.LowerPart;
+                    //mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
+                    //mRobot.LowerPart.Color = Color.White;
                 }
             }
 
@@ -132,6 +136,39 @@ namespace RoBuddies.Control.StateMachines
 
             mOldState = newState;
             mActiveStateMachine.Update(gameTime);
+        }
+
+        /// <summary>
+        /// sets the active robotpart with all statemachines colors and visibility
+        /// </summary>
+        /// <param name="part"></param>
+        public void setActivePart(IBody part)
+        {
+
+            if (part == mRobot.PartsCombined)
+            {
+                mActiveStateMachine = mPartsCombinedStateMachine;
+                mRobot.ActivePart = mRobot.PartsCombined;
+                setCombined(true);
+            }
+
+            if (part == mRobot.LowerPart)
+            {
+                mActiveStateMachine = mLowerPartStateMachine;
+                mRobot.ActivePart = mRobot.LowerPart;
+                setCombined(false);
+                mRobot.LowerPart.Color = Color.White;
+                mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
+            }
+
+            if (part == mRobot.UpperPart)
+            {
+                mActiveStateMachine = mUpperPartStateMachine;
+                mRobot.ActivePart = mRobot.UpperPart;
+                setCombined(false);
+                mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
+                mRobot.UpperPart.Color = Color.White;
+            }
         }
 
         /// <summary>
