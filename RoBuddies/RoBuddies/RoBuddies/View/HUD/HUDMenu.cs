@@ -157,6 +157,7 @@ namespace RoBuddies.View.HUD
                     }
                     else
                     {
+                        this.ActivePage.OnExit();
                         this.ActivePage = this.pageHistory[this.pageHistory.Count - 1];
                     }
                 }

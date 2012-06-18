@@ -123,5 +123,9 @@ namespace RoBuddies.View.HUD
         {
             base.Draw(spriteBatch);
         }
+
+        public virtual void OnExit()
+        {
+        }
     }
 }

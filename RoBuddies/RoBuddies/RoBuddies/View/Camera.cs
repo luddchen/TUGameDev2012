@@ -139,7 +139,10 @@ namespace RoBuddies.View
                 if (this.movingDistance > this.maxDirectMoveDistance)
                 {
                     this.movingDirection = direction / this.movingDistance;
-                    if (this.movingSpeed == 0) { this.movingSpeed = 0.3f; }
+                    if (this.movingSpeed == 0.0f)
+                    {
+                        this.movingSpeed += 0.3f;
+                    }
                 }
                 else
                 {
@@ -163,7 +166,7 @@ namespace RoBuddies.View
         {
             if (this.SmoothMove)
             {
-                if (this.movingSpeed > 0.1f)
+                if (this.movingSpeed > 0.0f)
                 {
                     this.position += this.movingSpeed * this.movingDirection;
                     this.movingDistance -= this.movingSpeed;
@@ -181,7 +184,7 @@ namespace RoBuddies.View
                 {
                     this.movingDirection = Vector2.Zero;
                     this.movingSpeed = 0;
-                    //this.position = this.targetPosition;
+                    this.position = this.targetPosition;
                 }
             }
         }

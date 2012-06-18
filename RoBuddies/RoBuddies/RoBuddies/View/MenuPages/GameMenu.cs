@@ -12,14 +12,17 @@ namespace RoBuddies.View.MenuPages
     class GameMenu : HUDMenuPage
     {
         private HUDString editor;
-        private HUDString makeSnapshot;
-        private HUDString restoreSnapshot;
+        private HUDString rewind;
+        private HUDString forward;
+
+        private int rewindTimer = 8;
+        private int rewindCounter = 0;
 
         public override void OnViewPortResize()
         {
-            if (editor != null) { editor.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.3f); }
-            if (makeSnapshot != null) { makeSnapshot.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
-            if (restoreSnapshot != null) { restoreSnapshot.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }
+            if (editor != null) { editor.Position = new Vector2(this.Viewport.Width * 0.5f, this.Viewport.Height * 0.3f); }
+            if (rewind != null) { rewind.Position = new Vector2(this.Viewport.Width * 0.5f, this.Viewport.Height * 0.7f); }
+            if (forward != null) { forward.Position = new Vector2(this.Viewport.Width * 0.5f, this.Viewport.Height * 0.8f); }
         }
 
         public GameMenu(LevelMenu menu, ContentManager content)
@@ -32,15 +35,15 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(editor);
             this.ChoiceList.Add(editor);
 
-            makeSnapshot = new HUDString("do a Snapshot", content);
-            makeSnapshot.Scale = 0.7f;
-            this.AllElements.Add(makeSnapshot);
-            this.ChoiceList.Add(makeSnapshot);
+            rewind = new HUDString("rewind", content);
+            rewind.Scale = 0.7f;
+            this.AllElements.Add(rewind);
+            this.ChoiceList.Add(rewind);
 
-            restoreSnapshot = new HUDString("restore Snapshot", content);
-            restoreSnapshot.Scale = 0.7f;
-            this.AllElements.Add(restoreSnapshot);
-            this.ChoiceList.Add(restoreSnapshot);
+            forward = new HUDString("forward", content);
+            forward.Scale = 0.7f;
+            this.AllElements.Add(forward);
+            this.ChoiceList.Add(forward);
 
             this.ActiveElement = editor;
         }
@@ -48,8 +51,10 @@ namespace RoBuddies.View.MenuPages
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            ((LevelView)this.Game.LevelView).CameraUpdate();
+            ((LevelView)this.Game.LevelView).Camera.Update(gameTime);
 
-            // Key.Enter -----------------------------------------------------------------------------
+            // Key.Enter pressed once -----------------------------------------------------------------------------
             if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Enter))
             {
                 if (this.ActiveElement != null)
@@ -63,24 +68,43 @@ namespace RoBuddies.View.MenuPages
                         }
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
                     }
-
-                    if (this.ActiveElement == makeSnapshot)
-                    {
-                        ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
-                        ((LevelView)((RoBuddies)this.Game).View).SnapShot.MakeSnapshot();
-                        ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
-                        this.Menu.IsVisible = false;
-                   }
-
-                    if (this.ActiveElement == restoreSnapshot)
-                    {
-                        ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
-                        ((LevelView)((RoBuddies)this.Game).View).SnapShot.Rewind();
-                        ((LevelView)((RoBuddies)this.Game).View).Level.ClearForces();
-                        this.Menu.IsVisible = false;
-                    }
                 }
             }
+
+            // Key.Enter hold down -----------------------------------------------------------------------------
+            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter))
+            {
+                if (this.ActiveElement != null)
+                {
+
+                    if (this.ActiveElement == rewind)
+                    {
+                        this.rewindCounter--;
+                        if (this.rewindCounter < 0)
+                        {
+                            ((LevelView)this.Game.LevelView).SnapShot.Rewind();
+                            this.rewindCounter = this.rewindTimer;
+                        }
+                    }
+
+                    if (this.ActiveElement == forward)
+                    {
+                        this.rewindCounter--;
+                        if (this.rewindCounter < 0)
+                        {
+                            ((LevelView)this.Game.LevelView).SnapShot.Forward();
+                            this.rewindCounter = this.rewindTimer;
+                        }
+                    }
+
+                }
+
+            }
+        }
+
+        public override void OnExit()
+        {
+            ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
         }
 
     }

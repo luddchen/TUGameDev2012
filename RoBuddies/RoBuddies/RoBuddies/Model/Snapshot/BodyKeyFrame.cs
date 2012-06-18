@@ -23,7 +23,7 @@ namespace RoBuddies.Model.Snapshot
             this.Velocity = body.LinearVelocity;
         }
 
-        public void Restore()
+        public virtual void Restore()
         {
             this.Body.Position = this.Position;
             this.Body.Rotation = this.Rotation;

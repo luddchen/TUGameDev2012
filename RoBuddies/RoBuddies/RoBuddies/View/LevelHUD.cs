@@ -33,7 +33,6 @@ namespace RoBuddies.View
             this.backgroundColor = new Color(0, 0, 0, 160);
 
             timeElapsed = new HUDString("", null, null, null, null, 0.5f, null, this.Game.Content);
-            timeElapsed.Scale = 0.5f;
             this.AllElements.Add(timeElapsed);
         }
 
@@ -42,11 +41,6 @@ namespace RoBuddies.View
             base.Update(gameTime);
             timeElapsed.String = String.Format("{0:00}", gameTime.TotalGameTime.Hours) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Minutes) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Seconds);
         }
-
-        //public string GetHUDString 
-        //{
-        //    get { return timeElapsed.Name; }
-        //}
 
     }
 }

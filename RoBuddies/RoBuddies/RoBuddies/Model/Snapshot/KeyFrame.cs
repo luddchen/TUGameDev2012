@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 
+using RoBuddies.Model.Objects;
+
 namespace RoBuddies.Model.Snapshot
 {
     class KeyFrame
@@ -16,7 +18,15 @@ namespace RoBuddies.Model.Snapshot
             this.AllBodyKeyFrames = new List<BodyKeyFrame>();
             foreach (IBody body in bodyList)
             {
-                BodyKeyFrame bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
+                BodyKeyFrame bodyKeyFrame;
+                if (body is Switch)
+                {
+                    bodyKeyFrame = new SwitchKeyFrame((Switch)body);
+                }
+                else
+                {
+                    bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
+                }
                 this.AllBodyKeyFrames.Add(bodyKeyFrame);
             }
         }

@@ -61,7 +61,7 @@ namespace RoBuddies.Model.Snapshot
             KeyFrame keyFrame = new KeyFrame(this.BodyList, this.Level);
             this.AllKeyFrames.Add(keyFrame);
             this.currentKeyFrame++;
-            Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
+            //Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
         }
 
         /// <summary>

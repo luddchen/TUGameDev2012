@@ -12,10 +12,8 @@ namespace RoBuddies.View
     class LevelView : HUD.HUDLevelView
     {
         public Model.Snapshot.Snapshot SnapShot;
-        private int snapshotTimer = 15;
-        private int snapshotCounter = 15;
-        private int rewindTimer = 8;
-        private int rewindCounter = 8;
+        private int snapshotTimer = 10;
+        private int snapshotCounter = 10;
         private KeyboardState oldKeyboardState;
 
         public HUD.HUD HUD;
@@ -89,73 +87,17 @@ namespace RoBuddies.View
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
-            if (newKeyboardState.IsKeyDown(Keys.LeftShift))
+            snapshotCounter--;
+            if (snapshotCounter == 0)
             {
-                this.Camera.SmoothMove = false;
-                if (newKeyboardState.IsKeyDown(Keys.Left))
-                {
-                    this.rewindCounter--;
-                    if (this.rewindCounter == 0)
-                    {
-                        this.SnapShot.Rewind();
-                        this.rewindCounter = this.rewindTimer;
-                    }
-                }
-                if (newKeyboardState.IsKeyDown(Keys.Right))
-                {
-                    this.rewindCounter--;
-                    if (this.rewindCounter == 0)
-                    {
-                        this.SnapShot.Forward();
-                        this.rewindCounter = this.rewindTimer;
-                    }
-                }
+                snapshotCounter = snapshotTimer;
+                this.SnapShot.MakeSnapshot();
             }
-            else
-            {
-                if (oldKeyboardState.IsKeyDown(Keys.LeftShift))
-                {
-                    this.SnapShot.PlayOn();
-                    this.Camera.SmoothMove = true;
-                }
+                
+            this.Level.Update(gameTime);
+            this.HUD.Update(gameTime);
 
-                snapshotCounter--;
-                if (snapshotCounter == 0)
-                {
-                    snapshotCounter = snapshotTimer;
-                    this.SnapShot.MakeSnapshot();
-                }
-
-                this.Level.Update(gameTime);
-                this.HUD.Update(gameTime);
-            }
-
-            // camera following
-            if (this.Level.Robot != null && this.Level.Robot.ActivePart != null)
-            {
-                this.Camera.Move(Utilities.ConvertUnits.ToDisplayUnits(this.Level.Robot.ActivePart.Position));
-            }
-
-            //if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
-            //{
-            //    this.Level.ClearForces();
-            //    this.SnapShot.MakeSnapshot();
-            //    this.Level.ClearForces();
-            //}
-
-            //if (newKeyboardState.IsKeyDown(Keys.R) && oldKeyboardState.IsKeyUp(Keys.R))
-            //{
-            //    this.Level.ClearForces();
-            //    this.SnapShot.Rewind(1);
-            //    this.Level.ClearForces();
-            //}
-
-            //if (newKeyboardState.IsKeyDown(Keys.E) && oldKeyboardState.IsKeyUp(Keys.E))
-            //{
-            //    this.Level.ClearForces();
-            //    this.SnapShot.Rewind(2);
-            //    this.Level.ClearForces();
-            //}
+            CameraUpdate();
 
             // test key for switching to the next level
             if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))
@@ -169,6 +111,17 @@ namespace RoBuddies.View
             }
 
             this.oldKeyboardState = newKeyboardState;
+        }
+
+        /// <summary>
+        /// camera following
+        /// </summary>
+        public void CameraUpdate()
+        {
+            if (this.Level.Robot != null && this.Level.Robot.ActivePart != null)
+            {
+                this.Camera.Move(Utilities.ConvertUnits.ToDisplayUnits(this.Level.Robot.ActivePart.Position));
+            }
         }
 
         protected override void DrawContent(SpriteBatch spriteBatch)

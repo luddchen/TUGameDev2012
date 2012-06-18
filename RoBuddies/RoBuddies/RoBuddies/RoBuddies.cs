@@ -110,7 +110,10 @@ namespace RoBuddies
             
             if (started)
             {
-                View.Update(gameTime);
+                if (!Menu.IsVisible)
+                {
+                    View.Update(gameTime);
+                }
                 Menu.Update(gameTime);
 
                 // testing camera
