@@ -93,6 +93,15 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WAIT_STATE);
                 }
+            }
+
+            if (newState.IsKeyUp(Keys.Left) && oldState.IsKeyDown(Keys.Left))
+            {
+                if (!(CurrentState is PullingState))
+                {
+                    SwitchToState(WAIT_STATE);
+                }
+                robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
                 robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
             }
 
@@ -103,6 +112,16 @@ namespace RoBuddies.Control.StateMachines
                     SwitchToState(WalkingState.RIGHT_WALK_STATE);
                 }
                 robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
+            }
+
+            if (newState.IsKeyUp(Keys.Right) && oldState.IsKeyDown(Keys.Right))
+            {
+                if (!(CurrentState is PullingState))
+                {
+                    SwitchToState(WAIT_STATE);
+                }
+                robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
+                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
             }
 
             if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
