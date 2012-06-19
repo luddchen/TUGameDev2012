@@ -76,7 +76,7 @@ namespace RoBuddies.Control.StateMachines
             Vector2 combinedPartPos = mRobot.PartsCombined.Position;
             float rayEnd = combinedPartPos.Y + mRobot.PartsCombined.Height; //mRobot.UpperPart.Height
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
-            bool hitsLadder = intersectingObject is Pipe;    
+            bool hitsLadder = intersectingObject is Ladder;    
             return hitsLadder;
         }
 
@@ -88,7 +88,6 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine && hitsLadder())
                 {
-                    //Console.WriteLine("hite Ladder!!! Change to climbing state");
                     mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.CLIMBING_STATE);
                 }
             }

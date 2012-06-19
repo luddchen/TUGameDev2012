@@ -63,10 +63,11 @@ namespace RoBuddies.Control.StateMachines
 
         private bool canClimbUp()
         {
+            Console.WriteLine("climb up check");
             Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y + robot.ActivePart.Height);
             float rayEnd = combinedPartPos.Y + robot.ActivePart.Height;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
-            bool canClimbUp = intersectingObject is Pipe;
+            bool canClimbUp = intersectingObject is Ladder;
             return canClimbUp;
         }
 
@@ -83,10 +84,14 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Up) && CurrentState.Name == CLIMBING_STATE && canClimbUp())
+            if (newState.IsKeyDown(Keys.Up) && CurrentState.Name == CLIMBING_STATE )//&& canClimbUp())
             {
+                Console.WriteLine("can climb up");
                 ((LadderClimbingState)CurrentState).IsMoving = false;
-                (Body as Body).LinearVelocity = new Vector2((Body as Body).LinearVelocity.X, 8);
+                //(Body as Body).LinearVelocity = new Vector2((Body as Body).LinearVelocity.X, 8);
+                robot.ActivePart.IgnoreGravity = true;
+                robot.ActivePart.Position += new Vector2(0, 2f);
+                robot.ActivePart.IgnoreGravity = true;
                 Body.Effect = SpriteEffects.None;
                 ((LadderClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
             }

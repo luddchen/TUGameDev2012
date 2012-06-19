@@ -38,7 +38,7 @@ namespace RoBuddies.Control.RobotStates
         public override void Enter()
         {
             frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
-            prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -2f));
+            prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -f));
             prismaticJoint.MotorEnabled = true;
             prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
         }

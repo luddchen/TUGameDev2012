@@ -36,7 +36,9 @@ namespace RoBuddies.Model.Objects
             this.game = game;
             this.BodyType = BodyType.Static;
             this.Friction = 10f;
-            ladderFixture = FixtureFactory.AttachRectangle(Width, Height, 0.5f, Vector2.Zero, this);
+            ladderFixture = FixtureFactory.AttachRectangle(Width, 0f, 1f,Vector2.Zero, this);
+            //ladderFixture = FixtureFactory.AttachEdge(Vector2.Zero, Vector2.Zero, this);
+            //ladderFixture = FixtureFactory.AttachEdge(new Vector2(0, -2), new Vector2(0, -2), this);
 
             this.CollisionCategories = Category.Cat1;
             this.CollidesWith = Category.None;
