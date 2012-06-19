@@ -45,7 +45,7 @@ namespace RoBuddies.Model.Objects
                 //this.Effect = SpriteEffects.FlipVertically;
                 
                 IsActivated = true;
-
+                this.Color = new Color(160, 160, 160, 160);
                 switchObject.switchOn();
             }
         }

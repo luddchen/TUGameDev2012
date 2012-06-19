@@ -9,7 +9,7 @@ using Robuddies.Interfaces;
 namespace RoBuddies.Model.Objects
 {
     /// <summary>
-    /// This class can be used to add crate objects to the level.
+    /// This class can be used to add wall objects to the level.
     /// </summary>
     class Wall : PhysicObject, ISwitchable
     {
@@ -96,7 +96,8 @@ namespace RoBuddies.Model.Objects
                 Color temp = this.Color;
                 temp.R *= 2; temp.G *= 2; temp.B *= 2;
                 this.Color = temp;
-                //Position += new Vector2(0, 1);
+                for (int i = 0; i < 10 * this.Height; i++ )
+                    Position += new Vector2(0, -1);
             }
         }  
 
