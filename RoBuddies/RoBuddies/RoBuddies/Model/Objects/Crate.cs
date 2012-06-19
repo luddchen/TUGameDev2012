@@ -32,9 +32,9 @@ namespace RoBuddies.Model.Objects
             calculateHeaviness();
 
             this.FixedRotation = true;
-            this.Friction = 1f;
+            this.Friction = 100f;
             //this.Mass = size.X * size.Y * Int16.MaxValue;
-            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 3, Vector2.Zero, this);
         }
 
         private void calculateHeaviness()
