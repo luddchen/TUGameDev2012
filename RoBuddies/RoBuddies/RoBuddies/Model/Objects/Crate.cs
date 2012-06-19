@@ -71,9 +71,10 @@ namespace RoBuddies.Model.Objects
                 else if (isHeavyCrate)
                 {
                     this.BodyType = BodyType.Static;
-                    Color temp = Color.BurlyWood;
-                    temp.R /= 2; temp.G /= 2; temp.B /= 2;
-                    this.Color = temp; //the crate cannot be moved now
+                    this.Color = new Color(320, 320, 320, 320);
+                    //Color temp = Color.BurlyWood;
+                    //temp.R /= 2; temp.G /= 2; temp.B /= 2;
+                    //this.Color = temp; //the crate cannot be moved now
                 }
             }
         }
