@@ -154,6 +154,7 @@
     <Compile Include="Model\Objects\Switch.cs" />
     <Compile Include="Model\Objects\Wall.cs" />
     <Compile Include="Model\PhysicObject.cs" />
+    <Compile Include="Model\RobotParts\PartsCombined.cs" />
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\Serializer\Converter\Converter.cs" />
     <Compile Include="Model\Serializer\Converter\CrateConverter.cs" />

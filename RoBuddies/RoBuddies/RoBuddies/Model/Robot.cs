@@ -9,6 +9,8 @@ using FarseerPhysics.Factories;
 using RoBuddies.Control;
 using RoBuddies.Control.StateMachines;
 using RoBuddies.Control.RobotStates;
+using FarseerPhysics.Dynamics.Joints;
+using RoBuddies.Model.RobotParts;
 
 namespace RoBuddies.Model
 {
@@ -22,7 +24,7 @@ namespace RoBuddies.Model
 
         private PhysicObject lowerPart;
         private PhysicObject upperPart;
-        private PhysicObject partsCombined;
+        private PartsCombined partsCombined;
         private PhysicObject head;
         private PhysicObject activePart;
 
@@ -39,7 +41,7 @@ namespace RoBuddies.Model
             get { return upperPart; }
         }
 
-        public PhysicObject PartsCombined
+        public PartsCombined PartsCombined
         {
             get { return partsCombined; }
         }
@@ -93,11 +95,6 @@ namespace RoBuddies.Model
             this.robotStateMachine = new RobotStateMachine(activePart, content, this);
             this.level.AddStateMachine(robotStateMachine);
 
-            this.partsCombined.IsVisible = true;
-            this.partsCombined.Friction = 3f;
-            this.partsCombined.IgnoreCollisionWith(this.upperPart);
-            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
-
             this.upperPart.IsVisible = false;
             this.upperPart.Friction = 3f;
             this.upperPart.IgnoreCollisionWith(this.partsCombined);
@@ -129,20 +126,12 @@ namespace RoBuddies.Model
 
         private void initPartsCombined(Vector2 pos, ContentManager content)
         {
-            Texture2D waitTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0001");
-            Texture2D jumpTex = content.Load<Texture2D>("Sprites//Robot//BudBudi//0040");
-
-            this.partsCombined = new PhysicObject(this.level);
-            this.ActivePart = partsCombined; 
-
-            partsCombined.FixedRotation = true;
-            partsCombined.Position = pos;
-            partsCombined.BodyType = BodyType.Dynamic;
-            partsCombined.Color = Color.White;
-            FixtureFactory.AttachRectangle(1, 2.9f, 1, Vector2.Zero, partsCombined);
-            partsCombined.Width = 3;
-            partsCombined.Height = 3;
-
+            this.partsCombined = new PartsCombined(this.level, pos);
+            this.partsCombined.IgnoreCollisionWith(this.upperPart);
+            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.upperPart);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart);
+            this.ActivePart = partsCombined;
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
         }
 

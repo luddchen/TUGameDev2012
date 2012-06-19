@@ -4,6 +4,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
+using RoBuddies.Model.RobotParts;
 
 namespace RoBuddies.Control.RobotStates
 {
@@ -28,13 +29,20 @@ namespace RoBuddies.Control.RobotStates
         {
             if (Name == LEFT_WALK_STATE)
             {
-                body.LinearVelocity = new Vector2(-3, body.LinearVelocity.Y);
+               
+                if (!(body is PartsCombined))
+                {
+                    body.LinearVelocity = new Vector2(-3, body.LinearVelocity.Y);
+                }
                 StateMachine.Body.Effect = SpriteEffects.FlipHorizontally;
             }
 
             if (Name == RIGHT_WALK_STATE)
             {
-                body.LinearVelocity = new Vector2(3, body.LinearVelocity.Y);
+                if (!(body is PartsCombined))
+                {
+                    body.LinearVelocity = new Vector2(3, body.LinearVelocity.Y);
+                }
                 StateMachine.Body.Effect = SpriteEffects.None;
             }
 

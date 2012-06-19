@@ -10,6 +10,7 @@ using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Utilities;
+using RoBuddies.Model.RobotParts;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -83,6 +84,7 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WalkingState.LEFT_WALK_STATE);
                 }
+                robot.PartsCombined.wheelMotor.MotorSpeed = 10f;
             }
 
             if (newState.IsKeyUp(Keys.Left))
@@ -91,6 +93,7 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WAIT_STATE);
                 }
+                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
             }
 
             if (newState.IsKeyDown(Keys.Right))
@@ -99,6 +102,7 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WalkingState.RIGHT_WALK_STATE);
                 }
+                robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
             }
 
             if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
