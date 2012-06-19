@@ -84,7 +84,19 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WalkingState.LEFT_WALK_STATE);
                 }
-                robot.PartsCombined.wheelMotor.MotorSpeed = 10f;
+                if (!isOnGround())
+                {
+                    robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+                    robot.PartsCombined.ApplyForce(new Vector2(-100, 0));
+                    if (robot.PartsCombined.LinearVelocity.X < -3)
+                    {
+                        robot.PartsCombined.LinearVelocity = new Vector2(-3, robot.PartsCombined.LinearVelocity.Y);
+                    }
+                }
+                else
+                {
+                    robot.PartsCombined.wheelMotor.MotorSpeed = 10f;
+                }
             }
 
             if (newState.IsKeyUp(Keys.Left))
@@ -112,6 +124,19 @@ namespace RoBuddies.Control.StateMachines
                     SwitchToState(WalkingState.RIGHT_WALK_STATE);
                 }
                 robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
+                if (!isOnGround())
+                {
+                    robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+                    robot.PartsCombined.ApplyForce(new Vector2(100, 0));
+                    if (robot.PartsCombined.LinearVelocity.X > 3)
+                    {
+                        robot.PartsCombined.LinearVelocity = new Vector2(3, robot.PartsCombined.LinearVelocity.Y);
+                    }
+                }
+                else
+                {
+                    robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
+                }
             }
 
             if (newState.IsKeyUp(Keys.Right) && oldState.IsKeyDown(Keys.Right))
@@ -159,8 +184,8 @@ namespace RoBuddies.Control.StateMachines
             float rayEnd;
             bool isOnGround = false;
 
-            Vector2 combinedPartPos = robot.PartsCombined.Position;
-            rayEnd = combinedPartPos.Y - robot.PartsCombined.Height / 2;
+            Vector2 combinedPartPos = robot.PartsCombined.wheelBody.Position;
+            rayEnd = combinedPartPos.Y - 0.6f;
             isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
 
             return isOnGround;

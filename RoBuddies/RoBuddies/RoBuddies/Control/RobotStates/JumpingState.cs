@@ -21,7 +21,7 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Enter()
         {
-            (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1500));
+            (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1800));
         }
 
         public override void Update(GameTime gameTime)
