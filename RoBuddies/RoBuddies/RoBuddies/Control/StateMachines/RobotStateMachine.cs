@@ -90,6 +90,17 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else if (canCombine())
                 {
+                    //change heavy crates to dynamic
+                    Layer mainLayer = Level.GetLayerByName("mainLayer");
+                    foreach (IBody obj in mainLayer.AllObjects)
+                    {
+                        if (obj is Crate)
+                        {
+                            Crate crate = (Crate)obj;
+                            crate.stateUpdate = true;
+                        }
+                    }
+
                     mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
                     setActivePart(mRobot.PartsCombined);
                     //mActiveStateMachine = mPartsCombinedStateMachine;
@@ -110,6 +121,17 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else if (mActiveStateMachine == mUpperPartStateMachine)
                 {
+                    //change heavy crates to static
+                    Layer mainLayer = Level.GetLayerByName("mainLayer");
+                    foreach (IBody obj in mainLayer.AllObjects)
+                    {
+                        if (obj is Crate)
+                        {
+                            Crate crate = (Crate)obj;
+                            crate.stateUpdate = false;
+                        }
+                    }
+
                     setActivePart(mRobot.LowerPart);
                     //mActiveStateMachine = mLowerPartStateMachine;
                     //mRobot.ActivePart = mRobot.LowerPart;

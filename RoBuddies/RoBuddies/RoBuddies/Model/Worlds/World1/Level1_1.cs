@@ -31,11 +31,11 @@ namespace RoBuddies.Model.Worlds.World1
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
 
-            Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
-            Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
-            levelObjects.Add(switchWall);
-            levelObjects.Add(wallSwitcher);
-        
+            //Switch wall testing 
+            //Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
+            //Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
+            //levelObjects.Add(switchWall);
+            //levelObjects.Add(wallSwitcher);
         }
     }
     
