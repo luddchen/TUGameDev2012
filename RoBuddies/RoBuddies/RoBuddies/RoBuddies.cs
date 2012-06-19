@@ -125,10 +125,10 @@ namespace RoBuddies
                     if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.View.Camera.Rotation -= 0.005f; }
                     if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.View.Camera.Rotation += 0.005f; }
 
-                    if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
-                    if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
+                    //if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
+                    //if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
+                    //if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
+                    //if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
                 }
             }
 

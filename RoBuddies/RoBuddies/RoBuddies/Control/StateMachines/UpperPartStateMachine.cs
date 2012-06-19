@@ -61,21 +61,28 @@ namespace RoBuddies.Control.StateMachines
                 SwitchToState(PIPE_CLIMBING_STATE);
             }
 
-            if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Left) && canClimbLeft())
+            if (CurrentState.Name == PIPE_CLIMBING_STATE)
             {
-                (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.FlipHorizontally;
-            }
+                ((PipeClimbingState)CurrentState).IsMoving = false;
 
-            if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Right) && canClimbRight())
-            {
-                (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
-                Body.Effect = SpriteEffects.None;
-            }
+                if (newState.IsKeyDown(Keys.Left) && canClimbLeft())
+                {
+                    (Body as Body).LinearVelocity = new Vector2(-5, (Body as Body).LinearVelocity.Y);
+                    Body.Effect = SpriteEffects.FlipHorizontally;
+                    ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
+                }
 
-            if (CurrentState.Name == PIPE_CLIMBING_STATE && newState.IsKeyDown(Keys.Space))
-            {
-                SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
+                if (newState.IsKeyDown(Keys.Right) && canClimbRight())
+                {
+                    (Body as Body).LinearVelocity = new Vector2(5, (Body as Body).LinearVelocity.Y);
+                    Body.Effect = SpriteEffects.None;
+                    ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
+                }
+
+                if (newState.IsKeyDown(Keys.Space))
+                {
+                    SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
+                }
             }
 
             CurrentState.Update(gameTime);
