@@ -31,6 +31,16 @@ namespace RoBuddies.Model.Worlds.World1
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
 
+            Pipe pipeLadder1 = new Pipe(new Vector2(4f, -1f), 2f, Color.BurlyWood, this.Level, this.game);
+            Pipe pipeLadder2 = new Pipe(new Vector2(4f, 1f), 2f, Color.BurlyWood, this.Level, this.game);
+            Pipe pipeLadder3 = new Pipe(new Vector2(4f, 3f), 2f, Color.BurlyWood, this.Level, this.game);
+            Pipe pipeLadder4 = new Pipe(new Vector2(4f, 5f), 2f, Color.BurlyWood, this.Level, this.game);
+
+            levelObjects.Add(pipeLadder1);
+            levelObjects.Add(pipeLadder2);
+            levelObjects.Add(pipeLadder3);
+            levelObjects.Add(pipeLadder4);
+
             //Switch wall testing 
             //Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
             //Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);

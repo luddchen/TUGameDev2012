@@ -70,9 +70,28 @@ namespace RoBuddies.Control.StateMachines
             mActiveStateMachine = mPartsCombinedStateMachine;
         }
 
+
+        private bool hitsLadder()
+        {
+            Vector2 combinedPartPos = mRobot.PartsCombined.Position;
+            float rayEnd = combinedPartPos.Y + mRobot.PartsCombined.Height; //mRobot.UpperPart.Height
+            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
+            bool hitsLadder = intersectingObject is Pipe;    
+            return hitsLadder;
+        }
+
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.Up) && mOldState.IsKeyUp(Keys.Up))
+            {
+                if (mActiveStateMachine == mPartsCombinedStateMachine && hitsLadder())
+                {
+                    //Console.WriteLine("hite Ladder!!! Change to climbing state");
+                    mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.CLIMBING_STATE);
+                }
+            }
 
             if (newState.IsKeyDown(Keys.X) && mOldState.IsKeyUp(Keys.X))
             {

@@ -69,7 +69,8 @@ namespace RoBuddies.Model.Worlds
             Layer backLayer = this.Level.GetLayerByName("backLayer");
             foreach (IBody body in levelObjects)
             {
-                if (body is Switch || body is Pipe || body is Door) {
+                if (body is Switch || body is Pipe || body is Door) // 
+                {
                     backLayer.AddObject(body);
                 } else {
                     mainLayer.AddObject(body);

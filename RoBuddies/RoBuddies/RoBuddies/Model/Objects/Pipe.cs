@@ -31,11 +31,11 @@ namespace RoBuddies.Model.Objects
             attachTexture();
 
             this.BodyType = BodyType.Static;
-            this.Friction = 10f;
+            this.Friction = 100f;
 
             pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
 
-            this.CollisionCategories = Category.Cat1;
+            //this.CollisionCategories = Category.Cat1;
             this.CollidesWith = Category.None;
         }
 

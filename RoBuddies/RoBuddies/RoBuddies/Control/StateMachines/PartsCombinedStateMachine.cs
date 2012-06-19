@@ -19,6 +19,7 @@ namespace RoBuddies.Control.StateMachines
         public const String WAIT_STATE = "WaitingState";
         public const String JUMP_STATE = "JumpState";
         public const String PULL_STATE = "PullingState";
+        public const String CLIMBING_STATE = "ClimbingState";
 
         private const int END_ANIMATION = 80;
 
@@ -55,13 +56,40 @@ namespace RoBuddies.Control.StateMachines
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
             AllStates.Add(new PullingState(PULL_STATE, textureList, this));
+            AllStates.Add(new LadderClimbingState(CLIMBING_STATE, textureList, Level, this));
 
             SwitchToState(WAIT_STATE);
+        }
+
+        private bool canClimbUp()
+        {
+            Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y + robot.ActivePart.Height);
+            float rayEnd = combinedPartPos.Y + robot.ActivePart.Height;
+            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
+            bool canClimbUp = intersectingObject is Pipe;
+            return canClimbUp;
+        }
+
+        private bool canClimbDown()
+        {
+            Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y - robot.ActivePart.Height / 4);
+            float rayEnd = combinedPartPos.Y + robot.ActivePart.Height / 3;
+            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
+            bool canClimbDown = intersectingObject is Ladder;
+            return canClimbDown;
         }
 
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
+
+            if (newState.IsKeyDown(Keys.Up) && CurrentState.Name == CLIMBING_STATE && canClimbUp())
+            {
+                ((LadderClimbingState)CurrentState).IsMoving = false;
+                (Body as Body).LinearVelocity = new Vector2((Body as Body).LinearVelocity.X, 8);
+                Body.Effect = SpriteEffects.None;
+                ((LadderClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
+            }
 
             if (newState.IsKeyDown(Keys.A))
             {
