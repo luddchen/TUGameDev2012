@@ -29,21 +29,11 @@ namespace RoBuddies.Control.RobotStates
         {
             if (Name == LEFT_WALK_STATE)
             {
-
-                if (!(body is PartsCombined))
-                {
-                    body.LinearVelocity = new Vector2(-3, body.LinearVelocity.Y);
-                }
                 StateMachine.Body.Effect = SpriteEffects.FlipHorizontally;
             }
 
             if (Name == RIGHT_WALK_STATE)
             {
-                if (!(body is PartsCombined))
-                {
-                    body.LinearVelocity = new Vector2(3, body.LinearVelocity.Y);
-                }
-                else
                 StateMachine.Body.Effect = SpriteEffects.None;
             }
             UpdateWalkAnimation(gameTime);

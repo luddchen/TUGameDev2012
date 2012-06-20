@@ -180,7 +180,6 @@ namespace RoBuddies.Control.StateMachines
                 {
                     SwitchToState(WalkingState.RIGHT_WALK_STATE);
                 }
-                robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
                 if (!isOnGround())
                 {
                     robot.PartsCombined.wheelMotor.MotorSpeed = 0f;

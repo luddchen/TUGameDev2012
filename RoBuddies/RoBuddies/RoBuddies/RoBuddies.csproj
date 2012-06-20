@@ -156,6 +156,7 @@
     <Compile Include="Model\PhysicObject.cs" />
     <Compile Include="Model\RobotParts\BridgeHead.cs" />
     <Compile Include="Model\RobotParts\Head.cs" />
+    <Compile Include="Model\RobotParts\LowerPart.cs" />
     <Compile Include="Model\RobotParts\PartsCombined.cs" />
     <Compile Include="Model\Robot.cs" />
     <Compile Include="Model\Serializer\Converter\Converter.cs" />

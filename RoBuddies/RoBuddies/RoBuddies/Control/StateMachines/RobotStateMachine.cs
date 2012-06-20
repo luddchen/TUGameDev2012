@@ -124,6 +124,7 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mLowerPartStateMachine)
                 {
+                    mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
                     setActivePart(mRobot.UpperPart);
                     //mActiveStateMachine = mUpperPartStateMachine;
                     //mRobot.ActivePart = mRobot.UpperPart;

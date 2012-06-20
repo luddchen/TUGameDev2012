@@ -64,20 +64,57 @@ namespace RoBuddies.Control.StateMachines
             if (newState.IsKeyDown(Keys.Left))
             {
                 SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(-3, (Body as Body).LinearVelocity.Y);
+                if (!isOnGround())
+                {
+                    robot.LowerPart.wheelMotor.MotorSpeed = 0f;
+                    robot.LowerPart.ApplyForce(new Vector2(-100, 0));
+                    if (robot.LowerPart.LinearVelocity.X < -3)
+                    {
+                        robot.LowerPart.LinearVelocity = new Vector2(-3, robot.LowerPart.LinearVelocity.Y);
+                    }
+                }
+                else
+                {
+                    robot.LowerPart.wheelMotor.MotorSpeed = 10f;
+                }
                 Body.Effect = SpriteEffects.FlipHorizontally;
                 UpdateWalkAnimation(gameTime);
                 //Console.WriteLine("Walk Left");
             }
 
+            if (newState.IsKeyUp(Keys.Left) && oldState.IsKeyDown(Keys.Left))
+            {
+                robot.LowerPart.LinearVelocity = new Vector2(0, robot.LowerPart.LinearVelocity.Y);
+                robot.LowerPart.wheelMotor.MotorSpeed = 0f;
+            }
+
             if (newState.IsKeyDown(Keys.Right))
             {
                 SwitchToState(WALK_STATE);
-                (Body as Body).LinearVelocity = new Vector2(3, (Body as Body).LinearVelocity.Y);
+                if (!isOnGround())
+                {
+                    robot.LowerPart.wheelMotor.MotorSpeed = 0f;
+                    robot.LowerPart.ApplyForce(new Vector2(100, 0));
+                    if (robot.LowerPart.LinearVelocity.X > 3)
+                    {
+                        robot.LowerPart.LinearVelocity = new Vector2(3, robot.LowerPart.LinearVelocity.Y);
+                    }
+                }
+                else
+                {
+                    robot.LowerPart.wheelMotor.MotorSpeed = -10f;
+                }
                 Body.Effect = SpriteEffects.None;
                 UpdateWalkAnimation(gameTime);
                 //Console.WriteLine("Walk Right");
             }
+
+            if (newState.IsKeyUp(Keys.Right) && oldState.IsKeyDown(Keys.Right))
+            {
+                robot.LowerPart.LinearVelocity = new Vector2(0, robot.LowerPart.LinearVelocity.Y);
+                robot.LowerPart.wheelMotor.MotorSpeed = 0f;
+            }
+
 
             oldState = newState;
         }
@@ -110,7 +147,7 @@ namespace RoBuddies.Control.StateMachines
         {
             Console.WriteLine("Jump LowerPart!");
             SwitchToState(JUMP_STATE);
-            ((Body)Body).ApplyForce(new Vector2(0, 1000));
+            ((Body)Body).ApplyForce(new Vector2(0, 1200));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace RoBuddies.Model
     {
         #region Members and Properties
 
-        private PhysicObject lowerPart;
+        private LowerPart lowerPart;
         private PhysicObject upperPart;
         private PartsCombined partsCombined;
         private Head head;
@@ -31,7 +31,7 @@ namespace RoBuddies.Model
         private RobotStateMachine robotStateMachine;
         private Level level;
 
-        public PhysicObject LowerPart
+        public LowerPart LowerPart
         {
             get { return lowerPart; }
         }
@@ -103,9 +103,19 @@ namespace RoBuddies.Model
             this.upperPart.IgnoreCollisionWith(this.lowerPart);
 
             this.lowerPart.IsVisible = false;
-            this.lowerPart.Friction = 3f;
-            this.lowerPart.IgnoreCollisionWith(partsCombined);
-            this.lowerPart.IgnoreCollisionWith(upperPart);
+            this.lowerPart.IgnoreCollisionWith(this.upperPart);
+            this.lowerPart.IgnoreCollisionWith(this.PartsCombined);
+            this.lowerPart.IgnoreCollisionWith(this.PartsCombined.wheelBody);
+            this.lowerPart.wheelBody.IgnoreCollisionWith(this.upperPart);
+            this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined);
+            this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined.wheelBody);
+
+            this.partsCombined.IgnoreCollisionWith(this.upperPart);
+            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
+            this.partsCombined.IgnoreCollisionWith(this.lowerPart.wheelBody);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.upperPart);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart.wheelBody);
             //----------------------------------------------------------------------------------------------------------
         }
 
@@ -129,28 +139,13 @@ namespace RoBuddies.Model
 
         private void initLowerPart(Vector2 pos, ContentManager content)
         {
-            Texture2D lowerWaitTex = content.Load<Texture2D>("Sprites//Robot//Bud//0001");
-
-            this.lowerPart = new PhysicObject(this.level);
-
-            lowerPart.FixedRotation = true;
-            lowerPart.Position = pos;
-            lowerPart.BodyType = BodyType.Dynamic;
-            lowerPart.Color = Color.White;
-            FixtureFactory.AttachRectangle(1, 1.5f, 1, Vector2.Zero, lowerPart);
-            lowerPart.Width = 3;
-            lowerPart.Height = 1.8f;
-
+            this.lowerPart = new LowerPart(this.level, pos);
             this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
         }
 
         private void initPartsCombined(Vector2 pos, ContentManager content)
         {
             this.partsCombined = new PartsCombined(this.level, pos);
-            this.partsCombined.IgnoreCollisionWith(this.upperPart);
-            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.upperPart);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart);
             this.ActivePart = partsCombined;
             this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
         }
