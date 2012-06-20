@@ -26,9 +26,16 @@ namespace RoBuddies.Control.StateMachines
         private Robot robot;
         private List<Texture2D> textureList;
 
+        private HeadStateMachine mHeadStateMachine;
+
         public Level Level
         {
             get { return robot.Level; }
+        }
+
+        public HeadStateMachine HeadStateMachine
+        {
+            get { return mHeadStateMachine; }
         }
 
         public UpperPartStateMachine(IBody body, ContentManager contentManager, Robot robot)
@@ -37,6 +44,8 @@ namespace RoBuddies.Control.StateMachines
             this.contentManager = contentManager;
             this.robot = robot;
             textureList = new List<Texture2D>();
+
+            mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
 
             for (int i = START_ANIMATION; i <= END_ANIMATION; i++)
             {
@@ -86,6 +95,12 @@ namespace RoBuddies.Control.StateMachines
             }
 
             CurrentState.Update(gameTime);
+
+            if (mHeadStateMachine.HasHead)
+            {
+                mHeadStateMachine.Update(gameTime);
+            }
+
             oldState = newState;
         }
 
