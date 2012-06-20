@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -13,7 +14,7 @@ namespace RoBuddies.Control.StateMachines
     {
         private List<Texture2D> textureList;
         private ContentManager contentManager;
-        private Robot robot;
+        protected Robot robot;
         private bool hasHead;
         private KeyboardState oldState;
 
@@ -58,7 +59,7 @@ namespace RoBuddies.Control.StateMachines
 
         private void UpdatePosition()
         {
-            Body.Position = robot.PartsCombined.Position + new Vector2(0, 2);
+            Body.Position = robot.ActivePart.Position + new Vector2(0, 2);
         }
     }
 }

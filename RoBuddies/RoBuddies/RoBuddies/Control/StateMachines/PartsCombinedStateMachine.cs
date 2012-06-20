@@ -55,7 +55,7 @@ namespace RoBuddies.Control.StateMachines
             this.textureList = new List<Texture2D>();
             this.isPulling = false;
 
-            mHeadStateMachine = new HeadStateMachine(robot.Head, contentManager, robot);
+            mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
@@ -78,7 +78,7 @@ namespace RoBuddies.Control.StateMachines
         {
             Console.WriteLine("climb up check");
             Vector2 combinedPartPos = robot.PartsCombined.Position;
-            float rayEnd = combinedPartPos.X + 100;
+            float rayEnd = combinedPartPos.X + 0.51f;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
            
             if (intersectingObject != null)
@@ -93,7 +93,7 @@ namespace RoBuddies.Control.StateMachines
         private bool canClimbDown()
         {
             Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y - robot.ActivePart.Height / 4);
-            float rayEnd = combinedPartPos.Y - robot.ActivePart.Height / 3;
+            float rayEnd = combinedPartPos.Y - 0.51f;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
 
             if (intersectingObject != null)
@@ -135,7 +135,7 @@ namespace RoBuddies.Control.StateMachines
                 SwitchToState(JUMP_STATE);
             }
 
-            if (newState.IsKeyDown(Keys.Left))
+            if (newState.IsKeyDown(Keys.Left) && newState.IsKeyUp(Keys.LeftControl))
             {
                 if (!(CurrentState is PullingState))
                 {

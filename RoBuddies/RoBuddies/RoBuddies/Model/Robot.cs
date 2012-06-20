@@ -30,6 +30,7 @@ namespace RoBuddies.Model
 
         private RobotStateMachine robotStateMachine;
         private Level level;
+        private Game game;
 
         public LowerPart LowerPart
         {
@@ -68,6 +69,11 @@ namespace RoBuddies.Model
             get { return level; }
         }
 
+        public Game Game
+        {
+            get { return game; }
+        }
+
         #endregion
 
         public Robot(ContentManager content, Vector2 pos, Level level, Game game) 
@@ -81,7 +87,7 @@ namespace RoBuddies.Model
 
         private void initRobot(ContentManager content, Vector2 pos, Game game) 
         {
-            // partsCombined construction ------------------------------------------------------------------------------    
+            this.game = game;
 
             // don't change the order of the initialization. The order of adding the bodys to the world is important for the editor.
             initLowerPart(pos, content);

@@ -134,6 +134,7 @@
     <Compile Include="Control\RobotStates\ShootingState.cs" />
     <Compile Include="Control\RobotStates\WaitingState.cs" />
     <Compile Include="Control\State.cs" />
+    <Compile Include="Control\StateMachines\BridgeHeadStateMachine.cs" />
     <Compile Include="Control\StateMachines\ExampleStateMachine.cs" />
     <Compile Include="Control\StateMachines\HeadStateMachine.cs" />
     <Compile Include="Control\StateMachines\LowerPartStateMachine.cs" />
