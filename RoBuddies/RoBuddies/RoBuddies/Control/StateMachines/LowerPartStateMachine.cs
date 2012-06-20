@@ -119,7 +119,7 @@ namespace RoBuddies.Control.StateMachines
             oldState = newState;
         }
 
-        private bool isOnGround()
+        public bool isOnGround()
         {
             bool isOnGround = false;
 

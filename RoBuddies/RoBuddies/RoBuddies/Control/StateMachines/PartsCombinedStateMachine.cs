@@ -241,7 +241,7 @@ namespace RoBuddies.Control.StateMachines
             return canOpenLevelEndingDoor;
         }
 
-        private bool isOnGround()
+        public bool isOnGround()
         {
             bool isOnGround = false;
 

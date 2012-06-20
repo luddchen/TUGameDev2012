@@ -28,20 +28,56 @@ namespace RoBuddies.Control.StateMachines
 
             if (newState.IsKeyDown(Keys.Y) && oldState.IsKeyUp(Keys.Y))
             {
-                Layer mainLayer = robot.Level.GetLayerByName("mainLayer");
-                Vector2 pos = new Vector2((int)Math.Round(robot.PartsCombined.Position.X), (int)Math.Round(robot.PartsCombined.Position.Y - 2.3f));
-                Wall newWall = new Wall(pos, new Vector2(3, 1), Color.White, robot.Level, robot.Game, false);
-                mainLayer.AddObject(newWall);
-                if (oldWall != null)
-                {
-                    robot.Level.removeObject(oldWall);
-                    oldWall.Dispose();
 
+                if (isOnGround() 
+                    && (robot.RobotStateMachine.ActiveStateMachine == robot.RobotStateMachine.PartsCombinedStateMachine
+                    || robot.RobotStateMachine.UpperPartStateMachine.CurrentState.Name != UpperPartStateMachine.PIPE_CLIMBING_STATE))
+                {
+                    Vector2 pos;
+                    Layer mainLayer = robot.Level.GetLayerByName("mainLayer");
+                    if (robot.RobotStateMachine.ActiveStateMachine == robot.RobotStateMachine.PartsCombinedStateMachine)
+                    {
+                        pos = new Vector2((int)Math.Round(robot.PartsCombined.Position.X), (int)Math.Round(robot.PartsCombined.Position.Y - 2.3f));
+                    }
+                    else
+                    {
+                        pos = new Vector2((int)Math.Round(robot.UpperPart.Position.X), (int)Math.Round(robot.UpperPart.Position.Y - 1));
+                    }
+                    if (robot.RobotStateMachine.LooksRight)
+                    {
+                        pos += new Vector2(1, 0);
+                    }
+                    else
+                    {
+                        pos -= new Vector2(1, 0);
+                    }
+                    Wall newWall = new Wall(pos, new Vector2(3, 1), Color.LightGreen, robot.Level, robot.Game, false);
+                    mainLayer.AddObject(newWall);
+                    if (oldWall != null)
+                    {
+                        robot.Level.removeObject(oldWall);
+                        oldWall.Dispose();
+
+                    }
+                    oldWall = newWall;
                 }
-                oldWall = newWall;
             }
 
             oldState = newState;
+        }
+
+        private bool isOnGround()
+        {
+            bool isOnGround = false;
+            if (robot.RobotStateMachine.ActiveStateMachine == robot.RobotStateMachine.PartsCombinedStateMachine)
+            {
+                isOnGround = robot.RobotStateMachine.PartsCombinedStateMachine.isOnGround();
+            }
+            else
+            {
+                isOnGround = robot.RobotStateMachine.LowerPartStateMachine.isOnGround();
+            }
+            return isOnGround;
         }
     }
 }

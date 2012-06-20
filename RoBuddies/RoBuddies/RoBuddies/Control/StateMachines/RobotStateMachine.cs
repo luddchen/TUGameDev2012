@@ -22,11 +22,12 @@ namespace RoBuddies.Control.StateMachines
         private LowerPartStateMachine mLowerPartStateMachine;
 
         private Robot mRobot;
+        private bool looksRight = true; // maybe redundent, but i need this quick(&dirty) for the bridgehead
         private KeyboardState mOldState;
 
         public StateMachine ActiveStateMachine
         {
-            get { return ActiveStateMachine; }
+            get { return mActiveStateMachine; }
             set { mActiveStateMachine = value; }
         }
 
@@ -48,6 +49,11 @@ namespace RoBuddies.Control.StateMachines
         public Level Level
         {
             get { return this.mRobot.Level; }
+        }
+
+        public bool LooksRight
+        {
+            get { return this.looksRight; }
         }
 
         #endregion
@@ -176,6 +182,16 @@ namespace RoBuddies.Control.StateMachines
                         }
                     }
                 }
+            }
+
+            if (newState.IsKeyDown(Keys.Right))
+            {
+                this.looksRight = true;
+            }
+
+            if (newState.IsKeyDown(Keys.Left))
+            {
+                this.looksRight = false;
             }
 
             mOldState = newState;

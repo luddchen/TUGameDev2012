@@ -103,22 +103,32 @@ namespace RoBuddies.Model
             this.robotStateMachine = new RobotStateMachine(activePart, content, this);
             this.level.AddStateMachine(robotStateMachine);
 
+            this.head.IgnoreCollisionWith(this.partsCombined);
+            this.head.IgnoreCollisionWith(this.partsCombined.wheelBody);
+            this.head.IgnoreCollisionWith(this.lowerPart);
+            this.head.IgnoreCollisionWith(this.lowerPart.wheelBody);
+            this.head.IgnoreCollisionWith(this.upperPart);
+
             this.upperPart.IsVisible = false;
             this.upperPart.Friction = 3f;
             this.upperPart.IgnoreCollisionWith(this.partsCombined);
             this.upperPart.IgnoreCollisionWith(this.lowerPart);
 
             this.lowerPart.IsVisible = false;
+            this.lowerPart.IgnoreCollisionWith(this.head);
             this.lowerPart.IgnoreCollisionWith(this.upperPart);
             this.lowerPart.IgnoreCollisionWith(this.PartsCombined);
             this.lowerPart.IgnoreCollisionWith(this.PartsCombined.wheelBody);
             this.lowerPart.wheelBody.IgnoreCollisionWith(this.upperPart);
             this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined);
             this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined.wheelBody);
+            this.lowerPart.wheelBody.IgnoreCollisionWith(this.Head);
 
+            this.partsCombined.IgnoreCollisionWith(this.head);
             this.partsCombined.IgnoreCollisionWith(this.upperPart);
             this.partsCombined.IgnoreCollisionWith(this.lowerPart);
             this.partsCombined.IgnoreCollisionWith(this.lowerPart.wheelBody);
+            this.partsCombined.wheelBody.IgnoreCollisionWith(this.head);
             this.partsCombined.wheelBody.IgnoreCollisionWith(this.upperPart);
             this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart);
             this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart.wheelBody);
