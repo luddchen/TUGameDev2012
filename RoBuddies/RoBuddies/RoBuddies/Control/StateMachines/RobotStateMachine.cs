@@ -89,8 +89,14 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
+                    mRobot.PartsCombined.Enabled = false;
+                    mRobot.PartsCombined.wheelBody.Enabled = false;
+                    mRobot.UpperPart.Enabled = true;
+                    mRobot.LowerPart.Enabled = true;
+                    mRobot.LowerPart.wheelBody.Enabled = true;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
+                    mRobot.LowerPart.wheelBody.Position = mRobot.LowerPart.Position + new Vector2(0, (-1f / 2f) + 0.20f);
                     setActivePart(mRobot.UpperPart);
                     //mActiveStateMachine = mUpperPartStateMachine;
                     //setCombined(false);
@@ -111,7 +117,11 @@ namespace RoBuddies.Control.StateMachines
                             crate.stateUpdate = true;
                         }
                     }
-
+                    mRobot.PartsCombined.Enabled = true;
+                    mRobot.PartsCombined.wheelBody.Enabled = true;
+                    mRobot.UpperPart.Enabled = false;
+                    mRobot.LowerPart.Enabled = false;
+                    mRobot.LowerPart.wheelBody.Enabled = false;
                     mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
                     setActivePart(mRobot.PartsCombined);
                     //mActiveStateMachine = mPartsCombinedStateMachine;

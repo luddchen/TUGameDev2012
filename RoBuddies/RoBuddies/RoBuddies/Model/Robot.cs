@@ -141,6 +141,8 @@ namespace RoBuddies.Model
         {
             this.lowerPart = new LowerPart(this.level, pos);
             this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
+            this.lowerPart.Enabled = false;
+            this.lowerPart.wheelBody.Enabled = false;
         }
 
         private void initPartsCombined(Vector2 pos, ContentManager content)
@@ -165,6 +167,7 @@ namespace RoBuddies.Model
             upperPart.Height = 3.7f;
 
             this.level.GetLayerByName("mainLayer").AddObject(this.upperPart);
+            this.upperPart.Enabled = false;
         }
 
         public void Update() 

@@ -152,7 +152,7 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else
                 {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = 10f;
+                    robot.PartsCombined.wheelMotor.MotorSpeed = 15f;
                 }
             }
 
@@ -191,7 +191,7 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else
                 {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = -10f;
+                    robot.PartsCombined.wheelMotor.MotorSpeed = -15f;
                 }
             }
 
@@ -247,17 +247,17 @@ namespace RoBuddies.Control.StateMachines
 
             // left ray
             Vector2 leftRayStart = robot.PartsCombined.wheelBody.Position - new Vector2(0.49f, 0);
-            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.6f);
+            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.51f);
             bool isOnLeftGround = RayCastUtility.isIntesectingAnObject(this.Level, leftRayStart, leftRayEnd);
 
             // middle ray
             Vector2 middleRayStart = robot.PartsCombined.wheelBody.Position;
-            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.6f);
+            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.51f);
             bool isOnMiddleGround = RayCastUtility.isIntesectingAnObject(this.Level, middleRayStart, middleRayEnd);
 
             // right ray
             Vector2 rightRayStart = robot.PartsCombined.wheelBody.Position + new Vector2(0.49f, 0);
-            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.6f);
+            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.51f);
             bool isOnRightGround = RayCastUtility.isIntesectingAnObject(this.Level, rightRayStart, rightRayEnd);
 
             isOnGround = isOnLeftGround || isOnMiddleGround || isOnRightGround;

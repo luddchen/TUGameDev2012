@@ -67,7 +67,7 @@ namespace RoBuddies.Control.StateMachines
                 if (!isOnGround())
                 {
                     robot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                    robot.LowerPart.ApplyForce(new Vector2(-100, 0));
+                    robot.LowerPart.ApplyForce(new Vector2(-80, 0));
                     if (robot.LowerPart.LinearVelocity.X < -3)
                     {
                         robot.LowerPart.LinearVelocity = new Vector2(-3, robot.LowerPart.LinearVelocity.Y);
@@ -75,7 +75,7 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else
                 {
-                    robot.LowerPart.wheelMotor.MotorSpeed = 10f;
+                    robot.LowerPart.wheelMotor.MotorSpeed = 15f;
                 }
                 Body.Effect = SpriteEffects.FlipHorizontally;
                 UpdateWalkAnimation(gameTime);
@@ -94,7 +94,7 @@ namespace RoBuddies.Control.StateMachines
                 if (!isOnGround())
                 {
                     robot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                    robot.LowerPart.ApplyForce(new Vector2(100, 0));
+                    robot.LowerPart.ApplyForce(new Vector2(80, 0));
                     if (robot.LowerPart.LinearVelocity.X > 3)
                     {
                         robot.LowerPart.LinearVelocity = new Vector2(3, robot.LowerPart.LinearVelocity.Y);
@@ -102,7 +102,7 @@ namespace RoBuddies.Control.StateMachines
                 }
                 else
                 {
-                    robot.LowerPart.wheelMotor.MotorSpeed = -10f;
+                    robot.LowerPart.wheelMotor.MotorSpeed = -15f;
                 }
                 Body.Effect = SpriteEffects.None;
                 UpdateWalkAnimation(gameTime);
@@ -121,9 +121,25 @@ namespace RoBuddies.Control.StateMachines
 
         private bool isOnGround()
         {
-            Vector2 lowerPartPos = robot.LowerPart.Position;
-            float rayEnd = lowerPartPos.Y - robot.LowerPart.Height / 2;
-            bool isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, lowerPartPos, new Vector2(lowerPartPos.X, rayEnd));
+            bool isOnGround = false;
+
+            // left ray
+            Vector2 leftRayStart = robot.LowerPart.wheelBody.Position - new Vector2(0.49f, 0);
+            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.51f);
+            bool isOnLeftGround = RayCastUtility.isIntesectingAnObject(this.Level, leftRayStart, leftRayEnd);
+
+            // middle ray
+            Vector2 middleRayStart = robot.LowerPart.wheelBody.Position;
+            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.51f);
+            bool isOnMiddleGround = RayCastUtility.isIntesectingAnObject(this.Level, middleRayStart, middleRayEnd);
+
+            // right ray
+            Vector2 rightRayStart = robot.LowerPart.wheelBody.Position + new Vector2(0.49f, 0);
+            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.51f);
+            bool isOnRightGround = RayCastUtility.isIntesectingAnObject(this.Level, rightRayStart, rightRayEnd);
+
+            isOnGround = isOnLeftGround || isOnMiddleGround || isOnRightGround;
+
             return isOnGround;
         }
 
