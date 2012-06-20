@@ -16,6 +16,8 @@ namespace RoBuddies.Control.StateMachines
 {
     class PartsCombinedStateMachine : StateMachine
     {
+        #region Members and Properties
+
         public const String WAIT_STATE = "WaitingState";
         public const String JUMP_STATE = "JumpState";
         public const String PULL_STATE = "PullingState";
@@ -31,10 +33,19 @@ namespace RoBuddies.Control.StateMachines
         private Crate currentCrate;
         private bool isPulling;
 
+        private HeadStateMachine mHeadStateMachine;
+
         public Level Level
         {
             get { return robot.Level; }
         }
+
+        public HeadStateMachine HeadStateMachine
+        {
+            get { return mHeadStateMachine; }
+        }
+
+        #endregion
 
         public PartsCombinedStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base(body)
@@ -43,6 +54,8 @@ namespace RoBuddies.Control.StateMachines
             this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
             this.isPulling = false;
+
+            mHeadStateMachine = new HeadStateMachine(robot.Head, contentManager, robot);
 
             for (int i = 1; i <= END_ANIMATION; i++)
             {
@@ -199,6 +212,12 @@ namespace RoBuddies.Control.StateMachines
             }
 
             CurrentState.Update(gameTime);
+
+            if (mHeadStateMachine.HasHead)
+            {
+                mHeadStateMachine.Update(gameTime);
+            }
+
             oldState = newState;
         }
 

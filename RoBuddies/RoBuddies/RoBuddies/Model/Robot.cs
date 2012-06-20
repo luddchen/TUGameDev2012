@@ -25,7 +25,7 @@ namespace RoBuddies.Model
         private PhysicObject lowerPart;
         private PhysicObject upperPart;
         private PartsCombined partsCombined;
-        private PhysicObject head;
+        private Head head;
         private PhysicObject activePart;
 
         private RobotStateMachine robotStateMachine;
@@ -46,7 +46,7 @@ namespace RoBuddies.Model
             get { return partsCombined; }
         }
 
-        public PhysicObject Head
+        public Head Head
         {
             get { return head; }
             set { head = value; }
@@ -88,7 +88,9 @@ namespace RoBuddies.Model
             initUpperPart(pos, content);
             initPartsCombined(pos, content);
 
-            this.head = new PhysicObject(this.level);
+            initHead(pos, content);
+            //this.head = new Head(this.level);
+            this.head.IsVisible = true;
            
             //headStateMachine = new HeadStateMachine(head, content, this);
 
@@ -105,6 +107,24 @@ namespace RoBuddies.Model
             this.lowerPart.IgnoreCollisionWith(partsCombined);
             this.lowerPart.IgnoreCollisionWith(upperPart);
             //----------------------------------------------------------------------------------------------------------
+        }
+
+        private void initHead(Vector2 pos, ContentManager content)
+        {
+            Texture2D headTex = content.Load<Texture2D>("Sprites//stop");
+
+            this.head = new Head(this.level);
+
+            head.FixedRotation = true;
+            head.Position = pos;
+            head.IgnoreGravity = true;
+            head.BodyType = BodyType.Dynamic;
+            head.Color = Color.White;
+            FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, head);
+            head.Width = 3;
+            head.Height = 3;
+
+            this.level.GetLayerByName("mainLayer").AddObject(this.head);
         }
 
         private void initLowerPart(Vector2 pos, ContentManager content)

@@ -17,7 +17,6 @@ namespace RoBuddies.Control.StateMachines
         public const String WALK_STATE = "WalkingState";
 
         private StateMachine mActiveStateMachine;
-        private HeadStateMachine mHeadStateMachine;
         private PartsCombinedStateMachine mPartsCombinedStateMachine;
         private UpperPartStateMachine mUpperPartStateMachine;
         private LowerPartStateMachine mLowerPartStateMachine;
@@ -29,11 +28,6 @@ namespace RoBuddies.Control.StateMachines
         {
             get { return ActiveStateMachine; }
             set { mActiveStateMachine = value; }
-        }
-
-        public HeadStateMachine HeadStateMachine
-        {
-            get { return mHeadStateMachine; }
         }
 
         public PartsCombinedStateMachine PartsCombinedStateMachine
@@ -64,7 +58,6 @@ namespace RoBuddies.Control.StateMachines
             mRobot = robot;
 
             mPartsCombinedStateMachine = new PartsCombinedStateMachine(robot.PartsCombined, content, robot);
-            mHeadStateMachine = new HeadStateMachine(robot.Head, content, robot);
             mUpperPartStateMachine = new UpperPartStateMachine(robot.UpperPart, content, robot);
             mLowerPartStateMachine = new LowerPartStateMachine(robot.LowerPart, content, robot);
             mActiveStateMachine = mPartsCombinedStateMachine;
