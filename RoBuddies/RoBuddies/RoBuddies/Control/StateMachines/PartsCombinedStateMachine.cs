@@ -244,12 +244,24 @@ namespace RoBuddies.Control.StateMachines
 
         private bool isOnGround()
         {
-            float rayEnd;
             bool isOnGround = false;
 
-            Vector2 combinedPartPos = robot.PartsCombined.wheelBody.Position;
-            rayEnd = combinedPartPos.Y - 0.6f;
-            isOnGround = RayCastUtility.isIntesectingAnObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
+            // left ray
+            Vector2 leftRayStart = robot.PartsCombined.wheelBody.Position - new Vector2(0.49f, 0);
+            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.6f);
+            bool isOnLeftGround = RayCastUtility.isIntesectingAnObject(this.Level, leftRayStart, leftRayEnd);
+
+            // middle ray
+            Vector2 middleRayStart = robot.PartsCombined.wheelBody.Position;
+            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.6f);
+            bool isOnMiddleGround = RayCastUtility.isIntesectingAnObject(this.Level, middleRayStart, middleRayEnd);
+
+            // right ray
+            Vector2 rightRayStart = robot.PartsCombined.wheelBody.Position + new Vector2(0.49f, 0);
+            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.6f);
+            bool isOnRightGround = RayCastUtility.isIntesectingAnObject(this.Level, rightRayStart, rightRayEnd);
+
+            isOnGround = isOnLeftGround || isOnMiddleGround || isOnRightGround;
 
             return isOnGround;
         }
