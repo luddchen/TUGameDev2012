@@ -120,7 +120,7 @@ namespace RoBuddies.Control.StateMachines
                 //Body.Effect = SpriteEffects.None;
             }
 
-            if (newState.IsKeyDown(Keys.A))
+            if (newState.IsKeyDown(Keys.A) && isOnGround())
             {
                 pullCrate();
             }
@@ -303,8 +303,7 @@ namespace RoBuddies.Control.StateMachines
 
                     isPulling = true;
                     //SwitchToState(PULL_STATE);
-
-                    crateJoint = new WeldJoint(robot.PartsCombined, currentCrate, currentCrate.WorldCenter, robot.PartsCombined.WorldCenter);
+                    crateJoint = new WeldJoint(robot.PartsCombined, currentCrate, currentCrate.WorldCenter, robot.PartsCombined.WorldCenter - new Vector2(0, 0.20f));
                     currentCrate.FixedRotation = false;
                     this.Level.AddJoint(crateJoint);
                 }

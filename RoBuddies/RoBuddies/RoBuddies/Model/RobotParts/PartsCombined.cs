@@ -32,7 +32,7 @@ namespace RoBuddies.Model.RobotParts
             this.wheelBody.BodyType = BodyType.Dynamic;
             this.wheelMotor = JointFactory.CreateRevoluteJoint(this.level, this, this.wheelBody, Vector2.Zero);
             this.wheelBody.Friction = 100f;
-            this.wheelMotor.MaxMotorTorque = 100f;
+            this.wheelMotor.MaxMotorTorque = 1000f;
             this.wheelMotor.MotorEnabled = true;
         }
     }
