@@ -64,9 +64,15 @@ namespace RoBuddies.Control.StateMachines
         private bool canClimbUp()
         {
             Console.WriteLine("climb up check");
-            Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y + robot.ActivePart.Height);
-            float rayEnd = combinedPartPos.Y + robot.ActivePart.Height;
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
+            Vector2 combinedPartPos = robot.PartsCombined.Position;
+            float rayEnd = combinedPartPos.X + 100;
+            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
+           
+            if (intersectingObject != null)
+            {
+                Console.WriteLine(intersectingObject.ToString());
+            }
+
             bool canClimbUp = intersectingObject is Ladder;
             return canClimbUp;
         }
@@ -74,8 +80,14 @@ namespace RoBuddies.Control.StateMachines
         private bool canClimbDown()
         {
             Vector2 combinedPartPos = new Vector2(robot.ActivePart.Position.X, robot.ActivePart.Position.Y - robot.ActivePart.Height / 4);
-            float rayEnd = combinedPartPos.Y + robot.ActivePart.Height / 3;
+            float rayEnd = combinedPartPos.Y - robot.ActivePart.Height / 3;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.Y, rayEnd));
+
+            if (intersectingObject != null)
+            {
+                Console.WriteLine(intersectingObject.ToString());
+            }
+
             bool canClimbDown = intersectingObject is Ladder;
             return canClimbDown;
         }
@@ -84,16 +96,15 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Up) && CurrentState.Name == CLIMBING_STATE )//&& canClimbUp())
+            if (newState.IsKeyDown(Keys.Up) && canClimbUp())
             {
                 Console.WriteLine("can climb up");
-                ((LadderClimbingState)CurrentState).IsMoving = false;
+                //((LadderClimbingState)CurrentState).IsMoving = false;
                 //(Body as Body).LinearVelocity = new Vector2((Body as Body).LinearVelocity.X, 8);
-                robot.ActivePart.IgnoreGravity = true;
-                robot.ActivePart.Position += new Vector2(0, 2f);
-                robot.ActivePart.IgnoreGravity = true;
-                Body.Effect = SpriteEffects.None;
-                ((LadderClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
+                //robot.ActivePart.IgnoreGravity = true;
+                robot.ActivePart.Position += new Vector2(0, 0.1f);
+                //robot.ActivePart.IgnoreGravity = true;
+                //Body.Effect = SpriteEffects.None;
             }
 
             if (newState.IsKeyDown(Keys.A))

@@ -37,16 +37,16 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Enter()
         {
-            frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
-            prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -f));
-            prismaticJoint.MotorEnabled = true;
-            prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
+            //frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
+            //prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -1f));
+            //prismaticJoint.MotorEnabled = true;
+            //prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
         }
 
         public override void Exit()
         {
-            this.level.RemoveJoint(prismaticJoint);
-            this.level.RemoveJoint(frictionJoint);
+            //this.level.RemoveJoint(prismaticJoint);
+            //this.level.RemoveJoint(frictionJoint);
         }
 
         public override void Update(GameTime gameTime)
@@ -57,9 +57,11 @@ namespace RoBuddies.Control.RobotStates
                 StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
                 (this.StateMachine.Body as Body).LinearVelocity = new Vector2( (this.StateMachine.Body as Body).LinearVelocity.X, 0);
             }
+
+            UpdateClimbAnimation(gameTime);
         }
 
-        public void UpdateClimbAnimation(GameTime gameTime)
+        private void UpdateClimbAnimation(GameTime gameTime)
         {
             IsMoving = true;
 

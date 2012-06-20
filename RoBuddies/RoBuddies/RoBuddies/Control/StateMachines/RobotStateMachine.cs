@@ -84,13 +84,13 @@ namespace RoBuddies.Control.StateMachines
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Up) && mOldState.IsKeyUp(Keys.Up))
-            {
-                if (mActiveStateMachine == mPartsCombinedStateMachine && hitsLadder())
-                {
-                    mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.CLIMBING_STATE);
-                }
-            }
+            //if (newState.IsKeyDown(Keys.Up) && mOldState.IsKeyUp(Keys.Up))
+            //{
+            //    if (mActiveStateMachine == mPartsCombinedStateMachine && hitsLadder())
+            //    {
+            //        mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.CLIMBING_STATE);
+            //    }
+            //}
 
             if (newState.IsKeyDown(Keys.X) && mOldState.IsKeyUp(Keys.X))
             {
