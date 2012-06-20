@@ -29,7 +29,7 @@ namespace RoBuddies.Control.StateMachines
             if (newState.IsKeyDown(Keys.Y) && oldState.IsKeyUp(Keys.Y))
             {
                 Layer mainLayer = robot.Level.GetLayerByName("mainLayer");
-                Vector2 pos = new Vector2((int)Math.Round(robot.PartsCombined.Position.X), (int)Math.Round(robot.PartsCombined.Position.Y - 2.89));
+                Vector2 pos = new Vector2((int)Math.Round(robot.PartsCombined.Position.X), (int)Math.Round(robot.PartsCombined.Position.Y - 2.3f));
                 Wall newWall = new Wall(pos, new Vector2(3, 1), Color.White, robot.Level, robot.Game, false);
                 mainLayer.AddObject(newWall);
                 if (oldWall != null)
