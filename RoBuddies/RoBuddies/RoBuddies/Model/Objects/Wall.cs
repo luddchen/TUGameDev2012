@@ -57,9 +57,8 @@ namespace RoBuddies.Model.Objects
             }
 
             this.BodyType = BodyType.Static;
-            this.Friction = 10f;
             wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
-
+            this.Friction = 4f;
         }
 
         /// <summary>

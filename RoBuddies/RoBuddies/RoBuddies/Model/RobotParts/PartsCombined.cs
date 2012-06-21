@@ -25,8 +25,8 @@ namespace RoBuddies.Model.RobotParts
             this.Width = 3;
             this.Height = 3f;
             this.IsVisible = true;
-            this.Friction = 0f;
             FixtureFactory.AttachRectangle(1, 2.3f, 1, new Vector2(0, 0.20f), this);
+            this.Friction = 0f;
             // attach wheel
             this.wheelBody = BodyFactory.CreateCircle(this.level, 0.5f, 1, this.Position + new Vector2(0, (-2.3f / 2f) + 0.20f));
             this.wheelBody.BodyType = BodyType.Dynamic;
