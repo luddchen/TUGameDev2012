@@ -13,7 +13,7 @@ namespace RoBuddies.Control.StateMachines
     class BridgeHeadStateMachine : HeadStateMachine
     {
         private KeyboardState oldState;
-        private Wall oldWall;
+        private static Wall oldWall; // needs to be static, because actually we've got two bridge heads in the game
 
         public BridgeHeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base( body, contentManager, robot)
