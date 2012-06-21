@@ -176,7 +176,7 @@ namespace RoBuddies.Control.StateMachines
                     Layer backLayer = Level.GetLayerByName("backLayer");
                     foreach (IBody obj in backLayer.AllObjects)
                     {
-                        if (obj is Switch && (Vector2.Distance(mRobot.ActivePart.Position, obj.Position) < 5))
+                        if (obj is Switch && (Vector2.Distance(mRobot.ActivePart.Position, obj.Position) < 1.5))
                         {
                             Switch switcher = (Switch)obj;
                             switcher.Activate();
