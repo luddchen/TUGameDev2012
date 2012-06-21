@@ -22,7 +22,7 @@ namespace RoBuddies.Model.Worlds.World2
         public Level2_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
-
+            Level.Robot.removeHead();
         }
 
         protected override void addLevelObjects()

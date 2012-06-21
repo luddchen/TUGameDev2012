@@ -1136,6 +1136,10 @@
       <Name>LEVEL1_2</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Worlds\World1\LEVEL1_3.json">
+      <Name>LEVEL1_3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Worlds\World2\LEVEL2_1.json">
       <Name>LEVEL2_1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

@@ -23,7 +23,10 @@ namespace RoBuddies.Control.StateMachines
         public bool HasHead
         {
             get { return hasHead; }
-            set { hasHead = value; }
+            set { 
+                hasHead = value;
+                ((PhysicObject)Body).IsVisible = value;
+            }
         }
 
         public HeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
@@ -34,7 +37,7 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.hasHead = true;
 
-            textureList.Add(contentManager.Load<Texture2D>("Sprites\\stop"));
+            textureList.Add(contentManager.Load<Texture2D>("Sprites\\Circle"));
             body.Texture = textureList[0];
 
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
@@ -59,7 +62,14 @@ namespace RoBuddies.Control.StateMachines
 
         private void UpdatePosition()
         {
-            Body.Position = robot.ActivePart.Position + new Vector2(0, 2);
+            if (robot.ActivePart != robot.UpperPart)
+            {
+                Body.Position = robot.ActivePart.Position + new Vector2(0, robot.ActivePart.Height / 2);
+            }
+            else
+            {
+                Body.Position = robot.ActivePart.Position + new Vector2(0, robot.ActivePart.Height / 4);
+            }
         }
     }
 }

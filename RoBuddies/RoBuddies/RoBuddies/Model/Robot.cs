@@ -85,6 +85,11 @@ namespace RoBuddies.Model
             this.level.Robot = this;
         }
 
+        public void removeHead() {
+            this.robotStateMachine.PartsCombinedStateMachine.HeadStateMachine.HasHead = false;
+            this.robotStateMachine.UpperPartStateMachine.HeadStateMachine.HasHead = false;
+        }
+
         private void initRobot(ContentManager content, Vector2 pos, Game game) 
         {
             this.game = game;
@@ -137,8 +142,6 @@ namespace RoBuddies.Model
 
         private void initHead(Vector2 pos, ContentManager content)
         {
-            Texture2D headTex = content.Load<Texture2D>("Sprites//stop");
-
             this.head = new Head(this.level);
 
             head.FixedRotation = true;
@@ -147,8 +150,8 @@ namespace RoBuddies.Model
             head.BodyType = BodyType.Dynamic;
             head.Color = Color.White;
             FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, head);
-            head.Width = 3;
-            head.Height = 3;
+            head.Width = 1f;
+            head.Height = 1f;
 
             this.level.GetLayerByName("mainLayer").AddObject(this.head);
         }

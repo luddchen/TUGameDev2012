@@ -21,7 +21,7 @@ namespace RoBuddies.Model.Worlds.World1
         public Level1_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
-
+            Level.Robot.removeHead();
         }
 
         protected override void addLevelObjects()
@@ -31,8 +31,8 @@ namespace RoBuddies.Model.Worlds.World1
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
 
-            Ladder ladder = new Ladder(new Vector2(4f,1f), 8f, Color.BurlyWood, this.Level, this.game);
-            levelObjects.Add(ladder);
+            //Ladder ladder = new Ladder(new Vector2(4f,1f), 8f, Color.BurlyWood, this.Level, this.game);
+            //levelObjects.Add(ladder);
 
             //Pipe Ladder testing
             //Pipe pipeLadder1 = new Pipe(new Vector2(4f, -1f), 2f, Color.BurlyWood, this.Level, this.game);
@@ -46,10 +46,10 @@ namespace RoBuddies.Model.Worlds.World1
             //levelObjects.Add(pipeLadder4);
 
             //Switch wall testing 
-            //Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
-            //Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
-            //levelObjects.Add(switchWall);
-            //levelObjects.Add(wallSwitcher);
+            Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
+            Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
+            levelObjects.Add(switchWall);
+            levelObjects.Add(wallSwitcher);
         }
     }
     

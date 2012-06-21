@@ -176,6 +176,7 @@
     <Compile Include="Model\StaticObject.cs" />
     <Compile Include="Model\Worlds\World1\Level1_1.cs" />
     <Compile Include="Model\Worlds\World1\Level1_2.cs" />
+    <Compile Include="Model\Worlds\World1\Level1_3.cs" />
     <Compile Include="Model\Worlds\World1\World1Level.cs" />
     <Compile Include="Model\Worlds\World2\Level2_1.cs" />
     <Compile Include="Model\Worlds\World2\Level2_5.cs" />

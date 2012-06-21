@@ -129,6 +129,7 @@ namespace RoBuddies.Control.StateMachines
                     mRobot.LowerPart.Enabled = false;
                     mRobot.LowerPart.wheelBody.Enabled = false;
                     mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
+                    mRobot.PartsCombined.wheelBody.Position = mRobot.PartsCombined.Position + new Vector2(0, (-2.3f / 2f) + 0.20f);
                     setActivePart(mRobot.PartsCombined);
                     //mActiveStateMachine = mPartsCombinedStateMachine;
                     //setCombined(true);
