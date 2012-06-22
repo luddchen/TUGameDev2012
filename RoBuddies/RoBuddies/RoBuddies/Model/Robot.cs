@@ -1,4 +1,6 @@
-﻿
+﻿using System;
+using System.Collections.Generic;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -79,7 +81,9 @@ namespace RoBuddies.Model
         public Robot(ContentManager content, Vector2 pos, Level level, Game game) 
         {
             this.level = level;
-            initRobot(content, pos, game);
+            this.game = game;
+
+            initRobot(content, pos);
 
             this.activePart = this.partsCombined;
             this.level.Robot = this;
@@ -90,107 +94,66 @@ namespace RoBuddies.Model
             this.robotStateMachine.UpperPartStateMachine.HeadStateMachine.HasHead = false;
         }
 
-        private void initRobot(ContentManager content, Vector2 pos, Game game) 
+        private void initRobot(ContentManager content, Vector2 pos) 
         {
-            this.game = game;
-
             // don't change the order of the initialization. The order of adding the bodys to the world is important for the editor.
             initLowerPart(pos, content);
             initUpperPart(pos, content);
             initPartsCombined(pos, content);
-
             initHead(pos, content);
-            //this.head = new Head(this.level);
-            this.head.IsVisible = true;
-           
-            //headStateMachine = new HeadStateMachine(head, content, this);
 
             this.robotStateMachine = new RobotStateMachine(activePart, content, this);
             this.level.AddStateMachine(robotStateMachine);
 
-            this.head.IgnoreCollisionWith(this.partsCombined);
-            this.head.IgnoreCollisionWith(this.partsCombined.wheelBody);
-            this.head.IgnoreCollisionWith(this.lowerPart);
-            this.head.IgnoreCollisionWith(this.lowerPart.wheelBody);
-            this.head.IgnoreCollisionWith(this.upperPart);
-
-            this.upperPart.IsVisible = false;
-            this.upperPart.Friction = 3f;
-            this.upperPart.IgnoreCollisionWith(this.partsCombined);
-            this.upperPart.IgnoreCollisionWith(this.lowerPart);
-
-            this.lowerPart.IsVisible = false;
-            this.lowerPart.IgnoreCollisionWith(this.head);
-            this.lowerPart.IgnoreCollisionWith(this.upperPart);
-            this.lowerPart.IgnoreCollisionWith(this.PartsCombined);
-            this.lowerPart.IgnoreCollisionWith(this.PartsCombined.wheelBody);
-            this.lowerPart.wheelBody.IgnoreCollisionWith(this.upperPart);
-            this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined);
-            this.lowerPart.wheelBody.IgnoreCollisionWith(this.PartsCombined.wheelBody);
-            this.lowerPart.wheelBody.IgnoreCollisionWith(this.Head);
-
-            this.partsCombined.IgnoreCollisionWith(this.head);
-            this.partsCombined.IgnoreCollisionWith(this.upperPart);
-            this.partsCombined.IgnoreCollisionWith(this.lowerPart);
-            this.partsCombined.IgnoreCollisionWith(this.lowerPart.wheelBody);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.head);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.upperPart);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart);
-            this.partsCombined.wheelBody.IgnoreCollisionWith(this.lowerPart.wheelBody);
-            //----------------------------------------------------------------------------------------------------------
+            IgnorePartCollisions();
         }
 
         private void initHead(Vector2 pos, ContentManager content)
         {
-            this.head = new Head(this.level);
-
-            head.FixedRotation = true;
-            head.Position = pos;
-            head.IgnoreGravity = true;
-            head.BodyType = BodyType.Dynamic;
-            head.Color = Color.White;
-            head.Width = 1f;
-            head.Height = 1f;
-            head.createRectangleFixture(1);
-
-            this.level.GetLayerByName("mainLayer").AddObject(this.head);
+            this.head = new Head(pos, new Vector2(1,1), Color.White, this.level);
         }
 
         private void initLowerPart(Vector2 pos, ContentManager content)
         {
-            this.lowerPart = new LowerPart(this.level, pos);
-            this.level.GetLayerByName("mainLayer").AddObject(this.lowerPart);
-            this.lowerPart.Enabled = false;
-            this.lowerPart.wheelBody.Enabled = false;
+            this.lowerPart = new LowerPart(pos, this.level);
+            this.lowerPart.setVisible(false);
         }
 
         private void initPartsCombined(Vector2 pos, ContentManager content)
         {
-            this.partsCombined = new PartsCombined(this.level, pos);
-            this.ActivePart = partsCombined;
-            this.level.GetLayerByName("mainLayer").AddObject(this.partsCombined);
+            this.partsCombined = new PartsCombined(pos, this.level);
         }
 
         private void initUpperPart(Vector2 pos, ContentManager content)
         {
-            Texture2D upperWaitTex = content.Load<Texture2D>("Sprites//Robot//Budi//0080");
+            this.upperPart = new PhysicObject(pos, new Vector2(5, 3.7f), Color.White, 3.0f, this.level);
 
-            this.upperPart = new PhysicObject(this.level);
-
-            upperPart.FixedRotation = true;
-            upperPart.Position = pos;
             upperPart.BodyType = BodyType.Dynamic;
-            upperPart.Color = Color.White;
             FixtureFactory.AttachRectangle(1, 1.5f, 1, Vector2.Zero, upperPart);
-            upperPart.Width = 5;
-            upperPart.Height = 3.7f;
-
             this.level.GetLayerByName("mainLayer").AddObject(this.upperPart);
-            this.upperPart.Enabled = false;
+            this.upperPart.setVisible(false);
         }
 
-        public void Update() 
+        private void IgnorePartCollisions()
         {
+            List<Body> allParts = new List<Body>();
+            allParts.Add(this.lowerPart);
+            allParts.Add(this.lowerPart.wheelBody);
+            allParts.Add(this.partsCombined);
+            allParts.Add(this.partsCombined.wheelBody);
+            allParts.Add(this.upperPart);
+            allParts.Add(this.head);
+            foreach (Body body1 in allParts)
+            {
+                foreach (Body body2 in allParts)
+                {
+                    if (body1 != body2)
+                    {
+                        body1.IgnoreCollisionWith( body2 );
+                    }
+                }
+            }
+            allParts.Clear();
         }
 
     }

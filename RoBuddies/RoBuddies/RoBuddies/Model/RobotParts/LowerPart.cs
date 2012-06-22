@@ -14,18 +14,12 @@ namespace RoBuddies.Model.RobotParts
         public Body wheelBody;
         public RevoluteJoint wheelMotor;
 
-        public LowerPart(Level level, Vector2 pos)
-            : base(level)
+        public LowerPart(Vector2 pos, Level level)
+            : base(pos, new Vector2(3, 1.8f), Color.White, 0f, level)
         {
-            this.FixedRotation = true;
-            this.Position = pos;
             this.BodyType = BodyType.Dynamic;
-            this.Color = Color.White;
-            this.Width = 3;
-            this.Height = 1.8f;
-            this.IsVisible = true;
-            this.Friction = 0f;
             FixtureFactory.AttachRectangle(1, 1f, 1, Vector2.Zero, this);
+            this.level.GetLayerByName("mainLayer").AddObject(this);
             // attach wheel
             this.wheelBody = BodyFactory.CreateCircle(this.level, 0.5f, 1, this.Position + new Vector2(0, (-1f / 2f) + 0.20f));
             this.wheelBody.BodyType = BodyType.Dynamic;
@@ -34,5 +28,12 @@ namespace RoBuddies.Model.RobotParts
             this.wheelMotor.MaxMotorTorque = 1000f;
             this.wheelMotor.MotorEnabled = true;
         }
+
+        public override void setVisible(bool visible)
+        {
+            base.setVisible(visible);
+            this.wheelBody.Enabled = visible;
+        }
+
     }
 }

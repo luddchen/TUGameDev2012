@@ -15,20 +15,17 @@ namespace RoBuddies.Model.Objects
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
 
         public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
-            : base(pos, size, color, level)
+            : base(pos, size, color, 0, level)
         {
 
             Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
             defineTextures(crateTex, crateTex, crateTex);
 
             this.BodyType = BodyType.Dynamic;
-
             calculateHeaviness();
-
-            this.FixedRotation = true;
             createRectangleFixture(2f);
 
-            Console.Out.WriteLine(this.Mass);
+            //Console.Out.WriteLine(this.Mass);
             this.Friction = 0.01f * this.Mass;
         }
 

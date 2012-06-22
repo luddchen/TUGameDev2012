@@ -98,9 +98,10 @@ namespace RoBuddies.Model
             this.IsVisible = true;
             this.Color = Color.White;
             this.BodyType = BodyType.Static;
+            this.FixedRotation = true;
         }
 
-        public PhysicObject(Vector2 position, Vector2 size, Color color, Level level)
+        public PhysicObject(Vector2 position, Vector2 size, Color color, float friction, Level level)
             : base(level)
         {
             this.level = level;
@@ -110,13 +111,22 @@ namespace RoBuddies.Model
             this.Width = size.X;
             this.Height = size.Y;
             this.BodyType = BodyType.Static;
+            this.FixedRotation = true;
+            this.Friction = friction;
         }
 
+        /// <summary>
+        /// creates a new fixture , deletes all previous fixtures , new density is 1.0f
+        /// </summary>
         public void createRectangleFixture()
         {
             createRectangleFixture(1f);
         }
 
+        /// <summary>
+        /// creates a new fixture , deletes all previous fixtures
+        /// </summary>
+        /// <param name="density">density of this object</param>
         public void createRectangleFixture(float density)
         {
             foreach (Fixture fixture in this.FixtureList)
@@ -126,10 +136,24 @@ namespace RoBuddies.Model
             FixtureFactory.AttachRectangle(this.Width, this.Height, density, Vector2.Zero, this);
         }
 
+        /// <summary>
+        /// set this object to not collide with any other object
+        /// </summary>
         public void setUncollidable()
         {
             this.CollisionCategories = Category.Cat1;
             this.CollidesWith = Category.None;
         }
+
+        /// <summary>
+        /// sets the visibility of this object (physical and optical)
+        /// </summary>
+        /// <param name="visible"></param>
+        public virtual void setVisible(bool visible)
+        {
+            this.Enabled = visible;
+            this.IsVisible = visible;
+        }
+
     }
 }

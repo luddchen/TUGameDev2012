@@ -20,12 +20,10 @@ namespace RoBuddies.Model.Objects
         private Texture2D center;
 
         public Pipe(Vector2 pos, float width, Color color, Level level, Game game)
-            : base(pos, new Vector2(width, PIPE_HEIGHT), color, level)
+            : base(pos, new Vector2(width, PIPE_HEIGHT), color, 100f, level)
         {
             center = game.Content.Load<Texture2D>("Sprites//pipe");
             this.game = game;
-
-            this.Friction = 100f;
 
             changePipeLength(this.Width);
             setUncollidable();

@@ -28,7 +28,7 @@ namespace RoBuddies.Model.Objects
         /// <param name="texture">the texture which will be layed over the crate</param>
         /// <param name="level">the world object of the physics engine for the physics calculations</param>
         public Wall(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchAble)
-            : base(pos, size, color, level)
+            : base(pos, size, color, 4f, level)
         {
             this.game = game;
 
@@ -45,7 +45,6 @@ namespace RoBuddies.Model.Objects
             }
 
             createRectangleFixture();
-            this.Friction = 4f;
         }
 
         /// <summary>

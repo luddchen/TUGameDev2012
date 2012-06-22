@@ -16,7 +16,7 @@ namespace RoBuddies.Model.Objects
         private Color realColor;
 
         public Switch(Vector2 pos, Vector2 size, Color color, Level level, Game game, ISwitchable switchPair, Robot robot)
-            : base(pos, size, color, level)
+            : base(pos, size, color, 0, level)
         {
             switcherOnTex = game.Content.Load<Texture2D>("Sprites//switcher_l");
             switcherOffTex = game.Content.Load<Texture2D>("Sprites//switcher_r");

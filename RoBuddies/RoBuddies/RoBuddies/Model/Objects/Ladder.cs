@@ -20,14 +20,13 @@ namespace RoBuddies.Model.Objects
         private Game game;
 
         public Ladder(Vector2 pos, float height, Color color, Level level, Game game)
-           : base(pos, new Vector2(LADDER_WIDTH, height), color, level)
+           : base(pos, new Vector2(LADDER_WIDTH, height), color, 10f, level)
         {
             top = game.Content.Load<Texture2D>("Sprites//LadderTop");
             center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
             bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
 
             this.game = game;
-            this.Friction = 10f;
             //ladderFixture = FixtureFactory.AttachEdge(Vector2.Zero, Vector2.Zero, this);
             //ladderFixture = FixtureFactory.AttachEdge(new Vector2(0, -2), new Vector2(0, -2), this);
             changeLadderHeight(this.Height);
