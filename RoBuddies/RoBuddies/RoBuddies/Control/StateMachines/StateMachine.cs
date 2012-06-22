@@ -131,7 +131,7 @@ namespace RoBuddies.Control.StateMachines
             switch (button)
             {
                 case ControlButton.down : { key = Keys.Down; break; }
-                case ControlButton.up   : { key = Keys.Down; break; }
+                case ControlButton.up   : { key = Keys.Up; break; }
                 case ControlButton.left : { key = Keys.Left; break; }
                 case ControlButton.right: { key = Keys.Right; break; }
                 case ControlButton.jump : { key = Keys.Space; break; }
