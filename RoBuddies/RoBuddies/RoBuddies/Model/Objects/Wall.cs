@@ -13,7 +13,6 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Wall : PhysicObject, ISwitchable
     {
-        private Fixture wallFixture;
         private Game game;
         private bool switchable = false;
 
@@ -29,7 +28,7 @@ namespace RoBuddies.Model.Objects
         /// <param name="texture">the texture which will be layed over the crate</param>
         /// <param name="level">the world object of the physics engine for the physics calculations</param>
         public Wall(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchAble)
-            : base(level)
+            : base(pos, size, color, level)
         {
             this.game = game;
 
@@ -38,26 +37,14 @@ namespace RoBuddies.Model.Objects
 
             defineTextures(createTexture(size, roboLabTex), createTexture(size, mountainTex), createTexture(size, roboLabTex));
 
-            this.Position = pos;
-            this.Width = size.X;
-            this.Height = size.Y;
-
             if (switchAble)
             {
                 this.switchable = true ;
-                Color temp = color;
-                temp.R /= 2; temp.G /= 2; temp.B /= 2;
-                this.Color = temp;
-                this.CollisionCategories = Category.Cat1;
-                this.CollidesWith = Category.None;
-            }
-            else
-            {
-                this.Color = color;
+                this.Color = new Color(color.R/2, color.G/2, color.B/2);
+                setUncollidable();
             }
 
-            this.BodyType = BodyType.Static;
-            wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+            createRectangleFixture();
             this.Friction = 4f;
         }
 
@@ -68,8 +55,8 @@ namespace RoBuddies.Model.Objects
         public void changeWallSize(Vector2 newSize) {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            this.DestroyFixture(wallFixture);
-            wallFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
+
+            createRectangleFixture();
 
             Texture2D wallTex = createTexture(newSize, roboLabTex);
             defineTextures(wallTex, wallTex, wallTex);

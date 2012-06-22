@@ -13,27 +13,21 @@ namespace RoBuddies.Model.Objects
     {
         private bool isMoving = false; //statement of the crate, as pulling in prototype
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
-        private Fixture crateFixture;
 
         public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
-            : base(level)
+            : base(pos, size, color, level)
         {
 
             Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
             defineTextures(crateTex, crateTex, crateTex);
 
-            this.Position = pos;
-            this.Width = size.X;
-            this.Height = size.Y;
-
             this.BodyType = BodyType.Dynamic;
-            this.Color = Color.BurlyWood;
 
             calculateHeaviness();
 
             this.FixedRotation = true;
-            //this.Mass = size.X * size.Y * Int16.MaxValue;
-            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 2f, Vector2.Zero, this);
+            createRectangleFixture(2f);
+
             Console.Out.WriteLine(this.Mass);
             this.Friction = 0.01f * this.Mass;
         }
@@ -72,10 +66,7 @@ namespace RoBuddies.Model.Objects
                 else if (isHeavyCrate)
                 {
                     this.BodyType = BodyType.Static;
-                    this.Color = new Color(320, 320, 320, 320);
-                    //Color temp = Color.BurlyWood;
-                    //temp.R /= 2; temp.G /= 2; temp.B /= 2;
-                    //this.Color = temp; //the crate cannot be moved now
+                    this.Color = Color.White;
                 }
             }
         }
@@ -88,8 +79,7 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            this.DestroyFixture(crateFixture);
-            crateFixture = FixtureFactory.AttachRectangle(Width, Height, 1f, Vector2.Zero, this);
+            createRectangleFixture(2f);
             calculateHeaviness();
         }
     }

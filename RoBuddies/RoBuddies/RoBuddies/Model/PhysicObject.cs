@@ -1,5 +1,6 @@
-﻿
-using FarseerPhysics.Dynamics;
+﻿using FarseerPhysics.Dynamics;
+using FarseerPhysics.Factories;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -90,12 +91,45 @@ namespace RoBuddies.Model
             }
         }
 
-        public PhysicObject(Level world)
-            : base(world)
+        public PhysicObject(Level level)
+            : base(level)
         {
-            this.level = world;
+            this.level = level;
             this.IsVisible = true;
+            this.Color = Color.White;
+            this.BodyType = BodyType.Static;
         }
 
+        public PhysicObject(Vector2 position, Vector2 size, Color color, Level level)
+            : base(level)
+        {
+            this.level = level;
+            this.IsVisible = true;
+            this.Color = color;
+            this.Position = position;
+            this.Width = size.X;
+            this.Height = size.Y;
+            this.BodyType = BodyType.Static;
+        }
+
+        public void createRectangleFixture()
+        {
+            createRectangleFixture(1f);
+        }
+
+        public void createRectangleFixture(float density)
+        {
+            foreach (Fixture fixture in this.FixtureList)
+            {
+                this.DestroyFixture(fixture);
+            }
+            FixtureFactory.AttachRectangle(this.Width, this.Height, density, Vector2.Zero, this);
+        }
+
+        public void setUncollidable()
+        {
+            this.CollisionCategories = Category.Cat1;
+            this.CollidesWith = Category.None;
+        }
     }
 }

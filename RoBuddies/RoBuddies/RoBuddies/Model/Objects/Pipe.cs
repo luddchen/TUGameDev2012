@@ -13,30 +13,22 @@ namespace RoBuddies.Model.Objects
     /// </summary>
     class Pipe : PhysicObject
     {
+        private const float PIPE_HEIGHT = 0.5f;
+
         private Game game;
-        private Fixture pipeFixture;
 
         private Texture2D center;
 
         public Pipe(Vector2 pos, float width, Color color, Level level, Game game)
-            : base(level)
+            : base(pos, new Vector2(width, PIPE_HEIGHT), color, level)
         {
             center = game.Content.Load<Texture2D>("Sprites//pipe");
-
             this.game = game;
-            this.Position = pos;
-            this.Width = width;
-            this.Height = 0.5f;
-            this.Color = color;
-            attachTexture();
 
-            this.BodyType = BodyType.Static;
             this.Friction = 100f;
 
-            pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
-
-            this.CollisionCategories = Category.Cat1;
-            this.CollidesWith = Category.None;
+            changePipeLength(this.Width);
+            setUncollidable();
         }
 
         private void attachTexture()
@@ -52,9 +44,8 @@ namespace RoBuddies.Model.Objects
         public void changePipeLength(float newLength)
         {
             this.Width = Math.Max(1, newLength);
-            this.DestroyFixture(pipeFixture);
+            createRectangleFixture();
             attachTexture();
-            pipeFixture = FixtureFactory.AttachRectangle(Width, Height, 1, Vector2.Zero, this);
         }
     }
 }

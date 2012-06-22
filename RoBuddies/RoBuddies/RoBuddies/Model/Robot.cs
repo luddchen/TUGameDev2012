@@ -149,9 +149,9 @@ namespace RoBuddies.Model
             head.IgnoreGravity = true;
             head.BodyType = BodyType.Dynamic;
             head.Color = Color.White;
-            FixtureFactory.AttachRectangle(1, 1, 1, Vector2.Zero, head);
             head.Width = 1f;
             head.Height = 1f;
+            head.createRectangleFixture(1);
 
             this.level.GetLayerByName("mainLayer").AddObject(this.head);
         }
