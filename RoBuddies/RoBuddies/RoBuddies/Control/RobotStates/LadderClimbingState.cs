@@ -18,9 +18,9 @@ namespace RoBuddies.Control.RobotStates
     {
         private const float MAX_MOTOR_FORCE = 1000f;
         
-        // this texture numbers works only for upper part ... for combined climbing use 81 up to 90 but it is possible that this textures are heigher than walking textures
-        private const int START_CLIMBING = 20; // 100 - 80
-        private const int STOP_CLIMBING = 30;  // 110 - 80
+        // for lower part the right texture numbers are 20-29
+        private const int START_CLIMBING = 80; // 100 - 80
+        private const int STOP_CLIMBING = 89;  // 110 - 80
         private float currentTextureIndex;
 
         private Level level;
@@ -37,33 +37,39 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Enter()
         {
-            //frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
-            //prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -1f));
-            //prismaticJoint.MotorEnabled = true;
-            //prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
+            frictionJoint = JointFactory.CreateFixedFrictionJoint(level, (Body)this.StateMachine.Body, this.StateMachine.Body.Position);
+            prismaticJoint = JointFactory.CreateFixedPrismaticJoint(level, ((Body)this.StateMachine.Body), this.StateMachine.Body.Position, new Vector2(0, -1f));
+            prismaticJoint.MotorEnabled = true;
+            prismaticJoint.MaxMotorForce = MAX_MOTOR_FORCE;
+            StateMachine.Body.Width = 2.5f;
+            StateMachine.Body.Height = 3.6f;
         }
 
         public override void Exit()
         {
-            //this.level.RemoveJoint(prismaticJoint);
-            //this.level.RemoveJoint(frictionJoint);
+            this.level.RemoveJoint(prismaticJoint);
+            this.level.RemoveJoint(frictionJoint);
+            StateMachine.Body.Width = 3f;
+            StateMachine.Body.Height = 3f;
         }
 
         public override void Update(GameTime gameTime)
         {
             if (!IsMoving)
             {
-                currentTextureIndex = START_CLIMBING;
+                currentTextureIndex = STOP_CLIMBING;
                 StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
                 (this.StateMachine.Body as Body).LinearVelocity = new Vector2( (this.StateMachine.Body as Body).LinearVelocity.X, 0);
             }
 
-            UpdateClimbAnimation(gameTime);
+            if (IsMoving)
+            {
+                UpdateClimbAnimation(gameTime);
+            }
         }
 
         private void UpdateClimbAnimation(GameTime gameTime)
         {
-            IsMoving = true;
 
             if (currentTextureIndex < START_CLIMBING)
             {

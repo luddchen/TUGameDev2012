@@ -61,7 +61,7 @@ namespace RoBuddies.Control.StateMachines
                         CurrentState.Exit();
                     }
                     CurrentState = state;
-                    state.Enter();
+                    CurrentState.Enter();
                     break;
                 }
             }

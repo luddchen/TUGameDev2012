@@ -12,7 +12,7 @@ namespace RoBuddies.Model.Objects
     /// </summary>    
     class Ladder : PhysicObject
     {
-        private const float LADDER_WIDTH = 1.5f;
+        private const float LADDER_WIDTH = 1.75f;
 
         private Texture2D top;
         private Texture2D center;
@@ -22,13 +22,11 @@ namespace RoBuddies.Model.Objects
         public Ladder(Vector2 pos, float height, Color color, Level level, Game game)
            : base(pos, new Vector2(LADDER_WIDTH, height), color, 10f, level)
         {
+            this.game = game;
             top = game.Content.Load<Texture2D>("Sprites//LadderTop");
             center = game.Content.Load<Texture2D>("Sprites//LadderCenter");
             bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
 
-            this.game = game;
-            //ladderFixture = FixtureFactory.AttachEdge(Vector2.Zero, Vector2.Zero, this);
-            //ladderFixture = FixtureFactory.AttachEdge(new Vector2(0, -2), new Vector2(0, -2), this);
             changeLadderHeight(this.Height);
             setUncollidable();
         }
@@ -51,7 +49,12 @@ namespace RoBuddies.Model.Objects
         public void changeLadderHeight(float newHeight)
         {
             this.Height = Math.Max(4, newHeight);
-            createRectangleFixture();
+            foreach (Fixture fixture in this.FixtureList)
+            {
+                this.DestroyFixture(fixture);
+            }
+            FixtureFactory.AttachRectangle(0.01f, this.Height - 1.2f, 1, new Vector2(0, -0.5f), this); // RaycastTool only returns the ladder if the ray go from outside to inner of fixture
+            FixtureFactory.AttachRectangle(0.01f, this.Height - 1.2f, 1, new Vector2(0, 0.5f), this); // RaycastTool only returns the ladder if the ray go from outside to inner of fixture
             applyTexture();
         }
     }
