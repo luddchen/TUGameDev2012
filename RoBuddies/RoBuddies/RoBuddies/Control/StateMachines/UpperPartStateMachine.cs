@@ -21,7 +21,6 @@ namespace RoBuddies.Control.StateMachines
         private const int START_ANIMATION = 80;
         private const int END_ANIMATION = 130;
 
-        private KeyboardState oldState;
         private ContentManager contentManager;
         private Robot robot;
         private List<Texture2D> textureList;
@@ -63,9 +62,9 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
+            base.Update(gameTime);
 
-            if (CurrentState.Name != PIPE_CLIMBING_STATE && hitsPipe())
+            if (CurrentState.Name != PIPE_CLIMBING_STATE && canClimb(0))
             {
                 SwitchToState(PIPE_CLIMBING_STATE);
             }
@@ -74,21 +73,21 @@ namespace RoBuddies.Control.StateMachines
             {
                 ((PipeClimbingState)CurrentState).IsMoving = false;
 
-                if (newState.IsKeyDown(Keys.Left) && canClimbLeft())
+                if (ButtonIsDown(ControlButton.left) && canClimb(-1))
                 {
                     (Body as Body).LinearVelocity = new Vector2(-5, (Body as Body).LinearVelocity.Y);
                     Body.Effect = SpriteEffects.FlipHorizontally;
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
 
-                if (newState.IsKeyDown(Keys.Right) && canClimbRight())
+                if (ButtonIsDown(ControlButton.right) && canClimb(1))
                 {
                     (Body as Body).LinearVelocity = new Vector2(5, (Body as Body).LinearVelocity.Y);
                     Body.Effect = SpriteEffects.None;
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
 
-                if (newState.IsKeyDown(Keys.Space))
+                if (ButtonIsDown(ControlButton.jump))
                 {
                     SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
                 }
@@ -101,42 +100,16 @@ namespace RoBuddies.Control.StateMachines
                 mHeadStateMachine.Update(gameTime);
             }
 
-            oldState = newState;
-        }
-
-        /// <summary>
-        /// Test with ray cast if left of the upper part is a pipe for climbing
-        /// </summary>
-        /// <returns>true if the upper part can climb left</returns>
-        private bool canClimbLeft()
-        {
-            Vector2 upperPartPos = new Vector2(robot.UpperPart.Position.X - robot.UpperPart.Width / 4, robot.UpperPart.Position.Y);
-            float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 3;
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
-            bool canClimbLeft = intersectingObject is Pipe;
-            return canClimbLeft;
-        }
-
-        /// <summary>
-        /// Test with ray cast if right of the upper part is a pipe for climbing
-        /// </summary>
-        /// <returns>true if the upper part can climb right</returns>
-        private bool canClimbRight()
-        {
-            Vector2 upperPartPos = new Vector2(robot.UpperPart.Position.X + robot.UpperPart.Width / 4, robot.UpperPart.Position.Y);
-            float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 3;
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
-            bool canClimbRight = intersectingObject is Pipe;
-            return canClimbRight;
+            oldKeyboardState = newKeyboardState;
         }
 
         /// <summary>
         /// Test with ray if the robot hits a pipe for climbing
         /// </summary>
         /// <returns>true if the upper part hit a pipe</returns>
-        private bool hitsPipe()
+        private bool canClimb(float direction)
         {
-            Vector2 upperPartPos = robot.UpperPart.Position;
+            Vector2 upperPartPos = robot.UpperPart.Position + new Vector2(robot.UpperPart.Width / 6, 0) * direction;
             float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 3;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
             bool hitsPipe = intersectingObject is Pipe;

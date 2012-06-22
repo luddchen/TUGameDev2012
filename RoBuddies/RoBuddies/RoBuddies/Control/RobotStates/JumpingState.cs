@@ -4,6 +4,7 @@ using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
+using RoBuddies.Model.RobotParts;
 ﻿
 namespace RoBuddies.Control.RobotStates
 {
@@ -21,7 +22,15 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Enter()
         {
-            (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1800));
+            if (StateMachine.Body is PartsCombined)
+            {
+                (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1800));
+            }
+
+            if (StateMachine.Body is LowerPart)
+            {
+                (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1200));
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -38,6 +47,19 @@ namespace RoBuddies.Control.RobotStates
 
             StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
             //currentTextureIndex += 0.6f; // need first the new animated sprites
+            switchBackToWaitingState();
+        }
+
+        private void switchBackToWaitingState() {
+            if (StateMachine is PartsCombinedStateMachine)
+            {
+                StateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
+            }
+
+            if (StateMachine is LowerPartStateMachine)
+            {
+                StateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
+            }
         }
     }
 }
