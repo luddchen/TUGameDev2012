@@ -121,14 +121,6 @@ namespace RoBuddies
                 {
                     if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
                     if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
-
-                    if (Keyboard.GetState().IsKeyDown(Keys.K)) { this.View.Camera.Rotation -= 0.005f; }
-                    if (Keyboard.GetState().IsKeyDown(Keys.L)) { this.View.Camera.Rotation += 0.005f; }
-
-                    //if (Keyboard.GetState().IsKeyDown(Keys.Left)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(-1, 0)); }
-                    //if (Keyboard.GetState().IsKeyDown(Keys.Right)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(+1, 0)); }
-                    //if (Keyboard.GetState().IsKeyDown(Keys.Up)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, -1)); }
-                    //if (Keyboard.GetState().IsKeyDown(Keys.Down)) { this.View.Camera.Move(this.View.Camera.Position + new Vector2(0, +1)); }
                 }
             }
 
@@ -146,7 +138,7 @@ namespace RoBuddies
                 this.View = this.EditorView;
                 this.Menu = this.EditorMenu;
             }
-            this.Menu.IsVisible = false;
+            this.Menu.IsVisible = true;
 
             Window_ClientSizeChanged(null, null);
             this.viewModeChanged = false;
@@ -185,8 +177,8 @@ namespace RoBuddies
 
                 if (!startScreen)
                 {
-                    splashColor.A -= 4;
-                    if (splashColor.A < 4)
+                    splashColor.A -= 6;
+                    if (splashColor.A < 6)
                     {
                         started = true;
                     }

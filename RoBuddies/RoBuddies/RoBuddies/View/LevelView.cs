@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using FarseerPhysics;
 using FarseerPhysics.DebugViews;
 using Microsoft.Xna.Framework;
@@ -48,7 +48,7 @@ namespace RoBuddies.View
 
             this.worlds = new Worlds(game);
 
-            viewNextLevel();
+            //viewNextLevel();
         }
 
         /// <summary>
@@ -68,11 +68,17 @@ namespace RoBuddies.View
                 this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
                 this.SnapShot.MakeSnapshot(false);
 
+                this.Camera.SetBoundingBox(this.Level);
+                this.Camera.SmoothMove = false;
+                CameraUpdate();
+                this.Camera.SmoothMove = true;
+                Console.Out.WriteLine("load level");
+
                 this.debugView = new DebugViewXNA(this.Level);
                 this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
                 this.debugView.DefaultShapeColor = Color.White;
                 this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
-            }            
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -82,16 +88,18 @@ namespace RoBuddies.View
             if (this.Level.finished) // load next level, when current level is finished
             {
                 viewNextLevel();
-                this.Camera.SetBoundingBox(this.Level);
             }
 
             KeyboardState newKeyboardState = Keyboard.GetState();
 
-            snapshotCounter--;
-            if (snapshotCounter == 0)
+            if (this.SnapShot != null)
             {
-                snapshotCounter = snapshotTimer;
-                this.SnapShot.MakeSnapshot(true);
+                snapshotCounter--;
+                if (snapshotCounter == 0)
+                {
+                    snapshotCounter = snapshotTimer;
+                    this.SnapShot.MakeSnapshot(true);
+                }
             }
                 
             this.Level.Update(gameTime);

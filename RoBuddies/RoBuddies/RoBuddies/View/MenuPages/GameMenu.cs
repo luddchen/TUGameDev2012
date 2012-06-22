@@ -104,7 +104,10 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnExit()
         {
-            ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
+            if (((LevelView)this.Game.LevelView).SnapShot != null)
+            {
+                ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
+            }
         }
 
     }
