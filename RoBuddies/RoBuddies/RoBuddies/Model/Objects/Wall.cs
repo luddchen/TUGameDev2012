@@ -41,7 +41,7 @@ namespace RoBuddies.Model.Objects
             {
                 this.switchable = true ;
                 this.Color = new Color(color.R/2, color.G/2, color.B/2);
-                setUncollidable();
+                setUncollidable(true);
             }
 
             createRectangleFixture();

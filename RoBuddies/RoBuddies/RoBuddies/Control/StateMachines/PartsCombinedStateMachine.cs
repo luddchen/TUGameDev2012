@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Dynamics.Joints;
+using FarseerPhysics.Factories;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -27,9 +28,9 @@ namespace RoBuddies.Control.StateMachines
 
         private Robot robot;
         private List<Texture2D> textureList;
-        private WeldJoint crateJoint;
         private Crate currentCrate;
         private bool isPulling;
+        private float pullingDistance;
 
         private HeadStateMachine mHeadStateMachine;
 
@@ -110,7 +111,7 @@ namespace RoBuddies.Control.StateMachines
             }
 
             //if (oldKeyboardState.IsKeyDown(Keys.A) && newKeyboardState.IsKeyUp(Keys.A))
-            if (ButtonReleased(ControlButton.use))
+            if (ButtonReleased(ControlButton.use) && isPulling)
             {
                 stopPulling();
             }
@@ -192,7 +193,7 @@ namespace RoBuddies.Control.StateMachines
 
             Vector2 combinedPartPos = robot.PartsCombined.Position;
 
-            rayEnd = combinedPartPos.X - robot.PartsCombined.Width / 2;
+            rayEnd = combinedPartPos.X - robot.PartsCombined.Width / 3;
             Body bodyLeft = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
 
             if (bodyLeft != null && bodyLeft is Crate)
@@ -200,7 +201,7 @@ namespace RoBuddies.Control.StateMachines
                 return bodyLeft as Crate;
             }
 
-            rayEnd = combinedPartPos.X + robot.PartsCombined.Width / 2;
+            rayEnd = combinedPartPos.X + robot.PartsCombined.Width / 3;
             Body bodyRight = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(rayEnd, combinedPartPos.Y));
 
             if (bodyRight != null && bodyRight is Crate)
@@ -213,31 +214,38 @@ namespace RoBuddies.Control.StateMachines
 
         private void pullCrate()
         {
+            Crate crate = getMovableCrate();
+
             if (!isPulling)
             {
-                Crate crate = getMovableCrate();
-
                 if (crate != null)
                 {
                     currentCrate = crate;
 
+                    robot.PartsCombined.wheelBody.IgnoreCollisionWith(currentCrate);
+                    robot.PartsCombined.IgnoreCollisionWith(currentCrate);
+
+                    pullingDistance = robot.PartsCombined.Position.X - currentCrate.Position.X;
+
                     isPulling = true;
-                    //SwitchToState(PULL_STATE);
-                    crateJoint = new WeldJoint(robot.PartsCombined, currentCrate, currentCrate.WorldCenter, robot.PartsCombined.WorldCenter - new Vector2(0, 0.20f));
-                    currentCrate.FixedRotation = false;
-                    this.Level.AddJoint(crateJoint);
+                }
+            }
+            else
+            {
+                if (crate == null)
+                {
+                    stopPulling();
                 }
             }
         }
 
         private void stopPulling()
         {
-            if (crateJoint != null)
-            {
-                isPulling = false;
-                this.Level.RemoveJoint(crateJoint);
-                currentCrate.FixedRotation = true;
-            }
+            isPulling = false;
+
+            robot.PartsCombined.wheelBody.RestoreCollisionWith(currentCrate);
+            robot.PartsCombined.RestoreCollisionWith(currentCrate);
+            currentCrate.LinearVelocity = Vector2.Zero;
         }
 
         private void climbLadder(float distance)
@@ -269,6 +277,11 @@ namespace RoBuddies.Control.StateMachines
             {
                 robot.PartsCombined.wheelMotor.MotorSpeed = motorSpeed;
             }
+
+            if (isPulling)
+            {
+                currentCrate.LinearVelocity = robot.PartsCombined.LinearVelocity;
+            }
         }
 
         private void stopWalk()
@@ -279,6 +292,10 @@ namespace RoBuddies.Control.StateMachines
             }
             robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
             robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+            if (isPulling)
+            {
+                currentCrate.LinearVelocity = Vector2.Zero;
+            }
         }
     }
 }

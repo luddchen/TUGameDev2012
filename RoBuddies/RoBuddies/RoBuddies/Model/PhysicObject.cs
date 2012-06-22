@@ -139,10 +139,19 @@ namespace RoBuddies.Model
         /// <summary>
         /// set this object to not collide with any other object
         /// </summary>
-        public void setUncollidable()
+        public void setUncollidable(bool value)
         {
-            this.CollisionCategories = Category.Cat1;
-            this.CollidesWith = Category.None;
+            if (value)
+            {
+                this.CollisionCategories = Category.Cat1;
+                this.CollidesWith = Category.None;
+            }
+
+            if (!value)
+            {
+                this.CollisionCategories = Category.All;
+                this.CollidesWith = Category.All;
+            }
         }
 
         /// <summary>

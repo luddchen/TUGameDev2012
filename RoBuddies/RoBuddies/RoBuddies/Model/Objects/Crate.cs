@@ -1,6 +1,8 @@
 ﻿using System;
 using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
+using FarseerPhysics.Dynamics.Contacts;
+
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,18 +17,16 @@ namespace RoBuddies.Model.Objects
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
 
         public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
-            : base(pos, size, color, 0, level)
+            : base(pos, size, color, 1, level)
         {
 
             Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
             defineTextures(crateTex, crateTex, crateTex);
 
             this.BodyType = BodyType.Dynamic;
-            calculateHeaviness();
-            createRectangleFixture(2f);
+            this.FixedRotation = true;
 
-            //Console.Out.WriteLine(this.Mass);
-            this.Friction = 0.01f * this.Mass;
+            changeCrateSize(size);
         }
 
         private void calculateHeaviness()
@@ -53,6 +53,8 @@ namespace RoBuddies.Model.Objects
         /// </summary>
         public bool stateUpdate
         {
+            get { return isHeavyCrate; }
+
             set
             {
                 if (value && isHeavyCrate)
@@ -76,8 +78,9 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            createRectangleFixture(2f);
+            createRectangleFixture(5f);
             calculateHeaviness();
         }
+
     }
 }

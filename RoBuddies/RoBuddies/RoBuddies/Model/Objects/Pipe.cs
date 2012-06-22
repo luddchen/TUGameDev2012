@@ -26,7 +26,7 @@ namespace RoBuddies.Model.Objects
             this.game = game;
 
             changePipeLength(this.Width);
-            setUncollidable();
+            setUncollidable(true);
         }
 
         private void attachTexture()

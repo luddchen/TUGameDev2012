@@ -28,7 +28,7 @@ namespace RoBuddies.Model.Objects
             bottom = game.Content.Load<Texture2D>("Sprites//LadderBottom");
 
             changeLadderHeight(this.Height);
-            setUncollidable();
+            setUncollidable(true);
         }
 
         private void applyTexture()
