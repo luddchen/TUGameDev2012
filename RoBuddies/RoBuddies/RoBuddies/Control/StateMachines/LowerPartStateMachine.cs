@@ -121,26 +121,7 @@ namespace RoBuddies.Control.StateMachines
 
         public bool isOnGround()
         {
-            bool isOnGround = false;
-
-            // left ray
-            Vector2 leftRayStart = robot.LowerPart.wheelBody.Position - new Vector2(0.49f, 0);
-            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.51f);
-            bool isOnLeftGround = RayCastUtility.isIntesectingAnObject(this.Level, leftRayStart, leftRayEnd);
-
-            // middle ray
-            Vector2 middleRayStart = robot.LowerPart.wheelBody.Position;
-            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.51f);
-            bool isOnMiddleGround = RayCastUtility.isIntesectingAnObject(this.Level, middleRayStart, middleRayEnd);
-
-            // right ray
-            Vector2 rightRayStart = robot.LowerPart.wheelBody.Position + new Vector2(0.49f, 0);
-            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.51f);
-            bool isOnRightGround = RayCastUtility.isIntesectingAnObject(this.Level, rightRayStart, rightRayEnd);
-
-            isOnGround = isOnLeftGround || isOnMiddleGround || isOnRightGround;
-
-            return isOnGround;
+            return RayCastUtility.isOnGround(this.Level, robot.LowerPart.wheelBody);
         }
 
         private void UpdateWalkAnimation(GameTime gameTime)

@@ -83,6 +83,8 @@ namespace RoBuddies.Control.RobotStates
 
             StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
             currentTextureIndex += 0.7f;
+
+            IsMoving = false;
         }
 
     }

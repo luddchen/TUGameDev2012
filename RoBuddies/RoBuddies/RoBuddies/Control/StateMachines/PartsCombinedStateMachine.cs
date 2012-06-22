@@ -27,7 +27,6 @@ namespace RoBuddies.Control.StateMachines
 
         private KeyboardState oldState;
         private Robot robot;
-        private ContentManager contentManager;
         private List<Texture2D> textureList;
         private WeldJoint crateJoint;
         private Crate currentCrate;
@@ -51,7 +50,6 @@ namespace RoBuddies.Control.StateMachines
             : base(body)
         {
             this.robot = robot;
-            this.contentManager = contentManager;
             this.textureList = new List<Texture2D>();
             this.isPulling = false;
 
@@ -74,15 +72,15 @@ namespace RoBuddies.Control.StateMachines
             SwitchToState(WAIT_STATE);
         }
 
-        private bool canClimbUp()
+        private bool canClimb(float yCheckDistance)
         {
             Vector2 combinedPartPos = robot.PartsCombined.Position;
-            Vector2 rayDirection = new Vector2(0.51f, 0.71f);
+            Vector2 rayDirection = new Vector2(0.51f, yCheckDistance);
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
 
             if (!(intersectingObject is Ladder)) // second ray on other side of robot
             {
-                rayDirection = new Vector2(-0.51f, 0.71f);
+                rayDirection = new Vector2(-0.51f, yCheckDistance);
                 intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
             }
 
@@ -90,49 +88,18 @@ namespace RoBuddies.Control.StateMachines
             return canClimbUp;
         }
 
-        private bool canClimbDown()
-        {
-            Vector2 combinedPartPos = robot.PartsCombined.Position;
-            Vector2 rayDirection = new Vector2(0.51f, -0.71f);
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
-
-            if (!(intersectingObject is Ladder)) // second ray on other side of robot
-            {
-                rayDirection = new Vector2(-0.51f, -0.71f);
-                intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
-            }
-
-            bool canClimbDown = intersectingObject is Ladder;
-            return canClimbDown;
-        }
-
         public override void Update(GameTime gameTime)
         {
             KeyboardState newState = Keyboard.GetState();
 
-            if (CurrentState is LadderClimbingState)
+            if ((newState.IsKeyDown(Keys.Up) && canClimb(0.71f)))
             {
-                ((LadderClimbingState)CurrentState).IsMoving = false;
+                climbLadder(0.15f);
             }
 
-            if (newState.IsKeyDown(Keys.Up) && canClimbUp())
+            if (newState.IsKeyDown(Keys.Down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
             {
-                if (!(CurrentState is LadderClimbingState))
-                {
-                    SwitchToState(CLIMBING_STATE);
-                }
-                ((LadderClimbingState)CurrentState).IsMoving = true;
-                robot.ActivePart.Position += new Vector2(0, 0.15f);
-            }
-
-            if (newState.IsKeyDown(Keys.Down) && canClimbDown()) // && !isOnGround() -> doesnt work because raycast hits ladder
-            {
-                if (!(CurrentState is LadderClimbingState))
-                {
-                    SwitchToState(CLIMBING_STATE);
-                }
-                ((LadderClimbingState)CurrentState).IsMoving = true;
-                robot.ActivePart.Position += new Vector2(0, -0.15f);
+                climbLadder(-0.15f);
             }
 
             if (newState.IsKeyDown(Keys.A) && isOnGround())
@@ -144,72 +111,30 @@ namespace RoBuddies.Control.StateMachines
             {
                 stopPulling();
             }
-
+           
             if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
 
-            if (newState.IsKeyDown(Keys.Left) && newState.IsKeyUp(Keys.LeftControl))
+            if (newState.IsKeyDown(Keys.Left))
             {
-                if (!(CurrentState is PullingState))
-                {
-                    SwitchToState(WalkingState.LEFT_WALK_STATE);
-                }
-                if (!isOnGround())
-                {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
-                    robot.PartsCombined.ApplyForce(new Vector2(-100, 0));
-                    if (robot.PartsCombined.LinearVelocity.X < -3)
-                    {
-                        robot.PartsCombined.LinearVelocity = new Vector2(-3, robot.PartsCombined.LinearVelocity.Y);
-                    }
-                }
-                else
-                {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = 15f;
-                }
+                startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
             }
 
             if (newState.IsKeyUp(Keys.Left) && oldState.IsKeyDown(Keys.Left))
             {
-                if (!(CurrentState is PullingState))
-                {
-                    SwitchToState(WAIT_STATE);
-                }
-                robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
-                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+                stopWalk();
             }
 
             if (newState.IsKeyDown(Keys.Right))
             {
-                if (!(CurrentState is PullingState))
-                {
-                    SwitchToState(WalkingState.RIGHT_WALK_STATE);
-                }
-                if (!isOnGround())
-                {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
-                    robot.PartsCombined.ApplyForce(new Vector2(100, 0));
-                    if (robot.PartsCombined.LinearVelocity.X > 3)
-                    {
-                        robot.PartsCombined.LinearVelocity = new Vector2(3, robot.PartsCombined.LinearVelocity.Y);
-                    }
-                }
-                else
-                {
-                    robot.PartsCombined.wheelMotor.MotorSpeed = -15f;
-                }
+                startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
             }
 
             if (newState.IsKeyUp(Keys.Right) && oldState.IsKeyDown(Keys.Right))
             {
-                if (!(CurrentState is PullingState))
-                {
-                    SwitchToState(WAIT_STATE);
-                }
-                robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
-                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+                stopWalk();
             }
 
             if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
@@ -218,7 +143,6 @@ namespace RoBuddies.Control.StateMachines
             }
 
             CurrentState.Update(gameTime);
-            //Console.Out.WriteLine("update " + CurrentState.Name);
 
             if (mHeadStateMachine.HasHead)
             {
@@ -251,26 +175,7 @@ namespace RoBuddies.Control.StateMachines
 
         public bool isOnGround()
         {
-            bool isOnGround = false;
-
-            // left ray
-            Vector2 leftRayStart = robot.PartsCombined.wheelBody.Position - new Vector2(0.49f, 0);
-            Vector2 leftRayEnd = new Vector2(leftRayStart.X, leftRayStart.Y - 0.51f);
-            bool isOnLeftGround = RayCastUtility.isIntesectingAnObject(this.Level, leftRayStart, leftRayEnd);
-
-            // middle ray
-            Vector2 middleRayStart = robot.PartsCombined.wheelBody.Position;
-            Vector2 middleRayEnd = new Vector2(middleRayStart.X, middleRayStart.Y - 0.51f);
-            bool isOnMiddleGround = RayCastUtility.isIntesectingAnObject(this.Level, middleRayStart, middleRayEnd);
-
-            // right ray
-            Vector2 rightRayStart = robot.PartsCombined.wheelBody.Position + new Vector2(0.49f, 0);
-            Vector2 rightRayEnd = new Vector2(rightRayStart.X, rightRayStart.Y - 0.51f);
-            bool isOnRightGround = RayCastUtility.isIntesectingAnObject(this.Level, rightRayStart, rightRayEnd);
-
-            isOnGround = isOnLeftGround || isOnMiddleGround || isOnRightGround;
-
-            return isOnGround;
+            return RayCastUtility.isOnGround(this.Level, robot.PartsCombined.wheelBody);
         }
 
         private Crate getMovableCrate()
@@ -325,6 +230,47 @@ namespace RoBuddies.Control.StateMachines
                 this.Level.RemoveJoint(crateJoint);
                 currentCrate.FixedRotation = true;
             }
+        }
+
+        private void climbLadder(float distance)
+        {
+            if (!(CurrentState is LadderClimbingState))
+            {
+                SwitchToState(CLIMBING_STATE);
+            }
+            ((LadderClimbingState)CurrentState).IsMoving = true;
+            robot.ActivePart.Position += new Vector2(0, distance);
+        }
+
+        private void startWalk(String newStateName, float force, float velocityLimit, float motorSpeed)
+        {
+            if (!(CurrentState is PullingState))
+            {
+                SwitchToState(newStateName);
+            }
+            if (!isOnGround())
+            {
+                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+                robot.PartsCombined.ApplyForce(new Vector2(force, 0));
+                if (Math.Abs(robot.PartsCombined.LinearVelocity.X) > Math.Abs(velocityLimit))
+                {
+                    robot.PartsCombined.LinearVelocity = new Vector2(velocityLimit, robot.PartsCombined.LinearVelocity.Y);
+                }
+            }
+            else
+            {
+                robot.PartsCombined.wheelMotor.MotorSpeed = motorSpeed;
+            }
+        }
+
+        private void stopWalk()
+        {
+            if (!(CurrentState is PullingState))
+            {
+                SwitchToState(WAIT_STATE);
+            }
+            robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
+            robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
         }
     }
 }
