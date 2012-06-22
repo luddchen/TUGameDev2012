@@ -12,10 +12,6 @@ namespace RoBuddies.Control.StateMachines
     {
         #region Members and Properties
 
-        public const String WAIT_STATE = "WaitingState";
-        public const String JUMP_STATE = "JumpState";
-        public const String WALK_STATE = "WalkingState";
-
         private StateMachine mActiveStateMachine;
         private PartsCombinedStateMachine mPartsCombinedStateMachine;
         private UpperPartStateMachine mUpperPartStateMachine;
@@ -23,7 +19,6 @@ namespace RoBuddies.Control.StateMachines
 
         private Robot mRobot;
         private bool looksRight = true; // maybe redundent, but i need this quick(&dirty) for the bridgehead
-        private KeyboardState mOldState;
 
         public StateMachine ActiveStateMachine
         {
@@ -63,113 +58,57 @@ namespace RoBuddies.Control.StateMachines
         {
             mRobot = robot;
 
-            mPartsCombinedStateMachine = new PartsCombinedStateMachine(robot.PartsCombined, content, robot);
-            mUpperPartStateMachine = new UpperPartStateMachine(robot.UpperPart, content, robot);
-            mLowerPartStateMachine = new LowerPartStateMachine(robot.LowerPart, content, robot);
-            mActiveStateMachine = mPartsCombinedStateMachine;
-        }
-
-
-        private bool hitsLadder()
-        {
-            Vector2 combinedPartPos = mRobot.PartsCombined.Position;
-            float rayEnd = combinedPartPos.Y + mRobot.PartsCombined.Height; //mRobot.UpperPart.Height
-            FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, new Vector2(combinedPartPos.X, rayEnd));
-            bool hitsLadder = intersectingObject is Ladder;    
-            return hitsLadder;
+            mPartsCombinedStateMachine  = new PartsCombinedStateMachine(robot.PartsCombined, content, robot);
+            mUpperPartStateMachine      = new UpperPartStateMachine(robot.UpperPart, content, robot);
+            mLowerPartStateMachine      = new LowerPartStateMachine(robot.LowerPart, content, robot);
+            mActiveStateMachine         = mPartsCombinedStateMachine;
         }
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
+            base.Update(gameTime);
 
-            //if (newState.IsKeyDown(Keys.Up) && mOldState.IsKeyUp(Keys.Up))
-            //{
-            //    if (mActiveStateMachine == mPartsCombinedStateMachine && hitsLadder())
-            //    {
-            //        mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.CLIMBING_STATE);
-            //    }
-            //}
-
-            if (newState.IsKeyDown(Keys.X) && mOldState.IsKeyUp(Keys.X))
+            //if (newKeyboardState.IsKeyDown(Keys.X) && oldKeyboardState.IsKeyUp(Keys.X))
+            if (ButtonPressed(ControlButton.robot))
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
-                    mRobot.PartsCombined.Enabled = false;
-                    mRobot.PartsCombined.wheelBody.Enabled = false;
-                    mRobot.UpperPart.Enabled = true;
-                    mRobot.LowerPart.Enabled = true;
-                    mRobot.LowerPart.wheelBody.Enabled = true;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
                     mRobot.LowerPart.wheelBody.Position = mRobot.LowerPart.Position + new Vector2(0, (-1f / 2f) + 0.20f);
                     setActivePart(mRobot.UpperPart);
-                    //mActiveStateMachine = mUpperPartStateMachine;
-                    //setCombined(false);
-                    //mRobot.ActivePart = mRobot.UpperPart;
-                    //mRobot.UpperPart.Color = Color.White;
-                    //mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
+
                     mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.SHOOTING_STATE);
                 }
-                else if (canCombine())
+                else
                 {
-                    //change heavy crates to dynamic
-                    Layer mainLayer = Level.GetLayerByName("mainLayer");
-                    foreach (IBody obj in mainLayer.AllObjects)
+                    if (canCombine())
                     {
-                        if (obj is Crate)
+                        crateStateUpdate(true);
+
+                        mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
+                        mRobot.PartsCombined.wheelBody.Position = mRobot.PartsCombined.Position + new Vector2(0, (-2.3f / 2f) + 0.20f);
+                        setActivePart(mRobot.PartsCombined);
+                    }
+                    else
+                    {
+                        if (mActiveStateMachine == mLowerPartStateMachine)
                         {
-                            Crate crate = (Crate)obj;
-                            crate.stateUpdate = true;
+                            mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
+                            setActivePart(mRobot.UpperPart);
+                        }
+                        else if (mActiveStateMachine == mUpperPartStateMachine)
+                        {
+                            crateStateUpdate( false );
+
+                            setActivePart(mRobot.LowerPart);
                         }
                     }
-                    mRobot.PartsCombined.Enabled = true;
-                    mRobot.PartsCombined.wheelBody.Enabled = true;
-                    mRobot.UpperPart.Enabled = false;
-                    mRobot.LowerPart.Enabled = false;
-                    mRobot.LowerPart.wheelBody.Enabled = false;
-                    mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
-                    mRobot.PartsCombined.wheelBody.Position = mRobot.PartsCombined.Position + new Vector2(0, (-2.3f / 2f) + 0.20f);
-                    setActivePart(mRobot.PartsCombined);
-                    //mActiveStateMachine = mPartsCombinedStateMachine;
-                    //setCombined(true);
-                    //mRobot.ActivePart = mRobot.PartsCombined;
                 }
             }
 
-            if (newState.IsKeyDown(Keys.LeftAlt) && mOldState.IsKeyUp(Keys.LeftAlt))
-            {
-                if (mActiveStateMachine == mLowerPartStateMachine)
-                {
-                    mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                    setActivePart(mRobot.UpperPart);
-                    //mActiveStateMachine = mUpperPartStateMachine;
-                    //mRobot.ActivePart = mRobot.UpperPart;
-                    //mRobot.UpperPart.Color = Color.White;
-                    //mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
-                }
-                else if (mActiveStateMachine == mUpperPartStateMachine)
-                {
-                    //change heavy crates to static
-                    Layer mainLayer = Level.GetLayerByName("mainLayer");
-                    foreach (IBody obj in mainLayer.AllObjects)
-                    {
-                        if (obj is Crate)
-                        {
-                            Crate crate = (Crate)obj;
-                            crate.stateUpdate = false;
-                        }
-                    }
-
-                    setActivePart(mRobot.LowerPart);
-                    //mActiveStateMachine = mLowerPartStateMachine;
-                    //mRobot.ActivePart = mRobot.LowerPart;
-                    //mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
-                    //mRobot.LowerPart.Color = Color.White;
-                }
-            }
-
-            if (newState.IsKeyDown(Keys.S) && mOldState.IsKeyUp(Keys.S))
+            // if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
+            if (ButtonPressed(ControlButton.use))
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine || mActiveStateMachine == mUpperPartStateMachine)
                 {
@@ -185,17 +124,18 @@ namespace RoBuddies.Control.StateMachines
                 }
             }
 
-            if (newState.IsKeyDown(Keys.Right))
+            //if (newKeyboardState.IsKeyDown(Keys.Right))
+            if (ButtonIsDown(ControlButton.right))
             {
                 this.looksRight = true;
             }
 
-            if (newState.IsKeyDown(Keys.Left))
+            //if (newKeyboardState.IsKeyDown(Keys.Left))
+            if (ButtonIsDown(ControlButton.left))
             {
                 this.looksRight = false;
             }
 
-            mOldState = newState;
             mActiveStateMachine.Update(gameTime);
         }
 
@@ -249,9 +189,22 @@ namespace RoBuddies.Control.StateMachines
 
         private void setCombined(bool isCombined)
         {
-            mRobot.UpperPart.IsVisible = !isCombined;
-            mRobot.LowerPart.IsVisible = !isCombined;
-            mRobot.PartsCombined.IsVisible = isCombined;
+            mRobot.UpperPart.setVisible( !isCombined );
+            mRobot.LowerPart.setVisible( !isCombined );
+            mRobot.PartsCombined.setVisible( isCombined );
+        }
+
+        private void crateStateUpdate(bool newState)
+        {
+            Layer mainLayer = Level.GetLayerByName("mainLayer");
+            foreach (IBody obj in mainLayer.AllObjects)
+            {
+                if (obj is Crate)
+                {
+                    Crate crate = (Crate)obj;
+                    crate.stateUpdate = newState;
+                }
+            }
         }
     }
 }

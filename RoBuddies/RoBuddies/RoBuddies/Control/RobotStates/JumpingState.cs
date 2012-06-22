@@ -37,7 +37,7 @@ namespace RoBuddies.Control.RobotStates
             }
 
             StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
-            currentTextureIndex += 0.6f;
+            //currentTextureIndex += 0.6f; // need first the new animated sprites
         }
     }
 }
