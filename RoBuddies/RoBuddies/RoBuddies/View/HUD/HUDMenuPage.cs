@@ -35,6 +35,8 @@ namespace RoBuddies.View.HUD
         /// </summary>
         protected List<IHUDElement> ChoiceList { get; set; }
 
+        protected int leftRightStep = 4;
+
         /// <summary>
         /// the Head Up Display Menu containing this page
         /// </summary>
@@ -112,6 +114,29 @@ namespace RoBuddies.View.HUD
                     }
                 } // -----------------------------------------------------------------------------------
 
+                // Key.right -----------------------------------------------------------------------------
+                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Right) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Right))
+                {
+                    int index = this.ChoiceList.IndexOf(this.activeElement);
+                    if (index >= 0)                 // found active elements index
+                    {
+                        index += leftRightStep;
+                        if (index >= this.ChoiceList.Count) { index -= this.ChoiceList.Count; } // cycle
+                        this.ActiveElement = this.ChoiceList[index];
+                    }
+                } // ------------------------------------------------------------------------------------
+
+                // Key.left -------------------------------------------------------------------------------
+                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Left) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Left))
+                {
+                    int index = this.ChoiceList.IndexOf(this.activeElement);
+                    if (index >= 0)                 // found active elements index
+                    {
+                        index -= leftRightStep;
+                        if (index < 0) { index += this.ChoiceList.Count; } // cycle
+                        this.ActiveElement = this.ChoiceList[index];
+                    }
+                } // -----------------------------------------------------------------------------------
             }
         }
 

@@ -47,16 +47,15 @@ namespace RoBuddies.View
             this.Camera.SmoothMove = true;
 
             this.worlds = new Worlds(game);
-
-            //viewNextLevel();
         }
 
         /// <summary>
         /// sets the view to the next level
         /// </summary>
-        private void viewNextLevel()
+        /// <param name="newLevel">the new level , nullable</param>
+        public void viewNextLevel(Level newLevel)
         {
-            Level nextLevel = this.worlds.getNextLevel();
+            Level nextLevel = newLevel ?? this.worlds.getNextLevel();
             if (nextLevel != null)
             {
                 if (this.SnapShot != null)
@@ -87,7 +86,7 @@ namespace RoBuddies.View
 
             if (this.Level.finished) // load next level, when current level is finished
             {
-                viewNextLevel();
+                viewNextLevel(null);
             }
 
             KeyboardState newKeyboardState = Keyboard.GetState();

@@ -40,13 +40,14 @@ namespace RoBuddies.View
             OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
             HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
             GameMenu gameMenu = new GameMenu(this, this.Game.Content);
+            LevelChoiceMenu levelChoice = new LevelChoiceMenu(this, this.Game.Content);
 
             mainMenu.gamePage = gameMenu;
             mainMenu.quitPage = quitMenu;
             mainMenu.optionPage = optionMenu;
             mainMenu.helpPage = helpMenu;
 
-            this.DefaultPage = mainMenu ;
+            this.DefaultPage = levelChoice; //mainMenu ;
             this.ActivePage = this.DefaultPage;
             // end decoration -------------------------------------------------------------------
         }
