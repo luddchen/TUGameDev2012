@@ -6,7 +6,7 @@ namespace RoBuddies.Model.Snapshot
 {
     class KeyFrame
     {
-        private List<BodyKeyFrame> AllBodyKeyFrames;
+        public List<BodyKeyFrame> AllBodyKeyFrames;
         private PhysicObject activeRobotPart;
         private Level Level;
 
@@ -28,6 +28,38 @@ namespace RoBuddies.Model.Snapshot
                     bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
                 }
                 this.AllBodyKeyFrames.Add(bodyKeyFrame);
+            }
+        }
+
+        public KeyFrame(KeyFrame oldKeyFrame, Level level) 
+        {
+            bool changes = false;
+
+            this.Level = level;
+            this.activeRobotPart = this.Level.Robot.ActivePart;
+            if (oldKeyFrame.activeRobotPart != this.activeRobotPart) { changes = true; }
+
+            this.AllBodyKeyFrames = new List<BodyKeyFrame>();
+            foreach (BodyKeyFrame oldBodyKeyframe in oldKeyFrame.AllBodyKeyFrames)  
+            {
+                BodyKeyFrame bodyKeyFrame;
+                if (oldBodyKeyframe.Body is Switch)
+                {
+                    bodyKeyFrame = new SwitchKeyFrame((Switch)oldBodyKeyframe.Body);
+                }
+                else
+                {
+                    bodyKeyFrame = new BodyKeyFrame((PhysicObject)oldBodyKeyframe.Body);
+                }
+                this.AllBodyKeyFrames.Add(bodyKeyFrame);
+
+                if (bodyKeyFrame.Position != oldBodyKeyframe.Position) { changes = true; }
+            }
+
+            if (!changes)
+            {
+                this.AllBodyKeyFrames.Clear();
+                this.AllBodyKeyFrames = null;
             }
         }
 

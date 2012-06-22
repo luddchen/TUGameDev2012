@@ -6,12 +6,12 @@ namespace RoBuddies.Model.Snapshot
 {
     class BodyKeyFrame
     {
-        private PhysicObject Body;
-        private Vector2 Position;
-        private float Rotation;
-        private SpriteEffects Effect;
-        private Vector2 Velocity;
-        private bool IsVisible;
+        public PhysicObject Body;
+        public Vector2 Position;
+        public float Rotation;
+        public SpriteEffects Effect;
+        public Vector2 Velocity;
+        public bool IsVisible;
 
         public BodyKeyFrame(PhysicObject body)
         {

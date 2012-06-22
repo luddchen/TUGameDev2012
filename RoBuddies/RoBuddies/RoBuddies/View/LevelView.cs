@@ -64,9 +64,9 @@ namespace RoBuddies.View
                     this.SnapShot.Release();
                 }
                 this.Level = nextLevel;
+                this.Level.Step(0.001f);
                 this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
-                this.Level.ClearForces();
-                this.SnapShot.MakeSnapshot();
+                this.SnapShot.MakeSnapshot(false);
 
                 this.debugView = new DebugViewXNA(this.Level);
                 this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
@@ -91,7 +91,7 @@ namespace RoBuddies.View
             if (snapshotCounter == 0)
             {
                 snapshotCounter = snapshotTimer;
-                this.SnapShot.MakeSnapshot();
+                this.SnapShot.MakeSnapshot(true);
             }
                 
             this.Level.Update(gameTime);

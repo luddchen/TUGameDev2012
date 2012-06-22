@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using FarseerPhysics.Dynamics;
+
 namespace RoBuddies.Model.Snapshot
 {
 
@@ -38,14 +40,11 @@ namespace RoBuddies.Model.Snapshot
         {
             this.BodyList = new List<IBody>();
 
-            foreach (Layer layer in level.AllLayers)
+            foreach (Body body in level.BodyList)
             {
-                foreach (IBody body in layer.AllObjects)
+                if (body is PhysicObject)
                 {
-                    if (body is PhysicObject)
-                    {
-                        this.BodyList.Add(body);
-                    }
+                    this.BodyList.Add((PhysicObject) body);
                 }
             }
 
@@ -56,12 +55,24 @@ namespace RoBuddies.Model.Snapshot
         /// <summary>
         /// do a new snapshot
         /// </summary>
-        public void MakeSnapshot()
+        public void MakeSnapshot(bool onlyOnChanges)
         {
-            KeyFrame keyFrame = new KeyFrame(this.BodyList, this.Level);
-            this.AllKeyFrames.Add(keyFrame);
-            this.currentKeyFrame++;
-            //Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
+            KeyFrame keyFrame;
+            if (onlyOnChanges)
+            {
+                keyFrame = new KeyFrame(this.AllKeyFrames[this.currentKeyFrame], this.Level);
+            }
+            else
+            {
+                keyFrame = new KeyFrame(this.BodyList, this.Level);
+            }
+
+            if (keyFrame.AllBodyKeyFrames != null)
+            {
+                this.AllKeyFrames.Add(keyFrame);
+                this.currentKeyFrame++;
+                //Console.Out.WriteLine("available Snapshots : " + this.AllKeyFrames.Count);
+            }
         }
 
         /// <summary>

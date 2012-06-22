@@ -61,7 +61,7 @@ namespace RoBuddies.View.MenuPages
                         this.Game.LevelView.Level = this.Game.EditorView.Level;
 
                         ((LevelView)this.Game.LevelView).SnapShot.CreateBodyList(this.Game.LevelView.Level);
-                        ((LevelView)this.Game.LevelView).SnapShot.MakeSnapshot();
+                        ((LevelView)this.Game.LevelView).SnapShot.MakeSnapshot(false);
 
 
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
