@@ -25,7 +25,6 @@ namespace RoBuddies.Control.StateMachines
 
         private const int END_ANIMATION = 90;
 
-        private KeyboardState oldState;
         private Robot robot;
         private List<Texture2D> textureList;
         private WeldJoint crateJoint;
@@ -90,54 +89,64 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
+            base.Update(gameTime);
 
-            if ((newState.IsKeyDown(Keys.Up) && canClimb(0.71f)))
+            //if ((newKeyboardState.IsKeyDown(Keys.Up) && canClimb(0.71f)))
+            if ( ButtonIsDown(ControlButton.up) && canClimb(0.71f))
             {
                 climbLadder(0.15f);
             }
 
-            if (newState.IsKeyDown(Keys.Down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
+            //if (newKeyboardState.IsKeyDown(Keys.Down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
+            if (ButtonIsDown(ControlButton.down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
             {
                 climbLadder(-0.15f);
             }
 
-            if (newState.IsKeyDown(Keys.A) && isOnGround())
+            //if (newKeyboardState.IsKeyDown(Keys.A) && isOnGround())
+            if (ButtonIsDown(ControlButton.use) && isOnGround())
             {
                 pullCrate();
             }
 
-            if (oldState.IsKeyDown(Keys.A) && newState.IsKeyUp(Keys.A))
+            //if (oldKeyboardState.IsKeyDown(Keys.A) && newKeyboardState.IsKeyUp(Keys.A))
+            if (ButtonReleased(ControlButton.use))
             {
                 stopPulling();
             }
            
-            if (newState.IsKeyDown(Keys.Space) && oldState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
+            //if (newKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
+            if (ButtonPressed(ControlButton.jump) && !(CurrentState is JumpingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
 
-            if (newState.IsKeyDown(Keys.Left))
+            //if (newKeyboardState.IsKeyDown(Keys.Left))
+            if (ButtonIsDown(ControlButton.left))
             {
                 startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
             }
 
-            if (newState.IsKeyUp(Keys.Left) && oldState.IsKeyDown(Keys.Left))
+            //if (newKeyboardState.IsKeyUp(Keys.Left) && oldKeyboardState.IsKeyDown(Keys.Left))
+            if (ButtonReleased(ControlButton.left))
             {
                 stopWalk();
             }
 
-            if (newState.IsKeyDown(Keys.Right))
+            //if (newKeyboardState.IsKeyDown(Keys.Right))
+            if (ButtonIsDown(ControlButton.right))
             {
                 startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
             }
 
-            if (newState.IsKeyUp(Keys.Right) && oldState.IsKeyDown(Keys.Right))
+            //if (newKeyboardState.IsKeyUp(Keys.Right) && oldKeyboardState.IsKeyDown(Keys.Right))
+            if (ButtonReleased(ControlButton.right))
             {
                 stopWalk();
             }
 
-            if (newState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
+            //if (newKeyboardState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
+            if (ButtonIsDown(ControlButton.up) && canOpenLevelEndingDoor())
             {
                 Level.finished = true;
             }
@@ -149,7 +158,6 @@ namespace RoBuddies.Control.StateMachines
                 mHeadStateMachine.Update(gameTime);
             }
 
-            oldState = newState;
         }
 
         /// <summary>
