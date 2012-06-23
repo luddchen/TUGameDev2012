@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using RoBuddies.Model.Objects;
 using RoBuddies.Model;
 using Microsoft.Xna.Framework.Content;
@@ -12,7 +9,6 @@ namespace RoBuddies.Control.StateMachines
 {
     class BridgeHeadStateMachine : HeadStateMachine
     {
-        private KeyboardState oldState;
         private static Wall oldWall; // needs to be static, because actually we've got two bridge heads in the game
 
         public BridgeHeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
@@ -24,9 +20,8 @@ namespace RoBuddies.Control.StateMachines
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            KeyboardState newState = Keyboard.GetState();
 
-            if (newState.IsKeyDown(Keys.Y) && oldState.IsKeyUp(Keys.Y))
+            if (newKeyboardState.IsKeyDown(Keys.Y) && oldKeyboardState.IsKeyUp(Keys.Y))
             {
 
                 if (isOnGround() 
@@ -62,8 +57,6 @@ namespace RoBuddies.Control.StateMachines
                     oldWall = newWall;
                 }
             }
-
-            oldState = newState;
         }
 
         private bool isOnGround()

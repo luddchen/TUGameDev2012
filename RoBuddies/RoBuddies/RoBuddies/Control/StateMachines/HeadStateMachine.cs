@@ -6,7 +6,6 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
-using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -16,7 +15,6 @@ namespace RoBuddies.Control.StateMachines
         private ContentManager contentManager;
         protected Robot robot;
         private bool hasHead;
-        private KeyboardState oldState;
 
         public const String WAIT_STATE = "WaitingState";
 
@@ -47,9 +45,9 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            KeyboardState newState = Keyboard.GetState();
+            base.Update(gameTime);
 
-            if (newState.IsKeyDown(Keys.LeftControl) && oldState.IsKeyUp(Keys.LeftControl))
+            if (newKeyboardState.IsKeyDown(Keys.LeftControl) && oldKeyboardState.IsKeyUp(Keys.LeftControl))
             {
                 Console.WriteLine("Head");
             }
@@ -57,7 +55,6 @@ namespace RoBuddies.Control.StateMachines
             UpdatePosition();
 
             CurrentState.Update(gameTime);
-            oldState = newState;
         }
 
         private void UpdatePosition()

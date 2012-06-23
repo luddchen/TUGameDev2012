@@ -118,6 +118,7 @@
     <Compile Include="Control\AnimatedState.cs" />
     <Compile Include="Control\Editor\KeyboardController.cs" />
     <Compile Include="Control\Editor\MouseController.cs" />
+    <Compile Include="Control\PlayerControl.cs" />
     <Compile Include="Control\RobotStates\LadderClimbingState.cs" />
     <Compile Include="Control\RobotStates\PipeClimbingState.cs" />
     <Compile Include="Control\RobotStates\CombineState.cs" />

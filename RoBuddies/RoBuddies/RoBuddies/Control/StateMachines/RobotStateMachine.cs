@@ -1,9 +1,6 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
-using RoBuddies.Utilities;
 using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
