@@ -14,7 +14,6 @@ namespace RoBuddies.View
         public Model.Snapshot.Snapshot SnapShot;
         private int snapshotTimer = 10;
         private int snapshotCounter = 10;
-        private KeyboardState oldKeyboardState;
 
         public HUD.HUD HUD;
 
@@ -117,7 +116,6 @@ namespace RoBuddies.View
                 showDebug = !showDebug;
             }
 
-            this.oldKeyboardState = newKeyboardState;
         }
 
         /// <summary>

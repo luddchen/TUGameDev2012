@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -56,16 +56,17 @@ namespace RoBuddies.View.MenuPages
 
                     if (this.ActiveElement == testLevel)
                     {
-                        (new LevelWriter(this.Game.EditorView.Level)).writeLevel(".\\", "editor_temp.json");
-                        this.activateObjects(this.Game.EditorView.Level);
-                        this.Game.LevelView.Level = this.Game.EditorView.Level;
-
-                        ((LevelView)this.Game.LevelView).SnapShot.CreateBodyList(this.Game.LevelView.Level);
-                        ((LevelView)this.Game.LevelView).SnapShot.MakeSnapshot(false);
-
-
-                        this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
-                        this.Game.LevelView.Camera.ClearBoundingBox();
+                        if (this.Game.EditorView.Level.Robot != null)
+                        {
+                            (new LevelWriter(this.Game.EditorView.Level)).writeLevel(".\\", "editor_temp.json");
+                            this.activateObjects(this.Game.EditorView.Level);
+                            ((LevelView)this.Game.LevelView).viewNextLevel(this.Game.EditorView.Level);
+                            this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
+                        }
+                        else
+                        {
+                            Console.Out.WriteLine("your level need at least a robot to play ...");
+                        }
                     }
 
                 }

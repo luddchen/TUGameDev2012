@@ -145,13 +145,14 @@ namespace RoBuddies
             {
                 this.View = this.LevelView;
                 this.Menu = this.LevelMenu;
+                this.Menu.IsVisible = true;
             }
             if (this.currentViewMode == ViewMode.Editor)
             {
                 this.View = this.EditorView;
                 this.Menu = this.EditorMenu;
+                this.Menu.IsVisible = false;
             }
-            this.Menu.IsVisible = true;
 
             Window_ClientSizeChanged(null, null);
             this.viewModeChanged = false;

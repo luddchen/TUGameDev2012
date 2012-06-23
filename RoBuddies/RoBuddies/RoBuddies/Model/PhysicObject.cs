@@ -1,4 +1,6 @@
-﻿using FarseerPhysics.Dynamics;
+﻿using System.Collections.Generic;
+
+using FarseerPhysics.Dynamics;
 using FarseerPhysics.Factories;
 
 using Microsoft.Xna.Framework;
@@ -129,10 +131,16 @@ namespace RoBuddies.Model
         /// <param name="density">density of this object</param>
         public void createRectangleFixture(float density)
         {
+            List<Fixture> temp = new List<Fixture>();
             foreach (Fixture fixture in this.FixtureList)
+            {
+                temp.Add(fixture);
+            }
+            foreach (Fixture fixture in temp)
             {
                 this.DestroyFixture(fixture);
             }
+            temp.Clear();
             FixtureFactory.AttachRectangle(this.Width, this.Height, density, Vector2.Zero, this);
         }
 
