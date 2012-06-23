@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
+using RoBuddies.Control;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -70,7 +71,7 @@ namespace RoBuddies.View.MenuPages
             base.Update(gameTime);
 
             // Key.Enter -----------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Enter))
+            if (ButtonPressed(ControlButton.enter))
             {
                 if (this.ActiveElement != null)
                 {
@@ -78,13 +79,13 @@ namespace RoBuddies.View.MenuPages
             }
 
             // Key.down -----------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Down) ) //&& this.Menu.oldKeyboardState.IsKeyUp(Keys.Down))
+            if (ButtonIsDown(ControlButton.down))
             {
                 help.Position = new Vector2( help.Position.X, help.Position.Y - 2);
             } // ------------------------------------------------------------------------------------
 
             // Key.Up -------------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Up) ) //&& this.Menu.oldKeyboardState.IsKeyUp(Keys.Up))
+            if (ButtonIsDown(ControlButton.up))
             {
                 help.Position = new Vector2(help.Position.X, help.Position.Y + 2);
             } // -----------------------------------------------------------------------------------

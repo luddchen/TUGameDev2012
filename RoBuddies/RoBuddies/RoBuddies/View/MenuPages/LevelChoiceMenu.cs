@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
+using RoBuddies.Control;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 using RoBuddies.Model.Worlds.World3;
@@ -156,7 +157,7 @@ namespace RoBuddies.View.MenuPages
             base.Update(gameTime);
 
             // Key.Enter -----------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Enter))
+            if (ButtonPressed(ControlButton.enter))
             {
                 if (this.ActiveElement != null)
                 {

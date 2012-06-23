@@ -49,17 +49,7 @@ namespace RoBuddies.Model.Objects
         /// <param name="newHeight">the new size of the crate</param>
         public void changeLadderHeight(float newHeight)
         {
-            List<Fixture> temp = new List<Fixture>();
-            foreach (Fixture fixture in this.FixtureList)
-            {
-                temp.Add(fixture);
-            }
-            foreach (Fixture fixture in temp)
-            {
-                this.DestroyFixture(fixture);
-            }
-            temp.Clear();
-
+            clearFixtures();
 
             this.Height = Math.Max(4, newHeight);
             FixtureFactory.AttachRectangle(0.01f, this.Height - 1.2f, 1, new Vector2(0, -0.5f), this); // RaycastTool only returns the ladder if the ray go from outside to inner of fixture

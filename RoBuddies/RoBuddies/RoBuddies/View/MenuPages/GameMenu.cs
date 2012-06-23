@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Serializer;
 using RoBuddies.View.HUD;
+using RoBuddies.Control;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -54,7 +55,7 @@ namespace RoBuddies.View.MenuPages
             ((LevelView)this.Game.LevelView).Camera.Update(gameTime);
 
             // Key.Enter pressed once -----------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Enter))
+            if (ButtonPressed(ControlButton.enter))
             {
                 if (this.ActiveElement != null)
                 {
@@ -71,7 +72,7 @@ namespace RoBuddies.View.MenuPages
             }
 
             // Key.Enter hold down -----------------------------------------------------------------------------
-            if (this.Menu.newKeyboardState.IsKeyDown(Keys.Enter))
+            if (ButtonIsDown(ControlButton.enter))
             {
                 if (this.ActiveElement != null)
                 {

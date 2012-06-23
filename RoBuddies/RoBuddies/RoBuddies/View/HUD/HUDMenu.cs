@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using RoBuddies.Control;
 
 namespace RoBuddies.View.HUD
 {
@@ -36,16 +37,6 @@ namespace RoBuddies.View.HUD
         /// history of all previous menu pages to enable a back feature
         /// </summary>
         protected List<HUDMenuPage> pageHistory;
-
-        /// <summary>
-        /// old keyboard state
-        /// </summary>
-        public KeyboardState oldKeyboardState { get; set; }
-
-        /// <summary>
-        /// new keyboard state
-        /// </summary>
-        public KeyboardState newKeyboardState { get; set; }
 
         /// <summary>
         /// prefered width of menu window
@@ -126,7 +117,6 @@ namespace RoBuddies.View.HUD
             this.IsVisible = false;
             this.PreferedWidth = 800;
             this.PreferedHeight = 400;
-            this.newKeyboardState = Keyboard.GetState();
         }
 
 
@@ -137,15 +127,12 @@ namespace RoBuddies.View.HUD
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            this.oldKeyboardState = this.newKeyboardState;
-            this.newKeyboardState = Keyboard.GetState();
 
-            if (this.newKeyboardState.IsKeyDown(Keys.Escape) && this.oldKeyboardState.IsKeyUp(Keys.Escape))
+            if (ButtonPressed(ControlButton.menu))
             {
                 if (!this.isVisible)
                 {
                     this.pageHistory.Clear();
-                    this.ActivePage = this.DefaultPage;
                     this.IsVisible = true;
                 }
                 else

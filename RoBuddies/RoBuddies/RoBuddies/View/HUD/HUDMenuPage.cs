@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
+using RoBuddies.Control;
 
 namespace RoBuddies.View.HUD
 {
@@ -91,7 +92,7 @@ namespace RoBuddies.View.HUD
             {
 
                 // Key.down -----------------------------------------------------------------------------
-                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Down) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Down))
+                if (ButtonPressed(ControlButton.down))
                 {
                     int index = this.ChoiceList.IndexOf(this.activeElement);
                     if (index >= 0)                 // found active elements index
@@ -103,7 +104,7 @@ namespace RoBuddies.View.HUD
                 } // ------------------------------------------------------------------------------------
 
                 // Key.Up -------------------------------------------------------------------------------
-                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Up) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Up))
+                if (ButtonPressed(ControlButton.up))
                 {
                     int index = this.ChoiceList.IndexOf(this.activeElement);
                     if (index >= 0)                 // found active elements index
@@ -115,7 +116,7 @@ namespace RoBuddies.View.HUD
                 } // -----------------------------------------------------------------------------------
 
                 // Key.right -----------------------------------------------------------------------------
-                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Right) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Right))
+                if (ButtonPressed(ControlButton.right))
                 {
                     int index = this.ChoiceList.IndexOf(this.activeElement);
                     if (index >= 0)                 // found active elements index
@@ -127,7 +128,7 @@ namespace RoBuddies.View.HUD
                 } // ------------------------------------------------------------------------------------
 
                 // Key.left -------------------------------------------------------------------------------
-                if (this.Menu.newKeyboardState.IsKeyDown(Keys.Left) && this.Menu.oldKeyboardState.IsKeyUp(Keys.Left))
+                if (ButtonPressed(ControlButton.left))
                 {
                     int index = this.ChoiceList.IndexOf(this.activeElement);
                     if (index >= 0)                 // found active elements index
