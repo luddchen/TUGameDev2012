@@ -24,9 +24,10 @@ namespace RoBuddies.Control.StateMachines
         public IBody Body;
 
 
-        public StateMachine(IBody body)
+        public StateMachine(IBody body, Game game)
         {
             this.Body = body;
+            this.Game = (RoBuddies)game;
             this.AllStates = new List<State>();
         }
 
@@ -68,7 +69,6 @@ namespace RoBuddies.Control.StateMachines
 
         public virtual void Update(GameTime gameTime)
         {
-            base.Update();
         }
 
     }

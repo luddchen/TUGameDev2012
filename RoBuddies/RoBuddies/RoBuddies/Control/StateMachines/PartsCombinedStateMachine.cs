@@ -43,7 +43,7 @@ namespace RoBuddies.Control.StateMachines
         #endregion
 
         public PartsCombinedStateMachine(IBody body, ContentManager contentManager, Robot robot)
-            : base(body)
+            : base(body, robot.Game)
         {
             this.robot = robot;
             this.textureList = new List<Texture2D>();
@@ -86,63 +86,51 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            //if ((newKeyboardState.IsKeyDown(Keys.Up) && canClimb(0.71f)))
             if ( ButtonIsDown(ControlButton.up) && canClimb(0.71f))
             {
                 climbLadder(0.15f);
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
             if (ButtonIsDown(ControlButton.down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
             {
                 climbLadder(-0.15f);
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.A) && isOnGround())
             if (ButtonIsDown(ControlButton.use) && isOnGround())
             {
                 pullCrate();
             }
 
-            //if (oldKeyboardState.IsKeyDown(Keys.A) && newKeyboardState.IsKeyUp(Keys.A))
             if (ButtonReleased(ControlButton.use) && isPulling)
             {
                 stopPulling();
             }
            
-            //if (newKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
             if (ButtonPressed(ControlButton.jump) && !(CurrentState is JumpingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Left))
             if (ButtonIsDown(ControlButton.left))
             {
                 startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
             }
 
-            //if (newKeyboardState.IsKeyUp(Keys.Left) && oldKeyboardState.IsKeyDown(Keys.Left))
             if (ButtonReleased(ControlButton.left))
             {
                 stopWalk();
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Right))
             if (ButtonIsDown(ControlButton.right))
             {
                 startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
             }
 
-            //if (newKeyboardState.IsKeyUp(Keys.Right) && oldKeyboardState.IsKeyDown(Keys.Right))
             if (ButtonReleased(ControlButton.right))
             {
                 stopWalk();
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Up) && canOpenLevelEndingDoor())
             if (ButtonIsDown(ControlButton.up) && canOpenLevelEndingDoor())
             {
                 Level.finished = true;

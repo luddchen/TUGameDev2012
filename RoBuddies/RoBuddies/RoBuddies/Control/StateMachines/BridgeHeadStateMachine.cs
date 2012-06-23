@@ -19,8 +19,6 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             if (newKeyboardState.IsKeyDown(Keys.Y) && oldKeyboardState.IsKeyUp(Keys.Y))
             {
 

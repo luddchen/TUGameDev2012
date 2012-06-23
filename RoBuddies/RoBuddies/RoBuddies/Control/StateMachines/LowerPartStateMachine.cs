@@ -31,7 +31,7 @@ namespace RoBuddies.Control.StateMachines
         #endregion
 
         public LowerPartStateMachine(IBody body, ContentManager contentManager, Robot robot)
-            : base(body)
+            : base(body, robot.Game)
         {
             this.contentManager = contentManager;
             this.robot = robot;
@@ -54,33 +54,27 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
 
-            //if (newKeyboardState.IsKeyDown(Keys.Space) && oldKeyboardState.IsKeyUp(Keys.Space) && !(CurrentState is JumpingState) && isOnGround())
             if (ButtonPressed(ControlButton.jump) && !(CurrentState is JumpingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Left))
             if (ButtonIsDown(ControlButton.left))
             {
                 startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
             }
 
-            //if (newKeyboardState.IsKeyUp(Keys.Left) && oldKeyboardState.IsKeyDown(Keys.Left))
             if (ButtonReleased(ControlButton.left))
             {
                 stopWalk();
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Right))
             if (ButtonIsDown(ControlButton.right))
             {
                 startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
             }
 
-            //if (newKeyboardState.IsKeyUp(Keys.Right) && oldKeyboardState.IsKeyDown(Keys.Right))
             if (ButtonReleased(ControlButton.right))
             {
                 stopWalk();

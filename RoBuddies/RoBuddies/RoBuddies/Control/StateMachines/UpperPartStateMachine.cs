@@ -37,10 +37,11 @@ namespace RoBuddies.Control.StateMachines
         }
 
         public UpperPartStateMachine(IBody body, ContentManager contentManager, Robot robot)
-            : base(body)
+            : base(body, robot.Game)
         {
             this.contentManager = contentManager;
             this.robot = robot;
+
             textureList = new List<Texture2D>();
 
             mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
@@ -61,8 +62,6 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             if (CurrentState.Name != PIPE_CLIMBING_STATE && canClimb(0))
             {
                 SwitchToState(PIPE_CLIMBING_STATE);
@@ -98,8 +97,6 @@ namespace RoBuddies.Control.StateMachines
             {
                 mHeadStateMachine.Update(gameTime);
             }
-
-            oldKeyboardState = newKeyboardState;
         }
 
         /// <summary>

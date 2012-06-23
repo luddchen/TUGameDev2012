@@ -3,13 +3,15 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
+using RoBuddies.Control;
+
 namespace RoBuddies.View.HUD
 {
 
     /// <summary>
     /// basis class for HeadUpDisplay
     /// </summary>
-    class HUD
+    class HUD : PlayerControl
     {
         /// <summary>
         /// a background texture , if null there will be no background
@@ -70,11 +72,6 @@ namespace RoBuddies.View.HUD
                 OnVisibilityChange();
             }
         }
-
-        /// <summary>
-        /// reference to game
-        /// </summary>
-        public RoBuddies Game { get; set; }
 
         /// <summary>
         /// HUD constructor

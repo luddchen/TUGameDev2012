@@ -16,6 +16,16 @@ namespace RoBuddies
     {
         public enum ViewMode{ Level, Editor }
 
+        /// <summary>
+        /// the keyboard state before update
+        /// </summary>
+        public KeyboardState oldKeyboardState;
+
+        /// <summary>
+        /// the keyboard state after update
+        /// </summary>
+        public KeyboardState newKeyboardState;
+
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
         SpriteBatch SpriteBatch;
@@ -100,9 +110,12 @@ namespace RoBuddies
         /// <param name="gameTime">gametime</param>
         protected override void Update(GameTime gameTime)
         {
+            this.oldKeyboardState = this.newKeyboardState;
+            this.newKeyboardState = Keyboard.GetState();
+
             if (startScreen)
             {
-                if (Keyboard.GetState().GetPressedKeys().Length > 0)
+                if (newKeyboardState.GetPressedKeys().Length > 0)
                 {
                     startScreen = false;
                 }
@@ -117,10 +130,10 @@ namespace RoBuddies
                 Menu.Update(gameTime);
 
                 // testing camera
-                if (Keyboard.GetState().IsKeyDown(Keys.LeftShift))
+                if (newKeyboardState.IsKeyDown(Keys.LeftShift))
                 {
-                    if (Keyboard.GetState().IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
-                    if (Keyboard.GetState().IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
+                    if (newKeyboardState.IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
+                    if (newKeyboardState.IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
                 }
             }
 

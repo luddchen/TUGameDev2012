@@ -28,7 +28,7 @@ namespace RoBuddies.Control.StateMachines
         }
 
         public HeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
-            : base(body)
+            : base(body, robot.Game)
         {
             this.textureList = new List<Texture2D>();
             this.contentManager = contentManager;
@@ -45,8 +45,6 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
             if (newKeyboardState.IsKeyDown(Keys.LeftControl) && oldKeyboardState.IsKeyUp(Keys.LeftControl))
             {
                 Console.WriteLine("Head");

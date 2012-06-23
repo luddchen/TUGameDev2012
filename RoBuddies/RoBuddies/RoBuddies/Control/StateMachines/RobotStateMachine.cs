@@ -51,7 +51,7 @@ namespace RoBuddies.Control.StateMachines
         #endregion
 
         public RobotStateMachine(IBody body, ContentManager content, Robot robot)
-            : base(body)
+            : base(body, robot.Game)
         {
             mRobot = robot;
 
@@ -63,9 +63,6 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            //if (newKeyboardState.IsKeyDown(Keys.X) && oldKeyboardState.IsKeyUp(Keys.X))
             if (ButtonPressed(ControlButton.robot))
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
@@ -104,7 +101,6 @@ namespace RoBuddies.Control.StateMachines
                 }
             }
 
-            // if (newKeyboardState.IsKeyDown(Keys.S) && oldKeyboardState.IsKeyUp(Keys.S))
             if (ButtonPressed(ControlButton.use))
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine || mActiveStateMachine == mUpperPartStateMachine)
@@ -121,13 +117,11 @@ namespace RoBuddies.Control.StateMachines
                 }
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Right))
             if (ButtonIsDown(ControlButton.right))
             {
                 this.looksRight = true;
             }
 
-            //if (newKeyboardState.IsKeyDown(Keys.Left))
             if (ButtonIsDown(ControlButton.left))
             {
                 this.looksRight = false;

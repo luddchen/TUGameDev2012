@@ -14,22 +14,24 @@ namespace RoBuddies.Control
     class PlayerControl
     {
         /// <summary>
+        /// reference to game
+        /// </summary>
+        public RoBuddies Game { get; set; }
+
+        /// <summary>
         /// the keyboard state before update
         /// </summary>
-        protected KeyboardState oldKeyboardState;
+        protected KeyboardState oldKeyboardState
+        {
+            get { return Game.oldKeyboardState; }
+        }
 
         /// <summary>
         /// the keyboard state after update
         /// </summary>
-        protected KeyboardState newKeyboardState;
-
-        /// <summary>
-        /// updates the control input devices
-        /// </summary>
-        public void Update()
+        protected KeyboardState newKeyboardState
         {
-            this.oldKeyboardState = this.newKeyboardState;
-            this.newKeyboardState = Keyboard.GetState();
+            get { return Game.newKeyboardState; }
         }
 
         /// <summary>
