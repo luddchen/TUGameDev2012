@@ -2,19 +2,42 @@
 
 namespace RoBuddies.Control
 {
+    /// <summary>
+    /// a enumaration of all player usable buttons / keys
+    /// </summary>
     public enum ControlButton { left, right, up, down, jump, use, robot }; 
 
+    /// <summary>
+    /// class to manage player inputs from different devices 
+    /// (keyboard, gamepad, ...)
+    /// </summary>
     class PlayerControl
     {
+        /// <summary>
+        /// the keyboard state before update
+        /// </summary>
         protected KeyboardState oldKeyboardState;
+
+        /// <summary>
+        /// the keyboard state after update
+        /// </summary>
         protected KeyboardState newKeyboardState;
 
+        /// <summary>
+        /// updates the control input devices
+        /// </summary>
         public void Update()
         {
             this.oldKeyboardState = this.newKeyboardState;
             this.newKeyboardState = Keyboard.GetState();
         }
 
+        /// <summary>
+        /// check if a button was released since last update ; 
+        /// that means before update the button was down and now the button is up
+        /// </summary>
+        /// <param name="button">a control button to check</param>
+        /// <returns>true, if control button was released</returns>
         public bool ButtonReleased(ControlButton button)
         {
             Keys key = getKeyboardKey(button);
@@ -24,6 +47,12 @@ namespace RoBuddies.Control
             return false;
         }
 
+        /// <summary>
+        /// check if a button was pressed since last update ;
+        /// that means before update the button was up and now the button is down
+        /// </summary>
+        /// <param name="button">a control button to check</param>
+        /// <returns>true, if control button was pressed</returns>
         public bool ButtonPressed(ControlButton button)
         {
             Keys key = getKeyboardKey(button);
@@ -33,6 +62,11 @@ namespace RoBuddies.Control
             return false;
         }
 
+        /// <summary>
+        /// check if a button is down
+        /// </summary>
+        /// <param name="button">a control button to check</param>
+        /// <returns>true, if control button is down</returns>
         public bool ButtonIsDown(ControlButton button)
         {
             Keys key = getKeyboardKey(button);
@@ -42,6 +76,11 @@ namespace RoBuddies.Control
             return false;
         }
 
+        /// <summary>
+        /// check if a button is up
+        /// </summary>
+        /// <param name="button">a control button to check</param>
+        /// <returns>true, if control button is up</returns>
         public bool ButtonIsUp(ControlButton button)
         {
             Keys key = getKeyboardKey(button);
@@ -51,6 +90,12 @@ namespace RoBuddies.Control
             return false;
         }
 
+        /// <summary>
+        /// check if a button state has toggled ; 
+        /// that means the state before update and the state after update are not equal
+        /// </summary>
+        /// <param name="button">a control button to check</param>
+        /// <returns>true, if control button was toggled</returns>
         public bool ButtonToggled(ControlButton button)
         {
             Keys key = getKeyboardKey(button);
@@ -60,7 +105,11 @@ namespace RoBuddies.Control
             return false;
         }
 
-
+        /// <summary>
+        /// translate the control button to a specific key
+        /// </summary>
+        /// <param name="button"></param>
+        /// <returns></returns>
         private Keys getKeyboardKey(ControlButton button)
         {
             Keys key = Keys.Enter;
