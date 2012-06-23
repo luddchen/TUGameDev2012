@@ -42,6 +42,8 @@ namespace RoBuddies.View
             GameMenu gameMenu = new GameMenu(this, this.Game.Content);
             LevelChoiceMenu levelChoice = new LevelChoiceMenu(this, this.Game.Content);
 
+            levelChoice.mainPage = mainMenu;
+
             mainMenu.gamePage = gameMenu;
             mainMenu.quitPage = quitMenu;
             mainMenu.optionPage = optionMenu;

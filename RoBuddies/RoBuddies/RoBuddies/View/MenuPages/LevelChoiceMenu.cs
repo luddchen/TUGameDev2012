@@ -35,6 +35,9 @@ namespace RoBuddies.View.MenuPages
         private HUDString hospital3;
         private HUDString hospital4;
 
+        private HUDString mainMenu;
+        public HUDMenuPage mainPage { get; set; }
+
         public override void OnViewPortResize()
         {
             if (levelChoose != null) { levelChoose.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.1f); }
@@ -57,15 +60,21 @@ namespace RoBuddies.View.MenuPages
             if (hospital2 != null) { hospital2.Position = new Vector2(this.Viewport.Width * 0.8f, this.Viewport.Height * 0.42f); }
             if (hospital3 != null) { hospital3.Position = new Vector2(this.Viewport.Width * 0.8f, this.Viewport.Height * 0.54f); }
             if (hospital4 != null) { hospital4.Position = new Vector2(this.Viewport.Width * 0.8f, this.Viewport.Height * 0.66f); }
+
+            if (mainMenu != null) { mainMenu.Position = new Vector2(this.Viewport.Width * 0.3f, this.Viewport.Height * 0.85f); }
         }
 
         public LevelChoiceMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+            this.leftRightStep = 5;
 
             levelChoose = new HUDString("choose a level", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(levelChoose);
+
+            mainMenu = new HUDString("to main menu", null, null, Color.Yellow, null, 0.6f, null, content);
+            this.AllElements.Add(mainMenu);
 
             tutorial1 = new HUDString("Tutorial 1", null, null, null, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(tutorial1);
@@ -83,6 +92,8 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(tutorial4);
             this.ChoiceList.Add(tutorial4);
 
+            this.ChoiceList.Add(mainMenu);
+
             lab1 = new HUDString("lab 1", null, null, Color.Black, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(lab1);
             this.ChoiceList.Add(lab1);
@@ -98,6 +109,8 @@ namespace RoBuddies.View.MenuPages
             lab4 = new HUDString("lab 4", null, null, Color.Black, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(lab4);
             this.ChoiceList.Add(lab4);
+
+            this.ChoiceList.Add(mainMenu);
 
             mountain1 = new HUDString("Mountain 1", null, null, null, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(mountain1);
@@ -115,6 +128,8 @@ namespace RoBuddies.View.MenuPages
             this.AllElements.Add(mountain4);
             this.ChoiceList.Add(mountain4);
 
+            this.ChoiceList.Add(mainMenu);
+
             hospital1 = new HUDString("Hospital 1", null, null, Color.Black, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(hospital1);
             this.ChoiceList.Add(hospital1);
@@ -130,6 +145,8 @@ namespace RoBuddies.View.MenuPages
             hospital4 = new HUDString("Hospital 4", null, null, Color.Black, choiceBackground, 0.45f, null, content);
             this.AllElements.Add(hospital4);
             this.ChoiceList.Add(hospital4);
+
+            this.ChoiceList.Add(mainMenu);
 
             this.ActiveElement = tutorial1;
         }
@@ -162,6 +179,11 @@ namespace RoBuddies.View.MenuPages
                     {
                         ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_1(this.Menu.Game).Level);
                         this.Menu.IsVisible = false;
+                    }
+
+                    if (this.ActiveElement == mainMenu)
+                    {
+                        this.Menu.ActivePage = this.mainPage;
                     }
                 }
             }
