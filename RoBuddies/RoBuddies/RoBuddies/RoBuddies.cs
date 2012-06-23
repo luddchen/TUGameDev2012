@@ -123,10 +123,9 @@ namespace RoBuddies
             
             if (started)
             {
-                if (!Menu.IsVisible)
-                {
-                    View.Update(gameTime);
-                }
+                View.Pause = Menu.IsVisible;
+
+                View.Update(gameTime);
                 Menu.Update(gameTime);
 
                 // testing camera

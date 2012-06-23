@@ -113,7 +113,7 @@ namespace RoBuddies.View.HUD
             : base(game)
         {
             this.pageHistory = new List<HUDMenuPage>();
-            this.backgroundColor = Color.Black;
+            this.backgroundColor = new Color(16, 16, 16, 255); //Color.Black;
             this.IsVisible = false;
             this.PreferedWidth = 800;
             this.PreferedHeight = 400;
@@ -137,15 +137,15 @@ namespace RoBuddies.View.HUD
                 }
                 else
                 {
+                    this.ActivePage.OnExit();
                     this.pageHistory.RemoveAt(this.pageHistory.Count - 1); 
 
-                    if (this.pageHistory.Count == 0 || this.ActivePage == this.DefaultPage)
+                    if (this.pageHistory.Count == 0) // || this.ActivePage == this.DefaultPage)
                     {
                         IsVisible = false;
                     }
                     else
                     {
-                        this.ActivePage.OnExit();
                         this.ActivePage = this.pageHistory[this.pageHistory.Count - 1];
                         this.pageHistory.RemoveAt(this.pageHistory.Count - 1);  // remove doubles
                     }

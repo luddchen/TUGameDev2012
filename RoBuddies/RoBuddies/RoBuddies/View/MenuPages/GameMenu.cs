@@ -77,7 +77,7 @@ namespace RoBuddies.View.MenuPages
                 if (this.ActiveElement != null)
                 {
 
-                    if (this.ActiveElement == rewind)
+                    if (this.ActiveElement == rewind && ((LevelView)this.Game.LevelView).SnapShot != null)
                     {
                         this.rewindCounter--;
                         if (this.rewindCounter < 0)
@@ -87,7 +87,7 @@ namespace RoBuddies.View.MenuPages
                         }
                     }
 
-                    if (this.ActiveElement == forward)
+                    if (this.ActiveElement == forward && ((LevelView)this.Game.LevelView).SnapShot != null)
                     {
                         this.rewindCounter--;
                         if (this.rewindCounter < 0)

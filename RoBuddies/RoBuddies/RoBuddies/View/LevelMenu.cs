@@ -35,19 +35,14 @@ namespace RoBuddies.View
             this.AllElements.Add(new HUDTexture(this.Game.Content));
             this.AllElements.Add(new HUDTexture(this.Game.Content));
 
-            MainMenu mainMenu = new MainMenu(this, this.Game.Content);
             QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
             OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
             HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
-            GameMenu gameMenu = new GameMenu(this, this.Game.Content);
             LevelChoiceMenu levelChoice = new LevelChoiceMenu(this, this.Game.Content);
 
-            levelChoice.mainPage = mainMenu;
-
-            mainMenu.gamePage = gameMenu;
-            mainMenu.quitPage = quitMenu;
-            mainMenu.optionPage = optionMenu;
-            mainMenu.helpPage = helpMenu;
+            levelChoice.quitPage = quitMenu;
+            levelChoice.optionPage = optionMenu;
+            levelChoice.helpPage = helpMenu;
 
             this.DefaultPage = levelChoice; //mainMenu ;
             // end decoration -------------------------------------------------------------------

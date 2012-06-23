@@ -83,39 +83,39 @@ namespace RoBuddies.View
         {
             base.Update(gameTime);
 
-            if (this.Level.finished) // load next level, when current level is finished
+            if (!Pause)
             {
-                viewNextLevel(null);
-            }
-
-            KeyboardState newKeyboardState = Keyboard.GetState();
-
-            if (this.SnapShot != null)
-            {
-                snapshotCounter--;
-                if (snapshotCounter == 0)
+                if (this.Level.finished) // load next level, when current level is finished
                 {
-                    snapshotCounter = snapshotTimer;
-                    this.SnapShot.MakeSnapshot(true);
+                    viewNextLevel(null);
+                }
+
+                if (this.SnapShot != null)
+                {
+                    snapshotCounter--;
+                    if (snapshotCounter == 0)
+                    {
+                        snapshotCounter = snapshotTimer;
+                        this.SnapShot.MakeSnapshot(true);
+                    }
+                }
+
+                this.Level.Update(gameTime);
+                this.HUD.Update(gameTime);
+
+                // test key for switching to the next level
+                if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))
+                {
+                    this.Level.finished = true;
+                }
+
+                if (newKeyboardState.IsKeyDown(Keys.L) && oldKeyboardState.IsKeyUp(Keys.L))
+                {
+                    showDebug = !showDebug;
                 }
             }
-                
-            this.Level.Update(gameTime);
-            this.HUD.Update(gameTime);
 
             CameraUpdate();
-
-            // test key for switching to the next level
-            if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))
-            {
-                this.Level.finished = true;
-            }
-
-            if (newKeyboardState.IsKeyDown(Keys.L) && oldKeyboardState.IsKeyUp(Keys.L))
-            {
-                showDebug = !showDebug;
-            }
-
         }
 
         /// <summary>

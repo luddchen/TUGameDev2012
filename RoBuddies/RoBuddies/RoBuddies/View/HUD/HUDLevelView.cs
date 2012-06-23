@@ -12,8 +12,6 @@ namespace RoBuddies.View.HUD
     {
         protected Texture2D stop;
 
-        //protected Layer mainLayer;
-
         /// <summary>
         /// space between levelbottom and screen bottom
         /// </summary>
@@ -26,6 +24,11 @@ namespace RoBuddies.View.HUD
                 this.Camera.Viewport = this.viewport;
             }
         }
+
+        /// <summary>
+        /// true if level should be paused, only camera update
+        /// </summary>
+        public bool Pause { get; set; }
 
         /// <summary>
         /// the active camera
