@@ -60,9 +60,7 @@ namespace RoBuddies.View.MenuPages
         public HelpMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
-            help = new HUDString(helpText, content);
-            help.Scale = 0.5f;
+            help = new HUDString(helpText, null, null, null, null, 0.5f, 0, content);
             this.AllElements.Add(help);
         }
 

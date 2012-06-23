@@ -16,17 +16,17 @@ namespace RoBuddies.View.HUD
         /// <summary>
         /// border size of contained menu page 
         /// </summary>
-        protected int MenuPageBorder = 50;
+        protected int MenuPageBorder = 10;
 
         /// <summary>
         /// extra border size on top of contained menu page
         /// </summary>
-        protected int MenuPageTopExtraBorder = 15;
+        protected int MenuPageTopExtraBorder = 50;
 
         /// <summary>
         /// color of menu headline
         /// </summary>
-        protected Color HeadLineColor = Color.Orchid;
+        protected Color HeadLineColor = Color.SkyBlue;
 
         /// <summary>
         /// the active menu page
@@ -71,7 +71,7 @@ namespace RoBuddies.View.HUD
             {
                 Viewport temp = this.viewport;
                 temp.Width -= 2 * MenuPageBorder;
-                temp.Height -= 2 * MenuPageBorder;
+                temp.Height -= (2 * MenuPageBorder + MenuPageTopExtraBorder);
                 temp.X += MenuPageBorder;
                 temp.Y += MenuPageBorder + MenuPageTopExtraBorder;
                 this.ActivePage.Viewport = temp;
@@ -113,9 +113,10 @@ namespace RoBuddies.View.HUD
             : base(game)
         {
             this.pageHistory = new List<HUDMenuPage>();
-            this.backgroundColor = new Color(16, 16, 16, 255); //Color.Black;
+            this.backgroundColor = new Color(0, 0, 0, 128);
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
             this.IsVisible = false;
-            this.PreferedWidth = 800;
+            this.PreferedWidth = 600;
             this.PreferedHeight = 400;
         }
 

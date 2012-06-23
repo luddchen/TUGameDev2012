@@ -42,6 +42,7 @@ namespace RoBuddies.View
 
         public LevelView(RoBuddies game) : base(game)
         {
+            this.background = game.Content.Load<Texture2D>("Sprites//Mountain//clouds");
             this.HUD = new LevelHUD(game);
             this.Camera.SmoothMove = true;
 

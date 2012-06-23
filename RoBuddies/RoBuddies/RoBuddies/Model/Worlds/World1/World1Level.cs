@@ -24,7 +24,7 @@ namespace RoBuddies.Model.Worlds.World1
         {
             Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.5f, 0.1f), 0.9f);
             this.Level.AddLayer(farAwayLayer);
-            Texture2D backgroundTexture = game.Content.Load<Texture2D>("Sprites//Menu//back_1");
+            Texture2D backgroundTexture = game.Content.Load<Texture2D>("Sprites//back_1");
             StaticObject background;
             for (int i = -2; i < 3; i++)
             {

@@ -24,23 +24,25 @@ namespace RoBuddies.View.MenuPages
         public QuitMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
-
             question = new HUDString("realy quit ?", content);
             question.Scale = 0.7f;
             this.AllElements.Add(question);
 
+            addChoiceLine();
+
             yes = new HUDString("YES, i need a short break", content);
             yes.Scale = 0.5f;
             this.AllElements.Add(yes);
-            this.ChoiceList.Add(yes);
+            addChoiceElement(yes);
+
+            addChoiceLine();
 
             no= new HUDString("NO, bring me back to RoBuddies world", content);
-            no.Scale = 0.7f;
+            no.Scale = 0.6f;
             this.AllElements.Add(no);
-            this.ChoiceList.Add(no);
+            addChoiceElement(no);
 
-            this.ActiveElement = no;
+            chooseActiveElement(0, 0);
         }
 
         public override void Update(GameTime gameTime)

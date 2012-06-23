@@ -123,5 +123,15 @@ namespace RoBuddies.Model.Snapshot
             this.BodyList.Clear();
         }
 
+        public bool isOnStart(int limit)
+        {
+            return (this.currentKeyFrame < limit);
+        }
+
+        public bool isOnEnd(int limit)
+        {
+            return (this.currentKeyFrame > this.AllKeyFrames.Count - limit);
+        }
+
     }
 }

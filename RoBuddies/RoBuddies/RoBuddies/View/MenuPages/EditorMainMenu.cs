@@ -27,17 +27,19 @@ namespace RoBuddies.View.MenuPages
         public EditorMainMenu(HUDMenu menu, ContentManager content)
             : base(menu, content)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+            addChoiceLine();
 
             level = new HUDString("Game", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(level);
-            this.ChoiceList.Add(level);
+            addChoiceElement(level);
+
+            addChoiceLine();
 
             testLevel = new HUDString("Test Level", null, null, null, null, 0.7f, null, content);
             this.AllElements.Add(testLevel);
-            this.ChoiceList.Add(testLevel);
+            addChoiceElement(testLevel);
 
-            this.ActiveElement = level;
+            chooseActiveElement(0, 0);
         }
 
         public override void Update(GameTime gameTime)

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.Control;
 
@@ -34,9 +33,9 @@ namespace RoBuddies.View.HUD
         /// <summary>
         /// list of all elements that can be choosen
         /// </summary>
-        protected List<IHUDElement> ChoiceList { get; set; }
+        protected List< List<IHUDElement> > ChoiceList;
 
-        protected int leftRightStep = 4;
+        protected int ChoiceLine = -1;
 
         /// <summary>
         /// the Head Up Display Menu containing this page
@@ -68,8 +67,9 @@ namespace RoBuddies.View.HUD
         /// <param name="content">Content Manager</param>
         public HUDMenuPage(HUDMenu menu, ContentManager content) : base(menu.Game)
         {
-            this.backgroundColor = new Color(0,0,0,20);
-            this.ChoiceList = new List<IHUDElement>();
+            this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
+            this.backgroundColor = new Color(16,16,16,16);
+            this.ChoiceList = new List< List<IHUDElement> >();
             this.Menu = menu;
         }
 
@@ -88,54 +88,62 @@ namespace RoBuddies.View.HUD
                 if (this.animationValue > MathHelper.TwoPi) { this.animationValue = 0.0f; }
             }
 
-            if (this.ChoiceList.Count > 0)   // at least one element
+            if (this.ChoiceList.Count > 0)
             {
 
                 // Key.down -----------------------------------------------------------------------------
                 if (ButtonPressed(ControlButton.down))
                 {
-                    int index = this.ChoiceList.IndexOf(this.activeElement);
-                    if (index >= 0)                 // found active elements index
+                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                    ChoiceLine++;
+                    if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = 0; }
+
+                    if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
+
+                    if (index >= 0)
                     {
-                        index++;
-                        if (index >= this.ChoiceList.Count) { index = 0; } // cycle
-                        this.ActiveElement = this.ChoiceList[index];
+                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
                     }
                 } // ------------------------------------------------------------------------------------
 
                 // Key.Up -------------------------------------------------------------------------------
                 if (ButtonPressed(ControlButton.up))
                 {
-                    int index = this.ChoiceList.IndexOf(this.activeElement);
-                    if (index >= 0)                 // found active elements index
+                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                    ChoiceLine--;
+                    if (ChoiceLine < 0) { ChoiceLine = this.ChoiceList.Count - 1; }
+
+                    if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
+                    
+                    if (index >= 0)
                     {
-                        index--;
-                        if (index < 0) { index = this.ChoiceList.Count - 1; } // cycle
-                        this.ActiveElement = this.ChoiceList[index];
+                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
                     }
                 } // -----------------------------------------------------------------------------------
 
                 // Key.right -----------------------------------------------------------------------------
                 if (ButtonPressed(ControlButton.right))
                 {
-                    int index = this.ChoiceList.IndexOf(this.activeElement);
-                    if (index >= 0)                 // found active elements index
+                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                    if (index >= 0)
                     {
-                        index += leftRightStep;
-                        if (index >= this.ChoiceList.Count) { index -= this.ChoiceList.Count; } // cycle
-                        this.ActiveElement = this.ChoiceList[index];
+                        index++;
+                        if (index >= this.ChoiceList[ChoiceLine].Count) { index = 0; }
+
+                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
                     }
                 } // ------------------------------------------------------------------------------------
 
                 // Key.left -------------------------------------------------------------------------------
                 if (ButtonPressed(ControlButton.left))
                 {
-                    int index = this.ChoiceList.IndexOf(this.activeElement);
-                    if (index >= 0)                 // found active elements index
+                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                    if (index >= 0)
                     {
-                        index -= leftRightStep;
-                        if (index < 0) { index += this.ChoiceList.Count; } // cycle
-                        this.ActiveElement = this.ChoiceList[index];
+                        index--;
+                        if (index < 0) { index = this.ChoiceList[ChoiceLine].Count - 1; }
+
+                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
                     }
                 } // -----------------------------------------------------------------------------------
             }
@@ -153,5 +161,32 @@ namespace RoBuddies.View.HUD
         public virtual void OnExit()
         {
         }
+
+        protected void addChoiceElement(IHUDElement element) 
+        {
+            if (this.ChoiceLine >= 0)
+            {
+                this.ChoiceList[ChoiceLine].Add(element); 
+            }
+        }
+
+        protected void addChoiceLine()
+        {
+            this.ChoiceList.Add(new List<IHUDElement>());
+            this.ChoiceLine = this.ChoiceList.Count - 1;
+        }
+
+        protected void chooseActiveElement(int line, int position)
+        {
+            if (line < this.ChoiceList.Count)
+            {
+                if (position < this.ChoiceList[line].Count)
+                {
+                    this.ActiveElement = this.ChoiceList[line][position];
+                    this.ChoiceLine = line;
+                }
+            }
+        }
+
     }
 }

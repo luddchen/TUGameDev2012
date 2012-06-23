@@ -86,7 +86,7 @@ namespace RoBuddies.Model
             this.finished = false;
             this.allLayers = new List<Layer>();
             this.allStateMachines = new List<StateMachine>();
-            this.Background = Color.DeepSkyBlue;
+            this.Background = Color.SkyBlue;
         }
 
         /// <summary>

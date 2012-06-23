@@ -42,45 +42,51 @@ namespace RoBuddies.View.MenuPages
         public OptionMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//Square");
+            addChoiceLine();
 
             fullscreen = new HUDString("Fullscreen", content);
             fullscreen.Scale = 0.7f;
             this.AllElements.Add(fullscreen);
-            this.ChoiceList.Add(fullscreen);
+            addChoiceElement(fullscreen);
 
             fullscreenValue = new HUDString("on", content);
             fullscreenValue.Scale = 0.7f;
             this.AllElements.Add(fullscreenValue);
 
+            addChoiceLine();
+
             cameraMode = new HUDString("Camera Mode", content);
             cameraMode.Scale = 0.7f;
             this.AllElements.Add(cameraMode);
-            this.ChoiceList.Add(cameraMode);
+            addChoiceElement(cameraMode);
 
             cameraModeValue = new HUDString("smooth", content);
             cameraModeValue.Scale = 0.7f;
             this.AllElements.Add(cameraModeValue);
 
+            addChoiceLine();
+
             sound = new HUDString("Sound", content);
             sound.Scale = 0.7f;
             this.AllElements.Add(sound);
-            this.ChoiceList.Add(sound);
+            addChoiceElement(sound);
 
             soundValue = new HUDString("on", content);
             soundValue.Scale = 0.7f;
             this.AllElements.Add(soundValue);
 
+            addChoiceLine();
+
             music = new HUDString("Music", content);
             music.Scale = 0.7f;
             this.AllElements.Add(music);
-            this.ChoiceList.Add(music);
+            addChoiceElement(music);
 
             musicValue = new HUDString("on", content);
             musicValue.Scale = 0.7f;
             this.AllElements.Add(musicValue);
 
-            this.ActiveElement = fullscreen;
+            chooseActiveElement(0, 0);
         }
 
         public override void Update(GameTime gameTime)
