@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -137,17 +137,20 @@ namespace RoBuddies.View.HUD
                 }
                 else
                 {
-                    if (this.pageHistory.Count > 0) { this.pageHistory.RemoveAt(this.pageHistory.Count - 1); }  // active page should be always here, but nobody knows ..
+                    this.pageHistory.RemoveAt(this.pageHistory.Count - 1); 
+
                     if (this.pageHistory.Count == 0 || this.ActivePage == this.DefaultPage)
                     {
-                        IsVisible = !IsVisible;
+                        IsVisible = false;
                     }
                     else
                     {
                         this.ActivePage.OnExit();
                         this.ActivePage = this.pageHistory[this.pageHistory.Count - 1];
+                        this.pageHistory.RemoveAt(this.pageHistory.Count - 1);  // remove doubles
                     }
                 }
+
             }
 
             if (this.ActivePage != null && IsVisible)

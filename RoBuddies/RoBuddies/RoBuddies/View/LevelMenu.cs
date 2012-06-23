@@ -50,7 +50,6 @@ namespace RoBuddies.View
             mainMenu.helpPage = helpMenu;
 
             this.DefaultPage = levelChoice; //mainMenu ;
-            this.ActivePage = this.DefaultPage;
             // end decoration -------------------------------------------------------------------
         }
 

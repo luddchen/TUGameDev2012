@@ -38,7 +38,6 @@ namespace RoBuddies.View
             HUDMenuPage mainMenu = new EditorMainMenu(this, this.Game.Content);
 
             this.DefaultPage = mainMenu;
-            this.ActivePage = this.DefaultPage;
             // end decoration -------------------------------------------------------------------
         }
 
