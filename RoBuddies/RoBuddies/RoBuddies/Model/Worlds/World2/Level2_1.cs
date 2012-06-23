@@ -23,6 +23,8 @@ namespace RoBuddies.Model.Worlds.World2
             : base(game, LEVEL_PATH, LEVEL_THEME)
         {
             Level.Robot.removeHead();
+            addSky(Vector2.Zero);
+            addMountains(Vector2.Zero);
         }
 
         protected override void addLevelObjects()
