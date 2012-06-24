@@ -170,6 +170,8 @@
     <Compile Include="Model\Serializer\Converter\WallConverter.cs" />
     <Compile Include="Model\Snapshot\BodyKeyFrame.cs" />
     <Compile Include="Model\Snapshot\KeyFrame.cs" />
+    <Compile Include="Model\Snapshot\LowerPartKeyFrame.cs" />
+    <Compile Include="Model\Snapshot\PartsCombinedKeyFrame.cs" />
     <Compile Include="Model\Snapshot\Snapshot.cs" />
     <Compile Include="Model\Snapshot\SwitchKeyFrame.cs" />
     <Compile Include="Model\StaticObject.cs" />
