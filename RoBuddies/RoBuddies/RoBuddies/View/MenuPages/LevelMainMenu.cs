@@ -23,55 +23,42 @@ namespace RoBuddies.View.MenuPages
         private int rewindCounter = 0;
 
         private HUDTexture help;
+        private HUDTexture info;
         private HUDTexture options;
         private HUDTexture quit;
 
         public HUDMenuPage quitPage { get; set; }
         public HUDMenuPage optionPage { get; set; }
         public HUDMenuPage helpPage { get; set; }
+        public HUDMenuPage infoPage { get; set; }
 
         protected Color notUsableColor = new Color(92, 92, 92, 92);
-
-        public override void OnViewPortResize()
-        {
-            if (editor != null) { editor.Position   = new Vector2(this.Viewport.Width * 0.25f, this.Viewport.Height * 0.1f); }
-            if (rewind != null) { rewind.Position   = new Vector2(this.Viewport.Width * 0.35f, this.Viewport.Height * 0.1f); }
-            if (forward != null){ forward.Position  = new Vector2(this.Viewport.Width * 0.45f, this.Viewport.Height * 0.1f); }
-            if (help != null)   { help.Position     = new Vector2(this.Viewport.Width * 0.55f, this.Viewport.Height * 0.1f); }
-            if (options != null){ options.Position  = new Vector2(this.Viewport.Width * 0.65f, this.Viewport.Height * 0.1f); }
-            if (quit != null)   { quit.Position     = new Vector2(this.Viewport.Width * 0.75f, this.Viewport.Height * 0.1f); }
-        }
 
         public LevelMainMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
             addChoiceLine();
 
-            editor = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Stationery"), null, 40, 40, null, null, null, content);
-            this.AllElements.Add(editor);
-            addChoiceElement(editor);
+            editor = menu.editor;
+            addChoiceElement(editor, false);
 
-            rewind = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//rewind_64"), null, 50, 50, null, null, null, content);
-            rewind.Scale = 0.7f;
-            this.AllElements.Add(rewind);
-            addChoiceElement(rewind);
+            rewind = menu.rewind;
+            addChoiceElement(rewind, false);
 
-            forward = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//forward_64"), null, 50, 50, null, null, null, content);
-            forward.Scale = 0.7f;
-            this.AllElements.Add(forward);
-            addChoiceElement(forward);
+            forward = menu.forward;
+            addChoiceElement(forward, false);
 
-            help = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Info"), null, 40, 40, null, null, null, content);
-            this.AllElements.Add(help);
-            addChoiceElement(help);
+            help = menu.help;
+            addChoiceElement(help, false);
 
-            options = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Tools"), null, 40, 40, null, null, null, content);
-            this.AllElements.Add(options);
-            addChoiceElement(options);
+            info = menu.info;
+            addChoiceElement(info, false);
 
-            quit = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Close"), null, 40, 40, null, null, null, content);
-            this.AllElements.Add(quit);
-            addChoiceElement(quit);
+            options = menu.options;
+            addChoiceElement(options, false);
+
+            quit = menu.quit;
+            addChoiceElement(quit, false);
 
             chooseActiveElement(0, 0);
         }
@@ -107,6 +94,11 @@ namespace RoBuddies.View.MenuPages
                     if (this.ActiveElement == help)
                     {
                         this.Menu.ActivePage = this.helpPage;
+                    }
+
+                    if (this.ActiveElement == info)
+                    {
+                        this.Menu.ActivePage = this.infoPage;
                     }
                 }
             }

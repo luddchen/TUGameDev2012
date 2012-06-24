@@ -12,7 +12,6 @@ namespace RoBuddies.View.MenuPages
 {
     class LevelChoiceMenu : LevelMainMenu
     {
-
         private HUDString levelChoose;
         private HUDString tutorial1;
         private HUDString tutorial2;
@@ -64,83 +63,67 @@ namespace RoBuddies.View.MenuPages
         public LevelChoiceMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            levelChoose = new HUDString("choose a level", null, null, Color.LightSkyBlue, null, 0.7f, null, content);
+            levelChoose = new HUDString("choose a level :", null, null, Color.SkyBlue, null, 0.7f, null, content);
             this.AllElements.Add(levelChoose);
 
             addChoiceLine();
 
-            tutorial1 = new HUDString("Tutorial 1", null, null, null, null, 0.5f, null, content);
-            this.AllElements.Add(tutorial1);
-            addChoiceElement(tutorial1);
+            tutorial1 = new HUDString("Tutorial 1", null, null, textColor, null, 0.5f, null, content);
+            addChoiceElement(tutorial1, true);
 
             lab1 = new HUDString("Lab 1", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(lab1);
-            addChoiceElement(lab1);
+            addChoiceElement(lab1, true);
 
-            mountain1 = new HUDString("Mountain 1", null, null, null, null, 0.5f, null, content);
-            this.AllElements.Add(mountain1);
-            addChoiceElement(mountain1);
+            mountain1 = new HUDString("Mountain 1", null, null, textColor, null, 0.5f, null, content);
+            addChoiceElement(mountain1, true);
 
             hospital1 = new HUDString("Hospital 1", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(hospital1);
-            addChoiceElement(hospital1);
+            addChoiceElement(hospital1, true);
 
 
             addChoiceLine();
 
-            tutorial2 = new HUDString("Tutorial 2", null, null, null, null, 0.5f, null, content);
-            this.AllElements.Add(tutorial2);
-            addChoiceElement(tutorial2);
+            tutorial2 = new HUDString("Tutorial 2", null, null, textColor, null, 0.5f, null, content);
+            addChoiceElement(tutorial2, true);
 
             lab2 = new HUDString("Lab 2", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(lab2);
-            addChoiceElement(lab2);
+            addChoiceElement(lab2, true);
 
-            mountain2 = new HUDString("Mountain 2", null, null, null, null, 0.5f, null, content);
-            this.AllElements.Add(mountain2);
-            addChoiceElement(mountain2);
+            mountain2 = new HUDString("Mountain 2", null, null, textColor, null, 0.5f, null, content);
+            addChoiceElement(mountain2, true);
 
             hospital2 = new HUDString("Hospital 2", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(hospital2);
-            addChoiceElement(hospital2);
+            addChoiceElement(hospital2, true);
 
 
             addChoiceLine();
 
             tutorial3 = new HUDString("Tutorial 3", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(tutorial3);
-            addChoiceElement(tutorial3);
+            addChoiceElement(tutorial3, true);
 
             lab3 = new HUDString("Lab 3", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(lab3);
-            addChoiceElement(lab3);
+            addChoiceElement(lab3, true);
 
             mountain3 = new HUDString("Mountain 3", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(mountain3);
-            addChoiceElement(mountain3);
+            addChoiceElement(mountain3, true);
 
             hospital3 = new HUDString("Hospital 3", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(hospital3);
-            addChoiceElement(hospital3);
+            addChoiceElement(hospital3, true);
 
 
             addChoiceLine();
 
             tutorial4 = new HUDString("Tutorial 4", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(tutorial4);
-            addChoiceElement(tutorial4);
+            addChoiceElement(tutorial4, true);
 
             lab4 = new HUDString("Lab 4", null, null, Color.Black, null, 0.45f, null, content);
-            this.AllElements.Add(lab4);
-            addChoiceElement(lab4);
+            addChoiceElement(lab4, true);
 
             mountain4 = new HUDString("Mountain 4", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(mountain4);
-            addChoiceElement(mountain4);
+            addChoiceElement(mountain4, true);
 
             hospital4 = new HUDString("Hospital 4", null, null, Color.Black, null, 0.5f, null, content);
-            this.AllElements.Add(hospital4);
-            addChoiceElement(hospital4);
+            addChoiceElement(hospital4, true);
 
             chooseActiveElement(1, 0);
         }

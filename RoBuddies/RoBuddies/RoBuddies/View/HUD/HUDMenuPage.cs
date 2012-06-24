@@ -15,6 +15,8 @@ namespace RoBuddies.View.HUD
     class HUDMenuPage : HUD
     {
 
+        protected Color textColor = Color.White;
+
         /// <summary>
         /// sclae of the active element
         /// </summary>
@@ -67,8 +69,6 @@ namespace RoBuddies.View.HUD
         /// <param name="content">Content Manager</param>
         public HUDMenuPage(HUDMenu menu, ContentManager content) : base(menu.Game)
         {
-            this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
-            this.backgroundColor = new Color(16,16,16,16);
             this.ChoiceList = new List< List<IHUDElement> >();
             this.Menu = menu;
         }
@@ -162,8 +162,10 @@ namespace RoBuddies.View.HUD
         {
         }
 
-        protected void addChoiceElement(IHUDElement element) 
+        protected void addChoiceElement(IHUDElement element, bool addToAllElements) 
         {
+            if (addToAllElements) { this.AllElements.Add(element); }
+
             if (this.ChoiceLine >= 0)
             {
                 this.ChoiceList[ChoiceLine].Add(element); 

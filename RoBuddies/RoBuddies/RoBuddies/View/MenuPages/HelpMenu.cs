@@ -17,14 +17,15 @@ namespace RoBuddies.View.MenuPages
                                 + "\n"
                                 + "some keys to help you :\n"
                                 + "---------------------------------\n"
-                                + "<space> : jump\n"
-                                + "<x> : separate or unseparate the parts\n"
-                                + "<alt> : switch between the robot parts\n"
-                                + "<a> : grab a crate to pull\n"
-                                + "<esc> : open / close menu\n"
-                                + "<left> : walk to left\n"
-                                + "<right> : walk to right\n"
-                                + "<s> : use a lever\n"
+                                + "<space>      jump\n\n"
+                                + "<left>       walk or climb to left\n\n"
+                                + "<right>      walk or climb to right\n\n"
+                                + "<up>         climb up or use level ending door\n\n"
+                                + "<down>       climb down\n\n"
+                                + "<x>          separate, unseparate or switch\n"
+                                + "             between the robot parts\n\n"
+                                + "<s>          use a lever or grab a crate to pull/push\n\n"
+                                + "<esc>        open / close menu\n"
                                 + "\n"
                                 + "remember some rules\n"
                                 + "----------------------------------\n"
@@ -39,14 +40,7 @@ namespace RoBuddies.View.MenuPages
                                 + "combined robot can pull crates\n"
                                 + "and push bigger crates than lower part\n"
                                 + "\n"
-                                + "only the combined robot can pass the door to next level\n"
-                                + "\n"
-                                + "\n"
-                                + "\n"
-                                + "\n"
-                                + "\n"
-                                + "\n"
-                                + "\n";
+                                + "only the combined robot can pass the door to next level";
                               
 
         public HUDMenuPage quitPage { get; set; }
@@ -60,7 +54,7 @@ namespace RoBuddies.View.MenuPages
         public HelpMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            help = new HUDString(helpText, null, null, null, null, 0.5f, 0, content);
+            help = new HUDString(helpText, null, null, textColor, null, 0.5f, 0, content);
             this.AllElements.Add(help);
         }
 
@@ -79,13 +73,19 @@ namespace RoBuddies.View.MenuPages
             // Key.down -----------------------------------------------------------------------------
             if (ButtonIsDown(ControlButton.down))
             {
-                help.Position = new Vector2( help.Position.X, help.Position.Y - 2);
+                if (help.Position.Y > viewport.Height - help.Height / 2)
+                {
+                    help.Position = new Vector2(help.Position.X, help.Position.Y - 2);
+                }
             } // ------------------------------------------------------------------------------------
 
             // Key.Up -------------------------------------------------------------------------------
             if (ButtonIsDown(ControlButton.up))
             {
-                help.Position = new Vector2(help.Position.X, help.Position.Y + 2);
+                if (help.Position.Y < help.Height / 2)
+                {
+                    help.Position = new Vector2(help.Position.X, help.Position.Y + 2);
+                }
             } // -----------------------------------------------------------------------------------
 
         }

@@ -29,15 +29,13 @@ namespace RoBuddies.View.MenuPages
         {
             addChoiceLine();
 
-            level = new HUDString("Game", null, null, null, null, 0.7f, null, content);
-            this.AllElements.Add(level);
-            addChoiceElement(level);
+            level = new HUDString("Game", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(level, true);
 
             addChoiceLine();
 
-            testLevel = new HUDString("Test Level", null, null, null, null, 0.7f, null, content);
-            this.AllElements.Add(testLevel);
-            addChoiceElement(testLevel);
+            testLevel = new HUDString("Test Level", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(testLevel, true);
 
             chooseActiveElement(0, 0);
         }

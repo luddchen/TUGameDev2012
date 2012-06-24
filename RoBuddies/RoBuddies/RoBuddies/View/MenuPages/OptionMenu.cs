@@ -44,46 +44,34 @@ namespace RoBuddies.View.MenuPages
         {
             addChoiceLine();
 
-            fullscreen = new HUDString("Fullscreen", content);
-            fullscreen.Scale = 0.7f;
-            this.AllElements.Add(fullscreen);
-            addChoiceElement(fullscreen);
+            fullscreen = new HUDString("Fullscreen", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(fullscreen, true);
 
-            fullscreenValue = new HUDString("on", content);
-            fullscreenValue.Scale = 0.7f;
+            fullscreenValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(fullscreenValue);
 
             addChoiceLine();
 
-            cameraMode = new HUDString("Camera Mode", content);
-            cameraMode.Scale = 0.7f;
-            this.AllElements.Add(cameraMode);
-            addChoiceElement(cameraMode);
+            cameraMode = new HUDString("Camera Mode", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(cameraMode, true);
 
-            cameraModeValue = new HUDString("smooth", content);
-            cameraModeValue.Scale = 0.7f;
+            cameraModeValue = new HUDString("smooth", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(cameraModeValue);
 
             addChoiceLine();
 
-            sound = new HUDString("Sound", content);
-            sound.Scale = 0.7f;
-            this.AllElements.Add(sound);
-            addChoiceElement(sound);
+            sound = new HUDString("Sound", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(sound, true);
 
-            soundValue = new HUDString("on", content);
-            soundValue.Scale = 0.7f;
+            soundValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(soundValue);
 
             addChoiceLine();
 
-            music = new HUDString("Music", content);
-            music.Scale = 0.7f;
-            this.AllElements.Add(music);
-            addChoiceElement(music);
+            music = new HUDString("Music", null, null, textColor, null, 0.7f, null, content);
+            addChoiceElement(music, true);
 
-            musicValue = new HUDString("on", content);
-            musicValue.Scale = 0.7f;
+            musicValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(musicValue);
 
             chooseActiveElement(0, 0);

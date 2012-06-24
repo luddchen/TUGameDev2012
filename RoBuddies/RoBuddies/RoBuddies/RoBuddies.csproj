@@ -207,6 +207,7 @@
     <Compile Include="View\LevelMenu.cs" />
     <Compile Include="View\MenuPages\EditorMainMenu.cs" />
     <Compile Include="View\MenuPages\HelpMenu.cs" />
+    <Compile Include="View\MenuPages\InfoMenu.cs" />
     <Compile Include="View\MenuPages\LevelChoiceMenu.cs" />
     <Compile Include="View\HUD\HUDMenuPage.cs" />
     <Compile Include="View\MenuPages\LevelMainMenu.cs" />

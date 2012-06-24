@@ -24,23 +24,18 @@ namespace RoBuddies.View.MenuPages
         public QuitMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            question = new HUDString("realy quit ?", content);
-            question.Scale = 0.7f;
+            question = new HUDString("realy quit ?", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(question);
 
             addChoiceLine();
 
-            yes = new HUDString("YES, i need a short break", content);
-            yes.Scale = 0.5f;
-            this.AllElements.Add(yes);
-            addChoiceElement(yes);
+            yes = new HUDString("YES, i need a short break", null, null, textColor, null, 0.5f, null, content);
+            addChoiceElement(yes, true);
 
             addChoiceLine();
 
-            no= new HUDString("NO, bring me back to RoBuddies world", content);
-            no.Scale = 0.6f;
-            this.AllElements.Add(no);
-            addChoiceElement(no);
+            no = new HUDString("NO, bring me back to RoBuddies world", null, null, textColor, null, 0.6f, null, content);
+            addChoiceElement(no, true);
 
             chooseActiveElement(0, 0);
         }

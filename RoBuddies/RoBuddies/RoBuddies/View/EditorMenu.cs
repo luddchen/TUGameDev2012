@@ -14,9 +14,9 @@ namespace RoBuddies.View
             base.OnViewPortResize();
             if (this.AllElements != null && this.AllElements.Count > 0)
             {
-                this.AllElements[0].Position = new Vector2(this.Viewport.Width / 2, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
-                this.AllElements[1].Position = new Vector2(MenuPageTopExtraBorder * 2, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
-                this.AllElements[2].Position = new Vector2(this.Viewport.Width - MenuPageTopExtraBorder * 2, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
+                this.AllElements[0].Position = new Vector2(this.Viewport.Width * 0.5f, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
+                this.AllElements[1].Position = new Vector2(this.Viewport.Width * 0.15f, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
+                this.AllElements[2].Position = new Vector2(this.Viewport.Width * 0.85f, (MenuPageTopExtraBorder + MenuPageBorder) / 2);
             }
         }
 
