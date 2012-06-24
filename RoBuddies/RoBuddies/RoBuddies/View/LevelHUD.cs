@@ -44,7 +44,7 @@ namespace RoBuddies.View
                 this.isVisible = true;
                 this.hudString.String = hudString;
                 this.HUD_width = (int)this.hudString.Width;
-                this.viewport.Y = 10; //for botton use: -1 + this.viewport.Height - this.HUD_height;
+                this.viewport.Y = 10; //for bottom use: -1 + this.viewport.Height - this.HUD_height;
                 this.viewport.X = this.viewport.X + (this.viewport.Width / 2 - (int)this.hudString.Width / 2);
                 this.viewport.Height = this.HUD_height;
                 this.viewport.Width = (int)this.hudString.Width;

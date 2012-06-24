@@ -26,6 +26,7 @@ namespace RoBuddies.Control.StateMachines
         private Robot robot;
         private List<Texture2D> textureList;
         private Crate currentCrate;
+        private Ladder currentLadder;
         private bool isPulling;
         private float pullingDistance;
 
@@ -78,7 +79,11 @@ namespace RoBuddies.Control.StateMachines
 
         private bool canClimb(float yCheckDistance)
         {
+            bool canClimbUp = false;
             Vector2 combinedPartPos = robot.PartsCombined.Position;
+            Vector2 combinedPartWheelPos = robot.PartsCombined.wheelBody.Position;
+            
+            // first ray
             Vector2 rayDirection = new Vector2(0.51f, yCheckDistance);
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
 
@@ -88,7 +93,24 @@ namespace RoBuddies.Control.StateMachines
                 intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartPos, combinedPartPos + rayDirection);
             }
 
-            bool canClimbUp = intersectingObject is Ladder;
+            if(!(intersectingObject is Ladder)) // third ray on the middle of the robot down
+            {
+                rayDirection = new Vector2(0, -0.51f);
+                intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartWheelPos - new Vector2(0.49f, 0), combinedPartWheelPos + rayDirection);
+            }
+
+            if (!(intersectingObject is Ladder)) // third ray on the middle of the robot down
+            {
+                rayDirection = new Vector2(0, -0.51f);
+                intersectingObject = RayCastUtility.getIntersectingObject(this.Level, combinedPartWheelPos - new Vector2(-0.49f, 0), combinedPartWheelPos + rayDirection);
+            }
+
+            if (intersectingObject is Ladder)
+            {
+                canClimbUp = true;
+                currentLadder = intersectingObject as Ladder;
+            }
+            Console.Out.WriteLine(intersectingObject);
             return canClimbUp;
         }
 
@@ -99,7 +121,7 @@ namespace RoBuddies.Control.StateMachines
                 climbLadder(0.15f);
             }
 
-            if (ButtonIsDown(ControlButton.down) && canClimb(-0.71f)) // && !isOnGround() -> doesnt work because raycast hits ladder
+            if (ButtonIsDown(ControlButton.down) && canClimb(-0.71f))
             {
                 climbLadder(-0.15f);
             }
@@ -249,7 +271,11 @@ namespace RoBuddies.Control.StateMachines
                 SwitchToState(CLIMBING_STATE);
             }
             ((LadderClimbingState)CurrentState).IsMoving = true;
-            robot.ActivePart.Position += new Vector2(0, distance);
+            float ladderYmax = currentLadder.Position.Y + (currentLadder.Height - 1.2f) / 2 - 0.1f;
+            float ladderYmin = currentLadder.Position.Y - (currentLadder.Height - 1.2f) / 2 + 1.1f;
+            float yPos = Math.Max( ladderYmin, Math.Min(ladderYmax, robot.PartsCombined.Position.Y + distance));
+            robot.PartsCombined.Position = new Vector2(currentLadder.Position.X, yPos);
+            robot.PartsCombined.wheelBody.Position = new Vector2(currentLadder.Position.X, yPos + (-2.3f / 2f) + 0.20f);
         }
 
         private void startWalk(String newStateName, float force, float velocityLimit, float motorSpeed)
