@@ -81,6 +81,7 @@ namespace RoBuddies.View
                 this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
 
                 this.topHud.setString(this.Level.LevelName);
+                this.background = null;
             }
         }
 

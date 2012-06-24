@@ -1,10 +1,6 @@
-﻿using System;
-
-using FarseerPhysics.Dynamics;
-using FarseerPhysics.Factories;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
-
 using Robuddies.Interfaces;
 
 namespace RoBuddies.Model.Objects
@@ -16,18 +12,20 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D doorClosedTex;
         private Texture2D doorLockedTex;
+        private SoundEffect doorSound;
 
         public bool IsSwitchedOn
         {
             get { return isSwitchedOn; }
         }
 
-
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(pos, size, color, 0, level)
         {
             doorLockedTex = game.Content.Load<Texture2D>("Sprites//door_locked");
             doorClosedTex = game.Content.Load<Texture2D>("Sprites//door_closed");
+
+            doorSound = game.Content.Load<SoundEffect>("Sounds//solved1");
 
             if (switchable)
             {
@@ -64,6 +62,7 @@ namespace RoBuddies.Model.Objects
         public void switchOn()
         {            
             isSwitchedOn = true;
+            doorSound.Play();
             this.Texture = doorClosedTex;
         }        
     }
