@@ -136,22 +136,22 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == tutorial1)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_1(this.Menu.Game).Level);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_1(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == tutorial2)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_3(this.Menu.Game).Level);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_3(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == mountain1)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_5(this.Menu.Game).Level);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_5(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == mountain2)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_1(this.Menu.Game).Level);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_1(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                 }

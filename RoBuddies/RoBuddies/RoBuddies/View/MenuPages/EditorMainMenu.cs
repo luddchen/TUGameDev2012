@@ -60,7 +60,7 @@ namespace RoBuddies.View.MenuPages
                             (new LevelWriter(this.Game.EditorView.Level)).writeLevel(".\\", "editor_temp.json");
                             this.Game.EditorView.Level.LevelName = "Test Level";
                             this.activateObjects(this.Game.EditorView.Level);
-                            ((LevelView)this.Game.LevelView).viewNextLevel(this.Game.EditorView.Level);
+                            ((LevelView)this.Game.LevelView).viewNextLevel(this.Game.EditorView.Level, gameTime);
                             this.Game.SwitchToViewMode(RoBuddies.ViewMode.Level);
                         }
                         else

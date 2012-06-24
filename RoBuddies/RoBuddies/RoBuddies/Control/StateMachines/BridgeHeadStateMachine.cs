@@ -38,13 +38,13 @@ namespace RoBuddies.Control.StateMachines
                     }
                     if (robot.RobotStateMachine.LooksRight)
                     {
-                        pos += new Vector2(2, 0);
+                        pos += new Vector2(1f, 0f);
                     }
                     else
                     {
-                        pos -= new Vector2(2, 0);
+                        pos -= new Vector2(1f, 0f);
                     }
-                    Wall newWall = new Wall(pos, new Vector2(4, 1), Color.LightGreen, robot.Level, robot.Game, false);
+                    Wall newWall = new Wall(pos, new Vector2(3, 1), Color.LightGreen, robot.Level, robot.Game, false);
                     mainLayer.AddObject(newWall);
                     if (oldWall != null)
                     {
