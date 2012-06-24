@@ -5,7 +5,7 @@ namespace RoBuddies.Control
     /// <summary>
     /// a enumaration of all player usable buttons / keys
     /// </summary>
-    public enum ControlButton { left, right, up, down, jump, use, robot, menu, enter }; 
+    public enum ControlButton { left, right, up, down, jump, use, head, robot, menu, enter }; 
 
     /// <summary>
     /// class to manage player inputs from different devices 
@@ -123,6 +123,7 @@ namespace RoBuddies.Control
                 case ControlButton.right: { key = Keys.Right; break; }
                 case ControlButton.jump: { key = Keys.Space; break; }
                 case ControlButton.use: { key = Keys.S; break; }
+                case ControlButton.head: { key = Keys.Y; break; }
                 case ControlButton.robot: { key = Keys.X; break; }
                 case ControlButton.menu: { key = Keys.Escape; break; }
                 case ControlButton.enter: { key = Keys.Enter; break; }

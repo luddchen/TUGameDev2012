@@ -1613,8 +1613,8 @@
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-    <Compile Include="Sprites\Menu\paly_64.png">
-      <Name>paly_64</Name>
+    <Compile Include="Sprites\Menu\play_64.png">
+      <Name>play_64</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
