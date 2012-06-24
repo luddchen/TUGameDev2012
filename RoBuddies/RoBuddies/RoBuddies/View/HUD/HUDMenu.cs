@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.Control;
 
@@ -16,7 +14,7 @@ namespace RoBuddies.View.HUD
         /// <summary>
         /// border size of contained menu page 
         /// </summary>
-        protected int MenuPageBorder = 15;
+        protected int MenuPageBorder = 16;
 
         /// <summary>
         /// extra border size on top of contained menu page
@@ -94,9 +92,11 @@ namespace RoBuddies.View.HUD
             get { return this.activePage; }
             set
             {
+                if (this.activePage != null) { this.activePage.OnExit(); }  // old page exit
+
                 this.activePage = value;
                 this.Viewport = this.viewport; // dirty way to get actual (sub-)viewport
-                if (this.activePage != null) { this.pageHistory.Add(this.activePage); }
+                if (this.activePage != null) { this.pageHistory.Add(this.activePage); this.activePage.OnEnter(); }
             }
         }
 

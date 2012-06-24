@@ -1670,13 +1670,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\menu2.png">
-      <Name>menu2</Name>
-      <Importer>TextureImporter</Importer>
-      <Processor>TextureProcessor</Processor>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="Sprites\Menu\menu3.png">
       <Name>menu3</Name>
       <Importer>TextureImporter</Importer>

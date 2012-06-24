@@ -66,18 +66,19 @@ namespace RoBuddies.View
             quit = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Close"), null, 40, 40, null, null, null, this.Game.Content);
             this.AllElements.Add(quit);
 
-            QuitMenu quitMenu = new QuitMenu(this, this.Game.Content);
-            OptionMenu optionMenu = new OptionMenu(this, this.Game.Content);
-            HelpMenu helpMenu = new HelpMenu(this, this.Game.Content);
-            InfoMenu infoMenu = new InfoMenu(this, this.Game.Content);
+            LevelMainMenu quitMenu = new QuitMenu(this, this.Game.Content);
+            LevelMainMenu optionMenu = new OptionMenu(this, this.Game.Content);
+            LevelMainMenu helpMenu = new HelpMenu(this, this.Game.Content);
+            LevelMainMenu infoMenu = new InfoMenu(this, this.Game.Content);
+
             LevelMainMenu mainMenu = new LevelChoiceMenu(this, this.Game.Content);
 
-            mainMenu.quitPage = quitMenu;
-            mainMenu.optionPage = optionMenu;
-            mainMenu.helpPage = helpMenu;
-            mainMenu.infoPage = infoMenu;
+            mainMenu.quitPage   = quitMenu.quitPage     = optionMenu.quitPage   = helpMenu.quitPage     = infoMenu.quitPage     = quitMenu;
+            mainMenu.optionPage = quitMenu.optionPage   = optionMenu.optionPage = helpMenu.optionPage   = infoMenu.optionPage   = optionMenu;
+            mainMenu.helpPage   = quitMenu.helpPage     = optionMenu.helpPage   = helpMenu.helpPage     = infoMenu.helpPage     = helpMenu;
+            mainMenu.infoPage   = quitMenu.infoPage     = optionMenu.infoPage   = helpMenu.infoPage     = infoMenu.infoPage     = infoMenu;
 
-            this.DefaultPage = mainMenu; //mainMenu ;
+            this.DefaultPage = mainMenu;
             // end decoration -------------------------------------------------------------------
         }
 

@@ -1,14 +1,12 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
 
 namespace RoBuddies.View.MenuPages
 {
-    class OptionMenu : HUDMenuPage
+    class OptionMenu : LevelMainMenu
     {
         private HUDString fullscreen;
         private HUDString fullscreenValue;
@@ -26,6 +24,8 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnViewPortResize()
         {
+            base.OnViewPortResize();
+
             if (fullscreen != null) { fullscreen.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
             if (fullscreenValue != null) { fullscreenValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
 

@@ -1,10 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
-using RoBuddies.Model;
-using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 

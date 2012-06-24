@@ -2,8 +2,6 @@
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Objects;
 using RoBuddies.Model.Serializer;

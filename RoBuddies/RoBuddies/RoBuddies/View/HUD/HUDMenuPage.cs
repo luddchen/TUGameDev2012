@@ -91,35 +91,38 @@ namespace RoBuddies.View.HUD
             if (this.ChoiceList.Count > 0)
             {
 
-                // Key.down -----------------------------------------------------------------------------
-                if (ButtonPressed(ControlButton.down))
+                if (this.ChoiceList.Count > 1)
                 {
-                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
-                    ChoiceLine++;
-                    if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = 0; }
-
-                    if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
-
-                    if (index >= 0)
+                    // Key.down -----------------------------------------------------------------------------
+                    if (ButtonPressed(ControlButton.down))
                     {
-                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
-                    }
-                } // ------------------------------------------------------------------------------------
+                        int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                        ChoiceLine++;
+                        if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = 0; }
 
-                // Key.Up -------------------------------------------------------------------------------
-                if (ButtonPressed(ControlButton.up))
-                {
-                    int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
-                    ChoiceLine--;
-                    if (ChoiceLine < 0) { ChoiceLine = this.ChoiceList.Count - 1; }
+                        if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
 
-                    if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
-                    
-                    if (index >= 0)
+                        if (index >= 0)
+                        {
+                            this.ActiveElement = this.ChoiceList[ChoiceLine][index];
+                        }
+                    } // ------------------------------------------------------------------------------------
+
+                    // Key.Up -------------------------------------------------------------------------------
+                    if (ButtonPressed(ControlButton.up))
                     {
-                        this.ActiveElement = this.ChoiceList[ChoiceLine][index];
-                    }
-                } // -----------------------------------------------------------------------------------
+                        int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
+                        ChoiceLine--;
+                        if (ChoiceLine < 0) { ChoiceLine = this.ChoiceList.Count - 1; }
+
+                        if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
+
+                        if (index >= 0)
+                        {
+                            this.ActiveElement = this.ChoiceList[ChoiceLine][index];
+                        }
+                    } // -----------------------------------------------------------------------------------
+                }
 
                 // Key.right -----------------------------------------------------------------------------
                 if (ButtonPressed(ControlButton.right))
@@ -156,6 +159,10 @@ namespace RoBuddies.View.HUD
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
+        }
+
+        public virtual void OnEnter()
+        {
         }
 
         public virtual void OnExit()

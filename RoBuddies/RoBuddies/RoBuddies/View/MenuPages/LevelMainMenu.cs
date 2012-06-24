@@ -1,15 +1,9 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
 using RoBuddies.Model;
 using RoBuddies.Model.Serializer;
-using RoBuddies.Model.Worlds.World1;
-using RoBuddies.Model.Worlds.World2;
-using RoBuddies.Model.Worlds.World3;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -34,9 +28,13 @@ namespace RoBuddies.View.MenuPages
 
         protected Color notUsableColor = new Color(92, 92, 92, 92);
 
+        protected LevelMenu menu;
+
         public LevelMainMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
+            this.menu = menu;
+
             addChoiceLine();
 
             editor = menu.editor;
@@ -162,12 +160,31 @@ namespace RoBuddies.View.MenuPages
 
         }
 
+        public override void OnEnter()
+        {
+            menu.editor.isVisible = true;
+            menu.rewind.isVisible = true;
+            menu.forward.isVisible = true;
+            menu.help.isVisible = true;
+            menu.info.isVisible = true;
+            menu.options.isVisible = true;
+            menu.quit.isVisible = true;
+        }
+
         public override void OnExit()
         {
             if (((LevelView)this.Game.LevelView).SnapShot != null)
             {
                 ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
             }
+
+            menu.editor.isVisible = false;
+            menu.rewind.isVisible = false;
+            menu.forward.isVisible = false;
+            menu.help.isVisible = false;
+            menu.info.isVisible = false;
+            menu.options.isVisible = false;
+            menu.quit.isVisible = false;
         }
 
     }

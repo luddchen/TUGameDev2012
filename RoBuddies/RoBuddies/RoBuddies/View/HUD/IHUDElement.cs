@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -45,6 +44,11 @@ namespace RoBuddies.View.HUD
         /// rotation of this element
         /// </summary>
         float Rotation { get; set; }
+
+        /// <summary>
+        /// if this element visible or not
+        /// </summary>
+        bool isVisible { get; set; }
 
         /// <summary>
         /// for update of values and effects 

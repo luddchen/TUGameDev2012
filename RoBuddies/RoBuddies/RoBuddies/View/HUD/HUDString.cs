@@ -64,6 +64,11 @@ namespace RoBuddies.View.HUD
         public float Rotation { get; set; }
 
         /// <summary>
+        /// if this element visible or not
+        /// </summary>
+        public bool isVisible { get; set; }
+
+        /// <summary>
         /// size of unscaled String
         /// </summary>
         protected Vector2 MeasureString
@@ -82,6 +87,7 @@ namespace RoBuddies.View.HUD
             this.String = "RoBuddies";
             this.Color = Color.Beige;
             this.Scale = 1.0f;
+            this.isVisible = true;
         }
 
         public HUDString(String text, ContentManager content)
@@ -91,6 +97,7 @@ namespace RoBuddies.View.HUD
             this.String = text;
             this.Color = Color.Beige;
             this.Scale = 1.0f;
+            this.isVisible = true;
         }
 
         public HUDString(String text, SpriteFont font, Vector2? position, Color? color, Color? backgroundColor, float? scale, float? rotation, ContentManager content)
@@ -105,7 +112,7 @@ namespace RoBuddies.View.HUD
             this.Color = color ?? Color.Beige;
             this.Scale = scale ?? 1.0f;
             this.Rotation = rotation ?? 0.0f;
-
+            this.isVisible = true;
 
             if (backgroundColor != null) 
             { 
@@ -127,12 +134,15 @@ namespace RoBuddies.View.HUD
         /// <param name="spriteBatch">the spritebatch</param>
         public void Draw(SpriteBatch spriteBatch)
         {
-            if (this.BackgroundTexture != null)
+            if (isVisible)
             {
-                Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)(this.Width*1.2f), (int)this.Height);
-                spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 0.0f);
+                if (this.BackgroundTexture != null)
+                {
+                    Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)(this.Width * 1.2f), (int)this.Height);
+                    spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 0.0f);
+                }
+                spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
             }
-            spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
         }
 
         /// <summary>

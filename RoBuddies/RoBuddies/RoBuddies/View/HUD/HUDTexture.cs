@@ -59,6 +59,11 @@ namespace RoBuddies.View.HUD
         /// </summary>
         public float Rotation { get; set; }
 
+        /// <summary>
+        /// if this element visible or not
+        /// </summary>
+        public bool isVisible { get; set; }
+
         public SpriteEffects Effect { get; set; }
 
         /// <summary>
@@ -83,6 +88,7 @@ namespace RoBuddies.View.HUD
             this.Width = 10;
             this.Height = 10;
             this.Scale = 1.0f;
+            this.isVisible = true;
         }
 
         public HUDTexture(Texture2D texture, Vector2? position, float? width, float? height, Color? color, float? scale, float? rotation, ContentManager content)
@@ -96,8 +102,7 @@ namespace RoBuddies.View.HUD
             this.Color = color ?? Color.Beige;
             this.Scale = scale ?? 1.0f;
             this.Rotation = rotation ?? 0.0f;
-
-
+            this.isVisible = true;
         }
 
         /// <summary>
@@ -113,19 +118,22 @@ namespace RoBuddies.View.HUD
         /// <param name="spriteBatch">the spritebatch</param>
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            Rectangle dest = new Rectangle(
-                    (int)Position.X,
-                    (int)Position.Y,
-                    (int)(Width * Scale),
-                    (int)(Height* Scale));
-            spriteBatch.Draw(this.Texture,
-                            dest,
-                            null,
-                            this.Color,
-                            -this.Rotation,
-                            this.Origin,
-                            this.Effect,
-                            0.0f);
+            if (isVisible)
+            {
+                Rectangle dest = new Rectangle(
+                        (int)Position.X,
+                        (int)Position.Y,
+                        (int)(Width * Scale),
+                        (int)(Height * Scale));
+                spriteBatch.Draw(this.Texture,
+                                dest,
+                                null,
+                                this.Color,
+                                -this.Rotation,
+                                this.Origin,
+                                this.Effect,
+                                0.0f);
+            }
         }
 
         /// <summary>

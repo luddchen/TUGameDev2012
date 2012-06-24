@@ -1,14 +1,12 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
 
 namespace RoBuddies.View.MenuPages
 {
-    class QuitMenu : HUDMenuPage
+    class QuitMenu : LevelMainMenu
     {
         private HUDString question; 
         private HUDString yes;
@@ -16,6 +14,8 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnViewPortResize()
         {
+            base.OnViewPortResize();
+
             if (question != null) { question.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.3f); }
             if (yes != null) { yes.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.6f); }
             if (no != null) { no.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.8f); }

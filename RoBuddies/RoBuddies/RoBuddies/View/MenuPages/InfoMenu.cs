@@ -1,14 +1,12 @@
 ﻿using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
 
 namespace RoBuddies.View.MenuPages
 {
-    class InfoMenu : HUDMenuPage
+    class InfoMenu : LevelMainMenu
     {
         private HUDString info;
 
@@ -22,6 +20,8 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnViewPortResize()
         {
+            base.OnViewPortResize();
+
             if (info != null) { info.Position = new Vector2(this.Viewport.Width / 2, info.Height / 2); }
         }
 
