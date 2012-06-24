@@ -10,7 +10,7 @@ namespace RoBuddies.View
     class LevelHUD : HUD.HUD
     {
 
-        private int HUD_height = 30;
+        private int HUD_height = 40;
         private int HUD_width = 120;
 
         private HUDString hudString;
@@ -27,9 +27,9 @@ namespace RoBuddies.View
             : base(game)
         {
             this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
-            this.backgroundColor = new Color(0, 0, 0, 160);
+            this.backgroundColor = new Color(100, 100, 100, 200);
 
-            hudString = new HUDString("", null, null, null, null, 0.5f, null, this.Game.Content);
+            hudString = new HUDString("", null, null, null, null, 0.7f, null, this.Game.Content);
             this.AllElements.Add(hudString);
         }
 

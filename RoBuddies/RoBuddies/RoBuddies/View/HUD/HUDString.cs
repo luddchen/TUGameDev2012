@@ -117,7 +117,7 @@ namespace RoBuddies.View.HUD
             if (backgroundColor != null) 
             { 
                 this.BackgroundColor = (Color)backgroundColor;
-                this.BackgroundTexture = content.Load<Texture2D>("Sprites\\Square");
+                this.BackgroundTexture = content.Load<Texture2D>("Sprites\\SquareRound");
                 this.BackgroundTextureOrigin = new Vector2(BackgroundTexture.Width/2, BackgroundTexture.Height/2);
             }
         }
@@ -139,7 +139,7 @@ namespace RoBuddies.View.HUD
                 if (this.BackgroundTexture != null)
                 {
                     Rectangle dest = new Rectangle((int)this.Position.X, (int)this.Position.Y, (int)(this.Width * 1.2f), (int)this.Height);
-                    spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 0.0f);
+                    spriteBatch.Draw(this.BackgroundTexture, dest, null, this.BackgroundColor, -this.Rotation, this.BackgroundTextureOrigin, SpriteEffects.None, 1.0f);
                 }
                 spriteBatch.DrawString(this.font, this.String, this.Position, this.Color, -this.Rotation, this.MeasureString / 2, this.Scale, SpriteEffects.None, 0.0f);
             }
