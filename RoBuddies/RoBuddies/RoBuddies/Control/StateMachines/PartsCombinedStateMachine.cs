@@ -110,7 +110,6 @@ namespace RoBuddies.Control.StateMachines
                 canClimbUp = true;
                 currentLadder = intersectingObject as Ladder;
             }
-            Console.Out.WriteLine(intersectingObject);
             return canClimbUp;
         }
 
