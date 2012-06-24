@@ -10,6 +10,8 @@ namespace RoBuddies.View.MenuPages
     class LevelMainMenu : HUDMenuPage 
     {
         private HUDTexture editor;
+        private HUDTexture play;
+        private HUDTexture reload;
         private HUDTexture rewind;
         private HUDTexture forward;
 
@@ -20,11 +22,6 @@ namespace RoBuddies.View.MenuPages
         private HUDTexture info;
         private HUDTexture options;
         private HUDTexture quit;
-
-        public HUDMenuPage quitPage { get; set; }
-        public HUDMenuPage optionPage { get; set; }
-        public HUDMenuPage helpPage { get; set; }
-        public HUDMenuPage infoPage { get; set; }
 
         protected Color notUsableColor = new Color(92, 92, 92, 92);
 
@@ -37,14 +34,25 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            editor = menu.editor;
-            addChoiceElement(editor, false);
+            play = menu.play;
+            addChoiceElement(play, false);
+
+            quit = menu.quit;
+            addChoiceElement(quit, false);
+
+            addChoiceLine();
+
+            reload = menu.reload;
+            addChoiceElement(reload, false);
 
             rewind = menu.rewind;
             addChoiceElement(rewind, false);
 
             forward = menu.forward;
             addChoiceElement(forward, false);
+
+            editor = menu.editor;
+            addChoiceElement(editor, false);
 
             help = menu.help;
             addChoiceElement(help, false);
@@ -55,7 +63,6 @@ namespace RoBuddies.View.MenuPages
             options = menu.options;
             addChoiceElement(options, false);
 
-            quit = menu.quit;
             addChoiceElement(quit, false);
 
             chooseActiveElement(0, 0);
@@ -81,22 +88,22 @@ namespace RoBuddies.View.MenuPages
                     }
                     if (this.ActiveElement == quit)
                     {
-                        this.Menu.ActivePage = this.quitPage;
+                        this.Menu.ActivePage = this.menu.quitMenu;
                     }
 
                     if (this.ActiveElement == options)
                     {
-                        this.Menu.ActivePage = this.optionPage;
+                        this.Menu.ActivePage = this.menu.optionMenu;
                     }
 
                     if (this.ActiveElement == help)
                     {
-                        this.Menu.ActivePage = this.helpPage;
+                        this.Menu.ActivePage = this.menu.helpMenu;
                     }
 
                     if (this.ActiveElement == info)
                     {
-                        this.Menu.ActivePage = this.infoPage;
+                        this.Menu.ActivePage = this.menu.infoMenu;
                     }
                 }
             }
@@ -106,9 +113,12 @@ namespace RoBuddies.View.MenuPages
             {
                 this.rewind.Color = notUsableColor;
                 this.forward.Color = notUsableColor;
+                this.reload.Color = notUsableColor;
             }
             else
             {
+                this.reload.Color = Color.White;
+
                 if (((LevelView)this.Game.LevelView).SnapShot.isOnStart(3))
                 {
                     this.rewind.Color = notUsableColor;
@@ -162,9 +172,12 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnEnter()
         {
-            menu.editor.isVisible = true;
+            menu.play.isVisible = true;
+            menu.reload.isVisible = true;
             menu.rewind.isVisible = true;
             menu.forward.isVisible = true;
+
+            menu.editor.isVisible = true;
             menu.help.isVisible = true;
             menu.info.isVisible = true;
             menu.options.isVisible = true;
@@ -173,14 +186,18 @@ namespace RoBuddies.View.MenuPages
 
         public override void OnExit()
         {
+            base.OnExit();
             if (((LevelView)this.Game.LevelView).SnapShot != null)
             {
                 ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
             }
 
-            menu.editor.isVisible = false;
+            menu.play.isVisible = false;
+            menu.reload.isVisible = false;
             menu.rewind.isVisible = false;
             menu.forward.isVisible = false;
+
+            menu.editor.isVisible = false;
             menu.help.isVisible = false;
             menu.info.isVisible = false;
             menu.options.isVisible = false;

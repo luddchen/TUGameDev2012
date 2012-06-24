@@ -30,6 +30,7 @@ namespace RoBuddies.View.MenuPages
         {
             info = new HUDString(infoText, null, null, textColor, null, 0.5f, 0, content);
             this.AllElements.Add(info);
+            chooseActiveElement(1, 5);
         }
 
         public override void Update(GameTime gameTime)
@@ -62,6 +63,12 @@ namespace RoBuddies.View.MenuPages
                 }
             } // -----------------------------------------------------------------------------------
 
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            chooseActiveElement(1, 5);
         }
 
     }

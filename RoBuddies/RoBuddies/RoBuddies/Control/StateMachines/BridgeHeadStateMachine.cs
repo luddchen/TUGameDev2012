@@ -19,7 +19,7 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            if (newKeyboardState.IsKeyDown(Keys.Y) && oldKeyboardState.IsKeyUp(Keys.Y))
+            if (ButtonPressed(ControlButton.head))
             {
 
                 if (isOnGround() 

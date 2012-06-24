@@ -167,6 +167,10 @@ namespace RoBuddies.View.HUD
 
         public virtual void OnExit()
         {
+            if (this.activeElement != null)
+            {
+                this.activeElement.Scale = this.activeScale;
+            }
         }
 
         protected void addChoiceElement(IHUDElement element, bool addToAllElements) 

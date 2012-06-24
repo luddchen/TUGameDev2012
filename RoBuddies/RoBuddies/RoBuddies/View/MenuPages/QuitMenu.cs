@@ -37,7 +37,7 @@ namespace RoBuddies.View.MenuPages
             no = new HUDString("NO, bring me back to RoBuddies world", null, null, textColor, null, 0.6f, null, content);
             addChoiceElement(no, true);
 
-            chooseActiveElement(0, 0);
+            chooseActiveElement(1, 7);
         }
 
         public override void Update(GameTime gameTime)
@@ -60,6 +60,12 @@ namespace RoBuddies.View.MenuPages
                     }
                 }
             }
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            chooseActiveElement(1, 7);
         }
 
     }

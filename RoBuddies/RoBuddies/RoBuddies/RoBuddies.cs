@@ -96,6 +96,8 @@ namespace RoBuddies
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
 
+            this.LevelMenu.IsVisible = true;
+
             splash = Content.Load<Texture2D>("Sprites//Menu//splashscreen");
         }
 
@@ -144,7 +146,7 @@ namespace RoBuddies
             {
                 this.View = this.LevelView;
                 this.Menu = this.LevelMenu;
-                this.Menu.IsVisible = true;
+                this.Menu.IsVisible = false;
             }
             if (this.currentViewMode == ViewMode.Editor)
             {
