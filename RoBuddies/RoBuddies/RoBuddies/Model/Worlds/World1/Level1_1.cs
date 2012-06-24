@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Model.Worlds.World1
 {
@@ -43,9 +44,15 @@ namespace RoBuddies.Model.Worlds.World1
 
         protected override void addLevelLabels()
         {
-            HUDString testString = new HUDString("test", null, new Vector2(0, 0), null, Color.Gray, 1, 0, game.Content);
-            testString.Position = new Vector2(0, 0);
-            levelLabels.Add(testString);
+            Color backgroundColor = new Color(0, 0, 0, 100);
+
+            HUDString welcomeString = new HUDString("I <3 \nRoBuddies", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            welcomeString.Position = ConvertUnits.ToDisplayUnits(new Vector2(-5, 4.5f));
+            levelLabels.Add(welcomeString);
+
+            HUDString hintString = new HUDString("Press 's'-Key\nto use levers", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintString.Position = ConvertUnits.ToDisplayUnits(new Vector2(0, 1));
+            levelLabels.Add(hintString);
         }
     }
     
