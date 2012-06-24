@@ -29,5 +29,10 @@ namespace RoBuddies.Model.Worlds.World3
         {
 
         }
+
+        protected override void addLevelLabels()
+        {
+
+        }
     }
 }

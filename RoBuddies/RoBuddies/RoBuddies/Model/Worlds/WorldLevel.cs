@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using RoBuddies.Model.Objects;
 using RoBuddies.Model.Serializer;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.Model.Worlds
 {
@@ -23,6 +24,11 @@ namespace RoBuddies.Model.Worlds
         protected List<IBody> levelObjects;
 
         /// <summary>
+        /// Add your new level objects for the level to this list
+        /// </summary>
+        protected List<HUDString> levelLabels;
+
+        /// <summary>
         /// Getter for the loaded level
         /// </summary>
         public Level Level
@@ -41,11 +47,14 @@ namespace RoBuddies.Model.Worlds
         {
             this.game = game;
             this.levelObjects = new List<IBody>();
+            this.levelLabels = new List<HUDString>();
             LevelReader levelReader = new LevelReader(game);
             this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath, levelTheme);
             this.Level.LevelName = levelName;
             addLevelObjects();
+            addLevelLabels();
             addLevelObjectsToLevel();
+            addLevelLabelsToLevel();
             addBackground();
         }
 
@@ -59,6 +68,11 @@ namespace RoBuddies.Model.Worlds
         /// which can not be added with the editor
         /// </summary>
         abstract protected void addLevelObjects();
+
+        /// <summary>
+        /// In this method you can add your level labels for the level
+        /// </summary>
+        abstract protected void addLevelLabels();
 
         /// <summary>
         /// adds the LevelObjects to the main or background layer
@@ -75,6 +89,18 @@ namespace RoBuddies.Model.Worlds
                 } else {
                     mainLayer.AddObject(body);
                 }
+            }
+        }
+
+        /// <summary>
+        /// adds the levelLabels to the background Layer
+        /// </summary>
+        private void addLevelLabelsToLevel()
+        {
+            Layer backLayer = this.Level.GetLayerByName("backLayer");
+            foreach (HUDString hudString in levelLabels)
+            {
+                backLayer.AddLabel(hudString);
             }
         }
 

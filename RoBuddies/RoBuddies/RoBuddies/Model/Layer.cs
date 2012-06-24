@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 using Microsoft.Xna.Framework;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.Model
 {
@@ -12,6 +13,7 @@ namespace RoBuddies.Model
     class Layer : IComparable<Layer>
     {
         private List<IBody> allObjects;
+        private List<HUDString> layerLabels;
 
         /// <summary>
         /// name for this layer, only for identification without knowing a reference, dont know if we need
@@ -39,6 +41,11 @@ namespace RoBuddies.Model
         public List<IBody> AllObjects { get { return this.allObjects; } }
 
         /// <summary>
+        /// list of all objects on this layer
+        /// </summary>
+        public List<HUDString> allLabels { get { return this.layerLabels; } }
+
+        /// <summary>
         /// add an object to this layer
         /// </summary>
         /// <param name="body">the object, which will be added</param>
@@ -48,6 +55,18 @@ namespace RoBuddies.Model
             {
                 this.AllObjects.Add(body);
                 body.Layer = this;
+            }
+        }
+
+        /// <summary>
+        /// adds an label to this layer
+        /// </summary>
+        /// <param name="hudString">the label, which will be added</param>
+        public void AddLabel(HUDString hudString)
+        {
+            if (hudString != null)
+            {
+                this.allLabels.Add(hudString);
             }
         }
 
@@ -75,7 +94,8 @@ namespace RoBuddies.Model
             this.Name = name;
             this.Parallax = parallax;
             this.LayerDepth = layerDepth;
-            this.allObjects = new List<IBody>(); 
+            this.allObjects = new List<IBody>();
+            this.layerLabels = new List<HUDString>();
         }
 
 
