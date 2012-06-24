@@ -39,6 +39,11 @@ namespace RoBuddies.Model
         /// </summary>
         public LevelTheme theme = LevelTheme.MENTAL_HOSPITAL;
 
+        /// <summary>
+        /// The levelName will be displayed at the beginning of a level
+        /// </summary>
+        public String LevelName { get; set; }
+
         private List<Layer> allLayers;
 
         private List<StateMachine> allStateMachines;

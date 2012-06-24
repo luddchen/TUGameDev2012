@@ -15,7 +15,8 @@ namespace RoBuddies.View
         private int snapshotTimer = 10;
         private int snapshotCounter = 10;
 
-        public HUD.HUD HUD;
+        public LevelHUD topHud;
+        private TimeSpan nextLevelLoadedTime;
 
         private Worlds worlds;
 
@@ -30,9 +31,9 @@ namespace RoBuddies.View
         public override void OnViewPortResize()
         {
             base.OnViewPortResize();
-            if (this.HUD != null)
+            if (this.topHud != null)
             {
-                this.HUD.Viewport = this.viewport;
+                this.topHud.Viewport = this.viewport;
             }
             if (this.Camera != null)
             {
@@ -43,7 +44,8 @@ namespace RoBuddies.View
         public LevelView(RoBuddies game) : base(game)
         {
             this.background = game.Content.Load<Texture2D>("Sprites//Mountain//clouds");
-            this.HUD = new LevelHUD(game);
+            this.topHud = new LevelHUD(game);
+            this.topHud.IsVisible = false;
             this.Camera.SmoothMove = true;
 
             this.worlds = new Worlds(game);
@@ -77,6 +79,8 @@ namespace RoBuddies.View
                 this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
                 this.debugView.DefaultShapeColor = Color.White;
                 this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
+
+                this.topHud.setString(this.Level.LevelName);
             }
         }
 
@@ -89,6 +93,12 @@ namespace RoBuddies.View
                 if (this.Level.finished) // load next level, when current level is finished
                 {
                     viewNextLevel(null);
+                    nextLevelLoadedTime = gameTime.TotalGameTime;
+                }
+
+                if (gameTime.TotalGameTime - nextLevelLoadedTime > new TimeSpan(0, 0, 5))
+                {
+                    this.topHud.IsVisible = false;
                 }
 
                 if (this.SnapShot != null)
@@ -102,7 +112,7 @@ namespace RoBuddies.View
                 }
 
                 this.Level.Update(gameTime);
-                this.HUD.Update(gameTime);
+                this.topHud.Update(gameTime);
 
                 // test key for switching to the next level
                 if (newKeyboardState.IsKeyDown(Keys.F12) && oldKeyboardState.IsKeyUp(Keys.F12))
@@ -148,9 +158,10 @@ namespace RoBuddies.View
                 this.debugView.RenderDebugData(ref projection, ref view);
             }
 
-            // uncomment for hud with time:
-            //this.HUD.Draw(spriteBatch);
+            if (this.topHud.IsVisible)
+            {
+                this.topHud.Draw(spriteBatch);
+            }
         }
-
     }
 }

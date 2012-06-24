@@ -16,9 +16,10 @@ namespace RoBuddies.Model.Worlds.World2
     {
         private const string LEVEL_PATH = "Worlds\\World2\\LEVEL2_5.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
+        private const String LEVEL_NAME = "Level  4: A  long  way  down";
 
         public Level2_5(Game game)
-            : base(game, LEVEL_PATH, LEVEL_THEME)
+            : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();
         }

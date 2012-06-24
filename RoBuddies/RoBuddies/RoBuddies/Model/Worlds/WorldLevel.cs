@@ -38,12 +38,14 @@ namespace RoBuddies.Model.Worlds
         /// <param name="game">The game for the level</param>
         /// <param name="levelPath">the path to the level file</param>
         /// <param name="levelTheme">the filename of the level file</param>
-        public WorldLevel(Game game, String levelPath, LevelTheme levelTheme)
+        /// <param name="levelName">the name of the level which will be displayed at the beginning of the level</param>
+        public WorldLevel(Game game, String levelPath, LevelTheme levelTheme, String levelName)
         {
             this.game = game;
             this.levelObjects = new List<IBody>();
             LevelReader levelReader = new LevelReader(game);
             this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath, levelTheme);
+            this.Level.LevelName = levelName;
             addLevelObjects();
             addLevelObjectsToLevel();
             addBackground();
@@ -76,6 +78,11 @@ namespace RoBuddies.Model.Worlds
                     mainLayer.AddObject(body);
                 }
             }
+        }
+
+        protected void setLevelName(String levelName)
+        {
+            this.Level.LevelName = levelName;
         }
 
     }

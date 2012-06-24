@@ -14,8 +14,8 @@ namespace RoBuddies.Model.Worlds.World3
     class World3Level : WorldLevel
     {
         
-        public World3Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
-            : base(game, LEVEL_PATH, LEVEL_THEME)
+        public World3Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME, String LEVEL_NAME)
+            : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
 
         }

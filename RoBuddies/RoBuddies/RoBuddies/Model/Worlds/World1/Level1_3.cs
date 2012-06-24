@@ -15,9 +15,10 @@ namespace RoBuddies.Model.Worlds.World1
     {
         private const string LEVEL_PATH = "Worlds\\World1\\Level1_3.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
+        private const String LEVEL_NAME = "Level  3:  Don't  be  headless";
 
         public Level1_3(Game game)
-            : base(game, LEVEL_PATH, LEVEL_THEME)
+            : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
 
         }

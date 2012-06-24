@@ -13,17 +13,14 @@ namespace RoBuddies.View
         private int HUD_height = 30;
         private int HUD_width = 120;
 
-        private HUDString timeElapsed;
+        private HUDString hudString;
 
         public override void OnViewPortResize()
         {
-            this.viewport.Y = 0; //for botton use: -1 + this.viewport.Height - this.HUD_height;
-            this.viewport.X = this.viewport.Width/2 - this.HUD_width/2;
-            this.viewport.Height = this.HUD_height;
-            this.viewport.Width = this.HUD_width;
-            this.backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
-
-            if (this.timeElapsed != null) { this.timeElapsed.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height / 2); }
+            if (hudString != null && hudString.String != "")
+            {
+                setString(hudString.String);
+            }
         }
 
         public LevelHUD(RoBuddies game)
@@ -32,14 +29,32 @@ namespace RoBuddies.View
             this.background = this.Game.Content.Load<Texture2D>("Sprites//SquareRound");
             this.backgroundColor = new Color(0, 0, 0, 160);
 
-            timeElapsed = new HUDString("", null, null, null, null, 0.5f, null, this.Game.Content);
-            this.AllElements.Add(timeElapsed);
+            hudString = new HUDString("", null, null, null, null, 0.5f, null, this.Game.Content);
+            this.AllElements.Add(hudString);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            timeElapsed.String = String.Format("{0:00}", gameTime.TotalGameTime.Hours) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Minutes) + ":" + String.Format("{0:00}", gameTime.TotalGameTime.Seconds);
+        }
+
+        public void setString(String hudString) {
+            if (hudString != "")
+            {
+                this.isVisible = true;
+                this.hudString.String = hudString;
+                this.HUD_width = (int)this.hudString.Width;
+                this.viewport.Y = 10; //for botton use: -1 + this.viewport.Height - this.HUD_height;
+                this.viewport.X = this.viewport.X + (this.viewport.Width / 2 - (int)this.hudString.Width / 2);
+                this.viewport.Height = this.HUD_height;
+                this.viewport.Width = (int)this.hudString.Width;
+                this.hudString.Position = new Vector2(this.viewport.Width / 2, this.viewport.Height / 2);
+                this.backgroundDest = new Rectangle(0, 0, this.viewport.Width, this.viewport.Height);
+            }
+            else
+            {
+                this.isVisible = false;
+            }
         }
 
     }

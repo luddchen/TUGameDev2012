@@ -19,8 +19,8 @@ namespace RoBuddies.Model.Worlds.World2
         /// Here you can add e.g. specific background art, which apply to
         /// all world 1 levels
         /// </summary>
-        public World2Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
-            : base(game, LEVEL_PATH, LEVEL_THEME)
+        public World2Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME, String LEVEL_NAME)
+            : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             this.Level.Background = Color.SkyBlue;
         }

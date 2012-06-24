@@ -19,8 +19,8 @@ namespace RoBuddies.Model.Worlds.World1
         /// Here you can add e.g. specific background art, which apply to
         /// all world 1 levels
         /// </summary>
-        public World1Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME)
-            : base(game, LEVEL_PATH, LEVEL_THEME)
+        public World1Level(Game game, string LEVEL_PATH, LevelTheme LEVEL_THEME, String LEVEL_NAME)
+            : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Layer farAwayLayer = new Layer("farAwayLayer", new Vector2(0.5f, 0.1f), 0.9f);
             this.Level.AddLayer(farAwayLayer);

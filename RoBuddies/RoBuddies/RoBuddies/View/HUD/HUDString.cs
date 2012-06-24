@@ -46,7 +46,7 @@ namespace RoBuddies.View.HUD
         public float Width
         {
             get { return this.MeasureString.X * this.Scale; }
-            set { } 
+            set { }
         }
 
         /// <summary>
