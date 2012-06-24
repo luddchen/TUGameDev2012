@@ -155,6 +155,7 @@ namespace RoBuddies.View
             {
                 this.movingSpeed = 0;
                 this.position = to;
+                this.targetPosition = to;
             }
         }
 

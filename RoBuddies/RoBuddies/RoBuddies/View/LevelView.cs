@@ -77,6 +77,7 @@ namespace RoBuddies.View
                 this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
                 this.debugView.DefaultShapeColor = Color.White;
                 this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
+                this.background = null;
             }
         }
 
