@@ -89,7 +89,7 @@ namespace RoBuddies.View
             this.movingSpeed = 0;
             this.movingDirection = Vector2.Zero;
             this.movingDistance = 0;
-            this.Zoom = 1.0f;
+            this.Zoom = 0.65f;
             this.Rotation = 0.0f;
             this.SmoothMove = true;
             this.useBoundingBox = false;
