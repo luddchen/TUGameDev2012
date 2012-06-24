@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Microsoft.Xna.Framework;
-using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
+using RoBuddies.Model.Serializer;
 
 namespace RoBuddies.Model.Worlds
 {

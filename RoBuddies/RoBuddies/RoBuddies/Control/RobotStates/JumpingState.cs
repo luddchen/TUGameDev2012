@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
 using RoBuddies.Model.RobotParts;
@@ -14,14 +15,18 @@ namespace RoBuddies.Control.RobotStates
         private const int STOP_JUMPING = 38;
 
         private float currentTextureIndex;
+        private SoundEffect jumpSound;
 
         public JumpingState(String name, List<Texture2D> textureList, StateMachine machine)
             : base(name, textureList, machine)
         {
+            jumpSound = machine.Game.Content.Load<SoundEffect>("Sounds//boing");
         }
 
         public override void Enter()
         {
+            jumpSound.Play();
+
             if (StateMachine.Body is PartsCombined)
             {
                 (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1800));

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using FarseerPhysics.Dynamics;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.RobotStates;
@@ -28,6 +29,9 @@ namespace RoBuddies.Control.StateMachines
         private bool isPulling;
         private float pullingDistance;
 
+        private SoundEffect pullingSound;
+        private SoundEffectInstance pullSoundInstance;
+
         private HeadStateMachine mHeadStateMachine;
 
         public Level Level
@@ -48,6 +52,10 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.textureList = new List<Texture2D>();
             this.isPulling = false;
+
+            pullingSound = contentManager.Load<SoundEffect>("Sounds\\push_pull");
+            pullSoundInstance = pullingSound.CreateInstance();
+            pullSoundInstance.IsLooped = true;
 
             mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
 
@@ -212,6 +220,7 @@ namespace RoBuddies.Control.StateMachines
                     pullingDistance = robot.PartsCombined.Position.X - currentCrate.Position.X;
 
                     isPulling = true;
+                    pullSoundInstance.Play();
                 }
             }
             else
@@ -226,6 +235,7 @@ namespace RoBuddies.Control.StateMachines
         private void stopPulling()
         {
             isPulling = false;
+            pullSoundInstance.Stop();
 
             robot.PartsCombined.wheelBody.RestoreCollisionWith(currentCrate);
             robot.PartsCombined.RestoreCollisionWith(currentCrate);
