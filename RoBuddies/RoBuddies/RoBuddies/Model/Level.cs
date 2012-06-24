@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using RoBuddies.Control.StateMachines;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies.Model
 {
@@ -47,6 +48,7 @@ namespace RoBuddies.Model
         private List<Layer> allLayers;
 
         private List<StateMachine> allStateMachines;
+
 
         /// <summary>
         /// Flag if the player has finished the level

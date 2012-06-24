@@ -30,5 +30,10 @@ namespace RoBuddies.Model.Worlds.World1
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
         }
+
+        protected override void addLevelLabels()
+        {
+
+        }
     }
 }

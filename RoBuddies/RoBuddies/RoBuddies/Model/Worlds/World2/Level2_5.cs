@@ -37,5 +37,10 @@ namespace RoBuddies.Model.Worlds.World2
             Door door = new Door(new Vector2(0f, -6f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
             levelObjects.Add(door);
         }
+
+        protected override void addLevelLabels()
+        {
+
+        }
     }
 }
