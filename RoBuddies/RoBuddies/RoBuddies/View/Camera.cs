@@ -220,7 +220,8 @@ namespace RoBuddies.View
         /// of the main and back layer of a level.
         /// </summary>
         /// <param name="level">the level which camera bounds will be calculated</param>
-        public void SetBoundingBox(Level level) {
+        public void SetBoundingBox(Level level)
+        {
             float viewWidth = viewport.Width / (2 * zoom);
             float viewHeight = viewport.Height / (2 * zoom);
             Rectangle bounds = new Rectangle(int.MaxValue, int.MaxValue, 0, 0);
@@ -241,6 +242,19 @@ namespace RoBuddies.View
                         bounds.Height = (int)Math.Max(bounds.Height, Math.Abs(bounds.Y - ConvertUnits.ToDisplayUnits(-body.Position.Y + bodyHeight)) - viewHeight);
                     }
                 }
+            }
+            // deactivate bounding box in X or Y direction, if it's
+            // smaller than the viewing resolution. Thereby the level
+            // will be centered.
+            if (bounds.Width <= 0)
+            {
+                bounds.X = -int.MaxValue;
+                bounds.Width = int.MaxValue;
+            }
+            if (bounds.Height <= 0)
+            {
+                bounds.Y = -int.MaxValue;
+                bounds.Height = int.MaxValue;
             }
             this.SetBoundingBox(bounds);
         }
