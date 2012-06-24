@@ -78,7 +78,7 @@
           },
           {
             "Wall": {
-              "Position": "30, -3",
+              "Position": "31, -3",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 3.0,

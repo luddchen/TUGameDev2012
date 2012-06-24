@@ -8,7 +8,15 @@
         "LayerDepth": 0.51,
         "Walls": [],
         "Crates": [],
-        "Pipes": [],
+        "Pipes": [
+          {
+            "Pipe": {
+              "Position": "-6, 2",
+              "Color": "255, 255, 255, 255",
+              "Width": 11.0
+            }
+          }
+        ],
         "Ladders": []
       }
     },
@@ -20,173 +28,122 @@
         "Walls": [
           {
             "Wall": {
-              "Position": "0, -3",
+              "Position": "-5, -6",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 47.0,
+                "Width": 35.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "-10, -2",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 17.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-9, -1",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 15.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-8, 0",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 13.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-3, 3",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
-                "Heigth": 5.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "9, 8",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 21.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "20, 1",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 7.0,
-                "Heigth": 7.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "5, 0",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
-                "Heigth": 5.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "1, -1",
+              "Position": "5, -2",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 5.0,
-                "Heigth": 3.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "23, 8",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 1.0,
-                "Heigth": 7.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "0, 12",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 47.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "-23, 5",
+              "Position": "7, -1",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
-                "Heigth": 15.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "16, 0",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
-                "Heigth": 5.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "14, -1",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
                 "Heigth": 3.0
               }
             }
-          }
-        ],
-        "Crates": [
+          },
           {
-            "Crate": {
+            "Wall": {
+              "Position": "9, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "12, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 11.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-11, 3",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 25.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-23, -2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 9.0
+              }
+            }
+          },
+          {
+            "Wall": {
               "Position": "-11, 2",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 3.0,
+                "Width": 1.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "0, 2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "2, 4",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
                 "Heigth": 3.0
               }
             }
           },
           {
-            "Crate": {
-              "Position": "8, 0",
+            "Wall": {
+              "Position": "7, 6",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 3.0,
-                "Heigth": 5.0
+                "Width": 11.0,
+                "Heigth": 1.0
               }
             }
           }
         ],
+        "Crates": [],
         "Pipes": [],
         "Ladders": []
       }
     }
   ],
   "Robot": {
-    "Position": "-21, -1"
+    "Position": "-21, -4"
   }
 }
