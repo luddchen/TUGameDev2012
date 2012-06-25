@@ -113,7 +113,7 @@ namespace RoBuddies.View.HUD
             : base(game)
         {
             this.pageHistory = new List<HUDMenuPage>();
-            this.backgroundColor = Color.DarkBlue;
+            this.backgroundColor = Color.SkyBlue;
             this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//menu3");
             this.IsVisible = false;
             this.PreferedWidth = 600;
@@ -175,6 +175,19 @@ namespace RoBuddies.View.HUD
                     this.ActivePage.Draw(spriteBatch);
                 }
 
+            }
+        }
+
+        public void makeTransparent(bool value)
+        {
+            if (value)
+            {
+                this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//menu3");
+            }
+
+            if (!value)
+            {
+                this.background = this.Game.Content.Load<Texture2D>("Sprites//Menu//menu3nobg");
             }
         }
     }

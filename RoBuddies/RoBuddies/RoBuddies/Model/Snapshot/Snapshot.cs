@@ -75,6 +75,13 @@ namespace RoBuddies.Model.Snapshot
             }
         }
 
+        public void RewindToStart()
+        {
+            this.currentKeyFrame = 0;
+            this.AllKeyFrames[currentKeyFrame].Restore();
+            PlayOn();
+        }
+
         /// <summary>
         /// rewind a single step without clean keyframes
         /// </summary>

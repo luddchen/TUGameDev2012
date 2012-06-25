@@ -18,65 +18,153 @@ namespace RoBuddies.View.MenuPages
         private int rewindTimer = 8;
         private int rewindCounter = 0;
 
+        private HUDTexture chooser;
         private HUDTexture help;
         private HUDTexture info;
         private HUDTexture options;
         private HUDTexture quit;
 
-        protected Color notUsableColor = new Color(92, 92, 92, 92);
+        protected Color notUsableColor = new Color(96, 0, 0, 64);
+        protected Color choiceBackgroundColor = new Color(0, 0, 0, 96);
 
-        protected LevelMenu menu;
+        private IHUDElement oldActiveElement;
 
         public LevelMainMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            this.menu = menu;
+
+            addChoiceLine(); 
+            
+                reload = menu.reload;
+                addChoiceElement(reload, false);
+
+                rewind = menu.rewind;
+                addChoiceElement(rewind, false);
+
+                forward = menu.forward;
+                addChoiceElement(forward, false);
 
             addChoiceLine();
 
-            play = menu.play;
-            addChoiceElement(play, false);
+                play = menu.play;
+                addChoiceElement(play, false);
 
-            quit = menu.quit;
-            addChoiceElement(quit, false);
+                chooser = menu.chooser;
+                addChoiceElement(chooser, false);
 
-            addChoiceLine();
+                help = menu.help;
+                addChoiceElement(help, false);
 
-            reload = menu.reload;
-            addChoiceElement(reload, false);
+                info = menu.info;
+                addChoiceElement(info, false);
 
-            rewind = menu.rewind;
-            addChoiceElement(rewind, false);
+                options = menu.options;
+                addChoiceElement(options, false);
 
-            forward = menu.forward;
-            addChoiceElement(forward, false);
+                editor = menu.editor;
+                addChoiceElement(editor, false);
 
-            editor = menu.editor;
-            addChoiceElement(editor, false);
+                quit = menu.quit;
+                addChoiceElement(quit, false);
 
-            help = menu.help;
-            addChoiceElement(help, false);
-
-            info = menu.info;
-            addChoiceElement(info, false);
-
-            options = menu.options;
-            addChoiceElement(options, false);
-
-            addChoiceElement(quit, false);
-
-            chooseActiveElement(0, 0);
+            chooseActiveElement(1, 0);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
 
-            // Key.Enter -----------------------------------------------------------------------------
+            // test
+
+            if (this.activeElement != this.oldActiveElement)
+            {
+                if (this.activeElement.Color != notUsableColor)
+                {
+                    if (this.activeElement == reload)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(0, 0);
+                    }
+
+                    if (this.activeElement == rewind && this.oldActiveElement != forward)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(0, 1);
+                        ((LevelMenu)this.Menu).mainMenu.oldActiveElement = ((LevelMenu)this.Menu).mainMenu.rewind;
+                    }
+
+                    if (this.activeElement == forward && this.oldActiveElement != rewind)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(0, 2);
+                        ((LevelMenu)this.Menu).mainMenu.oldActiveElement = ((LevelMenu)this.Menu).mainMenu.forward;
+                    }
+
+                    if (this.activeElement == play)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(1, 0);
+                    }
+
+                    if (this.activeElement == editor)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(1, 5);
+                    }
+
+                    if (this.activeElement == chooser)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).chooserMenu;
+                    }
+
+                    if (this.activeElement == help)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).helpMenu;
+                    }
+
+                    if (this.activeElement == info)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).infoMenu;
+                    }
+
+                    if (this.activeElement == options)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).optionMenu;
+                    }
+
+                    if (this.activeElement == quit)
+                    {
+                        this.Menu.ActivePage = ((LevelMenu)this.Menu).quitMenu;
+                    }
+
+                }
+                else
+                {
+                    this.activeElement.Scale = this.activeScale;
+                    this.activeElement = this.oldActiveElement;
+                    this.activeScale = this.activeElement.Scale;
+                    if (this.activeElement == reload || this.activeElement == rewind || this.activeElement == forward)
+                    {
+                        this.ChoiceLine = 0;
+                    }
+                    else
+                    {
+                        this.ChoiceLine = 1;
+                    }
+                }
+
+            }
+
+            // Key.Enter pressed once-----------------------------------------------------------------------------
             if (ButtonPressed(ControlButton.enter))
             {
                 if (this.ActiveElement != null)
                 {
+                    if (this.ActiveElement == play)
+                    {
+                        this.Menu.IsVisible = false;
+                    }
+
                     if (this.ActiveElement == editor)
                     {
                         Level loadedLevel = (new LevelReader(this.Game)).readLevel(".\\", "editor_temp.json");
@@ -86,25 +174,7 @@ namespace RoBuddies.View.MenuPages
                         }
                         this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
                     }
-                    if (this.ActiveElement == quit)
-                    {
-                        this.Menu.ActivePage = this.menu.quitMenu;
-                    }
 
-                    if (this.ActiveElement == options)
-                    {
-                        this.Menu.ActivePage = this.menu.optionMenu;
-                    }
-
-                    if (this.ActiveElement == help)
-                    {
-                        this.Menu.ActivePage = this.menu.helpMenu;
-                    }
-
-                    if (this.ActiveElement == info)
-                    {
-                        this.Menu.ActivePage = this.menu.infoMenu;
-                    }
                 }
             }
 
@@ -135,6 +205,22 @@ namespace RoBuddies.View.MenuPages
                 else
                 {
                     this.forward.Color = Color.White;
+                }
+
+
+                // Key.Enter pressed once-----------------------------------------------------------------------------
+                if (ButtonPressed(ControlButton.enter))
+                {
+                    if (this.ActiveElement != null)
+                    {
+
+                        if (this.ActiveElement == reload)
+                        {
+                            ((LevelView)this.Game.LevelView).SnapShot.RewindToStart();
+                            this.Menu.IsVisible = false;
+                        }
+
+                    }
                 }
 
                 // Key.Enter hold down -----------------------------------------------------------------------------
@@ -168,20 +254,35 @@ namespace RoBuddies.View.MenuPages
                 }
             }
 
+            this.oldActiveElement = this.activeElement;
+
         }
 
         public override void OnEnter()
         {
-            menu.play.isVisible = true;
-            menu.reload.isVisible = true;
-            menu.rewind.isVisible = true;
-            menu.forward.isVisible = true;
+            ((LevelMenu)this.Menu).play.isVisible = true;
+            ((LevelMenu)this.Menu).reload.isVisible = true;
+            ((LevelMenu)this.Menu).rewind.isVisible = true;
+            ((LevelMenu)this.Menu).forward.isVisible = true;
 
-            menu.editor.isVisible = true;
-            menu.help.isVisible = true;
-            menu.info.isVisible = true;
-            menu.options.isVisible = true;
-            menu.quit.isVisible = true;
+            ((LevelMenu)this.Menu).editor.isVisible = true;
+            ((LevelMenu)this.Menu).chooser.isVisible = true;
+            ((LevelMenu)this.Menu).help.isVisible = true;
+            ((LevelMenu)this.Menu).info.isVisible = true;
+            ((LevelMenu)this.Menu).options.isVisible = true;
+            ((LevelMenu)this.Menu).quit.isVisible = true;
+
+            ((LevelMenu)this.Menu).play.Scale = 1;
+            ((LevelMenu)this.Menu).reload.Scale = 0.7f;
+            ((LevelMenu)this.Menu).rewind.Scale = 0.5f;
+            ((LevelMenu)this.Menu).forward.Scale = 0.5f;
+
+            ((LevelMenu)this.Menu).editor.Scale = 1;
+            ((LevelMenu)this.Menu).chooser.Scale = 1;
+            ((LevelMenu)this.Menu).help.Scale = 1;
+            ((LevelMenu)this.Menu).info.Scale = 1;
+            ((LevelMenu)this.Menu).options.Scale = 1;
+            ((LevelMenu)this.Menu).quit.Scale = 1;
         }
 
         public override void OnExit()
@@ -192,16 +293,17 @@ namespace RoBuddies.View.MenuPages
                 ((LevelView)this.Game.LevelView).SnapShot.PlayOn();
             }
 
-            menu.play.isVisible = false;
-            menu.reload.isVisible = false;
-            menu.rewind.isVisible = false;
-            menu.forward.isVisible = false;
+            ((LevelMenu)this.Menu).play.isVisible = false;
+            ((LevelMenu)this.Menu).reload.isVisible = false;
+            ((LevelMenu)this.Menu).rewind.isVisible = false;
+            ((LevelMenu)this.Menu).forward.isVisible = false;
 
-            menu.editor.isVisible = false;
-            menu.help.isVisible = false;
-            menu.info.isVisible = false;
-            menu.options.isVisible = false;
-            menu.quit.isVisible = false;
+            ((LevelMenu)this.Menu).editor.isVisible = false;
+            ((LevelMenu)this.Menu).chooser.isVisible = false;
+            ((LevelMenu)this.Menu).help.isVisible = false;
+            ((LevelMenu)this.Menu).info.isVisible = false;
+            ((LevelMenu)this.Menu).options.isVisible = false;
+            ((LevelMenu)this.Menu).quit.isVisible = false;
         }
 
     }

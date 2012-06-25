@@ -56,19 +56,18 @@ namespace RoBuddies.View.MenuPages
         {
             help = new HUDString(helpText, null, null, textColor, null, 0.5f, 0, content);
             this.AllElements.Add(help);
-            chooseActiveElement(1, 4);
+            OnEnter();
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            // Key.Enter -----------------------------------------------------------------------------
-            if (ButtonPressed(ControlButton.enter))
+            if (ButtonIsDown(ControlButton.left) || ButtonIsDown(ControlButton.right))
             {
-                if (this.ActiveElement != null)
-                {
-                }
+                base.Update(gameTime);
+            }
+            else
+            {
+                animate(gameTime);
             }
 
             // Key.down -----------------------------------------------------------------------------
@@ -94,8 +93,14 @@ namespace RoBuddies.View.MenuPages
         public override void OnEnter()
         {
             base.OnEnter();
-            chooseActiveElement(1, 4);
+            chooseActiveElement(1, 2);
+            this.Menu.makeTransparent(false);
         }
 
+        public override void OnExit()
+        {
+            base.OnExit();
+            this.Menu.makeTransparent(true);
+        }
     }
 }
