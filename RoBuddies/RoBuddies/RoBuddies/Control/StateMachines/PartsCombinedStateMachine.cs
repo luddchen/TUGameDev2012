@@ -16,11 +16,6 @@ namespace RoBuddies.Control.StateMachines
     {
         #region Members and Properties
 
-        public const String WAIT_STATE = "WaitingState";
-        public const String JUMP_STATE = "JumpState";
-        public const String PULL_STATE = "PullingState";
-        public const String CLIMBING_STATE = "ClimbingState";
-
         private const int END_ANIMATION = 90;
 
         private Robot robot;
@@ -67,8 +62,9 @@ namespace RoBuddies.Control.StateMachines
 
             body.Texture = textureList[0];
 
-            AllStates.Add(new WalkingState(WalkingState.LEFT_WALK_STATE, textureList, this));
-            AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
+            AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
+            //AllStates.Add(new WalkingState(WalkingState.LEFT_WALK_STATE, textureList, this));
+            //AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
             AllStates.Add(new PushingState(PULL_STATE, textureList, this));
@@ -142,7 +138,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.left))
             {
-                startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
+                startWalk(WALK_STATE, -1);
             }
 
             if (ButtonReleased(ControlButton.left))
@@ -152,7 +148,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.right))
             {
-                startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
+                startWalk(WALK_STATE, 1);
             }
 
             if (ButtonReleased(ControlButton.right))
@@ -281,54 +277,26 @@ namespace RoBuddies.Control.StateMachines
             robot.PartsCombined.wheelBody.Position = new Vector2(currentLadder.Position.X, yPos + (-2.3f / 2f) + 0.20f);
         }
 
-        private void startWalk(String newStateName, float force, float velocityLimit, float motorSpeed)
+        private void startWalk(String newStateName, int direction)
         {
-            if (!isOnGround())
-            {
-                robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
-                robot.PartsCombined.ApplyForce(new Vector2(force, 0));
-                if (Math.Abs(robot.PartsCombined.LinearVelocity.X) > Math.Abs(velocityLimit))
-                {
-                    robot.PartsCombined.LinearVelocity = new Vector2(velocityLimit, robot.PartsCombined.LinearVelocity.Y);
-                }
-            }
-            else
-            {
-                robot.PartsCombined.wheelMotor.MotorSpeed = motorSpeed;
-            }
+            WalkingState.joinMovement(robot.PartsCombined, robot.PartsCombined.wheelMotor, isOnGround(), direction);
 
             if (!isPulling)
             {
                 SwitchToState(newStateName);
+                if (direction > 0)
+                {
+                    robot.PartsCombined.Effect = SpriteEffects.None;
+                }
+                else
+                {
+                    robot.PartsCombined.Effect = SpriteEffects.FlipHorizontally;
+                }
             }
 
             if (isPulling)
             {
-                ((PushingState)CurrentState).IsMoving = true;
-                currentCrate.LinearVelocity = robot.PartsCombined.LinearVelocity;
-
-                if (currentCrate.Position.X < robot.PartsCombined.Position.X)
-                {
-                    if (force > 0)
-                    {
-                        ((PushingState)CurrentState).walkBackwards = true;
-                    }
-                    else
-                    {
-                        ((PushingState)CurrentState).walkBackwards = false;
-                    }
-                }
-                else
-                {
-                    if (force < 0)
-                    {
-                        ((PushingState)CurrentState).walkBackwards = true;
-                    }
-                    else
-                    {
-                        ((PushingState)CurrentState).walkBackwards = false;
-                    }
-                }
+                ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.PartsCombined, 100 * direction);
             }
         }
 

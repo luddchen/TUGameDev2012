@@ -94,5 +94,20 @@ namespace RoBuddies.Control.RobotStates
             base.Enter();
             currentTextureIndex = TO_PUSHING;
         }
+
+        public void joinMovement(Model.Objects.Crate crate, Model.PhysicObject body, float force)
+        {
+            this.IsMoving = true;
+            crate.LinearVelocity = body.LinearVelocity;
+
+            if (crate.Position.X < body.Position.X)
+            {
+                this.walkBackwards = (force > 0);
+            }
+            else
+            {
+                this.walkBackwards = (force < 0);
+            }
+        }
     }
 }

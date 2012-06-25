@@ -13,10 +13,6 @@ namespace RoBuddies.Control.StateMachines
     {
         #region Members and Properties
 
-        public const String WAIT_STATE = "WaitingState";
-        public const String JUMP_STATE = "JumpState";
-        public const String WALK_STATE = "WalkingState";
-
         private const int END_ANIMATION = 55;
 
         private ContentManager contentManager;
@@ -44,8 +40,7 @@ namespace RoBuddies.Control.StateMachines
 
             body.Texture = textureList[0];
 
-            AllStates.Add(new WalkingState(WalkingState.LEFT_WALK_STATE, textureList, this));
-            AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
+            AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
 
@@ -62,7 +57,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.left))
             {
-                startWalk(WalkingState.LEFT_WALK_STATE, -100, -3, 15);
+                startWalk(WALK_STATE, -1);
             }
 
             if (ButtonReleased(ControlButton.left))
@@ -72,7 +67,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.right))
             {
-                startWalk(WalkingState.RIGHT_WALK_STATE, 100, 3, -15);
+                startWalk(WALK_STATE, 1);
             }
 
             if (ButtonReleased(ControlButton.right))
@@ -88,25 +83,23 @@ namespace RoBuddies.Control.StateMachines
             return RayCastUtility.isOnGround(this.Level, robot.LowerPart.wheelBody);
         }
 
-        private void startWalk(String newStateName, float force, float velocityLimit, float motorSpeed)
+        private void startWalk(String newStateName, int direction)
         {
+            WalkingState.joinMovement(robot.LowerPart, robot.LowerPart.wheelMotor, isOnGround(), direction);
+
             if (!(CurrentState is PullingState))
             {
                 SwitchToState(newStateName);
-            }
-            if (!isOnGround())
-            {
-                robot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                robot.LowerPart.ApplyForce(new Vector2(force, 0));
-                if (Math.Abs(robot.LowerPart.LinearVelocity.X) > Math.Abs(velocityLimit))
+                if (direction > 0)
                 {
-                    robot.LowerPart.LinearVelocity = new Vector2(velocityLimit, robot.LowerPart.LinearVelocity.Y);
+                    robot.LowerPart.Effect = SpriteEffects.None;
+                }
+                else
+                {
+                    robot.LowerPart.Effect = SpriteEffects.FlipHorizontally;
                 }
             }
-            else
-            {
-                robot.LowerPart.wheelMotor.MotorSpeed = motorSpeed;
-            }
+
         }
 
         private void stopWalk()
