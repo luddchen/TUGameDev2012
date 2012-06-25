@@ -140,16 +140,20 @@ namespace RoBuddies.View.MenuPages
                 }
                 else
                 {
-                    this.activeElement.Scale = this.activeScale;
-                    this.activeElement = this.oldActiveElement;
-                    this.activeScale = this.activeElement.Scale;
+                    //this.activeElement.Scale = this.activeScale;
+                    //this.activeElement = this.oldActiveElement;
+                    //this.activeScale = this.activeElement.Scale;
                     if (this.activeElement == reload || this.activeElement == rewind || this.activeElement == forward)
                     {
-                        this.ChoiceLine = 0;
-                    }
-                    else
-                    {
-                        this.ChoiceLine = 1;
+                        this.ActiveElement = this.oldActiveElement;
+                        if (this.activeElement == reload || this.activeElement == rewind || this.activeElement == forward)
+                        {
+                            this.ChoiceLine = 0;
+                        }
+                        else
+                        {
+                            this.ChoiceLine = 1;
+                        }
                     }
                 }
 

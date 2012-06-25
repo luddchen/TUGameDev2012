@@ -71,7 +71,7 @@ namespace RoBuddies.Control.StateMachines
             AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
-            AllStates.Add(new PullingState(PULL_STATE, textureList, this));
+            AllStates.Add(new PushingState(PULL_STATE, textureList, this));
             AllStates.Add(new LadderClimbingState(CLIMBING_STATE, textureList, Level, this));
 
             SwitchToState(WAIT_STATE);
@@ -233,6 +233,8 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (crate != null)
                 {
+                    SwitchToState(PULL_STATE);
+
                     currentCrate = crate;
 
                     robot.PartsCombined.wheelBody.IgnoreCollisionWith(currentCrate);
@@ -255,6 +257,8 @@ namespace RoBuddies.Control.StateMachines
 
         private void stopPulling()
         {
+            SwitchToState(WAIT_STATE);
+
             isPulling = false;
             pullSoundInstance.Stop();
 
@@ -279,10 +283,6 @@ namespace RoBuddies.Control.StateMachines
 
         private void startWalk(String newStateName, float force, float velocityLimit, float motorSpeed)
         {
-            if (!(CurrentState is PullingState))
-            {
-                SwitchToState(newStateName);
-            }
             if (!isOnGround())
             {
                 robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
@@ -297,23 +297,55 @@ namespace RoBuddies.Control.StateMachines
                 robot.PartsCombined.wheelMotor.MotorSpeed = motorSpeed;
             }
 
+            if (!isPulling)
+            {
+                SwitchToState(newStateName);
+            }
+
             if (isPulling)
             {
+                ((PushingState)CurrentState).IsMoving = true;
                 currentCrate.LinearVelocity = robot.PartsCombined.LinearVelocity;
+
+                if (currentCrate.Position.X < robot.PartsCombined.Position.X)
+                {
+                    if (force > 0)
+                    {
+                        ((PushingState)CurrentState).walkBackwards = true;
+                    }
+                    else
+                    {
+                        ((PushingState)CurrentState).walkBackwards = false;
+                    }
+                }
+                else
+                {
+                    if (force < 0)
+                    {
+                        ((PushingState)CurrentState).walkBackwards = true;
+                    }
+                    else
+                    {
+                        ((PushingState)CurrentState).walkBackwards = false;
+                    }
+                }
             }
         }
 
         private void stopWalk()
         {
-            if (!(CurrentState is PullingState))
+            robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
+            robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+
+            if (!isPulling)
             {
                 SwitchToState(WAIT_STATE);
             }
-            robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
-            robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+
             if (isPulling)
             {
                 currentCrate.LinearVelocity = Vector2.Zero;
+                ((PushingState)CurrentState).IsMoving = false;
             }
         }
     }
