@@ -26,6 +26,16 @@ namespace RoBuddies
         /// </summary>
         public KeyboardState newKeyboardState;
 
+        /// <summary>
+        /// the gamepad state before update
+        /// </summary>
+        public GamePadState oldGamePadState;
+
+        /// <summary>
+        /// the gamepad state after update
+        /// </summary>
+        public GamePadState newGamePadState;
+
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
         SpriteBatch SpriteBatch;
@@ -115,6 +125,9 @@ namespace RoBuddies
             this.oldKeyboardState = this.newKeyboardState;
             this.newKeyboardState = Keyboard.GetState();
 
+            this.oldGamePadState = this.newGamePadState;
+            this.newGamePadState = GamePad.GetState(PlayerIndex.One);
+
             if (startScreen)
             {
                 if (newKeyboardState.GetPressedKeys().Length > 0)
@@ -129,13 +142,6 @@ namespace RoBuddies
 
                 View.Update(gameTime);
                 Menu.Update(gameTime);
-
-                // testing camera
-                if (newKeyboardState.IsKeyDown(Keys.LeftShift))
-                {
-                    if (newKeyboardState.IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
-                    if (newKeyboardState.IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
-                }
             }
 
         }

@@ -63,7 +63,25 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            if (ButtonPressed(ControlButton.robot))
+            if (ButtonPressed(ControlButton.switchRobotPart))
+            {
+                if (mActiveStateMachine != mPartsCombinedStateMachine)
+                {
+                    if (mActiveStateMachine == mLowerPartStateMachine)
+                    {
+                        mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
+                        setActivePart(mRobot.UpperPart);
+                    }
+                    else if (mActiveStateMachine == mUpperPartStateMachine)
+                    {
+                        crateStateUpdate(false);
+
+                        setActivePart(mRobot.LowerPart);
+                    }
+                }
+            }
+
+            if (ButtonPressed(ControlButton.separateRobot))
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
@@ -86,20 +104,21 @@ namespace RoBuddies.Control.StateMachines
                     }
                     else
                     {
-                        if (mActiveStateMachine == mLowerPartStateMachine)
-                        {
-                            mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                            setActivePart(mRobot.UpperPart);
-                        }
-                        else if (mActiveStateMachine == mUpperPartStateMachine)
-                        {
-                            crateStateUpdate( false );
+                        //if (mActiveStateMachine == mLowerPartStateMachine)
+                        //{
+                        //    mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
+                        //    setActivePart(mRobot.UpperPart);
+                        //}
+                        //else if (mActiveStateMachine == mUpperPartStateMachine)
+                        //{
+                        //    crateStateUpdate( false );
 
-                            setActivePart(mRobot.LowerPart);
-                        }
+                        //    setActivePart(mRobot.LowerPart);
+                        //}
                     }
                 }
             }
+
 
             if (ButtonPressed(ControlButton.use))
             {
