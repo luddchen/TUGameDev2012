@@ -85,6 +85,9 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (mActiveStateMachine == mPartsCombinedStateMachine)
                 {
+                    mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
+                    mRobot.PartsCombined.wheelMotor.MotorSpeed = 0;
+                    mRobot.LowerPart.LinearVelocity = mRobot.PartsCombined.LinearVelocity;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
                     mRobot.LowerPart.wheelBody.Position = mRobot.LowerPart.Position + new Vector2(0, (-1f / 2f) + 0.20f);
@@ -97,24 +100,13 @@ namespace RoBuddies.Control.StateMachines
                     if (canCombine())
                     {
                         crateStateUpdate(true);
-
+                        mRobot.LowerPart.wheelMotor.MotorSpeed = 0;
+                        mUpperPartStateMachine.SwitchToState(UpperPartStateMachine.WAIT_STATE);
+                        mLowerPartStateMachine.SwitchToState(LowerPartStateMachine.WAIT_STATE);
+                        mRobot.PartsCombined.LinearVelocity = mRobot.LowerPart.LinearVelocity;
                         mRobot.PartsCombined.Position = new Vector2(mRobot.LowerPart.Position.X, mRobot.LowerPart.Position.Y - mRobot.LowerPart.Height / 2 + mRobot.PartsCombined.Height / 2);
                         mRobot.PartsCombined.wheelBody.Position = mRobot.PartsCombined.Position + new Vector2(0, (-2.3f / 2f) + 0.20f);
                         setActivePart(mRobot.PartsCombined);
-                    }
-                    else
-                    {
-                        //if (mActiveStateMachine == mLowerPartStateMachine)
-                        //{
-                        //    mRobot.LowerPart.wheelMotor.MotorSpeed = 0f;
-                        //    setActivePart(mRobot.UpperPart);
-                        //}
-                        //else if (mActiveStateMachine == mUpperPartStateMachine)
-                        //{
-                        //    crateStateUpdate( false );
-
-                        //    setActivePart(mRobot.LowerPart);
-                        //}
                     }
                 }
             }
