@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using RoBuddies.Model;
+using RoBuddies.Model.Serializer;
 using System.IO;
 
 namespace RoBuddies
@@ -127,6 +129,16 @@ namespace RoBuddies
 
             this.oldGamePadState = this.newGamePadState;
             this.newGamePadState = GamePad.GetState(PlayerIndex.One);
+
+            if (oldKeyboardState.IsKeyUp(Keys.F1) && newKeyboardState.IsKeyDown(Keys.F1))
+            {
+                Level loadedLevel = (new LevelReader(this)).readLevel(".\\", "editor_temp.json");
+                if (loadedLevel != null)
+                {
+                    this.EditorView.Level = loadedLevel;
+                }
+                this.SwitchToViewMode(RoBuddies.ViewMode.Editor);
+            }
 
             if (startScreen)
             {

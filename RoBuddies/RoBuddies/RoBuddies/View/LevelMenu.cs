@@ -10,7 +10,6 @@ namespace RoBuddies.View
     {
         public HUDTexture play;
         public HUDTexture reload;
-        public HUDTexture editor;
         public HUDTexture rewind;
         public HUDTexture forward;
         public HUDTexture help;
@@ -49,7 +48,6 @@ namespace RoBuddies.View
                 if (help != null) { help.Position = new Vector2(this.Viewport.Width * 0.5f, secondLine); }
                 if (info != null) { info.Position = new Vector2(this.Viewport.Width * 0.6f, secondLine); }
                 if (options != null) { options.Position = new Vector2(this.Viewport.Width * 0.7f, secondLine); }
-                if (editor != null) { editor.Position = new Vector2(this.Viewport.Width * 0.8f, secondLine); }
                 if (quit != null) { quit.Position = new Vector2(this.Viewport.Width - 40, secondLine); }
             }
         }
@@ -89,9 +87,6 @@ namespace RoBuddies.View
 
             options = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Tools"), null, 40, 40, null, null, null, this.Game.Content);
             this.AllElements.Add(options);
-
-            editor = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Stationery"), null, 40, 40, null, null, null, this.Game.Content);
-            this.AllElements.Add(editor);
 
             quit = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//Close"), null, 40, 40, null, null, null, this.Game.Content);
             this.AllElements.Add(quit);

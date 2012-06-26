@@ -93,7 +93,7 @@ namespace RoBuddies.View.HUD
                     {
                         int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
                         ChoiceLine++;
-                        if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = 0; }
+                        if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = this.ChoiceList.Count - 1; }
 
                         if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
 

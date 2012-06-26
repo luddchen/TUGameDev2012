@@ -9,7 +9,6 @@ namespace RoBuddies.View.MenuPages
 {
     class LevelMainMenu : HUDMenuPage 
     {
-        private HUDTexture editor;
         private HUDTexture play;
         private HUDTexture reload;
         private HUDTexture rewind;
@@ -61,9 +60,6 @@ namespace RoBuddies.View.MenuPages
                 options = menu.options;
                 addChoiceElement(options, false);
 
-                editor = menu.editor;
-                addChoiceElement(editor, false);
-
                 quit = menu.quit;
                 addChoiceElement(quit, false);
 
@@ -73,8 +69,6 @@ namespace RoBuddies.View.MenuPages
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-
-            // test
 
             if (this.activeElement != this.oldActiveElement)
             {
@@ -106,12 +100,6 @@ namespace RoBuddies.View.MenuPages
                         ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(1, 0);
                     }
 
-                    if (this.activeElement == editor)
-                    {
-                        this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
-                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(1, 5);
-                    }
-
                     if (this.activeElement == chooser)
                     {
                         this.Menu.ActivePage = ((LevelMenu)this.Menu).chooserMenu;
@@ -140,9 +128,6 @@ namespace RoBuddies.View.MenuPages
                 }
                 else
                 {
-                    //this.activeElement.Scale = this.activeScale;
-                    //this.activeElement = this.oldActiveElement;
-                    //this.activeScale = this.activeElement.Scale;
                     if (this.activeElement == reload || this.activeElement == rewind || this.activeElement == forward)
                     {
                         this.ActiveElement = this.oldActiveElement;
@@ -168,17 +153,6 @@ namespace RoBuddies.View.MenuPages
                     {
                         this.Menu.IsVisible = false;
                     }
-
-                    if (this.ActiveElement == editor)
-                    {
-                        Level loadedLevel = (new LevelReader(this.Game)).readLevel(".\\", "editor_temp.json");
-                        if (loadedLevel != null)
-                        {
-                            this.Game.EditorView.Level = loadedLevel;
-                        }
-                        this.Game.SwitchToViewMode(RoBuddies.ViewMode.Editor);
-                    }
-
                 }
             }
 
@@ -269,7 +243,6 @@ namespace RoBuddies.View.MenuPages
             ((LevelMenu)this.Menu).rewind.isVisible = true;
             ((LevelMenu)this.Menu).forward.isVisible = true;
 
-            ((LevelMenu)this.Menu).editor.isVisible = true;
             ((LevelMenu)this.Menu).chooser.isVisible = true;
             ((LevelMenu)this.Menu).help.isVisible = true;
             ((LevelMenu)this.Menu).info.isVisible = true;
@@ -281,7 +254,6 @@ namespace RoBuddies.View.MenuPages
             ((LevelMenu)this.Menu).rewind.Scale = 0.5f;
             ((LevelMenu)this.Menu).forward.Scale = 0.5f;
 
-            ((LevelMenu)this.Menu).editor.Scale = 1;
             ((LevelMenu)this.Menu).chooser.Scale = 1;
             ((LevelMenu)this.Menu).help.Scale = 1;
             ((LevelMenu)this.Menu).info.Scale = 1;
@@ -302,7 +274,6 @@ namespace RoBuddies.View.MenuPages
             ((LevelMenu)this.Menu).rewind.isVisible = false;
             ((LevelMenu)this.Menu).forward.isVisible = false;
 
-            ((LevelMenu)this.Menu).editor.isVisible = false;
             ((LevelMenu)this.Menu).chooser.isVisible = false;
             ((LevelMenu)this.Menu).help.isVisible = false;
             ((LevelMenu)this.Menu).info.isVisible = false;

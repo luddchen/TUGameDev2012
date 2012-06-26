@@ -25,6 +25,8 @@ namespace RoBuddies.View.MenuPages
                                 + "<s>          use a lever or grab a crate to pull/push\n\n"
                                 + "<esc>        open / close menu\n"
                                 + "\n"
+                                + "F1           Editor\n"
+                                + "\n"
                                 + "remember some rules\n"
                                 + "----------------------------------\n"
                                 + "upper part can't walk without legs\n"

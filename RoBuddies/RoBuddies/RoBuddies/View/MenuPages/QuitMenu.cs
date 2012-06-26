@@ -65,7 +65,7 @@ namespace RoBuddies.View.MenuPages
         public override void OnEnter()
         {
             base.OnEnter();
-            chooseActiveElement(1, 6);
+            chooseActiveElement(1, 5);
             this.Menu.makeTransparent(false);
         }
 
