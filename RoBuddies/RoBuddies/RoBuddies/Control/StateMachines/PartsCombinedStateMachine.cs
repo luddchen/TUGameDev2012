@@ -51,7 +51,6 @@ namespace RoBuddies.Control.StateMachines
 
             pullingSound = contentManager.Load<SoundEffect>("Sounds\\push_pull");
             pullSoundInstance = pullingSound.CreateInstance();
-            pullSoundInstance.IsLooped = true;
 
             mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
 
@@ -129,7 +128,7 @@ namespace RoBuddies.Control.StateMachines
                 stopPulling();
             }
            
-            if (ButtonPressed(ControlButton.jump) && !(CurrentState is JumpingState) && isOnGround())
+            if (ButtonPressed(ControlButton.jump) && !(CurrentState is JumpingState) && !(CurrentState is PullingState || CurrentState is PushingState) && isOnGround())
             {
                 SwitchToState(JUMP_STATE);
             }
@@ -246,7 +245,6 @@ namespace RoBuddies.Control.StateMachines
                     pullingDistance = robot.PartsCombined.Position.X - currentCrate.Position.X;
 
                     isPulling = true;
-                    pullSoundInstance.Play();
                 }
             }
             else
@@ -263,7 +261,6 @@ namespace RoBuddies.Control.StateMachines
             SwitchToState(WAIT_STATE);
 
             isPulling = false;
-            pullSoundInstance.Stop();
 
             robot.PartsCombined.wheelBody.RestoreCollisionWith(currentCrate);
             robot.PartsCombined.RestoreCollisionWith(currentCrate);
@@ -296,9 +293,16 @@ namespace RoBuddies.Control.StateMachines
 
             if (isPulling)
             {
+                if (Math.Abs(robot.PartsCombined.LinearVelocity.X) < 0.1f) // only play sound if player starts moving
+                {
+                    pullSoundInstance.Play();
+                }
                 int dir = 1;
                 if (direction == Model.Direction.left) { dir = -1; }
-                ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.PartsCombined, 100 * dir);
+                if (CurrentState is PushingState)
+                {
+                    ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.PartsCombined, 100 * dir);
+                }
             }
         }
 
@@ -314,7 +318,10 @@ namespace RoBuddies.Control.StateMachines
             if (isPulling)
             {
                 currentCrate.LinearVelocity = Vector2.Zero;
-                ((PushingState)CurrentState).IsMoving = false;
+                if (CurrentState is PushingState)
+                {
+                    ((PushingState)CurrentState).IsMoving = false;
+                }
             }
         }
     }
