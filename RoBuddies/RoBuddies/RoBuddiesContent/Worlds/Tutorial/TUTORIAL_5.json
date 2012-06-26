@@ -1,7 +1,7 @@
 {
   "Gravity": "0, -10",
   "Layers": [
-    {      
+    {
 		"Layer": {
 			"Name": "backLayer",
 			"Parallax": "1, 1",
@@ -20,47 +20,27 @@
         "Walls": [
           {
             "Wall": {
-              "Position": "1, 0",
+              "Position": "15, 0",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 39.0,
+                "Width": 33.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "-9, 4",
+              "Position": "12, 4",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 7.0,
+                "Width": 5.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "-14, 8",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 7.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-5, 12",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 11.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "11, 7",
+              "Position": "17, 8",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 7.0,
@@ -70,63 +50,52 @@
           },
           {
             "Wall": {
-              "Position": "20, 10",
+              "Position": "22, 5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-2, 6",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
-                "Heigth": 19.0
+                "Heigth": 13.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "-18, 9",
+              "Position": "15, 13",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 35.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "32, 6",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
-                "Heigth": 19.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "1, 19",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 39.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "10, 12",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 11.0,
-                "Heigth": 1.0
+                "Heigth": 13.0
               }
             }
           }
         ],
-        "Crates": [
-          {
-            "Crate": {
-              "Position": "14, 14",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
-                "Heigth": 3.0
-              }
-            }
-          }
-        ],
+        "Crates": [],
         "Pipes": [],
         "Ladders": []
       }
     }
   ],
   "Robot": {
-    "Position": "-16, 2"
+    "Position": "0, 2"
   }
 }

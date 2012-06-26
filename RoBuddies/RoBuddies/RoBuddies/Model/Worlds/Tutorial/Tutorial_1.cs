@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial  1:  Jump & Move crates";
+        private const String LEVEL_NAME = "Tutorial 1: Jump";
 
         public Tutorial_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -29,17 +29,8 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelObjects()
         {
-            Door door = new Door(new Vector2(1.5f, 2f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
-            //Switch doorSwitcher = new Switch(new Vector2(9f, 5f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, door, this.Level.Robot);
+            Door door = new Door(new Vector2(8.5f, 7f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
             levelObjects.Add(door);
-            //levelObjects.Add(doorSwitcher);
-
-            //Switch wall testing 
-            //Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
-            //Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
-            //levelObjects.Add(switchWall);
-            //levelObjects.Add(wallSwitcher);
-
         }
 
         protected override void addLevelLabels()
@@ -47,20 +38,13 @@ namespace RoBuddies.Model.Worlds.Tutorial
             Color backgroundColor = new Color(0, 0, 0, 100);
 
             HUDString hintStringJump = new HUDString("Press 'space'-Key\nto jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 5.5f));
+            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-20f, 10f));
             levelLabels.Add(hintStringJump);
 
-            HUDString hintStringCrate = new HUDString("Press 's'-Key\nto move the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-13f, 8.5f));
-            levelLabels.Add(hintStringCrate);
 
             HUDString hintStringDoor = new HUDString("Press 'up'-Key\nto go to next level", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(4.5f, 6f));
+            hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(6.5f, 14f));
             levelLabels.Add(hintStringDoor);
-
-            HUDString hintStringRewind = new HUDString("Press 'r'-Key to rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 6.5f));
-            levelLabels.Add(hintStringRewind);
         }
     }
 

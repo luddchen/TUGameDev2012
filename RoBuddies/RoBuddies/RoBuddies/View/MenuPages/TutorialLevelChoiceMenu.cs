@@ -65,7 +65,7 @@ namespace RoBuddies.View.MenuPages
             tutorial4 = new HUDString("-- 4 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial4, true);
 
-            tutorial5 = new HUDString("-- 5 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            tutorial5 = new HUDString("-- 5 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial5, true);
 
             tutorial6 = new HUDString("-- 6 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
@@ -117,6 +117,11 @@ namespace RoBuddies.View.MenuPages
                     if (this.ActiveElement == tutorial4)
                     {
                         ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_4(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == tutorial5)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_5(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                 }

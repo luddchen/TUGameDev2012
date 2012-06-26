@@ -29,17 +29,17 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelObjects()
         {
-            Door door = new Door(new Vector2(-14.5f, 0f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
-            levelObjects.Add(door);           
+            Door door = new Door(new Vector2(13.5f, 7f), new Vector2(2f, 3f), Color.BurlyWood, this.Level, this.game, false);
+            levelObjects.Add(door);            
         }
 
         protected override void addLevelLabels()
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintString = new HUDString("Press 'x'-Key\nto seperate ", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintString.Position = ConvertUnits.ToDisplayUnits(new Vector2(2f, 1f));
-            levelLabels.Add(hintString);
+            HUDString hintStringSeperate = new HUDString("Press 'x'-Key\nto seperate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-17f, 6.5f));
+            levelLabels.Add(hintStringSeperate);
         }
     }
 
