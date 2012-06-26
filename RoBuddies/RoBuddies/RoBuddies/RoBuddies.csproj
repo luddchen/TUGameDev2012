@@ -170,6 +170,8 @@
     <Compile Include="Model\Serializer\Converter\WallConverter.cs" />
     <Compile Include="Model\Snapshot\BodyKeyFrame.cs" />
     <Compile Include="Model\Snapshot\KeyFrame.cs" />
+    <Compile Include="Model\Snapshot\LowerPartKeyFrame.cs" />
+    <Compile Include="Model\Snapshot\PartsCombinedKeyFrame.cs" />
     <Compile Include="Model\Snapshot\Snapshot.cs" />
     <Compile Include="Model\Snapshot\SwitchKeyFrame.cs" />
     <Compile Include="Model\StaticObject.cs" />
@@ -207,12 +209,16 @@
     <Compile Include="View\LevelMenu.cs" />
     <Compile Include="View\MenuPages\EditorMainMenu.cs" />
     <Compile Include="View\MenuPages\HelpMenu.cs" />
+    <Compile Include="View\MenuPages\HospitalLevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\InfoMenu.cs" />
+    <Compile Include="View\MenuPages\LabLevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\LevelChoiceMenu.cs" />
     <Compile Include="View\HUD\HUDMenuPage.cs" />
     <Compile Include="View\MenuPages\LevelMainMenu.cs" />
+    <Compile Include="View\MenuPages\MountainLevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\OptionMenu.cs" />
     <Compile Include="View\MenuPages\QuitMenu.cs" />
+    <Compile Include="View\MenuPages\TutorialLevelChoiceMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="RoBuddies.ico" />

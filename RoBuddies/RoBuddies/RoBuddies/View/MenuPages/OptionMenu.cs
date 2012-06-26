@@ -74,7 +74,7 @@ namespace RoBuddies.View.MenuPages
             musicValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(musicValue);
 
-            chooseActiveElement(0, 0);
+            OnEnter();
         }
 
         public override void Update(GameTime gameTime)
@@ -137,6 +137,19 @@ namespace RoBuddies.View.MenuPages
                     }
                 }
             }
+        }
+
+        public override void OnEnter()
+        {
+            base.OnEnter();
+            chooseActiveElement(1, 4);
+            this.Menu.makeTransparent(false);
+        }
+
+        public override void OnExit()
+        {
+            base.OnExit();
+            this.Menu.makeTransparent(true);
         }
 
     }

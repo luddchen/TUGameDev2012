@@ -8,6 +8,14 @@ namespace RoBuddies.Control.StateMachines
 
     class StateMachine : PlayerControl
     {
+        public const String WALK_STATE = "WalkingState";
+        public const String WAIT_STATE = "WaitingState";
+        public const String JUMP_STATE = "JumpState";
+        public const String PULL_STATE = "PullingState";
+        public const String CLIMBING_STATE = "ClimbingState";
+        public const String SHOOTING_STATE = "ShootingState";
+        public const String PIPE_CLIMBING_STATE = "PipeClimbingState";
+
         /// <summary>
         /// the current state
         /// </summary>

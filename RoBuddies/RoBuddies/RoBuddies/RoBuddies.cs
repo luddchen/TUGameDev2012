@@ -5,6 +5,8 @@ using Microsoft.Xna.Framework.Input;
 
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using RoBuddies.Model;
+using RoBuddies.Model.Serializer;
 using System.IO;
 
 namespace RoBuddies
@@ -25,6 +27,16 @@ namespace RoBuddies
         /// the keyboard state after update
         /// </summary>
         public KeyboardState newKeyboardState;
+
+        /// <summary>
+        /// the gamepad state before update
+        /// </summary>
+        public GamePadState oldGamePadState;
+
+        /// <summary>
+        /// the gamepad state after update
+        /// </summary>
+        public GamePadState newGamePadState;
 
         GraphicsDeviceManager graphics;
         Viewport ViewPort;
@@ -96,6 +108,8 @@ namespace RoBuddies
             SwitchViewMode();
             Window_ClientSizeChanged(null, null);
 
+            this.LevelMenu.IsVisible = true;
+
             splash = Content.Load<Texture2D>("Sprites//Menu//splashscreen");
         }
 
@@ -113,6 +127,19 @@ namespace RoBuddies
             this.oldKeyboardState = this.newKeyboardState;
             this.newKeyboardState = Keyboard.GetState();
 
+            this.oldGamePadState = this.newGamePadState;
+            this.newGamePadState = GamePad.GetState(PlayerIndex.One);
+
+            if (oldKeyboardState.IsKeyUp(Keys.F1) && newKeyboardState.IsKeyDown(Keys.F1))
+            {
+                Level loadedLevel = (new LevelReader(this)).readLevel(".\\", "editor_temp.json");
+                if (loadedLevel != null)
+                {
+                    this.EditorView.Level = loadedLevel;
+                }
+                this.SwitchToViewMode(RoBuddies.ViewMode.Editor);
+            }
+
             if (startScreen)
             {
                 if (newKeyboardState.GetPressedKeys().Length > 0)
@@ -127,13 +154,6 @@ namespace RoBuddies
 
                 View.Update(gameTime);
                 Menu.Update(gameTime);
-
-                // testing camera
-                if (newKeyboardState.IsKeyDown(Keys.LeftShift))
-                {
-                    if (newKeyboardState.IsKeyDown(Keys.I)) { this.View.Camera.Zoom *= 1.01f; }
-                    if (newKeyboardState.IsKeyDown(Keys.O)) { this.View.Camera.Zoom /= 1.01f; }
-                }
             }
 
         }
@@ -144,7 +164,7 @@ namespace RoBuddies
             {
                 this.View = this.LevelView;
                 this.Menu = this.LevelMenu;
-                this.Menu.IsVisible = true;
+                this.Menu.IsVisible = false;
             }
             if (this.currentViewMode == ViewMode.Editor)
             {

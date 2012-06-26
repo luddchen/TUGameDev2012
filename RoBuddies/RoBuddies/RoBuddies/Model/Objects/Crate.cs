@@ -78,7 +78,7 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            createRectangleFixture(5f);
+            createRectangleFixture(25f);
             calculateHeaviness();
         }
 

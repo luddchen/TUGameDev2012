@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 
 using RoBuddies.Model.Objects;
+using RoBuddies.Model.RobotParts;
 
 namespace RoBuddies.Model.Snapshot
 {
@@ -22,6 +23,14 @@ namespace RoBuddies.Model.Snapshot
                 if (body is Switch)
                 {
                     bodyKeyFrame = new SwitchKeyFrame((Switch)body);
+                }
+                else if (body is PartsCombined)
+                {
+                    bodyKeyFrame = new PartsCombinedKeyFrame((PartsCombined)body);
+                }
+                else if (body is LowerPart)
+                {
+                    bodyKeyFrame = new LowerPartKeyFrame((LowerPart)body);
                 }
                 else
                 {
@@ -46,6 +55,14 @@ namespace RoBuddies.Model.Snapshot
                 if (oldBodyKeyframe.Body is Switch)
                 {
                     bodyKeyFrame = new SwitchKeyFrame((Switch)oldBodyKeyframe.Body);
+                }
+                else if (oldBodyKeyframe.Body is PartsCombined)
+                {
+                    bodyKeyFrame = new PartsCombinedKeyFrame((PartsCombined)oldBodyKeyframe.Body);
+                }
+                else if (oldBodyKeyframe.Body is LowerPart)
+                {
+                    bodyKeyFrame = new LowerPartKeyFrame((LowerPart)oldBodyKeyframe.Body);
                 }
                 else
                 {

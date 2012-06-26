@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model
 {
+    public enum Direction { left, right } 
 
     /// <summary>
     /// representing objects with physical behavior
@@ -175,6 +176,19 @@ namespace RoBuddies.Model
         {
             this.Enabled = visible;
             this.IsVisible = visible;
+        }
+
+
+        public void chooseDirection(Direction direction)
+        {
+            if (direction == Direction.right)
+            {
+                this.Effect = SpriteEffects.None;
+            }
+            else
+            {
+                this.Effect = SpriteEffects.FlipHorizontally;
+            }
         }
 
     }

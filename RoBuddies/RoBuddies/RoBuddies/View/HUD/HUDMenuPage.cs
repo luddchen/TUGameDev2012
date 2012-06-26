@@ -20,7 +20,7 @@ namespace RoBuddies.View.HUD
         /// <summary>
         /// sclae of the active element
         /// </summary>
-        private float activeScale;
+        protected float activeScale;
 
         /// <summary>
         /// value to control the animation of active / selected element
@@ -81,12 +81,7 @@ namespace RoBuddies.View.HUD
         {
             base.Update(gameTime);
 
-            if (this.activeElement != null)
-            {
-                this.activeElement.Scale = this.activeScale * ( 1.2f - (float)Math.Cos(this.animationValue) / 20);
-                this.animationValue += (float)(gameTime.ElapsedGameTime.Milliseconds * MathHelper.TwoPi / 700);
-                if (this.animationValue > MathHelper.TwoPi) { this.animationValue = 0.0f; }
-            }
+            animate(gameTime);
 
             if (this.ChoiceList.Count > 0)
             {
@@ -98,7 +93,7 @@ namespace RoBuddies.View.HUD
                     {
                         int index = this.ChoiceList[ChoiceLine].IndexOf(this.activeElement);
                         ChoiceLine++;
-                        if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = 0; }
+                        if (ChoiceLine >= this.ChoiceList.Count) { ChoiceLine = this.ChoiceList.Count - 1; }
 
                         if (this.ChoiceList[ChoiceLine].Count <= index) { index = this.ChoiceList[ChoiceLine].Count - 1; }
 
@@ -167,6 +162,10 @@ namespace RoBuddies.View.HUD
 
         public virtual void OnExit()
         {
+            if (this.activeElement != null)
+            {
+                this.activeElement.Scale = this.activeScale;
+            }
         }
 
         protected void addChoiceElement(IHUDElement element, bool addToAllElements) 
@@ -194,6 +193,17 @@ namespace RoBuddies.View.HUD
                     this.ActiveElement = this.ChoiceList[line][position];
                     this.ChoiceLine = line;
                 }
+            }
+        }
+
+
+        protected void animate(GameTime gameTime)
+        {
+            if (this.activeElement != null)
+            {
+                this.activeElement.Scale = this.activeScale * (1.2f - (float)Math.Cos(this.animationValue) / 20);
+                this.animationValue += (float)(gameTime.ElapsedGameTime.Milliseconds * MathHelper.TwoPi / 700);
+                if (this.animationValue > MathHelper.TwoPi) { this.animationValue = 0.0f; }
             }
         }
 
