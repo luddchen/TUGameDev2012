@@ -19,13 +19,14 @@ namespace RoBuddies.Model.RobotParts
         {
             this.BodyType = BodyType.Dynamic;
             FixtureFactory.AttachRectangle(1, 1f, 1, Vector2.Zero, this);
+            this.Friction = 0f;
             this.level.GetLayerByName("mainLayer").AddObject(this);
             // attach wheel
             this.wheelBody = BodyFactory.CreateCircle(this.level, 0.5f, 1, this.Position + new Vector2(0, (-1f / 2f) + 0.20f));
             this.wheelBody.BodyType = BodyType.Dynamic;
             this.wheelMotor = JointFactory.CreateRevoluteJoint(this.level, this, this.wheelBody, Vector2.Zero);
             this.wheelBody.Friction = 100f;
-            this.wheelMotor.MaxMotorTorque = 1000f;
+            this.wheelMotor.MaxMotorTorque = 100f;
             this.wheelMotor.MotorEnabled = true;
         }
 

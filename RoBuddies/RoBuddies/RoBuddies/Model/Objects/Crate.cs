@@ -25,7 +25,7 @@ namespace RoBuddies.Model.Objects
 
             this.BodyType = BodyType.Dynamic;
             this.FixedRotation = true;
-
+            this.BodyType = BodyType.Static;
             changeCrateSize(size);
         }
 
@@ -59,12 +59,10 @@ namespace RoBuddies.Model.Objects
             {
                 if (value && isHeavyCrate)
                 {
-                    this.BodyType = BodyType.Dynamic;
                     this.Color = Color.BurlyWood;
                 }
                 else if (isHeavyCrate)
                 {
-                    this.BodyType = BodyType.Static;
                     this.Color = Color.White;
                 }
             }
@@ -78,7 +76,7 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            createRectangleFixture(25f);
+            createRectangleFixture();
             calculateHeaviness();
         }
 
