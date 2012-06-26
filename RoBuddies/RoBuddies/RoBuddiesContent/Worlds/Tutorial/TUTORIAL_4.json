@@ -11,9 +11,9 @@
         "Pipes": [
           {
             "Pipe": {
-              "Position": "-6, 2",
+              "Position": "1, 4",
               "Color": "255, 255, 255, 255",
-              "Width": 11.0
+              "Width": 25.0
             }
           }
         ],
@@ -28,47 +28,67 @@
         "Walls": [
           {
             "Wall": {
-              "Position": "-5, -6",
+              "Position": "2, -6",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 35.0,
+                "Width": 49.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "5, -2",
+              "Position": "23, -4",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 5.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, 10",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "7, -1",
+              "Position": "18, -5",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 1.0,
+                "Width": 5.0,
                 "Heigth": 3.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "9, 0",
+              "Position": "26, 5",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 5.0,
+                "Width": 1.0,
+                "Heigth": 21.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-4, 5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 39.0,
                 "Heigth": 1.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "12, 0",
+              "Position": "-23, -1",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
@@ -78,27 +98,7 @@
           },
           {
             "Wall": {
-              "Position": "-11, 3",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 25.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-23, -2",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 1.0,
-                "Heigth": 9.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-11, 2",
+              "Position": "-11, 4",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
@@ -108,7 +108,7 @@
           },
           {
             "Wall": {
-              "Position": "0, 2",
+              "Position": "14, 4",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
@@ -118,20 +118,40 @@
           },
           {
             "Wall": {
-              "Position": "2, 4",
+              "Position": "16, 8",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
-                "Heigth": 3.0
+                "Heigth": 13.0
               }
             }
           },
           {
             "Wall": {
-              "Position": "7, 6",
+              "Position": "21, 15",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 11.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, 2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "23, 6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
                 "Heigth": 1.0
               }
             }

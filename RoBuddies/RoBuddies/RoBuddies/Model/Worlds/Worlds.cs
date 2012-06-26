@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using RoBuddies.Model.Worlds.Tutorial;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 using Microsoft.Xna.Framework;
@@ -25,9 +26,21 @@ namespace RoBuddies.Model.Worlds
         {
             this.game = game;
             worlds = new Queue<WorldLevel>();
-            addWorld1();
+            addTutorial();
+            addWorld1();            
             addWorld2();
             addWorld3();
+        }
+
+        /// <summary>
+        /// add here the levels of world 1. The order of adding is the order of playing the levels.
+        /// </summary>
+        private void addTutorial()
+        {
+            worlds.Enqueue(new Tutorial_1(this.game));
+            worlds.Enqueue(new Tutorial_2(this.game));
+            worlds.Enqueue(new Tutorial_3(this.game));
+            worlds.Enqueue(new Tutorial_4(this.game));
         }
 
         /// <summary>

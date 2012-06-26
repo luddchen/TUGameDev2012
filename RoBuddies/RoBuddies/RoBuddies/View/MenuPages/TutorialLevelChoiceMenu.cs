@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework.Content;
 using RoBuddies.View.HUD;
 using RoBuddies.Control;
+using RoBuddies.Model.Worlds.Tutorial;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 
@@ -61,7 +62,7 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            tutorial4 = new HUDString("-- 4 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            tutorial4 = new HUDString("-- 4 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial4, true);
 
             tutorial5 = new HUDString("-- 5 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
@@ -97,17 +98,25 @@ namespace RoBuddies.View.MenuPages
                 {
                     if (this.ActiveElement == tutorial1)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_1(this.Menu.Game).Level, gameTime);
+                        //((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_1(this.Menu.Game).Level, gameTime);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_1(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == tutorial2)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_2(this.Menu.Game).Level, gameTime);
+                        //((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_2(this.Menu.Game).Level, gameTime);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_2(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == tutorial3)
                     {
-                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_3(this.Menu.Game).Level, gameTime);
+                        //((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level1_3(this.Menu.Game).Level, gameTime);
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_3(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == tutorial4)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_4(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                 }
