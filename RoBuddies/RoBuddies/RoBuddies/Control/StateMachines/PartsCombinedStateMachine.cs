@@ -63,8 +63,6 @@ namespace RoBuddies.Control.StateMachines
             body.Texture = textureList[0];
 
             AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
-            //AllStates.Add(new WalkingState(WalkingState.LEFT_WALK_STATE, textureList, this));
-            //AllStates.Add(new WalkingState(WalkingState.RIGHT_WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
             AllStates.Add(new PushingState(PULL_STATE, textureList, this));
@@ -138,7 +136,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.left))
             {
-                startWalk(WALK_STATE, -1);
+                startWalk(Direction.left);
             }
 
             if (ButtonReleased(ControlButton.left))
@@ -148,7 +146,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.right))
             {
-                startWalk(WALK_STATE, 1);
+                startWalk(Direction.right);
             }
 
             if (ButtonReleased(ControlButton.right))
@@ -233,6 +231,15 @@ namespace RoBuddies.Control.StateMachines
 
                     currentCrate = crate;
 
+                    if (currentCrate.Position.X < robot.PartsCombined.Position.X)
+                    {
+                        robot.PartsCombined.chooseDirection(Model.Direction.left);
+                    }
+                    else
+                    {
+                        robot.PartsCombined.chooseDirection(Model.Direction.right);
+                    }
+
                     robot.PartsCombined.wheelBody.IgnoreCollisionWith(currentCrate);
                     robot.PartsCombined.IgnoreCollisionWith(currentCrate);
 
@@ -277,33 +284,27 @@ namespace RoBuddies.Control.StateMachines
             robot.PartsCombined.wheelBody.Position = new Vector2(currentLadder.Position.X, yPos + (-2.3f / 2f) + 0.20f);
         }
 
-        private void startWalk(String newStateName, int direction)
+        private void startWalk(Direction direction)
         {
             WalkingState.joinMovement(robot.PartsCombined, robot.PartsCombined.wheelMotor, isOnGround(), direction);
 
             if (!isPulling)
             {
-                SwitchToState(newStateName);
-                if (direction > 0)
-                {
-                    robot.PartsCombined.Effect = SpriteEffects.None;
-                }
-                else
-                {
-                    robot.PartsCombined.Effect = SpriteEffects.FlipHorizontally;
-                }
+                SwitchToState(WALK_STATE);
+                robot.PartsCombined.chooseDirection(direction);
             }
 
             if (isPulling)
             {
-                ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.PartsCombined, 100 * direction);
+                int dir = 1;
+                if (direction == Model.Direction.left) { dir = -1; }
+                ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.PartsCombined, 100 * dir);
             }
         }
 
         private void stopWalk()
         {
-            robot.PartsCombined.LinearVelocity = new Vector2(0, robot.PartsCombined.LinearVelocity.Y);
-            robot.PartsCombined.wheelMotor.MotorSpeed = 0f;
+            WalkingState.stopMovement(robot.PartsCombined, robot.PartsCombined.wheelMotor);
 
             if (!isPulling)
             {

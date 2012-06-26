@@ -53,7 +53,7 @@ namespace RoBuddies.Control.RobotStates
             {
                 if (currentTextureIndex < WAIT_PUSHING)
                 {
-                    currentTextureIndex += 0.5f;
+                    currentTextureIndex += 0.4f;
                 }
                 if (currentTextureIndex > WAIT_PUSHING)
                 {
@@ -75,11 +75,11 @@ namespace RoBuddies.Control.RobotStates
 
                 if (walkBackwards)
                 {
-                    currentTextureIndex -= 0.3f;
+                    currentTextureIndex -= 0.4f;
                 }
                 else
                 {
-                    currentTextureIndex += 0.3f;
+                    currentTextureIndex += 0.4f;
                 }
             }
 
@@ -103,10 +103,12 @@ namespace RoBuddies.Control.RobotStates
             if (crate.Position.X < body.Position.X)
             {
                 this.walkBackwards = (force > 0);
+                body.chooseDirection(Model.Direction.left);
             }
             else
             {
                 this.walkBackwards = (force < 0);
+                body.chooseDirection(Model.Direction.right);
             }
         }
     }

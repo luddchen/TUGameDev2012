@@ -57,7 +57,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.left))
             {
-                startWalk(WALK_STATE, -1);
+                startWalk(Direction.left);
             }
 
             if (ButtonReleased(ControlButton.left))
@@ -67,7 +67,7 @@ namespace RoBuddies.Control.StateMachines
 
             if (ButtonIsDown(ControlButton.right))
             {
-                startWalk(WALK_STATE, 1);
+                startWalk(Direction.right);
             }
 
             if (ButtonReleased(ControlButton.right))
@@ -83,33 +83,25 @@ namespace RoBuddies.Control.StateMachines
             return RayCastUtility.isOnGround(this.Level, robot.LowerPart.wheelBody);
         }
 
-        private void startWalk(String newStateName, int direction)
+        private void startWalk(Direction direction)
         {
             WalkingState.joinMovement(robot.LowerPart, robot.LowerPart.wheelMotor, isOnGround(), direction);
 
             if (!(CurrentState is PullingState))
             {
-                SwitchToState(newStateName);
-                if (direction > 0)
-                {
-                    robot.LowerPart.Effect = SpriteEffects.None;
-                }
-                else
-                {
-                    robot.LowerPart.Effect = SpriteEffects.FlipHorizontally;
-                }
+                SwitchToState(WALK_STATE);
+                robot.LowerPart.chooseDirection(direction);
             }
 
         }
 
         private void stopWalk()
         {
+            WalkingState.stopMovement(robot.LowerPart, robot.LowerPart.wheelMotor);
             if (!(CurrentState is PullingState))
             {
                 SwitchToState(WAIT_STATE);
             }
-            robot.LowerPart.LinearVelocity = new Vector2(0, robot.LowerPart.LinearVelocity.Y);
-            robot.LowerPart.wheelMotor.MotorSpeed = 0f;
         }
 
     }

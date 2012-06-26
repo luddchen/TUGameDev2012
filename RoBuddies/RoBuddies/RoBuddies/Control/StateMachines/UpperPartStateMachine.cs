@@ -13,10 +13,6 @@ namespace RoBuddies.Control.StateMachines
 {
     class UpperPartStateMachine : StateMachine
     {
-        public const String WAIT_STATE = "WaitingState";
-        public const String SHOOTING_STATE = "ShootingState";
-        public const String PIPE_CLIMBING_STATE = "PipeClimbingState";
-
         private const int START_ANIMATION = 80;
         private const int END_ANIMATION = 130;
 

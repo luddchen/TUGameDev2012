@@ -47,23 +47,31 @@ namespace RoBuddies.Control.RobotStates
             currentTextureIndex += 0.8f;
         }
 
-        public static void joinMovement(Model.PhysicObject body, FarseerPhysics.Dynamics.Joints.RevoluteJoint motor, bool isOnGround, int direction)
+        public static void joinMovement(Model.PhysicObject body, FarseerPhysics.Dynamics.Joints.RevoluteJoint motor, bool isOnGround, Model.Direction direction)
         {
-
+            int dir = 1;
+            if (direction == Model.Direction.left) { dir = -1; }
             if (!isOnGround)
             {
                 motor.MotorSpeed = 0f;
-                body.ApplyForce(new Vector2(direction * force, 0));
+                body.ApplyForce(new Vector2(dir * force, 0));
                 if (Math.Abs(body.LinearVelocity.X) > Math.Abs(velocityLimit))
                 {
-                    body.LinearVelocity = new Vector2(direction * velocityLimit, body.LinearVelocity.Y);
+                    body.LinearVelocity = new Vector2(dir * velocityLimit, body.LinearVelocity.Y);
                 }
             }
             else
             {
-                motor.MotorSpeed = direction * motorSpeed;
+                motor.MotorSpeed = dir * motorSpeed;
             }
 
         }
+
+        public static void stopMovement(Model.PhysicObject body, FarseerPhysics.Dynamics.Joints.RevoluteJoint motor)
+        {
+            body.LinearVelocity = new Vector2(0, body.LinearVelocity.Y);
+            motor.MotorSpeed = 0f;
+        }
+
     }
 }
