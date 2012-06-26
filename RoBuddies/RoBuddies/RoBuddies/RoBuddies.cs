@@ -142,7 +142,11 @@ namespace RoBuddies
 
             if (startScreen)
             {
-                if (newKeyboardState.GetPressedKeys().Length > 0)
+                if (newKeyboardState.GetPressedKeys().Length > 0 
+                    || newGamePadState.IsButtonDown(Buttons.Start) || newGamePadState.IsButtonDown(Buttons.A)
+                    || newGamePadState.IsButtonDown(Buttons.B) || newGamePadState.IsButtonDown(Buttons.X)
+                    || newGamePadState.IsButtonDown(Buttons.Y) || newGamePadState.IsButtonDown(Buttons.Start)
+                    || newGamePadState.IsButtonDown(Buttons.Back)) // unfortunately there's only this ugly way to detect any pressed gamepad buttons :-(
                 {
                     startScreen = false;
                 }

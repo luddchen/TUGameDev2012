@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework;
 
 namespace RoBuddies.Control
 {
@@ -178,25 +179,22 @@ namespace RoBuddies.Control
             Buttons button = Buttons.Start;
             switch (controlButton)
             {
-                // ===============================================
-                // todo : change the buttons here
-                // ===============================================
-                case ControlButton.down: { button = Buttons.Start; break; }
-                case ControlButton.up: { button = Buttons.Start; break; }
-                case ControlButton.left: { button = Buttons.Start; break; }
-                case ControlButton.right: { button = Buttons.Start; break; }
+                case ControlButton.down: { button = Buttons.DPadDown; break; }
+                case ControlButton.up: { button = Buttons.DPadUp; break; }
+                case ControlButton.left: { button = Buttons.DPadLeft; break; }
+                case ControlButton.right: { button = Buttons.DPadRight; break; }
 
-                case ControlButton.jump: { button = Buttons.Start; break; }
-                case ControlButton.releasePipe: { button = Buttons.Start; break; }
+                case ControlButton.jump: { button = Buttons.A; break; }
+                case ControlButton.releasePipe: { button = Buttons.A; break; }
 
-                case ControlButton.use: { button = Buttons.Start; break; }
-                case ControlButton.head: { button = Buttons.Start; break; }
+                case ControlButton.use: { button = Buttons.X; break; }
+                case ControlButton.head: { button = Buttons.B; break; }
 
-                case ControlButton.separateRobot: { button = Buttons.Start; break; }
-                case ControlButton.switchRobotPart: { button = Buttons.Start; break; }
+                case ControlButton.separateRobot: { button = Buttons.Y; break; }
+                case ControlButton.switchRobotPart: { button = Buttons.Y; break; }
 
                 case ControlButton.menu: { button = Buttons.Start; break; }
-                case ControlButton.enter: { button = Buttons.Start; break; }
+                case ControlButton.enter: { button = Buttons.A; break; }
             }
             return button;
         }
