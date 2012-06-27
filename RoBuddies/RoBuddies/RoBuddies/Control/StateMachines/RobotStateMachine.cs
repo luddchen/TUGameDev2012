@@ -88,6 +88,7 @@ namespace RoBuddies.Control.StateMachines
                     mPartsCombinedStateMachine.SwitchToState(PartsCombinedStateMachine.WAIT_STATE);
                     mRobot.PartsCombined.wheelMotor.MotorSpeed = 0;
                     mRobot.LowerPart.LinearVelocity = mRobot.PartsCombined.LinearVelocity;
+                    mRobot.UpperPart.LinearVelocity = Vector2.Zero;
                     mRobot.UpperPart.Position = Vector2.Add(mRobot.PartsCombined.Position, new Vector2(0, mRobot.PartsCombined.Height / 2));
                     mRobot.LowerPart.Position = new Vector2(mRobot.PartsCombined.Position.X, mRobot.PartsCombined.Position.Y - mRobot.PartsCombined.Height / 2 + mRobot.LowerPart.Height / 2);
                     mRobot.LowerPart.wheelBody.Position = mRobot.LowerPart.Position + new Vector2(0, (-1f / 2f) + 0.20f);

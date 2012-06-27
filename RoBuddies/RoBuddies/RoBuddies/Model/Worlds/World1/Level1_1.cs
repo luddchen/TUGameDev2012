@@ -34,25 +34,15 @@ namespace RoBuddies.Model.Worlds.World1
             levelObjects.Add(door);
             levelObjects.Add(doorSwitcher);
 
-            //Switch wall testing 
-            Wall switchWall = new Wall(new Vector2(4f, -1f), new Vector2(2f, 5f), Color.BurlyWood, this.Level, this.game, true);
-            Switch wallSwitcher = new Switch(new Vector2(2f, 0f), new Vector2(1f, 1f), Color.BurlyWood, this.Level, this.game, switchWall, this.Level.Robot);
-            levelObjects.Add(switchWall);
-            levelObjects.Add(wallSwitcher);
-
         }
 
         protected override void addLevelLabels()
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString welcomeString = new HUDString("I <3 \nRoBuddies", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            welcomeString.Position = ConvertUnits.ToDisplayUnits(new Vector2(-5, 4.5f));
+            HUDString welcomeString = new HUDString("I <3\nRoBuddies", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            welcomeString.Position = ConvertUnits.ToDisplayUnits(new Vector2(0, 4.5f));
             levelLabels.Add(welcomeString);
-
-            HUDString hintString = new HUDString("Press 's'-Key\nto use levers", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintString.Position = ConvertUnits.ToDisplayUnits(new Vector2(0, 1));
-            levelLabels.Add(hintString);
         }
     }
     
