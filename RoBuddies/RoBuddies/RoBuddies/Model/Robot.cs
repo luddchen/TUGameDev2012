@@ -92,6 +92,7 @@ namespace RoBuddies.Model
         public void removeHead() {
             this.robotStateMachine.PartsCombinedStateMachine.HeadStateMachine.HasHead = false;
             this.robotStateMachine.UpperPartStateMachine.HeadStateMachine.HasHead = false;
+            this.level.Robot.head.setVisible(false);
         }
 
         private void initRobot(ContentManager content, Vector2 pos) 

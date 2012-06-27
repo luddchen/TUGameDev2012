@@ -119,12 +119,7 @@ namespace RoBuddies.Control.StateMachines
 
             if ((ButtonPressed(ControlButton.left) || ButtonPressed(ControlButton.right)) && (CurrentState is PullingState || CurrentState is PushingState))
             {
-                //Console.Out.WriteLine(robot.PartsCombined.LinearVelocity.X);
-                //if (Math.Abs(robot.PartsCombined.LinearVelocity.X) >= 2.0f
-                //    && Math.Abs(robot.PartsCombined.LinearVelocity.X) <= 4.0f) // only play sound if player starts moving
-                //{
                 Game.soundBank.PlayCue("Pulling");
-                //}
             }
 
             if (ButtonReleased(ControlButton.use) && isPulling)
