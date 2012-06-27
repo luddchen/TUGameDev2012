@@ -32,6 +32,10 @@ namespace RoBuddies.Model.Snapshot
                 {
                     bodyKeyFrame = new LowerPartKeyFrame((LowerPart)body);
                 }
+                else if (body is Door)
+                {
+                    bodyKeyFrame = new DoorKeyFrame((Door)body);
+                }
                 else
                 {
                     bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
@@ -63,6 +67,10 @@ namespace RoBuddies.Model.Snapshot
                 else if (oldBodyKeyframe.Body is LowerPart)
                 {
                     bodyKeyFrame = new LowerPartKeyFrame((LowerPart)oldBodyKeyframe.Body);
+                }
+                else if (oldBodyKeyframe.Body is Door)
+                {
+                    bodyKeyFrame = new DoorKeyFrame((Door)oldBodyKeyframe.Body);
                 }
                 else
                 {

@@ -63,6 +63,12 @@ namespace RoBuddies.Model.Objects
             isSwitchedOn = true;
             game.soundBank.PlayCue("Solved");
             this.Texture = doorClosedTex;
-        }        
+        }
+
+        public void switchOff()
+        {
+            isSwitchedOn = false;
+            this.Texture = doorLockedTex;
+        }    
     }
 }

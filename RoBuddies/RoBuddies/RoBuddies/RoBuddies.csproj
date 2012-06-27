@@ -169,6 +169,7 @@
     <Compile Include="Model\Serializer\Converter\PipeConverter.cs" />
     <Compile Include="Model\Serializer\Converter\WallConverter.cs" />
     <Compile Include="Model\Snapshot\BodyKeyFrame.cs" />
+    <Compile Include="Model\Snapshot\DoorKeyFrame.cs" />
     <Compile Include="Model\Snapshot\KeyFrame.cs" />
     <Compile Include="Model\Snapshot\LowerPartKeyFrame.cs" />
     <Compile Include="Model\Snapshot\PartsCombinedKeyFrame.cs" />
