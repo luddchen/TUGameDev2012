@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 1: Jump";
+        private const String LEVEL_NAME = "Tutorial 1: Jumping";
 
         public Tutorial_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -37,12 +37,12 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintStringJump = new HUDString("Press 'space'-Key\nto jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-20f, 10f));
+            HUDString hintStringJump = new HUDString("  Press 'space'-Key\nor 'A'-Button to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
             levelLabels.Add(hintStringJump);
 
 
-            HUDString hintStringDoor = new HUDString("Press 'up'-Key\nto go to next level", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            HUDString hintStringDoor = new HUDString("Press 'up' to\ngo to next level", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(6.5f, 14f));
             levelLabels.Add(hintStringDoor);
         }

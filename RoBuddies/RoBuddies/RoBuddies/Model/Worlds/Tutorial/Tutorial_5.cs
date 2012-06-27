@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_5.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 5: Use Switcher";
+        private const String LEVEL_NAME = "Tutorial 5: Use Switches";
 
         public Tutorial_5(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -45,7 +45,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintStringSwitcher = new HUDString("Press 'up'-Key\nto use switcher", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            HUDString hintStringSwitcher = new HUDString("Press 'S'-Key\nor 'X'-Button\nto use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(4.5f, 10f));
             levelLabels.Add(hintStringSwitcher);
         }

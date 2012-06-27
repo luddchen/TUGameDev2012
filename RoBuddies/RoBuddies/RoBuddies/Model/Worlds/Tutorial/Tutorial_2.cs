@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_2.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 2: Seperate";
+        private const String LEVEL_NAME = "Tutorial 2: Seperation";
 
         public Tutorial_2(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -37,9 +37,13 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintStringSeperate = new HUDString("Press 'x'-Key\nto seperate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-17f, 6.5f));
+            HUDString hintStringSeperate = new HUDString("Press 'x'-Key or\n'Y'-Button\nto seperate and\nchange parts", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-16f, 6.5f));
             levelLabels.Add(hintStringSeperate);
+
+            HUDString hintStringStopClimb = new HUDString("Press 'space'-Key or\n'A'-Button\nto stop climbing", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringStopClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(3.5f, 7.75f));
+            levelLabels.Add(hintStringStopClimb);
         }
     }
 

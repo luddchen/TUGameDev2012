@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_3.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 3: Climb";
+        private const String LEVEL_NAME = "Tutorial 3: Climbing";
 
         public Tutorial_3(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -37,8 +37,8 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintStringClimb = new HUDString("Press 'up'-Key\nto climb ladder", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12f, 9.5f));
+            HUDString hintStringClimb = new HUDString("Press 'up'\nto climb ladders", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12f, 10f));
             levelLabels.Add(hintStringClimb);
         }
     }

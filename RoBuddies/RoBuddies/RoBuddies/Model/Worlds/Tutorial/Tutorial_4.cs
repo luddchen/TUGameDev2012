@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_4.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 4: Move Crate";
+        private const String LEVEL_NAME = "Tutorial 4: Move Crates";
 
         public Tutorial_4(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -37,7 +37,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString hintStringCrate = new HUDString("Press 's'-Key\nto move the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            HUDString hintStringCrate = new HUDString("Hold 's'-Key or\n'X'-Button to\nmove the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 17f));
             levelLabels.Add(hintStringCrate);
         }
