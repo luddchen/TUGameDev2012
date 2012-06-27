@@ -16,6 +16,7 @@ namespace RoBuddies.Model.Objects
         private Game game;
         private bool switchable = false;
 
+
         private Texture2D roboLabTex;
         private Texture2D mountainTex;
         private Texture2D platformLeft;
@@ -78,25 +79,43 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D createTexture(Vector2 newSize, Texture2D wallTex)
         {
-            if (newSize.X > 1)
+            switch(level.theme)
             {
-                //wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
-                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, platformLeft, platformCenter, platformRight, (int)(newSize.X - 2));
+                case LevelTheme.MOUNTAIN:
 
-            }
-            if (newSize.Y > 1)
-            {
-                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));
+                    if (newSize.X > 1)
+                    {
+                        wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, platformLeft, platformCenter, platformRight, (int)(newSize.X - 2));
+                    }
 
-             //   wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
-            }
+                    if (newSize.Y > 1)
+                    {
+                        wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));
+                    }
 
-            if (newSize.X > 1 && newSize.Y > 1)
-            {
-                Texture2D leftWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformLeft, soilLeft, soilLeft, (int)(newSize.Y - 2));
-                Texture2D centerWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));                
-                Texture2D rightWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformRight, soilRight, soilRight, (int)(newSize.Y - 2));
-                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, leftWall, centerWall, rightWall, (int)(newSize.X - 2));
+                    if (newSize.X > 1 && newSize.Y > 1)
+                    {
+                        Texture2D leftWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformLeft, soilLeft, soilLeft, (int)(newSize.Y - 2));
+                        Texture2D centerWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));                
+                        Texture2D rightWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformRight, soilRight, soilRight, (int)(newSize.Y - 2));
+                        wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, leftWall, centerWall, rightWall, (int)(newSize.X - 2));
+                    }
+
+                    break;
+                case LevelTheme.MENTAL_HOSPITAL:
+                case LevelTheme.ROBO_LAB:
+
+                    if (newSize.X > 1)
+                    {
+                        wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
+                    }
+
+                    if (newSize.Y > 1)
+                    {
+                        wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
+                    }
+
+                    break;
             }
 
             return wallTex;
