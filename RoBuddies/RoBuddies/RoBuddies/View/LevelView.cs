@@ -20,7 +20,7 @@ namespace RoBuddies.View
         public LevelHUD topHud;
         private TimeSpan nextLevelLoadedTime;
 
-        private Worlds worlds;
+        public Worlds worlds;
 
         /// <summary>
         /// for debugging the physical world

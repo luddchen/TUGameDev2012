@@ -5,6 +5,7 @@ using RoBuddies.Control;
 using RoBuddies.Model.Worlds.Tutorial;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
+using RoBuddies.Model.Worlds;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -20,6 +21,11 @@ namespace RoBuddies.View.MenuPages
         private HUDString tutorial7;
         private HUDString tutorial8;
         private HUDString tutorial9;
+
+        Worlds Worlds
+        {
+            get { return ((LevelView)this.Menu.Game.LevelView).worlds; }
+        }
 
         public override void OnViewPortResize()
         {
