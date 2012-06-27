@@ -18,7 +18,12 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D roboLabTex;
         private Texture2D mountainTex;
-        private Texture2D soilTex;
+        private Texture2D platformLeft;
+        private Texture2D platformRight;
+        private Texture2D platformCenter;
+        private Texture2D soilLeft;
+        private Texture2D soilRight;
+        private Texture2D soilCenter;
         private static Random random = new Random();
 
         /// <summary>
@@ -35,9 +40,15 @@ namespace RoBuddies.Model.Objects
             this.game = game;
 
             roboLabTex = game.Content.Load<Texture2D>("Sprites//WallTest");
-           // mountainTex = game.Content.Load<Texture2D>("Sprites//Wall" + RandomNumber(1, 4));
-            mountainTex = game.Content.Load<Texture2D>("Sprites//Platform");
-            soilTex = game.Content.Load<Texture2D>("Sprites//Wall1");
+            mountainTex = game.Content.Load<Texture2D>("Sprites//Wall" + RandomNumber(1, 4));
+
+            platformLeft = game.Content.Load<Texture2D>("Sprites//Platform_Left");
+            platformRight = game.Content.Load<Texture2D>("Sprites//Platform_Right");
+            platformCenter = game.Content.Load<Texture2D>("Sprites//Platform_Center");
+
+            soilLeft = game.Content.Load<Texture2D>("Sprites//Wall_Left");
+            soilRight = game.Content.Load<Texture2D>("Sprites//Wall_Right");
+            soilCenter = game.Content.Load<Texture2D>("Sprites//Wall1");
 
             defineTextures(createTexture(size, roboLabTex), createTexture(size, mountainTex), createTexture(size, roboLabTex));
 
@@ -70,15 +81,24 @@ namespace RoBuddies.Model.Objects
             if (newSize.X > 1)
             {
                 //wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
-                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, mountainTex, mountainTex, mountainTex, (int)(newSize.X - 2));
+                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, platformLeft, platformCenter, platformRight, (int)(newSize.X - 2));
 
             }
             if (newSize.Y > 1)
             {
-                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, mountainTex, soilTex, soilTex, (int)(newSize.Y - 2));
+                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));
 
              //   wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
             }
+
+            if (newSize.X > 1 && newSize.Y > 1)
+            {
+                Texture2D leftWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformLeft, soilLeft, soilLeft, (int)(newSize.Y - 2));
+                Texture2D centerWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformCenter, soilCenter, soilCenter, (int)(newSize.Y - 2));                
+                Texture2D rightWall = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, platformRight, soilRight, soilRight, (int)(newSize.Y - 2));
+                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, leftWall, centerWall, rightWall, (int)(newSize.X - 2));
+            }
+
             return wallTex;
         }
 
