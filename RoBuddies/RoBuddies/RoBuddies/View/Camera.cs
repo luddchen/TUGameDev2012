@@ -244,19 +244,20 @@ namespace RoBuddies.View
                     }
                 }
             }
+            // unfortunately this doesn't work good:
             // deactivate bounding box in X or Y direction, if it's
             // smaller than the viewing resolution. Thereby the level
             // will be centered.
-            if (bounds.Width <= 0)
-            {
-                bounds.X = -int.MaxValue;
-                bounds.Width = int.MaxValue;
-            }
-            if (bounds.Height <= 0)
-            {
-                bounds.Y = -int.MaxValue;
-                bounds.Height = int.MaxValue;
-            }
+            //if (bounds.Width <= 0)
+            //{
+            //    bounds.X = -int.MaxValue;
+            //    bounds.Width = int.MaxValue;
+            //}
+            //if (bounds.Height <= 0)
+            //{
+            //    bounds.Y = -int.MaxValue;
+            //    bounds.Height = int.MaxValue;
+            //}
             this.SetBoundingBox(bounds);
         }
     }

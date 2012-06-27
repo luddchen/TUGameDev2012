@@ -85,7 +85,8 @@ namespace RoBuddies.Control.StateMachines
                 pullCrate();
             }
 
-            if ((ButtonPressed(ControlButton.left) || ButtonPressed(ControlButton.right)) && (CurrentState is PullingState || CurrentState is PushingState))
+            if (((ButtonPressed(ControlButton.left) && canPush(Direction.left)) || (ButtonPressed(ControlButton.right) && canPush(Direction.right)))
+                && (CurrentState is PullingState || CurrentState is PushingState))
             {
                 Game.soundBank.PlayCue("Pulling");
             }
@@ -119,10 +120,19 @@ namespace RoBuddies.Control.StateMachines
                 if (direction == Model.Direction.left) { dir = -1; }
                 if (CurrentState is PushingState)
                 {
-                    ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.LowerPart, 100 * dir);
+                    if (canPush(direction)) // crate is right
+                    {
+                        ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.LowerPart, 100 * dir);
+                    }
                 }
             }
 
+        }
+
+        private bool canPush(Direction direction)
+        {
+            return this.currentCrate != null && ((this.currentCrate.Position.X <= robot.LowerPart.Position.X && direction == Model.Direction.left) // crate is left
+                                    || (this.currentCrate.Position.X >= robot.LowerPart.Position.X && direction == Model.Direction.right));
         }
 
         private void stopWalk()

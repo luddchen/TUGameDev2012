@@ -14,7 +14,7 @@ namespace RoBuddies.Control.RobotStates
 {
     class PipeClimbingState : AnimatedState
     {
-        private const float MAX_MOTOR_FORCE = 1000f;
+        private const float MAX_MOTOR_FORCE = 10000f;
 
         private const int START_CLIMBING = 10; // 90 - 80
         private const int STOP_CLIMBING = 20;  // 100 - 80
