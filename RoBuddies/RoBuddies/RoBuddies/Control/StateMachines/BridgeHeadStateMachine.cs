@@ -55,6 +55,8 @@ namespace RoBuddies.Control.StateMachines
                     oldWall = newWall;
                 }
             }
+
+            base.Update(gameTime);
         }
 
         private bool isOnGround()
