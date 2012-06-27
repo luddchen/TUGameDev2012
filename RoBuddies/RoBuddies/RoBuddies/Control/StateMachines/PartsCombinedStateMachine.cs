@@ -157,13 +157,12 @@ namespace RoBuddies.Control.StateMachines
                 Level.finished = true;
             }
 
-            CurrentState.Update(gameTime);
-
             if (mHeadStateMachine.HasHead)
             {
                 mHeadStateMachine.Update(gameTime);
             }
 
+            CurrentState.Update(gameTime);
         }
 
         /// <summary>

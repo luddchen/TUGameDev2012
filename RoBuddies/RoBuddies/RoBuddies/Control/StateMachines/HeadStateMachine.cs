@@ -16,8 +16,6 @@ namespace RoBuddies.Control.StateMachines
         protected Robot robot;
         private bool hasHead;
 
-        public const String WAIT_STATE = "WaitingState";
-
         public bool HasHead
         {
             get { return hasHead; }
@@ -33,7 +31,7 @@ namespace RoBuddies.Control.StateMachines
             this.textureList = new List<Texture2D>();
             this.contentManager = contentManager;
             this.robot = robot;
-            this.hasHead = true;
+            this.HasHead = true;
 
             textureList.Add(contentManager.Load<Texture2D>("Sprites\\Circle"));
             body.Texture = textureList[0];
