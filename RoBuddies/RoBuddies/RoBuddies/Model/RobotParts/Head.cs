@@ -13,7 +13,7 @@ namespace RoBuddies.Model.RobotParts
         {
             this.IgnoreGravity = true;
             this.BodyType = BodyType.Dynamic;
-            this.createRectangleFixture();
+            //this.createRectangleFixture();
             this.level.GetLayerByName("mainLayer").AddObject(this);
         }
 
