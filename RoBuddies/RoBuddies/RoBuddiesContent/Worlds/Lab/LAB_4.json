@@ -1,0 +1,169 @@
+{
+  "Gravity": "0, -10",
+  "Layers": [
+    {
+      "Layer": {
+        "Name": "backLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.51,
+        "Walls": [],
+        "Crates": [],
+        "Pipes": [
+          {
+            "Pipe": {
+              "Position": "1, 4",
+              "Color": "255, 255, 255, 255",
+              "Width": 25.0
+            }
+          }
+        ],
+        "Ladders": []
+      }
+    },
+    {
+      "Layer": {
+        "Name": "mainLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.5,
+        "Walls": [
+          {
+            "Wall": {
+              "Position": "2, -6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 49.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "23, -4",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, 10",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, -5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "26, 5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 21.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-4, 5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 39.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-23, -1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 11.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-11, 4",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "14, 4",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "16, 8",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 13.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "21, 15",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 11.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "18, 2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "23, 6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 1.0
+              }
+            }
+          }
+        ],
+        "Crates": [],
+        "Pipes": [],
+        "Ladders": []
+      }
+    }
+  ],
+  "Robot": {
+    "Position": "-21, -4"
+  }
+}

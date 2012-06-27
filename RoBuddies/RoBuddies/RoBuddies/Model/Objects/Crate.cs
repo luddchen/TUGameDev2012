@@ -22,10 +22,8 @@ namespace RoBuddies.Model.Objects
 
             Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
             defineTextures(crateTex, crateTex, crateTex);
-
             this.BodyType = BodyType.Dynamic;
             this.FixedRotation = true;
-            this.BodyType = BodyType.Static;
             changeCrateSize(size);
         }
 
@@ -59,10 +57,12 @@ namespace RoBuddies.Model.Objects
             {
                 if (value && isHeavyCrate)
                 {
+                    this.BodyType = BodyType.Dynamic;
                     this.Color = Color.BurlyWood;
                 }
                 else if (isHeavyCrate)
                 {
+                    this.BodyType = BodyType.Static;
                     this.Color = Color.White;
                 }
             }
@@ -76,7 +76,7 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            createRectangleFixture();
+            createRectangleFixture(25f);
             calculateHeaviness();
         }
 

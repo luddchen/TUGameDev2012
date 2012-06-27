@@ -229,7 +229,6 @@ namespace RoBuddies.Control.StateMachines
                     SwitchToState(PULL_STATE);
 
                     currentCrate = crate;
-                    currentCrate.BodyType = BodyType.Dynamic;
                     if (currentCrate.Position.X < robot.PartsCombined.Position.X)
                     {
                         robot.PartsCombined.chooseDirection(Model.Direction.left);
@@ -265,7 +264,6 @@ namespace RoBuddies.Control.StateMachines
             robot.PartsCombined.wheelBody.RestoreCollisionWith(currentCrate);
             robot.PartsCombined.RestoreCollisionWith(currentCrate);
             currentCrate.LinearVelocity = Vector2.Zero;
-            currentCrate.BodyType = BodyType.Static;
         }
 
         private void climbLadder(float distance)

@@ -1110,9 +1110,7 @@
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Worlds\World3\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="Worlds\Tutorial\TUTORIAL_1.json">
       <Name>TUTORIAL_1</Name>
@@ -1128,6 +1126,10 @@
     </None>
     <None Include="Worlds\Tutorial\TUTORIAL_4.json">
       <Name>TUTORIAL_4</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Tutorial\TUTORIAL_5.json">
+      <Name>TUTORIAL_5</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Worlds\World1\LEVEL1_1.json">
@@ -1160,6 +1162,22 @@
     </None>
     <None Include="Worlds\World2\LEVEL2_5.json">
       <Name>LEVEL2_5</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Lab\LAB_1.json">
+      <Name>LAB_1</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Lab\LAB_2.json">
+      <Name>LAB_2</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Lab\LAB_3.json">
+      <Name>LAB_3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Lab\LAB_4.json">
+      <Name>LAB_4</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
