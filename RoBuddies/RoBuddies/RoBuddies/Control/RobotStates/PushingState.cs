@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.StateMachines;
+using RoBuddies.Model.RobotParts;
 
 namespace RoBuddies.Control.RobotStates
 {
@@ -37,9 +38,11 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Update(GameTime gameTime)
         {
-            StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
-
-            UpdateClimbAnimation(gameTime);
+            if (StateMachine.Body is PartsCombined)
+            {
+                StateMachine.Body.Texture = TextureList[(int)currentTextureIndex];
+                UpdateClimbAnimation(gameTime);
+            }
         }
 
         private void UpdateClimbAnimation(GameTime gameTime)
