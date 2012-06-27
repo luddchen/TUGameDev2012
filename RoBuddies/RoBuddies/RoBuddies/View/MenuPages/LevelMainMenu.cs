@@ -14,7 +14,7 @@ namespace RoBuddies.View.MenuPages
         private HUDTexture rewind;
         private HUDTexture forward;
 
-        private int rewindTimer = 8;
+        private int rewindTimer = 3;
         private int rewindCounter = 0;
 
         private HUDTexture chooser;

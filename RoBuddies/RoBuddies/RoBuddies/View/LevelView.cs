@@ -14,6 +14,8 @@ namespace RoBuddies.View
         public Model.Snapshot.Snapshot SnapShot;
         private int snapshotTimer = 10;
         private int snapshotCounter = 10;
+        private int rewindTimer = 3;
+        private int rewindCounter = 0;
 
         public LevelHUD topHud;
         private TimeSpan nextLevelLoadedTime;
@@ -90,8 +92,29 @@ namespace RoBuddies.View
         {
             base.Update(gameTime);
 
+            if (this.SnapShot != null)
+            {
+                if (ButtonIsDown(Control.ControlButton.rewind))
+                {
+                    Pause = true;
+                    this.rewindCounter--;
+                    if (this.rewindCounter < 0)
+                    {
+                        SnapShot.Rewind();
+                        this.rewindCounter = this.rewindTimer;
+                    }
+                }
+
+                if (ButtonReleased(Control.ControlButton.rewind))
+                {
+                    Pause = false;
+                    SnapShot.PlayOn();
+                }
+            }
+
             if (!Pause)
             {
+
                 if (this.Level.finished) // load next level, when current level is finished
                 {
                     viewNextLevel(null, gameTime);

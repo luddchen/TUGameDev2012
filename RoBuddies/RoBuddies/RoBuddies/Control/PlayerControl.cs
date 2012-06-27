@@ -6,7 +6,7 @@ namespace RoBuddies.Control
     /// <summary>
     /// a enumaration of all player usable buttons / keys
     /// </summary>
-    public enum ControlButton { left, right, up, down, jump, releasePipe, use, head, separateRobot, switchRobotPart, menu, enter }; 
+    public enum ControlButton { left, right, up, down, jump, releasePipe, use, head, separateRobot, switchRobotPart, menu, enter, rewind }; 
 
     /// <summary>
     /// class to manage player inputs from different devices 
@@ -165,6 +165,7 @@ namespace RoBuddies.Control
 
                 case ControlButton.menu: { key = Keys.Escape; break; }
                 case ControlButton.enter: { key = Keys.Enter; break; }
+                case ControlButton.rewind: { key = Keys.R; break; }
             }
             return key;
         }
@@ -195,6 +196,7 @@ namespace RoBuddies.Control
 
                 case ControlButton.menu: { button = Buttons.Start; break; }
                 case ControlButton.enter: { button = Buttons.A; break; }
+                case ControlButton.rewind: { button = Buttons.Back; break; }
             }
             return button;
         }

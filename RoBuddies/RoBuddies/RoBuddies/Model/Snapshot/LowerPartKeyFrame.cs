@@ -26,7 +26,6 @@ namespace RoBuddies.Model.Snapshot
         public override void Restore()
         {
             base.Restore();
-            Console.Out.WriteLine("test");
             this.lowerPart.wheelBody.Position = this.wheelPosition;
             this.lowerPart.wheelBody.LinearVelocity = this.wheelVelocity;
             this.lowerPart.wheelBody.Rotation = this.wheelRotation;
