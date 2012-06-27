@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Robuddies.Interfaces;
 
@@ -12,7 +11,7 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D doorClosedTex;
         private Texture2D doorLockedTex;
-        private SoundEffect doorSound;
+        private RoBuddies game;
 
         public bool IsSwitchedOn
         {
@@ -22,10 +21,10 @@ namespace RoBuddies.Model.Objects
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
             : base(pos, size, color, 0, level)
         {
+            this.game = (game as RoBuddies);
+
             doorLockedTex = game.Content.Load<Texture2D>("Sprites//door_locked");
             doorClosedTex = game.Content.Load<Texture2D>("Sprites//door_closed");
-
-            doorSound = game.Content.Load<SoundEffect>("Sounds//solved1");
 
             if (switchable)
             {
@@ -62,7 +61,7 @@ namespace RoBuddies.Model.Objects
         public void switchOn()
         {            
             isSwitchedOn = true;
-            doorSound.Play();
+            game.soundBank.PlayCue("Solved");
             this.Texture = doorClosedTex;
         }        
     }

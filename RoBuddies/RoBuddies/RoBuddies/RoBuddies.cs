@@ -1,13 +1,13 @@
 using System;
+using System.IO;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-
-using RoBuddies.View;
-using RoBuddies.View.HUD;
 using RoBuddies.Model;
 using RoBuddies.Model.Serializer;
-using System.IO;
+using RoBuddies.View;
+using RoBuddies.View.HUD;
 
 namespace RoBuddies
 {
@@ -17,6 +17,10 @@ namespace RoBuddies
     class RoBuddies : Microsoft.Xna.Framework.Game
     {
         public enum ViewMode{ Level, Editor }
+
+        public AudioEngine audioEngine;
+        public SoundBank soundBank;
+        public WaveBank waveBank;
 
         /// <summary>
         /// the keyboard state before update
@@ -98,6 +102,10 @@ namespace RoBuddies
         /// </summary>
         protected override void LoadContent()
         {
+            audioEngine = new AudioEngine(Content.RootDirectory + "//Sound//Robuddies.xgs");
+            waveBank = new WaveBank(audioEngine, Content.RootDirectory + "//Sound//Wave Bank.xwb");
+            soundBank = new SoundBank(audioEngine, Content.RootDirectory + "//Sound//Sound Bank.xsb");
+
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
             LevelMenu = new LevelMenu(this);

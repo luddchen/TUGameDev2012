@@ -25,9 +25,6 @@ namespace RoBuddies.Control.StateMachines
         private bool isPulling;
         private float pullingDistance;
 
-        private SoundEffect pullingSound;
-        private SoundEffectInstance pullSoundInstance;
-
         private HeadStateMachine mHeadStateMachine;
 
         public Level Level
@@ -48,9 +45,6 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.textureList = new List<Texture2D>();
             this.isPulling = false;
-
-            pullingSound = contentManager.Load<SoundEffect>("Sounds\\push_pull");
-            pullSoundInstance = pullingSound.CreateInstance();
 
             mHeadStateMachine = new BridgeHeadStateMachine(robot.Head, contentManager, robot);
 
@@ -294,7 +288,7 @@ namespace RoBuddies.Control.StateMachines
             {
                 if (Math.Abs(robot.PartsCombined.LinearVelocity.X) < 0.1f) // only play sound if player starts moving
                 {
-                    pullSoundInstance.Play();
+                    Game.soundBank.PlayCue("Pulling");
                 }
                 int dir = 1;
                 if (direction == Model.Direction.left) { dir = -1; }

@@ -15,17 +15,15 @@ namespace RoBuddies.Control.RobotStates
         private const int STOP_JUMPING = 38;
 
         private float currentTextureIndex;
-        private SoundEffect jumpSound;
 
         public JumpingState(String name, List<Texture2D> textureList, StateMachine machine)
             : base(name, textureList, machine)
         {
-            jumpSound = machine.Game.Content.Load<SoundEffect>("Sounds//boing");
         }
 
         public override void Enter()
         {
-            jumpSound.Play();
+            StateMachine.Game.soundBank.PlayCue("Jump");
 
             if (StateMachine.Body is PartsCombined)
             {

@@ -117,10 +117,12 @@ namespace RoBuddies.View.MenuPages
                         if (soundValue.String == "on")
                         {
                             soundValue.String = "off";
+                            this.Menu.Game.audioEngine.GetCategory("SFX").SetVolume(0);
                         }
                         else
                         {
                             soundValue.String = "on";
+                            this.Menu.Game.audioEngine.GetCategory("SFX").SetVolume(1);
                         }
                     }
 
@@ -129,10 +131,12 @@ namespace RoBuddies.View.MenuPages
                         if (musicValue.String == "on")
                         {
                             musicValue.String = "off";
+                            this.Menu.Game.audioEngine.GetCategory("Music").SetVolume(0);
                         }
                         else
                         {
                             musicValue.String = "on";
+                            this.Menu.Game.audioEngine.GetCategory("Music").SetVolume(1);
                         }
                     }
                 }
