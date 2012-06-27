@@ -11,7 +11,7 @@ namespace RoBuddies.Control.StateMachines
 {
     class HeadStateMachine : StateMachine
     {
-        private List<Texture2D> textureList;
+        protected List<Texture2D> textureList;
         private ContentManager contentManager;
         protected Robot robot;
         private bool hasHead;
@@ -33,7 +33,7 @@ namespace RoBuddies.Control.StateMachines
             this.robot = robot;
             this.HasHead = true;
 
-            textureList.Add(contentManager.Load<Texture2D>("Sprites\\Circle"));
+            textureList.Add(contentManager.Load<Texture2D>("Sprites//Robot//BridgeHead"));
             body.Texture = textureList[0];
 
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
@@ -55,13 +55,16 @@ namespace RoBuddies.Control.StateMachines
 
         private void UpdatePosition()
         {
+            robot.Head.Effect = robot.ActivePart.Effect;
+            float xOffset = 0;// 0.05f;
+            if (robot.Head.Effect == SpriteEffects.None) { xOffset *= -1; }
             if (robot.ActivePart != robot.UpperPart)
             {
-                Body.Position = robot.ActivePart.Position + new Vector2(0, robot.ActivePart.Height / 2);
+                Body.Position = robot.ActivePart.Position + new Vector2(xOffset, robot.ActivePart.Height / 2 + robot.Head.Height / 4);
             }
             else
             {
-                Body.Position = robot.ActivePart.Position + new Vector2(0, robot.ActivePart.Height / 4);
+                Body.Position = robot.ActivePart.Position + new Vector2(xOffset, robot.ActivePart.Height / 4 + robot.Head.Height / 4);
             }
         }
     }

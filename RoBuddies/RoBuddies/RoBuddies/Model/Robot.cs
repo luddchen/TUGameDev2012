@@ -111,7 +111,7 @@ namespace RoBuddies.Model
 
         private void initHead(Vector2 pos, ContentManager content)
         {
-            this.head = new Head(pos, new Vector2(1,1), Color.White, this.level);
+            this.head = new Head(pos, new Vector2(1.3f,1.3f), Color.White, this.level);
         }
 
         private void initLowerPart(Vector2 pos, ContentManager content)
