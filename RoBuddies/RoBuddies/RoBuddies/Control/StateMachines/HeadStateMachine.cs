@@ -56,7 +56,8 @@ namespace RoBuddies.Control.StateMachines
         private void UpdatePosition()
         {
             robot.Head.Effect = robot.ActivePart.Effect;
-            float xOffset = 0;// 0.05f;
+            float xOffset = 0;
+            if (robot.RobotStateMachine.PartsCombinedStateMachine.CurrentState is PushingState) { xOffset -= 0.2f; }
             if (robot.Head.Effect == SpriteEffects.None) { xOffset *= -1; }
             if (robot.ActivePart != robot.UpperPart)
             {
