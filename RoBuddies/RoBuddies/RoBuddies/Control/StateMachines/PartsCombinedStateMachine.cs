@@ -117,6 +117,16 @@ namespace RoBuddies.Control.StateMachines
                 pullCrate();
             }
 
+            if ((ButtonPressed(ControlButton.left) || ButtonPressed(ControlButton.right)) && (CurrentState is PullingState || CurrentState is PushingState))
+            {
+                //Console.Out.WriteLine(robot.PartsCombined.LinearVelocity.X);
+                //if (Math.Abs(robot.PartsCombined.LinearVelocity.X) >= 2.0f
+                //    && Math.Abs(robot.PartsCombined.LinearVelocity.X) <= 4.0f) // only play sound if player starts moving
+                //{
+                Game.soundBank.PlayCue("Pulling");
+                //}
+            }
+
             if (ButtonReleased(ControlButton.use) && isPulling)
             {
                 stopPulling();
@@ -286,10 +296,6 @@ namespace RoBuddies.Control.StateMachines
 
             if (isPulling)
             {
-                if (Math.Abs(robot.PartsCombined.LinearVelocity.X) < 0.1f) // only play sound if player starts moving
-                {
-                    Game.soundBank.PlayCue("Pulling");
-                }
                 int dir = 1;
                 if (direction == Model.Direction.left) { dir = -1; }
                 if (CurrentState is PushingState)
