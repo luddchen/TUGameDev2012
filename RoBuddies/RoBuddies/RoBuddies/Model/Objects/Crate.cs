@@ -20,7 +20,7 @@ namespace RoBuddies.Model.Objects
             : base(pos, size, color, 1, level)
         {
 
-            Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate2");
+            Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate1");
             defineTextures(crateTex, crateTex, crateTex);
             this.BodyType = BodyType.Dynamic;
             this.FixedRotation = true;

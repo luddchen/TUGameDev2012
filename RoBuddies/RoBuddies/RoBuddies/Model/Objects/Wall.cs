@@ -18,6 +18,8 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D roboLabTex;
         private Texture2D mountainTex;
+        private Texture2D soilTex;
+        private static Random random = new Random();
 
         /// <summary>
         /// constructs a new crate object
@@ -33,7 +35,9 @@ namespace RoBuddies.Model.Objects
             this.game = game;
 
             roboLabTex = game.Content.Load<Texture2D>("Sprites//WallTest");
-            mountainTex = game.Content.Load<Texture2D>("Sprites//CrateSmall");
+           // mountainTex = game.Content.Load<Texture2D>("Sprites//Wall" + RandomNumber(1, 4));
+            mountainTex = game.Content.Load<Texture2D>("Sprites//Platform");
+            soilTex = game.Content.Load<Texture2D>("Sprites//Wall1");
 
             defineTextures(createTexture(size, roboLabTex), createTexture(size, mountainTex), createTexture(size, roboLabTex));
 
@@ -65,11 +69,15 @@ namespace RoBuddies.Model.Objects
         {
             if (newSize.X > 1)
             {
-                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
+                //wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.X - 2));
+                wallTex = Utilities.TextureConverter.connectLCR(game.GraphicsDevice, mountainTex, mountainTex, mountainTex, (int)(newSize.X - 2));
+
             }
             if (newSize.Y > 1)
             {
-                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
+                wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, mountainTex, soilTex, soilTex, (int)(newSize.Y - 2));
+
+             //   wallTex = Utilities.TextureConverter.connectTCB(game.GraphicsDevice, wallTex, wallTex, wallTex, (int)(newSize.Y - 2));
             }
             return wallTex;
         }
@@ -84,7 +92,11 @@ namespace RoBuddies.Model.Objects
                 for (int i = 0; i < 10 * this.Height; i++ )
                     Position += new Vector2(0, -1);
             }
-        }  
+        }
 
+        private int RandomNumber(int min, int max)
+        {
+            return random.Next(min, max);
+        }
     }
 }
