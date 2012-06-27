@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Control.RobotStates;
 using RoBuddies.Model;
 using RoBuddies.Utilities;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Control.StateMachines
 {
@@ -18,6 +19,9 @@ namespace RoBuddies.Control.StateMachines
         private ContentManager contentManager;
         private List<Texture2D> textureList;
         private Robot robot;
+        private Crate currentCrate;
+        private bool isPulling;
+        private float pullingDistance;
 
         public Level Level
         {
@@ -43,6 +47,7 @@ namespace RoBuddies.Control.StateMachines
             AllStates.Add(new WalkingState(WALK_STATE, textureList, this));
             AllStates.Add(new WaitingState(WAIT_STATE, textureList, this));
             AllStates.Add(new JumpingState(JUMP_STATE, textureList, this));
+            AllStates.Add(new PushingState(PULL_STATE, textureList, this));
 
             SwitchToState(WAIT_STATE);
         }
@@ -75,6 +80,21 @@ namespace RoBuddies.Control.StateMachines
                 stopWalk();
             }
 
+            if (ButtonIsDown(ControlButton.use) && isOnGround())
+            {
+                pullCrate();
+            }
+
+            if ((ButtonPressed(ControlButton.left) || ButtonPressed(ControlButton.right)) && (CurrentState is PullingState || CurrentState is PushingState))
+            {
+                Game.soundBank.PlayCue("Pulling");
+            }
+
+            if (ButtonReleased(ControlButton.use) && isPulling)
+            {
+                stopPulling();
+            }
+
             CurrentState.Update(gameTime);
         }
 
@@ -87,10 +107,20 @@ namespace RoBuddies.Control.StateMachines
         {
             WalkingState.joinMovement(robot.LowerPart, robot.LowerPart.wheelMotor, isOnGround(), direction);
 
-            if (!(CurrentState is PullingState))
+            if (!isPulling)
             {
                 SwitchToState(WALK_STATE);
                 robot.LowerPart.chooseDirection(direction);
+            }
+
+            if (isPulling)
+            {
+                int dir = 1;
+                if (direction == Model.Direction.left) { dir = -1; }
+                if (CurrentState is PushingState)
+                {
+                    ((PushingState)CurrentState).joinMovement(this.currentCrate, this.robot.LowerPart, 100 * dir);
+                }
             }
 
         }
@@ -98,10 +128,93 @@ namespace RoBuddies.Control.StateMachines
         private void stopWalk()
         {
             WalkingState.stopMovement(robot.LowerPart, robot.LowerPart.wheelMotor);
-            if (!(CurrentState is PullingState))
+
+            if (!isPulling)
             {
                 SwitchToState(WAIT_STATE);
             }
+
+            if (isPulling)
+            {
+                currentCrate.LinearVelocity = Vector2.Zero;
+                if (CurrentState is PushingState)
+                {
+                    ((PushingState)CurrentState).IsMoving = false;
+                }
+            }
+        }
+
+        private void pullCrate()
+        {
+            Crate crate = getMovableCrate();
+
+            if (!isPulling)
+            {
+                if (crate != null)
+                {
+                    SwitchToState(PULL_STATE);
+
+                    currentCrate = crate;
+                    if (currentCrate.Position.X < robot.LowerPart.Position.X)
+                    {
+                        robot.LowerPart.chooseDirection(Model.Direction.left);
+                    }
+                    else
+                    {
+                        robot.LowerPart.chooseDirection(Model.Direction.right);
+                    }
+
+                    robot.LowerPart.wheelBody.IgnoreCollisionWith(currentCrate);
+                    robot.LowerPart.IgnoreCollisionWith(currentCrate);
+
+                    pullingDistance = robot.LowerPart.Position.X - currentCrate.Position.X;
+
+                    isPulling = true;
+                }
+            }
+            else
+            {
+                if (crate == null)
+                {
+                    stopPulling();
+                }
+            }
+        }
+
+        private Crate getMovableCrate()
+        {
+            float rayEnd;
+
+            Vector2 lowerPartPos = robot.LowerPart.Position;
+
+            rayEnd = lowerPartPos.X - robot.LowerPart.Width / 3;
+            FarseerPhysics.Dynamics.Body bodyLeft = RayCastUtility.getIntersectingObject(this.Level, lowerPartPos, new Vector2(rayEnd, lowerPartPos.Y));
+
+            if (bodyLeft != null && bodyLeft is Crate)
+            {
+                return bodyLeft as Crate;
+            }
+
+            rayEnd = lowerPartPos.X + robot.LowerPart.Width / 3;
+            FarseerPhysics.Dynamics.Body bodyRight = RayCastUtility.getIntersectingObject(this.Level, lowerPartPos, new Vector2(rayEnd, lowerPartPos.Y));
+
+            if (bodyRight != null && bodyRight is Crate)
+            {
+                return bodyRight as Crate;
+            }
+
+            return null;
+        }
+
+        private void stopPulling()
+        {
+            SwitchToState(WAIT_STATE);
+
+            isPulling = false;
+
+            robot.LowerPart.wheelBody.RestoreCollisionWith(currentCrate);
+            robot.LowerPart.RestoreCollisionWith(currentCrate);
+            currentCrate.LinearVelocity = Vector2.Zero;
         }
 
     }
