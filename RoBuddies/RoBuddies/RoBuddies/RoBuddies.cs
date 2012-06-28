@@ -47,8 +47,6 @@ namespace RoBuddies
         SpriteBatch SpriteBatch;
         Texture2D splash;
         bool startScreen = true;
-        bool started = false;
-        Color splashColor = Color.White;
 
         public HUDLevelView LevelView;
         HUDMenu LevelMenu;
@@ -147,10 +145,18 @@ namespace RoBuddies
                 }
                 this.SwitchToViewMode(RoBuddies.ViewMode.Editor);
             }
+            
+            if (!startScreen)
+            {
+                View.Pause = Menu.IsVisible;
+
+                View.Update(gameTime);
+                Menu.Update(gameTime);
+            }
 
             if (startScreen)
             {
-                if (newKeyboardState.GetPressedKeys().Length > 0 
+                if (newKeyboardState.GetPressedKeys().Length > 0
                     || newGamePadState.IsButtonDown(Buttons.Start) || newGamePadState.IsButtonDown(Buttons.A)
                     || newGamePadState.IsButtonDown(Buttons.B) || newGamePadState.IsButtonDown(Buttons.X)
                     || newGamePadState.IsButtonDown(Buttons.Y) || newGamePadState.IsButtonDown(Buttons.Start)
@@ -158,14 +164,6 @@ namespace RoBuddies
                 {
                     startScreen = false;
                 }
-            }
-            
-            if (started)
-            {
-                View.Pause = Menu.IsVisible;
-
-                View.Update(gameTime);
-                Menu.Update(gameTime);
             }
 
         }
@@ -209,35 +207,16 @@ namespace RoBuddies
 
             GraphicsDevice.Clear(this.View.Level.Background);
 
-            if (startScreen || !started)
-            {
-                SpriteBatch.Begin();
-                Rectangle dest = new Rectangle(
-                            (int)0,
-                            (int)0,
-                            (int)this.ViewPort.Width,
-                            (int)this.ViewPort.Height);
-                SpriteBatch.Draw(splash, dest, null, splashColor, 0, Vector2.Zero, SpriteEffects.None, 0.5f);
-                SpriteBatch.End();
-
-                if (!startScreen)
-                {
-                    splashColor.A -= 6;
-                    if (splashColor.A < 6)
-                    {
-                        started = true;
-                    }
-                }
-            }
-
             if (this.viewModeChanged)
             {
                 SwitchViewMode();
             }
 
-            if (started)
+
+            View.Draw(SpriteBatch);
+
+            if (!startScreen)
             {
-                View.Draw(SpriteBatch);
                 Menu.Draw(SpriteBatch);
             }
 

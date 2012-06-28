@@ -98,7 +98,8 @@ namespace RoBuddies.View
             chooserMenu = new LevelChoiceMenu(this, this.Game.Content);
             mainMenu = new LevelMainMenu(this, this.Game.Content);
 
-            this.DefaultPage = chooserMenu;
+            this.DefaultPage = mainMenu;
+            makeTransparent(true);
             // end decoration -------------------------------------------------------------------
         }
 

@@ -4,6 +4,7 @@ using RoBuddies.View.HUD;
 using RoBuddies.Control;
 using RoBuddies.Model;
 using RoBuddies.Model.Serializer;
+using System;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -74,6 +75,13 @@ namespace RoBuddies.View.MenuPages
             {
                 if (this.activeElement.Color != notUsableColor)
                 {
+                    if ((this.oldActiveElement == reload || this.oldActiveElement == rewind || this.oldActiveElement == forward) &&
+                        !(this.activeElement == reload || this.activeElement == rewind || this.activeElement == forward))
+                    {
+                        this.ActiveElement = this.play;
+                        ((LevelMenu)this.Menu).mainMenu.chooseActiveElement(1, 0);
+                    }
+
                     if (this.activeElement == reload)
                     {
                         this.Menu.ActivePage = ((LevelMenu)this.Menu).mainMenu;
@@ -170,7 +178,7 @@ namespace RoBuddies.View.MenuPages
                 if (((LevelView)this.Game.LevelView).SnapShot.isOnStart(3))
                 {
                     this.rewind.Color = notUsableColor;
-                } 
+                }
                 else
                 {
                     this.rewind.Color = Color.White;
@@ -259,6 +267,9 @@ namespace RoBuddies.View.MenuPages
             ((LevelMenu)this.Menu).info.Scale = 1;
             ((LevelMenu)this.Menu).options.Scale = 1;
             ((LevelMenu)this.Menu).quit.Scale = 1;
+
+            chooseActiveElement(1, 0);
+            this.Menu.makeTransparent(true);
         }
 
         public override void OnExit()

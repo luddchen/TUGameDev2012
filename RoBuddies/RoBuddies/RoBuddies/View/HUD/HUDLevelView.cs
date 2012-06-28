@@ -44,7 +44,7 @@ namespace RoBuddies.View.HUD
         public HUDLevelView(RoBuddies game)
             : base(game)
         {
-            this.backgroundColor = new Color(255, 255, 255, 230);
+            this.backgroundColor = Color.White;
             this.stop = this.Game.Content.Load<Texture2D>("Sprites//stop");
             this.Camera = new Camera();
             this.Level = new Level();
@@ -58,7 +58,6 @@ namespace RoBuddies.View.HUD
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            //this.Level.Update(gameTime);  // seems to create assertion bugs in editor
             this.Camera.Update(gameTime);
         }
 
