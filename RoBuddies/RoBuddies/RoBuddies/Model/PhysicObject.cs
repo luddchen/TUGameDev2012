@@ -121,7 +121,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// creates a new fixture , deletes all previous fixtures , new density is 1.0f
         /// </summary>
-        public void createRectangleFixture()
+        public virtual void createRectangleFixture()
         {
             createRectangleFixture(1f);
         }
@@ -130,7 +130,7 @@ namespace RoBuddies.Model
         /// creates a new fixture , deletes all previous fixtures
         /// </summary>
         /// <param name="density">density of this object</param>
-        public void createRectangleFixture(float density)
+        public virtual void createRectangleFixture(float density)
         {
             clearFixtures();
             FixtureFactory.AttachRectangle(this.Width, this.Height, density, Vector2.Zero, this);

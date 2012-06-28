@@ -76,9 +76,19 @@ namespace RoBuddies.Model.Objects
         {
             this.Width = Math.Max(1, newSize.X);
             this.Height = Math.Max(1, newSize.Y);
-            createRectangleFixture(25f);
+            createRectangleFixture(10000000f);
             calculateHeaviness();
         }
 
+        public override void createRectangleFixture(float density)
+        {
+            float fricFixSize = 0.1f;
+            Fixture nonFricFix = FixtureFactory.AttachRectangle(this.Width, this.Height - 2 * fricFixSize, density, new Vector2(0, - 2 * fricFixSize / 2), this);
+            nonFricFix.Friction = 0f;
+            Fixture fricFixUp = FixtureFactory.AttachRectangle(this.Width - fricFixSize, fricFixSize, density, new Vector2(0, (this.Height - 2 * fricFixSize) / 2), this);
+            fricFixUp.Friction = 1f;
+            Fixture fricFixDown = FixtureFactory.AttachRectangle(this.Width - fricFixSize, fricFixSize, density, new Vector2(0, -(this.Height - 2 * fricFixSize) / 2), this);
+            fricFixDown.Friction = 10000000f;
+        }
     }
 }

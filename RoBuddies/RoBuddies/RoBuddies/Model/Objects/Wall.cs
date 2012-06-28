@@ -137,5 +137,14 @@ namespace RoBuddies.Model.Objects
         {
             return random.Next(min, max);
         }
+
+        public override void createRectangleFixture()
+        {
+            float fricFixSize = 0.1f;
+            Fixture nonFricFix = FixtureFactory.AttachRectangle(this.Width, this.Height - fricFixSize, 1f, new Vector2(0, -fricFixSize / 2), this);
+            nonFricFix.Friction = 0f;
+            Fixture fricFix = FixtureFactory.AttachRectangle(this.Width - fricFixSize, fricFixSize, 1f, new Vector2(0, (this.Height - fricFixSize) / 2), this);
+            fricFix.Friction = 1f;
+        }
     }
 }
