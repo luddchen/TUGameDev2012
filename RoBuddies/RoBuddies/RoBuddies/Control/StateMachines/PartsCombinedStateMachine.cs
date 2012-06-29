@@ -104,12 +104,12 @@ namespace RoBuddies.Control.StateMachines
         {
             if ( ButtonIsDown(ControlButton.up) && canClimb(0.71f))
             {
-                climbLadder(0.15f);
+                climbLadder(0.2f);
             }
 
             if (ButtonIsDown(ControlButton.down) && canClimb(-0.71f))
             {
-                climbLadder(-0.15f);
+                climbLadder(-0.2f);
             }
 
             if (ButtonIsDown(ControlButton.use) && isOnGround())

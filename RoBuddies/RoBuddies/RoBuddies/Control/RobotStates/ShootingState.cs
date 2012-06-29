@@ -11,7 +11,7 @@ namespace RoBuddies.Control.RobotStates
 {
     class ShootingState : AnimatedState
     {
-        private const float SHOOTING_FORCE = 1000;
+        private const float SHOOTING_FORCE = 1100; // 1000
 
         public ShootingState(String name, List<Texture2D> textureList, StateMachine machine)
             : base(name, textureList, machine)
@@ -20,7 +20,7 @@ namespace RoBuddies.Control.RobotStates
 
         public override void Enter()
         {
-            (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1000));
+            (StateMachine.Body as Body).ApplyForce(new Vector2(0, SHOOTING_FORCE));
         }
 
     }

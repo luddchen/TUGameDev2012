@@ -32,7 +32,7 @@ namespace RoBuddies.Control.RobotStates
 
             if (StateMachine.Body is LowerPart)
             {
-                (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1200));
+                (StateMachine.Body as Body).ApplyForce(new Vector2(0, 1450));
             }
         }
 

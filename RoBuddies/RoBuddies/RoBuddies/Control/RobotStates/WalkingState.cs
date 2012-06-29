@@ -14,8 +14,8 @@ namespace RoBuddies.Control.RobotStates
         private const int STOP_WALKING = 24;
 
         private const float force = 100;
-        private const float velocityLimit = 3;
-        private const float motorSpeed = -15;
+        private const float velocityLimit = 3f;
+        private const float motorSpeed = -12f; //-15
 
         private float currentTextureIndex;
         private Body body;

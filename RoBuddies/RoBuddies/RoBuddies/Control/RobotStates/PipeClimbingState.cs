@@ -44,6 +44,7 @@ namespace RoBuddies.Control.RobotStates
         {
             this.level.RemoveJoint(prismaticJoint);
             this.level.RemoveJoint(frictionJoint);
+            (this.StateMachine.Body as Body).LinearVelocity = new Vector2(0, (this.StateMachine.Body as Body).LinearVelocity.Y);
         }
 
         public override void Update(GameTime gameTime)

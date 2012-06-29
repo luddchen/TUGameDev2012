@@ -127,6 +127,7 @@ namespace RoBuddies.Model
             }
 
             this.Step(gameTime.ElapsedGameTime.Milliseconds * 0.001f);
+            this.Step(gameTime.ElapsedGameTime.Milliseconds * 0.001f);
         }
 
         /// <summary>

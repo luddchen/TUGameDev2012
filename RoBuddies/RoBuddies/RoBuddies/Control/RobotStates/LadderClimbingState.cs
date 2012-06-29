@@ -16,7 +16,7 @@ namespace RoBuddies.Control.RobotStates
 {
     class LadderClimbingState : AnimatedState
     {
-        private const float MAX_MOTOR_FORCE = 1000f;
+        private const float MAX_MOTOR_FORCE = 1000f;//1000f; --->> no effect ??
         
         // for lower part the right texture numbers are 20-29
         private const int START_CLIMBING = 80; // 100 - 80

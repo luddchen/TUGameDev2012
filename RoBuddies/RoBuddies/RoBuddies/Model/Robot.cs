@@ -130,7 +130,7 @@ namespace RoBuddies.Model
             this.upperPart = new PhysicObject(pos, new Vector2(5, 3.7f), Color.White, 3.0f, this.level);
 
             upperPart.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(1, 1f, 1, new Vector2(0, 0.25f), upperPart);
+            FixtureFactory.AttachRectangle(1.5f, 1f, 1, new Vector2(0, 0.25f), upperPart);
             this.level.GetLayerByName("mainLayer").AddObject(this.upperPart);
             this.upperPart.setVisible(false);
         }

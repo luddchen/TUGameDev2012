@@ -18,7 +18,7 @@ namespace RoBuddies.Model.RobotParts
             : base(pos, new Vector2(3, 1.8f), Color.White, 0f, level)
         {
             this.BodyType = BodyType.Dynamic;
-            FixtureFactory.AttachRectangle(1, 1f, 1, Vector2.Zero, this);
+            FixtureFactory.AttachRectangle(1.3f, 1f, 1, Vector2.Zero, this);
             this.Friction = 0f;
             this.level.GetLayerByName("mainLayer").AddObject(this);
             // attach wheel

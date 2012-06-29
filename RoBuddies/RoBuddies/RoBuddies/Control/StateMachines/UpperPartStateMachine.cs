@@ -69,14 +69,14 @@ namespace RoBuddies.Control.StateMachines
 
                 if (ButtonIsDown(ControlButton.left) && canClimb(-1))
                 {
-                    (Body as Body).LinearVelocity = new Vector2(-10, (Body as Body).LinearVelocity.Y);
+                    (Body as Body).LinearVelocity = new Vector2(-7, (Body as Body).LinearVelocity.Y);
                     Body.Effect = SpriteEffects.FlipHorizontally;
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
 
                 if (ButtonIsDown(ControlButton.right) && canClimb(1))
                 {
-                    (Body as Body).LinearVelocity = new Vector2(10, (Body as Body).LinearVelocity.Y);
+                    (Body as Body).LinearVelocity = new Vector2(7, (Body as Body).LinearVelocity.Y);
                     Body.Effect = SpriteEffects.None;
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
