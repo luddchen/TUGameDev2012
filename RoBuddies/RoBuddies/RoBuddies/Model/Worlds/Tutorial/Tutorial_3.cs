@@ -40,6 +40,10 @@ namespace RoBuddies.Model.Worlds.Tutorial
             HUDString hintStringClimb = new HUDString("Press 'up'\nto climb ladders", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12f, 10f));
             levelLabels.Add(hintStringClimb);
+
+            HUDTexture xboxTextureClimb = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_gray"), null, 250, 161, null, 0.8f, null, game.Content);
+            xboxTextureClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-13f, 7.5f));
+            levelLabels.Add(xboxTextureClimb);
         }
     }
 

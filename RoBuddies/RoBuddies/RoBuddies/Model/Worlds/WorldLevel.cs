@@ -26,7 +26,7 @@ namespace RoBuddies.Model.Worlds
         /// <summary>
         /// Add your new level objects for the level to this list
         /// </summary>
-        protected List<HUDString> levelLabels;
+        protected List<IHUDElement> levelLabels;
 
         /// <summary>
         /// Getter for the loaded level
@@ -47,7 +47,7 @@ namespace RoBuddies.Model.Worlds
         {
             this.game = game;
             this.levelObjects = new List<IBody>();
-            this.levelLabels = new List<HUDString>();
+            this.levelLabels = new List<IHUDElement>();
             LevelReader levelReader = new LevelReader(game);
             this.level = levelReader.readLevel(".\\" + game.Content.RootDirectory, levelPath, levelTheme);
             this.Level.LevelName = levelName;
@@ -98,9 +98,9 @@ namespace RoBuddies.Model.Worlds
         private void addLevelLabelsToLevel()
         {
             Layer backLayer = this.Level.GetLayerByName("backLayer");
-            foreach (HUDString hudString in levelLabels)
+            foreach (IHUDElement hudElement in levelLabels)
             {
-                backLayer.AddLabel(hudString);
+                backLayer.AddLabel(hudElement);
             }
         }
 

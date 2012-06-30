@@ -88,9 +88,9 @@ namespace RoBuddies.View.HUD
                 }
             }
 
-            foreach (HUDString hudString in layer.allLabels)
+            foreach (IHUDElement hudElement in layer.allLabels)
             {
-                hudString.Draw(spriteBatch);
+                hudElement.Draw(spriteBatch);
             }
 
             spriteBatch.End();

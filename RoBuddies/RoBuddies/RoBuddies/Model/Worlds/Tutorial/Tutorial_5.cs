@@ -46,8 +46,12 @@ namespace RoBuddies.Model.Worlds.Tutorial
             Color backgroundColor = new Color(0, 0, 0, 100);
 
             HUDString hintStringSwitcher = new HUDString("Press 'S'-Key\nor 'X'-Button\nto use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(4.5f, 10f));
+            hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 9f));
             levelLabels.Add(hintStringSwitcher);
+
+            HUDTexture xboxTextureSwitcher = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
+            xboxTextureSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 6.0f));
+            levelLabels.Add(xboxTextureSwitcher);
         }
     }
 

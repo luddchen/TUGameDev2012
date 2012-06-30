@@ -13,7 +13,7 @@ namespace RoBuddies.Model
     class Layer : IComparable<Layer>
     {
         private List<IBody> allObjects;
-        private List<HUDString> layerLabels;
+        private List<IHUDElement> layerLabels;
 
         /// <summary>
         /// name for this layer, only for identification without knowing a reference, dont know if we need
@@ -43,7 +43,7 @@ namespace RoBuddies.Model
         /// <summary>
         /// list of all objects on this layer
         /// </summary>
-        public List<HUDString> allLabels { get { return this.layerLabels; } }
+        public List<IHUDElement> allLabels { get { return this.layerLabels; } }
 
         /// <summary>
         /// add an object to this layer
@@ -62,11 +62,11 @@ namespace RoBuddies.Model
         /// adds an label to this layer
         /// </summary>
         /// <param name="hudString">the label, which will be added</param>
-        public void AddLabel(HUDString hudString)
+        public void AddLabel(IHUDElement hudElement)
         {
-            if (hudString != null)
+            if (hudElement != null)
             {
-                this.allLabels.Add(hudString);
+                this.allLabels.Add(hudElement);
             }
         }
 
@@ -95,7 +95,7 @@ namespace RoBuddies.Model
             this.Parallax = parallax;
             this.LayerDepth = layerDepth;
             this.allObjects = new List<IBody>();
-            this.layerLabels = new List<HUDString>();
+            this.layerLabels = new List<IHUDElement>();
         }
 
 

@@ -6,7 +6,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace RoBuddies.Model.Worlds.Tutorial
-{
+{ 
+
     /// <summary>
     /// Still abstract, but more concrete class of a specific level.
     /// Here you can add e.g. specific background art, which apply to
@@ -41,6 +42,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
                 crate = new StaticObject(crateTexture, new Vector2(i * 5, -1f), 1, 1, Color.White, 0);
                 notSoFarAwayLayer.AddObject(crate);
             }
+
         }
 
         protected override void addLevelObjects()
@@ -52,5 +54,6 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
 
         }
+
     }
 }
