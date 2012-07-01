@@ -74,13 +74,13 @@ namespace RoBuddies.View.MenuPages
             tutorial5 = new HUDString("-- 5 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial5, true);
 
-            tutorial6 = new HUDString("-- 6 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            tutorial6 = new HUDString("-- 6 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial6, true);
 
 
             addChoiceLine();
 
-            tutorial7 = new HUDString("-- 7 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            tutorial7 = new HUDString("-- 7 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(tutorial7, true);
 
             tutorial8 = new HUDString("-- 8 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
@@ -128,6 +128,16 @@ namespace RoBuddies.View.MenuPages
                     if (this.ActiveElement == tutorial5)
                     {
                         ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_5(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == tutorial6)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_6(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == tutorial7)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Tutorial_7(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
                 }

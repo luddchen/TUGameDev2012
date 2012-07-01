@@ -1165,6 +1165,14 @@
       <Name>TUTORIAL_5</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Worlds\Tutorial\TUTORIAL_6.json">
+      <Name>TUTORIAL_6</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Tutorial\TUTORIAL_7.json">
+      <Name>TUTORIAL_7</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Worlds\World1\LEVEL1_1.json">
       <Name>LEVEL1_1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

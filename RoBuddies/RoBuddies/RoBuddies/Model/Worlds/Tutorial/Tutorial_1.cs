@@ -19,7 +19,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Tutorial 1: Jumping";
+        private const String LEVEL_NAME = "Tutorial 1: Jump";
 
         public Tutorial_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)

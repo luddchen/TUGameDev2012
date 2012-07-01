@@ -43,6 +43,9 @@ namespace RoBuddies.Model.Worlds
             worlds.Enqueue(new Tutorial_3(this.game));
             worlds.Enqueue(new Tutorial_4(this.game));
             worlds.Enqueue(new Tutorial_5(this.game));
+            worlds.Enqueue(new Tutorial_6(this.game));
+            worlds.Enqueue(new Tutorial_7(this.game));
+            
         }
 
         /// <summary>

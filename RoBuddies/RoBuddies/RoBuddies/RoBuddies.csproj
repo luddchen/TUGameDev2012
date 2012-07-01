@@ -187,6 +187,8 @@
     <Compile Include="Model\Worlds\Tutorial\Tutorial_3.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_4.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_5.cs" />
+    <Compile Include="Model\Worlds\Tutorial\Tutorial_7.cs" />
+    <Compile Include="Model\Worlds\Tutorial\Tutorial_6.cs" />
     <Compile Include="Model\Worlds\World1\Level1_1.cs" />
     <Compile Include="Model\Worlds\World1\Level1_2.cs" />
     <Compile Include="Model\Worlds\World1\Level1_3.cs" />
