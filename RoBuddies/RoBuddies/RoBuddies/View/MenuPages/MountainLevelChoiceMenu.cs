@@ -4,6 +4,7 @@ using RoBuddies.View.HUD;
 using RoBuddies.Control;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
+using RoBuddies.Model.Worlds.MountainLevel;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -53,16 +54,16 @@ namespace RoBuddies.View.MenuPages
             mountain1 = new HUDString("-- 1 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(mountain1, true);
 
-            mountain2 = new HUDString("-- 2 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            mountain2 = new HUDString("-- 2 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(mountain2, true);
 
-            mountain3 = new HUDString("-- 3 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            mountain3 = new HUDString("-- 3 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(mountain3, true);
 
 
             addChoiceLine();
 
-            mountain4 = new HUDString("-- 4 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            mountain4 = new HUDString("-- 4 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(mountain4, true);
 
             mountain5 = new HUDString("-- 5 --", null, null, textColor, choiceBackgroundColor, 0.7f, null, content);
@@ -97,6 +98,21 @@ namespace RoBuddies.View.MenuPages
                 if (this.ActiveElement != null)
                 {
                     if (this.ActiveElement == mountain1)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Mountain_1(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == mountain2)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Mountain_2(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == mountain3)
+                    {
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Mountain_3(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
+                    }
+                    if (this.ActiveElement == mountain4)
                     {
                         ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Level2_1(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;

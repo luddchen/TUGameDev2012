@@ -1145,6 +1145,18 @@
       <Name>Wave Bank</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Worlds\Mountain\MOUNTAIN_1.json">
+      <Name>MOUNTAIN_1</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Mountain\MOUNTAIN_2.json">
+      <Name>MOUNTAIN_2</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Worlds\Mountain\MOUNTAIN_3.json">
+      <Name>MOUNTAIN_3</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Worlds\Tutorial\TUTORIAL_1.json">
       <Name>TUTORIAL_1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

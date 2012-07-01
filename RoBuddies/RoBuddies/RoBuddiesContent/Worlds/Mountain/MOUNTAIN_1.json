@@ -1,0 +1,232 @@
+{
+  "Gravity": "0, -10",
+  "Layers": [
+    {
+      "Layer": {
+        "Name": "backLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.51,
+        "Walls": [],
+        "Crates": [],
+        "Pipes": [],
+        "Ladders": []
+      }
+    },
+    {
+      "Layer": {
+        "Name": "mainLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.5,
+        "Walls": [
+          {
+            "Wall": {
+              "Position": "0, -3",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 47.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-12, -2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "1, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 15.0,
+                "Heigth": 7.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-4, -1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 13.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "9, 4",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 13.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "24, 13",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 27.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "55, 1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 11.0,
+                "Heigth": 7.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "30, -1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "19, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 19.0,
+                "Heigth": 7.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "61, 8",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 23.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "0, 19",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 47.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-23, 8",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 1.0,
+                "Heigth": 23.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "49, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "46, -1",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "42, -3",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 37.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "46, 10",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 17.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "42, 19",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 37.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "10.2859764, -3.021997",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 5.0,
+                "Heigth": 1.0
+              }
+            }
+          }
+        ],
+        "Crates": [
+          {
+            "Crate": {
+              "Position": "-2, 5",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 3.0
+              }
+            }
+          },
+          {
+            "Crate": {
+              "Position": "42, 0",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 3.0,
+                "Heigth": 5.0
+              }
+            }
+          }
+        ],
+        "Pipes": [],
+        "Ladders": []
+      }
+    }
+  ],
+  "Robot": {
+    "Position": "-21, -1"
+  }
+}

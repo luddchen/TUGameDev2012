@@ -5,6 +5,7 @@ using System.Text;
 using RoBuddies.Model.Worlds.Tutorial;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
+using RoBuddies.Model.Worlds.MountainLevel;
 using Microsoft.Xna.Framework;
 
 namespace RoBuddies.Model.Worlds
@@ -28,9 +29,11 @@ namespace RoBuddies.Model.Worlds
             this.game = game;
             worlds = new Queue<WorldLevel>();
             addTutorial();
+            addWorldMountain();
             addWorld1();            
             addWorld2();
             addWorld3();
+            
         }
 
         /// <summary>
@@ -73,6 +76,14 @@ namespace RoBuddies.Model.Worlds
         private void addWorld3()
         {
 
+        }
+
+
+        private void addWorldMountain()
+        {
+            worlds.Enqueue(new Mountain_1(this.game));
+            worlds.Enqueue(new Mountain_2(this.game));
+            worlds.Enqueue(new Mountain_3(this.game));
         }
 
         /// <summary>
