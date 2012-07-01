@@ -36,7 +36,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelLabels()
         {
-            Color backgroundColor = new Color(0, 0, 0, 100);
+            Color backgroundColor = new Color(0, 0, 0, 128);
 
             HUDString hintStringJump = new HUDString("  Press 'space'-Key\nor 'A'-Button to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
@@ -50,7 +50,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
             hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
             levelLabels.Add(hintStringDoor);
 
-            HUDTexture xboxTextureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_gray"), null, 250, 161, null, 0.8f, null, game.Content);
+            HUDTexture xboxTextureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_up"), null, 250, 161, null, 0.8f, null, game.Content);
             xboxTextureDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 7.5f));
             levelLabels.Add(xboxTextureDoor);
         }

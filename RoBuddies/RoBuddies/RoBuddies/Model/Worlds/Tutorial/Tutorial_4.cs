@@ -35,23 +35,15 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelLabels()
         {
-            Color backgroundColor = new Color(0, 0, 0, 100);
+            Color backgroundColor = new Color(0, 0, 0, 128);
 
             HUDString hintStringCrate = new HUDString("Hold 's'-Key or\n'X'-Button to\nmove the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 17f));
+            hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 17f));
             levelLabels.Add(hintStringCrate);
 
             HUDTexture xboxTextureCrate = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 14.5f));
+            xboxTextureCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 17f));
             levelLabels.Add(xboxTextureCrate);
-
-            HUDString hintStringRewind = new HUDString("You can rewind with\n'r'-Key or 'Back'-Button", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(15f, 9f));
-            levelLabels.Add(hintStringRewind);
-
-            HUDTexture xboxTextureRewind = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_rewind_1"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(15f, 6.5f));
-            levelLabels.Add(xboxTextureRewind);
         }
     }
 

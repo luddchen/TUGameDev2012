@@ -43,7 +43,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelLabels()
         {
-            Color backgroundColor = new Color(0, 0, 0, 100);
+            Color backgroundColor = new Color(0, 0, 0, 128);
 
             HUDString hintStringSwitcher = new HUDString("Press 'S'-Key\nor 'X'-Button\nto use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 9f));

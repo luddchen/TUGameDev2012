@@ -35,9 +35,9 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
         protected override void addLevelLabels()
         {
-            Color backgroundColor = new Color(0, 0, 0, 100);
+            Color backgroundColor = new Color(0, 0, 0, 128);
 
-            HUDString hintStringSeperate = new HUDString("Press 'x'-Key or\n'Y'-Button\nto seperate and\nchange parts", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            HUDString hintStringSeperate = new HUDString("Press 'x'-Key or\n'Y'-Button\nto seperate parts", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
             hintStringSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-16f, 7.5f));
             levelLabels.Add(hintStringSeperate);
 
@@ -45,17 +45,22 @@ namespace RoBuddies.Model.Worlds.Tutorial
             xboxTextureSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-16f, 4.5f));
             levelLabels.Add(xboxTextureSeperate);
 
-            HUDTexture xboxTextureSwitchPart = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_switchPart_1"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureSwitchPart.Position = ConvertUnits.ToDisplayUnits(new Vector2(-16f, 2.0f));
-            levelLabels.Add(xboxTextureSwitchPart);
 
-            HUDString hintStringStopClimb = new HUDString("Press 'space'-Key or\n'A'-Button\nto stop climbing", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringStopClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(3.5f, 7.75f));
+            HUDString hintStringStopClimb = new HUDString("Press 'space'-Key\n or 'A'-Button\nto stop climbing\n\n\n", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringStopClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(2.0f, 5.0f));
             levelLabels.Add(hintStringStopClimb);
 
             HUDTexture xboxTextureStopClimbing = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_A"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureStopClimbing.Position = ConvertUnits.ToDisplayUnits(new Vector2(3.5f, 5.25f));
+            xboxTextureStopClimbing.Position = ConvertUnits.ToDisplayUnits(new Vector2(2.0f, 3.6f));
             levelLabels.Add(xboxTextureStopClimbing);
+
+            HUDString hintStringSwitchPart = new HUDString("switch between parts", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringSwitchPart.Position = ConvertUnits.ToDisplayUnits(new Vector2(8f, 9.0f));
+            levelLabels.Add(hintStringSwitchPart);
+
+            HUDTexture xboxTextureSwitchPart = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_switchPart"), null, 250, 161, null, 0.8f, null, game.Content);
+            xboxTextureSwitchPart.Position = ConvertUnits.ToDisplayUnits(new Vector2(8, 7.0f));
+            levelLabels.Add(xboxTextureSwitchPart);
         }
     }
 
