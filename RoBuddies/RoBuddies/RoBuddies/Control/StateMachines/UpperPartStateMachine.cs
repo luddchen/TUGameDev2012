@@ -18,6 +18,7 @@ namespace RoBuddies.Control.StateMachines
 
         private ContentManager contentManager;
         private Robot robot;
+        private Pipe currentPipe;
         private List<Texture2D> textureList;
 
         private HeadStateMachine mHeadStateMachine;
@@ -60,6 +61,10 @@ namespace RoBuddies.Control.StateMachines
         {
             if (CurrentState.Name != PIPE_CLIMBING_STATE && canClimb(0))
             {
+                if (CurrentState.Name == WAIT_STATE)
+                {
+                    this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, currentPipe.Position.Y - this.robot.UpperPart.Height / 2);
+                }
                 SwitchToState(PIPE_CLIMBING_STATE);
             }
 
@@ -105,6 +110,10 @@ namespace RoBuddies.Control.StateMachines
             float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 3;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
             bool hitsPipe = intersectingObject is Pipe;
+            if (hitsPipe)
+            {
+                currentPipe = intersectingObject as Pipe;
+            }
             return hitsPipe;
         }
     }

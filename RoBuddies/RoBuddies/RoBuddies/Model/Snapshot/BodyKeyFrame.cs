@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using RoBuddies.Model.Objects;
 
 namespace RoBuddies.Model.Snapshot
 {
@@ -20,7 +21,15 @@ namespace RoBuddies.Model.Snapshot
             this.Rotation = body.Rotation;
             this.Effect = body.Effect;
             this.IsVisible = body.IsVisible;
-            this.Velocity = body.LinearVelocity;
+            if (this.Body is Crate)
+            {
+                // don't keep the velocity of creates, because this causes bugs
+                this.Velocity = Vector2.Zero;
+            }
+            else
+            {
+                this.Velocity = body.LinearVelocity;
+            }
         }
 
         public virtual void Restore()

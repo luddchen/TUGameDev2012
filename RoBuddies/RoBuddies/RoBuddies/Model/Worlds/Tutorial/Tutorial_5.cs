@@ -8,6 +8,7 @@ using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
+using Microsoft.Xna.Framework.Input;
 
 namespace RoBuddies.Model.Worlds.Tutorial
 {
@@ -44,14 +45,24 @@ namespace RoBuddies.Model.Worlds.Tutorial
         protected override void addLevelLabels()
         {
             Color backgroundColor = new Color(0, 0, 0, 128);
+            bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
-            HUDString hintStringSwitcher = new HUDString("Press 'S'-Key\nor 'X'-Button\nto use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 9f));
-            levelLabels.Add(hintStringSwitcher);
+            if (gamePadConnected)
+            {
+                HUDString hintStringSwitcher = new HUDString("use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 9f));
+                levelLabels.Add(hintStringSwitcher);
 
-            HUDTexture xboxTextureSwitcher = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 6.0f));
-            levelLabels.Add(xboxTextureSwitcher);
+                HUDTexture xboxTextureSwitcher = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
+                xboxTextureSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 6.0f));
+                levelLabels.Add(xboxTextureSwitcher);
+            }
+            else
+            {
+                HUDString hintStringSwitcher = new HUDString("Press 'S'-Key\nto use switches", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 9f));
+                levelLabels.Add(hintStringSwitcher);
+            }
         }
     }
 

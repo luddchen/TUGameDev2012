@@ -8,6 +8,7 @@ using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
+using Microsoft.Xna.Framework.Input;
 
 namespace RoBuddies.Model.Worlds.Tutorial
 {
@@ -36,14 +37,24 @@ namespace RoBuddies.Model.Worlds.Tutorial
         protected override void addLevelLabels()
         {
             Color backgroundColor = new Color(0, 0, 0, 128);
+            bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
-            HUDString hintStringCrate = new HUDString("Hold 's'-Key or\n'X'-Button to\nmove the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 17f));
-            levelLabels.Add(hintStringCrate);
+            if (gamePadConnected)
+            {
+                HUDString hintStringCrate = new HUDString("Hold button to move the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 17f));
+                levelLabels.Add(hintStringCrate);
 
-            HUDTexture xboxTextureCrate = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(16f, 17f));
-            levelLabels.Add(xboxTextureCrate);
+                HUDTexture xboxTextureCrate = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
+                xboxTextureCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 15f));
+                levelLabels.Add(xboxTextureCrate);
+            }
+            else
+            {
+                HUDString hintStringCrate = new HUDString("Hold 's'-Key to\nmove the crate", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 17f));
+                levelLabels.Add(hintStringCrate);
+            }
         }
     }
 

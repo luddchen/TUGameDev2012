@@ -8,6 +8,7 @@ using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
+using Microsoft.Xna.Framework.Input;
 
 namespace RoBuddies.Model.Worlds.Tutorial
 {
@@ -38,14 +39,25 @@ namespace RoBuddies.Model.Worlds.Tutorial
         {
             Color backgroundColor = new Color(0, 0, 0, 128);
 
-            HUDString hintStringRewind = new HUDString("Press 'R'-key\nto rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(9.0f, 0.0f));
-            levelLabels.Add(hintStringRewind);
+            bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
-           
-            HUDTexture xboxTextureRewind = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_rewind"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(9.0f, -3.0f));
-            levelLabels.Add(xboxTextureRewind);
+            if (gamePadConnected)
+            {
+                HUDString hintStringRewind = new HUDString("Hold to rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, 0.0f));
+                levelLabels.Add(hintStringRewind);
+
+
+                HUDTexture xboxTextureRewind = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_rewind"), null, 250, 161, null, 0.8f, null, game.Content);
+                xboxTextureRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, -3.0f));
+                levelLabels.Add(xboxTextureRewind);
+            }
+            else
+            {
+                HUDString hintStringRewind = new HUDString("Hold 'R'-key\nto rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, 0.0f));
+                levelLabels.Add(hintStringRewind);
+            }
         }
     }
 

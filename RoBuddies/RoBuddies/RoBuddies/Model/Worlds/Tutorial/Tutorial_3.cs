@@ -8,6 +8,7 @@ using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
+using Microsoft.Xna.Framework.Input;
 
 namespace RoBuddies.Model.Worlds.Tutorial
 {
@@ -36,14 +37,25 @@ namespace RoBuddies.Model.Worlds.Tutorial
         protected override void addLevelLabels()
         {
             Color backgroundColor = new Color(0, 0, 0, 128);
+            
+            bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
-            HUDString hintStringClimb = new HUDString("Press 'up'\nto climb ladders", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12.1f, 10f));
-            levelLabels.Add(hintStringClimb);
+            if (gamePadConnected)
+            {
+                HUDString hintStringClimb = new HUDString("climb ladders", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12.1f, 10f));
+                levelLabels.Add(hintStringClimb);
 
-            HUDTexture xboxTextureClimb = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_up"), null, 250, 161, null, 0.8f, null, game.Content);
-            xboxTextureClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-13f, 7.5f));
-            levelLabels.Add(xboxTextureClimb);
+                HUDTexture xboxTextureClimb = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_up"), null, 250, 161, null, 0.8f, null, game.Content);
+                xboxTextureClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-13f, 7.5f));
+                levelLabels.Add(xboxTextureClimb);
+            }
+            else
+            {
+                HUDString hintStringClimb = new HUDString("Press 'up'\nto climb ladders", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                hintStringClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(-12.1f, 10f));
+                levelLabels.Add(hintStringClimb);
+            }
         }
     }
 

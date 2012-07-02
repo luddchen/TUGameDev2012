@@ -45,7 +45,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
             if (gamePadConnected)
             {
-                HUDString hintStringJump = new HUDString("  Press 'A'-Button to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                HUDString hintStringJump = new HUDString("jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
                 hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
                 levelLabels.Add(hintStringJump);
 
@@ -53,7 +53,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
                 xboxTextureJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 7.5f));
                 levelLabels.Add(xboxTextureJump);
 
-                HUDString hintStringDoor = new HUDString("Press 'X'-Button to\ngo to next level", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                HUDString hintStringDoor = new HUDString("use doors", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
                 hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
                 levelLabels.Add(hintStringDoor);
 
@@ -63,11 +63,11 @@ namespace RoBuddies.Model.Worlds.Tutorial
             }
             else
             {
-                HUDString hintStringJump = new HUDString("  Press 'space'-Key to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                HUDString hintStringJump = new HUDString("Press 'space'-Key to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
                 hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
                 levelLabels.Add(hintStringJump);
 
-                HUDString hintStringDoor = new HUDString("Press 's'-Key to\ngo to next level", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+                HUDString hintStringDoor = new HUDString("Press 's'-Key to\ngo to use doors", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
                 hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
                 levelLabels.Add(hintStringDoor);
             }
