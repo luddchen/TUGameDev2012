@@ -152,7 +152,7 @@ namespace RoBuddies.Control.StateMachines
                 stopWalk();
             }
 
-            if (ButtonIsDown(ControlButton.up) && canOpenLevelEndingDoor())
+            if (ButtonIsDown(ControlButton.use) && canOpenLevelEndingDoor())
             {
                 Level.finished = true;
             }

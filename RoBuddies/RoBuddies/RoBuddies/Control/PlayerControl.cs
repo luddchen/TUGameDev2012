@@ -61,10 +61,13 @@ namespace RoBuddies.Control
         {
             Keys key = getKeyboardKey(controlButton);
             Buttons button = getGamePadButton(controlButton);
+            Buttons altButton = getGamePadAltButton(controlButton);
 
             if (newKeyboardState.IsKeyUp(key) && oldKeyboardState.IsKeyDown(key)) return true;
 
             if (newGamePadState.IsButtonUp(button) && oldGamePadState.IsButtonDown(button)) return true;
+
+            if (newGamePadState.IsButtonUp(altButton) && oldGamePadState.IsButtonDown(altButton)) return true;
 
             return false;
         }
@@ -79,10 +82,13 @@ namespace RoBuddies.Control
         {
             Keys key = getKeyboardKey(controlButton);
             Buttons button = getGamePadButton(controlButton);
+            Buttons altButton = getGamePadAltButton(controlButton);
 
             if (newKeyboardState.IsKeyDown(key) && oldKeyboardState.IsKeyUp(key)) return true;
 
             if (newGamePadState.IsButtonDown(button) && oldGamePadState.IsButtonUp(button)) return true;
+
+            if (newGamePadState.IsButtonDown(altButton) && oldGamePadState.IsButtonUp(altButton)) return true;
 
             return false;
         }
@@ -96,10 +102,13 @@ namespace RoBuddies.Control
         {
             Keys key = getKeyboardKey(controlButton);
             Buttons button = getGamePadButton(controlButton);
+            Buttons altButton = getGamePadAltButton(controlButton);
 
             if (newKeyboardState.IsKeyDown(key)) return true;
 
             if (newGamePadState.IsButtonDown(button)) return true;
+
+            if (newGamePadState.IsButtonDown(altButton)) return true;
 
             return false;
         }
@@ -113,10 +122,13 @@ namespace RoBuddies.Control
         {
             Keys key = getKeyboardKey(controlButton);
             Buttons button = getGamePadButton(controlButton);
+            Buttons altButton = getGamePadAltButton(controlButton);
 
             if (newKeyboardState.IsKeyUp(key)) return true;
 
             if (newGamePadState.IsButtonUp(button)) return true;
+
+            if (newGamePadState.IsButtonUp(altButton)) return true;
 
             return false;
         }
@@ -131,10 +143,13 @@ namespace RoBuddies.Control
         {
             Keys key = getKeyboardKey(controlButton);
             Buttons button = getGamePadButton(controlButton);
+            Buttons altButton = getGamePadAltButton(controlButton);
 
             if (newKeyboardState.IsKeyDown(key) != oldKeyboardState.IsKeyDown(key)) return true;
 
             if (newGamePadState.IsButtonDown(button) != oldGamePadState.IsButtonDown(button)) return true;
+
+            if (newGamePadState.IsButtonDown(altButton) != oldGamePadState.IsButtonDown(altButton)) return true;
 
             return false;
         }
@@ -186,17 +201,39 @@ namespace RoBuddies.Control
                 case ControlButton.right: { button = Buttons.DPadRight; break; }
 
                 case ControlButton.jump: { button = Buttons.A; break; }
-                case ControlButton.releasePipe: { button = Buttons.A; break; }
+                case ControlButton.releasePipe: { button = Buttons.Y; break; }
 
                 case ControlButton.use: { button = Buttons.X; break; }
                 case ControlButton.head: { button = Buttons.B; break; }
 
                 case ControlButton.separateRobot: { button = Buttons.Y; break; }
-                case ControlButton.switchRobotPart: { button = Buttons.Y; break; }
+                case ControlButton.switchRobotPart: { button = Buttons.LeftShoulder; break; }
 
                 case ControlButton.menu: { button = Buttons.Start; break; }
                 case ControlButton.enter: { button = Buttons.A; break; }
-                case ControlButton.rewind: { button = Buttons.Back; break; }
+                case ControlButton.rewind: { button = Buttons.LeftTrigger; break; }
+            }
+            return button;
+        }
+
+        /// <summary>
+        /// translate the control button to the alternative gamepad button
+        /// </summary>
+        /// <param name="button"></param>
+        /// <returns></returns>
+        private Buttons getGamePadAltButton(ControlButton controlButton)
+        {
+            Buttons button = Buttons.BigButton;
+            switch (controlButton)
+            {
+                case ControlButton.down: { button = Buttons.LeftThumbstickDown; break; }
+                case ControlButton.up: { button = Buttons.LeftThumbstickUp; break; }
+                case ControlButton.left: { button = Buttons.LeftThumbstickLeft; break; }
+                case ControlButton.right: { button = Buttons.LeftThumbstickRight; break; }
+
+                case ControlButton.switchRobotPart: { button = Buttons.RightShoulder; break; }
+
+                case ControlButton.rewind: { button = Buttons.RightTrigger; break; }
             }
             return button;
         }

@@ -81,7 +81,7 @@ namespace RoBuddies.Control.StateMachines
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
 
-                if (ButtonIsDown(ControlButton.releasePipe) || ButtonIsDown(ControlButton.down))
+                if (ButtonIsDown(ControlButton.releasePipe))
                 {
                     SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
                 }
