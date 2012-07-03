@@ -28,12 +28,17 @@ namespace RoBuddies.Model.Worlds
         {
             this.game = game;
             worlds = new Queue<WorldLevel>();
+            addWorlds();
+            
+        }
+
+        private void addWorlds()
+        {
             addTutorial();
             addWorldMountain();
-            addWorld1();            
+            addWorld1();
             addWorld2();
             addWorld3();
-            
         }
 
         /// <summary>
@@ -113,6 +118,21 @@ namespace RoBuddies.Model.Worlds
                 level = worlds.ElementAt<WorldLevel>(levelIndex).Level;
             }
             return level;
+        }
+
+        /// <summary>
+        /// this method sets the level to a specific level of the worlds queue
+        /// </summary>
+        /// <param name="level">an level from the world queue</param>
+        public void setLevel(Level level)
+        {
+            for (int levelIndex = 0; levelIndex < worlds.Count; levelIndex++ )
+            {
+                if (worlds.ElementAt<WorldLevel>(levelIndex).Level.LevelName == level.LevelName)
+                {
+                    this.currentLevel = levelIndex;
+                }
+            }
         }
 
     }

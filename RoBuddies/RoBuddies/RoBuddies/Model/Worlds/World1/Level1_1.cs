@@ -17,7 +17,6 @@ namespace RoBuddies.Model.Worlds.World1
     /// </summary>
     class Level1_1 : World1Level
     {
-        public static int LEVEL_INDEX = 7;
         private const string LEVEL_PATH = "Worlds\\World1\\Level1_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
         private const String LEVEL_NAME = "Level  1:  The  journey  begins";

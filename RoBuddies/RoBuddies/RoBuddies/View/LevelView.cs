@@ -59,12 +59,24 @@ namespace RoBuddies.View
         /// <param name="newLevel">the new level , nullable</param>
         public void viewNextLevel(Level newLevel, GameTime gameTime)
         {
-            Level nextLevel = newLevel ?? this.worlds.getNextLevel();
+            Level nextLevel;
+            if (newLevel == null)
+            {
+                nextLevel = this.worlds.getNextLevel();
+            }
+            else
+            {
+                nextLevel = newLevel;
+                this.worlds.setLevel(newLevel);
+            }
             if (nextLevel != null)
             {
                 nextLevelLoadedTime = gameTime.TotalGameTime;
                 if (this.SnapShot != null)
                 {
+                    // reset previous level
+                    this.SnapShot.RewindToStart();
+                    this.Level.finished = false;
                     this.SnapShot.Release();
                 }
                 this.Level = nextLevel;
