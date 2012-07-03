@@ -54,6 +54,10 @@ namespace RoBuddies.Model.Worlds.Tutorial
                 HUDTexture xboxTextureJump = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_A"), null, 250, 161, null, 0.8f, null, game.Content);
                 xboxTextureJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 7.5f));
                 levelLabels.Add(xboxTextureJump);
+
+                HUDTexture textureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
+                textureDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 7.5f));
+                levelLabels.Add(textureDoor);
             }
             else
             {
@@ -61,7 +65,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
                 textureJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 9f));
                 levelLabels.Add(textureJump);
 
-                HUDTexture textureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//S"), null, 128, 128, null, 0.8f, null, game.Content);
+                HUDTexture textureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//A"), null, 128, 128, null, 0.8f, null, game.Content);
                 textureDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 7.5f));
                 levelLabels.Add(textureDoor);
             }

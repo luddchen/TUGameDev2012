@@ -59,7 +59,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
             }
             else
             {
-                HUDTexture textureSwitcher = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//S"), null, 128, 128, null, 0.8f, null, game.Content);
+                HUDTexture textureSwitcher = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//A"), null, 128, 128, null, 0.8f, null, game.Content);
                 textureSwitcher.Position = ConvertUnits.ToDisplayUnits(new Vector2(1.5f, 6.0f));
                 levelLabels.Add(textureSwitcher);
             }

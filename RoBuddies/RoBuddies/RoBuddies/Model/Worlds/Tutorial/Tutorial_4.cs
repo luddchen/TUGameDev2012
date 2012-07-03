@@ -51,7 +51,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
             }
             else
             {
-                HUDTexture textureCrate = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//S"), null, 128, 128, null, 0.8f, null, game.Content);
+                HUDTexture textureCrate = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//A"), null, 128, 128, null, 0.8f, null, game.Content);
                 textureCrate.Position = ConvertUnits.ToDisplayUnits(new Vector2(10f, 15f));
                 levelLabels.Add(textureCrate);
             }

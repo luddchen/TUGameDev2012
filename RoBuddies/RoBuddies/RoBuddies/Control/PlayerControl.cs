@@ -170,13 +170,13 @@ namespace RoBuddies.Control
                 case ControlButton.right: { key = Keys.Right; break; }
 
                 case ControlButton.jump: { key = Keys.Space; break; }
-                case ControlButton.releasePipe: { key = Keys.Space; break; }
+                case ControlButton.releasePipe: { key = Keys.X; break; }
 
-                case ControlButton.use: { key = Keys.S; break; }
+                case ControlButton.use: { key = Keys.A; break; }
                 case ControlButton.head: { key = Keys.Y; break; }
 
                 case ControlButton.separateRobot: { key = Keys.X; break; }
-                case ControlButton.switchRobotPart: { key = Keys.X; break; }
+                case ControlButton.switchRobotPart: { key = Keys.S; break; }
 
                 case ControlButton.menu: { key = Keys.Escape; break; }
                 case ControlButton.enter: { key = Keys.Enter; break; }

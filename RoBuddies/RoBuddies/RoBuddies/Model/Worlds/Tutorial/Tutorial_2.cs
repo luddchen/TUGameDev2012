@@ -45,7 +45,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
             levelLabels.Add(hintStringSeperate);
 
             HUDString hintStringStopClimb = new HUDString("stop climbing", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            hintStringStopClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(2.0f, 6.0f));
+            hintStringStopClimb.Position = ConvertUnits.ToDisplayUnits(new Vector2(2.0f, 6.5f));
             levelLabels.Add(hintStringStopClimb);
 
             HUDString hintStringSwitchPart = new HUDString("switch between parts", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
@@ -72,11 +72,11 @@ namespace RoBuddies.Model.Worlds.Tutorial
                 textureSeperate.Position = ConvertUnits.ToDisplayUnits(new Vector2(-16f, 4.5f));
                 levelLabels.Add(textureSeperate);
 
-                HUDTexture textureStopClimbing = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//Space"), null, 256, 256, null, 0.8f, null, game.Content);
+                HUDTexture textureStopClimbing = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//X"), null, 128, 128, null, 0.8f, null, game.Content);
                 textureStopClimbing.Position = ConvertUnits.ToDisplayUnits(new Vector2(2.0f, 4.6f));
                 levelLabels.Add(textureStopClimbing);
 
-                HUDTexture textureSwitchPart = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//X"), null, 128, 128, null, 0.8f, null, game.Content);
+                HUDTexture textureSwitchPart = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//S"), null, 128, 128, null, 0.8f, null, game.Content);
                 textureSwitchPart.Position = ConvertUnits.ToDisplayUnits(new Vector2(8, 7.0f));
                 levelLabels.Add(textureSwitchPart);
             }
