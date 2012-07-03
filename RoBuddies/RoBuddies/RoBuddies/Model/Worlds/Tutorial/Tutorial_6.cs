@@ -41,22 +41,21 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
             bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
+            HUDString hintStringRewind = new HUDString("Hold to rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, 0.0f));
+            levelLabels.Add(hintStringRewind);
+
             if (gamePadConnected)
             {
-                HUDString hintStringRewind = new HUDString("Hold to rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, 0.0f));
-                levelLabels.Add(hintStringRewind);
-
-
                 HUDTexture xboxTextureRewind = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_rewind"), null, 250, 161, null, 0.8f, null, game.Content);
                 xboxTextureRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, -3.0f));
                 levelLabels.Add(xboxTextureRewind);
             }
             else
             {
-                HUDString hintStringRewind = new HUDString("Hold 'R'-key\nto rewind", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, 0.0f));
-                levelLabels.Add(hintStringRewind);
+                HUDTexture textureRewind = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//R"), null, 128, 128, null, 0.8f, null, game.Content);
+                textureRewind.Position = ConvertUnits.ToDisplayUnits(new Vector2(8.5f, -3.0f));
+                levelLabels.Add(textureRewind);
             }
         }
     }

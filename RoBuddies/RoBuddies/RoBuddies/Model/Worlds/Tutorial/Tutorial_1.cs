@@ -41,35 +41,29 @@ namespace RoBuddies.Model.Worlds.Tutorial
 
             bool gamePadConnected = GamePad.GetCapabilities(PlayerIndex.One).IsConnected;
 
+            HUDString hintStringJump = new HUDString("jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
+            levelLabels.Add(hintStringJump);
 
+            HUDString hintStringDoor = new HUDString("use doors", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
+            levelLabels.Add(hintStringDoor);
 
             if (gamePadConnected)
             {
-                HUDString hintStringJump = new HUDString("jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
-                levelLabels.Add(hintStringJump);
-
                 HUDTexture xboxTextureJump = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_A"), null, 250, 161, null, 0.8f, null, game.Content);
                 xboxTextureJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 7.5f));
                 levelLabels.Add(xboxTextureJump);
-
-                HUDString hintStringDoor = new HUDString("use doors", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
-                levelLabels.Add(hintStringDoor);
-
-                HUDTexture xboxTextureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Xbox//Xbox_X"), null, 250, 161, null, 0.8f, null, game.Content);
-                xboxTextureDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 7.5f));
-                levelLabels.Add(xboxTextureDoor);
             }
             else
             {
-                HUDString hintStringJump = new HUDString("Press 'space'-Key to jump", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 10f));
-                levelLabels.Add(hintStringJump);
+                HUDTexture textureJump = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//Space"), null, 256, 256, null, 0.8f, null, game.Content);
+                textureJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-18f, 9f));
+                levelLabels.Add(textureJump);
 
-                HUDString hintStringDoor = new HUDString("Press 's'-Key to\ngo to use doors", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-                hintStringDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 10f));
-                levelLabels.Add(hintStringDoor);
+                HUDTexture textureDoor = new HUDTexture(game.Content.Load<Texture2D>("Sprites//Keyboard//S"), null, 128, 128, null, 0.8f, null, game.Content);
+                textureDoor.Position = ConvertUnits.ToDisplayUnits(new Vector2(5.0f, 7.5f));
+                levelLabels.Add(textureDoor);
             }
 
 
