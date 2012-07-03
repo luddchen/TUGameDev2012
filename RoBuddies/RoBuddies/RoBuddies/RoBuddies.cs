@@ -93,6 +93,20 @@ namespace RoBuddies
             if (File.Exists(@".\\editor_temp.json")) {
                 File.Delete(@".\\editor_temp.json");
             }
+            // create save game
+            if (!File.Exists(@".\\save.bin"))
+            {
+                BinaryWriter bw = new BinaryWriter(File.Open(".\\save.bin", FileMode.Create));
+                bw.Write(0);
+                bw.Flush();
+                bw.Close();
+            }
+            else
+            {
+                BinaryReader br = new BinaryReader(File.Open(".\\save.bin", FileMode.Open));
+                (this.LevelView as LevelView).worlds.setLevel(br.ReadInt32());
+                br.Close();
+            }
         }
 
         /// <summary>
