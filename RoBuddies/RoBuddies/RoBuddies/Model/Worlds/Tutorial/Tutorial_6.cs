@@ -18,6 +18,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     /// </summary>
     class Tutorial_6 : TutorialLevel
     {
+        public static const int LEVEL_INDEX = 5;
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_7.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
         private const String LEVEL_NAME = "Tutorial 6: Rewind";
