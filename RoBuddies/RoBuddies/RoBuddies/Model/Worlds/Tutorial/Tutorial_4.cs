@@ -18,6 +18,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
     /// </summary>
     class Tutorial_4 : TutorialLevel
     {
+        public static int LEVEL_INDEX = 3;
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_4.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
         private const String LEVEL_NAME = "Tutorial 4: Move Crates";

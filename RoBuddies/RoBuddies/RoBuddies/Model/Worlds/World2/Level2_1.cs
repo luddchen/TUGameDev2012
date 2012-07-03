@@ -16,7 +16,7 @@ namespace RoBuddies.Model.Worlds.World2
     /// </summary>
     class Level2_1 : World2Level
     {
-        public static const int LEVEL_INDEX = 10;
+        public static int LEVEL_INDEX = 10;
         private const string LEVEL_PATH = "Worlds\\World2\\LEVEL2_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
         private const String LEVEL_NAME = "Level  5:  The  unsolvable  level";
