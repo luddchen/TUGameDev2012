@@ -2,12 +2,14 @@
 
 using RoBuddies.Model.Objects;
 using RoBuddies.Model.RobotParts;
+using RoBuddies.Control.StateMachines;
 
 namespace RoBuddies.Model.Snapshot
 {
     class KeyFrame
     {
         public List<BodyKeyFrame> AllBodyKeyFrames;
+        public BodyKeyFrame BridgeHeadWallFrame;
         private PhysicObject activeRobotPart;
         private Level Level;
 
@@ -41,6 +43,11 @@ namespace RoBuddies.Model.Snapshot
                     bodyKeyFrame = new BodyKeyFrame((PhysicObject)body);
                 }
                 this.AllBodyKeyFrames.Add(bodyKeyFrame);
+            }
+            // save bridge head wall state
+            if (BridgeHeadStateMachine.wall != null)
+            {
+                this.BridgeHeadWallFrame = new BodyKeyFrame(BridgeHeadStateMachine.wall);
             }
         }
 
@@ -80,6 +87,15 @@ namespace RoBuddies.Model.Snapshot
 
                 if (bodyKeyFrame.Position != oldBodyKeyframe.Position) { changes = true; }
             }
+            // save bridge head wall state
+            if (BridgeHeadStateMachine.wall != null)                
+            {
+                this.BridgeHeadWallFrame = new BodyKeyFrame(BridgeHeadStateMachine.wall);
+                if (oldKeyFrame.BridgeHeadWallFrame == null || (oldKeyFrame.BridgeHeadWallFrame.Position != this.BridgeHeadWallFrame.Position))
+                {
+                    changes = true;
+                }
+            }
 
             if (!changes)
             {
@@ -94,7 +110,17 @@ namespace RoBuddies.Model.Snapshot
             {
                 bodyKeyFrame.Restore();
             }
-
+            // restore bridge head wall state
+            if (this.BridgeHeadWallFrame != null)
+            {
+                this.BridgeHeadWallFrame.Restore();
+            }
+            else if (BridgeHeadStateMachine.wall != null)
+            {
+                this.Level.removeObject(BridgeHeadStateMachine.wall);
+                BridgeHeadStateMachine.wall.Dispose();
+                BridgeHeadStateMachine.wall = null;
+            }
             this.Level.Robot.RobotStateMachine.setActivePart(this.activeRobotPart);
         }
 
@@ -103,6 +129,10 @@ namespace RoBuddies.Model.Snapshot
             foreach (BodyKeyFrame bodyKeyFrame in this.AllBodyKeyFrames)
             {
                 bodyKeyFrame.Release();
+            }
+            if (this.BridgeHeadWallFrame != null)
+            {
+                this.BridgeHeadWallFrame.Release();
             }
             this.AllBodyKeyFrames.Clear();
         }
