@@ -15,7 +15,6 @@ namespace RoBuddies.Model.Worlds
     /// </summary>
     abstract class WorldLevel
     {
-        public int levelIndex;
         private Level level;
         protected Game game;
 

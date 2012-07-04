@@ -48,24 +48,24 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            lab = new HUDString("Laboratory", null, null, textColor, null, 0.7f, null, content);
+            lab = new HUDString("Easy World", null, null, textColor, null, 0.7f, null, content);
             addChoiceElement(lab, true);
 
             addChoiceLine();
 
-            mountain = new HUDString("Mountain", null, null, textColor, null, 0.7f, null, content);
+            mountain = new HUDString("Head World", null, null, textColor, null, 0.7f, null, content);
             addChoiceElement(mountain, true);
 
             addChoiceLine();
 
-            hospital = new HUDString("Hospital", null, null, textColor, null, 0.7f, null, content);
+            hospital = new HUDString("Advanced World", null, null, textColor, null, 0.7f, null, content);
             addChoiceElement(hospital, true);
 
 
             this.tutorialPage = new TutorialLevelChoiceMenu(menu, content);
-            this.labPage = new LabLevelChoiceMenu(menu, content);
-            this.mountainPage = new MountainLevelChoiceMenu(menu, content);
-            this.hospitalPage = new HospitalLevelChoiceMenu(menu, content);
+            this.labPage = new World1LevelChoiceMenu(menu, content);
+            this.mountainPage = new World2LevelChoiceMenu(menu, content);
+            this.hospitalPage = new World3LevelChoiceMenu(menu, content);
 
             OnEnter();
         }

@@ -208,6 +208,7 @@
     <Compile Include="Model\Serializer\LevelWriter.cs" />
     <Compile Include="Utilities\ConvertUnits.cs" />
     <Compile Include="Utilities\RayCastUtility.cs" />
+    <Compile Include="Utilities\SaveGameUtility.cs" />
     <Compile Include="Utilities\TextureConverter.cs" />
     <Compile Include="View\Camera.cs" />
     <Compile Include="View\EditorHUD.cs" />
@@ -226,13 +227,13 @@
     <Compile Include="View\LevelMenu.cs" />
     <Compile Include="View\MenuPages\EditorMainMenu.cs" />
     <Compile Include="View\MenuPages\HelpMenu.cs" />
-    <Compile Include="View\MenuPages\HospitalLevelChoiceMenu.cs" />
+    <Compile Include="View\MenuPages\World3LevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\InfoMenu.cs" />
-    <Compile Include="View\MenuPages\LabLevelChoiceMenu.cs" />
+    <Compile Include="View\MenuPages\World1LevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\LevelChoiceMenu.cs" />
     <Compile Include="View\HUD\HUDMenuPage.cs" />
     <Compile Include="View\MenuPages\LevelMainMenu.cs" />
-    <Compile Include="View\MenuPages\MountainLevelChoiceMenu.cs" />
+    <Compile Include="View\MenuPages\World2LevelChoiceMenu.cs" />
     <Compile Include="View\MenuPages\OptionMenu.cs" />
     <Compile Include="View\MenuPages\QuitMenu.cs" />
     <Compile Include="View\MenuPages\TutorialLevelChoiceMenu.cs" />

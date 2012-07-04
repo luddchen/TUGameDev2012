@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Worlds;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
@@ -71,6 +72,7 @@ namespace RoBuddies.View
             }
             if (nextLevel != null)
             {
+                SaveGameUtility.saveIfHigher(this.worlds.currentLevelIndex);
                 nextLevelLoadedTime = gameTime.TotalGameTime;
                 if (this.SnapShot != null)
                 {

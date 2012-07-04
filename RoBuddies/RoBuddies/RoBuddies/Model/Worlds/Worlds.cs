@@ -18,7 +18,10 @@ namespace RoBuddies.Model.Worlds
 
         private Game game;
         private Queue<WorldLevel> worlds;
-        private int currentLevel = -1;
+        /// <summary>
+        /// the level index of the current level
+        /// </summary>
+        public int currentLevelIndex;
 
         /// <summary>
         /// Creates a new worlds object, which can return the next level
@@ -98,8 +101,8 @@ namespace RoBuddies.Model.Worlds
         public Level getNextLevel()
         {
             Level nextLevel = null;
-            if (++currentLevel <= worlds.Count) {
-                nextLevel = worlds.ElementAt<WorldLevel>(currentLevel).Level;
+            if (++currentLevelIndex <= worlds.Count) {
+                nextLevel = worlds.ElementAt<WorldLevel>(currentLevelIndex).Level;
             }
             return nextLevel;
         }
@@ -112,8 +115,8 @@ namespace RoBuddies.Model.Worlds
         public Level setLevel(int levelIndex)
         {
             Level level = null;
-            currentLevel = levelIndex;
-            if (currentLevel <= worlds.Count)
+            currentLevelIndex = levelIndex;
+            if (currentLevelIndex <= worlds.Count)
             {
                 level = worlds.ElementAt<WorldLevel>(levelIndex).Level;
             }
@@ -130,7 +133,7 @@ namespace RoBuddies.Model.Worlds
             {
                 if (worlds.ElementAt<WorldLevel>(levelIndex).Level.LevelName == level.LevelName)
                 {
-                    this.currentLevel = levelIndex;
+                    this.currentLevelIndex = levelIndex;
                 }
             }
         }
