@@ -61,9 +61,10 @@ namespace RoBuddies.Control.StateMachines
         {
             if (CurrentState.Name != PIPE_CLIMBING_STATE && canClimb(0))
             {
-                if (CurrentState.Name == WAIT_STATE)
+                if (CurrentState.Name == SHOOTING_STATE)
                 {
-                    this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, currentPipe.Position.Y - this.robot.UpperPart.Height / 2);
+                    this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, currentPipe.Position.Y - this.robot.UpperPart.Height / 2 + 0.25f);
+                    this.robot.UpperPart.LinearVelocity = Vector2.Zero;
                 }
                 SwitchToState(PIPE_CLIMBING_STATE);
             }
@@ -86,9 +87,10 @@ namespace RoBuddies.Control.StateMachines
                     ((PipeClimbingState)CurrentState).UpdateClimbAnimation(gameTime);
                 }
 
-                if (ButtonIsDown(ControlButton.releasePipe))
+                if (ButtonPressed(ControlButton.releasePipe))
                 {
-                    SwitchToState(WAIT_STATE); // TODO: maybe a falling state for the lower part
+                    this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, this.robot.UpperPart.Position.Y - currentPipe.Height / 2 - 0.3f);
+                    SwitchToState(WAIT_STATE);
                 }
             }
 
@@ -107,7 +109,7 @@ namespace RoBuddies.Control.StateMachines
         private bool canClimb(float direction)
         {
             Vector2 upperPartPos = robot.UpperPart.Position + new Vector2(robot.UpperPart.Width / 6, 0) * direction;
-            float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 3;
+            float rayEnd = upperPartPos.Y + robot.UpperPart.Height / 2;
             FarseerPhysics.Dynamics.Body intersectingObject = RayCastUtility.getIntersectingObject(this.Level, upperPartPos, new Vector2(upperPartPos.X, rayEnd));
             bool hitsPipe = intersectingObject is Pipe;
             if (hitsPipe)
