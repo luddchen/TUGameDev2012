@@ -4,6 +4,7 @@ using RoBuddies.View.HUD;
 using RoBuddies.Control;
 using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View.MenuPages
 {
@@ -48,17 +49,17 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            lab = new HUDString("Easy World", null, null, textColor, null, 0.7f, null, content);
+            lab = new HUDString("Easy World", null, null, notUsableColor, null, 0.7f, null, content);
             addChoiceElement(lab, true);
 
             addChoiceLine();
 
-            mountain = new HUDString("Head World", null, null, textColor, null, 0.7f, null, content);
+            mountain = new HUDString("Head World", null, null, notUsableColor, null, 0.7f, null, content);
             addChoiceElement(mountain, true);
 
             addChoiceLine();
 
-            hospital = new HUDString("Advanced World", null, null, textColor, null, 0.7f, null, content);
+            hospital = new HUDString("Advanced World", null, null, notUsableColor, null, 0.7f, null, content);
             addChoiceElement(hospital, true);
 
 
@@ -73,6 +74,8 @@ namespace RoBuddies.View.MenuPages
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            loadedLevelIndex = SaveGameUtility.loadGame();
+            UpdateLevelProgress();
 
             // Key.Enter -----------------------------------------------------------------------------
             if (ButtonPressed(ControlButton.enter))
@@ -84,23 +87,39 @@ namespace RoBuddies.View.MenuPages
                         this.Menu.ActivePage = this.tutorialPage;
                     }
 
-                    if (this.ActiveElement == lab)
+                    if (this.ActiveElement == lab && loadedLevelIndex >= 7)
                     {
                         this.Menu.ActivePage = this.labPage;
                     }
 
-                    if (this.ActiveElement == mountain)
+                    if (this.ActiveElement == mountain && loadedLevelIndex >= 16)
                     {
                         this.Menu.ActivePage = this.mountainPage;
                     }
 
-                    if (this.ActiveElement == hospital)
+                    if (this.ActiveElement == hospital && loadedLevelIndex >= 25)
                     {
                         this.Menu.ActivePage = this.hospitalPage;
                     }
                 }
             }
 
+        }
+
+        private void UpdateLevelProgress()
+        {
+            if (loadedLevelIndex >= 7)
+            {
+                lab.Color = textColor;
+            }
+            if (loadedLevelIndex >= 16)
+            {
+                mountain.Color = textColor;
+            }
+            if (loadedLevelIndex >= 25)
+            {
+                hospital.Color = textColor;
+            }
         }
 
         public override void OnEnter()

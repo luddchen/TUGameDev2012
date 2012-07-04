@@ -16,16 +16,18 @@ namespace RoBuddies.Model.Worlds.Tutorial
     /// This class loads the level 1 of world 1 and adds 
     /// objects to the level, which can not be used in the editor
     /// </summary>
-    class Tutorial_6 : TutorialLevel
+    class Tutorial_6 : MountainLevel.MountainLevel
     {
         private const string LEVEL_PATH = "Worlds\\Tutorial\\TUTORIAL_7.json";
-        private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
+        private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
         private const String LEVEL_NAME = "Tutorial 6: Rewind";
 
         public Tutorial_6(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();
+            addSky(Vector2.Zero);
+            addMountains(Vector2.Zero);
 
         }
 
