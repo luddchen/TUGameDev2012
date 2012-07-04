@@ -11,9 +11,6 @@ namespace RoBuddies.View.MenuPages
         private HUDString fullscreen;
         private HUDString fullscreenValue;
 
-        private HUDString cameraMode;
-        private HUDString cameraModeValue;
-
         private HUDString sound;
         private HUDString soundValue;
 
@@ -26,17 +23,14 @@ namespace RoBuddies.View.MenuPages
         {
             base.OnViewPortResize();
 
-            if (fullscreen != null) { fullscreen.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.2f); }
-            if (fullscreenValue != null) { fullscreenValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.2f); }
+            if (fullscreen != null) { fullscreen.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.25f); }
+            if (fullscreenValue != null) { fullscreenValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.25f); }
 
-            if (cameraMode != null) { cameraMode.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.4f); }
-            if (cameraModeValue != null) { cameraModeValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.4f); }
+            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.5f); }
+            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.5f); }
 
-            if (sound != null) { sound.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.6f); }
-            if (soundValue != null) { soundValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.6f); }
-
-            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.8f); }
-            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.8f); }
+            if (music != null) { music.Position = new Vector2(this.Viewport.Width * 0.33f, this.Viewport.Height * 0.75f); }
+            if (musicValue != null) { musicValue.Position = new Vector2(this.Viewport.Width * 0.66f, this.Viewport.Height * 0.75f); }
         }
 
         public OptionMenu(LevelMenu menu, ContentManager content)
@@ -49,14 +43,6 @@ namespace RoBuddies.View.MenuPages
 
             fullscreenValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(fullscreenValue);
-
-            addChoiceLine();
-
-            cameraMode = new HUDString("Camera Mode", null, null, textColor, null, 0.7f, null, content);
-            addChoiceElement(cameraMode, true);
-
-            cameraModeValue = new HUDString("smooth", null, null, textColor, null, 0.7f, null, content);
-            this.AllElements.Add(cameraModeValue);
 
             addChoiceLine();
 
@@ -95,20 +81,6 @@ namespace RoBuddies.View.MenuPages
                         else
                         {
                             fullscreenValue.String = "on";
-                        }
-                    }
-
-                    if (this.ActiveElement == cameraMode)
-                    {
-                        if (cameraModeValue.String == "smooth")
-                        {
-                            cameraModeValue.String = "normal";
-                            this.Menu.Game.LevelView.Camera.SmoothMove = false;
-                        }
-                        else
-                        {
-                            cameraModeValue.String = "smooth";
-                            this.Menu.Game.LevelView.Camera.SmoothMove = true;
                         }
                     }
 

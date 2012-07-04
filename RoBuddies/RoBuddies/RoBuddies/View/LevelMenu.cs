@@ -34,9 +34,7 @@ namespace RoBuddies.View
 
             if (this.AllElements != null && this.AllElements.Count > 0)
             {
-                this.AllElements[0].Position = new Vector2(this.Viewport.Width * 0.5f, (MenuPageTopExtraBorder + MenuPageBorder) * 0.25f);
-                this.AllElements[1].Position = new Vector2(this.Viewport.Width * 0.25f, (MenuPageTopExtraBorder + MenuPageBorder) * 0.25f);
-                this.AllElements[2].Position = new Vector2(this.Viewport.Width * 0.75f, (MenuPageTopExtraBorder + MenuPageBorder) * 0.25f);
+                this.AllElements[0].Position = new Vector2(this.Viewport.Width * 0.5f, (MenuPageTopExtraBorder + MenuPageBorder) * 0.275f);
 
                 if (reload != null) { reload.Position = new Vector2(32, firstLine); }
                 if (rewind != null) { rewind.Position = new Vector2(64, firstLine + 2); }
@@ -44,10 +42,10 @@ namespace RoBuddies.View
 
                 if (play != null) { play.Position = new Vector2(40, secondLine); }
 
-                if (chooser != null) { chooser.Position = new Vector2(this.Viewport.Width * 0.4f, secondLine); }
-                if (help != null) { help.Position = new Vector2(this.Viewport.Width * 0.5f, secondLine); }
-                if (info != null) { info.Position = new Vector2(this.Viewport.Width * 0.6f, secondLine); }
-                if (options != null) { options.Position = new Vector2(this.Viewport.Width * 0.7f, secondLine); }
+                if (chooser != null) { chooser.Position = new Vector2(this.Viewport.Width * 0.35f, secondLine); }
+                if (help != null) { help.Position = new Vector2(this.Viewport.Width * 0.45f, secondLine); }
+                if (info != null) { info.Position = new Vector2(this.Viewport.Width * 0.55f, secondLine); }
+                if (options != null) { options.Position = new Vector2(this.Viewport.Width * 0.65f, secondLine); }
                 if (quit != null) { quit.Position = new Vector2(this.Viewport.Width - 40, secondLine); }
             }
         }
@@ -55,12 +53,10 @@ namespace RoBuddies.View
         public LevelMenu(RoBuddies game) : base(game)
         {
             firstLine = 32;
-            secondLine = MenuPageTopExtraBorder + MenuPageBorder - 32;
+            secondLine = MenuPageTopExtraBorder + MenuPageBorder - 30;
             // some decoration -------------------------------------------------------------------
-            this.AllElements.Add(new HUDString( "RoBuddies", this.Game.Content));
+            this.AllElements.Add(new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//logo"), null, 300, 50, null, null, null, this.Game.Content));
             this.AllElements[0].Color = HeadLineColor;
-            this.AllElements.Add(new HUDTexture(this.Game.Content));
-            this.AllElements.Add(new HUDTexture(this.Game.Content));
 
 
             reload = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//reload_64"), null, 40, 40, null, null, null, this.Game.Content);
@@ -98,7 +94,7 @@ namespace RoBuddies.View
             chooserMenu = new LevelChoiceMenu(this, this.Game.Content);
             mainMenu = new LevelMainMenu(this, this.Game.Content);
 
-            this.DefaultPage = mainMenu;
+            this.DefaultPage = chooserMenu;
             makeTransparent(true);
             // end decoration -------------------------------------------------------------------
         }
