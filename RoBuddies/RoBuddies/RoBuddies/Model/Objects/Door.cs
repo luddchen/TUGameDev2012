@@ -11,11 +11,17 @@ namespace RoBuddies.Model.Objects
 
         private Texture2D doorClosedTex;
         private Texture2D doorLockedTex;
+        private Texture2D doorOpenedTex;
         private RoBuddies game;
 
         public bool IsSwitchedOn
         {
             get { return isSwitchedOn; }
+        }
+
+        public Texture2D DoorOpen
+        {
+            get { return doorOpenedTex; }
         }
 
         public Door(Vector2 pos, Vector2 size, Color color, Level level, Game game, bool switchable)
@@ -25,6 +31,7 @@ namespace RoBuddies.Model.Objects
 
             doorLockedTex = game.Content.Load<Texture2D>("Sprites//door_locked");
             doorClosedTex = game.Content.Load<Texture2D>("Sprites//door_closed");
+            doorOpenedTex = game.Content.Load<Texture2D>("Sprites//door_open");
 
             if (switchable)
             {
@@ -35,6 +42,23 @@ namespace RoBuddies.Model.Objects
             {
                 this.isSwitchedOn = true;
                 defineTextures(doorClosedTex, doorClosedTex, doorClosedTex);
+            }
+        }
+
+        public bool stateUpdate
+        {
+            get { return isSwitchedOn; }
+
+            set
+            {
+                if (value && isSwitchedOn)
+                {
+                    this.Texture = doorOpenedTex;
+                }
+                else if (isSwitchedOn)
+                {
+                    this.Texture = doorClosedTex;
+                }
             }
         }
 

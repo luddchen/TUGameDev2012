@@ -118,6 +118,9 @@ namespace RoBuddies
             waveBank = new WaveBank(audioEngine, Content.RootDirectory + "//Sound//Wave Bank.xwb");
             soundBank = new SoundBank(audioEngine, Content.RootDirectory + "//Sound//Sound Bank.xsb");
 
+            soundBank.PlayCue("BGM_SummerDays");
+            audioEngine.GetCategory("Music").SetVolume(0.1f);
+
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);
             LevelMenu = new LevelMenu(this);

@@ -102,6 +102,8 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
+            bool canOpenDoor = canOpenLevelEndingDoor();
+
             if ( ButtonIsDown(ControlButton.up) && canClimb(0.71f))
             {
                 climbLadder(0.2f);
@@ -152,7 +154,7 @@ namespace RoBuddies.Control.StateMachines
                 stopWalk();
             }
 
-            if (ButtonIsDown(ControlButton.use) && canOpenLevelEndingDoor())
+            if (ButtonIsDown(ControlButton.use) && canOpenDoor)
             {
                 Level.finished = true;
             }
@@ -180,6 +182,7 @@ namespace RoBuddies.Control.StateMachines
                     if (Vector2.Distance(robot.PartsCombined.Position, door.Position) < 1 && door.IsSwitchedOn)
                     { 
                         canOpenLevelEndingDoor = true;
+                        door.Texture = door.DoorOpen;
                     }
                 }
             }

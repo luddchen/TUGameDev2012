@@ -75,10 +75,20 @@ namespace RoBuddies.Control.StateMachines
                     else if (mActiveStateMachine == mUpperPartStateMachine)
                     {
                         crateStateUpdate(false);
+                       // doorStateUpdate(false);
 
                         setActivePart(mRobot.LowerPart);
                     }
                 }
+            }
+
+            if (mActiveStateMachine == mPartsCombinedStateMachine)
+            {
+                doorStateUpdate(true);
+            }
+            else
+            {
+                doorStateUpdate(false);
             }
 
             if (ButtonPressed(ControlButton.separateRobot))
@@ -206,6 +216,20 @@ namespace RoBuddies.Control.StateMachines
                 {
                     Crate crate = (Crate)obj;
                     crate.stateUpdate = newState;
+                }
+            }
+        }
+
+        private void doorStateUpdate(bool newState)
+        {
+            Layer backLayer = Level.GetLayerByName("backLayer");
+
+            foreach (IBody obj in backLayer.AllObjects)
+            {
+                if (obj is Door)
+                {
+                    Door door = obj as Door;
+                    door.stateUpdate = newState;
                 }
             }
         }
