@@ -9,23 +9,25 @@ using RoBuddies.Model.Objects;
 using RoBuddies.View.HUD;
 using RoBuddies.Utilities;
 
-namespace RoBuddies.Model.Worlds.World1
+namespace RoBuddies.Model.Worlds.MountainLevel
 {
     /// <summary>
     /// This class loads the level 1 of world 1 and adds 
     /// objects to the level, which can not be used in the editor
     /// </summary>
-    class Level1_1 : World1Level
+    class Mountain_4 : MountainLevel
     {
-        public static int LEVEL_INDEX = 7;
         private const string LEVEL_PATH = "Worlds\\World1\\Level1_1.json";
-        private const LevelTheme LEVEL_THEME = LevelTheme.MENTAL_HOSPITAL;
-        private const String LEVEL_NAME = "Level  1:  The  journey  begins";
+        private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
+        private const String LEVEL_NAME = "Level 4: The journey begins";
 
-        public Level1_1(Game game)
+        public Mountain_4(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();
+            Vector2 offset = new Vector2(0, -3);
+            addSky(offset);
+            addMountains(offset);
         }
 
         protected override void addLevelObjects()
@@ -39,11 +41,7 @@ namespace RoBuddies.Model.Worlds.World1
 
         protected override void addLevelLabels()
         {
-            Color backgroundColor = new Color(0, 0, 0, 100);
 
-            HUDString welcomeString = new HUDString("I <3\nRoBuddies", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
-            welcomeString.Position = ConvertUnits.ToDisplayUnits(new Vector2(0, 4.5f));
-            levelLabels.Add(welcomeString);
         }
     }
     

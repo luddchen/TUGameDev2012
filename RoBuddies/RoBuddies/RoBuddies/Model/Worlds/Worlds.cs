@@ -7,6 +7,7 @@ using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 using RoBuddies.Model.Worlds.MountainLevel;
 using Microsoft.Xna.Framework;
+using RoBuddies.Model.Worlds.Lab;
 
 namespace RoBuddies.Model.Worlds
 {
@@ -18,7 +19,10 @@ namespace RoBuddies.Model.Worlds
 
         private Game game;
         private Queue<WorldLevel> worlds;
-        private int currentLevel = -1;
+        /// <summary>
+        /// the level index of the current level
+        /// </summary>
+        public int currentLevelIndex;
 
         /// <summary>
         /// Creates a new worlds object, which can return the next level
@@ -28,12 +32,16 @@ namespace RoBuddies.Model.Worlds
         {
             this.game = game;
             worlds = new Queue<WorldLevel>();
+            addWorlds();
+            
+        }
+
+        private void addWorlds()
+        {
             addTutorial();
-            addWorldMountain();
-            addWorld1();            
+            addWorld1();
             addWorld2();
             addWorld3();
-            
         }
 
         /// <summary>
@@ -56,9 +64,12 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld1()
         {
-            worlds.Enqueue(new Level1_1(this.game));
-            //worlds.Enqueue(new Level1_2(this.game));
-            worlds.Enqueue(new Level1_3(this.game));
+            worlds.Enqueue(new Mountain_1(this.game));
+            worlds.Enqueue(new Mountain_2(this.game));
+            worlds.Enqueue(new Mountain_3(this.game));
+            worlds.Enqueue(new Mountain_4(this.game));
+            worlds.Enqueue(new Mountain_5(this.game));
+            worlds.Enqueue(new Mountain_6(this.game));
         }
 
         /// <summary>
@@ -66,8 +77,7 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld2()
         {
-            worlds.Enqueue(new Level2_5(this.game));
-            worlds.Enqueue(new Level2_1(this.game));
+
         }
 
         /// <summary>
@@ -78,14 +88,6 @@ namespace RoBuddies.Model.Worlds
 
         }
 
-
-        private void addWorldMountain()
-        {
-            worlds.Enqueue(new Mountain_1(this.game));
-            worlds.Enqueue(new Mountain_2(this.game));
-            worlds.Enqueue(new Mountain_3(this.game));
-        }
-
         /// <summary>
         /// This method returns the next level
         /// </summary>
@@ -93,8 +95,8 @@ namespace RoBuddies.Model.Worlds
         public Level getNextLevel()
         {
             Level nextLevel = null;
-            if (++currentLevel <= worlds.Count) {
-                nextLevel = worlds.ElementAt<WorldLevel>(currentLevel).Level;
+            if (++currentLevelIndex <= worlds.Count - 1) {
+                nextLevel = worlds.ElementAt<WorldLevel>(currentLevelIndex).Level;
             }
             return nextLevel;
         }
@@ -107,12 +109,27 @@ namespace RoBuddies.Model.Worlds
         public Level setLevel(int levelIndex)
         {
             Level level = null;
-            currentLevel = levelIndex;
-            if (currentLevel <= worlds.Count)
+            currentLevelIndex = levelIndex;
+            if (currentLevelIndex <= worlds.Count)
             {
                 level = worlds.ElementAt<WorldLevel>(levelIndex).Level;
             }
             return level;
+        }
+
+        /// <summary>
+        /// this method sets the level to a specific level of the worlds queue
+        /// </summary>
+        /// <param name="level">an level from the world queue</param>
+        public void setLevel(Level level)
+        {
+            for (int levelIndex = 0; levelIndex < worlds.Count; levelIndex++ )
+            {
+                if (worlds.ElementAt<WorldLevel>(levelIndex).Level.LevelName == level.LevelName)
+                {
+                    this.currentLevelIndex = levelIndex;
+                }
+            }
         }
 
     }

@@ -15,11 +15,12 @@ namespace RoBuddies.Model.Objects
     {
         private bool isMoving = false; //statement of the crate, as pulling in prototype
         private bool isHeavyCrate = false; // true for heavy box which fulfill the condition width*height > width*width 
+        private Texture2D bigCrateTex;
 
         public Crate(Vector2 pos, Vector2 size, Color color, Level level, Game game)
             : base(pos, size, color, 1, level)
         {
-
+            bigCrateTex = game.Content.Load<Texture2D>("Sprites//CrateBig");
             Texture2D crateTex = game.Content.Load<Texture2D>("Sprites//Crate1");
             defineTextures(crateTex, crateTex, crateTex);
             this.BodyType = BodyType.Dynamic;
@@ -32,6 +33,7 @@ namespace RoBuddies.Model.Objects
             if (this.Height * this.Width > this.Width * this.Width)
             {
                 isHeavyCrate = true;
+                defineTextures(bigCrateTex, bigCrateTex, bigCrateTex);
             }
         }
 

@@ -108,7 +108,7 @@ namespace RoBuddies.View.MenuPages
                         else
                         {
                             musicValue.String = "on";
-                            this.Menu.Game.audioEngine.GetCategory("Music").SetVolume(1);
+                            this.Menu.Game.audioEngine.GetCategory("Music").SetVolume(0.1f);
                         }
                     }
                 }

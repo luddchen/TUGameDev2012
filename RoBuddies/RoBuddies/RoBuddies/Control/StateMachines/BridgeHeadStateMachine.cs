@@ -10,7 +10,7 @@ namespace RoBuddies.Control.StateMachines
 {
     class BridgeHeadStateMachine : HeadStateMachine
     {
-        private static Wall oldWall; // needs to be static, because actually we've got two bridge heads in the game
+        public static Wall wall; // needs to be static, because actually we've got two bridge heads in the game
 
         public BridgeHeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base( body, contentManager, robot)
@@ -44,15 +44,15 @@ namespace RoBuddies.Control.StateMachines
                     {
                         pos -= new Vector2(1f, 0f);
                     }
-                    Wall newWall = new Wall(pos, new Vector2(3, 1), Color.LightGreen, robot.Level, robot.Game, false);
-                    mainLayer.AddObject(newWall);
-                    if (oldWall != null)
+                    if (wall == null)
                     {
-                        robot.Level.removeObject(oldWall);
-                        oldWall.Dispose();
-
+                        wall = new Wall(pos, new Vector2(3, 1), Color.LightGreen, robot.Level, robot.Game, false);
+                        mainLayer.AddObject(wall);
                     }
-                    oldWall = newWall;
+                    else
+                    {
+                        wall.Position = pos;
+                    }
                 }
             }
 

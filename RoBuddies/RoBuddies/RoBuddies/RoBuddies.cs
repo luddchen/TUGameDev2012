@@ -8,6 +8,7 @@ using RoBuddies.Model;
 using RoBuddies.Model.Serializer;
 using RoBuddies.View;
 using RoBuddies.View.HUD;
+using RoBuddies.Utilities;
 
 namespace RoBuddies
 {
@@ -103,6 +104,9 @@ namespace RoBuddies
             audioEngine = new AudioEngine(Content.RootDirectory + "//Sound//Robuddies.xgs");
             waveBank = new WaveBank(audioEngine, Content.RootDirectory + "//Sound//Wave Bank.xwb");
             soundBank = new SoundBank(audioEngine, Content.RootDirectory + "//Sound//Sound Bank.xsb");
+
+            soundBank.PlayCue("BGM_SummerDays");
+            audioEngine.GetCategory("Music").SetVolume(0.1f);
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);

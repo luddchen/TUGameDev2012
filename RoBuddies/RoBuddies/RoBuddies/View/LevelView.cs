@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Worlds;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.View
 {
@@ -59,12 +60,25 @@ namespace RoBuddies.View
         /// <param name="newLevel">the new level , nullable</param>
         public void viewNextLevel(Level newLevel, GameTime gameTime)
         {
-            Level nextLevel = newLevel ?? this.worlds.getNextLevel();
+            Level nextLevel;
+            if (newLevel == null)
+            {
+                nextLevel = this.worlds.getNextLevel();
+            }
+            else
+            {
+                nextLevel = newLevel;
+                this.worlds.setLevel(newLevel);
+            }
             if (nextLevel != null)
             {
+                SaveGameUtility.saveIfHigher(this.worlds.currentLevelIndex);
                 nextLevelLoadedTime = gameTime.TotalGameTime;
                 if (this.SnapShot != null)
                 {
+                    // reset previous level
+                    this.SnapShot.RewindToStart();
+                    this.Level.finished = false;
                     this.SnapShot.Release();
                 }
                 this.Level = nextLevel;

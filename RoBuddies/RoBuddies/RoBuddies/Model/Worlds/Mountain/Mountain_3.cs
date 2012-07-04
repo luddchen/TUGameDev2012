@@ -18,14 +18,15 @@ namespace RoBuddies.Model.Worlds.MountainLevel
     {
         private const string LEVEL_PATH = "Worlds\\Mountain\\Mountain_3.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
-        private const String LEVEL_NAME = "";
+        private const String LEVEL_NAME = "Level 3";
 
         public Mountain_3 (Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();
-            addSky(Vector2.Zero);
-            addMountains(Vector2.Zero);
+            Vector2 offset = new Vector2(0, -2);
+            addSky(offset);
+            addMountains(offset);
         }
 
         protected override void addLevelObjects()

@@ -27,6 +27,8 @@ namespace RoBuddies.View.MenuPages
         protected Color notUsableColor = new Color(96, 0, 0, 64);
         protected Color choiceBackgroundColor = new Color(0, 0, 0, 96);
 
+        protected int loadedLevelIndex;
+
         private IHUDElement oldActiveElement;
 
         public LevelMainMenu(LevelMenu menu, ContentManager content)

@@ -6,20 +6,19 @@ using Microsoft.Xna.Framework;
 using RoBuddies.Model.Objects;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace RoBuddies.Model.Worlds.World2
+namespace RoBuddies.Model.Worlds.MountainLevel
 {
     /// <summary>
     /// This class loads the level 5 of world 2 and adds 
     /// objects to the level, which can not be used in the editor
     /// </summary>
-    class Level2_5 : World2Level
+    class Mountain_5 : MountainLevel
     {
-        public static int LEVEL_INDEX = 9;
         private const string LEVEL_PATH = "Worlds\\World2\\LEVEL2_5.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
-        private const String LEVEL_NAME = "Level  4: A  long  way  down";
+        private const String LEVEL_NAME = "Level 5: A long way down";
 
-        public Level2_5(Game game)
+        public Mountain_5(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();

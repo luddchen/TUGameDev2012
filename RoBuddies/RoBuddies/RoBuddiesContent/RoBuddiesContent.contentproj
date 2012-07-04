@@ -1642,8 +1642,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Sprites\Menu\logo.png">
-      <Name>logo</Name>
+    <Compile Include="Sprites\CrateBig.png">
+      <Name>CrateBig</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
