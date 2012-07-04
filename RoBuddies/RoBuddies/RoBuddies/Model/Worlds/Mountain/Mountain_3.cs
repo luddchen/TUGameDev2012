@@ -18,7 +18,7 @@ namespace RoBuddies.Model.Worlds.MountainLevel
     {
         private const string LEVEL_PATH = "Worlds\\Mountain\\Mountain_3.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
-        private const String LEVEL_NAME = "";
+        private const String LEVEL_NAME = "Level 3";
 
         public Mountain_3 (Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)

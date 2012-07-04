@@ -15,13 +15,13 @@ namespace RoBuddies.View.MenuPages
         private HUDString tutorial;
         private LevelMainMenu tutorialPage;
 
-        private HUDString lab;
+        private HUDString world1;
         private LevelMainMenu labPage;
 
-        private HUDString mountain;
+        private HUDString world2;
         private LevelMainMenu mountainPage;
 
-        private HUDString hospital;
+        private HUDString world3;
         private LevelMainMenu hospitalPage;
 
         public override void OnViewPortResize()
@@ -31,9 +31,9 @@ namespace RoBuddies.View.MenuPages
             if (levelChoose != null) { levelChoose.Position = new Vector2(this.Viewport.Width * 0.2f, this.Viewport.Height * 0.15f); }
 
             if (tutorial != null) { tutorial.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.3f); }
-            if (lab != null) { lab.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.5f); }
-            if (mountain != null) { mountain.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.7f); }
-            if (hospital != null) { hospital.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.9f); }
+            if (world1 != null) { world1.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.5f); }
+            if (world2 != null) { world2.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.7f); }
+            if (world3 != null) { world3.Position = new Vector2(this.Viewport.Width / 2, this.Viewport.Height * 0.9f); }
         }
 
         public LevelChoiceMenu(LevelMenu menu, ContentManager content)
@@ -49,18 +49,18 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            lab = new HUDString("Easy World", null, null, notUsableColor, null, 0.7f, null, content);
-            addChoiceElement(lab, true);
+            world1 = new HUDString("Easy World", null, null, notUsableColor, null, 0.7f, null, content);
+            addChoiceElement(world1, true);
 
             addChoiceLine();
 
-            mountain = new HUDString("Head World", null, null, notUsableColor, null, 0.7f, null, content);
-            addChoiceElement(mountain, true);
+            world2 = new HUDString("Head World", null, null, notUsableColor, null, 0.7f, null, content);
+            addChoiceElement(world2, true);
 
             addChoiceLine();
 
-            hospital = new HUDString("Advanced World", null, null, notUsableColor, null, 0.7f, null, content);
-            addChoiceElement(hospital, true);
+            world3 = new HUDString("Advanced World", null, null, notUsableColor, null, 0.7f, null, content);
+            addChoiceElement(world3, true);
 
 
             this.tutorialPage = new TutorialLevelChoiceMenu(menu, content);
@@ -87,17 +87,17 @@ namespace RoBuddies.View.MenuPages
                         this.Menu.ActivePage = this.tutorialPage;
                     }
 
-                    if (this.ActiveElement == lab && loadedLevelIndex >= 7)
+                    if (this.ActiveElement == world1 && loadedLevelIndex >= 7)
                     {
                         this.Menu.ActivePage = this.labPage;
                     }
 
-                    if (this.ActiveElement == mountain && loadedLevelIndex >= 16)
+                    if (this.ActiveElement == world2 && loadedLevelIndex >= 16)
                     {
                         this.Menu.ActivePage = this.mountainPage;
                     }
 
-                    if (this.ActiveElement == hospital && loadedLevelIndex >= 25)
+                    if (this.ActiveElement == world3 && loadedLevelIndex >= 25)
                     {
                         this.Menu.ActivePage = this.hospitalPage;
                     }
@@ -110,15 +110,15 @@ namespace RoBuddies.View.MenuPages
         {
             if (loadedLevelIndex >= 7)
             {
-                lab.Color = textColor;
+                world1.Color = textColor;
             }
             if (loadedLevelIndex >= 16)
             {
-                mountain.Color = textColor;
+                world2.Color = textColor;
             }
             if (loadedLevelIndex >= 25)
             {
-                hospital.Color = textColor;
+                world3.Color = textColor;
             }
         }
 

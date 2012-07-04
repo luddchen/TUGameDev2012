@@ -7,6 +7,7 @@ using RoBuddies.Model.Worlds.World1;
 using RoBuddies.Model.Worlds.World2;
 using RoBuddies.Model.Worlds.MountainLevel;
 using Microsoft.Xna.Framework;
+using RoBuddies.Model.Worlds.Lab;
 
 namespace RoBuddies.Model.Worlds
 {
@@ -38,7 +39,6 @@ namespace RoBuddies.Model.Worlds
         private void addWorlds()
         {
             addTutorial();
-            addWorldMountain();
             addWorld1();
             addWorld2();
             addWorld3();
@@ -64,9 +64,12 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld1()
         {
-            worlds.Enqueue(new Level1_1(this.game));
-            //worlds.Enqueue(new Level1_2(this.game));
-            worlds.Enqueue(new Level1_3(this.game));
+            worlds.Enqueue(new Mountain_1(this.game));
+            worlds.Enqueue(new Mountain_2(this.game));
+            worlds.Enqueue(new Mountain_3(this.game));
+            worlds.Enqueue(new Mountain_4(this.game));
+            worlds.Enqueue(new Mountain_5(this.game));
+            worlds.Enqueue(new Mountain_6(this.game));
         }
 
         /// <summary>
@@ -74,8 +77,7 @@ namespace RoBuddies.Model.Worlds
         /// </summary>
         private void addWorld2()
         {
-            worlds.Enqueue(new Level2_5(this.game));
-            worlds.Enqueue(new Level2_1(this.game));
+
         }
 
         /// <summary>
@@ -86,14 +88,6 @@ namespace RoBuddies.Model.Worlds
 
         }
 
-
-        private void addWorldMountain()
-        {
-            worlds.Enqueue(new Mountain_1(this.game));
-            worlds.Enqueue(new Mountain_2(this.game));
-            worlds.Enqueue(new Mountain_3(this.game));
-        }
-
         /// <summary>
         /// This method returns the next level
         /// </summary>
@@ -101,7 +95,7 @@ namespace RoBuddies.Model.Worlds
         public Level getNextLevel()
         {
             Level nextLevel = null;
-            if (++currentLevelIndex <= worlds.Count) {
+            if (++currentLevelIndex <= worlds.Count - 1) {
                 nextLevel = worlds.ElementAt<WorldLevel>(currentLevelIndex).Level;
             }
             return nextLevel;
