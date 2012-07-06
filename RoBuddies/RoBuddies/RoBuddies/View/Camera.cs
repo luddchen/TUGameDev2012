@@ -18,9 +18,7 @@ namespace RoBuddies.View
         private float zoom;
         private Vector2 position;
         private Vector2 targetPosition;
-        private Vector2 movingDirection;
-        private float movingSpeed;
-        private float movingDistance;
+
         private Rectangle boundingBox;
         private bool useBoundingBox;
 
@@ -28,6 +26,8 @@ namespace RoBuddies.View
         /// if the new position from move() is to far away the new position will not be set direct
         /// </summary>
         public float maxDirectMoveDistance = 1;
+
+        public float CameraSpeed = 0.1f;
 
         /// <summary>
         /// Position of this Cam
@@ -86,9 +86,6 @@ namespace RoBuddies.View
         {
             this.position = Vector2.Zero;
             this.targetPosition = Vector2.Zero;
-            this.movingSpeed = 0;
-            this.movingDirection = Vector2.Zero;
-            this.movingDistance = 0;
             this.Zoom = 0.65f;
             this.Rotation = 0.0f;
             this.SmoothMove = true;
@@ -133,27 +130,10 @@ namespace RoBuddies.View
             if (this.SmoothMove)
             {
                 this.targetPosition = to;
-                Vector2 direction = this.targetPosition - this.position;
-                this.movingDistance = (float)Math.Sqrt(Math.Pow(direction.X, 2) + Math.Pow(direction.Y, 2));
-
-                if (this.movingDistance > this.maxDirectMoveDistance)
-                {
-                    this.movingDirection = direction / this.movingDistance;
-                    if (this.movingSpeed == 0.0f)
-                    {
-                        this.movingSpeed += 0.3f;
-                    }
-                }
-                else
-                {
-                    this.movingSpeed = 0;
-                    this.position = this.targetPosition;
-                }
             }
 
             if (!this.SmoothMove)
             {
-                this.movingSpeed = 0;
                 this.position = to;
                 this.targetPosition = to;
             }
@@ -167,25 +147,12 @@ namespace RoBuddies.View
         {
             if (this.SmoothMove)
             {
-                if (this.movingSpeed > 0.0f)
-                {
-                    this.position += this.movingSpeed * this.movingDirection;
-                    this.movingDistance -= this.movingSpeed;
+                Vector2 direction = this.targetPosition - this.position;
+                float movingDistance = (float)Math.Sqrt(Math.Pow(direction.X, 2) + Math.Pow(direction.Y, 2));
 
-                    if (this.movingDistance > Math.Pow(this.movingSpeed, 2) * 2)
-                    {
-                        this.movingSpeed += 0.3f;
-                    }
-                    else
-                    {
-                        this.movingSpeed -= 0.3f;
-                    }
-                }
-                else
+                if (movingDistance > this.maxDirectMoveDistance)
                 {
-                    this.movingDirection = Vector2.Zero;
-                    this.movingSpeed = 0;
-                    this.position = this.targetPosition;
+                    this.position = this.position + direction * this.CameraSpeed;
                 }
             }
         }
@@ -244,20 +211,7 @@ namespace RoBuddies.View
                     }
                 }
             }
-            // unfortunately this doesn't work good:
-            // deactivate bounding box in X or Y direction, if it's
-            // smaller than the viewing resolution. Thereby the level
-            // will be centered.
-            //if (bounds.Width <= 0)
-            //{
-            //    bounds.X = -int.MaxValue;
-            //    bounds.Width = int.MaxValue;
-            //}
-            //if (bounds.Height <= 0)
-            //{
-            //    bounds.Y = -int.MaxValue;
-            //    bounds.Height = int.MaxValue;
-            //}
+
             this.SetBoundingBox(bounds);
         }
     }

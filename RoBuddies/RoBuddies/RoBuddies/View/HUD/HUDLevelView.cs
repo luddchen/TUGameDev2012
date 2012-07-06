@@ -12,6 +12,8 @@ namespace RoBuddies.View.HUD
     {
         protected Texture2D stop;
 
+        private Texture2D rewindForeground;
+
         /// <summary>
         /// space between levelbottom and screen bottom
         /// </summary>
@@ -46,6 +48,7 @@ namespace RoBuddies.View.HUD
         {
             this.backgroundColor = Color.White;
             this.stop = this.Game.Content.Load<Texture2D>("Sprites//stop");
+            this.rewindForeground = game.Content.Load<Texture2D>("Sprites//menu//RewindForeground");
             this.Camera = new Camera();
             this.Level = new Level();
         }
@@ -71,7 +74,7 @@ namespace RoBuddies.View.HUD
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
 
-            spriteBatch.Begin(SpriteSortMode.BackToFront, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, this.Camera.GetViewMatrix(layer.Parallax));
 
             foreach (IBody body in layer.AllObjects)
             {
@@ -85,16 +88,9 @@ namespace RoBuddies.View.HUD
                         (int)ConvertUnits.ToDisplayUnits(body.Width),
                         (int)ConvertUnits.ToDisplayUnits(body.Height));
                     Color color;
-                    if (rewind)
+                    if (rewind && layer.Name != "mainLayer")
                     {
-                        if (layer.Name != "mainLayer")
-                        {
                             color = Color.DarkGray;
-                        }
-                        else
-                        {
-                            color = Color.LightBlue;
-                        }
                     }
                     else
                     {
@@ -117,6 +113,13 @@ namespace RoBuddies.View.HUD
             foreach (Layer layer in this.Level.AllLayers)
             {
                 Draw(layer, spriteBatch, rewind);
+            }
+
+            if (rewind)
+            {
+                spriteBatch.Begin();
+                spriteBatch.Draw(this.rewindForeground, this.backgroundDest, Color.White);
+                spriteBatch.End();
             }
         }
 
