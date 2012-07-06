@@ -102,6 +102,13 @@ namespace RoBuddies.View.HUD
         protected virtual void DrawContent(SpriteBatch spriteBatch) { }
 
         /// <summary>
+        /// draw the content in front of background and back of HUD elements
+        /// </summary>
+        /// <param name="spriteBatch"></param>
+        /// <param name="rewind">visualisation of rewinding</param>
+        protected virtual void DrawContent(SpriteBatch spriteBatch, bool rewind) { }
+
+        /// <summary>
         /// draw all elements and background
         /// </summary>
         /// <param name="spriteBtach">spritebatch</param>

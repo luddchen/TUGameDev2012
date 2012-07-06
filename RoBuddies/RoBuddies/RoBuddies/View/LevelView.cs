@@ -180,7 +180,14 @@ namespace RoBuddies.View
 
         protected override void DrawContent(SpriteBatch spriteBatch)
         {
-            base.DrawContent(spriteBatch);
+            if (this.SnapShot != null)
+            {
+                base.DrawContent(spriteBatch, this.SnapShot.IsRewinding);
+            }
+            else
+            {
+                base.DrawContent(spriteBatch);
+            }
 
             if (showDebug)
             {

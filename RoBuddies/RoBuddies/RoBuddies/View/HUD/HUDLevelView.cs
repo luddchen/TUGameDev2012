@@ -66,7 +66,7 @@ namespace RoBuddies.View.HUD
         /// </summary>
         /// <param name="layer">layer to draw</param>
         /// <param name="spriteBtach">spritebatch</param>
-        public void Draw(Layer layer, SpriteBatch spriteBatch)
+        public void Draw(Layer layer, SpriteBatch spriteBatch, bool rewind)
         {
 
             this.Game.GraphicsDevice.Viewport = this.Viewport;
@@ -84,7 +84,23 @@ namespace RoBuddies.View.HUD
                         (int)displayPos.Y,
                         (int)ConvertUnits.ToDisplayUnits(body.Width),
                         (int)ConvertUnits.ToDisplayUnits(body.Height));
-                    spriteBatch.Draw(body.Texture, dest, null, body.Color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
+                    Color color;
+                    if (rewind)
+                    {
+                        if (layer.Name != "mainLayer")
+                        {
+                            color = Color.DarkGray;
+                        }
+                        else
+                        {
+                            color = Color.LightBlue;
+                        }
+                    }
+                    else
+                    {
+                        color = body.Color;
+                    }
+                    spriteBatch.Draw(body.Texture, dest, null, color, -body.Rotation, body.Origin, body.Effect, layer.LayerDepth);
                 }
             }
 
@@ -96,13 +112,19 @@ namespace RoBuddies.View.HUD
             spriteBatch.End();
         }
 
+        protected override void DrawContent(SpriteBatch spriteBatch, bool rewind)
+        {
+            foreach (Layer layer in this.Level.AllLayers)
+            {
+                Draw(layer, spriteBatch, rewind);
+            }
+        }
+
         protected override void DrawContent(SpriteBatch spriteBatch)
         {
             foreach (Layer layer in this.Level.AllLayers)
             {
-                // todo : order layer (layerDepth)
-
-                Draw(layer, spriteBatch);
+                Draw(layer, spriteBatch, false);
             }
         }
     }

@@ -19,6 +19,10 @@ namespace RoBuddies.Model.Snapshot
 
         private int currentKeyFrame;
 
+        private bool isRewinding;
+
+        public bool IsRewinding { get { return isRewinding; } }
+
         /// <summary>
         /// creates a new Snapshot unit
         /// </summary>
@@ -30,6 +34,7 @@ namespace RoBuddies.Model.Snapshot
             this.BodyList = new List<IBody>();
             CreateBodyList(level);
             this.currentKeyFrame = -1;
+            this.isRewinding = false;
         }
 
         /// <summary>
@@ -91,6 +96,7 @@ namespace RoBuddies.Model.Snapshot
             {
                 this.currentKeyFrame--;
                 this.AllKeyFrames[currentKeyFrame].Restore();
+                this.isRewinding = true;
             }
         }
 
@@ -103,6 +109,7 @@ namespace RoBuddies.Model.Snapshot
             {
                 this.currentKeyFrame++;
                 this.AllKeyFrames[currentKeyFrame].Restore();
+                this.isRewinding = true;
             }
         }
 
@@ -115,6 +122,7 @@ namespace RoBuddies.Model.Snapshot
             {
                 this.AllKeyFrames.RemoveAt(i);
             }
+            this.isRewinding = false;
         }
 
         /// <summary>
