@@ -1133,6 +1133,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="font.spritefont">
+      <Name>font</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+    </Compile>
     <None Include="Sound\Robuddies.xgs">
       <Name>Robuddies</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

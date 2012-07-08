@@ -61,6 +61,10 @@
     <CodeAnalysisRuleSet>BasicDesignGuidelineRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DebugViewXNA, Version=3.3.1.19005, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Farseer3.3.1\DebugViewXNA.dll</HintPath>
+    </Reference>
     <Reference Include="FarseerPhysicsXNA, Version=3.3.4540.39123, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Farseer3.3.1\FarseerPhysicsXNA.dll</HintPath>
@@ -241,10 +245,6 @@
     <Content Include="RoBuddiesThumbnail.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\GamePrototypes\Farseer Physics Engine 3.3.1 Samples XNA\DebugView XNA\DebugView XNA.csproj">
-      <Project>{FC7845FA-13FE-4FF8-822A-A577F3F59B00}</Project>
-      <Name>DebugView XNA</Name>
-    </ProjectReference>
     <ProjectReference Include="..\RoBuddiesContent\RoBuddiesContent.contentproj">
       <Name>RoBuddiesContent</Name>
       <XnaReferenceType>Content</XnaReferenceType>
