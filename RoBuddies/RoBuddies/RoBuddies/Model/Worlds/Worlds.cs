@@ -71,6 +71,7 @@ namespace RoBuddies.Model.Worlds
             worlds.Enqueue(new Mountain_5(this.game));
             worlds.Enqueue(new Mountain_6(this.game));
             worlds.Enqueue(new Mountain_7(this.game));
+            worlds.Enqueue(new Mountain_8(this.game));
         }
 
         /// <summary>

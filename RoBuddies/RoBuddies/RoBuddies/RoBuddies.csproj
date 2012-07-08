@@ -190,6 +190,7 @@
     <Compile Include="Model\Worlds\Mountain\Mountain_2.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_3.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_7.cs" />
+    <Compile Include="Model\Worlds\Mountain\Mountain_8.cs" />
     <Compile Include="Model\Worlds\Tutorial\TutorialLevel.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_1.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_2.cs" />
