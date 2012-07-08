@@ -132,7 +132,8 @@ namespace RoBuddies.View.MenuPages
                     }
                     if (this.ActiveElement == world1_7 && loadedLevelIndex >= 13)
                     {
-
+                        ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Mountain_7(this.Menu.Game).Level, gameTime);
+                        this.Menu.IsVisible = false;
                     }
                     if (this.ActiveElement == world1_8 && loadedLevelIndex >= 14)
                     {
