@@ -25,7 +25,7 @@ namespace RoBuddies.Model.Worlds.Tutorial
         public Tutorial_7(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
-            Vector2 offset = new Vector2(0, -2);
+            Vector2 offset = new Vector2(0, -3);
             addSky(offset);
             addMountains(offset);
         }

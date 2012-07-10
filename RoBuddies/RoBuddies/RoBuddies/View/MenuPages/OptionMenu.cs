@@ -42,7 +42,7 @@ namespace RoBuddies.View.MenuPages
             fullscreen = new HUDString("Fullscreen", null, null, textColor, null, 0.7f, null, content);
             addChoiceElement(fullscreen, true);
 
-            fullscreenValue = new HUDString("off", null, null, textColor, null, 0.7f, null, content);
+            fullscreenValue = new HUDString("on", null, null, textColor, null, 0.7f, null, content);
             this.AllElements.Add(fullscreenValue);
 
             addChoiceLine();

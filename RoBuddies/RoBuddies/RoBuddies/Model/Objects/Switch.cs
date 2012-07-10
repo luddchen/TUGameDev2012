@@ -48,6 +48,7 @@ namespace RoBuddies.Model.Objects
                 if (value)
                 {
                     this.Color = this.realColor;
+                    this.Color = new Color(this.realColor.R, this.realColor.G, this.realColor.B, 80);
                     defineTextures(switcherOnTex, switcherOnTex, switcherOnTex);
                 }
                 if (!value)

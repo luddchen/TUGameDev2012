@@ -43,30 +43,34 @@ namespace RoBuddies.Control.StateMachines
 
         public override void Update(GameTime gameTime)
         {
-            if (newKeyboardState.IsKeyDown(Keys.LeftControl) && oldKeyboardState.IsKeyUp(Keys.LeftControl))
-            {
-                Console.WriteLine("Head");
-            }
-
             UpdatePosition();
 
             CurrentState.Update(gameTime);
         }
 
-        private void UpdatePosition()
+        public void UpdatePosition()
         {
-            robot.Head.Effect = robot.ActivePart.Effect;
+            if (robot.ActivePart != robot.LowerPart)
+            {
+                robot.Head.Effect = robot.ActivePart.Effect;
+            }
             float xOffset = 0;
             if (robot.RobotStateMachine.PartsCombinedStateMachine.CurrentState is PushingState) { xOffset -= 0.2f; }
             if (robot.Head.Effect == SpriteEffects.None) { xOffset *= -1; }
-            if (robot.ActivePart != robot.UpperPart)
+            if (robot.ActivePart == robot.PartsCombined)
             {
-                Body.Position = robot.ActivePart.Position + new Vector2(xOffset, robot.ActivePart.Height / 2 + robot.Head.Height / 4);
+                Body.Position = robot.PartsCombined.Position + new Vector2(xOffset, robot.PartsCombined.Height / 2 + robot.Head.Height / 4);
             }
             else
             {
-                Body.Position = robot.ActivePart.Position + new Vector2(xOffset, robot.ActivePart.Height / 4 + robot.Head.Height / 4);
+                Body.Position = robot.UpperPart.Position + new Vector2(xOffset, robot.UpperPart.Height / 4 + robot.Head.Height / 4);
             }
+        }
+
+        private bool canUseHead()
+        {
+            bool canUseHead = robot.ActivePart == robot.UpperPart || robot.ActivePart == robot.PartsCombined;
+            return canUseHead;
         }
     }
 }

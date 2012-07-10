@@ -24,7 +24,7 @@ namespace RoBuddies.Model.Worlds.MountainLevel
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
             Level.Robot.removeHead();
-            Vector2 offset = new Vector2(0, -2);
+            Vector2 offset = new Vector2(0, -3);
             addSky(offset);
             addMountains(offset);
         }

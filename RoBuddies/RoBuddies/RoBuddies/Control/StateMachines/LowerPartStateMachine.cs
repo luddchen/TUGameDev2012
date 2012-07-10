@@ -96,6 +96,16 @@ namespace RoBuddies.Control.StateMachines
                 stopPulling();
             }
 
+            if (ButtonPressed(ControlButton.releasePipe))
+            {
+                this.robot.RobotStateMachine.UpperPartStateMachine.releasePipe();
+            }
+
+            if (this.robot.RobotStateMachine.UpperPartStateMachine.HeadStateMachine.HasHead)
+            {
+                this.robot.RobotStateMachine.UpperPartStateMachine.HeadStateMachine.UpdatePosition();
+            }
+
             CurrentState.Update(gameTime);
         }
 

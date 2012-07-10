@@ -18,7 +18,7 @@ namespace RoBuddies.Control.StateMachines
 
         private ContentManager contentManager;
         private Robot robot;
-        private Pipe currentPipe;
+        public Pipe currentPipe;
         private List<Texture2D> textureList;
 
         private HeadStateMachine mHeadStateMachine;
@@ -89,9 +89,16 @@ namespace RoBuddies.Control.StateMachines
 
                 if (ButtonPressed(ControlButton.releasePipe))
                 {
-                    this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, this.robot.UpperPart.Position.Y - currentPipe.Height / 2 - 0.3f);
-                    SwitchToState(WAIT_STATE);
+                    releasePipe();
                 }
+            }
+            else if (ButtonIsDown(ControlButton.left))
+            {
+                Body.Effect = SpriteEffects.FlipHorizontally;
+            }
+            else if (ButtonIsDown(ControlButton.right))
+            {
+                Body.Effect = SpriteEffects.None;
             }
 
             CurrentState.Update(gameTime);
@@ -99,6 +106,15 @@ namespace RoBuddies.Control.StateMachines
             if (mHeadStateMachine.HasHead)
             {
                 mHeadStateMachine.Update(gameTime);
+            }
+        }
+
+        public void releasePipe()
+        {
+            if (currentPipe != null)
+            {
+                this.robot.UpperPart.Position = new Vector2(this.robot.UpperPart.Position.X, this.robot.UpperPart.Position.Y - currentPipe.Height / 2 - 0.3f);
+                SwitchToState(WAIT_STATE);
             }
         }
 
@@ -117,6 +133,11 @@ namespace RoBuddies.Control.StateMachines
                 currentPipe = intersectingObject as Pipe;
             }
             return hitsPipe;
+        }
+
+        public bool isOnGround()
+        {
+            return RayCastUtility.isOnGround(this.Level, robot.UpperPart);
         }
     }
 }

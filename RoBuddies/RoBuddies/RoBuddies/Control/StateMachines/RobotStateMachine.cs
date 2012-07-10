@@ -163,6 +163,10 @@ namespace RoBuddies.Control.StateMachines
             {
                 mActiveStateMachine = mPartsCombinedStateMachine;
                 mRobot.ActivePart = mRobot.PartsCombined;
+                if (UpperPartStateMachine.HeadStateMachine.HasHead)
+                {
+                    UpperPartStateMachine.HeadStateMachine.Body.Color = Color.White;
+                }
                 setCombined(true);
             }
 
@@ -172,7 +176,11 @@ namespace RoBuddies.Control.StateMachines
                 mRobot.ActivePart = mRobot.LowerPart;
                 setCombined(false);
                 mRobot.LowerPart.Color = Color.White;
-                mRobot.UpperPart.Color = new Color(160, 160, 160, 160);
+                mRobot.UpperPart.Color = new Color(160, 160, 160, 100);
+                if (UpperPartStateMachine.HeadStateMachine.HasHead)
+                {
+                    UpperPartStateMachine.HeadStateMachine.Body.Color = new Color(160, 160, 160, 100);
+                }
             }
 
             if (part == mRobot.UpperPart)
@@ -180,8 +188,12 @@ namespace RoBuddies.Control.StateMachines
                 mActiveStateMachine = mUpperPartStateMachine;
                 mRobot.ActivePart = mRobot.UpperPart;
                 setCombined(false);
-                mRobot.LowerPart.Color = new Color(160, 160, 160, 160);
+                mRobot.LowerPart.Color = new Color(160, 160, 160, 100);
                 mRobot.UpperPart.Color = Color.White;
+                if (UpperPartStateMachine.HeadStateMachine.HasHead)
+                {
+                    UpperPartStateMachine.HeadStateMachine.Body.Color = Color.White;
+                }
             }
         }
 

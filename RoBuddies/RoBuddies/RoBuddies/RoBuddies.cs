@@ -95,6 +95,10 @@ namespace RoBuddies
             if (File.Exists(@".\\editor_temp.json")) {
                 File.Delete(@".\\editor_temp.json");
             }
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.IsFullScreen = true;
+            graphics.ApplyChanges();
         }
 
         /// <summary>

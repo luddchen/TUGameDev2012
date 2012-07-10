@@ -11,6 +11,7 @@ namespace RoBuddies.Control.StateMachines
     class BridgeHeadStateMachine : HeadStateMachine
     {
         public static Wall wall; // needs to be static, because actually we've got two bridge heads in the game
+        private GameTime headUsedTime;
 
         public BridgeHeadStateMachine(IBody body, ContentManager contentManager, Robot robot)
             : base( body, contentManager, robot)
@@ -26,6 +27,8 @@ namespace RoBuddies.Control.StateMachines
                     && (robot.RobotStateMachine.ActiveStateMachine == robot.RobotStateMachine.PartsCombinedStateMachine
                     || robot.RobotStateMachine.UpperPartStateMachine.CurrentState.Name != UpperPartStateMachine.PIPE_CLIMBING_STATE))
                 {
+                    headUsedTime = new GameTime(gameTime.TotalGameTime, gameTime.ElapsedGameTime);
+                    this.Body.Color = new Color(160, 160, 160, 100);
                     Vector2 pos;
                     Layer mainLayer = robot.Level.GetLayerByName("mainLayer");
                     if (robot.RobotStateMachine.ActiveStateMachine == robot.RobotStateMachine.PartsCombinedStateMachine)
@@ -56,6 +59,11 @@ namespace RoBuddies.Control.StateMachines
                 }
             }
 
+            if (headUsedTime != null && gameTime.TotalGameTime.Subtract(headUsedTime.TotalGameTime).TotalSeconds >= 0.1)
+            {
+                this.Body.Color = Color.White;
+            }
+
             base.Update(gameTime);
         }
 
@@ -68,7 +76,7 @@ namespace RoBuddies.Control.StateMachines
             }
             else
             {
-                isOnGround = robot.RobotStateMachine.LowerPartStateMachine.isOnGround();
+                isOnGround = robot.RobotStateMachine.UpperPartStateMachine.isOnGround();
             }
             return isOnGround;
         }
