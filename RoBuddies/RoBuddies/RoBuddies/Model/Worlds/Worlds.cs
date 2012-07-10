@@ -8,6 +8,7 @@ using RoBuddies.Model.Worlds.World2;
 using RoBuddies.Model.Worlds.MountainLevel;
 using Microsoft.Xna.Framework;
 using RoBuddies.Model.Worlds.Lab;
+using RoBuddies.Model.Worlds.Mountain;
 
 namespace RoBuddies.Model.Worlds
 {
@@ -97,7 +98,8 @@ namespace RoBuddies.Model.Worlds
         public Level getNextLevel()
         {
             Level nextLevel = null;
-            if (++currentLevelIndex <= worlds.Count - 1) {
+            if (++currentLevelIndex <= worlds.Count - 1)
+            {
                 nextLevel = worlds.ElementAt<WorldLevel>(currentLevelIndex).Level;
             }
             return nextLevel;

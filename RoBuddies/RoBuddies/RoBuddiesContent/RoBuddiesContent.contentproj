@@ -1150,6 +1150,10 @@
       <Name>Wave Bank</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Worlds\END.json">
+      <Name>END</Name>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Worlds\HardLevel\H_LEVEL_1.json">
       <Name>H_LEVEL_1</Name>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

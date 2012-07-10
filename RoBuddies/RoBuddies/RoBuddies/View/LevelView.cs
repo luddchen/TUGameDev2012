@@ -7,6 +7,7 @@ using Microsoft.Xna.Framework.Input;
 using RoBuddies.Model;
 using RoBuddies.Model.Worlds;
 using RoBuddies.Utilities;
+using RoBuddies.Model.Worlds.Mountain;
 
 namespace RoBuddies.View
 {
@@ -73,33 +74,37 @@ namespace RoBuddies.View
             if (nextLevel != null)
             {
                 SaveGameUtility.saveIfHigher(this.worlds.currentLevelIndex);
-                nextLevelLoadedTime = gameTime.TotalGameTime;
-                if (this.SnapShot != null)
-                {
-                    // reset previous level
-                    this.SnapShot.RewindToStart();
-                    this.Level.finished = false;
-                    this.SnapShot.Release();
-                }
-                this.Level = nextLevel;
-                this.Level.Step(0.001f);
-                this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
-                this.SnapShot.MakeSnapshot(false);
-
-                this.Camera.SetBoundingBox(this.Level);
-                this.Camera.SmoothMove = false;
-                CameraUpdate();
-                this.Camera.SmoothMove = true;
-                Console.Out.WriteLine("load level");
-
-                this.debugView = new DebugViewXNA(this.Level);
-                this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
-                this.debugView.DefaultShapeColor = Color.White;
-                this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
-
-                this.topHud.setString(this.Level.LevelName);
-                this.background = null;
             }
+            else
+            {
+                nextLevel = new End(this.Game).Level;
+            }
+            nextLevelLoadedTime = gameTime.TotalGameTime;
+            if (this.SnapShot != null)
+            {
+                // reset previous level
+                this.SnapShot.RewindToStart();
+                this.Level.finished = false;
+                this.SnapShot.Release();
+            }
+            this.Level = nextLevel;
+            this.Level.Step(0.001f);
+            this.SnapShot = new Model.Snapshot.Snapshot(this.Level);
+            this.SnapShot.MakeSnapshot(false);
+
+            this.Camera.SetBoundingBox(this.Level);
+            this.Camera.SmoothMove = false;
+            CameraUpdate();
+            this.Camera.SmoothMove = true;
+            Console.Out.WriteLine("load level");
+
+            this.debugView = new DebugViewXNA(this.Level);
+            this.debugView.AppendFlags(DebugViewFlags.AABB | DebugViewFlags.Joint | DebugViewFlags.DebugPanel | DebugViewFlags.ContactPoints | DebugViewFlags.Shape);
+            this.debugView.DefaultShapeColor = Color.White;
+            this.debugView.LoadContent(Game.GraphicsDevice, Game.Content);
+
+            this.topHud.setString(this.Level.LevelName);
+            this.background = null;
         }
 
         public override void Update(GameTime gameTime)

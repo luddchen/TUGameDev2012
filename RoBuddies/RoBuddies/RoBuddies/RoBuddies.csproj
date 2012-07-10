@@ -185,6 +185,7 @@
     <Compile Include="Model\Worlds\Lab\LabLevel.cs" />
     <Compile Include="Model\Worlds\Lab\Lab_1.cs" />
     <Compile Include="Model\Worlds\Lab\Lab_4.cs" />
+    <Compile Include="Model\Worlds\Mountain\End.cs" />
     <Compile Include="Model\Worlds\Mountain\MountainLevel.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_1.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_2.cs" />
