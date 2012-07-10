@@ -7,6 +7,8 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using RoBuddies.Model.Serializer;
 using RoBuddies.Model.Objects;
+using RoBuddies.View.HUD;
+using RoBuddies.Utilities;
 
 namespace RoBuddies.Model.Worlds.MountainLevel
 {
@@ -18,7 +20,7 @@ namespace RoBuddies.Model.Worlds.MountainLevel
     {
         private const string LEVEL_PATH = "Worlds\\Mountain\\Mountain_1.json";
         private const LevelTheme LEVEL_THEME = LevelTheme.MOUNTAIN;
-        private const String LEVEL_NAME = "Level 1";
+        private const String LEVEL_NAME = "Level 1: The Journey Begins";
 
         public Mountain_1(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
@@ -36,7 +38,15 @@ namespace RoBuddies.Model.Worlds.MountainLevel
 
         protected override void addLevelLabels()
         {
+            Color backgroundColor = new Color(0, 0, 0, 128);
 
+            HUDString hintStringJump = new HUDString("Now your epic journey begins", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            hintStringJump.Position = ConvertUnits.ToDisplayUnits(new Vector2(-17f, 2f));
+            levelLabels.Add(hintStringJump);
+
+            HUDString glString = new HUDString("Good Luck!", null, new Vector2(0, 0), null, backgroundColor, 0.85f, null, game.Content);
+            glString.Position = ConvertUnits.ToDisplayUnits(new Vector2(-9f, 4f));
+            levelLabels.Add(glString);
         }
     }
 }
