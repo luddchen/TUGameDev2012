@@ -43,7 +43,7 @@ namespace RoBuddies
         /// </summary>
         public GamePadState newGamePadState;
 
-        GraphicsDeviceManager graphics;
+        public GraphicsDeviceManager graphics;
         Viewport ViewPort;
         SpriteBatch SpriteBatch;
         Texture2D splash;
@@ -65,6 +65,7 @@ namespace RoBuddies
         public RoBuddies()
         {
             graphics = new GraphicsDeviceManager(this);
+            graphics.PreferMultiSampling = true;
             Content.RootDirectory = "Content";
             Window.AllowUserResizing = true;
             Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
@@ -106,7 +107,8 @@ namespace RoBuddies
             soundBank = new SoundBank(audioEngine, Content.RootDirectory + "//Sound//Sound Bank.xsb");
 
             soundBank.PlayCue("BGM_SummerDays");
-            audioEngine.GetCategory("Music").SetVolume(0.1f);
+            audioEngine.GetCategory("Music").SetVolume(1f);
+            audioEngine.GetCategory("SFX").SetVolume(3.5f);
 
             SpriteBatch = new SpriteBatch(GraphicsDevice);
             LevelView = new LevelView(this);

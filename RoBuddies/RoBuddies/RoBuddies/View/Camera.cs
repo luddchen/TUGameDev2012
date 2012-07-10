@@ -14,6 +14,7 @@ namespace RoBuddies.View
     /// </summary>
     class Camera
     {
+        private const float INITIAL_ZOOM = 0.6f;
         private Viewport viewport;
         private float zoom;
         private Vector2 position;
@@ -86,7 +87,7 @@ namespace RoBuddies.View
         {
             this.position = Vector2.Zero;
             this.targetPosition = Vector2.Zero;
-            this.Zoom = 0.65f;
+            this.Zoom = INITIAL_ZOOM;
             this.Rotation = 0.0f;
             this.SmoothMove = true;
             this.useBoundingBox = false;
@@ -190,6 +191,7 @@ namespace RoBuddies.View
         /// <param name="level">the level which camera bounds will be calculated</param>
         public void SetBoundingBox(Level level)
         {
+            this.zoom = (viewport.Height / 480) * INITIAL_ZOOM;
             float viewWidth = viewport.Width / (2 * zoom);
             float viewHeight = viewport.Height / (2 * zoom);
             Rectangle bounds = new Rectangle(int.MaxValue, int.MaxValue, 0, 0);
