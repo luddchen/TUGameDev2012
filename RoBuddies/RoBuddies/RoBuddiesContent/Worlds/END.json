@@ -1,0 +1,69 @@
+{
+  "Gravity": "0, -10",
+  "Layers": [
+    {
+      "Layer": {
+        "Name": "backLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.51,
+        "Walls": [],
+        "Crates": [],
+        "Pipes": [
+          {
+            "Pipe": {
+              "Position": "2, 15",
+              "Color": "255, 255, 255, 255",
+              "Width": 37.0
+            }
+          }
+        ],
+        "Ladders": []
+      }
+    },
+    {
+      "Layer": {
+        "Name": "mainLayer",
+        "Parallax": "1, 1",
+        "LayerDepth": 0.5,
+        "Walls": [
+          {
+            "Wall": {
+              "Position": "2, -2",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 37.0,
+                "Heigth": 5.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-18, 6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 7.0,
+                "Heigth": 21.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "23, 6",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 7.0,
+                "Heigth": 21.0
+              }
+            }
+          }
+        ],
+        "Crates": [],
+        "Pipes": [],
+        "Ladders": []
+      }
+    }
+  ],
+  "Robot": {
+    "Position": "-11, 2"
+  }
+}
