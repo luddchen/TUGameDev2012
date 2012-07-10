@@ -18,7 +18,7 @@ namespace RoBuddies.Model.Worlds.Mountain
         public End(Game game)
             : base(game, LEVEL_PATH, LEVEL_THEME, LEVEL_NAME)
         {
-            Vector2 offset = new Vector2(0, -6);
+            Vector2 offset = new Vector2(0, 0);
             addSky(offset);
             addMountains(offset);
         }
