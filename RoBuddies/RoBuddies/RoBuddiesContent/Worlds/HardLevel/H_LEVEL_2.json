@@ -36,14 +36,14 @@
             "Ladder": {
               "Position": "-6, 6",
               "Color": "188, 143, 143, 255",
-              "Heigth": 10.0
+              "Heigth": 12.0
             }
           },
           {
             "Ladder": {
               "Position": "8, 9",
               "Color": "188, 143, 143, 255",
-              "Heigth": 10.0
+              "Heigth": 12.0
             }
           }
         ]

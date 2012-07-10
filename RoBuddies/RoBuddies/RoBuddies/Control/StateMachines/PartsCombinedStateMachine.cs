@@ -104,7 +104,7 @@ namespace RoBuddies.Control.StateMachines
         {
             bool canOpenDoor = canOpenLevelEndingDoor();
 
-            if ( ButtonIsDown(ControlButton.up) && canClimb(0.71f))
+            if (ButtonIsDown(ControlButton.up) && canClimb(0.71f))
             {
                 climbLadder(0.2f);
             }

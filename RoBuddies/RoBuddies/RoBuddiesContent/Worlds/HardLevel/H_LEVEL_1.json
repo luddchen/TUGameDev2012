@@ -11,7 +11,7 @@
         "Pipes": [
           {
             "Pipe": {
-              "Position": "-13, 22",
+              "Position": "-13, 23",
               "Color": "255, 255, 255, 255",
               "Width": 9.0
             }
@@ -27,14 +27,14 @@
         "Ladders": [
           {
             "Ladder": {
-              "Position": "-4, 10",
+              "Position": "-5, 9",
               "Color": "188, 143, 143, 255",
               "Heigth": 14.0
             }
           },
           {
             "Ladder": {
-              "Position": "1, 26",
+              "Position": "2, 26",
               "Color": "188, 143, 143, 255",
               "Heigth": 10.0
             }
@@ -55,6 +55,16 @@
         "Parallax": "1, 1",
         "LayerDepth": 0.5,
         "Walls": [
+          {
+            "Wall": {
+              "Position": "23, 19",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 19.0,
+                "Heigth": 8.0
+              }
+            }
+          },
           {
             "Wall": {
               "Position": "1, -6",
@@ -97,27 +107,7 @@
           },
           {
             "Wall": {
-              "Position": "0, 12",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 5.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "-12, 15",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 13.0,
-                "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "0, 20",
+              "Position": "-1, 12",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 7.0,
@@ -127,7 +117,27 @@
           },
           {
             "Wall": {
-              "Position": "-13, 23",
+              "Position": "-11, 16",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 15.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "0, 21",
+              "Color": "255, 255, 255, 255",
+              "Size": {
+                "Width": 7.0,
+                "Heigth": 1.0
+              }
+            }
+          },
+          {
+            "Wall": {
+              "Position": "-13, 24",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 11.0,
@@ -137,7 +147,7 @@
           },
           {
             "Wall": {
-              "Position": "-17, 22",
+              "Position": "-17, 23",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
@@ -147,7 +157,7 @@
           },
           {
             "Wall": {
-              "Position": "-8, 22",
+              "Position": "-8, 23",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 1.0,
@@ -200,7 +210,7 @@
               "Position": "27, 15",
               "Color": "255, 255, 255, 255",
               "Size": {
-                "Width": 37.0,
+                "Width": 35.0,
                 "Heigth": 1.0
               }
             }
@@ -212,16 +222,6 @@
               "Size": {
                 "Width": 1.0,
                 "Heigth": 1.0
-              }
-            }
-          },
-          {
-            "Wall": {
-              "Position": "23, 18",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 19.0,
-                "Heigth": 7.0
               }
             }
           },
@@ -369,17 +369,7 @@
         "Crates": [
           {
             "Crate": {
-              "Position": "-12, 25",
-              "Color": "255, 255, 255, 255",
-              "Size": {
-                "Width": 3.0,
-                "Heigth": 3.0
-              }
-            }
-          },
-          {
-            "Crate": {
-              "Position": "21, 2",
+              "Position": "-12, 26",
               "Color": "255, 255, 255, 255",
               "Size": {
                 "Width": 3.0,
