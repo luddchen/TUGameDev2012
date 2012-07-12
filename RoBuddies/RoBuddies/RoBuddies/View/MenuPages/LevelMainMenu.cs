@@ -260,7 +260,7 @@ namespace RoBuddies.View.MenuPages
             ((LevelMenu)this.Menu).quit.isVisible = true;
 
             ((LevelMenu)this.Menu).play.Scale = 1;
-            ((LevelMenu)this.Menu).reload.Scale = 0.7f;
+            ((LevelMenu)this.Menu).reload.Scale = 0.5f;
             ((LevelMenu)this.Menu).rewind.Scale = 0.5f;
             ((LevelMenu)this.Menu).forward.Scale = 0.5f;
 

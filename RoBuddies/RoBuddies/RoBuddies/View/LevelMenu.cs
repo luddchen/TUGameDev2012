@@ -36,7 +36,7 @@ namespace RoBuddies.View
             {
                 this.AllElements[0].Position = new Vector2(this.Viewport.Width * 0.5f, (MenuPageTopExtraBorder + MenuPageBorder) * 0.275f);
 
-                if (reload != null) { reload.Position = new Vector2(32, firstLine); }
+                if (reload != null) { reload.Position = new Vector2(32, firstLine + 2); }
                 if (rewind != null) { rewind.Position = new Vector2(64, firstLine + 2); }
                 if (forward != null) { forward.Position = new Vector2(96, firstLine + 2); }
 
@@ -59,7 +59,7 @@ namespace RoBuddies.View
             this.AllElements[0].Color = HeadLineColor;
 
 
-            reload = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//reload_64"), null, 40, 40, null, null, null, this.Game.Content);
+            reload = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//reload_64"), null, 50, 50, null, null, null, this.Game.Content);
             this.AllElements.Add(reload);
 
             rewind = new HUDTexture(this.Game.Content.Load<Texture2D>("Sprites//Menu//rewind_64"), null, 50, 50, null, null, null, this.Game.Content);
