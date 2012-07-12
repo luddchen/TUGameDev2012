@@ -49,18 +49,18 @@ namespace RoBuddies.View.MenuPages
 
             addChoiceLine();
 
-            world1 = new HUDString("Easy World", null, null, notUsableColor, null, 0.7f, null, content);
+            world1 = new HUDString("Begin Journey", null, null, notUsableColor, null, 0.7f, null, content);
             addChoiceElement(world1, true);
 
             addChoiceLine();
 
-            world2 = new HUDString("Head World", null, null, notUsableColor, null, 0.7f, null, content);
-            addChoiceElement(world2, true);
+            //world2 = new HUDString("Head World", null, null, notUsableColor, null, 0.7f, null, content);
+            //addChoiceElement(world2, true);
 
-            addChoiceLine();
+            //addChoiceLine();
 
-            world3 = new HUDString("Advanced World", null, null, notUsableColor, null, 0.7f, null, content);
-            addChoiceElement(world3, true);
+            //world3 = new HUDString("Advanced World", null, null, notUsableColor, null, 0.7f, null, content);
+            //addChoiceElement(world3, true);
 
 
             this.tutorialPage = new TutorialLevelChoiceMenu(menu, content);
@@ -92,15 +92,15 @@ namespace RoBuddies.View.MenuPages
                         this.Menu.ActivePage = this.labPage;
                     }
 
-                    if (this.ActiveElement == world2 && loadedLevelIndex >= 16)
-                    {
-                        this.Menu.ActivePage = this.mountainPage;
-                    }
+                    //if (this.ActiveElement == world2 && loadedLevelIndex >= 16)
+                    //{
+                    //    this.Menu.ActivePage = this.mountainPage;
+                    //}
 
-                    if (this.ActiveElement == world3 && loadedLevelIndex >= 25)
-                    {
-                        this.Menu.ActivePage = this.hospitalPage;
-                    }
+                    //if (this.ActiveElement == world3 && loadedLevelIndex >= 25)
+                    //{
+                    //    this.Menu.ActivePage = this.hospitalPage;
+                    //}
                 }
             }
 

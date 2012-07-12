@@ -190,8 +190,8 @@
     <Compile Include="Model\Worlds\Mountain\Mountain_1.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_2.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_3.cs" />
+    <Compile Include="Model\Worlds\Mountain\Mountain_6.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_7.cs" />
-    <Compile Include="Model\Worlds\Mountain\Mountain_8.cs" />
     <Compile Include="Model\Worlds\Tutorial\TutorialLevel.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_1.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_2.cs" />
@@ -200,10 +200,10 @@
     <Compile Include="Model\Worlds\Tutorial\Tutorial_5.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_7.cs" />
     <Compile Include="Model\Worlds\Tutorial\Tutorial_6.cs" />
-    <Compile Include="Model\Worlds\Mountain\Mountain_4.cs" />
-    <Compile Include="Model\Worlds\Mountain\Mountain_6.cs" />
-    <Compile Include="Model\Worlds\World1\World1Level.cs" />
     <Compile Include="Model\Worlds\Mountain\Mountain_5.cs" />
+    <Compile Include="Model\Worlds\Mountain\Mountain_8.cs" />
+    <Compile Include="Model\Worlds\World1\World1Level.cs" />
+    <Compile Include="Model\Worlds\Mountain\Mountain_4.cs" />
     <Compile Include="Model\Worlds\World2\World2Level.cs" />
     <Compile Include="Model\Worlds\WorldLevel.cs" />
     <Compile Include="Model\Worlds\Worlds.cs" />

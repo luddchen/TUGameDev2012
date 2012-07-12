@@ -40,14 +40,14 @@ namespace RoBuddies.View.MenuPages
 
                 world1_7.Position = new Vector2(this.Viewport.Width * 0.2f, this.Viewport.Height * 0.85f);
                 world1_8.Position = new Vector2(this.Viewport.Width * 0.5f, this.Viewport.Height * 0.85f);
-                world1_9.Position = new Vector2(this.Viewport.Width * 0.8f, this.Viewport.Height * 0.85f);
+                //world1_9.Position = new Vector2(this.Viewport.Width * 0.8f, this.Viewport.Height * 0.85f);
             }
         }
 
         public World1LevelChoiceMenu(LevelMenu menu, ContentManager content)
             : base(menu, content)
         {
-            levelChoose = new HUDString("choose a World 1 level :", null, null, Color.SkyBlue, null, 0.7f, null, content);
+            levelChoose = new HUDString("choose a level :", null, null, Color.SkyBlue, null, 0.7f, null, content);
             this.AllElements.Add(levelChoose);
 
             addChoiceLine();
@@ -82,8 +82,8 @@ namespace RoBuddies.View.MenuPages
             world1_8 = new HUDString("-- 8 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
             addChoiceElement(world1_8, true);
 
-            world1_9 = new HUDString("-- 9 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
-            addChoiceElement(world1_9, true);
+            //world1_9 = new HUDString("-- 9 --", null, null, notUsableColor, choiceBackgroundColor, 0.7f, null, content);
+            //addChoiceElement(world1_9, true);
 
 
             OnEnter();
@@ -140,10 +140,10 @@ namespace RoBuddies.View.MenuPages
                         ((LevelView)this.Menu.Game.LevelView).viewNextLevel(new Mountain_8(this.Menu.Game).Level, gameTime);
                         this.Menu.IsVisible = false;
                     }
-                    if (this.ActiveElement == world1_9 && loadedLevelIndex >= 15)
-                    {
+                    //if (this.ActiveElement == world1_9 && loadedLevelIndex >= 15)
+                    //{
 
-                    }
+                    //}
                 }
             }
 
